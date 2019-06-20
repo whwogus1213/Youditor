@@ -5,5 +5,6 @@ import com.good.dto.AccountsVO;
 
 public interface AccountsDAO {
 
+	
 	public List<AccountsVO> selectAccounts() throws Exception;
 }
