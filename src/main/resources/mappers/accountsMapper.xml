@@ -18,6 +18,16 @@
     <select id="selectAccounts" resultType="AccountsVO">
         SELECT * FROM accounts
     </select>
+    
+    <!-- 회원 가입 -->
+    <insert id="insertAccounts" parameterType="com.good.dto.AccountsVO">
+     insert into accounts(id,
+     					 passwd,
+     					 nickname,
+     					 picture,
+     					 footer) 
+	  values(#{id}, #{passwd}, #{nickname}, #{picture}, #{footer})  
+    </insert>
 
 </mapper>
 

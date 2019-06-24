@@ -65,14 +65,14 @@
 	</div>
 	<div class="container">
 		<form class="form-horizontal" method="post" name="memInsForm"
-		action="#">
+		action="${path}/accounts/insertAccountsPro">
 			
 			<div class="form-inline">
 				<h2 align="center">&nbsp;</h2>
 				<label class="control-label col-sm-3">아이디(E-mail)</label>
 				<div class="col-sm-3">
-					<input type="text" class="form-control" id="AccountID" 
-						name="AccountID" maxlength="16" placeholder="Enter ID">
+					<input type="text" class="form-control" id="id" 
+						name="id" maxlength="16" placeholder="Enter ID">
 				</div>
 				<input class="btn btn-danger btn-sm" type="button"
 					name="confirm_id" value="ID중복확인"
@@ -82,16 +82,16 @@
 				<h2 align="center">&nbsp;</h2>
 				<label class="control-label col-sm-3">비밀번호</label>
 				<div class="col-sm-3">
-					<input type="password" class="form-control" id="pwd" 
-						name="pwd" maxlength="16" placeholder="Enter Password">
+					<input type="password" class="form-control" id="passwd" 
+						name="passwd" maxlength="16" placeholder="Enter Password">
 				</div>		
 			</div>
 			<div class="form-inline">
 				<h2 align="center">&nbsp;</h2>
 				<label class="control-label col-sm-3">비밀번호확인</label>
 				<div class="col-sm-3">
-					<input type="password" class="form-control" id="repwd" 
-						name="repwd" maxlength="16" placeholder="Enter Password">
+					<input type="password" class="form-control" id="reppasswd" 
+						name="repasswd" maxlength="16" placeholder="Enter Password">
 				</div>		
 			</div>
 			<div class="form-inline">
@@ -159,8 +159,7 @@
 			<div class="form-group">
 				<h2 align="center">&nbsp;</h2>
 				<div class="col-sm-offset-2 col-sm-12" align="center">
-					<button type="button" class="btn btn-primary"
-						onclick="memberInsertCheckForm(this.form)">
+					<button type="submit" id="submit">
 					회원가입</button>
 				</div>
 			</div>
