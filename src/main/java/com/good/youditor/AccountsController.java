@@ -29,6 +29,7 @@ public class AccountsController {
 		List<AccountsVO> list = service.selectAccounts();
 		model.addAttribute("list",list);
 	}
+
 	
 	@RequestMapping(value = "/join.do", method=RequestMethod.GET)
 	public ModelAndView join(Locale locale, Model model) throws Exception {
@@ -45,6 +46,5 @@ public class AccountsController {
 		System.out.println("String login open");
 		return mav;	
 	}
-
 
 }

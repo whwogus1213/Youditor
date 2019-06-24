@@ -69,7 +69,7 @@
 			
 			<div class="form-inline">
 				<h2 align="center">&nbsp;</h2>
-				<label class="control-label col-sm-3">아이디</label>
+				<label class="control-label col-sm-3">아이디(E-mail)</label>
 				<div class="col-sm-3">
 					<input type="text" class="form-control" id="AccountID" 
 						name="AccountID" maxlength="16" placeholder="Enter ID">
@@ -100,14 +100,6 @@
 				<div class="col-sm-3">
 					<input type="text" class="form-control" id="nickname" 
 						name="nickname" maxlength="10" placeholder="Enter Nickname">
-				</div>		
-			</div>
-			<div class="form-inline">
-				<h2 align="center">&nbsp;</h2>
-				<label class="control-label col-sm-3">E-mail</label>
-				<div class="col-sm-7">
-					<input type="text" class="form-control" id="address" 
-						name="address" maxlength="100" placeholder="Enter Address">
 				</div>		
 			</div>
 			<div class="form-inline">
