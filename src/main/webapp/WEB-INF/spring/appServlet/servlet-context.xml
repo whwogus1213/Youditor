@@ -30,7 +30,8 @@
             <mapping path="/**"/>
             <!-- 아래 예외 url설정하면됨  -->
 <!--             <exclude-mapping path=""/> -->
-            
+            <exclude-mapping path="/"/>
+            <exclude-mapping path="/accounts/**"/>
             <beans:ref bean="authenticationInterceptor"/>
         </interceptor>
     </interceptors>
