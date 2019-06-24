@@ -30,6 +30,10 @@
 	  values(#{id}, #{passwd}, #{nickname},now(), #{picture}, #{footer})  
     </insert>
 
+	<select id="login" resultType="AccountsVO">
+        select * from accounts where id = #{id} and passwd = #{passwd}
+    </select>
+
 </mapper>
 
 

@@ -24,5 +24,10 @@ public class AccountsServiceImpl implements AccountsService {
 		dao.insertAccounts(vo);
 		
 	}
+	@Override
+	public AccountsVO login(AccountsVO vo) throws Exception {
+		return dao.login(vo);
+		
+	}
 	
 }

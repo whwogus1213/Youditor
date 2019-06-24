@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
   <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
       <a class="navbar-brand" href="/">YouDitor</a>
@@ -30,16 +31,18 @@
           <li class="nav-item">
             <a class="nav-link" href="#">구인구직</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">영상편집팁</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/accounts/login.do">로그인</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/accounts/join.do">회원가입</a>
-          </li>
-        </ul>
+				<li class="nav-item"><a class="nav-link" href="#">영상편집팁</a></li>
+
+				<c:if test="${login.id ne null }">
+					<li class="nav-item"><a class="nav-link" href="/accounts/logout">로그아웃</a></li>
+				</c:if>
+				<c:if test="${login.id eq null }">
+					<li class="nav-item"><a class="nav-link" href="/accounts/login.do">로그인</a></li>
+					<li class="nav-item"><a class="nav-link" href="/accounts/join.do">회원가입</a></li>
+				</c:if>
+
+				
+			</ul>
       </div>
     </div>
   </nav>

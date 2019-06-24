@@ -28,6 +28,11 @@ public class AccountsDAOImpl implements AccountsDAO {
 	public void insertAccounts(AccountsVO vo) throws Exception{
 		sqlSession.insert(NAMESPACE + ".insertAccounts", vo);
 	}
+
+	@Override
+	public AccountsVO login(AccountsVO vo) throws Exception {
+		return sqlSession.selectOne(NAMESPACE+".login",vo);
+	}
 	
 	
 }

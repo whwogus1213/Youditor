@@ -30,6 +30,7 @@
 	
 
 	<div class="container" align ="center">
+	<form class="form-horizontal" method="post">
 		<div class="form-inline">
 			<h2 align="center">&nbsp;</h2>
 			<label class="control-label col-sm-3">아이디</label>
@@ -50,11 +51,14 @@
 		<div class="form-group">
 			<h2 align="center">&nbsp;</h2>
 			<div class="col-sm-offset-2 col-sm-12" align="center">
-				<button type="button" class="btn btn-primary"
+<!-- 				<button type="button" class="btn btn-primary"
 					onclick="memberInsertCheckForm(this.form)">
+				로그인</button> -->
+				<button type="submit" class="btn btn-primary">
 				로그인</button>
 			</div>
 		</div>
+	</form>
 	</div>
 	<h2 align="center">&nbsp;</h2>
 	<h2 align="center">&nbsp;</h2>
