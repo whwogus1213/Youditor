@@ -13,7 +13,7 @@ import com.good.dto.AccountsVO;
 @RequestMapping("/board")
 public class BoardController {
 
-	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	@RequestMapping(value = "/boardList", method = RequestMethod.GET)
 	public void boardlist(Model model) throws Exception {
 
 		System.out.println("dd");

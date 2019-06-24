@@ -59,5 +59,4 @@ public class BoardVO {
 	public void setMod_date(Date mod_date) {
 		this.mod_date = mod_date;
 	}
-	
 }
