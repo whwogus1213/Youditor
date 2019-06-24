@@ -117,7 +117,7 @@
 				<h2 align="center">&nbsp;</h2>
 				<label class="control-label col-sm-3">자기소개</label>
 				<div class="col-sm-7">
-					<textarea class="form-control" id="footer" 
+					<textarea class="form-control" name="footer" id="footer" 
 						rows="5" cols="80" placeholder="Enter Profile"></textarea>
 				</div>		
 			</div>
