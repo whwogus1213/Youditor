@@ -24,6 +24,10 @@ public class AccountsDAOImpl implements AccountsDAO {
 //		return null;
 	}
 
+	@Override 
+	public void insertAccounts(AccountsVO vo) throws Exception{
+		sqlSession.insert(NAMESPACE + ".insertAccounts", vo);
+	}
 	
 	
 }

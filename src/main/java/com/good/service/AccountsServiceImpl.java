@@ -19,6 +19,10 @@ public class AccountsServiceImpl implements AccountsService {
 		// TODO Auto-generated method stub
 		return dao.selectAccounts();
 	}
-	
+	@Override
+	public void insertAccounts(AccountsVO vo) throws Exception {
+		dao.insertAccounts(vo);
+		
+	}
 	
 }

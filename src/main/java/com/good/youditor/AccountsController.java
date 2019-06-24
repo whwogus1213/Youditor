@@ -47,4 +47,18 @@ public class AccountsController {
 		return mav;	
 	}
 
+	@RequestMapping(value="/insertAccountsForm")
+	public String insertAccountsForm() throws Exception{
+		return "accounts/insertAccounts";
+	}
+	
+	// insertAccountsForm-> insertAccountsPro
+	@RequestMapping(value="/insertAccountsPro")
+	public String insertAccountsPro(AccountsVO vo) throws Exception{
+		service.insertAccounts(vo);
+		System.out.println("============insertAccountsPro 성공==============");
+			
+		return "redirect:/";
+		
+	}
 }
