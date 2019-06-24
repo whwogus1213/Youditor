@@ -24,9 +24,10 @@
      insert into accounts(id,
      					 passwd,
      					 nickname,
+     					 reg_date,
      					 picture,
      					 footer) 
-	  values(#{id}, #{passwd}, #{nickname}, #{picture}, #{footer})  
+	  values(#{id}, #{passwd}, #{nickname},now(), #{picture}, #{footer})  
     </insert>
 
 </mapper>
