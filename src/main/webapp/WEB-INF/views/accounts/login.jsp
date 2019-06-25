@@ -11,10 +11,13 @@
 	<meta name="author" content="">
 
   <title>로그인 - YouDitor</title>
-	<link href="/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-	<script src="/resources/vendor/js/jquery-3.3.1.min.js"></script>
+<!-- 	<link href="/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<script src="/resources/vendor/jquery/jquery.min.js"></script>
 	<script src="/resources/vendor/bootstrap/js/bootstrap.min.js"></script>
-	<script src="/resources/vendor/js/function.js"></script>
+    <script src="/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script> -->
+
+<jsp:include page="../module/header.jsp" flush="false"/>
+
 
   <!-- Custom styles -->
   <link href="/resources/css/modern-business.css" rel="stylesheet">

@@ -17,7 +17,7 @@
 			max-width:	100px;
 		}
 	</style>
-	<script type="text/javascript" src="/resources/js/jquery-3.3.1.min.js" charset="utf-8"></script>
+	<jsp:include page="../module/header.jsp" flush="false"/>
 	<script type="text/javascript">
 		var sel_file;
 	
@@ -47,8 +47,7 @@
 	</script>
 
 	<title>회원 가입 - YouDitor</title>
-	<link href="/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-	<script src="/resources/vendor/bootstrap/js/bootstrap.min.js"></script>
+
 	<!-- Custom styles -->
 	<link href="/resources/css/modern-business.css" rel="stylesheet">
 	
