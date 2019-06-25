@@ -24,4 +24,9 @@ public class VideoBarodDAOImpl implements VideoBoardDAO {
 	public List<VideoBoardVO> listAll() throws Exception {
 		return sqlSession.selectList(NAMESPACE + ".listAll");
 	}
+
+	@Override
+	public VideoBoardVO view(int boardId) throws Exception {
+		return sqlSession.selectOne(NAMESPACE+".view",boardId);
+	}
 }

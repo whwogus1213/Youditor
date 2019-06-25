@@ -19,5 +19,9 @@ public class VideoBoardServiceImpl implements VideoBoardService {
 	public List<VideoBoardVO> listAll() throws Exception {
 		return videoBoardDAO.listAll();
 	}
+	@Override
+	public VideoBoardVO view(int boardId) throws Exception {
+		return videoBoardDAO.view(boardId);
+	}
 
 }

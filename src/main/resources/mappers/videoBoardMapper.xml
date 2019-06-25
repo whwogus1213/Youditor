@@ -7,4 +7,16 @@
 	<select id="listAll" resultType="VideoBoardVO">
         SELECT * FROM videoBoard
     </select>
+    
+    <!-- 게시물 조회 -->
+	<select id="view" parameterType="int" resultType="VideoBoardVO">
+		select * from videoBoard where boardId = #{boardId} 
+	</select>
+    
+    
+    
+    
+    
+    
+    
 </mapper>
