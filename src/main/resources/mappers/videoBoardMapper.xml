@@ -3,8 +3,8 @@
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
-<mapper namespace="com.good.mapper.boardsMapper">
-	<select id="selectBoard" resultType="BoardVO">
+<mapper namespace="com.good.mapper.videoBoardMapper">
+	<select id="selectVideoBoard" resultType="VideoBoardVO">
         SELECT * FROM board
     </select>
 </mapper>

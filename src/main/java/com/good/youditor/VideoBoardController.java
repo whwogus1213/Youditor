@@ -11,7 +11,7 @@ import com.good.dto.AccountsVO;
 
 @Controller
 @RequestMapping("/board")
-public class BoardController {
+public class VideoBoardController {
 
 	@RequestMapping(value = "/boardList", method = RequestMethod.GET)
 	public void boardlist(Model model) throws Exception {

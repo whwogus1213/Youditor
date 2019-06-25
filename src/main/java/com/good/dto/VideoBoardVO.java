@@ -2,7 +2,7 @@ package com.good.dto;
 
 import java.util.Date;
 
-public class BoardVO {
+public class VideoBoardVO {
 	private int id;
 	private int accountId;
 	private String subject;
