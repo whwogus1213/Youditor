@@ -3,14 +3,22 @@ package com.good.dto;
 import java.util.Date;
 
 public class AccountsVO {
+	private int		accountid;
 	private String	id;
 	private String	passwd;
 	private String	nickname;
 	private Date	reg_date;
 	private int		authority;
 	private String	picture;
-	private String	footer;
 	
+	private String	footer;
+
+	public int getAccountid() {
+		return accountid;
+	}
+	public void setAccountid(int accountid) {
+		this.accountid = accountid;
+	}
 	public String getId() {
 		return id;
 	}
@@ -54,5 +62,12 @@ public class AccountsVO {
 		this.footer = footer;
 	}
 
+	
+	@Override
+	public String toString() {
+		return "AccountsVO [accountid=" + accountid + ", id=" + id + ", passwd=" + passwd + ", nickname=" + nickname
+				+ ", reg_date=" + reg_date + ", authority=" + authority + ", picture=" + picture + ", footer=" + footer
+				+ "]";
+	}
 
 }

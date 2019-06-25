@@ -1,0 +1,52 @@
+package com.good.service;
+
+import java.util.List;
+
+import javax.inject.Inject;
+
+import org.springframework.stereotype.Service;
+
+import com.good.dao.AccountsDAO;
+import com.good.dao.ManagerDAO;
+import com.good.dto.AccountsVO;
+import com.good.dto.ManagerVO;
+
+@Service
+public class ManagerServiceImpl implements ManagerService {	
+	@Inject
+	private ManagerDAO dao;
+
+	@Override
+	public List<AccountsVO> selectAccounts() throws Exception {
+		// TODO Auto-generated method stub
+		return dao.selectAccounts();
+	}
+
+	@Override
+	public ManagerVO login(ManagerVO vo) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.login(vo);
+	}
+
+	@Override
+	public void authorUp(AccountsVO vo) throws Exception {
+		System.out.println(vo.toString());
+		if(vo.getAuthority() <= 4) {
+			vo.setAuthority(vo.getAuthority()+1);
+			dao.authorUp(vo);
+		}
+		
+	}
+	
+	@Override
+	public void authorDown(AccountsVO vo) throws Exception {
+		if(vo.getAuthority() >= 2) {
+			vo.setAuthority(vo.getAuthority()-1);
+			dao.authorDown(vo);
+		}
+		
+	}
+	
+	
+	
+}
