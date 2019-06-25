@@ -16,8 +16,7 @@
 
 <title>YouditoR</title>
 
-<link href="/resources/vendor/bootstrap/css/bootstrap.min.css"
-	rel="stylesheet">
+	<jsp:include page="../module/header.jsp" flush="false"/>
 
 </head>
 
