@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
 <mapper namespace="com.good.mapper.videoBoardMapper">
-	<select id="selectVideoBoard" resultType="VideoBoardVO">
-        SELECT * FROM board
+	<select id="listAll" resultType="VideoBoardVO">
+        SELECT * FROM videoBoard
     </select>
 </mapper>

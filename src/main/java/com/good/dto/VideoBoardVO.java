@@ -3,19 +3,19 @@ package com.good.dto;
 import java.util.Date;
 
 public class VideoBoardVO {
-	private int id;
+	private int boardId;
 	private int accountId;
 	private String subject;
 	private String object;
 	private Date reg_date;
 	private int categoryId;
-	private String youtube_link;
+	private String youtubeLink;
 	private Date mod_date;
-	public int getId() {
-		return id;
+	public int getBoardId() {
+		return boardId;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setBoardId(int boardId) {
+		this.boardId = boardId;
 	}
 	public int getAccountId() {
 		return accountId;
@@ -47,16 +47,23 @@ public class VideoBoardVO {
 	public void setCategoryId(int categoryId) {
 		this.categoryId = categoryId;
 	}
-	public String getYoutube_link() {
-		return youtube_link;
+	public String getYoutubeLink() {
+		return youtubeLink;
 	}
-	public void setYoutube_link(String youtube_link) {
-		this.youtube_link = youtube_link;
+	public void setYoutubeLink(String youtubeLink) {
+		this.youtubeLink = youtubeLink;
 	}
 	public Date getMod_date() {
 		return mod_date;
 	}
 	public void setMod_date(Date mod_date) {
 		this.mod_date = mod_date;
+	}
+	
+	@Override
+	public String toString() {
+		return "VideoBoardVO [boardId=" + boardId + ", accountId=" + accountId + ", subject=" + subject + ", object="
+				+ object + ", reg_date=" + reg_date + ", categoryId=" + categoryId + ", youtubeLink=" + youtubeLink
+				+ ", mod_date=" + mod_date + "]";
 	}
 }
