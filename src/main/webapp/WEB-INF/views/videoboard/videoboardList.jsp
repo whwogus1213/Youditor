@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>비디오게시판- YouditoR</title>
+<title>비디오게시판 - YouditoR</title>
 <link href="/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <script src="/resources/vendor/bootstrap/js/bootstrap.min.js"></script>
 <!-- Custom styles -->
@@ -17,10 +17,13 @@
 	<jsp:include page="../module/top.jsp" flush="false" />
 	<div class="form-group">
 		<div class="col-sm-12">
-			<h1 align="center">게시판</h1>
+			<h2 align="center">&nbsp;</h2>
+			<h1 align="center">oo</h1>
+			<h2 align="center">&nbsp;</h2>
 		</div>
+		<h5 align="center">ㅇㅇ유투버의 편집영상을 감상할 수 있습니다</h5>
+		<h2 align="center">&nbsp;</h2>
 	</div>
-	<h5 align="center">ㅇㅇ</h5>
 	<div class="container">
 		<table class="table table-bordered table-striped nanum table-hover">
 			<!-- <table border="1"> -->
@@ -47,6 +50,11 @@
 			</tbody>
 		</table>
 	</div>
+	<h2 align="center">&nbsp;</h2>
+	<div class="col-sm-9" align="right">
+		<button type="button" class="btn btn-primary" onclick="location.href='/board/write.do' ">글 작성</button>
+	</div>
+	<h2 align="center">&nbsp;</h2>
 	<jsp:include page="../module/bottom.jsp" flush="false" />
 </body>
 </html>
