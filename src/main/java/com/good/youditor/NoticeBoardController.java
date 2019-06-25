@@ -11,7 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/notice")
-public class NoticeController {
+public class NoticeBoardController {
 	@RequestMapping(value = "/main", method=RequestMethod.GET)
 	public ModelAndView main(Locale locale, Model model) throws Exception {
 		ModelAndView mav = new ModelAndView();
