@@ -37,7 +37,7 @@
 				<c:forEach items="${VideoBoardList}" var="VideoBoardList">
 					<tr>
 						<td>${VideoBoardList.boardId}</td>
-						<td><a href="/board/boardView?boardId=${VideoBoardList.boardId}">${VideoBoardList.subject}</a>
+						<td><a href="/videoboard/videoBoardView?boardId=${VideoBoardList.boardId}">${VideoBoardList.subject}</a>
 						</td>
 						<td>${VideoBoardList.accountId}</td>
 						<td><fmt:formatDate value="${VideoBoardList.reg_date}"

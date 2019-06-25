@@ -20,7 +20,7 @@
              	 카테고리
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
-              <a class="dropdown-item" href="/board/videoBoardList">게임</a>
+              <a class="dropdown-item" href="/videoboard/videoBoardList">게임</a>
               <a class="dropdown-item" href="#">먹방</a>
               <a class="dropdown-item" href="#">일상</a>
               <a class="dropdown-item" href="#">모터</a>
