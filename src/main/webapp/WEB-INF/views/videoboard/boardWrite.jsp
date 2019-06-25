@@ -18,7 +18,7 @@
 	<div class="form-group">
 		<div class="col-sm-12">
 			<h2 align="center">&nbsp;</h2>
-			<h1 align="center">글 작성</h1>
+			<h1 align="center">유투브 올리기</h1>
 			<h2 align="center">&nbsp;</h2>
 		</div>
 	</div>

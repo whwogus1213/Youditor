@@ -52,7 +52,7 @@
 	</div>
 	<h2 align="center">&nbsp;</h2>
 	<div class="col-sm-9" align="right">
-		<button type="button" class="btn btn-primary" onclick="location.href='/board/write.do' ">글 작성</button>
+		<button type="button" class="btn btn-primary" onclick="location.href='/board/write.do' ">유투브 올리기</button>
 	</div>
 	<h2 align="center">&nbsp;</h2>
 	<jsp:include page="../module/bottom.jsp" flush="false" />
