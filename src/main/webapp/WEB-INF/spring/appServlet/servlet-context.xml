@@ -33,6 +33,8 @@
             <exclude-mapping path="/"/>
             <exclude-mapping path="/accounts/**"/>
             <exclude-mapping path="/notice/**"/>
+            <exclude-mapping path="/manager"/>
+            <exclude-mapping path="/manager/**"/>
             <beans:ref bean="authenticationInterceptor"/>
         </interceptor>
     </interceptors>
