@@ -34,9 +34,9 @@ public class VideoBoardController {
 		List<VideoBoardVO> list = videoBoardService.listAll();
 		
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("videoBoard/videoBoardList");
+		mav.setViewName("videoboard/videoboardList");
 		System.out.println("VideoBoardController VideoBoardList open");
-		mav.addObject("VideoBoardlist", list);
+		mav.addObject("VideoBoardList", list);
 		return mav;
 	}
 
