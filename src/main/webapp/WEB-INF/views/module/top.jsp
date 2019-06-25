@@ -16,11 +16,11 @@
             <a class="nav-link" href="#">공지</a>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="/board/boardList" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
              	 카테고리
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
-              <a class="dropdown-item" href="#">게임</a>
+              <a class="dropdown-item" href="/board/videoBoardList">게임</a>
               <a class="dropdown-item" href="#">먹방</a>
               <a class="dropdown-item" href="#">일상</a>
               <a class="dropdown-item" href="#">모터</a>

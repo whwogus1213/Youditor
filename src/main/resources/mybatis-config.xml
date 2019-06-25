@@ -8,7 +8,7 @@
     	<typeAliases>
     		<typeAlias type="com.good.dto.AccountsVO" alias="AccountsVO"/>
     		<typeAlias type="com.good.dto.ManagerVO" alias="ManagerVO"/>
-    		<typeAlias type="com.good.dto.BoardVO" alias="BoardVO"/>
+    		<typeAlias type="com.good.dto.VideoBoardVO" alias="VideoBoardVO"/>
     	</typeAliases>
     </configuration>
     
