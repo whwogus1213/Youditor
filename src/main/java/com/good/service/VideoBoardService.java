@@ -9,4 +9,6 @@ public interface VideoBoardService {
 	
 	// 게시물 목록
 	public List<VideoBoardVO> listAll() throws Exception;
+	
+	public VideoBoardVO view(int boardId) throws Exception;
 }

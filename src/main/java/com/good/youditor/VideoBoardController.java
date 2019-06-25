@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.good.dto.AccountsVO;
@@ -36,6 +37,19 @@ public class VideoBoardController {
 		mav.setViewName("videoBoard/videoBoardList");
 		System.out.println("VideoBoardController VideoBoardList open");
 		mav.addObject("VideoBoardlist", list);
+		return mav;
+	}
+
+	// 게시물 상세정보
+	@RequestMapping(value = "/boardView", method = RequestMethod.GET)
+	public ModelAndView view(@RequestParam("boardId") int boardId) throws Exception {
+		System.out.println("*************************************************");
+		VideoBoardVO row = videoBoardService.view(boardId);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("videoboard/boardView");
+		mav.addObject("row", row);
+		System.out.println("VideoBoardController boardView open");
 		return mav;
 	}
 }
