@@ -10,6 +10,7 @@ public class AccountsVO {
 	private int		authority;
 	private String	picture;
 	private String	footer;
+	
 	public String getId() {
 		return id;
 	}
