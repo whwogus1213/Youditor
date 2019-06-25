@@ -117,7 +117,7 @@
 				<h2 align="center">&nbsp;</h2>
 				<label class="control-label col-sm-3">자기소개</label>
 				<div class="col-sm-7">
-					<textarea class="form-control" id="footer" 
+					<textarea class="form-control" name="footer" id="footer" 
 						rows="5" cols="80" placeholder="Enter Profile"></textarea>
 				</div>		
 			</div>
@@ -149,19 +149,13 @@
 					</label> BookShop의 개인정보 수집 및 이용에 동의합니다.
 				</div>
 			</div>
-			<div class="col-sm-10">
-				<label class="radio-inline">
-					<input type="radio" id="registerYn" name="registerYn" value="Y" checked> 동의합니다.
-				</label>
-				<label class="radio-inline">
-					<input type="radio" id="registerYn" name="registerYn" value="N"> 동의하지 않습니다.
-				</label>
-			</div>
 			<div class="form-group">
 				<h2 align="center">&nbsp;</h2>
 				<div class="col-sm-offset-2 col-sm-12" align="center">
 					<button type="submit" id="submit">
 					회원가입</button>
+					<button type="reset" id="reset">
+					다시 작성</button>
 				</div>
 			</div>
 		</form>

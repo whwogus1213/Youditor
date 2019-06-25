@@ -17,7 +17,7 @@
 		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
 <!-- 		<property name="url" value="jdbc:log4jdbc:mysql://127.0.0.1:3306/videoboard_db?useSSL=false&amp;serverTimezone=UTC"></property> -->
 		<property name="url" value="jdbc:mysql://127.0.0.1:3306/videoboard_db?useSSL=false&amp;serverTimezone=UTC"></property>
-		<property name="username" value="master"></property>
+		<property name="username" value="videomaster"></property>
 		<property name="password" value="1111"></property>
 	</bean>
 	
