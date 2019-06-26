@@ -15,6 +15,7 @@ import com.good.dto.AccountsVO;
 import com.good.dto.NoticeBoardVO;
 import com.good.dto.NoticeBoardVO;
 import com.good.service.NoticeBoardService;
+import com.good.service.VideoBoardService;
 
 @Controller
 @RequestMapping("/noticeboard")
@@ -43,7 +44,7 @@ public class NoticeBoardController {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("noticeboard/noticeBoardView");
 		mav.addObject("row", row);
-		System.out.println("NoticeBoardController noticeBoardView open");
+		System.out.println("NoticeBoardController boardView open");
 		return mav;
 	}
 
