@@ -7,11 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>공지사항 - YouditoR</title>
-
-	<link href="/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-	<script src="/resources/vendor/bootstrap/js/bootstrap.min.js"></script>
-	<!-- Custom styles -->
-	<link href="/resources/css/modern-business.css" rel="stylesheet">
+	<jsp:include page="./../module/header.jsp" flush="false"/>
 </head>
 <body>
 	<jsp:include page="./../module/top.jsp" flush="false"/>
