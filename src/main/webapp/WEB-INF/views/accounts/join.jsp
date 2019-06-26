@@ -75,7 +75,7 @@
 				</div>
 				<input class="btn btn-danger btn-sm" type="button"
 					name="confirm_email" value="ID중복확인"
-					OnClick="confirmEmail(document.memInsForm.email.value)">
+					OnClick="confirmId(document.memInsForm.id.value)">
 			</div>
 			<div class="form-inline">
 				<h2 align="center">&nbsp;</h2>
