@@ -74,7 +74,7 @@
 						name="email" maxlength="16" placeholder="Enter ID">
 				</div>
 				<input class="btn btn-danger btn-sm" type="button"
-					name="confirm_email" value="ID중복확인"
+					name="confirm_id" value="ID중복확인"
 					OnClick="confirmId(document.memInsForm.id.value)">
 			</div>
 			<div class="form-inline">
