@@ -52,10 +52,6 @@
 	<h1>${row.accountId }</h1>
 	<h1>${row.categoryId }</h1>
 	<h1>${row.youtubeLink }</h1>
-		  <button id="modity_btn">수정</button>
-		  <button id="delete_btn">삭제</button>
-        <button type="button" class="btn btn-info btn-sm" onclick="location.href='/videoboard/videoBoardList'">취소</button>
-    
 	<jsp:include page="../module/bottom.jsp" flush="false"/>
  
 </body>

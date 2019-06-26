@@ -24,21 +24,4 @@ public class VideoBoardServiceImpl implements VideoBoardService {
 		return videoBoardDAO.view(boardId);
 	}
 
-	//글쓰기
-	@Override
-	public void insertVideoBoard(VideoBoardVO vo) throws Exception {
-		videoBoardDAO.insertVideoBoard(vo);
-	}
-
-	 // 수정
-	 @Override
-	 public void updateVideoBoard(VideoBoardVO vo) throws Exception {
-		 videoBoardDAO.updateVideoBoard(vo);
-	 }
-
-	 // 삭제
-	 @Override
-	 public void deleteVideoBoard(int boardId) throws Exception {
-		 videoBoardDAO.deleteVideoBoard(boardId);
-	 }
 }
