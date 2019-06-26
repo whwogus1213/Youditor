@@ -46,11 +46,11 @@
 			document.write('<iframe width="667" height="375" src="https://www.youtube.com/embed/' + youtubeID + '" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
 		</script>
 	</div>
-	<h1>${row.boardId }</h1>
-	<h1>${row.accountId }</h1>
-	<h1>${row.categoryId }</h1>
+	<!-- <h1>${row.boardId }</h1> -->
 	<h1>${row.subject }</h1>
 	<h1>${row.object }</h1>
+	<h1>${row.accountId }</h1>
+	<h1>${row.categoryId }</h1>
 	<h1>${row.youtubeLink }</h1>
 	<jsp:include page="../module/bottom.jsp" flush="false"/>
  
