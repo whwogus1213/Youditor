@@ -80,24 +80,25 @@ public class VideoBoardController {
 		
 	}
 	
-	//파일 이동 메서드
-	//'videoBoardList.jsp' 로 이동 <-- 이동하고자 하는 파일로 명 바꾸면됨
-	@RequestMapping(value = "/videoBoardList.do", method=RequestMethod.GET)
+	//파일 이동
+	//게시글 수정
+	//'videoBoardUpdate.jsp' 로 이동 <-- 이동하고자 하는 파일로 명 바꾸면됨
+	@RequestMapping(value = "/videoBoardUpdate", method=RequestMethod.GET)
 	public ModelAndView join(Locale locale, Model model) throws Exception {
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("videoboard/videoBoardList");
+		mav.setViewName("videoboard/videoBoardUpdate");
 		System.out.println("String videoboardlist open");
 		return mav;	
-	}//아직 활용 안되고 있음
+	}
 	
 	
 	// 글 수정
-	 @RequestMapping(value = "/vedioBoardModify", method = RequestMethod.GET)
-	 public void getModify(@RequestParam("boardId") int boardId, Model model) throws Exception {
+	 @RequestMapping(value = "/update", method = RequestMethod.GET)
+	 public void getUpdatey(@RequestParam("boardId") int boardId, Model model) throws Exception {
 	  
 	  VideoBoardVO vo = videoBoardService.view(boardId);
 	  
-	  model.addAttribute("vedioBoardModify", vo);
+	  model.addAttribute("updateVideoBoard", vo);
 	  
 	 }
 	// 글 삭제
@@ -108,8 +109,8 @@ public class VideoBoardController {
 	  
 	 }
 	 // 글 수정  POST 
-	 @RequestMapping(value = "/vedioBoardModify", method = RequestMethod.POST)
-	 public String postModify(VideoBoardVO vo) throws Exception {
+	 @RequestMapping(value = "/update", method = RequestMethod.POST)
+	 public String postUpdate(VideoBoardVO vo) throws Exception {
 	  
 		 videoBoardService.updateVideoBoard(vo);
 	  
