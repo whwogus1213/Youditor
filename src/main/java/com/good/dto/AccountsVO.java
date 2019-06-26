@@ -3,51 +3,39 @@ package com.good.dto;
 import java.util.Date;
 
 public class AccountsVO {
-	private int		accountid;
-	private String	id;
-	private String	passwd;
+	private int		accountId;
+	private String	email;
+	private String	pwd;
 	private String	nickname;
-	private Date	reg_date;
-	private int		authority;
 	private String	picture;
-	
 	private String	footer;
-
-	public int getAccountid() {
-		return accountid;
+	private Date	reg_date;
+	private Date	mod_date;
+	private int		authority;
+	
+	public int getAccountId() {
+		return accountId;
 	}
-	public void setAccountid(int accountid) {
-		this.accountid = accountid;
+	public void setAccountId(int accountId) {
+		this.accountId = accountId;
 	}
-	public String getId() {
-		return id;
+	public String getEmail() {
+		return email;
 	}
-	public void setId(String id) {
-		this.id = id;
+	public void setEmail(String email) {
+		this.email = email;
 	}
-	public String getPasswd() {
-		return passwd;
+	public String getPwd() {
+		return pwd;
 	}
-	public void setPasswd(String passwd) {
-		this.passwd = passwd;
+	public void setPwd(String pwd) {
+		this.pwd = pwd;
 	}
 	public String getNickname() {
 		return nickname;
 	}
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
-	}
-	public Date getReg_date() {
-		return reg_date;
-	}
-	public void setReg_date(Date reg_date) {
-		this.reg_date = reg_date;
-	}
-	public int getAuthority() {
-		return authority;
-	}
-	public void setAuthority(int authority) {
-		this.authority = authority;
 	}
 	public String getPicture() {
 		return picture;
@@ -61,13 +49,29 @@ public class AccountsVO {
 	public void setFooter(String footer) {
 		this.footer = footer;
 	}
-
-	
+	public Date getReg_date() {
+		return reg_date;
+	}
+	public void setReg_date(Date reg_date) {
+		this.reg_date = reg_date;
+	}
+	public Date getMod_date() {
+		return mod_date;
+	}
+	public void setMod_date(Date mod_date) {
+		this.mod_date = mod_date;
+	}
+	public int getAuthority() {
+		return authority;
+	}
+	public void setAuthority(int authority) {
+		this.authority = authority;
+	}
 	@Override
 	public String toString() {
-		return "AccountsVO [accountid=" + accountid + ", id=" + id + ", passwd=" + passwd + ", nickname=" + nickname
-				+ ", reg_date=" + reg_date + ", authority=" + authority + ", picture=" + picture + ", footer=" + footer
-				+ "]";
+		return "AccountsVO [accountId=" + accountId + ", email=" + email + ", pwd=" + pwd + ", nickname=" + nickname
+				+ ", picture=" + picture + ", footer=" + footer + ", reg_date=" + reg_date + ", mod_date=" + mod_date
+				+ ", authority=" + authority + "]";
 	}
-
+	
 }

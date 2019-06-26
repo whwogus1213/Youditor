@@ -70,27 +70,27 @@
 				<h2 align="center">&nbsp;</h2>
 				<label class="control-label col-sm-3">아이디(E-mail)</label>
 				<div class="col-sm-3">
-					<input type="text" class="form-control" id="id" 
-						name="id" maxlength="16" placeholder="Enter ID">
+					<input type="text" class="form-control" id="email" 
+						name="email" maxlength="16" placeholder="Enter ID">
 				</div>
 				<input class="btn btn-danger btn-sm" type="button"
-					name="confirm_id" value="ID중복확인"
-					OnClick="confirmId(document.memInsForm.id.value)">
+					name="confirm_email" value="ID중복확인"
+					OnClick="confirmEmail(document.memInsForm.email.value)">
 			</div>
 			<div class="form-inline">
 				<h2 align="center">&nbsp;</h2>
 				<label class="control-label col-sm-3">비밀번호</label>
 				<div class="col-sm-3">
-					<input type="password" class="form-control" id="passwd" 
-						name="passwd" maxlength="16" placeholder="Enter Password">
+					<input type="password" class="form-control" id="pwd" 
+						name="pwd" maxlength="16" placeholder="Enter Password">
 				</div>		
 			</div>
 			<div class="form-inline">
 				<h2 align="center">&nbsp;</h2>
 				<label class="control-label col-sm-3">비밀번호확인</label>
 				<div class="col-sm-3">
-					<input type="password" class="form-control" id="reppasswd" 
-						name="repasswd" maxlength="16" placeholder="Enter Password">
+					<input type="password" class="form-control" id="repwd" 
+						name="repwd" maxlength="16" placeholder="Enter Password">
 				</div>		
 			</div>
 			<div class="form-inline">
