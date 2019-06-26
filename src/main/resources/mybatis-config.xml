@@ -10,6 +10,7 @@
     		<typeAlias type="com.good.dto.ManagerVO" alias="ManagerVO"/>
     		<typeAlias type="com.good.dto.VideoBoardVO" alias="VideoBoardVO"/>
     		<typeAlias type="com.good.dto.NoticeBoardVO" alias="NoticeBoardVO"/>
+    		<typeAlias type="com.good.dto.ReplyVO" alias="ReplyVO"/>
     	</typeAliases>
     </configuration>
     
