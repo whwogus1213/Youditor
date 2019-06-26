@@ -37,15 +37,15 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach items="${list}" var="list">
+				<c:forEach items="${NoticeBoardList}" var="NoticeBoardList">
 					<tr>
-						<td>${list.boardId}</td>
-						<td>${list.categoryId}</td>
-						<td><a href="/noticeboard/noticeBoardView?boardId=${list.boardId}">${list.subject}</a>
+						<td>${NoticeBoardList.boardId}</td>
+						<td>${NoticeBoardList.categoryId}</td>
+						<td><a href="/noticeboard/noticeBoardView?boardId=${NoticeBoardList.boardId}">${NoticeBoardList.subject}</a>
 						</td>
-						<td>${list.accountId}</td>
-						<td><fmt:formatDate value="${list.reg_date}" pattern="yyyy-MM-dd"/></td>
-						<td>${list.viewCount}</td>
+						<td>${NoticeBoardList.accountId}</td>
+						<td><fmt:formatDate value="${NoticeBoardList.reg_date}" pattern="yyyy-MM-dd"/></td>
+						<td>${NoticeBoardList.viewCount}</td>
 					</tr>
 				</c:forEach>
 			</tbody>

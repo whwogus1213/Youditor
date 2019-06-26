@@ -56,10 +56,10 @@ public class NoticeBoardController {
 		System.out.println("NoticeBoardController boardWrite open");
 		return mav;
 	}
-	
+
 	// 페이징
 	@RequestMapping(value = "/listPage", method = RequestMethod.GET)
-	public String listPage(Model model, int num) throws Exception {
+	public void listPage(Model model, int num) throws Exception {
 		System.out.println("paging start");
 		// 게시물 총 갯수
 		int count = noticeBoardService.count();
@@ -83,7 +83,7 @@ public class NoticeBoardController {
 		model.addAttribute("pageNum", pageNum);
 		
 		System.out.println("paging end");
-		
-        return "redirect:/noticeboard/listPage?num=1";
 	}
+	
+	
 }

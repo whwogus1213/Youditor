@@ -28,7 +28,7 @@
 	<!-- 페이징 -->
 	<select id="listPage" parameterType="hashMap" resultType="NoticeBoardVO">
 		select *
-		from boticeboard
+		from noticeboard
 		order by boardId desc
 		limit #{displayPost}, #{postNum}
 	</select>
