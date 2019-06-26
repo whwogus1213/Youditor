@@ -37,20 +37,25 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach items="${NoticeBoardList}" var="NoticeBoardList">
+				<c:forEach items="${list}" var="list">
 					<tr>
-						<td>${NoticeBoardList.boardId}</td>
-						<td>${NoticeBoardList.categoryId}</td>
-						<td><a href="/noticeboard/noticeBoardView?boardId=${NoticeBoardList.boardId}">${NoticeBoardList.subject}</a>
+						<td>${list.boardId}</td>
+						<td>${list.categoryId}</td>
+						<td><a href="/noticeboard/noticeBoardView?boardId=${list.boardId}">${list.subject}</a>
 						</td>
-						<td>${NoticeBoardList.accountId}</td>
-						<td><fmt:formatDate value="${NoticeBoardList.reg_date}" pattern="yyyy-MM-dd"/></td>
-						<td>${NoticeBoardList.viewCount}</td>
+						<td>${list.accountId}</td>
+						<td><fmt:formatDate value="${list.reg_date}" pattern="yyyy-MM-dd"/></td>
+						<td>${list.viewCount}</td>
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
+		<c:forEach begin="1" end="${pageNum}" var="num">
+			<span>
+				<a href="/noticeboard/listPage?num=${num}">${num}</a>
+			</span>
+		</c:forEach>
 	</div>
-	<jsp:include page="./../module/bottom.jsp" flush="false"/>
+	<jsp:include page="../module/bottom.jsp" flush="false"/>
 </body>
 </html>

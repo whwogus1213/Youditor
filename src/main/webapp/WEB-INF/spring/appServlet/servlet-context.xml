@@ -32,6 +32,7 @@
 <!--             <exclude-mapping path=""/> -->
             <exclude-mapping path="/"/>
             <exclude-mapping path="/accounts/**"/>
+            <exclude-mapping path="/notice/**"/>
             <exclude-mapping path="/noticeboard/**"/>
             <exclude-mapping path="/manager"/>
             <exclude-mapping path="/manager/**"/>

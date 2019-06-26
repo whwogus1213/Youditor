@@ -10,6 +10,7 @@ public class NoticeBoardVO {
 	private String object;
 	private Date reg_date;
 	private Date mod_date;
+	private int viewCount;
 	
 	public int getBoardId() {
 		return boardId;
@@ -52,5 +53,17 @@ public class NoticeBoardVO {
 	}
 	public void setMod_date(Date mod_date) {
 		this.mod_date = mod_date;
+	}
+	public final int getViewCount() {
+		return viewCount;
+	}
+	public final void setViewCount(int viewCount) {
+		this.viewCount = viewCount;
+	}
+	@Override
+	public String toString() {
+		return "NoticeBoardVO [boardId=" + boardId + ", accountId=" + accountId + ", categoryId=" + categoryId
+				+ ", subject=" + subject + ", object=" + object + ", reg_date=" + reg_date + ", mod_date=" + mod_date
+				+ ", viewCount=" + viewCount + "]";
 	}
 }	// End - public class NoticeBoardVO
