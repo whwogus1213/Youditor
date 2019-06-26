@@ -24,46 +24,46 @@
 	</div>
 	<div class="container">
 	
-    <form class="form-horizontal" method="post">
+    <form class="form-horizontal" method="post" action="${path}/videoboard/insertVideoBoardPro">
       <div class="form-inline">
         <label class="control-label col-sm-2">제목</label>
         <div class="col-sm-3">
-           <input type="text" class="form-control" name="subject" maxlength="50" placeholder="Enter Title">
+           <input type="text" class="form-control" id="subject" name="subject" maxlength="50" placeholder="Enter Title">
         </div>
       </div>
       <br>
       <div class="form-inline">
         <label class="control-label col-sm-2">카테고리</label>
         <div class="col-sm-3">
-           <input type="text" class="form-control" name="catrgory" maxlength="50" placeholder="Enter Title">
+           <input type="text" class="form-control" id="categoryId" name="categoryId" maxlength="50" placeholder="Enter Title">
         </div>
       </div>
       <br>
       <div class="form-inline">
         <label class="control-label col-sm-2">작성자</label>
         <div class="col-sm-3">
-           <input type="text" class="form-control" name="account" maxlength="50" placeholder="Enter Title">
+           <input type="text" class="form-control" id="accountId" name="accountId" maxlength="50" placeholder="Enter Title">
         </div>
       </div>
       <br>
       <div class="form-inline">
         <label class="control-label col-sm-2">유투브 링크</label>
         <div class="col-sm-3">
-           <input type="text" class="form-control" name="youtubeLink" maxlength="30" placeholder="Enter Youtube Link">
+           <input type="text" class="form-control" id="youtubeLink" name="youtubeLink" maxlength="30" placeholder="Enter Youtube Link">
         </div>
       </div>
       <br>
       <div class="form-inline">
           <label class="control-label col-sm-2">내용</label>
            <div class="col-sm-3">
-              <textarea rows="10" cols="100" name="content"></textarea>
+              <textarea rows="10" cols="100" id="object" name="object"></textarea>
            </div>
       </div>
       <br>
 	     <div class="col-sm-12" align="center">
-	       <button type="submit" class="btn btn-primary btn-sm">올리기</button>
+	       <button type="submit" id="submit">올리기</button>
 	       <button type="reset" class="btn btn-warning btn-sm">초기화</button>
-	       <button type="button" class="btn btn-info btn-sm" onclick="location.href='/board/videoBoardList'">뒤로 가기</button>
+	       <button type="button" class="btn btn-info btn-sm" onclick="location.href='/videoboard/videoBoardList'">뒤로 가기</button>
 	     </div>
       <br>
     </form>
