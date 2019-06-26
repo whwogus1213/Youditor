@@ -23,9 +23,10 @@
 		<h5 align="center">ㅇㅇ유투버의 편집영상을 감상할 수 있습니다</h5>
 		<h2 align="center">&nbsp;</h2>
 	</div>
+	<!-- 
+	
 	<div class="container">
 		<table class="table table-bordered table-striped nanum table-hover">
-			<!-- <table border="1"> -->
 			<thead>
 				<tr>
 					<th>번호</th>
@@ -51,59 +52,60 @@
 			</tbody>
 		</table>
 	</div>
+	
+	 -->
+		
 	<div class="container">
-    <!-- Marketing Icons Section -->
-    <div class="row">
-      <div class="col-lg-4 mb-4">
-        <div class="card h-100">
-          <h4 class="card-header">영상 제목</h4>
-          <div class="card-body">
-<!--           <a href="#"><img class="card-img-top" src="" alt=""></a> -->
-			<iframe width="300" height="200" src="https://img.youtube.com/vi/xZKVYhHInok/mqdefault.jpg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-          </div>
-          <div class="card-footer">
-            <a href="#" class="btn btn-primary">여기는 좋아요, 작성자 프로필 만들곳</a>
-          </div>
-        </div>
+    	<!-- Marketing Icons Section -->
+    	<div class="row">
+			<c:forEach items="${VideoBoardList}" var="VideoBoardList">
+     		 <div class="col-lg-4 mb-4">
+        		<div class="card h-100">
+        			<div align="center">
+         				<h5 class="card-header"><a href="/videoboard/videoBoardView?boardId=${VideoBoardList.boardId}">${VideoBoardList.subject}</a></h5>
+        			</div>
+          			<div class="card-body" align="center">
+						<script>
+							var e = '${VideoBoardList.youtubeLink}';
+							var eArray  = e.split('/');
+							var youtubeID;
+							for( var i in eArray ) {
+								youtubeID = eArray[i];
+							}
+							if(youtubeID.length >11){
+								eArray = youtubeID.split("=");
+								youtubeID = eArray[1];
+								youtubeID = youtubeID.substr(0,11);
+							}
+							//document.write('<p>' + youtubeID + '</p>');
+							document.write('<img width="300" height="200" src="https://img.youtube.com/vi/' + youtubeID + '/mqdefault.jpg"></img>');
+						</script>
+          			</div>
+          			<div class="card-footer" align="justify">
+						<table class="table table-bordered table-striped nanum table-hover">
+							<thead>
+								<tr>
+									<th>작성자</th>
+									<th>작성일</th>
+									<th>조회수</th>
+								</tr>
+							</thead>
+								<tr>
+									<td>${VideoBoardList.accountId}</td>
+									<td><fmt:formatDate value="${VideoBoardList.reg_date}"
+											pattern="yyyy-MM-dd" /></td>
+									<td>${VideoBoardList.viewCount }</td>
+								</tr>
+							<tbody>
+							
+							</tbody>
+						</table>
+          			</div>
+        		</div>
+      		</div>
+			</c:forEach>
+      	</div>
       </div>
-      <div class="col-lg-4 mb-4">
-        <div class="card h-100">
-          <h4 class="card-header">영상 제목</h4>
-          <div class="card-body">
-<!--           <a href="#"><img class="card-img-top" src="" alt=""></a> -->
-			<iframe width="300" height="200" src="https://img.youtube.com/vi/xZKVYhHInok/mqdefault.jpg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-          </div>
-          <div class="card-footer">
-            <a href="#" class="btn btn-primary">여기는 좋아요, 작성자 프로필 만들곳</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 mb-4">
-        <div class="card h-100">
-          <h4 class="card-header">영상 제목</h4>
-          <div class="card-body">
-<!--           <a href="#"><img class="card-img-top" src="" alt=""></a> -->
-			<iframe width="300" height="200" src="https://img.youtube.com/vi/xZKVYhHInok/mqdefault.jpg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-          </div>
-          <div class="card-footer">
-            <a href="#" class="btn btn-primary">여기는 좋아요, 작성자 프로필 만들곳</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 mb-4">
-        <div class="card h-100">
-          <h4 class="card-header">영상 제목</h4>
-          <div class="card-body">
-<!--           <a href="#"><img class="card-img-top" src="" alt=""></a> -->
-			<iframe width="300" height="200" src="https://img.youtube.com/vi/nVCubhQ454c/mqdefault.jpg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-          </div>
-          <div class="card-footer">
-            <a href="#" class="btn btn-primary">여기는 좋아요, 작성자 프로필 만들곳</a>
-          </div>
-        </div>
-      </div>
-    <!-- /.row -->
-    </div>
 	<h2 align="center">&nbsp;</h2>
 	<div class="col-sm-9" align="right">
 		<button type="button" class="btn btn-primary" onclick="location.href='/videoboard/write.do' ">유투브 올리기</button>
