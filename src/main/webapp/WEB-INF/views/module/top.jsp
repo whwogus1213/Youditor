@@ -33,10 +33,10 @@
           </li>
 				<li class="nav-item"><a class="nav-link" href="#">영상편집팁</a></li>
 
-				<c:if test="${login.id ne null }">
+				<c:if test="${login.email ne null }">
 					<li class="nav-item"><a class="nav-link" href="/accounts/logout">로그아웃</a></li>
 				</c:if>
-				<c:if test="${login.id eq null }">
+				<c:if test="${login.email eq null }">
 					<li class="nav-item"><a class="nav-link" href="/accounts/login.do">로그인</a></li>
 					<li class="nav-item"><a class="nav-link" href="/accounts/join.do">회원가입</a></li>
 				</c:if>

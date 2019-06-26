@@ -65,7 +65,7 @@ public class AccountsController {
             session.setAttribute("login", vo);
             returnURL = "redirect:/";
         }else { // 로그인에 실패한 경우
-            returnURL = "redirect:/login.do"; // 로그인 폼으로 다시 가도록 함
+            returnURL = "redirect:/accounts/login.do"; // 로그인 폼으로 다시 가도록 함
         }
          
         return returnURL; // 위에서 설정한 returnURL 을 반환해서 이동시킴

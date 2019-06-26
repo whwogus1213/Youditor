@@ -2,37 +2,38 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
- 
+
 <mapper namespace="com.good.mapper.accountsMapper">
- 
- 	<!-- 
-        mybatis-config.xml의 typeAlias에 등록해두지 않았다면 
-        
-        <select id="selectAccounts" resultType="com.good.dto.AccountsVO" >
-            ...
-        </select>
-        
-        이렇게 해야 한다.
-    -->
-    
-    <select id="selectAccounts" resultType="AccountsVO">
-        SELECT * FROM accounts
-    </select>
-    
-    <!-- 회원 가입 -->
-    <insert id="insertAccounts" parameterType="com.good.dto.AccountsVO">
-     insert into accounts(id,
-     					 passwd,
-     					 nickname,
-     					 reg_date,
-     					 picture,
-     					 footer) 
-	  values(#{id}, #{passwd}, #{nickname},now(), #{picture}, #{footer})  
-    </insert>
+
+	<!--
+	mybatis-config.xml의 typeAlias에 등록해두지 않았다면
+	<select id="selectAccounts" resultType="com.good.dto.AccountsVO" >
+		...
+	</select>
+	이렇게 해야 한다.
+	-->
+
+	<select id="selectAccounts" resultType="AccountsVO">
+		SELECT * FROM accounts
+	</select>
+
+	<!-- 회원 가입 -->
+	<insert id="insertAccounts"
+		parameterType="com.good.dto.AccountsVO">
+
+		insert into accounts(email,
+							pwd,
+							nickname,
+							picture,
+							footer,
+							reg_date,
+							mod_date)
+		values(#{email}, #{pwd}, #{nickname}, #{picture}, #{footer}, now(),	now())
+	</insert>
 
 	<select id="login" resultType="AccountsVO">
-        select * from accounts where id = #{id} and passwd = #{passwd}
-    </select>
+		 select * from accounts where email = #{email} and pwd = #{pwd}
+	</select>
 
 </mapper>
 

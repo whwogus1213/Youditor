@@ -10,7 +10,7 @@
     </select>
     
     <update id="authorUp">
-    	UPDATE accounts SET authority = #{authority} WHERE accountid = #{accountid}
+    	UPDATE accounts SET authority = #{authority} WHERE accountId = #{accountId}
     </update>
 
 </mapper>

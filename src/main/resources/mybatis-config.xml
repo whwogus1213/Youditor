@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE configuration 
+<!DOCTYPE configuration
     PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-config.dtd">
 
@@ -9,6 +9,7 @@
     		<typeAlias type="com.good.dto.AccountsVO" alias="AccountsVO"/>
     		<typeAlias type="com.good.dto.ManagerVO" alias="ManagerVO"/>
     		<typeAlias type="com.good.dto.VideoBoardVO" alias="VideoBoardVO"/>
+    		<typeAlias type="com.good.dto.NoticeBoardVO" alias="NoticeBoardVO"/>
     	</typeAliases>
     </configuration>
     
