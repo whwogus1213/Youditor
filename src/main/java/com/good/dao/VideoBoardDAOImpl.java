@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.good.dto.VideoBoardVO;
 
 @Repository
-public class VideoBarodDAOImpl implements VideoBoardDAO {
+public class VideoBoardDAOImpl implements VideoBoardDAO {
 
 	
 	@Inject
