@@ -6,7 +6,7 @@
 <mapper namespace="com.good.mapper.managerMapper">
 
 	<select id="login" resultType="ManagerVO">
-        select * from manager where adminID = #{adminID} and adminPWD = #{adminPWD}
+        select * from admin where adminId = #{adminId} and adminPwd = #{adminPwd}
     </select>
     
     <update id="authorUp">

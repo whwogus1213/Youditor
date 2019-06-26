@@ -12,38 +12,38 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.good.dto.AccountsVO;
-import com.good.dto.NoticeBoardVO;
-import com.good.dto.NoticeBoardVO;
-import com.good.service.NoticeBoardService;
+import com.good.dto.RecruitBoardVO;
+import com.good.dto.RecruitBoardVO;
+import com.good.service.RecruitBoardService;
 
 @Controller
 @RequestMapping("/noticeboard")
-public class NoticeBoardController {
+public class RecruitBoardController {
 
 	@Inject
-	NoticeBoardService noticeBoardService;
+	RecruitBoardService recruitBoardService;
 
-	@RequestMapping(value = "/noticeBoardList")
+	@RequestMapping(value = "/recruitBoardList")
 	public ModelAndView list() throws Exception {
-		List<NoticeBoardVO> list = noticeBoardService.listAll();
+		List<RecruitBoardVO> list = recruitBoardService.listAll();
 
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("noticeboard/noticeBoardList");
-		System.out.println("NoticeBoardController NoticeBoardList open");
-		mav.addObject("NoticeBoardList", list);
+		mav.setViewName("recruitboard/recruitBoardList");
+		System.out.println("RecruitBoardController recruitBoardList open");
+		mav.addObject("RecruitBoardList", list);
 		return mav;
 	}
 
 	// 게시물 상세정보
-	@RequestMapping(value = "/noticeBoardView", method = RequestMethod.GET)
+	@RequestMapping(value = "/recruitBoardView", method = RequestMethod.GET)
 	public ModelAndView view(@RequestParam("boardId") int boardId) throws Exception {
 		System.out.println("*************************************************");
-		NoticeBoardVO row = noticeBoardService.view(boardId);
+		RecruitBoardVO row = recruitBoardService.view(boardId);
 
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("noticeboard/noticeBoardView");
+		mav.setViewName("recruitboard/recruitBoardView");
 		mav.addObject("row", row);
-		System.out.println("NoticeBoardController noticeBoardView open");
+		System.out.println("RecruitBoardController recruitBoardView open");
 		return mav;
 	}
 
@@ -53,8 +53,8 @@ public class NoticeBoardController {
 		System.out.println("*************************************************");
 
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("noticeboard/boardWrite");
-		System.out.println("NoticeBoardController boardWrite open");
+		mav.setViewName("recruitboard/boardWrite");
+		System.out.println("RecruitBoardController boardWrite open");
 		return mav;
 	}
 }
