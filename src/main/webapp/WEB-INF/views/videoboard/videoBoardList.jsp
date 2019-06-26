@@ -23,37 +23,6 @@
 		<h5 align="center">ㅇㅇ유투버의 편집영상을 감상할 수 있습니다</h5>
 		<h2 align="center">&nbsp;</h2>
 	</div>
-	<!-- 
-	
-	<div class="container">
-		<table class="table table-bordered table-striped nanum table-hover">
-			<thead>
-				<tr>
-					<th>번호</th>
-					<th>제목</th>
-					<th>작성자</th>
-					<th>작성일</th>
-					<th>조회수</th>
-				</tr>
-			</thead>
-			
-			<tbody>
-				<c:forEach items="${VideoBoardList}" var="VideoBoardList">
-					<tr>
-						<td>${VideoBoardList.boardId}</td>
-						<td><a href="/videoboard/videoBoardView?boardId=${VideoBoardList.boardId}">${VideoBoardList.subject}</a>
-						</td>
-						<td>${VideoBoardList.accountId}</td>
-						<td><fmt:formatDate value="${VideoBoardList.reg_date}"
-								pattern="yyyy-MM-dd" /></td>
-						<td>${VideoBoardList.viewCount }</td>
-					</tr>
-				</c:forEach>
-			</tbody>
-		</table>
-	</div>
-	
-	 -->
 		
 	<div class="container">
     	<!-- Marketing Icons Section -->
@@ -81,20 +50,20 @@
 							document.write('<img width="300" height="200" src="https://img.youtube.com/vi/' + youtubeID + '/mqdefault.jpg"></img>');
 						</script>
           			</div>
-          			<div class="card-footer" align="justify">
-						<table class="table table-bordered table-striped nanum table-hover">
+          			<div class="card-footer" align="center">
+						<table class="table nanum table-hover">
 							<thead>
 								<tr>
-									<th>작성자</th>
-									<th>작성일</th>
+									<th><div align="center">작성자</div></th>
+									<th><div align="center">작성일</div></th>
 									<th>조회수</th>
 								</tr>
 							</thead>
 								<tr>
-									<td>${VideoBoardList.accountId}</td>
-									<td><fmt:formatDate value="${VideoBoardList.reg_date}"
-											pattern="yyyy-MM-dd" /></td>
-									<td>${VideoBoardList.viewCount }</td>
+									<td><div align="center">${VideoBoardList.accountId}</div></td>
+									<td><div align="center"><fmt:formatDate value="${VideoBoardList.reg_date}"
+											pattern="yyyy-MM-dd" /></div></td>
+									<td><div align="right">${VideoBoardList.viewCount }</div></td>
 								</tr>
 							<tbody>
 							
