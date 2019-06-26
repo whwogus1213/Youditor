@@ -1,26 +1,19 @@
 package com.good.dto;
 
 public class ManagerVO {
-	private String	adminId;
-	private String	adminPwd;
-	public final String getAdminId() {
-		return adminId;
+	private String	adminID;
+	private String	adminPWD;
+	public String getAdminID() {
+		return adminID;
 	}
-	public final void setAdminId(String adminId) {
-		this.adminId = adminId;
+	public void setAdminID(String adminID) {
+		this.adminID = adminID;
 	}
-	public final String getAdminPwd() {
-		return adminPwd;
+	public String getAdminPWD() {
+		return adminPWD;
 	}
-	public final void setAdminPwd(String adminPwd) {
-		this.adminPwd = adminPwd;
+	public void setAdminPWD(String adminPWD) {
+		this.adminPWD = adminPWD;
 	}
-	
-	@Override
-	public String toString() {
-		return "ManagerVO [adminId=" + adminId + ", adminPwd=" + adminPwd + "]";
-	}
-
-	
 	
 }
