@@ -37,8 +37,8 @@
 
 				<c:forEach items="${list}" var="list">
 					<tr>
-						<td>${list.id}</td>
-						<td>${list.passwd}</td>
+						<td>${list.email}</td>
+						<td>${list.pwd}</td>
 						<td>${list.nickname}</td>
 						<td><fmt:formatDate value="${list.reg_date}"
 								pattern="yyyy-MM-dd" /></td>

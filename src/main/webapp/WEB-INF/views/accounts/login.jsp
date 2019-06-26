@@ -38,16 +38,16 @@
 			<h2 align="center">&nbsp;</h2>
 			<label class="control-label col-sm-3">아이디</label>
 			<div class="col-sm-3">
-				<input type="text" class="form-control" id="id" 
-					name="id" maxlength="16" placeholder="Enter ID">
+				<input type="text" class="form-control" id="email" 
+					name="email" maxlength="16" placeholder="Enter ID">
 			</div>
 		</div>
 		<div class="form-inline">
 			<h2 align="center">&nbsp;</h2>
 			<label class="control-label col-sm-3">비밀번호</label>
 			<div class="col-sm-3">
-				<input type="password" class="form-control" id="passwd" 
-					name="passwd" maxlength="16" placeholder="Enter Password">
+				<input type="password" class="form-control" id="pwd" 
+					name="pwd" maxlength="16" placeholder="Enter Password">
 			</div>		
 		</div>
 		<h2 align="center">&nbsp;</h2>
