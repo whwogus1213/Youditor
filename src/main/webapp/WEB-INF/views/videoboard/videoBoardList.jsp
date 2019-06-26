@@ -7,9 +7,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>비디오게시판 - YouditoR</title>
-<link href="/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-<script src="/resources/vendor/bootstrap/js/bootstrap.min.js"></script>
+<title>비디오게시판- YouditoR</title>
+<jsp:include page="../module/header.jsp" flush="false"/>
 <!-- Custom styles -->
 <link href="/resources/css/modern-business.css" rel="stylesheet">
 </head>
@@ -40,7 +39,7 @@
 				<c:forEach items="${VideoBoardList}" var="VideoBoardList">
 					<tr>
 						<td>${VideoBoardList.boardId}</td>
-						<td><a href="/board/boardView?boardId=${VideoBoardList.boardId}">${VideoBoardList.subject}</a>
+						<td><a href="/videoboard/videoBoardView?boardId=${VideoBoardList.boardId}">${VideoBoardList.subject}</a>
 						</td>
 						<td>${VideoBoardList.accountId}</td>
 						<td><fmt:formatDate value="${VideoBoardList.reg_date}"

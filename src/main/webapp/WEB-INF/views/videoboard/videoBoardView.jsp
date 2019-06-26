@@ -11,13 +11,10 @@
 	<meta name="author" content="">
 
   <title>YouDitor</title>
-	<link href="/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-	<script src="/resources/vendor/js/jquery-3.3.1.min.js"></script>
-	<script src="/resources/vendor/bootstrap/js/bootstrap.min.js"></script>
-	<script src="/resources/vendor/js/function.js"></script>
+<jsp:include page="../module/header.jsp" flush="false"/>
 
   <!-- Custom styles -->
-  <link href="/resources/css/modern-business.css" rel="stylesheet">
+<link href="/resources/css/modern-business.css" rel="stylesheet">
 </head>
 <body>
 	<jsp:include page="../module/top.jsp" flush="false"/>

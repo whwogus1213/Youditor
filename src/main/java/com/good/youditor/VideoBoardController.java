@@ -16,7 +16,7 @@ import com.good.dto.VideoBoardVO;
 import com.good.service.VideoBoardService;
 
 @Controller
-@RequestMapping("/board")
+@RequestMapping("/videoboard")
 public class VideoBoardController {
 
 //	@RequestMapping(value = "/VideoboardList", method = RequestMethod.GET)
@@ -34,20 +34,20 @@ public class VideoBoardController {
 		List<VideoBoardVO> list = videoBoardService.listAll();
 		
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("videoboard/videoboardList");
+		mav.setViewName("videoboard/videoBoardList");
 		System.out.println("VideoBoardController VideoBoardList open");
 		mav.addObject("VideoBoardList", list);
 		return mav;
 	}
 
 	// 게시물 상세정보
-	@RequestMapping(value = "/boardView", method = RequestMethod.GET)
+	@RequestMapping(value = "/videoBoardView", method = RequestMethod.GET)
 	public ModelAndView view(@RequestParam("boardId") int boardId) throws Exception {
 		System.out.println("*************************************************");
 		VideoBoardVO row = videoBoardService.view(boardId);
 		
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("videoboard/boardView");
+		mav.setViewName("videoboard/videoBoardView");
 		mav.addObject("row", row);
 		System.out.println("VideoBoardController boardView open");
 		return mav;

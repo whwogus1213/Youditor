@@ -17,10 +17,8 @@
 
 <title>YouditoR</title>
 
-<link href="/resources/vendor/bootstrap/css/bootstrap.min.css"
-	rel="stylesheet">
-  <script src="/resources/vendor/jquery/jquery.min.js"></script>
-  <script src="/resources/vendor/bootstrap/js/bootstrap.min.js"></script>
+	<jsp:include page="../module/header.jsp" flush="false"/>
+
   
   
 <script type="text/javascript">
