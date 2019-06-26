@@ -11,6 +11,8 @@ public class VideoBoardVO {
 	private int categoryId;
 	private String youtubeLink;
 	private Date mod_date;
+	private int	viewCount;
+	
 	public int getBoardId() {
 		return boardId;
 	}
@@ -60,10 +62,18 @@ public class VideoBoardVO {
 		this.mod_date = mod_date;
 	}
 	
+	public int getViewCount() {
+		return viewCount;
+	}
+	public void setViewCount(int viewCount) {
+		this.viewCount = viewCount;
+	}
 	@Override
 	public String toString() {
 		return "VideoBoardVO [boardId=" + boardId + ", accountId=" + accountId + ", subject=" + subject + ", object="
 				+ object + ", reg_date=" + reg_date + ", categoryId=" + categoryId + ", youtubeLink=" + youtubeLink
-				+ ", mod_date=" + mod_date + "]";
+				+ ", mod_date=" + mod_date + ", viewCount=" + viewCount + "]";
 	}
+	
+	
 }
