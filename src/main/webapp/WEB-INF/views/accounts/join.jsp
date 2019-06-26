@@ -156,7 +156,7 @@
 				<div class="checkbox">
 					<label>
 						<input type="checkbox" id="is_subscribed" name="is_subscribed" value="o"/>
-					</label> BookShop의 개인정보 수집 및 이용에 동의합니다.
+					</label> YouditoR의 개인정보 수집 및 이용에 동의합니다.
 				</div>
 			</div>
 			<div class="form-group">

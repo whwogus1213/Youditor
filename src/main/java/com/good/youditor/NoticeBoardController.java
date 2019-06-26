@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping("/notice")
+@RequestMapping("/noticeboard")
 public class NoticeBoardController {
-	@RequestMapping(value = "/main", method=RequestMethod.GET)
-	public ModelAndView main(Locale locale, Model model) throws Exception {
+	@RequestMapping(value = "/noticeBoardList")
+	public ModelAndView listdo(Locale locale, Model model) throws Exception {
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("notice/main");
+		mav.setViewName("noticeboard/noticeBoardList");
 		
 		System.out.println("String notice-main open");
 		return mav;	
