@@ -35,25 +35,25 @@
 			</tr>
 		</thead>
 		<tbody>
-
-			<c:forEach items="${list}" var="list">
-				<tr>
-					<td>${list.bno}</td>
-					<td>
-						<a href="/board/view?bno=${list.bno}">${list.title}</a>
-					</td>
-					<td>${list.category}</td>
-					<td>${list.writer}</td>
-					<td>
-						<fmt:formatDate value="${list.regDate}" pattern="yyyy-MM-dd" />
-					</td>
-					<td>${list.viewCount }</td>
-				</tr>
-			</c:forEach>
-
+				<c:forEach items="${list}" var="list">
+					<tr>
+						<td>${NoticeBoardList.boardId}</td>
+						<td><a href="/noticeboard/noticeBoardView?boardId=${NoticeBoardList.boardId}">${NoticeBoardList.subject}</a>
+						</td>
+						<td>${NoticeBoardList.accountId}</td>
+						<td><fmt:formatDate value="${NoticeBoardList.reg_date}"
+								pattern="yyyy-MM-dd" /></td>
+						<td>${NoticeBoardList.viewCount }</td>
+					</tr>
+				</c:forEach>
 		</tbody>
 	</table>
-</div>
+	</div>
+  <h2 align="center">&nbsp;</h2>
+	<div class="col-sm-9" align="right">
+		<button type="button" class="btn btn-primary" onclick="location.href='/noticeboard/write.do' ">공지 올리기</button>
+	</div>
+	<h2 align="center">&nbsp;</h2>
 	<jsp:include page="./../module/bottom.jsp" flush="false"/>
 </body>
 </html>
