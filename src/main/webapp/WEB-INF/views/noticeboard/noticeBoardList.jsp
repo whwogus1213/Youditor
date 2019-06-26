@@ -50,6 +50,11 @@
 			</tbody>
 		</table>
 	</div>
+  <h2 align="center">&nbsp;</h2>
+	<div class="col-sm-9" align="right">
+		<button type="button" class="btn btn-primary" onclick="location.href='/noticeboard/write.do' ">공지 올리기</button>
+	</div>
+	<h2 align="center">&nbsp;</h2>
 	<jsp:include page="./../module/bottom.jsp" flush="false"/>
 </body>
 </html>

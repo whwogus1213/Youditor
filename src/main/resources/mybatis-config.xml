@@ -7,10 +7,26 @@
     <configuration>
     	<typeAliases>
     		<typeAlias type="com.good.dto.AccountsVO" alias="AccountsVO"/>
+    		<typeAlias type="com.good.dto.FollowListVO" alias="FollowListVO"/>
     		<typeAlias type="com.good.dto.ManagerVO" alias="ManagerVO"/>
-    		<typeAlias type="com.good.dto.VideoBoardVO" alias="VideoBoardVO"/>
+    		<typeAlias type="com.good.dto.MessageVO" alias="MessageVO"/>
     		<typeAlias type="com.good.dto.NoticeBoardVO" alias="NoticeBoardVO"/>
+
     		<typeAlias type="com.good.dto.ReplyVO" alias="ReplyVO"/>
+
+    		<typeAlias type="com.good.dto.NoticeCategoryVO" alias="NoticeCategoryVO"/>
+    		<typeAlias type="com.good.dto.RecruitBoardVO" alias="RecruitBoardVO"/>
+    		<typeAlias type="com.good.dto.RecruitCategoryVO" alias="RecruitCategoryVO"/>
+    		<typeAlias type="com.good.dto.RecruitCommentVO" alias="RecruitCommentVO"/>
+    		<typeAlias type="com.good.dto.RecruitStarVO" alias="RecruitStarVO"/>
+    		<typeAlias type="com.good.dto.TipBoardVO" alias="TipBoardVO"/>
+    		<typeAlias type="com.good.dto.TipCategoryVO" alias="TipCategoryVO"/>
+    		<typeAlias type="com.good.dto.TipCommentVO" alias="TipCommentVO"/>
+    		<typeAlias type="com.good.dto.TipStarVO" alias="TipStarVO"/>
+    		<typeAlias type="com.good.dto.VideoBoardVO" alias="VideoBoardVO"/>
+    		<typeAlias type="com.good.dto.VideoCategoryVO" alias="VideoCategoryVO"/>
+    		<typeAlias type="com.good.dto.VideoCommentVO" alias="VideoCommentVO"/>
+    		<typeAlias type="com.good.dto.VideoStarVO" alias="VideoStarVO"/>
+
     	</typeAliases>
     </configuration>
-    
