@@ -39,7 +39,7 @@
 							
 				var reader = new FileReader();
 				reader.onload = function(e) {
-					$("#img").attr("src", e.target.result);
+					$("#profileImg").attr("src", e.target.result);
 				}
 				reader.readAsDataURL(f);
 			});
@@ -107,9 +107,20 @@
 				<div class="col-sm-3">
 					<input type="file" name="picture"  id="picture">
 				</div>
-				<label class="col-sm-3">미리보기</label>
+				<label class="col-sm-2">미리보기</label>
 				<div class="img_wrap">
-					<img id="img"/>
+					<c:choose>
+			 		<c:when test="${empty picture }">
+						<div>
+							<img id ="profileImg" src = "/resources/images/profile/default_img.jpg" style = "border-radius:0%; padding-top : 10px; height:100px; width:100px;">
+						</div>
+					</c:when>
+					<c:otherwise>
+						<div>
+							<img id="profileImg" style="height:100px; width:100px" />
+						</div>
+					</c:otherwise>
+				</c:choose>
 				</div>
 			</div>
 			<div class="form-inline">
@@ -145,7 +156,7 @@
 				<div class="checkbox">
 					<label>
 						<input type="checkbox" id="is_subscribed" name="is_subscribed" value="o"/>
-					</label> BookShop의 개인정보 수집 및 이용에 동의합니다.
+					</label> YouditoR의 개인정보 수집 및 이용에 동의합니다.
 				</div>
 			</div>
 			<div class="form-group">

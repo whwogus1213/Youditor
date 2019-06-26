@@ -52,4 +52,15 @@ public class VideoBoardController {
 		System.out.println("VideoBoardController boardView open");
 		return mav;
 	}
+
+	// 게시물 상세정보
+	@RequestMapping(value = "/write.do", method = RequestMethod.GET)
+	public ModelAndView writedo() throws Exception {
+		System.out.println("*************************************************");
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("videoboard/boardWrite");
+		System.out.println("VideoBoardController boardWrite open");
+		return mav;
+	}
 }
