@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>비디오게시판 - 작성 - YouditoR</title>
+<title>공지게시판 - 작성 - YouditoR</title>
 <jsp:include page="./../module/header.jsp" flush="false"/>
 <!-- Custom styles -->
 <link href="/resources/css/modern-business.css" rel="stylesheet">
@@ -17,7 +17,7 @@
 	<div class="form-group">
 		<div class="col-sm-12">
 			<h2 align="center">&nbsp;</h2>
-			<h1 align="center">유투브 올리기</h1>
+			<h1 align="center">공지 올리기</h1>
 			<h2 align="center">&nbsp;</h2>
 		</div>
 	</div>
@@ -34,9 +34,8 @@
 				<label class="control-label col-sm-2">카테고리</label>
 				<div class="col-sm-3">
 	        		<select name="categoryId">
-		           		<option value="1">게임</option>
-		           		<option value="2">음식</option>
-		           		<option value="3">화장</option>
+		           		<option value="1">공지</option>
+		           		<option value="2">이벤트</option>
 		           </select>
 				</div>
 			</div>
@@ -45,13 +44,6 @@
 		        <label class="control-label col-sm-2">작성자</label>
 		        <div class="col-sm-3">
 					<input type="text" class="form-control" name="accountId" maxlength="50" placeholder="Enter Title">
-		        </div>
-			</div>
-			<br>
-			<div class="form-inline">
-		        <label class="control-label col-sm-2">유투브 링크</label>
-		        <div class="col-sm-3">
-					<input type="text" class="form-control" name="youtubeLink" maxlength="30" placeholder="Enter Youtube Link">
 		        </div>
 			</div>
 			<br>
@@ -65,7 +57,7 @@
 			<div class="col-sm-12" align="center">
 				<button type="submit" class="btn btn-primary btn-sm">올리기</button>
 				<button type="reset" class="btn btn-warning btn-sm">초기화</button>
-				<button type="button" class="btn btn-info btn-sm" onclick="location.href='/board/videoBoardList'">뒤로 가기</button>
+				<button type="button" class="btn btn-info btn-sm" onclick="location.href='/board/noticeBoardList'">뒤로 가기</button>
 			</div>
 			<br>
 		</form>
