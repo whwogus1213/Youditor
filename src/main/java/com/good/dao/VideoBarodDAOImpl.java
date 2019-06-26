@@ -11,12 +11,12 @@ import org.springframework.stereotype.Repository;
 import com.good.dto.VideoBoardVO;
 
 @Repository
-public class VideoBarodDAOImpl implements VideoBoardDAO {
+public class VideoBoardDAOImpl implements VideoBoardDAO {
 
-	
+
 	@Inject
 	private SqlSession sqlSession;
-	
+
 	private static final String NAMESPACE = "com.good.mapper.videoBoardMapper";
 
 	// 게시물 목록
