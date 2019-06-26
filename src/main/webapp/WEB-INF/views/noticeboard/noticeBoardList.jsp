@@ -47,6 +47,7 @@
 					<td>
 						<fmt:formatDate value="${list.regDate}" pattern="yyyy-MM-dd" />
 					</td>
+					<td>${list.viewCount }</td>
 				</tr>
 			</c:forEach>
 
