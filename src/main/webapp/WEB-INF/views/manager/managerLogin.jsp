@@ -25,13 +25,13 @@
 		<form class="form-horizontal" method="post">
 			<div class="form-group">
 				<label><span class="glyphicon glyphicon-user"></span>
-					Manager ID</label> <input type="text" class="form-control" id="adminID"
-					name="adminID" maxlength="16" placeholder="Enter Admin ID">
+					Manager ID</label> <input type="text" class="form-control" id="adminId"
+					name="adminId" maxlength="16" placeholder="Enter Admin ID">
 			</div>
 			<div class="form-group">
 				<label><span class="glyphicon glyphicon-eye-open"></span>
-					Password</label> <input type="password" class="form-control" id="adminPWD"
-					name="adminPWD" maxlength="16" placeholder="Enter Admin Password">
+					Password</label> <input type="password" class="form-control" id="adminPwd"
+					name="adminPwd" maxlength="16" placeholder="Enter Admin Password">
 			</div>
 			<div class="form-group">
 				<button type="submit" class="btn btn-success btn-block">
