@@ -51,9 +51,10 @@
 	</div>
 	<h2 align="center">&nbsp;</h2>
 	<div class="col-sm-9" align="right">
-		<button type="button" class="btn btn-primary" onclick="location.href='/board/write.do' ">유투브 올리기</button>
+		<button type="button" class="btn btn-primary" onclick="location.href='/videoboard/write.do' ">유투브 올리기</button>
 	</div>
 	<h2 align="center">&nbsp;</h2>
+	<img src="https://img.youtube.com/vi/nVCubhQ454c/0.jpg" ></img>
 	<jsp:include page="../module/bottom.jsp" flush="false" />
 </body>
 </html>
