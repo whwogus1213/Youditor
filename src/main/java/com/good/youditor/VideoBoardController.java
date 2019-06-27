@@ -55,7 +55,7 @@ public class VideoBoardController {
 		return mav;
 	}
 
-	// 게시물 상세정보
+	// 게시물 쓰기
 	@RequestMapping(value = "/write.do", method = RequestMethod.GET)
 	public ModelAndView writedo() throws Exception {
 		System.out.println("*************************************************");
