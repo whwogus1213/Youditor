@@ -4,14 +4,14 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.good.mapper.noticeBoardMapper">
-
+<!-- 
 	<select id="listAll" resultType="NoticeBoardVO">
 		SELECT *
 		FROM noticeboard
 		order by boardId desc
 		
 	</select>
-
+ -->
 	<!-- 게시물 조회 -->
 	<select id="view" parameterType="int" resultType="NoticeBoardVO">
 		select *

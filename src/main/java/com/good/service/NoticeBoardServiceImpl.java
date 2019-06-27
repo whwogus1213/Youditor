@@ -16,10 +16,10 @@ public class NoticeBoardServiceImpl implements NoticeBoardService {
 	NoticeBoardDAO noticeBoardDAO;
 	
 	// 게시물 목록
-	@Override
-	public List<NoticeBoardVO> listAll() throws Exception {
-		return noticeBoardDAO.listAll();
-	}
+//	@Override
+//	public List<NoticeBoardVO> listAll() throws Exception {
+//		return noticeBoardDAO.listAll();
+//	}
 	
 	// 게시물 상세보기
 	@Override

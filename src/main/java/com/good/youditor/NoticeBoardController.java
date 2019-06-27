@@ -21,17 +21,17 @@ public class NoticeBoardController {
 	@Inject
 	NoticeBoardService noticeBoardService;
 
-	// 게시물 목록
-	@RequestMapping(value = "/noticeBoardList")
-	public ModelAndView list() throws Exception {
-		List<NoticeBoardVO> list = noticeBoardService.listAll();
-
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("noticeboard/noticeBoardList");
-		System.out.println("NoticeBoardController NoticeBoardList open");
-		mav.addObject("NoticeBoardList", list);
-		return mav;
-	}
+//	// 게시물 목록
+//	@RequestMapping(value = "/noticeBoardList")
+//	public ModelAndView list() throws Exception {
+//		List<NoticeBoardVO> list = noticeBoardService.listAll();
+//
+//		ModelAndView mav = new ModelAndView();
+//		mav.setViewName("noticeboard/noticeBoardList");
+//		System.out.println("NoticeBoardController NoticeBoardList open");
+//		mav.addObject("NoticeBoardList", list);
+//		return mav;
+//	}
 
 	// 게시물 상세정보
 	@RequestMapping(value = "/noticeBoardView", method = RequestMethod.GET)
@@ -58,23 +58,23 @@ public class NoticeBoardController {
 	}
 
 	// 페이징
-	@RequestMapping(value = "/listPage", method = RequestMethod.GET)
+	@RequestMapping(value = "/noticeBoardList", method = RequestMethod.GET)
 	public void listPage(Model model, int num) throws Exception {
 		System.out.println("paging start");
 		// 게시물 총 갯수
 		int count = noticeBoardService.count();
 		
 		// 한 페이지에 출력할 게시물 갯수
-		int postNum = 5;
+		int postNum = 10;
 		
 		// 게시물 총 갯수 / 한 페이지에 출력할 게시물 갯수 = 하단 페이징
-		int pageNum = (int)Math.ceil((double)count/(double)5);
+		int pageNum = (int)Math.ceil((double)count/(double)10);
 		
 		// 선택한 페이지 번호(임시)
 		//int selectNum = 1;
 
 		// 출력할 게시물
-		int displayPost = (num - 1) * 5;
+		int displayPost = (num - 1) * 10;
 		
 		List<NoticeBoardVO> list = null;
 		list = noticeBoardService.listPage(displayPost, postNum);		

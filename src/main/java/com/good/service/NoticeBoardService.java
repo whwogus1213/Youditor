@@ -7,7 +7,7 @@ import com.good.dto.NoticeBoardVO;
 public interface NoticeBoardService {
 
 	// 게시물 목록
-	public List<NoticeBoardVO> listAll() throws Exception;
+//	public List<NoticeBoardVO> listAll() throws Exception;
 
 	// 게시물 상세보기
 	public NoticeBoardVO view(int boardId) throws Exception;

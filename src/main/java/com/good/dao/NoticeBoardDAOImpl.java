@@ -19,10 +19,10 @@ public class NoticeBoardDAOImpl implements NoticeBoardDAO {
 	private static final String NAMESPACE = "com.good.mapper.noticeBoardMapper";
 
 	// 게시물 목록
-	@Override
-	public List<NoticeBoardVO> listAll() throws Exception {
-		return sqlSession.selectList(NAMESPACE + ".listAll");
-	}
+//	@Override
+//	public List<NoticeBoardVO> listAll() throws Exception {
+//		return sqlSession.selectList(NAMESPACE + ".listAll");
+//	}
 	
 	// 게시물 상세보기
 	@Override
@@ -43,7 +43,6 @@ public class NoticeBoardDAOImpl implements NoticeBoardDAO {
 		
 		myMap.put("displayPost", displayPost);
 		myMap.put("postNum", postNum);
-						
 		return sqlSession.selectList(NAMESPACE + ".listPage", myMap);
 	}
 }

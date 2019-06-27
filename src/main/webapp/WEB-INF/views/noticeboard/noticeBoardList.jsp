@@ -50,7 +50,12 @@
 				</c:forEach>
 			</tbody>
 		</table>
+		<c:forEach begin="1" end="${pageNum}" var="num">
+			<span>
+				<a href="/noticeboard/noticeBoardList?num=${num}">${num}</a>
+			</span>
+		</c:forEach>
 	</div>
-	<jsp:include page="./../module/bottom.jsp" flush="false"/>
+	<jsp:include page="../module/bottom.jsp" flush="false"/>
 </body>
 </html>
