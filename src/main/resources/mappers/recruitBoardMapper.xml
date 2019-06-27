@@ -4,54 +4,15 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.good.mapper.recruitBoardMapper">
-  <!-- 게시물 목록 -->
 	<select id="listAll" resultType="RecruitBoardVO">
         SELECT * FROM recruitBoard
-  </select>
+    </select>
 
-  <!-- 게시물 읽기 -->
+    <!-- 게시물 조회 -->
 	<select id="view" parameterType="int" resultType="RecruitBoardVO">
 		select * from recruitBoard where boardId = #{boardId}
 	</select>
 
-  <!-- 글 쓰기 -->
-  <insert id="insertRecruitBoard" parameterType="RecruitBoardVO">
-    insert into
-      recruitBoard(accountId,
-                categoryId,
-                subject,
-                object,
-                fee,
-                reg_date,
-                mod_date)
-      values(#{accountId},
-            #{categoryId},
-            #{subject},
-            #{object},
-            #{fee},
-            now(),
-            now())
-  </insert>
-
-  <!-- 글 수정 -->
-  <update id="updateRecruitBoard">
-    update
-      recruitBoard
-    set
-      subject = #{subject},
-      object = #{object},
-      fee = #{fee}
-    where
-      boardId = #{boardId}
-  </update>
-
-  <!-- 글 삭제 -->
-  <delete id="deleteRecruitBoard">
-    delete from
-      recruitBoard
-    where
-      boardId = #{boardId}
-	</delete>
 
 
 

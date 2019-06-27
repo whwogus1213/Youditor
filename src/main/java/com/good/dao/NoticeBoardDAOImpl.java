@@ -24,11 +24,11 @@ public class NoticeBoardDAOImpl implements NoticeBoardDAO {
 		return sqlSession.selectList(NAMESPACE + ".listAll");
 	}
 
-	// 게시물 보기
 	@Override
 	public NoticeBoardVO view(int boardId) throws Exception {
 		return sqlSession.selectOne(NAMESPACE+".view",boardId);
 	}
+<<<<<<< HEAD
 
 	//글쓰기
 	@Override
@@ -47,4 +47,6 @@ public class NoticeBoardDAOImpl implements NoticeBoardDAO {
 	 public void deleteNoticeBoard(int boardId) throws Exception {
 		 sqlSession.delete(NAMESPACE + ".deleteNoticeBoard", boardId);
 	 }
+=======
+>>>>>>> parent of 8842814... 각 게시판 java&mapper 업뎃
 }
