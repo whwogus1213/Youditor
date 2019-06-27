@@ -21,8 +21,8 @@ public class ReplyDAOImpl implements ReplyDAO {
 	private static final String NAMESPACE = "com.good.mapper.replyMapper";
 
 	@Override
-	public List<ReplyVO> listAll() throws Exception {
-		return sqlSession.selectList(NAMESPACE+".listAll");
+	public List<ReplyVO> listAll(int boardId) throws Exception {
+		return sqlSession.selectList(NAMESPACE+".listAll", boardId);
 	}
 
 	@Override
