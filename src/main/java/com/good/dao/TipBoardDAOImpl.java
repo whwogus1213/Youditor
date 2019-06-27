@@ -29,4 +29,22 @@ public class TipBoardDAOImpl implements TipBoardDAO {
 	public TipBoardVO view(int boardId) throws Exception {
 		return sqlSession.selectOne(NAMESPACE+".view",boardId);
 	}
+
+	//글쓰기
+	@Override
+	public void insertTipBoard(TipBoardVO vo) throws Exception{
+		sqlSession.insert(NAMESPACE + ".insertTipBoard", vo);
+	}
+
+	 // 수정
+	 @Override
+	 public void updateTipBoard(TipBoardVO vo) throws Exception {
+		 sqlSession.update(NAMESPACE + ".updateTipBoard", vo);
+	 }
+
+	 // 삭제
+	 @Override
+	 public void deleteTipBoard(int boardId) throws Exception {
+		 sqlSession.delete(NAMESPACE + ".deleteTipBoard", boardId);
+	 }
 }
