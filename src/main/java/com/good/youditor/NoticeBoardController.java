@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.good.dao.NoticeBoardDAO;
 import com.good.dto.NoticeBoardVO;
 import com.good.service.NoticeBoardService;
 
@@ -21,16 +23,23 @@ public class NoticeBoardController {
 	@Inject
 	NoticeBoardService noticeBoardService;
 
-	// 게시물 목록
-	@RequestMapping(value = "/noticeBoardList")
-	public ModelAndView list() throws Exception {
-		List<NoticeBoardVO> list = noticeBoardService.listAll();
+//	// 게시물 목록
+//	@RequestMapping(value = "/noticeBoardList")
+//	public ModelAndView list() throws Exception {
+//		List<NoticeBoardVO> list = noticeBoardService.listAll();
+//
+//		ModelAndView mav = new ModelAndView();
+//		mav.setViewName("noticeboard/noticeBoardList");
+//		System.out.println("NoticeBoardController NoticeBoardList open");
+//		mav.addObject("NoticeBoardList", list);
+//		return mav;
+//	}
 
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("noticeboard/noticeBoardList");
+	@RequestMapping(value = "/noticeBoardList", method = RequestMethod.GET)
+	public String list(Model model) throws Exception {
+		model.addAttribute("NoticeBoardList", noticeBoardService.listAll());
 		System.out.println("NoticeBoardController NoticeBoardList open");
-		mav.addObject("NoticeBoardList", list);
-		return mav;
+		return "noticeboard/noticeBoardList";
 	}
 
 	// 게시물 상세정보
