@@ -31,8 +31,8 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public void authorUp(AccountsVO vo) throws Exception {
 		System.out.println(vo.toString());
-		if(vo.getAuthority() <= 4) {
-			vo.setAuthority(vo.getAuthority()+1);
+		if (vo.getAuthority() <= 4) {
+			vo.setAuthority(vo.getAuthority() + 1);
 			dao.authorUp(vo);
 		}
 
@@ -40,13 +40,11 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public void authorDown(AccountsVO vo) throws Exception {
-		if(vo.getAuthority() >= 2) {
-			vo.setAuthority(vo.getAuthority()-1);
+		if (vo.getAuthority() >= 2) {
+			vo.setAuthority(vo.getAuthority() - 1);
 			dao.authorDown(vo);
 		}
 
 	}
-
-
 
 }

@@ -18,8 +18,12 @@
 
 <!-- 댓글기능 시작 -->
 <script type="text/javascript">
-
+replyList();
 $(function(){
+
+	/* 댓글 리스트 출력 */
+	
+	
 	$("#replyAdd").click(function(){
 		console.log("댓글 추가 시작");
 		var object = $('#reply_input').val();
@@ -39,18 +43,30 @@ $(function(){
 			url : "/reply/insert",
 			data : reply,
 			success : function(){
-				console.log("성공!!!");
 				$("#reply_input").val("");
-				alert("성공");
-					
+				/* 리스트 다시 불러온다. */
+									
 				}
 			});
-
 		
-		});
-	
+		});/* 댓글 추가 버튼 끝 */
 	
 });
+
+
+
+function replyList(){
+	/* 댓글 리스트 출력 */
+	$.ajax({
+		type : "POST",
+		url : "/reply/listAll?boardId=${row.boardId}",
+		success : function(result){
+			console.log(result);
+			$("#listReply").html(result);
+			}
+		
+		});
+}
 
 
 
@@ -96,12 +112,32 @@ $(function(){
 		</span>
 	</div>
 	
-	<div class="form-group">
-		<div class="col-sm-8" id="replyList">
-			
-		</div>
+
+	<div id="listReply">
 	</div>
+	<c:forEach var="rlist" items="${list}">
+		======================================================
+		${rList.nickname }
+		${rList.object }
+	
+	
+	
+	</c:forEach>
+	
+	
+	
+	
 </div>
+	
+	
+
+	
+	
+	
+	
+	
+	
+	
 	<jsp:include page="../module/bottom.jsp" flush="false"/>
  
 </body>
