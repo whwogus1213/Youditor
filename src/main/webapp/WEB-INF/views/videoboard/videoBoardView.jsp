@@ -104,6 +104,8 @@ function replyList(){
 		<h6 style="color:gray"> 조회수&nbsp;&nbsp; ${row.viewCount }</h6>
 		<h5 align="right">등록일 &nbsp;&nbsp; <fmt:formatDate value="${row.reg_date}" pattern="yyyy년 MM월 dd일  hh:mm:ss" /></h5>
 		<hr>
+		<h6>${row.accountId } 프로필이 표시되게끔....</h6>
+		<hr>
 	</div>
 	<%-- 	<h1>${row.youtubeLink }</h1> --%>
 	<div class="container">
