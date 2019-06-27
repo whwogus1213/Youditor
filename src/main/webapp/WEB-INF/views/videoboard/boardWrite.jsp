@@ -11,29 +11,6 @@
 <jsp:include page="./../module/header.jsp" flush="false"/>
 <!-- Custom styles -->
 <link href="/resources/css/modern-business.css" rel="stylesheet">
-<script type="text/javascript">
-	$("#test").click(function(){
-		var e = $('input[name=youtubeLink]').val();
-		if(e===null || e===""){
-			alert("유투브 주소를 입력해주세요");
-		} else {
-			var eArray  = e.split('/');
-			var youtubeID;
-			youtubeID = eArray[3];
-			document.write('<p>' + youtubeID + '</p>');
-			if(youtubeID.length >11){
-				eArray = youtubeID.split("=");
-				youtubeID = eArray[1];
-				youtubeID = youtubeID.substr(0,11);
-			}
-			//document.write('<p>' + youtubeID + '</p>');
-			var time= new Date().getTime();
-			var src = 'https://img.youtube.com/vi/' + youtubeID + '/mqdefault.jpg?time=' + time;
-			$('#profileImg').attr('src', src);
-			//document.write('<img id="profileImg" style="border-radius:0%; padding-left : 15px; padding-top:10px; height:200px; width:300px;" src="https://img.youtube.com/vi/' + youtubeID + '/mqdefault.jpg"></img>');
-		}
-	});
-</script>
 </head>
 <body>
 	<jsp:include page="../module/top.jsp" flush="false" />
@@ -82,6 +59,28 @@
 				<label class="col-sm-2">썸네일 미리보기</label>
 				<div id="thumb1">
 					<img id ="profileImg" src = "/resources/images/ThumbnailDefault.jpg" style = "border-radius:0%; padding-left : 15px; padding-top:10px; height:200px; width:300px;">
+					<script type="text/javascript">
+						$("#test").click(function(){
+							var e = $('input[name=youtubeLink]').val();
+							if(e===null || e===""){
+								alert("유투브 주소를 입력해주세요");
+							} else {
+								var eArray  = e.split('/');
+								var youtubeID;
+								youtubeID = eArray[3];
+								if(youtubeID.length >11){
+									eArray = youtubeID.split("=");
+									youtubeID = eArray[1];
+									youtubeID = youtubeID.substr(0,11);
+								}
+								//document.write('<p>' + youtubeID + '</p>');
+								var time= new Date().getTime();
+								var src = 'https://img.youtube.com/vi/' + youtubeID + '/mqdefault.jpg?time=' + time;
+								$('#profileImg').attr('src', src);
+								//document.write('<img id="profileImg" style="border-radius:0%; padding-left : 15px; padding-top:10px; height:200px; width:300px;" src="https://img.youtube.com/vi/' + youtubeID + '/mqdefault.jpg"></img>');
+							}
+						});
+					</script>
 				</div>
 			</div>
 			<br>
