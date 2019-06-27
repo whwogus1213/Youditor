@@ -12,7 +12,41 @@
 	<select id="view" parameterType="int" resultType="NoticeBoardVO">
 		select * from noticeBoard where boardId = #{boardId}
 	</select>
+    <!-- 글 쓰기 -->
+    <insert id="insertNoticeBoard" parameterType="NoticeBoardVO">
+		insert into
+      noticeBoard(accountId,
+                categoryId,
+								subject,
+                object,
+								reg_date,
+								mod_date)
+	    values(#{accountId},
+            #{categoryId},
+            #{subject},
+            #{object},
+            now(),
+            now())
+    </insert>
 
+    <!-- 글 수정 -->
+		 <update id="updateNoticeBoard">
+		  update
+        noticeBoard
+		  set
+        subject = #{subject},
+		    object = #{object}
+		  where
+        boardId = #{boardId}
+		 </update>
+
+ 	<!-- 글 삭제 -->
+		 <delete id="deleteNoticeBoard">
+		  delete from
+		    noticeBoard
+		  where
+        boardId = #{boardId}
+		 </delete>
 
 
 

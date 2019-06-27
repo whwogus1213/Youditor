@@ -10,6 +10,7 @@ public interface NoticeBoardService {
 	// 게시물 목록
 	public List<NoticeBoardVO> listAll() throws Exception;
 
+	// 게시물 보기
 	public NoticeBoardVO view(int boardId) throws Exception;
 
 	//글 쓰기
@@ -20,4 +21,5 @@ public interface NoticeBoardService {
 
 	//삭제
 	public void deleteNoticeBoard(int boardId) throws Exception;
+
 }
