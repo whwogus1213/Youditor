@@ -55,9 +55,9 @@
 			</div>
 			<br>
 			<div class="col-sm-12" align="center">
-			<button type="submit" id="submit">올리기</button>
-	       <button type="reset" class="btn btn-warning btn-sm">초기화</button>
-	       <button type="button" class="btn btn-info btn-sm" onclick="location.href='/noticeboard/noticeBoardList?num=1'">뒤로 가기</button>
+			<button type="submit" id="submit" class="btn btn-success">올리기</button>
+	       <button type="reset" class="btn btn-warning">초기화</button>
+	       <button type="button" class="btn btn-info" onclick="location.href='/noticeboard/noticeBoardList?num=1'">뒤로 가기</button>
 	       </div>
 			<br>
 		</form>
