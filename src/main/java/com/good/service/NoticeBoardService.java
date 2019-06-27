@@ -12,4 +12,13 @@ public interface NoticeBoardService {
 
 	// 게시물 읽기
 	public NoticeBoardVO view(int boardId) throws Exception;
+
+	//글 쓰기
+	public void insertNoticeBoard(NoticeBoardVO vo) throws Exception;
+
+	//수정
+	public void updateNoticeBoard(NoticeBoardVO vo) throws Exception;
+
+	//삭제
+	public void deleteNoticeBoard(int boardId) throws Exception;
 }

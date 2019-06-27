@@ -32,19 +32,19 @@ public class NoticeBoardDAOImpl implements NoticeBoardDAO {
 
 	//글쓰기
 	@Override
-	public void insertVideoBoard(VideoBoardVO vo) throws Exception{
-		sqlSession.insert(NAMESPACE + ".insertVideoBoard", vo);
+	public void insertNoticeBoard(NoticeBoardVO vo) throws Exception{
+		sqlSession.insert(NAMESPACE + ".insertNoticeBoard", vo);
 	}
 
 	 // 수정
 	 @Override
-	 public void updateVideoBoard(VideoBoardVO vo) throws Exception {
-		 sqlSession.update(NAMESPACE + ".updateVideoBoard", vo);
+	 public void updateNoticeBoard(NoticeBoardVO vo) throws Exception {
+		 sqlSession.update(NAMESPACE + ".updateNoticeBoard", vo);
 	 }
 
 	 // 삭제
 	 @Override
-	 public void deleteVideoBoard(int boardId) throws Exception {
-		 sqlSession.delete(NAMESPACE + ".deleteVideoBoard", boardId);
+	 public void deleteNoticeBoard(int boardId) throws Exception {
+		 sqlSession.delete(NAMESPACE + ".deleteNoticeBoard", boardId);
 	 }
 }
