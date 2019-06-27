@@ -13,7 +13,6 @@
             <a class="nav-link" href="/">홈</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/noticeboard/noticeBoardList?num=1">공지</a>
 			<a class="nav-link" href="/noticeboard/noticeBoardList">공지</a>
           </li>
           <li class="nav-item dropdown">
