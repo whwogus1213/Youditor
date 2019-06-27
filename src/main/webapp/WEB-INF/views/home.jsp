@@ -13,7 +13,8 @@
   <meta name="author" content="">
 
   <title>YouditoR</title>
-  <jsp:include page="./module/header.jsp" flush="false"/>
+
+  <link href="/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
   <!-- Custom styles -->
   <link href="/resources/css/modern-business.css" rel="stylesheet">
