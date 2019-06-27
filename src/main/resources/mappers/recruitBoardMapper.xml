@@ -12,7 +12,44 @@
 	<select id="view" parameterType="int" resultType="RecruitBoardVO">
 		select * from recruitBoard where boardId = #{boardId}
 	</select>
+    <!-- 글 쓰기 -->
+    <insert id="insertRecruitBoard" parameterType="RecruitBoardVO">
+		insert into
+      recruitBoard(accountId,
+                categoryId,
+								subject,
+                object,
+								fee,
+								reg_date,
+								mod_date)
+	    values(#{accountId},
+            #{categoryId},
+            #{subject},
+            #{object},
+            #{fee},
+            now(),
+            now())
+    </insert>
 
+    <!-- 글 수정 -->
+		 <update id="updateRecruitBoard">
+		  update
+        recruitBoard
+		  set
+        subject = #{subject},
+		    object = #{object},
+        fee = #{fee}
+		  where
+        boardId = #{boardId}
+		 </update>
+
+ 	<!-- 글 삭제 -->
+		 <delete id="deleteRecruitBoard">
+		  delete from
+		    recruitBoard
+		  where
+        boardId = #{boardId}
+		 </delete>
 
 
 

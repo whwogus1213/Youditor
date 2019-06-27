@@ -16,7 +16,6 @@ import com.good.dto.AdminVO;
 import com.good.service.AccountsService;
 import com.good.service.AdminService;
 
-
 /**
  * Handles requests for the application home page.
  */
@@ -34,22 +33,22 @@ public class AdminController {
 	@RequestMapping(value = "/admin", method = RequestMethod.POST)
 	public String AccountsList(HttpSession session, AdminVO mavo, Model model) throws Exception {
 
-        String returnURL = "";
-        if ( session.getAttribute("login") != null ){
-            // 기존에 login이란 세션 값이 존재한다면
-            session.removeAttribute("login"); // 기존값을 제거해 준다.
-        }
+		String returnURL = "";
+		if (session.getAttribute("login") != null) {
+			// 기존에 login이란 세션 값이 존재한다면
+			session.removeAttribute("login"); // 기존값을 제거해 준다.
+		}
 
 		AdminVO vo = service.login(mavo);
 
-		if ( vo != null ){ // 로그인 성공
-            session.setAttribute("login", vo);
-            returnURL = "redirect:/adminView";
-        }else { // 로그인에 실패한 경우
-            returnURL = "redirect:/admin"; // 로그인 폼으로 다시 가도록 함
-        }
+		if (vo != null) { // 로그인 성공
+			session.setAttribute("login", vo);
+			returnURL = "redirect:/adminView";
+		} else { // 로그인에 실패한 경우
+			returnURL = "redirect:/admin"; // 로그인 폼으로 다시 가도록 함
+		}
 
-        return returnURL; // 위에서 설정한 returnURL 을 반환해서 이동시킴
+		return returnURL; // 위에서 설정한 returnURL 을 반환해서 이동시킴
 	}
 
 	@RequestMapping(value = "/adminView", method = RequestMethod.GET)
@@ -57,7 +56,7 @@ public class AdminController {
 
 		List<AccountsVO> list = null;
 		list = service.selectAccounts();
-		model.addAttribute("list",list);
+		model.addAttribute("list", list);
 		return "admin/adminView";
 	}
 
@@ -72,9 +71,5 @@ public class AdminController {
 		service.authorDown(vo);
 		return "admin/adminView";
 	}
-
-
-
-
 
 }
