@@ -12,7 +12,6 @@
 <!-- Custom styles -->
 <link href="/resources/css/modern-business.css" rel="stylesheet">
 <script type="text/javascript">
-$(document).ready(function{
 	$("#test").click(function(){
 		var e = $('input[name=youtubeLink]').val();
 		if(e===null || e===""){
@@ -21,7 +20,7 @@ $(document).ready(function{
 			var eArray  = e.split('/');
 			var youtubeID;
 			youtubeID = eArray[3];
-			//document.write('<p>' + youtubeID + '</p>');
+			document.write('<p>' + youtubeID + '</p>');
 			if(youtubeID.length >11){
 				eArray = youtubeID.split("=");
 				youtubeID = eArray[1];
@@ -30,11 +29,10 @@ $(document).ready(function{
 			//document.write('<p>' + youtubeID + '</p>');
 			var time= new Date().getTime();
 			var src = 'https://img.youtube.com/vi/' + youtubeID + '/mqdefault.jpg?time=' + time;
-			$("#profileImg").attr("src", src);
+			$('#profileImg').attr('src', src);
 			//document.write('<img id="profileImg" style="border-radius:0%; padding-left : 15px; padding-top:10px; height:200px; width:300px;" src="https://img.youtube.com/vi/' + youtubeID + '/mqdefault.jpg"></img>');
 		}
 	});
-});
 </script>
 </head>
 <body>
