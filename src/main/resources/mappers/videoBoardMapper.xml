@@ -12,7 +12,33 @@
 	<select id="view" parameterType="int" resultType="VideoBoardVO">
 		select * from videoBoard where boardId = #{boardId} 
 	</select>
+    <!-- 글 쓰기 -->
+    <insert id="insertVideoBoard" parameterType="VideoBoardVO">
+		insert into videoBoard(subject,
+								categoryId,
+								accountId,
+								youtubeLink,
+								object,
+								reg_date,
+								mod_date)
+	  values(#{subject}, #{categoryId},#{accountId}, #{youtubeLink}, #{object},  now(), now())
+    </insert>
     
+    <!-- 글 수정 --> 
+		 <update id="updateVideoBoard">
+		  update videoBoard
+		   set
+		    subject = #{subject},
+		    object = #{object}
+		   where boardId = #{boardId}  
+		 </update>
+ 
+ 	<!-- 글 삭제 -->
+		 <delete id="deleteVideoBoard">
+		  delete from
+		   videoBoard
+		  where boardId = #{boardId}
+		 </delete>
     
     
     

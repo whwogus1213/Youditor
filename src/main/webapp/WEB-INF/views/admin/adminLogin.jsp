@@ -25,7 +25,7 @@
 		<form class="form-horizontal" method="post">
 			<div class="form-group">
 				<label><span class="glyphicon glyphicon-user"></span>
-					Manager ID</label> <input type="text" class="form-control" id="adminId"
+					Admin ID</label> <input type="text" class="form-control" id="adminId"
 					name="adminId" maxlength="16" placeholder="Enter Admin ID">
 			</div>
 			<div class="form-group">

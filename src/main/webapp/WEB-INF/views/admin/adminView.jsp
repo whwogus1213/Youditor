@@ -19,8 +19,8 @@
 
 	<jsp:include page="../module/header.jsp" flush="false"/>
 
-  
-  
+
+
 <script type="text/javascript">
 
 function authorUp(accountId, authority){
@@ -30,7 +30,7 @@ function authorUp(accountId, authority){
 			};
 	console.log(json);
 	$.ajax({
-		url:"manager/authorUp",
+		url:"admin/authorUp",
 		type:"post",
 		data:json,
 		success : function(){
@@ -38,8 +38,8 @@ function authorUp(accountId, authority){
 				location.reload();
 			}
 
-		
-		});	
+
+		});
 }
 function authorDown(accountId, authority){
 	var json = {
@@ -48,7 +48,7 @@ function authorDown(accountId, authority){
 			};
 	console.log(json);
 	$.ajax({
-		url:"manager/authorDown",
+		url:"admin/authorDown",
 		type:"post",
 		data:json,
 		success : function(){
@@ -56,17 +56,17 @@ function authorDown(accountId, authority){
 				location.reload();
 			}
 
-		
-		});	
+
+		});
 }
 
 </script>
-  
+
 </head>
 
 <body>
 	<div class="container">
-		<h1>managerView</h1>
+		<h1>adminView</h1>
 		<table class="table table-borderd table-striped nanum table-hover">
 		<thead>
 			<tr>
@@ -93,7 +93,7 @@ function authorDown(accountId, authority){
 					<button class="btn btn-xs btn-danger authorDown" onclick="authorDown(${list.accountId},${list.authority})">DOWN</button>
 				</td>
 <!-- 				<td><span class="glyphicon glyphicon-arrow-up" aria-hidden="true"> </span></td> -->
-				
+
 			</tr>
 		</c:forEach>
 		</tbody>

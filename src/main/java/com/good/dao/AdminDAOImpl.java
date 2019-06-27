@@ -8,16 +8,16 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.good.dto.AccountsVO;
-import com.good.dto.ManagerVO;
+import com.good.dto.AdminVO;
 
 @Repository
-public class ManagerDAOImpl implements ManagerDAO {
+public class AdminDAOImpl implements AdminDAO {
 
 	@Inject
 	private SqlSession sqlSession;
-	
-	private static final String NAMESPACE = "com.good.mapper.managerMapper";
-	
+
+	private static final String NAMESPACE = "com.good.mapper.adminMapper";
+
 	@Override
 	public List<AccountsVO> selectAccounts() throws Exception {
 		return sqlSession.selectList("com.good.mapper.accountsMapper.selectAccounts");
@@ -25,7 +25,7 @@ public class ManagerDAOImpl implements ManagerDAO {
 
 
 	@Override
-	public ManagerVO login(ManagerVO vo) throws Exception {
+	public AdminVO login(AdminVO vo) throws Exception {
 		return sqlSession.selectOne(NAMESPACE+".login",vo);
 	}
 
@@ -40,6 +40,6 @@ public class ManagerDAOImpl implements ManagerDAO {
 	public void authorDown(AccountsVO vo) throws Exception {
 		sqlSession.update(NAMESPACE+".authorUp",vo);
 	}
-	
-	
+
+
 }

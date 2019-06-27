@@ -1,6 +1,6 @@
 package com.good.dto;
 
-public class ManagerVO {
+public class AdminVO {
 	private String	adminId;
 	private String	adminPwd;
 	public final String getAdminId() {
@@ -15,12 +15,12 @@ public class ManagerVO {
 	public final void setAdminPwd(String adminPwd) {
 		this.adminPwd = adminPwd;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "ManagerVO [adminId=" + adminId + ", adminPwd=" + adminPwd + "]";
+		return "AdminVO [adminId=" + adminId + ", adminPwd=" + adminPwd + "]";
 	}
 
-	
-	
+
+
 }
