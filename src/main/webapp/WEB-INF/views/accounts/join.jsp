@@ -103,17 +103,17 @@
 				<label class="col-sm-2">미리보기</label>
 				<div class="img_wrap">
 					<c:choose>
-			 		<c:when test="${empty picture }">
-						<div>
-							<img id ="profileImg" src = "/resources/images/profile/default_img.jpg" style = "border-radius:0%; padding-top : 10px; height:100px; width:100px;">
-						</div>
-					</c:when>
-					<c:otherwise>
-						<div>
-							<img id="profileImg" style="height:100px; width:100px" />
-						</div>
-					</c:otherwise>
-				</c:choose>
+				 		<c:when test="${empty picture }">
+							<div>
+								<img id ="profileImg" src = "/resources/images/profile/default_img.jpg" style = "border-radius:0%; padding-top : 10px; height:100px; width:100px;">
+							</div>
+						</c:when>
+						<c:otherwise>
+							<div>
+								<img id="profileImg" style="height:100px; width:100px" />
+							</div>
+						</c:otherwise>
+					</c:choose>
 				</div>
 			</div>
 			<div class="form-inline">
