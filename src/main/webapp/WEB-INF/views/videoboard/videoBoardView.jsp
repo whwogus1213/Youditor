@@ -26,14 +26,6 @@
 	<h1>${row.subject }</h1>
 	<h1>${row.object }</h1>
 <%-- 	<h1>${row.youtubeLink }</h1> --%>
-<div class="container">
-	<div class="form-group">
-		<div class="col-sm-8">
-			<input class="form-control" type="text" id="reply_input" placeholder="댓글 추가..." maxlength="200">
-			<button id="replyAdd" class='btn btn-success btn-sm'>댓글</button>
-		</div>
-	</div>
-	
 
 
 	<div id="rList">

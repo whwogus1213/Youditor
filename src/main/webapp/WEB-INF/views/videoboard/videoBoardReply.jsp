@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
@@ -21,7 +21,7 @@
                 <table class="table">                    
                     <tr>
                         <td>
-                            <textarea style="width: 1100px" rows="3" cols="30" id="comment" name="comment" placeholder="댓글을 입력하세요"></textarea>
+                            <textarea style="width: 1100px" rows="3" cols="30" id="object" name="object" placeholder="댓글을 입력하세요"></textarea>
                             <br>
                             <div>
                                 <a href='#' onClick="fn_comment('${row.boardId }')" class="btn pull-right btn-success">등록</a>
@@ -31,7 +31,7 @@
                 </table>
             </div>
         </div>
-        <input type="hidden" id="b_code" name="b_code" value="${row.boardId }" />        
+        <input type="hidden" id="boardId" name="boardId" value="${row.boardId }" />        
     </form>
 </div>
 <div class="container">
@@ -45,7 +45,7 @@
 /*
  * 댓글 등록하기(Ajax)
  */
-function fn_comment(code){
+function fn_comment(boardId){
     
     $.ajax({
         type:'POST',
@@ -54,8 +54,8 @@ function fn_comment(code){
         success : function(data){
             if(data == "success")
             {
+                $("#object").val("");
                 getCommentList();
-                $("#comment").val("");
             }
         },
         error:function(request,status,error){
@@ -80,43 +80,70 @@ $(function(){
 function getCommentList(){
     
     $.ajax({
-        type:'GET',
+        type:"POST",
         url : "/reply/listAll",
-        dataType : "json",
+        dataType : "application/json; charset=utf-8",
         data:$("#commentForm").serialize(),
-        contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
+//         contentType: "application/json; charset=UTF-8", 
         success : function(data){
-            
-            var html = "";
-            var cCnt = data.length;
-            
-            if(data.length > 0){
-                
-                for(i=0; i<data.length; i++){
-                    html += "<div>";
-                    html += "<div><table class='table'><h6><strong>"+data[i].nickname+"</strong></h6>";
-                    html += data[i].object + "<tr><td></td></tr>";
-                    html += "</table></div>";
-                    html += "</div>";
-                }
-                
-            } else {
-                
-                html += "<div>";
-                html += "<div><table class='table'><h6><strong>등록된 댓글이 없습니다.</strong></h6>";
-                html += "</table></div>";
-                html += "</div>";
-                
-            }
-            
-            $("#cCnt").html(cCnt);
-            $("#commentList").html(html);
-            
-        },
-        error:function(request,status,error){
-            
-       }
-        
+           console.log("gggggggggggggggg");
+           var html = "";
+           var cCnt = data.length;
+           
+           if(data.length > 0){
+               
+               for(i=0; i<data.length; i++){
+                   html += "<div>";
+                   html += "<div><table class='table'><h6><strong>"+data[i].nickname+"</strong></h6>";
+                   html += data[i].object + "<tr><td></td></tr>";
+                   html += "</table></div>";
+                   html += "</div>";
+               }
+               
+           } else {
+               
+               html += "<div>";
+               html += "<div><table class='table'><h6><strong>등록된 댓글이 없습니다.</strong></h6>";
+               html += "</table></div>";
+               html += "</div>";
+               
+           }
+           
+           $("#cCnt").html(cCnt);
+           $("#commentList").html(html);
+       },
+        error : function(request, status, error ) {   // 오류가 발생했을 때 호출된다. 
+        	console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+       },
+      	complete : function (data) {   // 정상이든 비정상인든 실행이 완료될 경우 실행될 함수
+			alert(data);
+      		var html = "";
+	        var cCnt = data.length;
+	           if(data.length > 0){
+	               
+	               for(i=0; i<data.length; i++){
+	                   html += "<div>";
+	                   html += "<div><table class='table'><h6><strong>"+data[i].nickname+"</strong></h6>";
+	                   html += data[i].object + "<tr><td></td></tr>";
+	                   html += "</table></div>";
+	                   html += "</div>";
+	               }
+	               
+	           } else {
+	               
+	               html += "<div>";
+	               html += "<div><table class='table'><h6><strong>등록된 댓글이 없습니다.</strong></h6>";
+	               html += "</table></div>";
+	               html += "</div>";
+	               
+	           }
+	           
+	           $("#cCnt").html(cCnt);
+	           $("#commentList").html(html);
+      	}
+
+
+    
     });
 }
  
