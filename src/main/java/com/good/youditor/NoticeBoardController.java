@@ -53,25 +53,25 @@ public class NoticeBoardController {
 		System.out.println("paging start");
 		// 게시물 총 갯수
 		int count = noticeBoardService.count();
-		
+
 		// 한 페이지에 출력할 게시물 갯수
 		int postNum = 10;
-		
+
 		// 게시물 총 갯수 / 한 페이지에 출력할 게시물 갯수 = 하단 페이징
-		int pageNum = (int)Math.ceil((double)count/(double)10);
-		
+		int pageNum = (int) Math.ceil((double) count / (double) 10);
+
 		// 선택한 페이지 번호(임시)
-		//int selectNum = 1;
+		// int selectNum = 1;
 
 		// 출력할 게시물
 		int displayPost = (num - 1) * 10;
-		
+
 		List<NoticeBoardVO> list = null;
-		list = noticeBoardService.listPage(displayPost, postNum);		
-		
+		list = noticeBoardService.listPage(displayPost, postNum);
+
 		model.addAttribute("NoticeBoardList", list);
 		model.addAttribute("pageNum", pageNum);
-		
+
 		System.out.println("paging end");
 	}
 
@@ -87,15 +87,15 @@ public class NoticeBoardController {
 	}
 
 	// 글작성
-	@RequestMapping(value="/insertNoticeBoardForm")
-	public String insertNoticeBoardForm() throws Exception{
+	@RequestMapping(value = "/insertNoticeBoardForm")
+	public String insertNoticeBoardForm() throws Exception {
 		return "noticeboard/insertNoticeBoard";
 	}
 
 	// 글작성 완료
 	// insertNoticeBoardForm-> insertNoticeBoardPro
-	@RequestMapping(value="/insertNoticeBoardPro" , method=RequestMethod.POST)
-	public String insertNoticeBoardPro(NoticeBoardVO vo) throws Exception{
+	@RequestMapping(value = "/insertNoticeBoardPro", method = RequestMethod.POST)
+	public String insertNoticeBoardPro(NoticeBoardVO vo) throws Exception {
 		System.out.println("============insertNoticeBoardPro 성공==============");
 		System.out.println(vo);
 		noticeBoardService.insertNoticeBoard(vo);
@@ -104,10 +104,10 @@ public class NoticeBoardController {
 
 	}
 
-	//파일 이동
-	//게시글 수정
-	//'noticeBoardUpdate.jsp' 로 이동 <-- 이동하고자 하는 파일로 명 바꾸면됨
-	@RequestMapping(value = "/noticeBoardUpdate", method=RequestMethod.GET)
+	// 파일 이동
+	// 게시글 수정
+	// 'noticeBoardUpdate.jsp' 로 이동 <-- 이동하고자 하는 파일로 명 바꾸면됨
+	@RequestMapping(value = "/noticeBoardUpdate", method = RequestMethod.GET)
 	public ModelAndView join(Locale locale, Model model) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("noticeboard/noticeBoardUpdate");
@@ -120,15 +120,15 @@ public class NoticeBoardController {
 	public void getUpdatey(@RequestParam("boardId") int boardId, Model model) throws Exception {
 		NoticeBoardVO vo = noticeBoardService.view(boardId);
 
-	  model.addAttribute("updateNoticeBoard", vo);
+		model.addAttribute("updateNoticeBoard", vo);
 
 	}
 
 	// 글 삭제
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
-		public void getDelete(@RequestParam("boardId") int boardId, Model model) throws Exception {
+	public void getDelete(@RequestParam("boardId") int boardId, Model model) throws Exception {
 
-	  model.addAttribute("deleteNoticeBoard", boardId);
+		model.addAttribute("deleteNoticeBoard", boardId);
 	}
 
 	// 글 수정  POST
@@ -136,7 +136,7 @@ public class NoticeBoardController {
 	public String postUpdate(NoticeBoardVO vo) throws Exception {
 		noticeBoardService.updateNoticeBoard(vo);
 
-	  return "redirect:/noticeboard/noticeBoardList";
+		return "redirect:/noticeboard/noticeBoardList";
 
 	}
 
@@ -145,6 +145,6 @@ public class NoticeBoardController {
 	public String postDelete(@RequestParam("boardId") int boardId) throws Exception {
 		noticeBoardService.deleteNoticeBoard(boardId);
 
-	  return "redirect:/noticeboard/noticeBoardList";
+		return "redirect:/noticeboard/noticeBoardList";
 	}
 }

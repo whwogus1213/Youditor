@@ -23,23 +23,19 @@ public class AdminDAOImpl implements AdminDAO {
 		return sqlSession.selectList("com.good.mapper.accountsMapper.selectAccounts");
 	}
 
-
 	@Override
 	public AdminVO login(AdminVO vo) throws Exception {
-		return sqlSession.selectOne(NAMESPACE+".login",vo);
+		return sqlSession.selectOne(NAMESPACE + ".login", vo);
 	}
-
 
 	@Override
 	public void authorUp(AccountsVO vo) throws Exception {
-		sqlSession.update(NAMESPACE+".authorUp",vo);
+		sqlSession.update(NAMESPACE + ".authorUp", vo);
 	}
-
 
 	@Override
 	public void authorDown(AccountsVO vo) throws Exception {
-		sqlSession.update(NAMESPACE+".authorUp",vo);
+		sqlSession.update(NAMESPACE + ".authorUp", vo);
 	}
-
 
 }

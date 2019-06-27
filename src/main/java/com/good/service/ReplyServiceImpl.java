@@ -26,8 +26,7 @@ public class ReplyServiceImpl implements ReplyService {
 	@Override
 	public void insert(ReplyVO vo) throws Exception {
 		dao.insert(vo);
-		
+
 	}
-	
 
 }

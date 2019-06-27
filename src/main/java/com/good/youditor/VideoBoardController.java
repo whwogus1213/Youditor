@@ -20,12 +20,6 @@ import com.good.service.VideoBoardService;
 @RequestMapping("/videoboard")
 public class VideoBoardController {
 
-//	@RequestMapping(value = "/VideoboardList", method = RequestMethod.GET)
-//	public void boardlist(Model model) throws Exception {
-//
-//		System.out.println("dd");
-//	}
-
 	@Inject
 	VideoBoardService videoBoardService;
 
@@ -66,15 +60,15 @@ public class VideoBoardController {
 	}
 
 	// 글작성
-	@RequestMapping(value="/insertVideoBoardForm")
-	public String insertVideoBoardForm() throws Exception{
+	@RequestMapping(value = "/insertVideoBoardForm")
+	public String insertVideoBoardForm() throws Exception {
 		return "videoboard/insertVideoBoard";
 	}
 
 	// 글작성 완료
 	// insertVideoBoardForm-> insertVideoBoardPro
-	@RequestMapping(value="/insertVideoBoardPro" , method=RequestMethod.POST)
-	public String insertVideoBoardPro(VideoBoardVO vo) throws Exception{
+	@RequestMapping(value = "/insertVideoBoardPro", method = RequestMethod.POST)
+	public String insertVideoBoardPro(VideoBoardVO vo) throws Exception {
 		System.out.println("============insertVideoBoardPro 성공==============");
 		System.out.println(vo);
 		videoBoardService.insertVideoBoard(vo);
@@ -83,10 +77,10 @@ public class VideoBoardController {
 
 	}
 
-	//파일 이동
-	//게시글 수정
-	//'videoBoardUpdate.jsp' 로 이동 <-- 이동하고자 하는 파일로 명 바꾸면됨
-	@RequestMapping(value = "/videoBoardUpdate", method=RequestMethod.GET)
+	// 파일 이동
+	// 게시글 수정
+	// 'videoBoardUpdate.jsp' 로 이동 <-- 이동하고자 하는 파일로 명 바꾸면됨
+	@RequestMapping(value = "/videoBoardUpdate", method = RequestMethod.GET)
 	public ModelAndView join(Locale locale, Model model) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("videoboard/videoBoardUpdate");
@@ -99,15 +93,15 @@ public class VideoBoardController {
 	public void getUpdatey(@RequestParam("boardId") int boardId, Model model) throws Exception {
 		VideoBoardVO vo = videoBoardService.view(boardId);
 
-	  model.addAttribute("updateVideoBoard", vo);
+		model.addAttribute("updateVideoBoard", vo);
 
 	}
 
 	// 글 삭제
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
-		public void getDelete(@RequestParam("boardId") int boardId, Model model) throws Exception {
+	public void getDelete(@RequestParam("boardId") int boardId, Model model) throws Exception {
 
-	  model.addAttribute("deleteVideoBoard", boardId);
+		model.addAttribute("deleteVideoBoard", boardId);
 	}
 
 	// 글 수정  POST
@@ -115,7 +109,7 @@ public class VideoBoardController {
 	public String postUpdate(VideoBoardVO vo) throws Exception {
 		videoBoardService.updateVideoBoard(vo);
 
-	  return "redirect:/videoboard/videoBoardList";
+		return "redirect:/videoboard/videoBoardList";
 
 	}
 
@@ -124,6 +118,6 @@ public class VideoBoardController {
 	public String postDelete(@RequestParam("boardId") int boardId) throws Exception {
 		videoBoardService.deleteVideoBoard(boardId);
 
-	  return "redirect:/videoboard/videoBoardList";
+		return "redirect:/videoboard/videoBoardList";
 	}
 }

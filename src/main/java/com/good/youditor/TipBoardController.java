@@ -20,12 +20,6 @@ import com.good.service.TipBoardService;
 @RequestMapping("/tipboard")
 public class TipBoardController {
 
-//	@RequestMapping(value = "/TipboardList", method = RequestMethod.GET)
-//	public void boardlist(Model model) throws Exception {
-//
-//		System.out.println("dd");
-//	}
-
 	@Inject
 	TipBoardService tipBoardService;
 
@@ -66,15 +60,15 @@ public class TipBoardController {
 	}
 
 	// 글작성
-	@RequestMapping(value="/insertTipBoardForm")
-	public String insertTipBoardForm() throws Exception{
+	@RequestMapping(value = "/insertTipBoardForm")
+	public String insertTipBoardForm() throws Exception {
 		return "tipboard/insertTipBoard";
 	}
 
 	// 글작성 완료
 	// insertTipBoardForm-> insertTipBoardPro
-	@RequestMapping(value="/insertTipBoardPro" , method=RequestMethod.POST)
-	public String insertTipBoardPro(TipBoardVO vo) throws Exception{
+	@RequestMapping(value = "/insertTipBoardPro", method = RequestMethod.POST)
+	public String insertTipBoardPro(TipBoardVO vo) throws Exception {
 		System.out.println("============insertTipBoardPro 성공==============");
 		System.out.println(vo);
 		tipBoardService.insertTipBoard(vo);
@@ -83,10 +77,10 @@ public class TipBoardController {
 
 	}
 
-	//파일 이동
-	//게시글 수정
-	//'tipBoardUpdate.jsp' 로 이동 <-- 이동하고자 하는 파일로 명 바꾸면됨
-	@RequestMapping(value = "/tipBoardUpdate", method=RequestMethod.GET)
+	// 파일 이동
+	// 게시글 수정
+	// 'tipBoardUpdate.jsp' 로 이동 <-- 이동하고자 하는 파일로 명 바꾸면됨
+	@RequestMapping(value = "/tipBoardUpdate", method = RequestMethod.GET)
 	public ModelAndView join(Locale locale, Model model) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("tipboard/tipBoardUpdate");
@@ -99,15 +93,15 @@ public class TipBoardController {
 	public void getUpdatey(@RequestParam("boardId") int boardId, Model model) throws Exception {
 		TipBoardVO vo = tipBoardService.view(boardId);
 
-	  model.addAttribute("updateTipBoard", vo);
+		model.addAttribute("updateTipBoard", vo);
 
 	}
 
 	// 글 삭제
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
-		public void getDelete(@RequestParam("boardId") int boardId, Model model) throws Exception {
+	public void getDelete(@RequestParam("boardId") int boardId, Model model) throws Exception {
 
-	  model.addAttribute("deleteTipBoard", boardId);
+		model.addAttribute("deleteTipBoard", boardId);
 	}
 
 	// 글 수정  POST
@@ -115,7 +109,7 @@ public class TipBoardController {
 	public String postUpdate(TipBoardVO vo) throws Exception {
 		tipBoardService.updateTipBoard(vo);
 
-	  return "redirect:/tipboard/tipBoardList";
+		return "redirect:/tipboard/tipBoardList";
 
 	}
 
@@ -124,6 +118,6 @@ public class TipBoardController {
 	public String postDelete(@RequestParam("boardId") int boardId) throws Exception {
 		tipBoardService.deleteTipBoard(boardId);
 
-	  return "redirect:/tipboard/tipBoardList";
+		return "redirect:/tipboard/tipBoardList";
 	}
 }

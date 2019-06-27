@@ -28,22 +28,22 @@ public class RecruitBoardServiceImpl implements RecruitBoardService {
 		return recruitBoardDAO.view(boardId);
 	}
 
-	//글쓰기
+	// 글쓰기
 	@Override
 	public void insertRecruitBoard(RecruitBoardVO vo) throws Exception {
 		recruitBoardDAO.insertRecruitBoard(vo);
 	}
 
-	 // 수정
-	 @Override
-	 public void updateRecruitBoard(RecruitBoardVO vo) throws Exception {
-		 recruitBoardDAO.updateRecruitBoard(vo);
-	 }
+	// 수정
+	@Override
+	public void updateRecruitBoard(RecruitBoardVO vo) throws Exception {
+		recruitBoardDAO.updateRecruitBoard(vo);
+	}
 
-	 // 삭제
-	 @Override
-	 public void deleteRecruitBoard(int boardId) throws Exception {
-		 recruitBoardDAO.deleteRecruitBoard(boardId);
-	 }
+	// 삭제
+	@Override
+	public void deleteRecruitBoard(int boardId) throws Exception {
+		recruitBoardDAO.deleteRecruitBoard(boardId);
+	}
 
 }

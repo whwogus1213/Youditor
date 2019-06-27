@@ -24,7 +24,7 @@ public class NoticeBoardDAOImpl implements NoticeBoardDAO {
 //	public List<NoticeBoardVO> listAll() throws Exception {
 //		return sqlSession.selectList(NAMESPACE + ".listAll");
 //	}
-	
+
 	// 게시물 상세보기
 	@Override
 	public NoticeBoardVO view(int boardId) throws Exception {
@@ -36,34 +36,33 @@ public class NoticeBoardDAOImpl implements NoticeBoardDAO {
 	public int count() throws Exception {
 		return sqlSession.selectOne(NAMESPACE + ".count");
 	}
-	
+
 	// 페이징
 	@Override
 	public List<NoticeBoardVO> listPage(int displayPost, int postNum) {
 		HashMap<String, Integer> myMap = new HashMap<String, Integer>();
-		
+
 		myMap.put("displayPost", displayPost);
 		myMap.put("postNum", postNum);
 		return sqlSession.selectList(NAMESPACE + ".listPage", myMap);
 	}
 
-	//글쓰기
+	// 글쓰기
 	@Override
-	public void insertNoticeBoard(NoticeBoardVO vo) throws Exception{
+	public void insertNoticeBoard(NoticeBoardVO vo) throws Exception {
 		sqlSession.insert(NAMESPACE + ".insertNoticeBoard", vo);
 	}
 
-	 // 수정
-	 @Override
-	 public void updateNoticeBoard(NoticeBoardVO vo) throws Exception {
-		 sqlSession.update(NAMESPACE + ".updateNoticeBoard", vo);
-	 }
+	// 수정
+	@Override
+	public void updateNoticeBoard(NoticeBoardVO vo) throws Exception {
+		sqlSession.update(NAMESPACE + ".updateNoticeBoard", vo);
+	}
 
-	 // 삭제
-	 @Override
-	 public void deleteNoticeBoard(int boardId) throws Exception {
-		 sqlSession.delete(NAMESPACE + ".deleteNoticeBoard", boardId);
-	 }
-	 
-		
+	// 삭제
+	@Override
+	public void deleteNoticeBoard(int boardId) throws Exception {
+		sqlSession.delete(NAMESPACE + ".deleteNoticeBoard", boardId);
+	}
+
 }

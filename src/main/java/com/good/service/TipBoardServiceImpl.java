@@ -28,22 +28,22 @@ public class TipBoardServiceImpl implements TipBoardService {
 		return tipBoardDAO.view(boardId);
 	}
 
-	//글쓰기
+	// 글쓰기
 	@Override
 	public void insertTipBoard(TipBoardVO vo) throws Exception {
 		tipBoardDAO.insertTipBoard(vo);
 	}
 
-	 // 수정
-	 @Override
-	 public void updateTipBoard(TipBoardVO vo) throws Exception {
-		 tipBoardDAO.updateTipBoard(vo);
-	 }
+	// 수정
+	@Override
+	public void updateTipBoard(TipBoardVO vo) throws Exception {
+		tipBoardDAO.updateTipBoard(vo);
+	}
 
-	 // 삭제
-	 @Override
-	 public void deleteTipBoard(int boardId) throws Exception {
-		 tipBoardDAO.deleteTipBoard(boardId);
-	 }
+	// 삭제
+	@Override
+	public void deleteTipBoard(int boardId) throws Exception {
+		tipBoardDAO.deleteTipBoard(boardId);
+	}
 
 }
