@@ -52,14 +52,6 @@
 		<hr>
 	</div>
 	<%-- 	<h1>${row.youtubeLink }</h1> --%>
-	<div class="container">
-		<div class="input-group" align="center">
-			<input class="form-control" type="text" id="reply_input" placeholder="댓글 추가..." maxlength="200">
-			<span class="input-group-btn">
-				<button id="replyAdd" class='btn btn-primary' style="width:130px">등록</button>
-			</span>
-		</div>
-		<br>
 		<div id="listReply">
 			<jsp:include page="../videoboard/videoBoardReply.jsp" flush="false"/>
 		</div>
