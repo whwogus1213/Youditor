@@ -9,8 +9,15 @@
 	<meta name="description" content="">
 	<meta name="author" content="">
 	
+	<style type="text/css">
+		.container.imgs_wrap img{
+			resize:	both;
+			width:			100px;
+			height:			100px;
+			max-width:	100px;
+		}
+	</style>
 	<jsp:include page="../module/header.jsp" flush="false"/>
-		
 	<script type="text/javascript">
 		var sel_file;
 	

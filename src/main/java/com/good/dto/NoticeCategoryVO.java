@@ -1,7 +1,5 @@
 package com.good.dto;
 
-import java.util.Date;
-
 public class NoticeCategoryVO {
 	private int categoryId;
 	private String categoryName;

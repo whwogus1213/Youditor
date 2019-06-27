@@ -81,7 +81,7 @@ public class NoticeBoardController {
 		System.out.println("*************************************************");
 
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("noticeboard/boardWrite");
+		mav.setViewName("noticeboard/noticeBoardWrite");
 		System.out.println("NoticeBoardController boardWrite open");
 		return mav;
 	}
