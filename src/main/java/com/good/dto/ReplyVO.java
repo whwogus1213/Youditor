@@ -12,7 +12,7 @@ public class ReplyVO {
 	private Date	mod_date;
 	
 	private int		countReply;
-	private String	writerNick;
+	private String	nickname;
 	public int getCommentId() {
 		return commentId;
 	}
@@ -61,20 +61,18 @@ public class ReplyVO {
 	public void setCountReply(int countReply) {
 		this.countReply = countReply;
 	}
-	public String getWriterNick() {
-		return writerNick;
+	public String getNickname() {
+		return nickname;
 	}
-	public void setWriterNick(String writerNick) {
-		this.writerNick = writerNick;
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
+	
 	@Override
 	public String toString() {
 		return "ReplyVO [commentId=" + commentId + ", accountId=" + accountId + ", boardId=" + boardId + ", object="
 				+ object + ", replyCommentId=" + replyCommentId + ", reg_date=" + reg_date + ", mod_date=" + mod_date
-				+ ", countReply=" + countReply + ", writerNick=" + writerNick + "]";
+				+ ", countReply=" + countReply + ", nickname=" + nickname + "]";
 	}
-	
-	
-	
-	
+
 }

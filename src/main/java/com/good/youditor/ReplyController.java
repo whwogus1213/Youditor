@@ -29,11 +29,22 @@ public class ReplyController {
 	// 게시물 목록
 	@RequestMapping(value = "/insert", method=RequestMethod.POST)
 	public void insert(HttpSession session, ReplyVO vo) throws Exception{
-		System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
 		AccountsVO av = (AccountsVO)session.getAttribute("login");
 		int accountId = av.getAccountId();
-		System.out.println(accountId+"@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+		System.out.println("댓글 작성자 계정번호 : "+accountId);
 		vo.setAccountId(accountId);
 		service.insert(vo);
+	}
+	
+	@RequestMapping(value="/listAll")
+	public void listAll(HttpSession session, int boardId, Model model) throws Exception {
+		AccountsVO av = (AccountsVO)session.getAttribute("login");
+		
+		
+		List<ReplyVO> list = service.listAll(boardId);
+		System.out.println(list);
+		
+		
+		model.addAttribute("list",list);
 	}
 }
