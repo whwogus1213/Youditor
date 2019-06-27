@@ -24,6 +24,7 @@ public class TipBoardDAOImpl implements TipBoardDAO {
 		return sqlSession.selectList(NAMESPACE + ".listAll");
 	}
 
+	// 게시물 보기
 	@Override
 	public TipBoardVO view(int boardId) throws Exception {
 		return sqlSession.selectOne(NAMESPACE+".view",boardId);

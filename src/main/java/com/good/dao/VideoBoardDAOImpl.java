@@ -25,16 +25,18 @@ public class VideoBoardDAOImpl implements VideoBoardDAO {
 		return sqlSession.selectList(NAMESPACE + ".listAll");
 	}
 
+	// 게시물 보기
 	@Override
 	public VideoBoardVO view(int boardId) throws Exception {
 		return sqlSession.selectOne(NAMESPACE+".view",boardId);
 	}
+
 	//글쓰기
-	@Override 
+	@Override
 	public void insertVideoBoard(VideoBoardVO vo) throws Exception{
 		sqlSession.insert(NAMESPACE + ".insertVideoBoard", vo);
 	}
-		
+
 	 // 수정
 	 @Override
 	 public void updateVideoBoard(VideoBoardVO vo) throws Exception {

@@ -10,5 +10,6 @@ public interface NoticeBoardService {
 	// 게시물 목록
 	public List<NoticeBoardVO> listAll() throws Exception;
 
+	// 게시물 읽기
 	public NoticeBoardVO view(int boardId) throws Exception;
 }

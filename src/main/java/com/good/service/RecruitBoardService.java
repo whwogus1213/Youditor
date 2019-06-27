@@ -10,5 +10,6 @@ public interface RecruitBoardService {
 	// 게시물 목록
 	public List<RecruitBoardVO> listAll() throws Exception;
 
+	// 게시물 읽기
 	public RecruitBoardVO view(int boardId) throws Exception;
 }

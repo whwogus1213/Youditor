@@ -2,47 +2,60 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
- 
+
 <mapper namespace="com.good.mapper.videoBoardMapper">
+  <!-- 게시물 목록 -->
 	<select id="listAll" resultType="VideoBoardVO">
         SELECT * FROM videoBoard
-    </select>
-    
-    <!-- 게시물 조회 -->
+  </select>
+
+  <!-- 게시물 읽기 -->
 	<select id="view" parameterType="int" resultType="VideoBoardVO">
-		select * from videoBoard where boardId = #{boardId} 
+		select * from videoBoard where boardId = #{boardId}
 	</select>
-    <!-- 글 쓰기 -->
-    <insert id="insertVideoBoard" parameterType="VideoBoardVO">
-		insert into videoBoard(subject,
-								categoryId,
-								accountId,
-								youtubeLink,
-								object,
-								reg_date,
-								mod_date)
-	  values(#{subject}, #{categoryId},#{accountId}, #{youtubeLink}, #{object},  now(), now())
-    </insert>
-    
-    <!-- 글 수정 --> 
-		 <update id="updateVideoBoard">
-		  update videoBoard
-		   set
-		    subject = #{subject},
-		    object = #{object}
-		   where boardId = #{boardId}  
-		 </update>
- 
- 	<!-- 글 삭제 -->
-		 <delete id="deleteVideoBoard">
-		  delete from
-		   videoBoard
-		  where boardId = #{boardId}
-		 </delete>
-    
-    
-    
-    
-    
-    
+
+  <!-- 글 쓰기 -->
+  <insert id="insertVideoBoard" parameterType="VideoBoardVO">
+    insert into
+      videoBoard(accountId,
+                categoryId,
+                subject,
+                object,
+                youtubeLink,
+                reg_date,
+                mod_date)
+      values(#{accountId},
+            #{categoryId},
+            #{subject},
+            #{object},
+            #{youtubeLink},
+            now(),
+            now())
+  </insert>
+
+  <!-- 글 수정 -->
+  <update id="updateVideoBoard">
+    update
+      videoBoard
+    set
+      subject = #{subject},
+      object = #{object},
+      youtubeLink = #{youtubeLink}
+    where
+      boardId = #{boardId}
+  </update>
+
+  <!-- 글 삭제 -->
+  <delete id="deleteVideoBoard">
+    delete from
+      videoBoard
+    where
+      boardId = #{boardId}
+	</delete>
+
+
+
+
+
+
 </mapper>

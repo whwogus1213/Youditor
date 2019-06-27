@@ -12,17 +12,22 @@ import com.good.dto.VideoBoardVO;
 @Service
 public class VideoBoardServiceImpl implements VideoBoardService {
 
+	// 주입
 	@Inject
 	VideoBoardDAO videoBoardDAO;
+
 	// 게시물 목록
 	@Override
 	public List<VideoBoardVO> listAll() throws Exception {
 		return videoBoardDAO.listAll();
 	}
+
+	// 게시물 읽기
 	@Override
 	public VideoBoardVO view(int boardId) throws Exception {
 		return videoBoardDAO.view(boardId);
 	}
+
 	//글쓰기
 	@Override
 	public void insertVideoBoard(VideoBoardVO vo) throws Exception {

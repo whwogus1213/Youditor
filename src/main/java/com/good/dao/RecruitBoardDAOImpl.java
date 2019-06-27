@@ -24,6 +24,7 @@ public class RecruitBoardDAOImpl implements RecruitBoardDAO {
 		return sqlSession.selectList(NAMESPACE + ".listAll");
 	}
 
+	// 게시물 보기
 	@Override
 	public RecruitBoardVO view(int boardId) throws Exception {
 		return sqlSession.selectOne(NAMESPACE+".view",boardId);
