@@ -61,7 +61,7 @@ $(function(){
 	<jsp:include page="../module/top.jsp" flush="false"/>
 	
 	<!-- 게시글 상세정보 -->
-	<div align="center" style="background-color:black; padding:30px">
+	<div align="center" style="background-color:black; padding-top:60px">
 		<script>
 			var e = '${row.youtubeLink}';
 			var eArray  = e.split('/');
@@ -78,15 +78,21 @@ $(function(){
 		</script>
 	</div>
 	<!-- <h1>${row.boardId }</h1> -->
-	<h1>${row.subject }</h1>
-	<h1>${row.object }</h1>
+	<div class="container">
+		<h2> ${row.subject }</h2>
+		<br>
+		<h5>${row.object }</h5>
+		<br>
+		<h5 align="right"> 조회수 ${row.viewCount }</h5>
+		<hr>
+	</div>
 <%-- 	<h1>${row.youtubeLink }</h1> --%>
 <div class="container">
-	<div class="form-group">
-		<div class="col-sm-8">
-			<input class="form-control" type="text" id="reply_input" placeholder="댓글 추가..." maxlength="200">
-			<button id="replyAdd" class='btn btn-success btn-sm'>댓글</button>
-		</div>
+	<div class="input-group" align="center">
+		<input class="form-control" type="text" id="reply_input" placeholder="댓글 추가..." maxlength="200">
+		<span class="input-group-btn">
+			<button id="replyAdd" class='btn btn-dark'>등록</button>
+		</span>
 	</div>
 	
 	<div class="form-group">
