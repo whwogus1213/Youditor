@@ -15,63 +15,6 @@
 <title>YouDitor</title>
 <jsp:include page="../module/header.jsp" flush="false"/>
 
-
-<!-- 댓글기능 시작 -->
-<script type="text/javascript">
-replyList();
-$(function(){
-
-	/* 댓글 리스트 출력 */
-	
-	
-	$("#replyAdd").click(function(){
-		console.log("댓글 추가 시작");
-		var object = $('#reply_input').val();
-		var boardId = ${row.boardId};
-				
-		console.log(boardId);
-		
-		var reply = {
-				"boardId" : boardId,
-				"object" : object
-				};
-
-		console.log(reply);
-
-		$.ajax({
-			type : "POST",
-			url : "/reply/insert",
-			data : reply,
-			success : function(){
-				$("#reply_input").val("");
-				/* 리스트 다시 불러온다. */
-									
-				}
-			});
-		
-		});/* 댓글 추가 버튼 끝 */
-	
-});
-
-
-
-function replyList(){
-	/* 댓글 리스트 출력 */
-	$.ajax({
-		type : "POST",
-		url : "/reply/listAll?boardId=${row.boardId}",
-		success : function(result){
-			console.log(result);
-			$("#listReply").html(result);
-			}
-		
-		});
-}
-
-
-
-</script>
-
 </head>
 <body>
 	<jsp:include page="../module/top.jsp" flush="false"/>
@@ -113,17 +56,10 @@ function replyList(){
 	</div>
 	
 
-	<div id="listReply">
+
+	<div id="rList">
+		<%@ include file="../videoboard/videoBoardReply.jsp" %>
 	</div>
-	<c:forEach var="rlist" items="${list}">
-		======================================================
-		${rList.nickname }
-		${rList.object }
-	
-	
-	
-	</c:forEach>
-	
 	
 	
 	
