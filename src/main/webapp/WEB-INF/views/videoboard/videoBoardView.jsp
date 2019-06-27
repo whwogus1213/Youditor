@@ -5,26 +5,57 @@
 <!DOCTYPE html>
 <html>
 
-<head>  <meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<meta name="description" content="">
-	<meta name="author" content="">
+<head>
 
-  <title>YouDitor</title>
-	<jsp:include page="../module/header.jsp" flush="false"/>
-	<script>
-		function getYoutubeCode(e){
-			var youtubeCode;
-			var eSplit  = e.split('/');
-			for( var i in eSplit ) {
-				youtubeCode = eSplit[i];
-			}
-			return youtubeCode;
-		}
-	</script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
 
-  <!-- Custom styles -->
-<link href="/resources/css/modern-business.css" rel="stylesheet">
+<title>YouDitor</title>
+<jsp:include page="../module/header.jsp" flush="false"/>
+
+
+<!-- 댓글기능 시작 -->
+<script type="text/javascript">
+
+$(function(){
+	$("#replyAdd").click(function(){
+		console.log("댓글 추가 시작");
+		var object = $('#reply_input').val();
+		var boardId = ${row.boardId};
+				
+		console.log(boardId);
+		
+		var reply = {
+				"boardId" : boardId,
+				"object" : object
+				};
+
+		console.log(reply);
+
+		$.ajax({
+			type : "POST",
+			url : "/reply/insert",
+			data : reply,
+			success : function(){
+				console.log("성공!!!");
+				$("#reply_input").val("");
+				alert("성공");
+					
+				}
+			});
+
+		
+		});
+	
+	
+});
+
+
+
+</script>
+
 </head>
 <body>
 	<jsp:include page="../module/top.jsp" flush="false"/>
@@ -49,9 +80,36 @@
 	<!-- <h1>${row.boardId }</h1> -->
 	<h1>${row.subject }</h1>
 	<h1>${row.object }</h1>
-	<h1>${row.accountId }</h1>
-	<h1>${row.categoryId }</h1>
-	<h1>${row.youtubeLink }</h1>
+<%-- 	<h1>${row.youtubeLink }</h1> --%>
+<div class="container">
+	<div class="form-group">
+		<div class="col-sm-8">
+			<input class="form-control" type="text" id="reply_input" placeholder="댓글 추가..." maxlength="200">
+			<button id="replyAdd" class='btn btn-success btn-sm'>댓글</button>
+		</div>
+	</div>
+	
+	<div class="form-group">
+		<div class="col-sm-8" id="replyList">
+			
+		</div>
+	</div>
+	
+	
+</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	<jsp:include page="../module/bottom.jsp" flush="false"/>
  
 </body>
