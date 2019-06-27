@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="com.good.mapper.replyMapper">
+	<select id="listAll" resultType="ReplyVO">
+        SELECT * FROM videocomment
+    </select>
+    
+    <insert id="insert" parameterType="ReplyVO">
+    	insert into videocomment(accountId, boardId, object,  reg_date, mod_date)
+		values(#{accountId}, #{boardId}, #{object}, now(), now())
+    </insert>
+    
+    
+    
+    
+    
+    
+    
+</mapper>
