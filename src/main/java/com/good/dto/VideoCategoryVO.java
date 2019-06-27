@@ -1,8 +1,6 @@
 package com.good.dto;
 
-import java.util.Date;
-
-public class NoticeCategoryVO {
+public class VideoCategoryVO {
 	private int categoryId;
 	private String categoryName;
 	private int authority;
@@ -26,4 +24,4 @@ public class NoticeCategoryVO {
 		this.authority = authority;
 	}
 
-}	// End - public class NoticeCategoryVO
+}	// End - VideoCategoryVO

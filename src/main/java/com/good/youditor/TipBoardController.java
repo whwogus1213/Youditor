@@ -13,16 +13,17 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.good.dto.AccountsVO;
 import com.good.dto.TipBoardVO;
+import com.good.dto.TipBoardVO;
 import com.good.service.TipBoardService;
 
 @Controller
-@RequestMapping("/tipboard")
+@RequestMapping("/noticeboard")
 public class TipBoardController {
 
 	@Inject
 	TipBoardService tipBoardService;
 
-	@RequestMapping(value = "/tipBoardList")
+	@RequestMapping(value = "/recruitBoardList")
 	public ModelAndView list() throws Exception {
 		List<TipBoardVO> list = tipBoardService.listAll();
 
