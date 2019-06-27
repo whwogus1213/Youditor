@@ -14,6 +14,7 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/noticeboard/noticeBoardList?num=1">공지</a>
+			<a class="nav-link" href="/noticeboard/noticeBoardList">공지</a>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

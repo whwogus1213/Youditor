@@ -53,11 +53,12 @@
 			</tbody>
 		</table>
 	</div>
+	<!-- 
 	<c:forEach begin="1" end="${pageNum}" var="num">
 		<span> <a href="/noticeboard/noticeBoardList?num=${num}">${num}</a>
 		</span>
 	</c:forEach>
-
+ 	-->
 	<h2 align="center">&nbsp;</h2>
 	<div class="col-sm-9" align="right">
 		<button type="button" class="btn btn-primary"

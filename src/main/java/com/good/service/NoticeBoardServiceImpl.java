@@ -17,10 +17,10 @@ public class NoticeBoardServiceImpl implements NoticeBoardService {
 	NoticeBoardDAO noticeBoardDAO;
 
 	// 게시물 목록
-//	@Override
-//	public List<NoticeBoardVO> listAll() throws Exception {
-//		return noticeBoardDAO.listAll();
-//	}
+	@Override
+	public List<NoticeBoardVO> listAll() throws Exception {
+		return noticeBoardDAO.listAll();
+	}
 
 	// 게시물 상세보기
 	@Override
@@ -34,11 +34,11 @@ public class NoticeBoardServiceImpl implements NoticeBoardService {
 		return noticeBoardDAO.count();
 	}
 
-	// 페이징
-	@Override
-	public List<NoticeBoardVO> listPage(int displayPost, int postNum) throws Exception {
-		return noticeBoardDAO.listPage(displayPost, postNum);
-	}
+//	// 페이징
+//	@Override
+//	public List<NoticeBoardVO> listPage(int displayPost, int postNum) throws Exception {
+//		return noticeBoardDAO.listPage(displayPost, postNum);
+//	}
 
 	// 글쓰기
 	@Override
