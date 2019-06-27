@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.good.dto.AccountsVO;
 import com.good.service.AccountsService;
@@ -49,7 +50,7 @@ public class AccountsController {
 
 	// 로그인 처리하는 부분
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String loginProcess(HttpSession session, AccountsVO paraVo) throws Exception {
+	public String loginProcess(HttpSession session, AccountsVO paraVo, RedirectAttributes rttr) throws Exception {
 		String returnURL = "";
 		if (session.getAttribute("login") != null) {
 			// 기존에 login이란 세션 값이 존재한다면
@@ -63,6 +64,7 @@ public class AccountsController {
 			session.setAttribute("login", vo);
 			returnURL = "redirect:/";
 		} else { // 로그인에 실패한 경우
+			rttr.addFlashAttribute("msg", false);
 			returnURL = "redirect:/accounts/login.do"; // 로그인 폼으로 다시 가도록 함
 		}
 
