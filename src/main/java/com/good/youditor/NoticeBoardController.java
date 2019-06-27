@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.good.dao.NoticeBoardDAO;
 import com.good.dto.NoticeBoardVO;
+import com.good.dto.Pagination;
 import com.good.service.NoticeBoardService;
 
 @Controller
@@ -36,8 +37,17 @@ public class NoticeBoardController {
 //	}
 
 	@RequestMapping(value = "/noticeBoardList", method = RequestMethod.GET)
-	public String list(Model model) throws Exception {
-		model.addAttribute("NoticeBoardList", noticeBoardService.listAll());
+	public String list(Model model, @RequestParam(required = false, defaultValue = "1") int page,
+			@RequestParam(required = false, defaultValue = "1") int range) throws Exception {
+		// 전체 게시글 개수
+		int listCnt = noticeBoardService.getBoardListCnt();
+		
+		// pagination 객체 생성
+		Pagination pagination = new Pagination();
+		pagination.pageInfo(page, range, listCnt);
+
+		model.addAttribute("pagination", pagination);
+		model.addAttribute("NoticeBoardList", noticeBoardService.listAll(pagination));
 		System.out.println("NoticeBoardController NoticeBoardList open");
 		return "noticeboard/noticeBoardList";
 	}

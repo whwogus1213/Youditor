@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.good.dao.NoticeBoardDAO;
 import com.good.dto.NoticeBoardVO;
+import com.good.dto.Pagination;
 
 @Service
 public class NoticeBoardServiceImpl implements NoticeBoardService {
@@ -18,8 +19,8 @@ public class NoticeBoardServiceImpl implements NoticeBoardService {
 
 	// 게시물 목록
 	@Override
-	public List<NoticeBoardVO> listAll() throws Exception {
-		return noticeBoardDAO.listAll();
+	public List<NoticeBoardVO> listAll(Pagination pagination) throws Exception {
+		return noticeBoardDAO.listAll(pagination);
 	}
 
 	// 게시물 상세보기
@@ -30,8 +31,8 @@ public class NoticeBoardServiceImpl implements NoticeBoardService {
 
 	// 게시물 총 개수
 	@Override
-	public int count() throws Exception {
-		return noticeBoardDAO.count();
+	public int getBoardListCnt() throws Exception {
+		return noticeBoardDAO.getBoardListCnt();
 	}
 
 //	// 페이징

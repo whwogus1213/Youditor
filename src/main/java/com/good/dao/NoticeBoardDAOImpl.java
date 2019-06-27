@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.good.dto.NoticeBoardVO;
+import com.good.dto.Pagination;
 
 @Repository
 public class NoticeBoardDAOImpl implements NoticeBoardDAO {
@@ -21,8 +22,8 @@ public class NoticeBoardDAOImpl implements NoticeBoardDAO {
 
 	// 게시물 목록
 	@Override
-	public List<NoticeBoardVO> listAll() throws Exception {
-		return sqlSession.selectList(NAMESPACE + ".listAll");
+	public List<NoticeBoardVO> listAll(Pagination pagination) throws Exception {
+		return sqlSession.selectList(NAMESPACE + ".listAll", pagination);
 	}
 
 	// 게시물 상세보기
@@ -33,8 +34,8 @@ public class NoticeBoardDAOImpl implements NoticeBoardDAO {
 
 	// 게시물 총 개수
 	@Override
-	public int count() throws Exception {
-		return sqlSession.selectOne(NAMESPACE + ".count");
+	public int getBoardListCnt() throws Exception {
+		return sqlSession.selectOne(NAMESPACE + ".getBoardListCnt");
 	}
 
 //	// 페이징

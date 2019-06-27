@@ -8,6 +8,7 @@
 		SELECT *
 		FROM noticeboard
 		order by boardId desc
+		LIMIT #{startList}, #{listSize}
 	</select>
 	<!-- 게시물 조회 -->
 	<select id="view" parameterType="int" resultType="NoticeBoardVO">
@@ -17,7 +18,7 @@
 	</select>
 
 	<!-- 게시물 총 갯수 구하기 -->
-	<select id="count" resultType="int">
+	<select id="getBoardListCnt" resultType="int">
 		select count(boardId)
 		from noticeboard 
 	</select>
