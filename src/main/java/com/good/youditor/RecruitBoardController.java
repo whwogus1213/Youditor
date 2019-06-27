@@ -13,11 +13,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.good.dto.AccountsVO;
 import com.good.dto.RecruitBoardVO;
-import com.good.dto.RecruitBoardVO;
 import com.good.service.RecruitBoardService;
 
 @Controller
-@RequestMapping("/noticeboard")
+@RequestMapping("/recruitboard")
 public class RecruitBoardController {
 
 	@Inject
