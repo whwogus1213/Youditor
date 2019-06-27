@@ -33,7 +33,7 @@
 			<div class="form-inline">
 				<label class="control-label col-sm-2">카테고리</label>
 				<div class="col-sm-3">
-	        		<select name="categoryId">
+	        		<select class="browser-default custom-select" name="categoryId" style="width:190px">
 		           		<option value="1">공지</option>
 		           		<option value="2">이벤트</option>
 		           </select>
@@ -55,9 +55,9 @@
 			</div>
 			<br>
 			<div class="col-sm-12" align="center">
-			<button type="submit" id="submit">올리기</button>
-	       <button type="reset" class="btn btn-warning btn-sm">초기화</button>
-	       <button type="button" class="btn btn-info btn-sm" onclick="location.href='/noticeboard/noticeBoardList?num=1'">뒤로 가기</button>
+			<button type="submit" id="submit" class="btn btn-success">올리기</button>
+	       <button type="reset" class="btn btn-warning">초기화</button>
+	       <button type="button" class="btn btn-info" onclick="location.href='/noticeboard/noticeBoardList?num=1'">뒤로 가기</button>
 	       </div>
 			<br>
 		</form>
