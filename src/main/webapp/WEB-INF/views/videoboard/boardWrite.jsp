@@ -65,35 +65,25 @@ $(document).ready(function(){
 			<div class="form-inline">
 				<label class="col-sm-2">썸네일 미리보기</label>
 				<div id="thumb1">
-					<c:choose>
-					 	<c:when test="${not empty youtubeLink }">
-							<div>
-								<img id ="profileImg" src = "/resources/images/ThumbnailDefault.jpg" style = "border-radius:0%; padding-left : 15px; padding-top:10px; height:200px; width:300px;">
-							</div>
-						</c:when>
-						<c:otherwise>
-							<script>
-								var e = '${youtubeLink}';
-								var eArray  = e.split('/');
-								var youtubeID;
-								//document.write('<p>' + e + '</p>');
-								youtubeID = eArray[3];
-								//document.write('<p>' + youtubeID + '</p>');
-								if(youtubeID.length >11){
-									eArray = youtubeID.split("=");
-									youtubeID = eArray[1];
-									youtubeID = youtubeID.substr(0,11);
-								}
-								//document.write('<p>' + youtubeID + '</p>');
-								document.write('<div><img id="profileImg" style="border-radius:0%; padding-left : 15px; padding-top:10px; height:200px; width:300px;" src="https://img.youtube.com/vi/' + youtubeID + '/mqdefault.jpg"></img></div>');
-							</script>
-							<!--
-							<div>
-								<img id="profileImg" style="border-radius:0%; padding-left : 15px; padding-top:10px; height:200px; width:300px;" />
-							</div>
-							-->
-						</c:otherwise>
-					</c:choose>
+					<script type="text/javascript">
+					if($('input[name=youtubeLink]').val()==""){
+						document.write('<img id ="profileImg" src = "/resources/images/ThumbnailDefault.jpg" style = "border-radius:0%; padding-left : 15px; padding-top:10px; height:200px; width:300px;">');
+					} else {
+						var e = $('input[name=youtubeLink]').val();
+						var eArray  = e.split('/');
+						var youtubeID;
+						document.write('<p>' + e + '</p>');
+						youtubeID = eArray[3];
+						//document.write('<p>' + youtubeID + '</p>');
+						if(youtubeID.length >11){
+							eArray = youtubeID.split("=");
+							youtubeID = eArray[1];
+							youtubeID = youtubeID.substr(0,11);
+						}
+						//document.write('<p>' + youtubeID + '</p>');
+						document.write('<img id="profileImg" style="border-radius:0%; padding-left : 15px; padding-top:10px; height:200px; width:300px;" src="https://img.youtube.com/vi/' + youtubeID + '/mqdefault.jpg"></img>');
+					}
+					</script>
 				</div>
 			</div>
 			<br>
