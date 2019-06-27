@@ -35,9 +35,8 @@ $(function(){
 		console.log(reply);
 
 		$.ajax({
+			type : "POST",
 			url : "/reply/insert",
-			dataType:"json",
-			type : "get",
 			data : reply,
 			success : function(){
 				console.log("성공!!!");

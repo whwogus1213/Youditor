@@ -27,7 +27,7 @@ public class ReplyController {
 	ReplyService service;
 	
 	// 게시물 목록
-	@RequestMapping(value = "/insert", method=RequestMethod.GET)
+	@RequestMapping(value = "/insert", method=RequestMethod.POST)
 	public void insert(HttpSession session, ReplyVO vo) throws Exception{
 		System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
 		AccountsVO av = (AccountsVO)session.getAttribute("login");
