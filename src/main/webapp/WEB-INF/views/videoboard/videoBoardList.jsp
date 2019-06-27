@@ -38,7 +38,6 @@
 							var e = '${VideoBoardList.youtubeLink}';
 							var eArray  = e.split('/');
 							var youtubeID;
-							//document.write('<p>' + e + '</p>');
 							youtubeID = eArray[3];
 							//document.write('<p>' + youtubeID + '</p>');
 							if(youtubeID.length >11){

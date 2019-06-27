@@ -11,10 +11,28 @@
 <jsp:include page="./../module/header.jsp" flush="false"/>
 <!-- Custom styles -->
 <link href="/resources/css/modern-business.css" rel="stylesheet">
-<script>
-$(document).ready(function(){
+<script type="text/javascript">
+$(document).ready(function{
 	$("#test").click(function(){
-		$("#thumb1").load(window.location.href + " #thumb1");
+		var e = $('input[name=youtubeLink]').val();
+		if(e===null || e===""){
+			alert("유투브 주소를 입력해주세요");
+		} else {
+			var eArray  = e.split('/');
+			var youtubeID;
+			youtubeID = eArray[3];
+			//document.write('<p>' + youtubeID + '</p>');
+			if(youtubeID.length >11){
+				eArray = youtubeID.split("=");
+				youtubeID = eArray[1];
+				youtubeID = youtubeID.substr(0,11);
+			}
+			//document.write('<p>' + youtubeID + '</p>');
+			var time= new Date().getTime();
+			var src = 'https://img.youtube.com/vi/' + youtubeID + '/mqdefault.jpg?time=' + time;
+			$("#profileImg").attr("src", src);
+			//document.write('<img id="profileImg" style="border-radius:0%; padding-left : 15px; padding-top:10px; height:200px; width:300px;" src="https://img.youtube.com/vi/' + youtubeID + '/mqdefault.jpg"></img>');
+		}
 	});
 });
 </script>
@@ -59,31 +77,13 @@ $(document).ready(function(){
 		        <label class="control-label col-sm-2">유투브 링크</label>
 		        <div class="col-sm-3">
 					<input type="text" class="form-control" name="youtubeLink" maxlength="300" placeholder="Enter Youtube Link">
-					<button type="button" id="test" class="btn btn-success btn-sm">썸네일 테스트</button>
+					<input type="button" id="test" class="btn btn-success btn-sm"  value="썸네일테스트"></input>
 		        </div>
 			</div>
 			<div class="form-inline">
 				<label class="col-sm-2">썸네일 미리보기</label>
 				<div id="thumb1">
-					<script type="text/javascript">
-					if($('input[name=youtubeLink]').val()==""){
-						document.write('<img id ="profileImg" src = "/resources/images/ThumbnailDefault.jpg" style = "border-radius:0%; padding-left : 15px; padding-top:10px; height:200px; width:300px;">');
-					} else {
-						var e = $('input[name=youtubeLink]').val();
-						var eArray  = e.split('/');
-						var youtubeID;
-						document.write('<p>' + e + '</p>');
-						youtubeID = eArray[3];
-						//document.write('<p>' + youtubeID + '</p>');
-						if(youtubeID.length >11){
-							eArray = youtubeID.split("=");
-							youtubeID = eArray[1];
-							youtubeID = youtubeID.substr(0,11);
-						}
-						//document.write('<p>' + youtubeID + '</p>');
-						document.write('<img id="profileImg" style="border-radius:0%; padding-left : 15px; padding-top:10px; height:200px; width:300px;" src="https://img.youtube.com/vi/' + youtubeID + '/mqdefault.jpg"></img>');
-					}
-					</script>
+					<img id ="profileImg" src = "/resources/images/ThumbnailDefault.jpg" style = "border-radius:0%; padding-left : 15px; padding-top:10px; height:200px; width:300px;">
 				</div>
 			</div>
 			<br>
