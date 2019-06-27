@@ -23,9 +23,9 @@
   
 <script type="text/javascript">
 
-function authorUp(accountid, authority){
+function authorUp(accountId, authority){
 	var json = {
-			"accountid" : accountid,
+			"accountId" : accountId,
 			 "authority" : authority
 			};
 	console.log(json);
@@ -41,9 +41,9 @@ function authorUp(accountid, authority){
 		
 		});	
 }
-function authorDown(accountid, authority){
+function authorDown(accountId, authority){
 	var json = {
-			"accountid" : accountid,
+			"accountId" : accountId,
 			 "authority" : authority
 			};
 	console.log(json);
@@ -82,15 +82,15 @@ function authorDown(accountid, authority){
 		<tbody>
 		<c:forEach items="${list}" var="list">
 			<tr>
-				<td>${list.accountid}</td>
-				<td>${list.id}</td>
-				<td>${list.passwd}</td>
+				<td>${list.accountId}</td>
+				<td>${list.email}</td>
+				<td>${list.pwd}</td>
 				<td>${list.nickname}</td>
 				<td><fmt:formatDate value="${list.reg_date}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 				<td>${list.authority}</td>
 				<td>
-					<button class="btn btn-xs btn-success authorUp" onclick="authorUp(${list.accountid},${list.authority})">UP</button>
-					<button class="btn btn-xs btn-danger authorDown" onclick="authorDown(${list.accountid},${list.authority})">DOWN</button>
+					<button class="btn btn-xs btn-success authorUp" onclick="authorUp(${list.accountId},${list.authority})">UP</button>
+					<button class="btn btn-xs btn-danger authorDown" onclick="authorDown(${list.accountId},${list.authority})">DOWN</button>
 				</td>
 <!-- 				<td><span class="glyphicon glyphicon-arrow-up" aria-hidden="true"> </span></td> -->
 				
