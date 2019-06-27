@@ -79,6 +79,7 @@ $(function(){
 	</div>
 	<!-- <h1>${row.boardId }</h1> -->
 	<div class="container">
+		<br>
 		<h2> ${row.subject }</h2>
 		<br>
 		<h5>${row.object }</h5>
