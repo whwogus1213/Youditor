@@ -24,7 +24,6 @@
 	<h5 align="center">  YouditoR의 최신 소식을 알려드립니다.</h5>
 	<h2 align="center">&nbsp;</h2>
 	<div class="container">
-<<<<<<< HEAD
 	<table class="table table-bordered table-striped nanum table-hover">
 	<!-- <table border="1"> -->
 		<thead>
@@ -37,19 +36,6 @@
 			</tr>
 		</thead>
 		<tbody>
-=======
-		<table class="table table-bordered table-striped nanum table-hover">
-		<!-- <table border="1"> -->
-			<thead>
-				<tr><th>번호</th>
-					<th>분류</th>
-					<th>제목</th>
-					<th>작성자</th>
-					<th>작성일</th>
-				</tr>
-			</thead>
-			<tbody>
->>>>>>> parent of 3a6b865... Revert "Master Commit"
 				<c:forEach items="${list}" var="list">
 					<tr>
 						<td>${NoticeBoardList.boardId}</td>
@@ -61,7 +47,6 @@
 						<td>${NoticeBoardList.viewCount }</td>
 					</tr>
 				</c:forEach>
-<<<<<<< HEAD
 		</tbody>
 	</table>
 	</div>
@@ -70,11 +55,6 @@
 		<button type="button" class="btn btn-primary" onclick="location.href='/noticeboard/write.do' ">공지 올리기</button>
 	</div>
 	<h2 align="center">&nbsp;</h2>
-=======
-			</tbody>
-		</table>
-	</div>
->>>>>>> parent of 3a6b865... Revert "Master Commit"
 	<jsp:include page="./../module/bottom.jsp" flush="false"/>
 </body>
 </html>

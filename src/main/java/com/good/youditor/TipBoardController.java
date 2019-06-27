@@ -17,13 +17,13 @@ import com.good.dto.TipBoardVO;
 import com.good.service.TipBoardService;
 
 @Controller
-@RequestMapping("/noticeboard")
+@RequestMapping("/tipboard")
 public class TipBoardController {
 
 	@Inject
 	TipBoardService tipBoardService;
 
-	@RequestMapping(value = "/recruitBoardList")
+	@RequestMapping(value = "/tipBoardList")
 	public ModelAndView list() throws Exception {
 		List<TipBoardVO> list = tipBoardService.listAll();
 

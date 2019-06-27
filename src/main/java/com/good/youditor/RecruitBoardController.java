@@ -17,7 +17,7 @@ import com.good.dto.RecruitBoardVO;
 import com.good.service.RecruitBoardService;
 
 @Controller
-@RequestMapping("/noticeboard")
+@RequestMapping("/recruitboard")
 public class RecruitBoardController {
 
 	@Inject
