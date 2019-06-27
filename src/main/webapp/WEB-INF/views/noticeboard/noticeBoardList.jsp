@@ -24,18 +24,18 @@
 	<h5 align="center">  YouditoR의 최신 소식을 알려드립니다.</h5>
 	<h2 align="center">&nbsp;</h2>
 	<div class="container">
-		<table class="table table-bordered table-striped nanum table-hover">
-		<!-- <table border="1"> -->
-			<thead>
-				<tr>
-					<th>번호</th>
-					<th>분류</th>
-					<th>제목</th>
-					<th>작성자</th>
-					<th>작성일</th>
-				</tr>
-			</thead>
-			<tbody>
+	<table class="table table-bordered table-striped nanum table-hover">
+	<!-- <table border="1"> -->
+		<thead>
+			<tr>
+				<th>번호</th>
+				<th>분류</th>
+				<th>제목</th>
+				<th>작성자</th>
+				<th>작성일</th>
+			</tr>
+		</thead>
+		<tbody>
 				<c:forEach items="${list}" var="list">
 					<tr>
 						<td>${NoticeBoardList.boardId}</td>
@@ -47,8 +47,8 @@
 						<td>${NoticeBoardList.viewCount }</td>
 					</tr>
 				</c:forEach>
-			</tbody>
-		</table>
+		</tbody>
+	</table>
 	</div>
   <h2 align="center">&nbsp;</h2>
 	<div class="col-sm-9" align="right">
