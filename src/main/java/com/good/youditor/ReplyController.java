@@ -31,7 +31,7 @@ public class ReplyController {
 
 	@Inject
 	ReplyService service;
-	
+
 	// 게시물 목록
 	@RequestMapping(value = "/insert", method=RequestMethod.POST)
 	public String insertComment(@ModelAttribute("ReplyVO") ReplyVO vo, HttpServletRequest request) throws Exception{
@@ -91,4 +91,5 @@ public class ReplyController {
 		model.addAttribute("list", list);
 		
 	}*/
+
 }

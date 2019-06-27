@@ -13,6 +13,7 @@ import com.good.dto.TipBoardVO;
 @Repository
 public class TipBoardDAOImpl implements TipBoardDAO {
 
+	// 주입
 	@Inject
 	private SqlSession sqlSession;
 
@@ -24,26 +25,27 @@ public class TipBoardDAOImpl implements TipBoardDAO {
 		return sqlSession.selectList(NAMESPACE + ".listAll");
 	}
 
+	// 게시물 보기
 	@Override
 	public TipBoardVO view(int boardId) throws Exception {
-		return sqlSession.selectOne(NAMESPACE+".view",boardId);
+		return sqlSession.selectOne(NAMESPACE + ".view", boardId);
 	}
 
-	//글쓰기
+	// 글쓰기
 	@Override
-	public void insertTipBoard(TipBoardVO vo) throws Exception{
+	public void insertTipBoard(TipBoardVO vo) throws Exception {
 		sqlSession.insert(NAMESPACE + ".insertTipBoard", vo);
 	}
 
-	 // 수정
-	 @Override
-	 public void updateTipBoard(TipBoardVO vo) throws Exception {
-		 sqlSession.update(NAMESPACE + ".updateTipBoard", vo);
-	 }
+	// 수정
+	@Override
+	public void updateTipBoard(TipBoardVO vo) throws Exception {
+		sqlSession.update(NAMESPACE + ".updateTipBoard", vo);
+	}
 
-	 // 삭제
-	 @Override
-	 public void deleteTipBoard(int boardId) throws Exception {
-		 sqlSession.delete(NAMESPACE + ".deleteTipBoard", boardId);
-	 }
+	// 삭제
+	@Override
+	public void deleteTipBoard(int boardId) throws Exception {
+		sqlSession.delete(NAMESPACE + ".deleteTipBoard", boardId);
+	}
 }
