@@ -13,7 +13,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.good.dto.AccountsVO;
 import com.good.dto.TipBoardVO;
-import com.good.dto.TipBoardVO;
 import com.good.service.TipBoardService;
 
 @Controller
