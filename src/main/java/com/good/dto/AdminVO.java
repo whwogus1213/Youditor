@@ -1,4 +1,4 @@
-]package com.good.dto;
+package com.good.dto;
 
 public class AdminVO {
 	private String	adminId;
@@ -22,5 +22,5 @@ public class AdminVO {
 	}
 
 
-	
+
 }
