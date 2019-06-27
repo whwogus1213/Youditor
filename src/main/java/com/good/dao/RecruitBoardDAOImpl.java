@@ -48,4 +48,10 @@ public class RecruitBoardDAOImpl implements RecruitBoardDAO {
 	 public void deleteRecruitBoard(int boardId) throws Exception {
 		 sqlSession.delete(NAMESPACE + ".deleteRecruitBoard", boardId);
 	 }
+	 
+	 
+	 
+	 
+	 
+	 
 }
