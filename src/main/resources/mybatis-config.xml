@@ -7,8 +7,8 @@
     <configuration>
     	<typeAliases>
     		<typeAlias type="com.good.dto.AccountsVO" alias="AccountsVO"/>
+    		<typeAlias type="com.good.dto.AdminVO" alias="AdminVO"/>
     		<typeAlias type="com.good.dto.FollowListVO" alias="FollowListVO"/>
-    		<typeAlias type="com.good.dto.ManagerVO" alias="ManagerVO"/>
     		<typeAlias type="com.good.dto.MessageVO" alias="MessageVO"/>
     		<typeAlias type="com.good.dto.NoticeBoardVO" alias="NoticeBoardVO"/>
     		<typeAlias type="com.good.dto.NoticeCategoryVO" alias="NoticeCategoryVO"/>

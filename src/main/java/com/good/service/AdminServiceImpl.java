@@ -7,14 +7,14 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.good.dao.AccountsDAO;
-import com.good.dao.ManagerDAO;
+import com.good.dao.AdminDAO;
 import com.good.dto.AccountsVO;
-import com.good.dto.ManagerVO;
+import com.good.dto.AdminVO;
 
 @Service
-public class ManagerServiceImpl implements ManagerService {	
+public class AdminServiceImpl implements AdminService {
 	@Inject
-	private ManagerDAO dao;
+	private AdminDAO dao;
 
 	@Override
 	public List<AccountsVO> selectAccounts() throws Exception {
@@ -23,7 +23,7 @@ public class ManagerServiceImpl implements ManagerService {
 	}
 
 	@Override
-	public ManagerVO login(ManagerVO vo) throws Exception {
+	public AdminVO login(AdminVO vo) throws Exception {
 		// TODO Auto-generated method stub
 		return dao.login(vo);
 	}
@@ -35,18 +35,18 @@ public class ManagerServiceImpl implements ManagerService {
 			vo.setAuthority(vo.getAuthority()+1);
 			dao.authorUp(vo);
 		}
-		
+
 	}
-	
+
 	@Override
 	public void authorDown(AccountsVO vo) throws Exception {
 		if(vo.getAuthority() >= 2) {
 			vo.setAuthority(vo.getAuthority()-1);
 			dao.authorDown(vo);
 		}
-		
+
 	}
-	
-	
-	
+
+
+
 }
