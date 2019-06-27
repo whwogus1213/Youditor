@@ -11,6 +11,9 @@
     		<typeAlias type="com.good.dto.FollowListVO" alias="FollowListVO"/>
     		<typeAlias type="com.good.dto.MessageVO" alias="MessageVO"/>
     		<typeAlias type="com.good.dto.NoticeBoardVO" alias="NoticeBoardVO"/>
+
+    		<typeAlias type="com.good.dto.ReplyVO" alias="ReplyVO"/>
+
     		<typeAlias type="com.good.dto.NoticeCategoryVO" alias="NoticeCategoryVO"/>
     		<typeAlias type="com.good.dto.RecruitBoardVO" alias="RecruitBoardVO"/>
     		<typeAlias type="com.good.dto.RecruitCategoryVO" alias="RecruitCategoryVO"/>
@@ -24,5 +27,6 @@
     		<typeAlias type="com.good.dto.VideoCategoryVO" alias="VideoCategoryVO"/>
     		<typeAlias type="com.good.dto.VideoCommentVO" alias="VideoCommentVO"/>
     		<typeAlias type="com.good.dto.VideoStarVO" alias="VideoStarVO"/>
+
     	</typeAliases>
     </configuration>
