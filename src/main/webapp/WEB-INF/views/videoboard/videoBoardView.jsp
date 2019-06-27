@@ -20,31 +20,38 @@
 	<jsp:include page="../module/top.jsp" flush="false"/>
 	
 	<!-- 게시글 상세정보 -->
-	<h1>${row.boardId }</h1>
-	<h1>${row.accountId }</h1>
-	<h1>${row.categoryId }</h1>
-	<h1>${row.subject }</h1>
-	<h1>${row.object }</h1>
-<%-- 	<h1>${row.youtubeLink }</h1> --%>
 
-
-	<div id="rList">
-		<%@ include file="../videoboard/videoBoardReply.jsp" %>
+		<div align="center" style="background-color:black; padding-top:60px">
+		<script>
+			var e = '${row.youtubeLink}';
+			var eArray  = e.split('/');
+			var youtubeID;
+			for( var i in eArray ) {
+				youtubeID = eArray[i];
+			}
+			if(youtubeID.length >11){
+				eArray = youtubeID.split("=");
+				youtubeID = eArray[1];
+				youtubeID = youtubeID.substr(0,11);
+			}
+			document.write('<iframe width="667" height="375" src="https://www.youtube.com/embed/' + youtubeID + '" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
+		</script>
 	</div>
-	
-	
-	
-</div>
-	
-	
+	<!-- <h1>${row.boardId }</h1> -->
+	<div class="container">
+		<br>
+		<h2> ${row.subject }</h2>
+		<br>
+		<h5>${row.object }</h5>
+		<br>
+		<h5 align="right"> 조회수 ${row.viewCount }</h5>
+		<hr>
+	</div>
 
-	
-	
-	
-	
-	
-	
-	
+		<div id="listReply">
+			<jsp:include page="../videoboard/videoBoardReply.jsp" flush="false"/>
+		</div>
+
 	<jsp:include page="../module/bottom.jsp" flush="false"/>
  
 </body>
