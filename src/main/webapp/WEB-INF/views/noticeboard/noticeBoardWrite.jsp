@@ -33,7 +33,7 @@
 			<div class="form-inline">
 				<label class="control-label col-sm-2">카테고리</label>
 				<div class="col-sm-3">
-	        		<select name="categoryId">
+	        		<select class="browser-default custom-select" name="categoryId" style="width:190px">
 		           		<option value="1">공지</option>
 		           		<option value="2">이벤트</option>
 		           </select>
