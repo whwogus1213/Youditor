@@ -67,5 +67,3 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.gitignore.io/api/java,maven,windows,java-web
-src/main/java/com/good/dao/ReplyDAO.java
-src/main/java/com/good/service/ReplyService.java
