@@ -39,6 +39,8 @@
             <exclude-mapping path="/noticeboard/**"/>
             <exclude-mapping path="/videoboard"/>
             <exclude-mapping path="/videoboard/**"/>
+            <exclude-mapping path="/reply/**"/>
+            <exclude-mapping path="/reply"/>
             <beans:ref bean="authenticationInterceptor"/>
         </interceptor>
     </interceptors>

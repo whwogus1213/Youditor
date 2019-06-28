@@ -1,6 +1,8 @@
 package com.good.youditor;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -52,28 +54,16 @@ public class ReplyController {
         return "success";
     }
 	
-	@RequestMapping(value="/listAll")
-	public ArrayList<HashMap<String, String>> listComment(ReplyVO vo) throws Exception{
+	@RequestMapping(value="/listAll", method = {RequestMethod.GET,RequestMethod.POST})
+	public List<ReplyVO> listComment(ReplyVO vo) throws Exception{
         
-        ArrayList<HashMap<String, String>> hmlist = new ArrayList<HashMap<String,String>>();
+		System.out.println("-----listComment : "+vo);
 
         // 해당 게시물 댓글
         List<ReplyVO> replyList = service.listAll(vo.getBoardId());
         
-        if(replyList.size() > 0){
-            for(int i=0; i<replyList.size(); i++){
-            	
-                HashMap<String, String> hm = new HashMap<String,String>();
-                hm.put("commentId", replyList.get(i).getCommentId()+"");
-                hm.put("object", replyList.get(i).getObject());
-                hm.put("nickname", replyList.get(i).getNickname());
-                
-                hmlist.add(hm);
-            }
-            
-        }
-        
-        return hmlist;
+        System.out.println(replyList);
+        return replyList;
         
     }
 
