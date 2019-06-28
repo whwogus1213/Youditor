@@ -49,20 +49,22 @@
 		<h5 align="right">등록일 &nbsp;&nbsp; <fmt:formatDate value="${row.reg_date}" pattern="yyyy년 MM월 dd일  hh:mm:ss" /></h5>
 		<hr>
 		<h6>${row.accountId } 프로필이 표시되게끔....</h6>
+		<%-- 	<h1>${row.youtubeLink }</h1> --%>
+		<!-- 디자인 필요 -->
+		<div align="right">
+			<c:if test="${login.email ne row.boardId}">
+				<button class="btn-warning btn-sm" href="/videoboard/updateVideoBoard.do?boardId=${row.boardId}">수정</button>
+				<button class="btn-danger btn-sm" href="/videoboard/delete">삭제</button>
+			</c:if>
+			<c:if test="${login.email eq row.boardId}">
+				<a href="/videoboard/delete">test 수정 버튼이 안보이고 이 버튼이 보이면 로그인한 아이디로 작성한 게시물이 아님</a>
+			</c:if>
+		</div>
 		<hr>
 	</div>
-	<%-- 	<h1>${row.youtubeLink }</h1> --%>
-	<!-- 디자인 필요 -->
-	<c:if test="${login.email ne row.boardId}">
-		<a href="/videoboard/updateVideoBoard.do?boardId=${row.boardId}">수정 ${row.subject}</a>
-		<a href="/videoboard/delete">삭제</a>
-	</c:if>
-	<c:if test="${login.email eq row.boardId}">
-		<a href="/videoboard/delete">test 수정 버튼이 안보이고 이 버튼이 보이면 로그인한 아이디로 작성한 게시물이 아님</a>
-	</c:if>
-		<div id="listReply">
-			<jsp:include page="../videoboard/videoBoardReply.jsp" flush="false"/>
-		</div>
+	<div id="listReply">
+		<jsp:include page="../videoboard/videoBoardReply.jsp" flush="false"/>
+	</div>
 
 	<jsp:include page="../module/bottom.jsp" flush="false"/>
  
