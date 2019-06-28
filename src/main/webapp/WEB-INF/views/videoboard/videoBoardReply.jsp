@@ -12,10 +12,9 @@
 <body>
 <div class="container">
     <form id="commentForm" name="commentForm" method="post">
-    <br><br>
         <div>
             <div>
-                <span><strong>Comments</strong></span> <span id="cCnt"></span>
+                <span><strong>Comments</strong></span>&nbsp;&nbsp;&nbsp;&nbsp;<span id="cCnt"></span>
             </div>
             <div>
                 <div class="table input-group">           
