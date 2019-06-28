@@ -29,7 +29,6 @@
 	<h1 align="center">YouditoR 로그인</h1>
 	<h2 align="center">&nbsp;</h2>
 	<h2 align="center">&nbsp;</h2>
-	<h2 align="center">&nbsp;</h2>
 	
 
 	<div class="container" align ="center">
@@ -42,6 +41,7 @@
 					name="email" maxlength="16" placeholder="Enter ID">
 			</div>
 		</div>
+		<br>
 		<div class="form-inline">
 			<h2 align="center">&nbsp;</h2>
 			<label class="control-label col-sm-3">비밀번호</label>

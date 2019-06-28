@@ -18,17 +18,13 @@
                 <span><strong>Comments</strong></span> <span id="cCnt"></span>
             </div>
             <div>
-                <table class="table">                    
-                    <tr>
-                        <td>
-                            <textarea style="width: 1100px" rows="3" cols="30" id="object" name="object" placeholder="댓글을 입력하세요"></textarea>
-                            <br>
-                            <div>
-                                <a href='#' onClick="fn_comment('${row.boardId }')" class="btn pull-right btn-success">등록</a>
-                            </div>
-                        </td>
-                    </tr>
-                </table>
+                <div class="table input-group">           
+                    <textarea style="width: 1000px" rows="3" cols="30" id="object" name="object" placeholder="댓글을 입력하세요"></textarea>
+                    <br>
+                    <div>
+                         <a href='#' onClick="fn_comment('${row.boardId }')" class="btn pull-right btn-success" style="height:100%; width:110px; text-align:center; line-height:65px;">등록</a>
+                    </div>
+				</div>
             </div>
         </div>
         <input type="hidden" id="boardId" name="boardId" value="${row.boardId }" />        
