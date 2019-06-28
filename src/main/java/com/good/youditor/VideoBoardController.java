@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.good.dto.AccountsVO;
 import com.good.dto.VideoBoardVO;
 import com.good.service.VideoBoardService;
 
@@ -67,34 +66,26 @@ public class VideoBoardController {
 
 	// 글작성 완료
 	// insertVideoBoardForm-> insertVideoBoardPro
-	@RequestMapping(value = "/insertVideoBoardPro", method = RequestMethod.POST)
+	@RequestMapping(value = "/insertVideoBoardPro")
 	public String insertVideoBoardPro(VideoBoardVO vo) throws Exception {
 		System.out.println("============insertVideoBoardPro 성공==============");
 		System.out.println(vo);
 		videoBoardService.insertVideoBoard(vo);
 
 		return "redirect:/";
-
 	}
 
 	// 파일 이동
 	// 게시글 수정
 	// 'videoBoardUpdate.jsp' 로 이동 <-- 이동하고자 하는 파일로 명 바꾸면됨
-	@RequestMapping(value = "/videoBoardUpdate", method = RequestMethod.GET)
-	public ModelAndView join(Locale locale, Model model) throws Exception {
+	@RequestMapping(value = "/updateVideoBoard.do", method = RequestMethod.GET)
+	public ModelAndView join(Locale locale, Model model,@RequestParam("boardId") int boardId) throws Exception {
+		VideoBoardVO update = videoBoardService.view(boardId);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("videoboard/videoBoardUpdate");
+		mav.addObject("videoBoardUpdate", update);
 		System.out.println("String videoboardlist open");
 		return mav;
-	}
-
-	// 글 수정
-	@RequestMapping(value = "/update", method = RequestMethod.GET)
-	public void getUpdatey(@RequestParam("boardId") int boardId, Model model) throws Exception {
-		VideoBoardVO vo = videoBoardService.view(boardId);
-
-		model.addAttribute("updateVideoBoard", vo);
-
 	}
 
 	// 글 삭제
@@ -103,12 +94,16 @@ public class VideoBoardController {
 
 		model.addAttribute("deleteVideoBoard", boardId);
 	}
-
-	// 글 수정  POST
-	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public String postUpdate(VideoBoardVO vo) throws Exception {
+	// 글 수정
+	@RequestMapping(value = "/updatevideoBoardForm")
+	public String updateVideoBoardForm() throws Exception {
+		return "videoboard/updateVideoBoard";
+	}
+	// 글 수정
+	@RequestMapping(value = "/updateVideoBoardPro")
+	public String updateVideoBoardPro(VideoBoardVO vo) throws Exception {
 		videoBoardService.updateVideoBoard(vo);
-
+		System.out.println("============ updateVideoBoard 성공==============");
 		return "redirect:/videoboard/videoBoardList";
 
 	}
