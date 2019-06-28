@@ -78,11 +78,10 @@ function getCommentList(){
     $.ajax({
         type:"POST",
         url : "/reply/listAll",
-        dataType : "application/json; charset=utf-8",
+//         dataType : "application/json; charset=utf-8",
         data:$("#commentForm").serialize(),
 //         contentType: "application/json; charset=UTF-8", 
         success : function(data){
-           console.log("gggggggggggggggg");
            var html = "";
            var cCnt = data.length;
            
@@ -107,36 +106,7 @@ function getCommentList(){
            
            $("#cCnt").html(cCnt);
            $("#commentList").html(html);
-       },
-        error : function(request, status, error ) {   // 오류가 발생했을 때 호출된다. 
-        	console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-       },
-      	complete : function (data) {   // 정상이든 비정상인든 실행이 완료될 경우 실행될 함수
-			alert(data);
-      		var html = "";
-	        var cCnt = data.length;
-	           if(data.length > 0){
-	               
-	               for(i=0; i<data.length; i++){
-	                   html += "<div>";
-	                   html += "<div><table class='table'><h6><strong>"+data[i].nickname+"</strong></h6>";
-	                   html += data[i].object + "<tr><td></td></tr>";
-	                   html += "</table></div>";
-	                   html += "</div>";
-	               }
-	               
-	           } else {
-	               
-	               html += "<div>";
-	               html += "<div><table class='table'><h6><strong>등록된 댓글이 없습니다.</strong></h6>";
-	               html += "</table></div>";
-	               html += "</div>";
-	               
-	           }
-	           
-	           $("#cCnt").html(cCnt);
-	           $("#commentList").html(html);
-      	}
+       }
 
 
     

@@ -41,7 +41,6 @@ public class ReplyController {
         HttpSession session = request.getSession();
         AccountsVO loginVO = (AccountsVO)session.getAttribute("login");
         vo.setAccountId(loginVO.getAccountId());
-        System.out.println(vo.getBoardId()+"############################################");
 		
         try{
             service.insert(vo);
@@ -52,18 +51,12 @@ public class ReplyController {
         
         return "success";
     }
-	/*
-	 * public void insert(HttpSession session, ReplyVO vo) throws Exception{
-	 * AccountsVO av = (AccountsVO)session.getAttribute("login"); int accountId =
-	 * av.getAccountId(); System.out.println("댓글 작성자 계정번호 : "+accountId);
-	 * vo.setAccountId(accountId); service.insert(vo); }
-	 */
 	
 	@RequestMapping(value="/listAll")
 	public ArrayList<HashMap<String, String>> listComment(ReplyVO vo) throws Exception{
         
         ArrayList<HashMap<String, String>> hmlist = new ArrayList<HashMap<String,String>>();
-        
+
         // 해당 게시물 댓글
         List<ReplyVO> replyList = service.listAll(vo.getBoardId());
         
@@ -79,36 +72,9 @@ public class ReplyController {
             }
             
         }
-        System.out.println("hmlist");
-        System.out.println(hmlist);
         
         return hmlist;
         
     }
-	/*
-	 * @RequestMapping(value="/listAll") public ResponseEntity
-	 * listComment(@ModelAttribute("ReplyVO") ReplyVO vo, HttpServletRequest
-	 * request) throws Exception{
-	 * 
-	 * HttpHeaders responseHeaders = new HttpHeaders(); ArrayList<HashMap> hmlist =
-	 * new ArrayList<HashMap>();
-	 * 
-	 * // 해당 게시물 댓글 List<ReplyVO> replyList = service.listAll(vo.getBoardId());
-	 * 
-	 * if(replyList.size() > 0){ for(int i=0; i<replyList.size(); i++){ HashMap hm =
-	 * new HashMap(); hm.put("commentId", replyList.get(i).getCommentId());
-	 * hm.put("object", replyList.get(i).getObject()); hm.put("nickname",
-	 * replyList.get(i).getNickname());
-	 * 
-	 * hmlist.add(hm); }
-	 * 
-	 * }
-	 * 
-	 * // JSONArray json = new JSONArray(hmlist); JsonArray json = new
-	 * JsonArray(hmlist); return new ResponseEntity(json.toString(),
-	 * responseHeaders, HttpStatus.CREATED);
-	 * 
-	 * }
-	 * 
-	 */
+
 }
