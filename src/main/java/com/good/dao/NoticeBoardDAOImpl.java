@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.good.dto.NoticeBoardVO;
 import com.good.dto.Pagination;
+import com.good.dto.Search;
 
 @Repository
 public class NoticeBoardDAOImpl implements NoticeBoardDAO {
@@ -20,10 +21,10 @@ public class NoticeBoardDAOImpl implements NoticeBoardDAO {
 
 	private static final String NAMESPACE = "com.good.mapper.noticeBoardMapper";
 
-	// 게시물 목록
+	// 게시물 목록 + 페이징 + 검색
 	@Override
-	public List<NoticeBoardVO> listAll(Pagination pagination) throws Exception {
-		return sqlSession.selectList(NAMESPACE + ".listAll", pagination);
+	public List<NoticeBoardVO> listAll(Search search) throws Exception {
+		return sqlSession.selectList(NAMESPACE + ".listAll", search);
 	}
 
 	// 게시물 상세보기
@@ -34,19 +35,9 @@ public class NoticeBoardDAOImpl implements NoticeBoardDAO {
 
 	// 게시물 총 개수
 	@Override
-	public int getBoardListCnt() throws Exception {
-		return sqlSession.selectOne(NAMESPACE + ".getBoardListCnt");
+	public int getBoardListCnt(Search search) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + ".getBoardListCnt", search);
 	}
-
-//	// 페이징
-//	@Override
-//	public List<NoticeBoardVO> listPage(int displayPost, int postNum) {
-//		HashMap<String, Integer> myMap = new HashMap<String, Integer>();
-//
-//		myMap.put("displayPost", displayPost);
-//		myMap.put("postNum", postNum);
-//		return sqlSession.selectList(NAMESPACE + ".listPage", myMap);
-//	}
 
 	// 글쓰기
 	@Override

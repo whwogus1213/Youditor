@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.good.dao.NoticeBoardDAO;
 import com.good.dto.NoticeBoardVO;
 import com.good.dto.Pagination;
+import com.good.dto.Search;
 
 @Service
 public class NoticeBoardServiceImpl implements NoticeBoardService {
@@ -17,10 +18,10 @@ public class NoticeBoardServiceImpl implements NoticeBoardService {
 	@Inject
 	NoticeBoardDAO noticeBoardDAO;
 
-	// 게시물 목록
+	// 게시물 목록 + 페이징 + 검색
 	@Override
-	public List<NoticeBoardVO> listAll(Pagination pagination) throws Exception {
-		return noticeBoardDAO.listAll(pagination);
+	public List<NoticeBoardVO> listAll(Search search) throws Exception {
+		return noticeBoardDAO.listAll(search);
 	}
 
 	// 게시물 상세보기
@@ -31,15 +32,9 @@ public class NoticeBoardServiceImpl implements NoticeBoardService {
 
 	// 게시물 총 개수
 	@Override
-	public int getBoardListCnt() throws Exception {
-		return noticeBoardDAO.getBoardListCnt();
+	public int getBoardListCnt(Search search) throws Exception {
+		return noticeBoardDAO.getBoardListCnt(search);
 	}
-
-//	// 페이징
-//	@Override
-//	public List<NoticeBoardVO> listPage(int displayPost, int postNum) throws Exception {
-//		return noticeBoardDAO.listPage(displayPost, postNum);
-//	}
 
 	// 글쓰기
 	@Override

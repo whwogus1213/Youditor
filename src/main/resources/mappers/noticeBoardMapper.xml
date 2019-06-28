@@ -4,9 +4,21 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.good.mapper.noticeBoardMapper">
+	<!-- 게시물 목록 + 페이징 + 검색 -->
 	<select id="listAll" resultType="NoticeBoardVO">
 		SELECT *
 		FROM noticeboard
+		<trim prefix="WHERE" prefixOverrides="AND|OR">
+			<if test="searchType=='subject' and keyword != null and keyword != '' ">
+				AND subject like CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType=='object' and keyword != null and keyword != '' ">
+				AND object like CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType=='accountId' and keyword != null and keyword != '' ">
+				AND accountId like CONCAT('%', #{keyword}, '%')
+			</if>
+		</trim>
 		order by boardId desc
 		LIMIT #{startList}, #{listSize}
 	</select>
@@ -20,52 +32,49 @@
 	<!-- 게시물 총 갯수 구하기 -->
 	<select id="getBoardListCnt" resultType="int">
 		select count(boardId)
-		from noticeboard 
-	</select>
-	
-	<!-- 페이징
-	<select id="listPage" parameterType="hashMap" resultType="NoticeBoardVO">
-		select *
 		from noticeboard
-		order by boardId desc
-		limit #{displayPost}, #{postNum}
+		<trim prefix="WHERE" prefixOverrides="AND|OR">
+			<if test="keyword != null and keyword != '' ">
+				<if test="searchType=='subject'">
+					AND subject like CONCAT('%', #{keyword}, '%')
+				</if>
+				<if test="searchType=='object'">
+					AND object like CONCAT('%', #{keyword}, '%')
+				</if>
+				<if test="searchType=='accountId'">
+					AND accountId like CONCAT('%', #{keyword}, '%')
+				</if>
+      		</if>
+		</trim>
 	</select>
-	-->
 	
     <!-- 글 쓰기 -->
     <insert id="insertNoticeBoard" parameterType="NoticeBoardVO">
-		insert into
-      noticeBoard(accountId,
-                categoryId,
+		insert into noticeBoard(accountId,
+								categoryId,
 								subject,
-                object,
+								object,
 								reg_date,
 								mod_date)
-	    values(#{accountId},
-            #{categoryId},
-            #{subject},
-            #{object},
-            now(),
-            now())
+		values(#{accountId},
+				#{categoryId},
+				#{subject},
+				#{object},
+				now(),
+				now())
     </insert>
 
     <!-- 글 수정 -->
 	 <update id="updateNoticeBoard">
-		  update
-        noticeBoard
-		  set
-        subject = #{subject},
-		    object = #{object}
-		  where
-        boardId = #{boardId}
+		update noticeBoard
+		set subject = #{subject}, object = #{object}
+		where boardId = #{boardId}
 	 </update>
 
  	<!-- 글 삭제 -->
 	 <delete id="deleteNoticeBoard">
-		  delete from
-		    noticeBoard
-		  where
-        boardId = #{boardId}
+		delete from noticeBoard
+		where boardId = #{boardId}
 	 </delete>
 
 
