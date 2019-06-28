@@ -4,20 +4,26 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<c:set var="path" value="${pageContext.request.contextPath}"></c:set>
 <!DOCTYPE html>
 <html>
 <head>
 	<jsp:include page="../module/header.jsp" flush="false"/>
 </head>
 <body>
+
+
 <div class="container">
     <form id="commentForm" name="commentForm" method="post">
+	
     <br><br>
         <div>
             <div>
                 <span><strong>Comments</strong></span> <span id="cCnt"></span>
+               
             </div>
             <div>
+            	<c:if test="${login.email != null }">
                 <div class="table input-group">           
                     <textarea style="width: 1000px" rows="3" cols="30" id="object" name="object" placeholder="댓글을 입력하세요"></textarea>
                     <br>
@@ -25,11 +31,15 @@
                          <a href='#' onClick="fn_comment('${row.boardId }')" class="btn pull-right btn-success" style="height:100%; width:110px; text-align:center; line-height:65px;">등록</a>
                     </div>
 				</div>
+				</c:if>
             </div>
         </div>
+        
         <input type="hidden" id="boardId" name="boardId" value="${row.boardId }" />        
     </form>
 </div>
+
+
 <div class="container">
     <form id="commentListForm" name="commentListForm" method="post">
         <div id="commentList">
@@ -65,8 +75,9 @@ function fn_comment(boardId){
  * 초기 페이지 로딩시 댓글 불러오기
  */
 $(function(){
-    
+	console.log(${row.boardId});
     getCommentList();
+    console.log("로딩완료");
     
 });
  
@@ -74,12 +85,12 @@ $(function(){
  * 댓글 불러오기(Ajax)
  */
 function getCommentList(){
-    
+    console.log($("#boardId").val());
     $.ajax({
         type:"POST",
         url : "/reply/listAll",
 //         dataType : "application/json; charset=utf-8",
-        data:$("#commentForm").serialize(),
+        data:$("#boardId"),
 //         contentType: "application/json; charset=UTF-8", 
         success : function(data){
            var html = "";

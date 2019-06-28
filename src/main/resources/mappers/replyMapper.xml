@@ -5,7 +5,7 @@
  
 <mapper namespace="com.good.mapper.replyMapper">
 	<select id="listAll" resultType="ReplyVO" parameterType="int">
-        SELECT * FROM videocomment vc, accounts ac where boardId = #{boardId} and vc.accountId = ac.accountId
+        SELECT * FROM videocomment vc, accounts ac where boardId = #{boardId} and vc.accountId = ac.accountId order by commentId
     </select>
     
     <insert id="insert" parameterType="ReplyVO">
