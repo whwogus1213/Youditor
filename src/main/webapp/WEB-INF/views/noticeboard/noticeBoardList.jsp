@@ -42,6 +42,17 @@
 		url = url + "&range=" + range;
 		location.href = url;
 	}
+
+	// 검색버튼 이벤트
+	$(document).on('click', '#btnSearch', function(e) {
+		e.preventDefault();
+		var url = "${pageContext.request.contextPath}/noticeboard/noticeBoardList";
+		url = url + "?searchType=" + $('#searchType').val();
+		url = url + "&keyword=" + $('#keyword').val();
+
+		location.href = url;
+		console.log(url);
+	});
 </script>
 </head>
 <body>
@@ -84,39 +95,53 @@
 				</c:forEach>
 			</tbody>
 		</table>
-		<!-- pagination{s} -->
+
+		<!-- 페이징 -->
 		<div id="paginationBox">
 			<ul class="pagination">
 				<c:if test="${pagination.prev}">
-					<li class="page-item"><a class="page-link" href="#"
-						onClick="fn_prev('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}')">Previous</a></li>
-				</c:if>
-				<c:forEach begin="${pagination.startPage}"
-					end="${pagination.endPage}" var="idx">
-					<li
-						class="page-item <c:out value="${pagination.page == idx ? 'active' : ''}"/> ">
+					<li class="page-item">
 						<a class="page-link" href="#"
-						onClick="fn_pagination('${idx}', '${pagination.range}', '${pagination.rangeSize}')">
-							${idx}</a>
+						onClick="fn_prev('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}')">Previous</a>
+					</li>
+				</c:if>
+				<c:forEach begin="${pagination.startPage}" end="${pagination.endPage}" var="idx">
+					<li class="page-item <c:out value="${pagination.page == idx ? 'active' : ''}"/> ">
+						<a class="page-link" href="#"
+						onClick="fn_pagination('${idx}', '${pagination.range}', '${pagination.rangeSize}')">${idx}</a>
 					</li>
 				</c:forEach>
 				<c:if test="${pagination.next}">
-					<li class="page-item"><a class="page-link" href="#"
+					<li class="page-item">
+						<a class="page-link" href="#"
 						onClick="fn_next('${pagination.range}', '${pagination.range}',
 						'${pagination.rangeSize}')">Next</a>
 					</li>
 				</c:if>
 			</ul>
 		</div>
-		<!-- pagination{e} -->
+		<!-- 페이징 -->
+
+		<!-- 검색 -->
+		<div class="form-group row justify-content-center">
+			<div class="w100" style="padding-right: 10px">
+				<select class="form-control form-control-sm" name="searchType" id="searchType">
+					<option value="subject">제목</option>
+					<option value="object">본문</option>
+					<option value="accountId">작성자</option>
+				</select>
+			</div>
+			<div class="w300" style="padding-right: 10px">
+				<input type="text" class="form-control form-control-sm" name="keyword" id="keyword">
+			</div>
+			<div>
+				<button class="btn btn-sm btn-primary" name="btnSearch" id="btnSearch">검색</button>
+			</div>
+		</div>
+		<!-- 검색 -->
+
 	</div>
 
-	<!-- 
-	<c:forEach begin="1" end="${pageNum}" var="num">
-		<span> <a href="/noticeboard/noticeBoardList?num=${num}">${num}</a>
-		</span>
-	</c:forEach>
- 	-->
 	<h2 align="center">&nbsp;</h2>
 
 	<div class="col-sm-9" align="right">

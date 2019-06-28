@@ -7,6 +7,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.good.dao.NoticeBoardDAO;
 import com.good.dto.NoticeBoardVO;
 import com.good.dto.Pagination;
+import com.good.dto.Search;
 import com.good.service.NoticeBoardService;
 
 @Controller
@@ -24,30 +26,23 @@ public class NoticeBoardController {
 	@Inject
 	NoticeBoardService noticeBoardService;
 
-//	// 게시물 목록
-//	@RequestMapping(value = "/noticeBoardList")
-//	public ModelAndView list() throws Exception {
-//		List<NoticeBoardVO> list = noticeBoardService.listAll();
-//
-//		ModelAndView mav = new ModelAndView();
-//		mav.setViewName("noticeboard/noticeBoardList");
-//		System.out.println("NoticeBoardController NoticeBoardList open");
-//		mav.addObject("NoticeBoardList", list);
-//		return mav;
-//	}
-
+	// 게시물 목록 + 페이징 + 검색
 	@RequestMapping(value = "/noticeBoardList", method = RequestMethod.GET)
 	public String list(Model model, @RequestParam(required = false, defaultValue = "1") int page,
-			@RequestParam(required = false, defaultValue = "1") int range) throws Exception {
-		// 전체 게시글 개수
-		int listCnt = noticeBoardService.getBoardListCnt();
+									@RequestParam(required = false, defaultValue = "1") int range,
+									@RequestParam(required = false, defaultValue = "object") String searchType,
+									@RequestParam(required = false) String keyword) throws Exception {
+		Search search = new Search();
+		search.setSearchType(searchType);
+		search.setKeyword(keyword);
 		
-		// pagination 객체 생성
-		Pagination pagination = new Pagination();
-		pagination.pageInfo(page, range, listCnt);
+		// 전체 게시글 개수
+		int listCnt = noticeBoardService.getBoardListCnt(search);
+		
+		search.pageInfo(page, range, listCnt);
 
-		model.addAttribute("pagination", pagination);
-		model.addAttribute("NoticeBoardList", noticeBoardService.listAll(pagination));
+		model.addAttribute("pagination", search);
+		model.addAttribute("NoticeBoardList", noticeBoardService.listAll(search));
 		System.out.println("NoticeBoardController NoticeBoardList open");
 		return "noticeboard/noticeBoardList";
 	}
@@ -64,34 +59,6 @@ public class NoticeBoardController {
 		System.out.println("NoticeBoardController boardView open");
 		return mav;
 	}
-
-//	// 페이징
-//	@RequestMapping(value = "/noticeBoardList", method = RequestMethod.GET)
-//	public void listPage(Model model, int num) throws Exception {
-//		System.out.println("paging start");
-//		// 게시물 총 갯수
-//		int count = noticeBoardService.count();
-//
-//		// 한 페이지에 출력할 게시물 갯수
-//		int postNum = 10;
-//
-//		// 게시물 총 갯수 / 한 페이지에 출력할 게시물 갯수 = 하단 페이징
-//		int pageNum = (int) Math.ceil((double) count / (double) 10);
-//
-//		// 선택한 페이지 번호(임시)
-//		// int selectNum = 1;
-//
-//		// 출력할 게시물
-//		int displayPost = (num - 1) * 10;
-//
-//		List<NoticeBoardVO> list = null;
-//		list = noticeBoardService.listPage(displayPost, postNum);
-//
-//		model.addAttribute("NoticeBoardList", list);
-//		model.addAttribute("pageNum", pageNum);
-//
-//		System.out.println("paging end");
-//	}
 
 	// 게시물 쓰기
 	@RequestMapping(value = "/write.do", method = RequestMethod.GET)

@@ -4,20 +4,18 @@ import java.util.List;
 
 import com.good.dto.NoticeBoardVO;
 import com.good.dto.Pagination;
+import com.good.dto.Search;
 
 public interface NoticeBoardService {
 
-	// 게시물 목록
-	public List<NoticeBoardVO> listAll(Pagination pagination) throws Exception;
+	// 게시물 목록 + 페이징 + 검색
+	public List<NoticeBoardVO> listAll(Search search) throws Exception;
 
 	// 게시물 상세보기
 	public NoticeBoardVO view(int boardId) throws Exception;
 
 	// 게시물 총 갯수
-	public int getBoardListCnt() throws Exception;
-
-	// 페이징
-//	public List<NoticeBoardVO> listPage(int displayPost, int postNum) throws Exception;
+	public int getBoardListCnt(Search search) throws Exception;
 
 	// 글 쓰기
 	public void insertNoticeBoard(NoticeBoardVO vo) throws Exception;
