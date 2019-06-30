@@ -27,7 +27,6 @@ import com.good.dto.ReplyVO;
 import com.good.dto.VideoBoardVO;
 import com.good.service.ReplyService;
 import com.good.service.VideoBoardService;
-import com.mysql.cj.x.json.JsonArray;
 
 @RestController
 @RequestMapping("/reply/*")
