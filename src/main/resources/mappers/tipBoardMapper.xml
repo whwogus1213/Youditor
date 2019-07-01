@@ -5,7 +5,7 @@
 
 <mapper namespace="com.good.mapper.tipBoardMapper">
 	<select id="listAll" resultType="TipBoardVO">
-        SELECT * FROM tipBoard
+        SELECT * FROM tipBoard order by boardID desc
     </select>
 
     <!-- 게시물 조회 -->
