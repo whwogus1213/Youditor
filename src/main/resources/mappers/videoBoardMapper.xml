@@ -5,7 +5,12 @@
 
 <mapper namespace="com.good.mapper.videoBoardMapper">
 	<select id="listAll" resultType="VideoBoardVO">
-        SELECT * FROM videoBoard
+
+       select boardId, accountId, categoryId, subject, object, youtubeLink, 
+				reg_date, mod_date, viewCount, (select count(*) from videocomment where b.boardId = boardId) as replyCount
+		 from videoBoard b
+		 order by boardId desc 
+
     </select>
 
     <!-- 게시물 조회 -->
