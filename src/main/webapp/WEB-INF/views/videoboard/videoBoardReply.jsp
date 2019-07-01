@@ -136,7 +136,7 @@ function getCommentList(){
                        
                    if(sessionAccountId == data[i].accountId){
                 	   html += "<div class='col-sm-10'; align='right'>";
-	                   html += "<button class='btn btn-xs btn-link' onclick = 'replyUpdateForm("+data[i].commentId+")' style='color:#777777; font-size:smaller'>수정</button>|";
+	                   html += "<button class='btn btn-xs btn-link' onclick = 'replyUpdateForm("+data[i].commentId+", "+ data[i].accountId+", \""+data[i].object+"\")' style='color:#777777; font-size:smaller'>수정</button>|";
 	                   html += "<button class='btn btn-xs btn-link' onclick = 'replyDelete("+data[i].commentId+")' style='color:#777777; font-size:smaller'>삭제</button>";
 	                   html +="</div>";
 	               }

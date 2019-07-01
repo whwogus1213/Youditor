@@ -38,7 +38,6 @@ public class VideoBoardController {
 	// 게시물 상세정보
 	@RequestMapping(value = "/videoBoardView", method = RequestMethod.GET)
 	public ModelAndView view(@RequestParam("boardId") int boardId) throws Exception {
-		System.out.println("*************************************************");
 		VideoBoardVO row = videoBoardService.view(boardId);
 
 		ModelAndView mav = new ModelAndView();

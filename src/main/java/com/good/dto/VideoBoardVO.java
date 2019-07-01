@@ -99,7 +99,9 @@ public class VideoBoardVO {
 	public String toString() {
 		return "VideoBoardVO [boardId=" + boardId + ", accountId=" + accountId + ", subject=" + subject + ", object="
 				+ object + ", reg_date=" + reg_date + ", categoryId=" + categoryId + ", youtubeLink=" + youtubeLink
-				+ ", mod_date=" + mod_date + ", viewCount=" + viewCount + "]";
+				+ ", mod_date=" + mod_date + ", viewCount=" + viewCount + ", replyCount=" + replyCount + "]";
 	}
+
+	
 	
 }
