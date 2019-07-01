@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@ page session="false"%>
+<%@ page session="true"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -61,11 +61,10 @@
 		<div class="col-sm-12">
 			<h2 align="center">&nbsp;</h2>
 			<h1 align="center">팔로우 리스트</h1>
-			<h2 align="center">&nbsp;</h2>
+			<h2 align="center">팔로우 중인 사람</h2>
 		</div>
 	</div>
-	<h2 align="center">&nbsp;</h2>
-	<h2 align="center">&nbsp;</h2>
+	email : ${login.email } accountid : ${login.accountId}
 	<div class="container">
 		<table class="table table-bordered table-striped nanum table-hover">
 			<!-- <table border="1"> -->
@@ -79,12 +78,14 @@
 			</thead>
 			<tbody>
 				<c:forEach items="${FollowList}" var="FollowList">
-					<tr>
-						<td>${FollowList.followId}</td>
-						<td>${FollowList.followAccountId}</td>
-						<td>${FollowList.followerAccountId}</td>
-						<td><fmt:formatDate value="${FollowList.reg_date}" pattern="yyyy-MM-dd" /></td>
-					</tr>
+					<c:if test="${login.accountId eq FollowList.followerAccountId }">
+						<tr>
+							<td>${FollowList.followId}</td>
+							<td>${FollowList.followAccountId}</td>
+							<td>${FollowList.followerAccountId}</td>
+							<td><fmt:formatDate value="${FollowList.reg_date}" pattern="yyyy-MM-dd" /></td>
+						</tr>
+					</c:if>
 				</c:forEach>
 			</tbody>
 		</table>
