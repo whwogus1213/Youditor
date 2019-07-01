@@ -29,4 +29,14 @@ public class ReplyDAOImpl implements ReplyDAO {
 		sqlSession.insert(NAMESPACE + ".insert", vo);
 	}
 
+	@Override
+	public void delete(ReplyVO vo) throws Exception {
+		sqlSession.delete(NAMESPACE + ".delete",vo);
+	}
+
+	@Override
+	public void update(ReplyVO vo) throws Exception {
+		sqlSession.update(NAMESPACE + ".update", vo);
+	}
+
 }

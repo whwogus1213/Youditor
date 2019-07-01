@@ -76,7 +76,9 @@
       </div>
 	<h2 align="center">&nbsp;</h2>
 	<div class="col-sm-9" align="right">
-		<button type="button" class="btn btn-primary" onclick="location.href='/videoboard/write.do' ">유투브 올리기</button>
+		<c:if test="${login.email != null }">  
+				<button type="button" class="btn btn-primary" onclick="location.href='/videoboard/write.do' ">유투브 올리기</button>
+		</c:if>
 	</div>
 	<h2 align="center">&nbsp;</h2>
 	<jsp:include page="../module/bottom.jsp" flush="false" />

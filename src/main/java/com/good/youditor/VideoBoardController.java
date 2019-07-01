@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.good.dto.VideoBoardVO;
 import com.good.service.VideoBoardService;
@@ -79,26 +80,27 @@ public class VideoBoardController {
 	// 게시글 수정
 	// 'videoBoardUpdate.jsp' 로 이동 <-- 이동하고자 하는 파일로 명 바꾸면됨
 	@RequestMapping(value = "/updateVideoBoard.do", method = RequestMethod.GET)
-	public ModelAndView join(Locale locale, Model model,@RequestParam("boardId") int boardId) throws Exception {
+	public ModelAndView joinUpdate(Locale locale, Model model,@RequestParam("boardId") int boardId) throws Exception {
 		VideoBoardVO update = videoBoardService.view(boardId);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("videoboard/videoBoardUpdate");
 		mav.addObject("videoBoardUpdate", update);
-		System.out.println("String videoboardlist open");
+		System.out.println("String videoBoardUpdate open");
+		return mav;
+	}
+	// 파일 이동
+	// 게시글 삭제
+	// 'videoBoardDelete.jsp' 로 이동 <-- 이동하고자 하는 파일로 명 바꾸면됨
+	@RequestMapping(value = "/deleteVideoBoard.do", method = RequestMethod.GET)
+	public ModelAndView joinDelete(Locale locale, Model model,@RequestParam("boardId") int boardId) throws Exception {
+		VideoBoardVO delete = videoBoardService.view(boardId);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("videoboard/videoBoardDelete");
+		mav.addObject("videoBoardDelete", delete);
+		System.out.println("String videoBoardDelete open");
 		return mav;
 	}
 
-	// 글 삭제
-	@RequestMapping(value = "/delete", method = RequestMethod.GET)
-	public void getDelete(@RequestParam("boardId") int boardId, Model model) throws Exception {
-
-		model.addAttribute("deleteVideoBoard", boardId);
-	}
-	// 글 수정
-	@RequestMapping(value = "/updatevideoBoardForm")
-	public String updateVideoBoardForm() throws Exception {
-		return "videoboard/updateVideoBoard";
-	}
 	// 글 수정
 	@RequestMapping(value = "/updateVideoBoardPro")
 	public String updateVideoBoardPro(VideoBoardVO vo) throws Exception {
@@ -108,10 +110,12 @@ public class VideoBoardController {
 
 	}
 
-	// 글 삭제  POST
-	@RequestMapping(value = "/delete", method = RequestMethod.POST)
-	public String postDelete(@RequestParam("boardId") int boardId) throws Exception {
-		videoBoardService.deleteVideoBoard(boardId);
+	// 글 삭제
+	@RequestMapping(value = "/deleteVideoBoardPro")
+	public String deleteVideoBoardPro(VideoBoardVO vo, RedirectAttributes rttr) throws Exception {
+		videoBoardService.deleteVideoBoard(vo);
+		rttr.addFlashAttribute("result","deleteOK");
+		System.out.println("============ deleteVideoBoard 성공==============");
 
 		return "redirect:/videoboard/videoBoardList";
 	}

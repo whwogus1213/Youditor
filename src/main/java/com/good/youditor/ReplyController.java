@@ -35,7 +35,6 @@ public class ReplyController {
 	@Inject
 	ReplyService service;
 
-	// 게시물 목록
 	@RequestMapping(value = "/insert", method=RequestMethod.POST)
 	public String insertComment(ReplyVO vo, HttpServletRequest request) throws Exception{
         
@@ -65,5 +64,20 @@ public class ReplyController {
         return replyList;
         
     }
+	
+	
+	@RequestMapping(value = "/delete", method=RequestMethod.POST)
+	public void deleteComment(ReplyVO vo) throws Exception{
+		service.delete(vo);
+        
+    }
+
+	
+	@RequestMapping(value = "/update", method=RequestMethod.POST)
+	public void updateComment(ReplyVO vo) throws Exception{
+		service.update(vo);
+		
+	}
+	
 
 }

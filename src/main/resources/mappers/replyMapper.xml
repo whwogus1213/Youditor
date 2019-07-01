@@ -13,9 +13,13 @@
 		values(#{accountId}, #{boardId}, #{object}, now(), now())
     </insert>
     
+    <delete id="delete" parameterType="ReplyVO">
+    	DELETE FROM videocomment WHERE commentId = #{commentId}
+    </delete>
     
-    
-    
+    <update id="update" parameterType="ReplyVO">
+    	UPDATE videocomment SET object = #{object}, mod_date = now() WHERE commentId = #{commentId}
+    </update>
     
     
     
