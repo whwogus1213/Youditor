@@ -34,6 +34,7 @@
 				<li class="nav-item"><a class="nav-link" href="#">영상편집팁</a></li>
 
 				<c:if test="${login.email ne null }">
+					<li class="nav-item"><a class="nav-link" href="/follow/followList">팔로우</a></li>
 					<li class="nav-item"><a class="nav-link" href="/accounts/logout">로그아웃</a></li>
 				</c:if>
 				<c:if test="${login.email eq null }">

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.good.mapper.followMapper">
+	<!-- 팔로우 리스트 출력 + 페이징 + 검색-->
+	<select id="listAll" resultType="FollowListVO">
+		SELECT *
+		FROM followlist
+		<trim prefix="WHERE" prefixOverrides="AND|OR">
+			<if test="searchType=='followAccountId' and keyword != null and keyword != '' ">
+				AND followAccountId like CONCAT('%', #{keyword}, '%')
+			</if>
+		</trim>
+		order by reg_date desc
+		LIMIT #{startList}, #{listSize}
+	</select>
+
+	<!-- 팔로워 수 -->
+	<select id="getFollowListCnt" resultType="int">
+		select count(*)
+		from followlist
+		<trim prefix="WHERE" prefixOverrides="AND|OR">
+			<if test="keyword != null and keyword != '' ">
+				<if test="searchType=='followAccountId'">
+					AND followAccountId like CONCAT('%', #{keyword}, '%')
+				</if>
+      		</if>
+		</trim>
+	</select>
+	
+</mapper>
