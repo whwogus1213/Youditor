@@ -18,12 +18,12 @@ public class FollowController {
 	@Inject
 	FollowService followService;
 	
-	// 팔로워 목록 + 페이징 + 검색
-	@RequestMapping(value = "/followList", method = RequestMethod.GET)
-	public String list(Model model, @RequestParam(required = false, defaultValue = "1") int page,
-									@RequestParam(required = false, defaultValue = "1") int range,
-									@RequestParam(required = false, defaultValue = "followAccountId") String searchType,
-									@RequestParam(required = false) String keyword) throws Exception {
+	// 팔로잉 목록 + 페이징 + 검색
+	@RequestMapping(value = "/followingList", method = RequestMethod.GET)
+	public String followingList(Model model, @RequestParam(required = false, defaultValue = "1") int page,
+											 @RequestParam(required = false, defaultValue = "1") int range,
+											 @RequestParam(required = false, defaultValue = "followAccountId") String searchType,
+											 @RequestParam(required = false) String keyword) throws Exception {
 		Search search = new Search();
 		search.setSearchType(searchType);
 		search.setKeyword(keyword);
@@ -35,7 +35,28 @@ public class FollowController {
 
 		model.addAttribute("pagination", search);
 		model.addAttribute("FollowList", followService.listAll(search));
-		System.out.println("FollowController FollowList open");
-		return "follow/followList";
+		System.out.println("FollowController FollowingList open");
+		return "follow/followingList";
+	}
+	
+	// 팔로워 목록 + 페이징 + 검색
+	@RequestMapping(value = "/followerList", method = RequestMethod.GET)
+	public String followerList(Model model, @RequestParam(required = false, defaultValue = "1") int page,
+											@RequestParam(required = false, defaultValue = "1") int range,
+											@RequestParam(required = false, defaultValue = "followAccountId") String searchType,
+											@RequestParam(required = false) String keyword) throws Exception {
+		Search search = new Search();
+		search.setSearchType(searchType);
+		search.setKeyword(keyword);
+		
+		// 팔로워 수
+		int listCnt = followService.getFollowListCnt(search);
+		
+		search.pageInfo(page, range, listCnt);
+		
+		model.addAttribute("pagination", search);
+		model.addAttribute("FollowList", followService.listAll(search));
+		System.out.println("FollowController FollowerList open");
+		return "follow/followerList";
 	}
 }

@@ -16,7 +16,7 @@
 	function fn_prev(page, range, rangeSize) {
 		var page = ((range - 2) * rangeSize) + 1;
 		var range = range - 1;
-		var url = "${pageContext.request.contextPath}/follow/followList";
+		var url = "${pageContext.request.contextPath}/follow/followingList";
 
 		url = url + "?page=" + page;
 		url = url + "&range=" + range;
@@ -25,7 +25,7 @@
 
 	//페이지 번호 클릭
 	function fn_pagination(page, range, rangeSize, searchType, keyword) {
-		var url = "${pageContext.request.contextPath}/follow/followList";
+		var url = "${pageContext.request.contextPath}/follow/followingList";
 
 		url = url + "?page=" + page;
 		url = url + "&range=" + range;
@@ -36,7 +36,7 @@
 	function fn_next(page, range, rangeSize) {
 		var page = parseInt((range * rangeSize)) + 1;
 		var range = parseInt(range) + 1;
-		var url = "${pageContext.request.contextPath}/follow/followList";
+		var url = "${pageContext.request.contextPath}/follow/followingList";
 
 		url = url + "?page=" + page;
 		url = url + "&range=" + range;
@@ -46,7 +46,7 @@
 	// 검색버튼 이벤트
 	$(document).on('click', '#btnSearch', function(e) {
 		e.preventDefault();
-		var url = "${pageContext.request.contextPath}/follow/follwList";
+		var url = "${pageContext.request.contextPath}/follow/followingList";
 		url = url + "?searchType=" + $('#searchType').val();
 		url = url + "&keyword=" + $('#keyword').val();
 
@@ -60,11 +60,10 @@
 	<div class="form-group">
 		<div class="col-sm-12">
 			<h2 align="center">&nbsp;</h2>
-			<h1 align="center">팔로우 리스트</h1>
-			<h2 align="center">팔로우 중인 사람</h2>
+			<h1 align="center">Following List</h1>
+			<h2 align="center">내가 팔로우 중인 사람</h2>
 		</div>
 	</div>
-	email : ${login.email } accountid : ${login.accountId}
 	<div class="container">
 		<table class="table table-bordered table-striped nanum table-hover">
 			<!-- <table border="1"> -->
@@ -94,7 +93,8 @@
 		<div id="paginationBox">
 			<ul class="pagination">
 				<c:if test="${pagination.prev}">
-					<li class="page-item"><a class="page-link" href="#"
+					<li class="page-item">
+						<a class="page-link" href="#"
 						onClick="fn_prev('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}')">Previous</a>
 					</li>
 				</c:if>
@@ -105,7 +105,8 @@
 					</li>
 				</c:forEach>
 				<c:if test="${pagination.next}">
-					<li class="page-item"><a class="page-link" href="#"
+					<li class="page-item">
+						<a class="page-link" href="#"
 						onClick="fn_next('${pagination.range}', '${pagination.range}',
 						'${pagination.rangeSize}')">Next</a>
 					</li>

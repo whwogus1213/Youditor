@@ -28,6 +28,4 @@ public class FollowDAOImpl implements FollowDAO {
 	public int getFollowListCnt(Search search) {
 		return sqlSession.selectOne(NAMESPACE + ".getFollowListCnt", search);
 	}
-	
-
 }
