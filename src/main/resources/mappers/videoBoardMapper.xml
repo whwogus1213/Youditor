@@ -5,7 +5,7 @@
 
 <mapper namespace="com.good.mapper.videoBoardMapper">
 	<select id="listAll" resultType="VideoBoardVO">
-        SELECT * FROM videoBoard order by boardID desc
+        SELECT * FROM videoBoard
     </select>
 
     <!-- 게시물 조회 -->
@@ -43,16 +43,18 @@
         boardId = #{boardId}
 		 </update>
 
- 	<!-- 글 삭제 -->
+ 		<!-- 글 삭제 -->
 		 <delete id="deleteVideoBoard">
 		  delete from
 		    videoBoard
 		  where
-        boardId = #{boardId}
+        	boardId = #{boardId}
 		 </delete>
-
-
-
+		
+		<!-- 조회수 증가 -->
+		<update id="viewCount">
+		UPDATE videoBoard SET viewCount = viewCount+1 WHERE boardId=#{boardId}
+		</update>
 
 
 

@@ -48,4 +48,9 @@ public class VideoBoardDAOImpl implements VideoBoardDAO {
 	public void deleteVideoBoard(VideoBoardVO vo) throws Exception {
 		sqlSession.delete(NAMESPACE + ".deleteVideoBoard", vo);
 	}
+
+	//조회수
+	public void viewCount(int boardId) throws Exception {
+		sqlSession.update(NAMESPACE + ".viewCount", boardId);
+	}
 }

@@ -25,6 +25,7 @@ public class VideoBoardServiceImpl implements VideoBoardService {
 	// 게시물 읽기
 	@Override
 	public VideoBoardVO view(int boardId) throws Exception {
+		videoBoardDAO.viewCount(boardId);
 		return videoBoardDAO.view(boardId);
 	}
 
@@ -44,6 +45,12 @@ public class VideoBoardServiceImpl implements VideoBoardService {
 	@Override
 	public void deleteVideoBoard(VideoBoardVO vo) throws Exception {
 		videoBoardDAO.deleteVideoBoard(vo);
+	}
+	
+	// 조회수
+	@Override
+	public void viewCount(int boardId) throws Exception {
+		videoBoardDAO.viewCount(boardId);
 	}
 
 }

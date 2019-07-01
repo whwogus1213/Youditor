@@ -13,6 +13,21 @@
 <link href="/resources/css/modern-business.css" rel="stylesheet">
 </head>
 <body>
+	<script>
+	var result = '${result}';
+	$(function(){
+		//이건 아직 미구현
+		if(result === 'registerOK'){
+			$('#registerOK').removeClass('hidden');
+			$('#registerOK').fadeOut(2000);
+		}
+		if(result === 'deleteOK'){
+			$('#deleteOK').removeClass('hidden');
+			$('#deleteOK').removeAttr("style");
+			$('#deleteOK').fadeOut(2000);
+		}
+	})
+	</script>
 	<jsp:include page="../module/top.jsp" flush="false" />
 	<div class="form-group">
 		<div class="col-sm-12">
@@ -22,6 +37,7 @@
 		</div>
 		<h5 align="center">ㅇㅇ유투버의 편집영상을 감상할 수 있습니다</h5>
 		<h2 align="center">&nbsp;</h2>
+		<div id="deleteOK" class="alert alert-danger hidden" role="alert" style="visibility:hidden">글이 삭제되었습니다.</div>
 	</div>
 		
 	<div class="container">
