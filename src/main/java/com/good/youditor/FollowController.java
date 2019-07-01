@@ -12,7 +12,7 @@ import com.good.dto.Search;
 import com.good.service.FollowService;
 
 @Controller
-@RequestMapping(value = "/follow")
+@RequestMapping("/follow")
 public class FollowController {
 
 	@Inject
