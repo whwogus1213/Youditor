@@ -21,4 +21,6 @@ public interface VideoBoardDAO {
 	// 삭제
 	public void deleteVideoBoard(VideoBoardVO vo) throws Exception;
 
+	//조회수
+	public void viewCount(int boardId) throws Exception;
 }
