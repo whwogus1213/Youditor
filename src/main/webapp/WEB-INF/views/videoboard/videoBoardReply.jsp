@@ -122,7 +122,7 @@ function getCommentList(){
                
                for(i=0; i<data.length; i++){
                    
-                   html += "<div>";
+                   html += "<div id = "+data[i].commentId+">";
                    html += "<div><table class='table'><h6><strong>"+data[i].nickname+"</strong></h6>";
                    html += data[i].object;
                    html += "<div class='row'>";
@@ -154,7 +154,6 @@ function getCommentList(){
            
            $("#cCnt").html(cCnt);
            $("#commentList").html(html);
-           $("#commentUpdel").html(updel);
        }
 
 
@@ -163,27 +162,48 @@ function getCommentList(){
 }
 
 
-function replyUpdateForm(commentId){
-	var json = {"commentId" : commentId};
+function replyUpdateForm(commentId, accountId, object){
+	var html = "";
+	
+	$("#commentList #"+commentId).css("border","1px dashed black");
+	html += "<div>";
+	html += "<textarea style='width: 1000px' rows='3' cols='30' id='upObject"+commentId+"' name='upObject"+commentId+"'>"+object+"</textarea>";
+	html += "<a href='#' onClick='replyUpdate("+commentId+")' class='btn pull-right btn-success' style='height:100%; width:90px; text-align:center; line-height:65px;'>수정</a>";
+	html += "</div>";
+	$("#commentList #"+commentId).html(html);	
+}
+
+function replyUpdate(commentId){
+	var object = $("#upObject"+commentId).val();
+	var json = {
+			"commentId" : commentId,
+			"object" : object
+			};
 	alert("update");
 	$.ajax({
 		type:'POST',
-		url : "/reply/Update",
+		url : "/reply/update",
 		data: json,
 		success : function(data){
+			alert("수정되었습니다.");
+			getCommentList();
 		}
 	        
 	});
 }
 
 
-function replyDelete(commentId){
+function replyDelete(commentId, object){
+	console.log(commentId);
+	console.log(object);
+	
 	var json = {
-			"commentId" : commentId
+			"commentId" : commentId,
+			"object" : object
 			};
 	$.ajax({
 		type:'POST',
-		url : "/reply/Delete",
+		url : "/reply/delete",
 		data:json,
 		success : function(){
 			alert("삭제되었습니다.");

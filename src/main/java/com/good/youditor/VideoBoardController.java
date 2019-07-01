@@ -73,7 +73,7 @@ public class VideoBoardController {
 		System.out.println(vo);
 		videoBoardService.insertVideoBoard(vo);
 
-		return "redirect:/";
+		return "redirect:/videoboard/videoBoardList";
 	}
 
 	// 파일 이동

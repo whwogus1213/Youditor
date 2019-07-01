@@ -12,6 +12,7 @@ public class VideoBoardVO {
 	private String youtubeLink;
 	private Date mod_date;
 	private int viewCount;
+	private int replyCount;
 
 	public int getBoardId() {
 		return boardId;
@@ -85,11 +86,20 @@ public class VideoBoardVO {
 		this.viewCount = viewCount;
 	}
 
+
+	public int getReplyCount() {
+		return replyCount;
+	}
+
+	public void setReplyCount(int replyCount) {
+		this.replyCount = replyCount;
+	}
+
 	@Override
 	public String toString() {
 		return "VideoBoardVO [boardId=" + boardId + ", accountId=" + accountId + ", subject=" + subject + ", object="
 				+ object + ", reg_date=" + reg_date + ", categoryId=" + categoryId + ", youtubeLink=" + youtubeLink
 				+ ", mod_date=" + mod_date + ", viewCount=" + viewCount + "]";
 	}
-
+	
 }

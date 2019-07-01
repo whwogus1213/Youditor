@@ -65,7 +65,9 @@
 									<td><div align="right">${VideoBoardList.viewCount }</div></td>
 								</tr>
 							<tbody>
-							
+								<tr>
+									<td>댓글수 : ${VideoBoardList.replyCount}</td>
+								</tr>
 							</tbody>
 						</table>
           			</div>

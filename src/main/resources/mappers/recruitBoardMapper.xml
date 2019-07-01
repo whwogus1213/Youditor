@@ -5,7 +5,7 @@
 
 <mapper namespace="com.good.mapper.recruitBoardMapper">
 	<select id="listAll" resultType="RecruitBoardVO">
-        SELECT * FROM recruitBoard
+        SELECT * FROM recruitBoard order by boardID desc
     </select>
 
     <!-- 게시물 조회 -->

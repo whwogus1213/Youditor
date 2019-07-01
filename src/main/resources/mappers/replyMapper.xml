@@ -5,7 +5,7 @@
  
 <mapper namespace="com.good.mapper.replyMapper">
 	<select id="listAll" resultType="ReplyVO" parameterType="int">
-        SELECT * FROM videocomment vc, accounts ac where boardId = #{boardId} and vc.accountId = ac.accountId order by commentId
+        SELECT * FROM videocomment vc, accounts ac where boardId = #{boardId} and vc.accountId = ac.accountId order by commentId desc
     </select>
     
     <insert id="insert" parameterType="ReplyVO">
@@ -15,10 +15,11 @@
     
     <delete id="delete" parameterType="ReplyVO">
     	DELETE FROM videocomment WHERE commentId = #{commentId}
-    
     </delete>
     
-    
+    <update id="update" parameterType="ReplyVO">
+    	UPDATE videocomment SET object = #{object}, mod_date = now() WHERE commentId = #{commentId}
+    </update>
     
     
     

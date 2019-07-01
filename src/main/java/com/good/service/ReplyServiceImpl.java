@@ -35,4 +35,10 @@ public class ReplyServiceImpl implements ReplyService {
 		
 	}
 
+	@Override
+	public void update(ReplyVO vo) throws Exception {
+		dao.update(vo);
+		
+	}
+
 }
