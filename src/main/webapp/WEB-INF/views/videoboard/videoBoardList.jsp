@@ -49,27 +49,39 @@
 							document.write('<img width="300" height="200" src="https://img.youtube.com/vi/' + youtubeID + '/mqdefault.jpg"></img>');
 						</script>
           			</div>
-          			<div class="card-footer" align="center">
-						<table class="table nanum table-hover">
-							<thead>
-								<tr>
-									<th><div align="center">작성자</div></th>
-									<th><div align="center">작성일</div></th>
-									<th>조회수</th>
-								</tr>
-							</thead>
-								<tr>
-									<td><div align="center">${VideoBoardList.accountId}</div></td>
-									<td><div align="center"><fmt:formatDate value="${VideoBoardList.reg_date}"
-											pattern="yyyy-MM-dd" /></div></td>
-									<td><div align="right">${VideoBoardList.viewCount }</div></td>
-								</tr>
-							<tbody>
-								<tr>
-									<td>댓글수 : ${VideoBoardList.replyCount}</td>
-								</tr>
-							</tbody>
-						</table>
+          			<div class="card-footer" align="left">
+          				<div class="row">
+          					<div class="col-sm-6" align="left">
+          						<strong>Made by.</strong>
+          					</div>
+          					<div class="col-sm-6" align="right">
+								${VideoBoardList.accountId}<br>
+          					</div>
+          				</div>
+          				<div class="row">
+          					<div class="col-sm-6" align="left">
+          						<strong>Date</strong> 
+          					</div>
+          					<div class="col-sm-6" align="right">
+								<fmt:formatDate value="${VideoBoardList.reg_date}" pattern="yyyy-MM-dd" /><br>
+          					</div>
+          				</div>
+          				<div class="row">
+          					<div class="col-sm-6" align="left">
+          						<strong>Views</strong>
+          					</div>
+          					<div class="col-sm-6" align="right">
+								${VideoBoardList.viewCount }<br>
+          					</div>
+          				</div>
+          				<div class="row">
+          					<div class="col-sm-6" align="left">
+          						<strong>Comments</strong>
+          					</div>
+          					<div class="col-sm-6" align="right">
+						 		${VideoBoardList.replyCount}
+          					</div>
+          				</div>
           			</div>
         		</div>
       		</div>

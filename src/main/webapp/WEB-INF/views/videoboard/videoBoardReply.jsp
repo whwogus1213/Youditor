@@ -126,9 +126,13 @@ function getCommentList(){
                    html += "<div><table class='table'><h6><strong>"+data[i].nickname+"</strong></h6>";
                    html += data[i].object;
                    html += "<div class='row'>";
-                   html += "<div class='col-sm-2' align='left'>";
-                   html += "<button class='btn btn-xs btn-link' onclick = 'replyUpdateForm("+data[i].commentId+")' style='color:#777777; font-size:smaller'>답글</button>|";
-                   html +="</div>";
+                   if(sessionAccountId > 0){
+                       html += "<div class='col-sm-2' align='left'>";
+                       html += "<button class='btn btn-xs btn-link' onclick = 'replyUpdateForm("+data[i].commentId+")' style='color:#777777; font-size:smaller'>답글</button>|";
+                       html +="</div>";
+                   } else {
+                	   html += "<br>";
+                   }
                        
                    if(sessionAccountId == data[i].accountId){
                 	   html += "<div class='col-sm-10'; align='right'>";
