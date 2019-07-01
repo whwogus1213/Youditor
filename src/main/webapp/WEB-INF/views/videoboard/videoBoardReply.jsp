@@ -127,8 +127,10 @@ function getCommentList(){
                    html += data[i].object;
                        
                    if(sessionAccountId == data[i].accountId){
-	                   html += "<button class='btn btn-xs btn-success' onclick = 'replyUpdateForm("+data[i].commentId+")'>수정</button>";
-	                   html += "<button class='btn btn-xs btn-danger' onclick = 'replyDelete("+data[i].commentId+")'>삭제</button>";
+                	   html += "<div align='right'>";
+	                   html += "<button class='btn btn-xs btn-link' onclick = 'replyUpdateForm("+data[i].commentId+")' style='color:#777777; font-size:smaller'>수정</button>|";
+	                   html += "<button class='btn btn-xs btn-link' onclick = 'replyDelete("+data[i].commentId+")' style='color:#777777; font-size:smaller'>삭제</button>";
+	                   html +="</div>";
 	               }
                    
                    html += "<tr><td></td></tr>";
