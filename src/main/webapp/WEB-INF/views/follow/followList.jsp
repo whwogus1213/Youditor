@@ -12,7 +12,7 @@
 <!-- Custom styles -->
 <link href="/resources/css/modern-business.css" rel="stylesheet">
 <script>
-	// 이전 버튼
+// 이전 버튼
 	function fn_prev(page, range, rangeSize) {
 		var page = ((range - 2) * rangeSize) + 1;
 		var range = range - 1;
@@ -65,6 +65,7 @@
 		</div>
 	</div>
 	<h2 align="center">&nbsp;</h2>
+	<h2 align="center">&nbsp;</h2>
 	<div class="container">
 		<table class="table table-bordered table-striped nanum table-hover">
 			<!-- <table border="1"> -->
@@ -96,10 +97,8 @@
 						onClick="fn_prev('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}')">Previous</a>
 					</li>
 				</c:if>
-				<c:forEach begin="${pagination.startPage}"
-					end="${pagination.endPage}" var="idx">
-					<li
-						class="page-item <c:out value="${pagination.page == idx ? 'active' : ''}"/> ">
+				<c:forEach begin="${pagination.startPage}" end="${pagination.endPage}" var="idx">
+					<li class="page-item <c:out value="${pagination.page == idx ? 'active' : ''}"/> ">
 						<a class="page-link" href="#"
 						onClick="fn_pagination('${idx}', '${pagination.range}', '${pagination.rangeSize}')">${idx}</a>
 					</li>

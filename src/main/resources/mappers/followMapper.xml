@@ -8,6 +8,7 @@
 	<select id="listAll" resultType="FollowListVO">
 		SELECT *
 		FROM followlist
+		<!-- 검색 -->
 		<trim prefix="WHERE" prefixOverrides="AND|OR">
 			<if test="searchType=='followAccountId' and keyword != null and keyword != '' ">
 				AND followAccountId like CONCAT('%', #{keyword}, '%')
@@ -19,14 +20,15 @@
 
 	<!-- 팔로워 수 -->
 	<select id="getFollowListCnt" resultType="int">
-		select count(*)
+		select count(followId)
 		from followlist
+		<!-- 검색 -->
 		<trim prefix="WHERE" prefixOverrides="AND|OR">
 			<if test="keyword != null and keyword != '' ">
 				<if test="searchType=='followAccountId'">
 					AND followAccountId like CONCAT('%', #{keyword}, '%')
 				</if>
-      		</if>
+			</if>
 		</trim>
 	</select>
 	
