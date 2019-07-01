@@ -66,13 +66,18 @@ public class ReplyController {
     }
 	
 	
-	@RequestMapping(value = "/Delete", method=RequestMethod.POST)
+	@RequestMapping(value = "/delete", method=RequestMethod.POST)
 	public void deleteComment(ReplyVO vo) throws Exception{
-		System.out.println("replyDelete###########################################################");
-		System.out.println(vo);
 		service.delete(vo);
         
     }
+
+	
+	@RequestMapping(value = "/update", method=RequestMethod.POST)
+	public void updateComment(ReplyVO vo) throws Exception{
+		service.update(vo);
+		
+	}
 	
 
 }

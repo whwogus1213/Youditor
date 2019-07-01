@@ -34,4 +34,9 @@ public class ReplyDAOImpl implements ReplyDAO {
 		sqlSession.delete(NAMESPACE + ".delete",vo);
 	}
 
+	@Override
+	public void update(ReplyVO vo) throws Exception {
+		sqlSession.update(NAMESPACE + ".update", vo);
+	}
+
 }
