@@ -19,6 +19,6 @@ public interface VideoBoardDAO {
 	public void updateVideoBoard(VideoBoardVO vo) throws Exception;
 
 	// 삭제
-	public void deleteVideoBoard(int boardId) throws Exception;
+	public void deleteVideoBoard(VideoBoardVO vo) throws Exception;
 
 }

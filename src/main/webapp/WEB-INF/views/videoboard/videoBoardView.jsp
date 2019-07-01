@@ -36,6 +36,15 @@
 				youtubeID = youtubeID.substr(0,11);
 			}
 			document.write('<iframe width="667" height="375" src="https://www.youtube.com/embed/' + youtubeID + '" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
+		
+			//삭제 버튼 누르면 삭제할 것이냐고 묻고 삭제한다고 하면 videoboardcontroller 의 deleteVideoBoardPro 메서드 호출
+			$(function(){
+				$('#deletebtn').click(function(){
+					if(confirm("정말 삭제하시겠습니까?")){
+						self.location.href = "${path}/videoboard/deleteVideoBoardPro?boardId=${row.boardId}";
+					}
+				});
+			});
 		</script>
 	</div>
 	<!-- <h1>${row.boardId }</h1> -->
@@ -54,7 +63,7 @@
 		<div align="right">
 			<c:if test="${login.accountId eq row.accountId}">
 				<button class="btn btn-warning btn-sm" onclick="location.href='/videoboard/updateVideoBoard.do?boardId=${row.boardId}'">수정</button>
-				<button class="btn btn-danger btn-sm" onclick="location.href='/videoboard/delete'">삭제</button>
+				<button class="btn btn-danger btn-sm" id="deletebtn">삭제</button>
 			</c:if>
 		</div>
 		<hr>

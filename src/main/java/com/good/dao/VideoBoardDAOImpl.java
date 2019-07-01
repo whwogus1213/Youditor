@@ -45,7 +45,7 @@ public class VideoBoardDAOImpl implements VideoBoardDAO {
 
 	// 삭제
 	@Override
-	public void deleteVideoBoard(int boardId) throws Exception {
-		sqlSession.delete(NAMESPACE + ".deleteVideoBoard", boardId);
+	public void deleteVideoBoard(VideoBoardVO vo) throws Exception {
+		sqlSession.delete(NAMESPACE + ".deleteVideoBoard", vo);
 	}
 }
