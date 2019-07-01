@@ -38,7 +38,7 @@
 		<h6 style="color:gray"> 조회수&nbsp;&nbsp; ${videoBoardUpdate.viewCount }</h6>
 		<h5 align="right">등록일 &nbsp;&nbsp; <fmt:formatDate value="${videoBoardUpdate.reg_date}" pattern="yyyy년 MM월 dd일  hh:mm:ss" /></h5>
 		<hr>
-		<input type="text" class="form-control" name="boardId" id="boardId" maxlength="50" value="${videoBoardUpdate.boardId}" readonly="readonly">
+		<input type="text" class="form-control" name="boardId" id="boardId" maxlength="50" value="${videoBoardUpdate.boardId}" style="visibility:hidden">
 		
 		<h6>${videoBoardUpdate.accountId } 프로필이 표시되게끔....</h6>
 		<hr>
