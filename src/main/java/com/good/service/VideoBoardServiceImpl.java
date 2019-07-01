@@ -42,8 +42,8 @@ public class VideoBoardServiceImpl implements VideoBoardService {
 
 	// 삭제
 	@Override
-	public void deleteVideoBoard(int boardId) throws Exception {
-		videoBoardDAO.deleteVideoBoard(boardId);
+	public void deleteVideoBoard(VideoBoardVO vo) throws Exception {
+		videoBoardDAO.deleteVideoBoard(vo);
 	}
 
 }
