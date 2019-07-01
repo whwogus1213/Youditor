@@ -125,14 +125,18 @@ function getCommentList(){
                    html += "<div>";
                    html += "<div><table class='table'><h6><strong>"+data[i].nickname+"</strong></h6>";
                    html += data[i].object;
+                   html += "<div class='row'>";
+                   html += "<div class='col-sm-2' align='left'>";
+                   html += "<button class='btn btn-xs btn-link' onclick = 'replyUpdateForm("+data[i].commentId+")' style='color:#777777; font-size:smaller'>답글</button>|";
+                   html +="</div>";
                        
                    if(sessionAccountId == data[i].accountId){
-                	   html += "<div align='right'>";
+                	   html += "<div class='col-sm-10'; align='right'>";
 	                   html += "<button class='btn btn-xs btn-link' onclick = 'replyUpdateForm("+data[i].commentId+")' style='color:#777777; font-size:smaller'>수정</button>|";
 	                   html += "<button class='btn btn-xs btn-link' onclick = 'replyDelete("+data[i].commentId+")' style='color:#777777; font-size:smaller'>삭제</button>";
 	                   html +="</div>";
 	               }
-                   
+                   html +="</div>";
                    html += "<tr><td></td></tr>";
                    html += "</table></div>";
                    html += "</div>";
