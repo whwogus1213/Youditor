@@ -13,7 +13,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>{row.subject} - YouDitor</title>
+<title>${row.subject} - YouDitor</title>
 <jsp:include page="../module/header.jsp" flush="false"/>
 
 </head>
