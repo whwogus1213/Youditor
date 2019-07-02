@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.good.dto.VideoBoardVO;
+import com.good.dto.VideoCategoryVO;
 import com.good.service.VideoBoardService;
 
 @Controller
@@ -24,9 +25,16 @@ public class VideoBoardController {
 	VideoBoardService videoBoardService;
 
 	// 게시물 목록
-	@RequestMapping(value = "/videoBoardList")
-	public ModelAndView list() throws Exception {
-		List<VideoBoardVO> list = videoBoardService.listAll();
+	@RequestMapping(value = "/videoBoardList", method = RequestMethod.GET)
+	public ModelAndView list(@RequestParam(required = false, defaultValue = "0") int category) throws Exception {
+		System.out.println(category+"$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+		
+		VideoCategoryVO videoCategoryVO = new VideoCategoryVO();
+		videoCategoryVO.setCategoryId(category);
+		
+		
+		
+		List<VideoBoardVO> list = videoBoardService.listAll(videoCategoryVO);
 
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("videoboard/videoBoardList");
