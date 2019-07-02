@@ -29,6 +29,24 @@
 		values(<!-- 뭘넣어야할까 followAccountId -->, #{followerAccountId}, now())
     </insert>
 
+	<!-- 페이징 -->
+<!-- 
+	<select id="paging" parameterType="PagingVo" resultType="FollowListVO">
+        SELECT @rownum:=@rownum+1 as no, notice.*
+		FROM noticeboard notice
+		WHERE (@rownum:=0)=0
+		ORDER BY no desc
+		LIMIT #{start}, #{last}
+	</select>
+-->
+    <!-- 카운트 -->
+<!-- 
+	<select id="getListCount" resultType="int">
+		SELECT count(*)
+		FROM followlist
+	</select>    
+ -->
+ 
 	<!-- 팔로우 리스트 출력 + 페이징 + 검색-->
 <!-- 
 	<select id="listAll" resultType="FollowListVO">
