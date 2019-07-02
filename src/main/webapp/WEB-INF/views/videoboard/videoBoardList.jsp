@@ -16,11 +16,12 @@
 	<script>
 	var result = '${result}';
 	$(function(){
-		//이건 아직 미구현
+		//수정이나 글쓰기 하면 추가할수 있음
+		/*
 		if(result === 'registerOK'){
 			$('#registerOK').removeClass('hidden');
 			$('#registerOK').fadeOut(2000);
-		}
+		}*/
 		if(result === 'deleteOK'){
 			$('#deleteOK').removeClass('hidden');
 			$('#deleteOK').removeAttr("style");
@@ -96,6 +97,14 @@
           					</div>
           					<div class="col-sm-6" align="right">
 						 		${VideoBoardList.replyCount}
+          					</div>
+          				</div>
+          				<div class="row">
+          					<div class="col-sm-6" align="left">
+          						<strong>평점</strong>
+          					</div>
+          					<div class="col-sm-6" align="right">
+						 		${VideoBoardList.starCount}
           					</div>
           				</div>
           			</div>

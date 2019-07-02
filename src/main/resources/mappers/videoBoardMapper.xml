@@ -7,7 +7,8 @@
 	<select id="listAll" resultType="VideoBoardVO">
 
        select boardId, accountId, categoryId, subject, object, youtubeLink, 
-				reg_date, mod_date, viewCount, (select count(*) from videocomment where b.boardId = boardId) as replyCount
+				reg_date, mod_date, viewCount, (select count(*) from videocomment where b.boardId = boardId) as replyCount,
+				(select star from videostar where b.boardId = boardId) as starCount
 		 from videoBoard b
 		 order by boardId desc 
 
@@ -22,11 +23,11 @@
 		insert into
       videoBoard(accountId,
                 categoryId,
-								subject,
+				subject,
                 object,
-								youtubeLink,
-								reg_date,
-								mod_date)
+				youtubeLink,
+				reg_date,
+				mod_date)
 	    values(#{accountId},
             #{categoryId},
             #{subject},

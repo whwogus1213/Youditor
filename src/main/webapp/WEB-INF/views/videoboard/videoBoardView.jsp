@@ -14,6 +14,20 @@
 <meta name="author" content="">
 
 <title>${row.subject} - YouDitor</title>
+	<style>
+		.star_rating {font-size:0; letter-spacing:-4px;}
+		.star_rating a {
+		    font-size:22px;
+		    letter-spacing:0;
+		    display:inline-block;
+		    margin-left:5px;
+		    color:#ccc;
+		    text-decoration:none;
+		}
+		.star_rating a:first-child {margin-left:0;}
+		.star_rating a.on {color:#777;}
+	</style>
+
 <jsp:include page="../module/header.jsp" flush="false"/>
 
 </head>
@@ -24,6 +38,13 @@
 
 		<div align="center" style="background-color:black; padding-top:60px">
 		<script>
+		$(function(){
+			$( ".star_rating a" ).click(function() {
+			     $(this).parent().children("a").removeClass("on");
+			     $(this).addClass("on").prevAll("a").addClass("on");
+			     return false;
+			});
+		});
 			var e = '${row.youtubeLink}';
 			var eArray  = e.split('/');
 			var youtubeID;
@@ -45,6 +66,16 @@
 					}
 				});
 			});
+			
+			$(function(){
+				$('#raiting').click(function(){
+					if(confirm("정말 삭제하시겠습니까?")){
+						self.location.href = "${path}/videoboard/deleteVideoBoardPro?boardId=${row.boardId}";
+					}
+				});
+			});
+
+
 		</script>
 	</div>
 	<!-- <h1>${row.boardId }</h1> -->
@@ -55,7 +86,20 @@
 		<h5>${row.object }</h5>
 		<br>
 		<h6 style="color:gray"> 조회수&nbsp;&nbsp; ${row.viewCount }</h6>
+		<form>
+			<p class="star_rating"> 평점
+			    <a href="#">★</a>
+			    <a href="#">★</a>
+			    <a href="#">★</a>
+			    <a href="#">★</a>
+			    <a href="#">★</a>
+			</p>
+        <input type="hidden" id="boardId" name="boardId" value="${row.boardId }" /> 
+			<button id ="raiting">평가</button>
+		</form>
+
 		<h5 align="right">등록일 &nbsp;&nbsp; <fmt:formatDate value="${row.reg_date}" pattern="yyyy년 MM월 dd일  hh:mm:ss" /></h5>
+		<div align="right">평가 점수 : ${row.starCount}</div>
 		<hr>
 		<h6>${row.accountId } 프로필이 표시되게끔....</h6>
 		<%-- 	<h1>${row.youtubeLink }</h1> --%>
