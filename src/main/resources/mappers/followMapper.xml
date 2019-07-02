@@ -20,7 +20,7 @@
 
 	<!-- 팔로워 수 -->
 	<select id="getFollowListCnt" resultType="int">
-		select count(followId)
+		select count(*)
 		from followlist
 		<!-- 검색 -->
 		<trim prefix="WHERE" prefixOverrides="AND|OR">

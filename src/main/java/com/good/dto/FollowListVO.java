@@ -3,18 +3,9 @@ package com.good.dto;
 import java.util.Date;
 
 public class FollowListVO {
-	private int followId;
 	private int followAccountId;
 	private int followerAccountId;
 	private Date reg_date;
-
-	public int getFollowId() {
-		return followId;
-	}
-
-	public void setFollowId(int followId) {
-		this.followId = followId;
-	}
 
 	public int getFollowAccountId() {
 		return followAccountId;
