@@ -26,8 +26,19 @@ public class ReplyServiceImpl implements ReplyService {
 	@Override
 	public void insert(ReplyVO vo) throws Exception {
 		dao.insert(vo);
+
+	}
+
+	@Override
+	public void delete(ReplyVO vo) throws Exception {
+		dao.delete(vo);
 		
 	}
-	
+
+	@Override
+	public void update(ReplyVO vo) throws Exception {
+		dao.update(vo);
+		
+	}
 
 }

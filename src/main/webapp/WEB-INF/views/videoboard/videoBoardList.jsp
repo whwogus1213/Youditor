@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@ page session="false"%>
+<%@ page session="true"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,6 +13,21 @@
 <link href="/resources/css/modern-business.css" rel="stylesheet">
 </head>
 <body>
+	<script>
+	var result = '${result}';
+	$(function(){
+		//이건 아직 미구현
+		if(result === 'registerOK'){
+			$('#registerOK').removeClass('hidden');
+			$('#registerOK').fadeOut(2000);
+		}
+		if(result === 'deleteOK'){
+			$('#deleteOK').removeClass('hidden');
+			$('#deleteOK').removeAttr("style");
+			$('#deleteOK').fadeOut(2000);
+		}
+	})
+	</script>
 	<jsp:include page="../module/top.jsp" flush="false" />
 	<div class="form-group">
 		<div class="col-sm-12">
@@ -22,6 +37,7 @@
 		</div>
 		<h5 align="center">ㅇㅇ유투버의 편집영상을 감상할 수 있습니다</h5>
 		<h2 align="center">&nbsp;</h2>
+		<div id="deleteOK" class="alert alert-danger hidden" role="alert" style="visibility:hidden">글이 삭제되었습니다.</div>
 	</div>
 		
 	<div class="container">
@@ -38,7 +54,6 @@
 							var e = '${VideoBoardList.youtubeLink}';
 							var eArray  = e.split('/');
 							var youtubeID;
-							//document.write('<p>' + e + '</p>');
 							youtubeID = eArray[3];
 							//document.write('<p>' + youtubeID + '</p>');
 							if(youtubeID.length >11){
@@ -50,25 +65,39 @@
 							document.write('<img width="300" height="200" src="https://img.youtube.com/vi/' + youtubeID + '/mqdefault.jpg"></img>');
 						</script>
           			</div>
-          			<div class="card-footer" align="center">
-						<table class="table nanum table-hover">
-							<thead>
-								<tr>
-									<th><div align="center">작성자</div></th>
-									<th><div align="center">작성일</div></th>
-									<th>조회수</th>
-								</tr>
-							</thead>
-								<tr>
-									<td><div align="center">${VideoBoardList.accountId}</div></td>
-									<td><div align="center"><fmt:formatDate value="${VideoBoardList.reg_date}"
-											pattern="yyyy-MM-dd" /></div></td>
-									<td><div align="right">${VideoBoardList.viewCount }</div></td>
-								</tr>
-							<tbody>
-							
-							</tbody>
-						</table>
+          			<div class="card-footer" align="left">
+          				<div class="row">
+          					<div class="col-sm-6" align="left">
+          						<strong>Made by.</strong>
+          					</div>
+          					<div class="col-sm-6" align="right">
+								${VideoBoardList.nickname}<br>
+          					</div>
+          				</div>
+          				<div class="row">
+          					<div class="col-sm-6" align="left">
+          						<strong>Date</strong> 
+          					</div>
+          					<div class="col-sm-6" align="right">
+								<fmt:formatDate value="${VideoBoardList.reg_date}" pattern="yyyy-MM-dd" /><br>
+          					</div>
+          				</div>
+          				<div class="row">
+          					<div class="col-sm-6" align="left">
+          						<strong>Views</strong>
+          					</div>
+          					<div class="col-sm-6" align="right">
+								${VideoBoardList.viewCount }<br>
+          					</div>
+          				</div>
+          				<div class="row">
+          					<div class="col-sm-6" align="left">
+          						<strong>Comments</strong>
+          					</div>
+          					<div class="col-sm-6" align="right">
+						 		${VideoBoardList.replyCount}
+          					</div>
+          				</div>
           			</div>
         		</div>
       		</div>
@@ -77,7 +106,9 @@
       </div>
 	<h2 align="center">&nbsp;</h2>
 	<div class="col-sm-9" align="right">
-		<button type="button" class="btn btn-primary" onclick="location.href='/videoboard/write.do' ">유투브 올리기</button>
+		<c:if test="${login.email != null }">  
+			<button type="button" class="btn btn-primary" onclick="location.href='/videoboard/write.do' ">유투브 올리기</button>
+		</c:if>
 	</div>
 	<h2 align="center">&nbsp;</h2>
 	<jsp:include page="../module/bottom.jsp" flush="false" />

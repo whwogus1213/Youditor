@@ -18,9 +18,9 @@ public class AccountsServiceImpl implements AccountsService {
 
 	@Override
 	public List<AccountsVO> selectAccounts() throws Exception {
-		// TODO Auto-generated method stub
 		return dao.selectAccounts();
 	}
+
 	@Override
 	public void insertAccounts(AccountsVO accountsVO) throws Exception {
 		dao.insertAccounts(accountsVO);

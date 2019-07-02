@@ -20,12 +20,6 @@ import com.good.service.RecruitBoardService;
 @RequestMapping("/recruitboard")
 public class RecruitBoardController {
 
-//	@RequestMapping(value = "/RecruitboardList", method = RequestMethod.GET)
-//	public void boardlist(Model model) throws Exception {
-//
-//		System.out.println("dd");
-//	}
-
 	@Inject
 	RecruitBoardService recruitBoardService;
 
@@ -66,15 +60,15 @@ public class RecruitBoardController {
 	}
 
 	// 글작성
-	@RequestMapping(value="/insertRecruitBoardForm")
-	public String insertRecruitBoardForm() throws Exception{
+	@RequestMapping(value = "/insertRecruitBoardForm")
+	public String insertRecruitBoardForm() throws Exception {
 		return "recruitboard/insertRecruitBoard";
 	}
 
 	// 글작성 완료
 	// insertRecruitBoardForm-> insertRecruitBoardPro
-	@RequestMapping(value="/insertRecruitBoardPro" , method=RequestMethod.POST)
-	public String insertRecruitBoardPro(RecruitBoardVO vo) throws Exception{
+	@RequestMapping(value = "/insertRecruitBoardPro", method = RequestMethod.POST)
+	public String insertRecruitBoardPro(RecruitBoardVO vo) throws Exception {
 		System.out.println("============insertRecruitBoardPro 성공==============");
 		System.out.println(vo);
 		recruitBoardService.insertRecruitBoard(vo);
@@ -83,10 +77,10 @@ public class RecruitBoardController {
 
 	}
 
-	//파일 이동
-	//게시글 수정
-	//'recruitBoardUpdate.jsp' 로 이동 <-- 이동하고자 하는 파일로 명 바꾸면됨
-	@RequestMapping(value = "/recruitBoardUpdate", method=RequestMethod.GET)
+	// 파일 이동
+	// 게시글 수정
+	// 'recruitBoardUpdate.jsp' 로 이동 <-- 이동하고자 하는 파일로 명 바꾸면됨
+	@RequestMapping(value = "/recruitBoardUpdate", method = RequestMethod.GET)
 	public ModelAndView join(Locale locale, Model model) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("recruitboard/recruitBoardUpdate");
@@ -99,15 +93,15 @@ public class RecruitBoardController {
 	public void getUpdatey(@RequestParam("boardId") int boardId, Model model) throws Exception {
 		RecruitBoardVO vo = recruitBoardService.view(boardId);
 
-	  model.addAttribute("updateRecruitBoard", vo);
+		model.addAttribute("updateRecruitBoard", vo);
 
 	}
 
 	// 글 삭제
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
-		public void getDelete(@RequestParam("boardId") int boardId, Model model) throws Exception {
+	public void getDelete(@RequestParam("boardId") int boardId, Model model) throws Exception {
 
-	  model.addAttribute("deleteRecruitBoard", boardId);
+		model.addAttribute("deleteRecruitBoard", boardId);
 	}
 
 	// 글 수정  POST
@@ -115,7 +109,7 @@ public class RecruitBoardController {
 	public String postUpdate(RecruitBoardVO vo) throws Exception {
 		recruitBoardService.updateRecruitBoard(vo);
 
-	  return "redirect:/recruitboard/recruitBoardList";
+		return "redirect:/recruitboard/recruitBoardList";
 
 	}
 
@@ -124,6 +118,6 @@ public class RecruitBoardController {
 	public String postDelete(@RequestParam("boardId") int boardId) throws Exception {
 		recruitBoardService.deleteRecruitBoard(boardId);
 
-	  return "redirect:/recruitboard/recruitBoardList";
+		return "redirect:/recruitboard/recruitBoardList";
 	}
 }

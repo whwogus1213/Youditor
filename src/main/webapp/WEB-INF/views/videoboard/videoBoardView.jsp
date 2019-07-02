@@ -1,5 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page session="true" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -12,72 +13,16 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>YouDitor</title>
+<title>${row.subject} - YouDitor</title>
 <jsp:include page="../module/header.jsp" flush="false"/>
-
-
-<!-- 댓글기능 시작 -->
-<script type="text/javascript">
-replyList();
-$(function(){
-
-	/* 댓글 리스트 출력 */
-	
-	
-	$("#replyAdd").click(function(){
-		console.log("댓글 추가 시작");
-		var object = $('#reply_input').val();
-		var boardId = ${row.boardId};
-				
-		console.log(boardId);
-		
-		var reply = {
-				"boardId" : boardId,
-				"object" : object
-				};
-
-		console.log(reply);
-
-		$.ajax({
-			type : "POST",
-			url : "/reply/insert",
-			data : reply,
-			success : function(){
-				$("#reply_input").val("");
-				/* 리스트 다시 불러온다. */
-									
-				}
-			});
-		
-		});/* 댓글 추가 버튼 끝 */
-	
-});
-
-
-
-function replyList(){
-	/* 댓글 리스트 출력 */
-	$.ajax({
-		type : "POST",
-		url : "/reply/listAll?boardId=${row.boardId}",
-		success : function(result){
-			console.log(result);
-			$("#listReply").html(result);
-			}
-		
-		});
-}
-
-
-
-</script>
 
 </head>
 <body>
 	<jsp:include page="../module/top.jsp" flush="false"/>
 	
 	<!-- 게시글 상세정보 -->
-	<div align="center" style="background-color:black; padding-top:60px">
+
+		<div align="center" style="background-color:black; padding-top:60px">
 		<script>
 			var e = '${row.youtubeLink}';
 			var eArray  = e.split('/');
@@ -91,53 +36,42 @@ function replyList(){
 				youtubeID = youtubeID.substr(0,11);
 			}
 			document.write('<iframe width="667" height="375" src="https://www.youtube.com/embed/' + youtubeID + '" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
+		
+			//삭제 버튼 누르면 삭제할 것이냐고 묻고 삭제한다고 하면 videoboardcontroller 의 deleteVideoBoardPro 메서드 호출
+			$(function(){
+				$('#deletebtn').click(function(){
+					if(confirm("정말 삭제하시겠습니까?")){
+						self.location.href = "${path}/videoboard/deleteVideoBoardPro?boardId=${row.boardId}";
+					}
+				});
+			});
 		</script>
 	</div>
 	<!-- <h1>${row.boardId }</h1> -->
 	<div class="container">
 		<br>
 		<h2> ${row.subject }</h2>
-		<br>
+		<span style="line-height:30%"><br></span>
 		<h5>${row.object }</h5>
 		<br>
-		<h5 align="right"> 조회수 ${row.viewCount }</h5>
+		<h6 style="color:gray"> 조회수&nbsp;&nbsp; ${row.viewCount }</h6>
+		<h5 align="right">등록일 &nbsp;&nbsp; <fmt:formatDate value="${row.reg_date}" pattern="yyyy년 MM월 dd일  hh:mm:ss" /></h5>
+		<hr>
+		<h6><strong>${row.nickname }</strong><br><br>${row.footer }</h6>
+		<%-- 	<h1>${row.youtubeLink }</h1> --%>
+		<!-- 디자인 필요 -->
+		<div align="right">
+			<c:if test="${login.accountId eq row.accountId}">
+				<button class="btn btn-warning btn-sm" onclick="location.href='/videoboard/updateVideoBoard.do?boardId=${row.boardId}'">수정</button>
+				<button class="btn btn-danger btn-sm" id="deletebtn">삭제</button>
+			</c:if>
+		</div>
 		<hr>
 	</div>
-<%-- 	<h1>${row.youtubeLink }</h1> --%>
-<div class="container">
-	<div class="input-group" align="center">
-		<input class="form-control" type="text" id="reply_input" placeholder="댓글 추가..." maxlength="200">
-		<span class="input-group-btn">
-			<button id="replyAdd" class='btn btn-dark'>등록</button>
-		</span>
-	</div>
-	
-
 	<div id="listReply">
+		<jsp:include page="../videoboard/videoBoardReply.jsp" flush="false"/>
 	</div>
-	<c:forEach var="rlist" items="${list}">
-		======================================================
-		${rList.nickname }
-		${rList.object }
-	
-	
-	
-	</c:forEach>
-	
-	
-	
-	
-</div>
-	
-	
 
-	
-	
-	
-	
-	
-	
-	
 	<jsp:include page="../module/bottom.jsp" flush="false"/>
  
 </body>

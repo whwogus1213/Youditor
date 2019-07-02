@@ -1,12 +1,21 @@
 package com.good.youditor;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,26 +34,50 @@ public class ReplyController {
 
 	@Inject
 	ReplyService service;
-	
-	// 게시물 목록
+
 	@RequestMapping(value = "/insert", method=RequestMethod.POST)
-	public void insert(HttpSession session, ReplyVO vo) throws Exception{
-		AccountsVO av = (AccountsVO)session.getAttribute("login");
-		int accountId = av.getAccountId();
-		System.out.println("댓글 작성자 계정번호 : "+accountId);
-		vo.setAccountId(accountId);
-		service.insert(vo);
+	public String insertComment(ReplyVO vo, HttpServletRequest request) throws Exception{
+        
+        HttpSession session = request.getSession();
+        AccountsVO loginVO = (AccountsVO)session.getAttribute("login");
+        vo.setAccountId(loginVO.getAccountId());
+		
+        try{
+            service.insert(vo);
+            
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        
+        return "success";
+    }
+	
+	@RequestMapping(value="/listAll", method = {RequestMethod.GET,RequestMethod.POST})
+	public List<ReplyVO> listComment(ReplyVO vo) throws Exception{
+        
+		System.out.println("-----listComment : "+vo);
+
+        // 해당 게시물 댓글
+        List<ReplyVO> replyList = service.listAll(vo.getBoardId());
+        
+        System.out.println(replyList);
+        return replyList;
+        
+    }
+	
+	
+	@RequestMapping(value = "/delete", method=RequestMethod.POST)
+	public void deleteComment(ReplyVO vo) throws Exception{
+		service.delete(vo);
+        
+    }
+
+	
+	@RequestMapping(value = "/update", method=RequestMethod.POST)
+	public void updateComment(ReplyVO vo) throws Exception{
+		service.update(vo);
+		
 	}
 	
-	@RequestMapping(value="/listAll")
-	public void listAll(HttpSession session, int boardId, Model model) throws Exception {
-		AccountsVO av = (AccountsVO)session.getAttribute("login");
-		
-		
-		List<ReplyVO> list = service.listAll(boardId);
-		System.out.println(list);
-		
-		
-		model.addAttribute("list",list);
-	}
+
 }

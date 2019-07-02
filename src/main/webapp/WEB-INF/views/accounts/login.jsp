@@ -31,7 +31,7 @@
 	<h2 align="center">&nbsp;</h2>
 <<<<<<< Updated upstream
 	<h2 align="center">&nbsp;</h2>
-	
+
 =======
 
 >>>>>>> Stashed changes
@@ -67,9 +67,6 @@
 		</div>
 	</form>
 	</div>
-<<<<<<< Updated upstream
-=======
-
 	<c:if test="${msg == false }">
 		 <script>
 	      alert( '로그인에 실패했습니다. 아이디 또는 패스워드를 다시 입력해주십시오.' );

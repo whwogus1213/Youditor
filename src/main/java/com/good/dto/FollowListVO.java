@@ -11,26 +11,33 @@ public class FollowListVO {
 	public int getFollowId() {
 		return followId;
 	}
+
 	public void setFollowId(int followId) {
 		this.followId = followId;
 	}
+
 	public int getFollowAccountId() {
 		return followAccountId;
 	}
+
 	public void setFollowAccountId(int followAccountId) {
 		this.followAccountId = followAccountId;
 	}
+
 	public int getFollowerAccountId() {
 		return followerAccountId;
 	}
+
 	public void setFollowerAccountId(int followerAccountId) {
 		this.followerAccountId = followerAccountId;
 	}
+
 	public Date getReg_date() {
 		return reg_date;
 	}
+
 	public void setReg_date(Date reg_date) {
 		this.reg_date = reg_date;
 	}
 
-}	// End - FollowListVO
+} // End - FollowListVO

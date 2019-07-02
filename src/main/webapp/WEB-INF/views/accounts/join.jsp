@@ -9,8 +9,15 @@
 	<meta name="description" content="">
 	<meta name="author" content="">
 	
+	<style type="text/css">
+		.container.imgs_wrap img{
+			resize:	both;
+			width:			100px;
+			height:			100px;
+			max-width:	100px;
+		}
+	</style>
 	<jsp:include page="../module/header.jsp" flush="false"/>
-		
 	<script type="text/javascript">
 		var sel_file;
 	
@@ -103,17 +110,17 @@
 				<label class="col-sm-2">미리보기</label>
 				<div class="img_wrap">
 					<c:choose>
-			 		<c:when test="${empty picture }">
-						<div>
-							<img id ="profileImg" src = "/resources/images/profile/default_img.jpg" style = "border-radius:0%; padding-top : 10px; height:100px; width:100px;">
-						</div>
-					</c:when>
-					<c:otherwise>
-						<div>
-							<img id="profileImg" style="height:100px; width:100px" />
-						</div>
-					</c:otherwise>
-				</c:choose>
+				 		<c:when test="${empty picture }">
+							<div>
+								<img id ="profileImg" src = "/resources/images/profile/default_img.jpg" style = "border-radius:0%; padding-top : 10px; height:100px; width:100px;">
+							</div>
+						</c:when>
+						<c:otherwise>
+							<div>
+								<img id="profileImg" style="height:100px; width:100px" />
+							</div>
+						</c:otherwise>
+					</c:choose>
 				</div>
 			</div>
 			<div class="form-inline">

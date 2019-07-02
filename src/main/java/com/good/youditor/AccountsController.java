@@ -20,7 +20,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.good.dto.AccountsVO;
 import com.good.service.AccountsService;
 
-
 /**
  * Handles requests for the application home page.
  */

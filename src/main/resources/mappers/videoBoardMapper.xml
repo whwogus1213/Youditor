@@ -4,14 +4,28 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.good.mapper.videoBoardMapper">
-	<select id="listAll" resultType="VideoBoardVO">
-        SELECT * FROM videoBoard
+	<select id="listAll" resultType="VideoBoardVO" parameterType="VideoCategoryVO">
+
+       select boardId, b.accountId, categoryId, subject, object, youtubeLink, 
+				b.reg_date, b.mod_date, viewCount, (select count(*) from videocomment where b.boardId = boardId) as replyCount
+				, ac.nickname
+		 from videoBoard b, accounts ac where b.accountId = ac.accountId 
+		 <trim prefix="WHERE" prefixOverrides="AND|OR">
+			<if test='categoryId!=0'>
+				AND categoryId = #{categoryId}
+			</if>
+		</trim>
+		 order by boardId desc 
+
     </select>
 
     <!-- 게시물 조회 -->
-	<select id="view" parameterType="int" resultType="VideoBoardVO">
-		select * from videoBoard where boardId = #{boardId}
+	<select id="view" parameterType="int" resultType="VideoBoardVO">select boardId, b.accountId, categoryId, subject, object, youtubeLink, 
+				b.reg_date, b.mod_date, viewCount, (select count(*) from videocomment where b.boardId = boardId) as replyCount
+				, ac.nickname, ac.footer
+		 from videoBoard b, accounts ac where boardId = #{boardId} and b.accountId = ac.accountId
 	</select>
+	
     <!-- 글 쓰기 -->
     <insert id="insertVideoBoard" parameterType="VideoBoardVO">
 		insert into
@@ -31,7 +45,7 @@
             now())
     </insert>
 
-    <!-- 글 수정 -->
+    	<!-- 글 수정 -->
 		 <update id="updateVideoBoard">
 		  update
         videoBoard
@@ -43,16 +57,18 @@
         boardId = #{boardId}
 		 </update>
 
- 	<!-- 글 삭제 -->
+ 		<!-- 글 삭제 -->
 		 <delete id="deleteVideoBoard">
 		  delete from
 		    videoBoard
 		  where
-        boardId = #{boardId}
+        	boardId = #{boardId}
 		 </delete>
-
-
-
+		
+		<!-- 조회수 증가 -->
+		<update id="viewCount">
+		UPDATE videoBoard SET viewCount = viewCount+1 WHERE boardId=#{boardId}
+		</update>
 
 
 

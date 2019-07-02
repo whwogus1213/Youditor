@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.good.dao.NoticeBoardDAO;
 import com.good.dto.NoticeBoardVO;
+import com.good.dto.Pagination;
+import com.good.dto.Search;
 
 @Service
 public class NoticeBoardServiceImpl implements NoticeBoardService {
@@ -16,34 +18,46 @@ public class NoticeBoardServiceImpl implements NoticeBoardService {
 	@Inject
 	NoticeBoardDAO noticeBoardDAO;
 
-	// 게시물 목록
+	// 게시물 목록 + 페이징 + 검색
 	@Override
-	public List<NoticeBoardVO> listAll() throws Exception {
-		return noticeBoardDAO.listAll();
+	public List<NoticeBoardVO> listAll(Search search) throws Exception {
+		return noticeBoardDAO.listAll(search);
 	}
 
-	// 게시물 읽기
+	// 게시물 상세보기
 	@Override
 	public NoticeBoardVO view(int boardId) throws Exception {
+		noticeBoardDAO.viewCount(boardId);
 		return noticeBoardDAO.view(boardId);
 	}
 
-	//글쓰기
+	// 게시물 총 개수
+	@Override
+	public int getBoardListCnt(Search search) throws Exception {
+		return noticeBoardDAO.getBoardListCnt(search);
+	}
+
+	// 글쓰기
 	@Override
 	public void insertNoticeBoard(NoticeBoardVO vo) throws Exception {
 		noticeBoardDAO.insertNoticeBoard(vo);
 	}
 
-	 // 수정
-	 @Override
-	 public void updateNoticeBoard(NoticeBoardVO vo) throws Exception {
-		 noticeBoardDAO.updateNoticeBoard(vo);
-	 }
+	// 수정
+	@Override
+	public void updateNoticeBoard(NoticeBoardVO vo) throws Exception {
+		noticeBoardDAO.updateNoticeBoard(vo);
+	}
 
-	 // 삭제
-	 @Override
-	 public void deleteNoticeBoard(int boardId) throws Exception {
-		 noticeBoardDAO.deleteNoticeBoard(boardId);
-	 }
+	// 삭제
+	@Override
+	public void deleteNoticeBoard(NoticeBoardVO vo) throws Exception {
+		noticeBoardDAO.deleteNoticeBoard(vo);
+	}
 
+	// 조회수
+	@Override
+	public void viewCount(int boardId) throws Exception {
+		noticeBoardDAO.viewCount(boardId);
+	}
 }
