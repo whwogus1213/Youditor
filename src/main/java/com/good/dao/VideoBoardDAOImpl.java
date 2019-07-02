@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.good.dto.VideoBoardVO;
+import com.good.dto.VideoCategoryVO;
 
 @Repository
 public class VideoBoardDAOImpl implements VideoBoardDAO {
@@ -21,8 +22,8 @@ public class VideoBoardDAOImpl implements VideoBoardDAO {
 
 	// 게시물 목록
 	@Override
-	public List<VideoBoardVO> listAll() throws Exception {
-		return sqlSession.selectList(NAMESPACE + ".listAll");
+	public List<VideoBoardVO> listAll(VideoCategoryVO videoCategory) throws Exception {
+		return sqlSession.selectList(NAMESPACE + ".listAll", videoCategory);
 	}
 
 	// 게시물 보기

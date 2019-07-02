@@ -4,11 +4,16 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.good.mapper.videoBoardMapper">
-	<select id="listAll" resultType="VideoBoardVO">
+	<select id="listAll" resultType="VideoBoardVO" parameterType="VideoCategoryVO">
 
        select boardId, accountId, categoryId, subject, object, youtubeLink, 
 				reg_date, mod_date, viewCount, (select count(*) from videocomment where b.boardId = boardId) as replyCount
 		 from videoBoard b
+		 <trim prefix="WHERE" prefixOverrides="AND|OR">
+			<if test='categoryId!=0'>
+				AND categoryId = #{categoryId}
+			</if>
+		</trim>
 		 order by boardId desc 
 
     </select>

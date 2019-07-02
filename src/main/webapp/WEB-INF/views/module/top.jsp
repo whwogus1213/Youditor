@@ -20,12 +20,13 @@
              	 카테고리
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
-              <a class="dropdown-item" href="/videoboard/videoBoardList">게임</a>
-              <a class="dropdown-item" href="#">먹방</a>
-              <a class="dropdown-item" href="#">일상</a>
-              <a class="dropdown-item" href="#">모터</a>
-              <a class="dropdown-item" href="#">스포츠</a>
-              <a class="dropdown-item" href="#">예능</a>
+              <a class="dropdown-item" href="/videoboard/videoBoardList?category=0">전체</a>
+              <a class="dropdown-item" href="/videoboard/videoBoardList?category=1">게임</a>
+              <a class="dropdown-item" href="/videoboard/videoBoardList?category=2">먹방</a>
+              <a class="dropdown-item" href="/videoboard/videoBoardList?category=3">일상</a>
+              <a class="dropdown-item" href="/videoboard/videoBoardList?category=4">모터</a>
+              <a class="dropdown-item" href="/videoboard/videoBoardList?category=5">스포츠</a>
+              <a class="dropdown-item" href="/videoboard/videoBoardList?category=6">예능</a>
             </div>
           </li>
           <li class="nav-item">

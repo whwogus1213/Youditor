@@ -4,11 +4,12 @@ import java.util.List;
 import java.util.Map;
 
 import com.good.dto.VideoBoardVO;
+import com.good.dto.VideoCategoryVO;
 
 public interface VideoBoardService {
 
 	// 게시물 목록
-	public List<VideoBoardVO> listAll() throws Exception;
+	public List<VideoBoardVO> listAll(VideoCategoryVO videoCategory) throws Exception;
 
 	// 게시물 보기
 	public VideoBoardVO view(int boardId) throws Exception;
