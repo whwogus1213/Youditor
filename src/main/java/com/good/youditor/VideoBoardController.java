@@ -95,18 +95,6 @@ public class VideoBoardController {
 		System.out.println("String videoBoardUpdate open");
 		return mav;
 	}
-	// 파일 이동
-	// 게시글 삭제
-	// 'videoBoardDelete.jsp' 로 이동 <-- 이동하고자 하는 파일로 명 바꾸면됨
-	@RequestMapping(value = "/deleteVideoBoard.do", method = RequestMethod.GET)
-	public ModelAndView joinDelete(Locale locale, Model model,@RequestParam("boardId") int boardId) throws Exception {
-		VideoBoardVO delete = videoBoardService.view(boardId);
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("videoboard/videoBoardDelete");
-		mav.addObject("videoBoardDelete", delete);
-		System.out.println("String videoBoardDelete open");
-		return mav;
-	}
 
 	// 글 수정
 	@RequestMapping(value = "/updateVideoBoardPro")
