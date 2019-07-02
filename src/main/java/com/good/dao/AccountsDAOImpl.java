@@ -14,26 +14,11 @@ public class AccountsDAOImpl implements AccountsDAO {
 
 	@Inject
 	private SqlSession sqlSession;
-	
+
 	private static final String NAMESPACE = "com.good.mapper.accountsMapper";
-	
+
 	@Override
 	public List<AccountsVO> selectAccounts() throws Exception {
-<<<<<<< Updated upstream
-		// TODO Auto-generated method stub
-		return sqlSession.selectList(NAMESPACE+".selectAccounts");
-//		return null;
-	}
-
-	@Override 
-	public void insertAccounts(AccountsVO vo) throws Exception{
-		sqlSession.insert(NAMESPACE + ".insertAccounts", vo);
-	}
-
-	@Override
-	public AccountsVO login(AccountsVO vo) throws Exception {
-		return sqlSession.selectOne(NAMESPACE+".login",vo);
-=======
 		return sqlSession.selectList(NAMESPACE + ".selectAccounts");
 	}
 
@@ -55,8 +40,7 @@ public class AccountsDAOImpl implements AccountsDAO {
 	@Override
 	public AccountsVO login(AccountsVO accountsVO) throws Exception {
 		return sqlSession.selectOne(NAMESPACE + ".login", accountsVO);
->>>>>>> Stashed changes
 	}
-	
-	
+
+
 }
