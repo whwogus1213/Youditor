@@ -10,7 +10,9 @@ import com.good.dao.AccountsDAO;
 import com.good.dto.AccountsVO;
 
 @Service
-public class AccountsServiceImpl implements AccountsService {	
+public class AccountsServiceImpl implements AccountsService {
+
+	// 주입
 	@Inject
 	private AccountsDAO dao;
 
@@ -20,14 +22,23 @@ public class AccountsServiceImpl implements AccountsService {
 		return dao.selectAccounts();
 	}
 	@Override
-	public void insertAccounts(AccountsVO vo) throws Exception {
-		dao.insertAccounts(vo);
-		
+	public void insertAccounts(AccountsVO accountsVO) throws Exception {
+		dao.insertAccounts(accountsVO);
+	}
+
+	@Override
+	public int checkEmail(String email) throws Exception {
+		return dao.checkEmail(email);
+	}
+
+	@Override
+	public int checkNickname(String nickname) throws Exception {
+		return dao.checkNickname(nickname);
 	}
 	@Override
-	public AccountsVO login(AccountsVO vo) throws Exception {
-		return dao.login(vo);
-		
+	public AccountsVO login(AccountsVO accountsVO) throws Exception {
+		return dao.login(accountsVO);
+
 	}
-	
+
 }

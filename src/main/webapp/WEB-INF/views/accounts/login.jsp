@@ -29,8 +29,12 @@
 	<h1 align="center">YouditoR 로그인</h1>
 	<h2 align="center">&nbsp;</h2>
 	<h2 align="center">&nbsp;</h2>
+<<<<<<< Updated upstream
 	<h2 align="center">&nbsp;</h2>
 	
+=======
+
+>>>>>>> Stashed changes
 
 	<div class="container" align ="center">
 	<form class="form-horizontal" method="post">
@@ -38,7 +42,7 @@
 			<h2 align="center">&nbsp;</h2>
 			<label class="control-label col-sm-3">아이디</label>
 			<div class="col-sm-3">
-				<input type="text" class="form-control" id="email" 
+				<input type="text" class="form-control" id="email"
 					name="email" maxlength="16" placeholder="Enter ID">
 			</div>
 		</div>
@@ -46,9 +50,9 @@
 			<h2 align="center">&nbsp;</h2>
 			<label class="control-label col-sm-3">비밀번호</label>
 			<div class="col-sm-3">
-				<input type="password" class="form-control" id="pwd" 
+				<input type="password" class="form-control" id="pwd"
 					name="pwd" maxlength="16" placeholder="Enter Password">
-			</div>		
+			</div>
 		</div>
 		<h2 align="center">&nbsp;</h2>
 		<div class="form-group">
@@ -63,10 +67,19 @@
 		</div>
 	</form>
 	</div>
+<<<<<<< Updated upstream
+=======
+
+	<c:if test="${msg == false }">
+		 <script>
+	      alert( '로그인에 실패했습니다. 아이디 또는 패스워드를 다시 입력해주십시오.' );
+	    </script>
+	</c:if>
+>>>>>>> Stashed changes
 	<h2 align="center">&nbsp;</h2>
 	<h2 align="center">&nbsp;</h2>
-	
+
 	<jsp:include page="../module/bottom.jsp" flush="false"/>
- 
+
 </body>
 </html>

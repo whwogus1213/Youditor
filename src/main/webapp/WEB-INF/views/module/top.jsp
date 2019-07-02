@@ -37,8 +37,15 @@
 					<li class="nav-item"><a class="nav-link" href="/accounts/logout">로그아웃</a></li>
 				</c:if>
 				<c:if test="${login.email eq null }">
+<<<<<<< Updated upstream
 					<li class="nav-item"><a class="nav-link" href="/accounts/login.do">로그인</a></li>
 					<li class="nav-item"><a class="nav-link" href="/accounts/join.do">회원가입</a></li>
+=======
+					<li class="nav-item"><a class="nav-link"
+						href="/accounts/login.do">로그인</a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="/accounts/signUp.do">회원가입</a></li>
+>>>>>>> Stashed changes
 				</c:if>
 
 				

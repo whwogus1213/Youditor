@@ -19,6 +19,7 @@ public class AccountsDAOImpl implements AccountsDAO {
 	
 	@Override
 	public List<AccountsVO> selectAccounts() throws Exception {
+<<<<<<< Updated upstream
 		// TODO Auto-generated method stub
 		return sqlSession.selectList(NAMESPACE+".selectAccounts");
 //		return null;
@@ -32,6 +33,29 @@ public class AccountsDAOImpl implements AccountsDAO {
 	@Override
 	public AccountsVO login(AccountsVO vo) throws Exception {
 		return sqlSession.selectOne(NAMESPACE+".login",vo);
+=======
+		return sqlSession.selectList(NAMESPACE + ".selectAccounts");
+	}
+
+	@Override
+	public void insertAccounts(AccountsVO accountsVO) throws Exception {
+		sqlSession.insert(NAMESPACE + ".insertAccounts", accountsVO);
+	}
+
+	@Override
+	public int checkEmail(String email) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + ".checkEmail", email);
+	}
+
+	@Override
+	public int checkNickname(String nickname) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + ".checkNickname", nickname);
+	}
+
+	@Override
+	public AccountsVO login(AccountsVO accountsVO) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + ".login", accountsVO);
+>>>>>>> Stashed changes
 	}
 	
 	
