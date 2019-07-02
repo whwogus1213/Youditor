@@ -19,6 +19,13 @@ public class FollowDAOImpl implements FollowDAO {
 	
 	private static final String NAMESPACE = "com.good.mapper.followMapper";
 
+	// 팔로잉
+	@Override
+	public List<FollowListVO> followingList(int followAccountId) throws Exception {
+		return sqlSession.selectList(NAMESPACE + ".followingList", followAccountId);
+	}
+
+
 //	@Override
 //	public List<FollowListVO> listAll(Search search) throws Exception {
 //		return sqlSession.selectList(NAMESPACE + ".listAll", search);

@@ -75,14 +75,12 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach items="${FollowList}" var="FollowList">
-					<c:if test="${login.accountId eq FollowList.followerAccountId }">
-						<tr>
-							<td>${FollowList.followAccountId}</td>
-							<td>${FollowList.followerAccountId}</td>
-							<td><fmt:formatDate value="${FollowList.reg_date}" pattern="yyyy-MM-dd" /></td>
-						</tr>
-					</c:if>
+				<c:forEach items="${followingList}" var="followingList">
+					<tr>
+						<td>${followingList.followAccountId}</td>
+						<td>${followingList.followerAccountId}</td>
+						<td><fmt:formatDate value="${followingList.reg_date}" pattern="yyyy-MM-dd" /></td>
+					</tr>
 				</c:forEach>
 			</tbody>
 		</table>

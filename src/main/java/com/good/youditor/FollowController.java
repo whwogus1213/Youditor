@@ -1,14 +1,14 @@
 package com.good.youditor;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import com.good.dto.Search;
+import com.good.dto.FollowListVO;
 import com.good.service.FollowService;
 
 @Controller
@@ -17,6 +17,19 @@ public class FollowController {
 
 	@Inject
 	FollowService followService;
+	
+	// 팔로잉
+	@RequestMapping(value = "/followingList")
+	public String follwingList(Model model, FollowListVO vo) throws Exception {
+		System.out.println("Start following List : " + vo);
+		
+		List<FollowListVO> followingList = followService.followingList(vo.getFollowAccountId());
+		System.out.println(vo.getFollowAccountId());
+		model.addAttribute("followingList", followingList);
+		
+		System.out.println(followingList);
+		return "follow/followingList";
+	}
 	
 //	// 팔로잉 목록 + 페이징 + 검색
 //	@RequestMapping(value = "/followingList", method = RequestMethod.GET)

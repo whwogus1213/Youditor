@@ -16,6 +16,14 @@ public class FollowServicImpl implements FollowService {
 
 	@Inject
 	FollowDAO followDAO;
+
+	// 팔로잉
+	@Override
+	public List<FollowListVO> followingList(int followAccountId) throws Exception {
+		return followDAO.followingList(followAccountId);
+	}
+
+	
 	
 //	@Override
 //	public List<FollowListVO> listAll(Search search) throws Exception {

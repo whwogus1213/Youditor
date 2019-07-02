@@ -9,6 +9,8 @@ import com.good.dto.Search;
 
 public interface FollowDAO {
 
+	public List<FollowListVO> followingList(int followAccountId) throws Exception;
+
 //	public List<FollowListVO> listAll(Search search) throws Exception;
 //
 //	public int getFollowListCnt(Search search);
