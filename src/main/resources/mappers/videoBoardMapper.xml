@@ -36,7 +36,7 @@
             now())
     </insert>
 
-    <!-- 글 수정 -->
+    	<!-- 글 수정 -->
 		 <update id="updateVideoBoard">
 		  update
         videoBoard

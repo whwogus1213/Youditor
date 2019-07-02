@@ -28,14 +28,16 @@
 	<div class="container">
 			<h2 align="center">&nbsp;</h2>
 			<h2 align="center">&nbsp;</h2>
+		<label class="control-label col-sm-2">링크</label>
 		<input type="text" class="form-control" name="youtubeLink" id="youtubeLink" maxlength="50" value="${videoBoardUpdate.youtubeLink }">
 		<span style="line-height:30%"><br></span>
 		<br>
+		<label class="control-label col-sm-2">제목</label>
 		<input type="text" class="form-control" name="subject" id="subject" maxlength="50" value="${videoBoardUpdate.subject }">
 		<span style="line-height:30%"><br></span>
+		<label class="control-label col-sm-2">내용</label>
 		<input type="text" class="form-control" name="object" id="object" maxlength="50" value="${videoBoardUpdate.object}">
 		<br>
-		<h6 style="color:gray"> 조회수&nbsp;&nbsp; ${videoBoardUpdate.viewCount }</h6>
 		<h5 align="right">등록일 &nbsp;&nbsp; <fmt:formatDate value="${videoBoardUpdate.reg_date}" pattern="yyyy년 MM월 dd일  hh:mm:ss" /></h5>
 		<hr>
 		<input type="text" class="form-control" name="boardId" id="boardId" maxlength="50" value="${videoBoardUpdate.boardId}" style="visibility:hidden">
@@ -43,6 +45,7 @@
 		<h6>${videoBoardUpdate.accountId } 프로필이 표시되게끔....</h6>
 		<hr>
 		<button type="submit" id="submit">수정</button>
+		<button type="button" class="btn btn-danger" onclick="location.href='/videoboard/videoBoardView?boardId=${videoBoardUpdate.boardId}' ">취소</button>
 	</div>
 	</form>
 	<%-- 	<h1>${videoBoardUpdate.youtubeLink }</h1> --%>

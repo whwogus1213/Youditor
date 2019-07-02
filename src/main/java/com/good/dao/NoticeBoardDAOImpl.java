@@ -53,8 +53,14 @@ public class NoticeBoardDAOImpl implements NoticeBoardDAO {
 
 	// 삭제
 	@Override
-	public void deleteNoticeBoard(int boardId) throws Exception {
-		sqlSession.delete(NAMESPACE + ".deleteNoticeBoard", boardId);
+	public void deleteNoticeBoard(NoticeBoardVO vo) throws Exception {
+		sqlSession.delete(NAMESPACE + ".deleteNoticeBoard", vo);
+	}
+	
+	//조회수
+	@Override
+	public void viewCount(int boardId) throws Exception {
+		sqlSession.update(NAMESPACE + ".viewCount", boardId);
 	}
 
 }

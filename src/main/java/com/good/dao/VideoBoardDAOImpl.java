@@ -50,6 +50,7 @@ public class VideoBoardDAOImpl implements VideoBoardDAO {
 	}
 
 	//조회수
+	@Override
 	public void viewCount(int boardId) throws Exception {
 		sqlSession.update(NAMESPACE + ".viewCount", boardId);
 	}
