@@ -55,6 +55,20 @@ public class FollowController {
 		return "follow/followerList";
 	}
 	
+	// 팔로잉 추가
+	@RequestMapping(value = "/insert")
+	public String insert(FollowListVO vo, HttpServletRequest request) throws Exception {
+		HttpSession session = request.getSession();
+		AccountsVO loginVO = (AccountsVO)session.getAttribute("login");
+		vo.setFollowerAccountId(loginVO.getAccountId());
+		
+		System.out.println("Start follow insert : " + vo);
+		
+		followService.insert(vo);
+		
+		return "success";
+	}
+	
 //	// 팔로잉 목록 + 페이징 + 검색
 //	@RequestMapping(value = "/followingList", method = RequestMethod.GET)
 //	public String followingList(Model model, @RequestParam(required = false, defaultValue = "1") int page,

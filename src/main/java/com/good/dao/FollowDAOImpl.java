@@ -6,10 +6,8 @@ import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
-import org.springframework.ui.Model;
 
 import com.good.dto.FollowListVO;
-import com.good.dto.Search;
 
 @Repository
 public class FollowDAOImpl implements FollowDAO {
@@ -19,16 +17,22 @@ public class FollowDAOImpl implements FollowDAO {
 	
 	private static final String NAMESPACE = "com.good.mapper.followMapper";
 
-	// 팔로잉
+	// 팔로잉 (로그인유저가 팔로우하는 사람 리스트)
 	@Override
 	public List<FollowListVO> followingList(int followAccountId) throws Exception {
 		return sqlSession.selectList(NAMESPACE + ".followingList", followAccountId);
 	}
 	
-	// 팔로워
+	// 팔로워(로그인유저를 팔로우하는 사람 리스트)
 	@Override
 	public List<FollowListVO> followerList(int followAccountId) throws Exception {
 		return sqlSession.selectList(NAMESPACE + ".followerList", followAccountId);
+	}
+
+	// 팔로잉 추가
+	@Override
+	public void insert(FollowListVO vo) throws Exception {
+		sqlSession.insert(NAMESPACE + ".insert", vo);
 	}
 
 
