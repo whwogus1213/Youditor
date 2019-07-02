@@ -9,7 +9,7 @@ import com.good.dto.Search;
 
 public interface FollowDAO {
 
-	public List<FollowListVO> listAll(Search search) throws Exception;
-
-	public int getFollowListCnt(Search search);
+//	public List<FollowListVO> listAll(Search search) throws Exception;
+//
+//	public int getFollowListCnt(Search search);
 }

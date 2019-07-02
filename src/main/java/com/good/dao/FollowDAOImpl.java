@@ -19,13 +19,13 @@ public class FollowDAOImpl implements FollowDAO {
 	
 	private static final String NAMESPACE = "com.good.mapper.followMapper";
 
-	@Override
-	public List<FollowListVO> listAll(Search search) throws Exception {
-		return sqlSession.selectList(NAMESPACE + ".listAll", search);
-	}
-
-	@Override
-	public int getFollowListCnt(Search search) {
-		return sqlSession.selectOne(NAMESPACE + ".getFollowListCnt", search);
-	}
+//	@Override
+//	public List<FollowListVO> listAll(Search search) throws Exception {
+//		return sqlSession.selectList(NAMESPACE + ".listAll", search);
+//	}
+//
+//	@Override
+//	public int getFollowListCnt(Search search) {
+//		return sqlSession.selectOne(NAMESPACE + ".getFollowListCnt", search);
+//	}
 }

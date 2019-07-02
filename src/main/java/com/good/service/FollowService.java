@@ -9,10 +9,10 @@ import com.good.dto.Search;
 
 public interface FollowService {
 	
-	// 팔로워 목록 + 페이징 + 검색
-	public List<FollowListVO> listAll(Search search) throws Exception;
-	
-	// 팔로워 총 갯수
-	public int getFollowListCnt(Search search) throws Exception;
+//	// 팔로워 목록 + 페이징 + 검색
+//	public List<FollowListVO> listAll(Search search) throws Exception;
+//	
+//	// 팔로워 총 갯수
+//	public int getFollowListCnt(Search search) throws Exception;
 
 }

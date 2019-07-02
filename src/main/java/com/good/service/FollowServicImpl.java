@@ -17,14 +17,14 @@ public class FollowServicImpl implements FollowService {
 	@Inject
 	FollowDAO followDAO;
 	
-	@Override
-	public List<FollowListVO> listAll(Search search) throws Exception {
-		return followDAO.listAll(search);
-	}
-
-	@Override
-	public int getFollowListCnt(Search search) throws Exception {
-		return followDAO.getFollowListCnt(search);
-	}
+//	@Override
+//	public List<FollowListVO> listAll(Search search) throws Exception {
+//		return followDAO.listAll(search);
+//	}
+//
+//	@Override
+//	public int getFollowListCnt(Search search) throws Exception {
+//		return followDAO.getFollowListCnt(search);
+//	}
 
 }
