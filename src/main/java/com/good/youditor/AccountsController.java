@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.good.dto.AccountsVO;
 import com.good.service.AccountsService;
@@ -85,7 +86,7 @@ public class AccountsController {
         }
 
         // 로그인이 성공하면 UserVO 객체를 반환함.
-        AccountsVO vo = service.login(paraVo);
+        AccountsVO vo = accountsService.login(paraVo);
 
         if ( vo != null ){ // 로그인 성공
             session.setAttribute("login", vo);
