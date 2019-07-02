@@ -11,8 +11,41 @@
 <head>
 	<jsp:include page="../module/header.jsp" flush="false"/>
 
+	
 </head>
 <body>
+    <form id="followingForm" name="followingForm" method="post">
+		<c:if test="${login.accountId ne row.accountId}">
+			<button class="btn btn-primary btn-sm" onclick="fn_following('${row.accountId}')">팔로우</button>
+		</c:if>
+	</form>
+	
+<script type="text/javascript">
+// 팔로잉
+function fn_following(accountId){
+	alert(accountId);
 
+	var json = {
+		"followAccountId" : accountId
+	}
+    $.ajax({
+        type:'POST',
+        url : "/follow/insert",
+		//data:$("#followingForm").serialize()
+		data:json,
+		success:function(){
+			alert("성콩");
+		},
+		error:function(){
+			alert("에러");
+			},
+		complete : function(){
+			alert("아무거나");
+			}
+		
+   });
+}
+</script>
 </body>
 </html>
+

@@ -61,6 +61,7 @@
 		<%-- 	<h1>${row.youtubeLink }</h1> --%>
 		<!-- 디자인 필요 -->
 		<div align="right">
+				<jsp:include page="../follow/follow.jsp" flush="false"/>
 			<c:if test="${login.accountId eq row.accountId}">
 				<button class="btn btn-warning btn-sm" onclick="location.href='/videoboard/updateVideoBoard.do?boardId=${row.boardId}'">수정</button>
 				<button class="btn btn-danger btn-sm" id="deletebtn">삭제</button>

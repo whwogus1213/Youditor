@@ -26,7 +26,7 @@
 	<!-- 팔로잉 추가 -->
     <insert id="insert" parameterType="FollowListVO">
     	insert into followlist(followAccountId, followerAccountId, reg_date)
-		values(<!-- 뭘넣어야할까 followAccountId -->, #{followerAccountId}, now())
+		values(#{followAccountId}, #{followerAccountId}, now())
     </insert>
 
 	<!-- 페이징 -->
