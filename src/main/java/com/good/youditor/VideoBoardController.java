@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.good.dto.VideoBoardVO;
+import com.good.dto.VideoCategoryVO;
 import com.good.service.VideoBoardService;
 
 @Controller
@@ -24,9 +25,16 @@ public class VideoBoardController {
 	VideoBoardService videoBoardService;
 
 	// 게시물 목록
-	@RequestMapping(value = "/videoBoardList")
-	public ModelAndView list() throws Exception {
-		List<VideoBoardVO> list = videoBoardService.listAll();
+	@RequestMapping(value = "/videoBoardList", method = RequestMethod.GET)
+	public ModelAndView list(@RequestParam(required = false, defaultValue = "0") int category) throws Exception {
+		System.out.println(category+"$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+		
+		VideoCategoryVO videoCategoryVO = new VideoCategoryVO();
+		videoCategoryVO.setCategoryId(category);
+		
+		
+		
+		List<VideoBoardVO> list = videoBoardService.listAll(videoCategoryVO);
 
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("videoboard/videoBoardList");
@@ -85,18 +93,6 @@ public class VideoBoardController {
 		mav.setViewName("videoboard/videoBoardUpdate");
 		mav.addObject("videoBoardUpdate", update);
 		System.out.println("String videoBoardUpdate open");
-		return mav;
-	}
-	// 파일 이동
-	// 게시글 삭제
-	// 'videoBoardDelete.jsp' 로 이동 <-- 이동하고자 하는 파일로 명 바꾸면됨
-	@RequestMapping(value = "/deleteVideoBoard.do", method = RequestMethod.GET)
-	public ModelAndView joinDelete(Locale locale, Model model,@RequestParam("boardId") int boardId) throws Exception {
-		VideoBoardVO delete = videoBoardService.view(boardId);
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("videoboard/videoBoardDelete");
-		mav.addObject("videoBoardDelete", delete);
-		System.out.println("String videoBoardDelete open");
 		return mav;
 	}
 

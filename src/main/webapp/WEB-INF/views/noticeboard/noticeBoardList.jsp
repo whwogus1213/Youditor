@@ -53,6 +53,16 @@
 		location.href = url;
 		console.log(url);
 	});
+	
+	//게시글을 삭제 했을시 삭제했다고 경고창이 떳다가 사라지는 기능
+	var result = '${result}';
+	$(function(){
+		if(result === 'deleteOK'){
+			$('#deleteOK').removeClass('hidden');
+			$('#deleteOK').removeAttr("style");
+			$('#deleteOK').fadeOut(2000);
+		}
+	})
 </script>
 </head>
 <body>
@@ -65,6 +75,7 @@
 		</div>
 	</div>
 	<h5 align="center">YouditoR의 최신 소식을 알려드립니다.</h5>
+	<div id="deleteOK" class="alert alert-danger hidden" role="alert" style="visibility:hidden">글이 삭제되었습니다.</div>
 	<h2 align="center">&nbsp;</h2>
 	<div class="container">
 		<table class="table table-bordered table-striped nanum table-hover">
@@ -98,7 +109,7 @@
 
 		<!-- 페이징 -->
 		<div id="paginationBox">
-			<ul class="pagination">
+			<ul class="pagination" style="display:table; margin-left:auto; margin-right: auto;">
 				<c:if test="${pagination.prev}">
 					<li class="page-item">
 						<a class="page-link" href="#"
@@ -121,28 +132,33 @@
 			</ul>
 		</div>
 		<!-- 페이징 -->
-
+		<hr>
 		<!-- 검색 -->
-		<div class="form-group row justify-content-center">
-			<div class="w100" style="padding-right: 10px">
-				<select class="form-control form-control-sm" name="searchType" id="searchType">
+		<div class="row input-group">
+			<div class="col-sm-2">
+			</div>
+			<div class="col-sm-2" align="right">
+				<select class="form-control form-control-sm" name="searchType" id="searchType" style="width:66.6%">
 					<option value="subject">제목</option>
 					<option value="object">본문</option>
 					<option value="accountId">작성자</option>
 				</select>
 			</div>
-			<div class="w300" style="padding-right: 10px">
-				<input type="text" class="form-control form-control-sm" name="keyword" id="keyword">
+			<div class="col-sm-4" align="right" >
+				<input type="text" class="form-control form-control-sm" name="keyword" id="keyword" >
 			</div>
-			<div>
+			<div class="col-sm-1">
 				<button class="btn btn-sm btn-primary" name="btnSearch" id="btnSearch">검색</button>
-				<button type="button" class="btn btn-primary"
+			</div>
+			<div class="col-sm-3" align="center">
+				<button type="button" class="btn btn-sm btn-primary"
 					onclick="location.href='/noticeboard/write.do' ">공지 올리기</button>
 			</div>
 		</div>
 		<!-- 검색 -->
 
 	</div>
+	<br>
 	<jsp:include page="./../module/bottom.jsp" flush="false" />
 </body>
 </html>

@@ -27,6 +27,7 @@ public class NoticeBoardServiceImpl implements NoticeBoardService {
 	// 게시물 상세보기
 	@Override
 	public NoticeBoardVO view(int boardId) throws Exception {
+		noticeBoardDAO.viewCount(boardId);
 		return noticeBoardDAO.view(boardId);
 	}
 
@@ -50,8 +51,13 @@ public class NoticeBoardServiceImpl implements NoticeBoardService {
 
 	// 삭제
 	@Override
-	public void deleteNoticeBoard(int boardId) throws Exception {
-		noticeBoardDAO.deleteNoticeBoard(boardId);
+	public void deleteNoticeBoard(NoticeBoardVO vo) throws Exception {
+		noticeBoardDAO.deleteNoticeBoard(vo);
 	}
 
+	// 조회수
+	@Override
+	public void viewCount(int boardId) throws Exception {
+		noticeBoardDAO.viewCount(boardId);
+	}
 }

@@ -19,20 +19,10 @@
 </head>
 <body>
 	<jsp:include page="../module/top.jsp" flush="false"/>
-
+	<form class="form-horizontal" method="post" action="${path}/noticeboard/updateNoticeBoardPro">
+	
 	<!-- 게시글 상세정보 -->
 	<div class="container">
-	<script>
-		
-		//삭제 버튼 누르면 삭제할 것이냐고 묻고 삭제한다고 하면 noticeboardcontroller 의 deleteVideoBoardPro 메서드 호출
-		$(function(){
-			$('#deletebtn').click(function(){
-				if(confirm("정말 삭제하시겠습니까?")){
-					self.location.href = "${path}/noticeboard/deleteNoticeBoardPro?boardId=${row.boardId}";
-				}
-			});
-		});
-	</script>
 		<div align="center">
 			<br><br>
 			<h1>공지 사항</h1>
@@ -40,28 +30,30 @@
 		</div>
 		<hr>
 		<br>
-		<h1>${row.subject }</h1>
+		<label class="control-label col-sm-2">제목</label>
+		<input type="text" class="form-control" name="subject" id="subject" maxlength="50" value="${noticeBoardUpdate.subject }">
 		<br>
+		<label class="control-label col-sm-2">내용</label>
+		<input type="text" class="form-control" name="object" id="object" maxlength="50" value="${noticeBoardUpdate.object }">
+		<br>
+		<input type="text" class="form-control" name="boardId" id="boardId" maxlength="50" value="${noticeBoardUpdate.boardId}" style="visibility:hidden">
+		
 		<div align="right">
-		<h4>작성자 ${row.accountId } 카테고리 ${row.categoryId}
-		</h4>
-		<h4>작성 일시 <fmt:formatDate value="${row.reg_date}" pattern="yyyy-MM-dd" /> 조회수 ${row.viewCount }
+		<h4>작성 일시 <fmt:formatDate value="${noticeBoardUpdate.reg_date}" pattern="yyyy-MM-dd" />
 		</h4>
 		</div>
 		<hr>
 		<br>
-		<h2>${row.object }</h2>
+		
 		<br>
 		<hr>
 		<div align="center">
-			<button type="button" class="btn btn-primary" onclick="location.href='/noticeboard/noticeBoardList' ">목록으로</button>
-			<c:if test="${login.accountId eq row.accountId}">
-			<button type="button" class="btn btn-success" onclick="location.href='/noticeboard/updateNoticeBoard.do?boardId=${row.boardId}' ">수정</button>
-			<button class="btn btn-danger" id="deletebtn">삭제</button>
-			</c:if>
+			<button type="submit" id="submit">수정</button>
+			<button type="button" class="btn btn-danger" onclick="location.href='/noticeboard/noticeBoardList' ">취소</button>
 		</div>
 		<br>
 	</div>
+	</form>
 	<jsp:include page="../module/bottom.jsp" flush="false"/>
 
 </body>
