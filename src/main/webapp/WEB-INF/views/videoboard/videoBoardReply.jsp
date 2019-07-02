@@ -170,10 +170,11 @@ function replyUpdateForm(commentId, accountId, object){
 	var html = "";
 	
 	$("#commentList #"+commentId).css("border","1px dashed black");
-	html += "<div>";
+	html += "<div class='input-group'><div>";
 	html += "<textarea style='width: 1000px' rows='3' cols='30' id='upObject"+commentId+"' name='upObject"+commentId+"'>"+object+"</textarea>";
-	html += "<a href='#' onClick='replyUpdate("+commentId+")' class='btn pull-right btn-success' style='height:100%; width:90px; text-align:center; line-height:65px;'>수정</a>";
-	html += "</div>";
+	html += "</div><div>";
+	html += "<button onClick='replyUpdate("+commentId+")' class='btn pull-right btn-success' style='height:93%; width:108px; text-align:center; line-height:65px;'>수정</button>";
+	html += "</div></div>";
 	$("#commentList #"+commentId).html(html);	
 }
 
@@ -183,7 +184,6 @@ function replyUpdate(commentId){
 			"commentId" : commentId,
 			"object" : object
 			};
-	alert("update");
 	$.ajax({
 		type:'POST',
 		url : "/reply/update",
