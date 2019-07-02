@@ -69,16 +69,15 @@
 			<!-- <table border="1"> -->
 			<thead>
 				<tr>
-					<th>팔로우당함</th>
-					<th>팔로우함</th>
-					<th>팔로우 일</th>
+					<th>아이디</th>
+					<th>날짜</th>
 				</tr>
 			</thead>
 			<tbody>
 				<c:forEach items="${followingList}" var="followingList">
 					<tr>
+						
 						<td>${followingList.followAccountId}</td>
-						<td>${followingList.followerAccountId}</td>
 						<td><fmt:formatDate value="${followingList.reg_date}" pattern="yyyy-MM-dd" /></td>
 					</tr>
 				</c:forEach>

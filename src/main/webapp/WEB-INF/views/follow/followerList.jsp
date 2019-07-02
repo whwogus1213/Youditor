@@ -69,20 +69,16 @@
 			<!-- <table border="1"> -->
 			<thead>
 				<tr>
-					<th>팔로우당함</th>
-					<th>팔로우함</th>
-					<th>팔로우 일</th>
+					<th>아이디</th>
+					<th>날짜</th>
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach items="${FollowList}" var="FollowList">
-					<c:if test="${login.accountId eq FollowList.followAccountId }">
+				<c:forEach items="${followerList}" var="followerList">
 						<tr>
-							<td>${FollowList.followAccountId}</td>
-							<td>${FollowList.followerAccountId}</td>
-							<td><fmt:formatDate value="${FollowList.reg_date}" pattern="yyyy-MM-dd" /></td>
+							<td>${followerList.followerAccountId}</td>
+							<td><fmt:formatDate value="${followerList.reg_date}" pattern="yyyy-MM-dd" /></td>
 						</tr>
-					</c:if>
 				</c:forEach>
 			</tbody>
 		</table>

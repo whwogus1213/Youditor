@@ -23,6 +23,12 @@ public class FollowServicImpl implements FollowService {
 		return followDAO.followingList(followAccountId);
 	}
 
+	// 팔로워
+	@Override
+	public List<FollowListVO> followerList(int followAccountId) throws Exception {
+		return followDAO.followerList(followAccountId);
+	}
+
 	
 	
 //	@Override

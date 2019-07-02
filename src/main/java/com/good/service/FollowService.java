@@ -12,6 +12,9 @@ public interface FollowService {
 	// 팔로잉
 	public List<FollowListVO> followingList(int followAccountId) throws Exception;
 
+	// 팔로워
+	public List<FollowListVO> followerList(int followAccountId) throws Exception;
+
 	
 //	// 팔로워 목록 + 페이징 + 검색
 //	public List<FollowListVO> listAll(Search search) throws Exception;
