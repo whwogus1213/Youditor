@@ -123,6 +123,7 @@
 					</c:choose>
 				</div>
 			</div>
+			<br>
 			<div class="form-inline">
 				<h2 align="center">&nbsp;</h2>
 				<label class="control-label col-sm-3">자기소개</label>
