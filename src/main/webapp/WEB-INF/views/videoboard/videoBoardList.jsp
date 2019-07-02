@@ -71,7 +71,7 @@
           						<strong>Made by.</strong>
           					</div>
           					<div class="col-sm-6" align="right">
-								${VideoBoardList.accountId}<br>
+								${VideoBoardList.nickname}<br>
           					</div>
           				</div>
           				<div class="row">
