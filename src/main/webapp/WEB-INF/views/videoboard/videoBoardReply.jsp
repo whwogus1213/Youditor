@@ -20,9 +20,9 @@
     <br><br>
         <div>
             <div>
-                <span><strong>Comments</strong></span> <span id="cCnt"></span>
-               
+                <span><strong>Comments</strong></span>&nbsp;&nbsp;&nbsp;<span id="cCnt"></span>
             </div>
+            <hr style="2px dashed">
             <div>
             	<c:if test="${login.email != null }">
                 <div class="table input-group">           
