@@ -53,6 +53,16 @@
 		location.href = url;
 		console.log(url);
 	});
+	
+	//게시글을 삭제 했을시 삭제했다고 경고창이 떳다가 사라지는 기능
+	var result = '${result}';
+	$(function(){
+		if(result === 'deleteOK'){
+			$('#deleteOK').removeClass('hidden');
+			$('#deleteOK').removeAttr("style");
+			$('#deleteOK').fadeOut(2000);
+		}
+	})
 </script>
 </head>
 <body>
@@ -65,6 +75,7 @@
 		</div>
 	</div>
 	<h5 align="center">YouditoR의 최신 소식을 알려드립니다.</h5>
+	<div id="deleteOK" class="alert alert-danger hidden" role="alert" style="visibility:hidden">글이 삭제되었습니다.</div>
 	<h2 align="center">&nbsp;</h2>
 	<div class="container">
 		<table class="table table-bordered table-striped nanum table-hover">
