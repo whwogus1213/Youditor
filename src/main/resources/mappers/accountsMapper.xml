@@ -18,18 +18,45 @@
 	</select>
 
 	<!-- 회원 가입 -->
-	<insert id="insertAccounts"
-		parameterType="com.good.dto.AccountsVO">
-
-		insert into accounts(email,
-							pwd,
-							nickname,
-							picture,
-							footer,
-							reg_date,
-							mod_date)
-		values(#{email}, #{pwd}, #{nickname}, #{picture}, #{footer}, now(),	now())
+	<insert id="insertAccounts" parameterType="com.good.dto.AccountsVO">
+		INSERT INTO
+				accounts(
+						email,
+						pwd,
+						nickname,
+						picture,
+						footer,
+						reg_date,
+						mod_date)
+				VALUES(
+					#{email},
+					#{pwd},
+					#{nickname},
+					#{picture},
+					#{footer},
+					now(),
+					now())
 	</insert>
+	
+	<!-- 이메일 체크 -->
+	<select id="checkEmail" parameterType="String" resultType="Integer">
+	    SELECT
+	      COUNT(*)
+	    FROM
+	      accounts
+	    WHERE
+	      email = #{email}
+	</select>
+
+	<!-- 닉네임 체크 -->
+	<select id="checkNickname" parameterType="String" resultType="Integer">
+	    SELECT
+	      COUNT(*)
+	    FROM
+	      accounts
+	    WHERE
+	      nickname = #{nickname}
+	</select>
 
 	<select id="login" resultType="AccountsVO">
 		 select * from accounts where email = #{email} and pwd = #{pwd}
