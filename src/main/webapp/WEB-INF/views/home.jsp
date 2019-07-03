@@ -21,7 +21,7 @@
 </head>
 
 <body>
-  <jsp:include page="./module/top.jsp" flush="false"/>
+  <jsp:include page="./module/top2.jsp" flush="false"/>
 
   <header>
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
@@ -146,7 +146,7 @@
           </div>
         </div>
       </div>
-      
+
     <!-- /.row -->
 
     <hr>
@@ -158,7 +158,7 @@
 
   <!-- Footer -->
   <!--
-  
+
   <footer class="py-5 bg-dark container">
     <div class="container">
       <p class="m-0 text-center text-white">Copyright &copy; Your Website 2019 All contents Copyright 2013 SolWeb Inc. all rights reserved<br>
@@ -169,7 +169,7 @@
   <!-- </footer>  -->
   <jsp:include page="./module/bottom.jsp" flush="false"/>
 
-  
+
   <script src="/resources/vendor/jquery/jquery.min.js"></script>
   <script src="/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
