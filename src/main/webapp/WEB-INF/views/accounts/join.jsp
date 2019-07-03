@@ -119,14 +119,14 @@
   		var pwd = $("#pwd").val();
   		var pwdCfm = $("#pwdCfm").val();
   		var nickname = $("#nickname").val();
-  		var agreement = $("#agreement").val();
+  		var agreement = $('input:checkbox[id="agreement"]').is(':checked');
   		if(email.length == 0) { alert("이메일를 입력해 주세요."); $("#email").focus(); return; }
   		if(isCheckEmail == 0) { alert("이메일 중복 체크를 해주세요."); $("#email").focus(); return; }
   		if(pwd.length == 0) { alert("비밀번호를 입력해 주세요."); $("#pwd").focus(); return; }
   		if(pwd != pwdCfm) { alert("비밀번호가 서로 다릅니다. 비밀번호를 확인해 주세요."); $("#pwd").focus(); return; }
   		if(nickname.length == 0) { alert("닉네임을 입력해 주세요."); $("#nickname").focus(); return; }
   		if(isCheckNickname == 0) { alert("닉네임 중복 체크를 해주세요."); $("#nickname").focus(); return; }
-  		if(agreement != "1") { alert("약관에 동의해주세요."); $("#agreement").focus(); return; }
+  		if(agreement != 1) { alert("약관에 동의해주세요."); $("#agreement").focus(); return; }
   	if(confirm("회원가입을 하시겠습니까?")) {
   		if(isCheckEmail == 0) {
   			alert('이메일 중복체크를 해주세요');
