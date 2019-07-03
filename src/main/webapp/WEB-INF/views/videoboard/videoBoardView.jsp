@@ -1,3 +1,4 @@
+<%@page import="com.good.dto.VideoStarVO"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page session="true" %>
@@ -66,16 +67,79 @@
 					}
 				});
 			});
-			
+			var result = '${result}';
+					
 			$(function(){
 				$('#raiting').click(function(){
-					if(confirm("정말 삭제하시겠습니까?")){
-						self.location.href = "${path}/videoboard/deleteVideoBoardPro?boardId=${row.boardId}";
-					}
+					alert('insert');
+					self.location.href = "${path}/videostar/insertVideoStarPro?boardId=${row.boardId}";
+						
 				});
 			});
-
-
+			
+			
+			$(function(){
+				
+				$('#notraiting').click(function(){
+						alert('로그인 후 이용해 주세요.');
+						
+				});
+			});
+			
+			$(function(){
+				
+				$('#raitingupdate').click(function(){
+						alert('update 하는 곳');
+						if(result == '1'){
+							self.location.href = "${path}/videostar/updateVideoStarPro1?boardId=${row.boardId}";
+						}if(result == '2'){
+							self.location.href = "${path}/videostar/updateVideoStarPro2?boardId=${row.boardId}";
+						}if(result == '3'){
+							self.location.href = "${path}/videostar/updateVideoStarPro3?boardId=${row.boardId}";
+						}if(result == '4'){
+							self.location.href = "${path}/videostar/updateVideoStarPro4?boardId=${row.boardId}";
+						}if(result == '5'){
+							self.location.href = "${path}/videostar/updateVideoStarPro5?boardId=${row.boardId}";
+						}
+				});
+			});
+			
+			$(function(){
+				$('#1').click(function(){
+						alert('result 에 1번 값을 넣어보자');
+					return result = 1;
+				});
+			});
+			
+			$(function(){
+				$('#2').click(function(){
+						alert('result 에 2번 값을 넣어보자');
+					return result = 2;
+				});
+			});
+			
+			$(function(){
+				$('#3').click(function(){
+						alert('result 에 3번 값을 넣어보자');
+					return result = 3;
+				});
+			});
+			
+			$(function(){
+				$('#4').click(function(){
+						alert('result 에 4번 값을 넣어보자');
+					return result = 4;
+				});
+			});
+			
+			$(function(){
+				$('#5').click(function(){
+						alert('result 에 5번 값을 넣어보자');
+					return result = 5;
+				});
+			});
+			
+			
 		</script>
 	</div>
 	<!-- <h1>${row.boardId }</h1> -->
@@ -86,18 +150,26 @@
 		<h5>${row.object }</h5>
 		<br>
 		<h6 style="color:gray"> 조회수&nbsp;&nbsp; ${row.viewCount }</h6>
-		<form>
+		
 			<p class="star_rating"> 평점
-			    <a href="#">★</a>
-			    <a href="#">★</a>
-			    <a href="#">★</a>
-			    <a href="#">★</a>
-			    <a href="#">★</a>
+			    <a href="#" id="1">★</a>
+			    <a href="#" id="2">★</a>
+			    <a href="#" id="3">★</a>
+			    <a href="#" id="4">★</a>
+			    <a href="#" id="5">★</a>
 			</p>
         <input type="hidden" id="boardId" name="boardId" value="${row.boardId }" /> 
-			<button id ="raiting">평가</button>
-		</form>
-
+			<c:if test="${login.email ne null}">
+				<c:if test="${login.accountId  eq row.accountId}">
+					<button id ="raitingupdate">업데이트 평가</button>
+				</c:if>
+				<c:if test="${login.accountId  ne row.accountId}">
+					<button id ="raiting">처음 평가</button>
+				</c:if>
+			</c:if>
+			<c:if test="${login.email eq null}">
+				<button id ="notraiting">로그인 해라</button>
+			</c:if>
 		<h5 align="right">등록일 &nbsp;&nbsp; <fmt:formatDate value="${row.reg_date}" pattern="yyyy년 MM월 dd일  hh:mm:ss" /></h5>
 		<div align="right">평가 점수 : ${row.starCount}</div>
 		<hr>

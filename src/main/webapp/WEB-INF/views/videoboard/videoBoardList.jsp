@@ -27,7 +27,7 @@
 			$('#deleteOK').removeAttr("style");
 			$('#deleteOK').fadeOut(2000);
 		}
-	})
+	});
 	</script>
 	<jsp:include page="../module/top.jsp" flush="false" />
 	<div class="form-group">

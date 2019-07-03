@@ -26,28 +26,28 @@ public class VideoStarDAOImpl implements VideoStarDAO {
 	
 	//평점
 	@Override
-	public void update1(int boardId) throws Exception {
-		sqlSession.update(NAMESPACE + ".update1", boardId);
+	public void update1(VideoStarVO vo) throws Exception {
+		sqlSession.update(NAMESPACE + ".update1", vo);
 	}
 	//평점
 	@Override
-	public void update2(int boardId) throws Exception {
-		sqlSession.update(NAMESPACE + ".update2", boardId);
+	public void update2(VideoStarVO vo) throws Exception {
+		sqlSession.update(NAMESPACE + ".update2", vo);
 	}
 	//평점
 	@Override
-	public void update3(int boardId) throws Exception {
-		sqlSession.update(NAMESPACE + ".update3", boardId);
+	public void update3(VideoStarVO vo) throws Exception {
+		sqlSession.update(NAMESPACE + ".update3", vo);
 	}
 	//평점
 	@Override
-	public void update4(int boardId) throws Exception {
-		sqlSession.update(NAMESPACE + ".update4", boardId);
+	public void update4(VideoStarVO vo) throws Exception {
+		sqlSession.update(NAMESPACE + ".update4", vo);
 	}
 	//평점
 	@Override
-	public void update5(int boardId) throws Exception {
-		sqlSession.update(NAMESPACE + ".update5", boardId);
+	public void update5(VideoStarVO vo) throws Exception {
+		sqlSession.update(NAMESPACE + ".update5", vo);
 	}
 
 }

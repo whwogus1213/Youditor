@@ -7,23 +7,23 @@
 	<!-- 처음 평점 추가 -->
 	<insert id="insert" parameterType="VideoStarVO">
     	insert into videostar(boardId, accountId, star, starCheck,  reg_date)
-		values(#{boardId}, #{accountId}, #{star}, 1, now())
+		values(#{boardId}, #{accountId}, 1, 1, now())
     </insert>
 	<!-- 평점 업데이트 -->
     <update id="update1" parameterType="VideoStarVO">
-		  UPDATE videoBoard SET star = star+1 WHERE boardId=#{boardId}
+		  UPDATE videostar SET star = +1 WHERE boardId=#{boardId}
 	</update>
 	<update id="update2" parameterType="VideoStarVO">
-		  UPDATE videoBoard SET star = star+2 WHERE boardId=#{boardId}
+		  UPDATE videostar SET star = +2 WHERE boardId=#{boardId}
 	</update>
 	<update id="update3" parameterType="VideoStarVO">
-		  UPDATE videoBoard SET star = star+3 WHERE boardId=#{boardId}
+		  UPDATE videostar SET star = +3 WHERE boardId=#{boardId}
 	</update>
 	<update id="update4" parameterType="VideoStarVO">
-		  UPDATE videoBoard SET star = star+4 WHERE boardId=#{boardId}
+		  UPDATE videostar SET star = +4 WHERE boardId=#{boardId}
 	</update>
 	<update id="update5" parameterType="VideoStarVO">
-		  UPDATE videoBoard SET star = star+5 WHERE boardId=#{boardId}
+		  UPDATE videostar SET star = +5 WHERE boardId=#{boardId}
 	</update>
 	
 

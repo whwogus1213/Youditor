@@ -11,13 +11,13 @@ public interface VideoStarService {
 	public void insert(VideoStarVO vo) throws Exception;
 
 	//평점 주는 기능
-	public void update1(int boardId) throws Exception;
+	public void update1(VideoStarVO vo) throws Exception;
 	//평점 주는 기능
-	public void update2(int boardId) throws Exception;
+	public void update2(VideoStarVO vo) throws Exception;
 	//평점 주는 기능
-	public void update3(int boardId) throws Exception;
+	public void update3(VideoStarVO vo) throws Exception;
 	//평점 주는 기능
-	public void update4(int boardId) throws Exception;
+	public void update4(VideoStarVO vo) throws Exception;
 	//평점 주는 기능
-	public void update5(int boardId) throws Exception;
+	public void update5(VideoStarVO vo) throws Exception;
 }
