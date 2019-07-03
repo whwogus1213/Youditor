@@ -47,10 +47,6 @@
         	<div id="commentList">
         	</div>
     </div>
-
-    
-    
-    
 </div>
 </div>
  
