@@ -10,4 +10,10 @@ public interface AccountsService {
 	public void insertAccounts(AccountsVO vo) throws Exception;
 
 	public AccountsVO login(AccountsVO vo) throws Exception;
+	
+	//회원가입시 이메일 중복체크 service
+	public int checkEmail(String email) throws Exception;
+
+	//회원가입시 닉네임 중복체크 service
+	public int checkNickname(String nickname) throws Exception;
 }
