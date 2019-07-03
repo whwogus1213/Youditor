@@ -67,10 +67,10 @@
 	height: 32px;
 }
 .category {
-	padding-left: 40%;
+	
 }
 .hire {
-	padding-left: 50%;
+	
 }
 .follow {
 	padding-left: 60%;
@@ -127,6 +127,8 @@
 						<li>|</li>
 					</ul>
 				</li>
+			</ul>
+			<ul class="navbar-nav ml-auto">
 				<c:if test="${login.accountId ne null }">
 					<li class="nav-item topMenuLi">
 						<a class="nav-link" href="#">팔로우</a>
