@@ -44,9 +44,10 @@
 		
 		<h6>${videoBoardUpdate.accountId } 프로필이 표시되게끔....</h6>
 		<hr>
-		<button type="submit" id="submit">수정</button>
+		<button type="button" class="btn btn-warning" id="submit">수정</button>
 		<button type="button" class="btn btn-danger" onclick="location.href='/videoboard/videoBoardView?boardId=${videoBoardUpdate.boardId}' ">취소</button>
 	</div>
+	<br>
 	</form>
 	<%-- 	<h1>${videoBoardUpdate.youtubeLink }</h1> --%>
 	

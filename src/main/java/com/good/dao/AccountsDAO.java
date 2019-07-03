@@ -14,5 +14,9 @@ public interface AccountsDAO {
 
 	public int checkNickname(String nickname) throws Exception;
 
-	public AccountsVO login(AccountsVO accountsVO) throws Exception;
+	public AccountsVO login(AccountsVO vo) throws Exception;
+
+	public int checkEmail(String email) throws Exception;
+
+	public int checkNickname(String nickname) throws Exception;
 }
