@@ -63,23 +63,23 @@ public class FollowController {
 	}
 	
 	// 팔로잉 추가
-	/*
-	 * @RequestMapping(value = "/insert", method = RequestMethod.POST) public void
-	 * insert(HttpServletRequest request, FollowListVO vo) throws Exception {
-	 * 
-	 * System.out.println("Start follow insert");
-	 * 
-	 * HttpSession session = request.getSession(); AccountsVO loginVO =
-	 * (AccountsVO)session.getAttribute("login");
-	 * 
-	 * // 로그인 유저 아이디 vo.setFollowerAccountId(loginVO.getAccountId());
-	 * 
-	 * System.out.println("followerAccountId : " + vo.getFollowerAccountId()); //
-	 * System.out.println("accountId" + accountId); System.out.println("followList"
-	 * + vo);
-	 * 
-	 * followService.insert(vo); }
-	 */
+	@RequestMapping(value = "/insert", method = RequestMethod.POST)
+	public void insert(HttpServletRequest request, FollowListVO vo) throws Exception {
+
+		System.out.println("Start follow insert");
+
+		HttpSession session = request.getSession();
+		AccountsVO loginVO = (AccountsVO) session.getAttribute("login");
+
+		// 로그인 유저 아이디
+		vo.setFollowerAccountId(loginVO.getAccountId());
+
+		System.out.println("followerAccountId : " + vo.getFollowerAccountId()); //
+//		System.out.println("accountId" + accountId);
+		System.out.println("followList" + vo);
+
+		followService.insert(vo);
+	}
 	
 //	// 팔로잉 목록 + 페이징 + 검색
 //	@RequestMapping(value = "/followingList", method = RequestMethod.GET)
