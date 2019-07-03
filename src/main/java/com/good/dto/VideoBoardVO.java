@@ -13,6 +13,9 @@ public class VideoBoardVO {
 	private Date mod_date;
 	private int viewCount;
 	private int replyCount;
+	
+	private String nickname;
+	private String footer;
 
 	public int getBoardId() {
 		return boardId;
@@ -93,6 +96,22 @@ public class VideoBoardVO {
 
 	public void setReplyCount(int replyCount) {
 		this.replyCount = replyCount;
+	}
+
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+
+	public String getFooter() {
+		return footer;
+	}
+
+	public void setFooter(String footer) {
+		this.footer = footer;
 	}
 
 	@Override

@@ -74,7 +74,7 @@
 			<h2 align="center">&nbsp;</h2>
 		</div>
 	</div>
-	<h5 align="center">YouditoR의 최신 소식을 알려드립니다.</h5>
+	<h5 align="center">YouditoR의 최신 소식과 이벤트를 알려드립니다.</h5>
 	<div id="deleteOK" class="alert alert-danger hidden" role="alert" style="visibility:hidden">글이 삭제되었습니다.</div>
 	<h2 align="center">&nbsp;</h2>
 	<div class="container">
@@ -95,8 +95,10 @@
 					<tr>
 						<td>${NoticeBoardList.boardId}</td>
 						<td>${NoticeBoardList.categoryId}</td>
-						<td><a
-							href="/noticeboard/noticeBoardView?boardId=${NoticeBoardList.boardId}">${NoticeBoardList.subject}</a>
+						<td>
+							<div style="overflow:hidden; text-overflow: ellipsis; white-space:nowrap; width:700px; height: 100%">
+							<a href="/noticeboard/noticeBoardView?boardId=${NoticeBoardList.boardId}">${NoticeBoardList.subject}</a>
+							</div>
 						</td>
 						<td>${NoticeBoardList.accountId}</td>
 						<td><fmt:formatDate value="${NoticeBoardList.reg_date}"

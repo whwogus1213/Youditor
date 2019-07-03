@@ -45,9 +45,9 @@
     	<div class="row">
 			<c:forEach items="${VideoBoardList}" var="VideoBoardList">
      		 <div class="col-lg-4 mb-4">
-        		<div class="card h-100">
+        		<div class="card h-100" style="display:block">
         			<div align="center">
-         				<h5 class="card-header"><a href="/videoboard/videoBoardView?boardId=${VideoBoardList.boardId}">${VideoBoardList.subject}</a></h5>
+         				<h5 class="card-header" style="overflow:hidden; text-overflow: ellipsis; white-space:nowrap; width:100%; height: 50px"><a href="/videoboard/videoBoardView?boardId=${VideoBoardList.boardId}">${VideoBoardList.subject}</a></h5>
         			</div>
           			<div class="card-body" align="center">
 						<script>
@@ -71,7 +71,7 @@
           						<strong>Made by.</strong>
           					</div>
           					<div class="col-sm-6" align="right">
-								${VideoBoardList.accountId}<br>
+								${VideoBoardList.nickname}<br>
           					</div>
           				</div>
           				<div class="row">

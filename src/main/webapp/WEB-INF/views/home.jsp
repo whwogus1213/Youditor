@@ -76,7 +76,7 @@
           <h4 class="card-header">영상 제목</h4>
           <div class="card-body">
 <!--           <a href="#"><img class="card-img-top" src="" alt=""></a> -->
-			<iframe width="300" height="200" src="https://img.youtube.com/vi/xZKVYhHInok/mqdefault.jpg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+			<img width="300" height="200" src="https://img.youtube.com/vi/xZKVYhHInok/mqdefault.jpg"></img>
           </div>
           <div class="card-footer">
             <a href="#" class="btn btn-primary">여기는 좋아요, 작성자 프로필 만들곳</a>
@@ -88,7 +88,7 @@
           <h4 class="card-header">영상 제목</h4>
           <div class="card-body">
 <!--           <a href="#"><img class="card-img-top" src="" alt=""></a> -->
-			<iframe width="300" height="200" src="https://img.youtube.com/vi/xZKVYhHInok/mqdefault.jpg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+			<img width="300" height="200" src="https://img.youtube.com/vi/xZKVYhHInok/mqdefault.jpg"></img>
           </div>
           <div class="card-footer">
             <a href="#" class="btn btn-primary">여기는 좋아요, 작성자 프로필 만들곳</a>
@@ -100,7 +100,7 @@
           <h4 class="card-header">영상 제목</h4>
           <div class="card-body">
 <!--           <a href="#"><img class="card-img-top" src="" alt=""></a> -->
-			<iframe width="300" height="200" src="https://img.youtube.com/vi/xZKVYhHInok/mqdefault.jpg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+			<img width="300" height="200" src="https://img.youtube.com/vi/xZKVYhHInok/mqdefault.jpg"></img>
           </div>
           <div class="card-footer">
             <a href="#" class="btn btn-primary">여기는 좋아요, 작성자 프로필 만들곳</a>
