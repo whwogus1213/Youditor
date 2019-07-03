@@ -8,7 +8,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
 	<meta name="description" content="">
 	<meta name="author" content="">
-	
+
 	<style type="text/css">
 		.container.imgs_wrap img{
 			resize:	both;
@@ -20,23 +20,23 @@
 	<jsp:include page="../module/header.jsp" flush="false"/>
 	<script type="text/javascript">
 		var sel_file;
-	
+
 		$(document).ready(function(){
 			$("#picture").on("change", handleImgFileSelect);
 		});
-		
+
 		function handleImgFileSelect(e) {
 			var files = e.target.files;
 			var filesArr = Array.prototype.slice.call(files);
-		
+
 			filesArr.forEach(function(f){
 				if(!f.type.match("image.*")) {
 					alert("확장자는 이미지 확장자만 가능합니다.");
 					return;
 				}
-							
+
 				sel_file = f;
-							
+
 				var reader = new FileReader();
 				reader.onload = function(e) {
 					$("#profileImg").attr("src", e.target.result);
@@ -45,12 +45,110 @@
 			});
 		}
 	</script>
+	<script type="text/javascript">
+  	var isCheckEmail = 0;
+  	$(function() {
+  		$("#checkEmail").click(function() {
+  			var email = $("#email").val();
+  			$.ajax({
+  				async: true,
+  				type: "POST",
+  				data: email,
+  				url: "checkEmail.do",
+  				dataType : "json",
+  				contentType: "application/json; charset=UTF-8",
+  				success: function (data) {
+  			        if(data.cnt > 0) {
+  						alert("이메일이 존재합니다. 다른 이메일을 입력해주세요.");
+  						//이메일이 존재할 경우 빨강으로 , 아니면 파랑으로 처리하는 디자인
+  						$("#divInputEmail").addClass("has-error")
+  						$("#divInputEmail").removeClass("has-success")
+  						$("#email").focus();
+  			        } else {
+  						alert("사용가능한 이메일입니다.");
+  						//이메일이 존재할 경우 빨강으로 , 아니면 파랑으로 처리하는 디자인
+  						$("#divInputEmail").addClass("has-success")
+  						$("#divInputEmail").removeClass("has-error")
+  						$("#pwd").focus();
+  						//이메일이 중복하지 않으면  isCheckEmail = 1
+  						isCheckEmail = 1;
+  			        }
+  				},
+  				error : function(error) {
+  					alert("error : " + error);
+  				}
+  			});
+  		});
+  	});
+  	var isCheckNickname = 0;
+  	$(function() {
+  		$("#checkNickname").click(function() {
+  			var nickname = $("#nickname").val();
+  			$.ajax({
+  				async: true,
+  				type: "POST",
+  				data: nickname,
+  				url: "checkNickname.do",
+  				dataType : "json",
+  				contentType: "application/json; charset=UTF-8",
+  				success: function (data) {
+  			        if(data.cnt > 0) {
+  						alert("닉네임이 존재합니다. 다른 닉네임을 입력해주세요.");
+  						//닉네임이 존재할 경우 빨강으로 , 아니면 파랑으로 처리하는 디자인
+  						$("#divInputNickname").addClass("has-error")
+  						$("#divInputNickname").removeClass("has-success")
+  						$("#nickname").focus();
+  			        } else {
+  						alert("사용가능한 닉네임입니다.");
+  						//닉네임이 존재할 경우 빨강으로 , 아니면 파랑으로 처리하는 디자인
+  						$("#divInputNickname").addClass("has-success")
+  						$("#divInputNickname").removeClass("has-error")
+  						$("#picture").focus();
+  						//닉네임이 중복하지 않으면  isCheckEmail = 1
+  						isCheckNickname = 1;
+  			        }
+  				},
+  				error : function(error) {
+  					alert("error : " + error);
+  				}
+  			});
+  		});
+  	});
+  	function DosignUp() {
+  		var email = $("#email").val();
+  		var pwd = $("#pwd").val();
+  		var pwdCfm = $("#pwdCfm").val();
+  		var nickname = $("#nickname").val();
+  		var agreement = $("#agreement").val();
+  		if(email.length == 0) { alert("이메일를 입력해 주세요."); $("#email").focus(); return; }
+  		if(isCheckEmail == 0) { alert("이메일 중복 체크를 해주세요."); $("#email").focus(); return; }
+  		if(pwd.length == 0) { alert("비밀번호를 입력해 주세요."); $("#pwd").focus(); return; }
+  		if(pwd != pwdCfm) { alert("비밀번호가 서로 다릅니다. 비밀번호를 확인해 주세요."); $("#pwd").focus(); return; }
+  		if(nickname.length == 0) { alert("닉네임을 입력해 주세요."); $("#nickname").focus(); return; }
+  		if(isCheckNickname == 0) { alert("닉네임 중복 체크를 해주세요."); $("#nickname").focus(); return; }
+  		if(agreement != "1") { alert("약관에 동의해주세요."); $("#agreement").focus(); return; }
+  	if(confirm("회원가입을 하시겠습니까?")) {
+  		if(isCheckEmail == 0) {
+  			alert('이메일 중복체크를 해주세요');
+  			$("#email").focus();
+  			return false;
+        	} else if(isCheckNickname == 0) {
+        		alert('닉네임 중복체크를 해주세요');
+        		$("#nickname").focus();
+  			return false;
+        	} else {
+          		alert("회원가입을 축하합니다");
+          		$("#frm").submit();
+        	}
+      	}
+  	}
+	</script>
 
 	<title>회원 가입 - YouDitor</title>
 
 	<!-- Custom styles -->
 	<link href="/resources/css/modern-business.css" rel="stylesheet">
-	
+
 </head>
 
 <body>
@@ -63,43 +161,42 @@
 		</div>
 	</div>
 	<div class="container">
-		<form class="form-horizontal" method="post" name="memInsForm"
+		<form class="form-horizontal" id="frm" method="post" name="memInsForm"
 		action="${path}/accounts/insertAccountsPro">
-			
+
 			<div class="form-inline">
 				<h2 align="center">&nbsp;</h2>
-				<label class="control-label col-sm-3">아이디(E-mail)</label>
+				<label class="control-label col-sm-3">E-mail<font color="red">(*필수)</font></label>
 				<div class="col-sm-3">
-					<input type="text" class="form-control" id="email" 
-						name="email" maxlength="16" placeholder="Enter ID">
+					<input type="text" class="form-control" id="email"
+						name="email" maxlength="30" placeholder="Enter ID">
 				</div>
-				<input class="btn btn-danger btn-sm" type="button"
-					name="confirm_id" value="ID중복확인"
-					OnClick="confirmId(document.memInsForm.id.value)">
+				<input class="btn btn-danger btn-sm" type="button" name="checkEmail" id="checkEmail" value="중복확인">
 			</div>
 			<div class="form-inline">
 				<h2 align="center">&nbsp;</h2>
-				<label class="control-label col-sm-3">비밀번호</label>
+				<label class="control-label col-sm-3">비밀번호<font color="red">(*필수)</font></label>
 				<div class="col-sm-3">
-					<input type="password" class="form-control" id="pwd" 
-						name="pwd" maxlength="16" placeholder="Enter Password">
-				</div>		
+					<input type="password" class="form-control" id="pwd"
+						name="pwd" maxlength="20" placeholder="Enter Password">
+				</div>
 			</div>
 			<div class="form-inline">
 				<h2 align="center">&nbsp;</h2>
 				<label class="control-label col-sm-3">비밀번호확인</label>
 				<div class="col-sm-3">
-					<input type="password" class="form-control" id="repwd" 
-						name="repwd" maxlength="16" placeholder="Enter Password">
-				</div>		
+					<input type="password" class="form-control" id="pwdCfm"
+						name="pwdCfm" maxlength="20" placeholder="Enter Password">
+				</div>
 			</div>
 			<div class="form-inline">
 				<h2 align="center">&nbsp;</h2>
-				<label class="control-label col-sm-3">이름(별명)</label>
+				<label class="control-label col-sm-3">이름(별명)<font color="red">(*필수)</font></label>
 				<div class="col-sm-3">
-					<input type="text" class="form-control" id="nickname" 
-						name="nickname" maxlength="10" placeholder="Enter Nickname">
-				</div>		
+					<input type="text" class="form-control" id="nickname"
+						name="nickname" maxlength="16" placeholder="Enter Nickname">
+				</div>
+				<input class="btn btn-danger btn-sm" type="button" name="checkNickname" id="checkNickname" value="중복확인">
 			</div>
 			<div class="form-inline">
 				<h2 align="center">&nbsp;</h2>
@@ -123,14 +220,13 @@
 					</c:choose>
 				</div>
 			</div>
-			<br>
 			<div class="form-inline">
 				<h2 align="center">&nbsp;</h2>
 				<label class="control-label col-sm-3">자기소개</label>
 				<div class="col-sm-7">
-					<textarea class="form-control" name="footer" id="footer" 
+					<textarea class="form-control" name="footer" id="footer"
 						rows="5" cols="80" placeholder="Enter Profile"></textarea>
-				</div>		
+				</div>
 			</div>
 			<div class="form-inline" align="center">
 				<h2 align="center">&nbsp;</h2>
@@ -143,27 +239,27 @@
 					<h6>
 						개인 정보 제3자 제공 동의
 						<br>① 개인정보를 제공받는 자: YouditoR
-						<br>② 개인정보를 제공받는 자의 개인 정보 이용 목적 : 영업관리, 
+						<br>② 개인정보를 제공받는 자의 개인 정보 이용 목적 : 영업관리,
 						설문조사 및 프로모션, 이벤트 경품 제공, e-mail 발송, 행사 관련 마케팅
 						<br>③ 제공하는 개인정보항목 : 이름, 이메일주소, 회사명, 직무/직책, 연락처, 휴대전화
 						<br>④ 개인정보를 제공받는 자의 개인 정보 보유 및 이용 기간 :
 						개인정보 취급 목적을 달성하여 더 이상 개인정보가 불 필요하게 된 경우이거나
 						5년이 지나면 지체 없이 해당 정보를 파기할 것입니다.
-						<br>귀하는 위와 같은 YouditoR의 개인정보 수집 및 이용정책에 동의하지 
-						않을 수 있으나, YouditoR으로부터 솔루션, 최신 IT정보, 행사초청안내 등의 
+						<br>귀하는 위와 같은 YouditoR의 개인정보 수집 및 이용정책에 동의하지
+						않을 수 있으나, YouditoR으로부터 솔루션, 최신 IT정보, 행사초청안내 등의
 						유용한 정보를 제공받지 못 할 수 있습니다.
 						<br> 개인 정보 보호에 대한 자세한 내용은 http://www.YouditoR.com 을 참조바랍니다.
 					</h6>
 				<div class="checkbox">
 					<label>
-						<input type="checkbox" id="is_subscribed" name="is_subscribed" value="o"/>
+						<input type="checkbox" id="agreement" name="agreement" value="1"/>
 					</label> YouditoR의 개인정보 수집 및 이용에 동의합니다.
 				</div>
 			</div>
 			<div class="form-group">
 				<h2 align="center">&nbsp;</h2>
 				<div class="col-sm-offset-2 col-sm-12" align="center">
-					<button type="submit" id="submit">
+					<button type="button" onclick="DosignUp();">
 					회원가입</button>
 					<button type="reset" id="reset">
 					다시 작성</button>
@@ -171,8 +267,8 @@
 			</div>
 		</form>
 	</div>
-	
+
 	<jsp:include page="../module/bottom.jsp" flush="false"/>
-  
+
 </body>
 </html>

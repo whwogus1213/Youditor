@@ -33,5 +33,15 @@ public class AccountsDAOImpl implements AccountsDAO {
 	public AccountsVO login(AccountsVO vo) throws Exception {
 		return sqlSession.selectOne(NAMESPACE + ".login", vo);
 	}
+	
+	@Override
+	public int checkEmail(String email) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + ".checkEmail", email);
+	}
+
+	@Override
+	public int checkNickname(String nickname) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + ".checkNickname", nickname);
+	}
 
 }
