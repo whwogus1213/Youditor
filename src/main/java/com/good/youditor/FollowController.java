@@ -64,7 +64,7 @@ public class FollowController {
 	
 	// 팔로잉 추가
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
-	public void insert(HttpServletRequest request, FollowListVO vo) throws Exception {
+	public String insert(HttpServletRequest request, FollowListVO vo) throws Exception {
 
 		System.out.println("Start follow insert");
 
@@ -78,7 +78,16 @@ public class FollowController {
 //		System.out.println("accountId" + accountId);
 		System.out.println("followList" + vo);
 
-		followService.insert(vo);
+		//followService.insert(vo);
+	       try{
+	   		followService.insert(vo);
+
+	            
+	        } catch (Exception e){
+	            e.printStackTrace();
+	        }
+		
+		return "success";
 	}
 	
 //	// 팔로잉 목록 + 페이징 + 검색
