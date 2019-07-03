@@ -11,6 +11,7 @@
 <jsp:include page="../module/header.jsp" flush="false" />
 <!-- Custom styles -->
 <link href="/resources/css/modern-business.css" rel="stylesheet">
+<!-- 
 <script>
 // 이전 버튼
 	function fn_prev(page, range, rangeSize) {
@@ -54,6 +55,7 @@
 		console.log(url);
 	});
 </script>
+ -->
 </head>
 <body>
 	<jsp:include page="./../module/top.jsp" flush="false" />
@@ -84,6 +86,7 @@
 		</table>
 
 		<!-- 페이징 -->
+<!-- 
 		<div id="paginationBox">
 			<ul class="pagination">
 				<c:if test="${pagination.prev}">
@@ -107,9 +110,11 @@
 				</c:if>
 			</ul>
 		</div>
+ -->
 		<!-- 페이징 -->
 
 		<!-- 검색 -->
+<!-- 
 		<div class="form-group row justify-content-center">
 			<div class="w100" style="padding-right: 10px">
 				<select class="form-control form-control-sm" name="searchType"
@@ -126,6 +131,7 @@
 					id="btnSearch">검색</button>
 			</div>
 		</div>
+ -->
 		<!-- 검색 -->
 
 	</div>
