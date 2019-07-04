@@ -27,9 +27,10 @@
 		<artifactId>spring-websocket</artifactId>
 		<version>${org.springframework-version}</version>
 	</dependency>
+	
 	<!-- json -->
 	<dependency>
-		<groupId>com.codehaus.jackson</groupId>
+		<groupId>org.codehaus.jackson</groupId>
 		<artifactId>jackson-mapper-asl</artifactId>
 			<version>1.4.2</version>
 		</dependency>

@@ -43,6 +43,7 @@
             <exclude-mapping path="/videoboard/**"/>
             <exclude-mapping path="/reply/**"/>
             <exclude-mapping path="/reply"/>
+            <exclude-mapping path="/echo"/>
             <beans:ref bean="authenticationInterceptor"/>
         </interceptor>
     </interceptors>
@@ -51,11 +52,11 @@
 
 
 	<!-- Websocket설정 -->
+	<beans:bean id="echoHandler" class="com.good.websocket.EchoHandler"></beans:bean>
 	<websocket:handlers>
 		<websocket:mapping handler="echoHandler" path="/echo"/>
 		<websocket:sockjs/>
 	</websocket:handlers>
 	
-	<beans:bean id="echoHandler" class="com.good.websocket.EchoHandler"></beans:bean>
 
 </beans:beans>

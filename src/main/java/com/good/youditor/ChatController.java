@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Locale;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -15,16 +16,21 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.good.dto.AccountsVO;
 import com.good.service.AccountsService;
+import com.mysql.cj.Session;
 
 @Controller
 public class ChatController {
 
-	@RequestMapping(value = "/chattion.do", method = RequestMethod.GET)
-	public ModelAndView chat(ModelAndView mv) throws Exception {
-		mv.setViewName("chat/chattingview");
-		
+	@RequestMapping(value = "/chatting.do")
+	public ModelAndView chat(ModelAndView mv, HttpServletRequest req) throws Exception {
 		//사용자정보 출력(세션)
-		
+		HttpSession session = req.getSession();
+		AccountsVO login = (AccountsVO)session.getAttribute("login");
+		System.out.println(login);
+		mv.addObject("userid",login.getAccountId());
+		mv.setViewName("chat/chattingview");
+	
+		return mv;
 	}
 
 }
