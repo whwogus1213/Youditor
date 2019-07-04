@@ -6,7 +6,7 @@
 <mapper namespace="com.good.mapper.noticeBoardMapper">
 	<!-- 게시물 목록 + 페이징 + 검색 -->
 	<select id="listAll" resultType="NoticeBoardVO">
-		SELECT *
+		SELECT boardId, accountId, categoryId, subject, object, CONVERT_TZ(reg_date,'+09:00','+00:00') as reg_date, CONVERT_TZ(mod_date,'+09:00','+00:00') as mod_date, viewCount 
 		FROM noticeboard
 		<trim prefix="WHERE" prefixOverrides="AND|OR">
 			<if test="searchType=='subject' and keyword != null and keyword != '' ">
@@ -24,7 +24,7 @@
 	</select>
 	<!-- 게시물 조회 -->
 	<select id="view" parameterType="int" resultType="NoticeBoardVO">
-		select *
+		select boardId, accountId, categoryId, subject, object, CONVERT_TZ(reg_date,'+09:00','+00:00') as reg_date, CONVERT_TZ(mod_date,'+09:00','+00:00') as mod_date, viewCount 
 		from noticeboard
 		where boardId = #{boardId}
 	</select>
