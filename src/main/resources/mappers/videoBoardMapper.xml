@@ -70,6 +70,10 @@
 		UPDATE videoBoard SET viewCount = viewCount+1 WHERE boardId=#{boardId}
 		</update>
 
-
+	<!-- 팔로우 체크 -->
+	<select id="followCheck" resultType="int" parameterType="map">
+		select EXISTS (select * from followlist where followAccountId = #{accountId2} and followerAccountId = #{accountId} )
+		
+	</select>
 
 </mapper>

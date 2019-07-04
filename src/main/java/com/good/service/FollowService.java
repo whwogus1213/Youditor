@@ -14,7 +14,6 @@ public interface FollowService {
 
 	// 팔로잉 추가
 	public void insert(FollowListVO vo) throws Exception;
-
 	
 //	// 팔로워 목록 + 페이징 + 검색
 //	public List<FollowListVO> listAll(Search search) throws Exception;

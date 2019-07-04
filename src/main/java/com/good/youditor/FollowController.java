@@ -8,18 +8,15 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.good.dto.AccountsVO;
 import com.good.dto.FollowListVO;
-import com.good.dto.VideoBoardVO;
 import com.good.service.FollowService;
-import com.good.service.VideoBoardService;
 
 @Controller
 @RequestMapping("/follow")
@@ -79,19 +76,31 @@ public class FollowController {
 //		System.out.println("accountId" + accountId);
 		System.out.println("followList" + vo);
 
-		//followService.insert(vo);
-	       try{
-	    	   System.out.println("followService.insert 진입");
-	   		followService.insert(vo);
-	   		System.out.println("followService.insert 성공");
+		// followService.insert(vo);
+		try {
+			System.out.println("followService.insert 진입");
+			followService.insert(vo);
+			System.out.println("followService.insert 성공");
 
-	            
-	        } catch (Exception e){
-	            e.printStackTrace();
-	        }
-		
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 		return "success";
 	}
+	
+//	// 팔로우 체크
+//	@RequestMapping(value = "/followCheck", method = {RequestMethod.GET, RequestMethod.POST})
+//	public ModelAndView followCheck(HttpServletRequest request, @RequestParam("followerAccountId") int followerAccountId) throws Exception {
+//		System.out.println("Start follow check");
+//		
+//		FollowListVO followCheck = followService.followCheck(followerAccountId);
+//		
+//		ModelAndView mv = new ModelAndView();
+//		mv.addObject("followCheck", followCheck);
+//		
+//		return mv;
+//	}
 	
 //	// 팔로잉 목록 + 페이징 + 검색
 //	@RequestMapping(value = "/followingList", method = RequestMethod.GET)

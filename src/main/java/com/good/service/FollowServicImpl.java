@@ -32,8 +32,6 @@ public class FollowServicImpl implements FollowService {
 	public void insert(FollowListVO vo) throws Exception {
 		followDAO.insert(vo);
 	}
-
-	
 	
 //	@Override
 //	public List<FollowListVO> listAll(Search search) throws Exception {

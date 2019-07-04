@@ -3,6 +3,7 @@ package com.good.dao;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.print.attribute.standard.MediaSize.NA;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
@@ -34,7 +35,6 @@ public class FollowDAOImpl implements FollowDAO {
 	public void insert(FollowListVO vo) throws Exception {
 		sqlSession.insert(NAMESPACE + ".insert", vo);
 	}
-
 
 //	@Override
 //	public List<FollowListVO> listAll(Search search) throws Exception {

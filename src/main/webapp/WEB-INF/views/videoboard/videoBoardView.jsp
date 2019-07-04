@@ -17,31 +17,31 @@
 <jsp:include page="../module/header.jsp" flush="false"/>
 
 <script type="text/javascript">
-
-function fn_following(accountId) {
-		alert(accountId);
-
+	// 팔로우 추가
+	function fn_following(accountId) {
+		//alert(accountId);
 		var json = {
 			"followAccountId" : accountId
 		}
-	$.ajax({
-		type : "POST",
-		url : "/follow/insert",
-// 		data:$("#followingForm").serialize(),
+		$.ajax({
+			type : "POST",
+			url : "/follow/insert",
+			//data:$("#followingForm").serialize(),
 			data : json,
-		// 				dataType : : "json",
-		success : function(data) {
-			if (data == "success") {
-				alert("성콩");
-				console.log("성공");
+			//dataType : : "json",
+			success : function(data) {
+				if (data == "success") {
+					//alert("성콩");
+					console.log("성공");
+					$('#followbtn').attr('class', 'btn btn-warning btn-sm');
+					$('#followbtn').html('팔로잉√');
+				}
+			},
+			error : function(data) {
+				alert("에러");
 			}
-		},
-		error : function(data) {
-			alert("에러");
-		}
-	});
-}
-
+		});
+	}
 </script>
 
 
@@ -90,11 +90,18 @@ function fn_following(accountId) {
 		<%-- 	<h1>${row.youtubeLink }</h1> --%>
 		<!-- 디자인 필요 -->
 		<div align="right">
+			<!-- 팔로우 버튼 -->
 			<div id="followDiv">
 				<c:if test="${login.accountId ne row.accountId}">
-					<button class="btn btn-primary btn-sm" onclick="fn_following('${row.accountId}')">팔로우</button>
+					<c:if test="${followCheck ne 1}">
+						<button class="btn btn-primary btn-sm" id="followbtn" onclick="fn_following('${row.accountId}')">팔로우</button>
+					</c:if>
+					<c:if test="${followCheck ne 0}">
+						<button class="btn btn-warning btn-sm" id="followbtn" onclick="fn_following('${row.accountId}')">팔로잉√</button>
+					</c:if>
 				</c:if>
 			</div>
+			<!-- 수정/삭제 버튼 -->
 			<c:if test="${login.accountId eq row.accountId}">
 				<button class="btn btn-warning btn-sm" onclick="location.href='/videoboard/updateVideoBoard.do?boardId=${row.boardId}'">수정</button>
 				<button class="btn btn-danger btn-sm" id="deletebtn">삭제</button>
