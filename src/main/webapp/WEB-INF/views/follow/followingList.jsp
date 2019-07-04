@@ -11,6 +11,7 @@
 <jsp:include page="../module/header.jsp" flush="false" />
 <!-- Custom styles -->
 <link href="/resources/css/modern-business.css" rel="stylesheet">
+<!-- 
 <script>
 // 이전 버튼
 	function fn_prev(page, range, rangeSize) {
@@ -54,6 +55,7 @@
 		console.log(url);
 	});
 </script>
+ -->
 </head>
 <body>
 	<jsp:include page="./../module/top.jsp" flush="false" />
@@ -69,27 +71,23 @@
 			<!-- <table border="1"> -->
 			<thead>
 				<tr>
-					<th>번호</th>
-					<th>팔로우당함</th>
-					<th>팔로우함</th>
-					<th>팔로우 일</th>
+					<th>아이디</th>
+					<th>날짜</th>
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach items="${FollowList}" var="FollowList">
-					<c:if test="${login.accountId eq FollowList.followerAccountId }">
-						<tr>
-							<td>${FollowList.followId}</td>
-							<td>${FollowList.followAccountId}</td>
-							<td>${FollowList.followerAccountId}</td>
-							<td><fmt:formatDate value="${FollowList.reg_date}" pattern="yyyy-MM-dd" /></td>
-						</tr>
-					</c:if>
+				<c:forEach items="${followingList}" var="followingList">
+					<tr>
+						
+						<td>${followingList.followAccountId}</td>
+						<td><fmt:formatDate value="${followingList.reg_date}" pattern="yyyy-MM-dd" /></td>
+					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
 
 		<!-- 페이징 -->
+<!-- 
 		<div id="paginationBox">
 			<ul class="pagination">
 				<c:if test="${pagination.prev}">
@@ -113,9 +111,11 @@
 				</c:if>
 			</ul>
 		</div>
+ -->
 		<!-- 페이징 -->
 
 		<!-- 검색 -->
+<!-- 
 		<div class="form-group row justify-content-center">
 			<div class="w100" style="padding-right: 10px">
 				<select class="form-control form-control-sm" name="searchType"
@@ -132,6 +132,7 @@
 					id="btnSearch">검색</button>
 			</div>
 		</div>
+ -->
 		<!-- 검색 -->
 
 	</div>

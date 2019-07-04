@@ -3,11 +3,12 @@ package com.good.dao;
 import java.util.List;
 
 import com.good.dto.VideoBoardVO;
+import com.good.dto.VideoCategoryVO;
 
 public interface VideoBoardDAO {
 
 	// 게시물 목록
-	public List<VideoBoardVO> listAll() throws Exception;
+	public List<VideoBoardVO> listAll(VideoCategoryVO videoCategory) throws Exception;
 
 	// 게시물 보기
 	public VideoBoardVO view(int boardId) throws Exception;
@@ -23,4 +24,7 @@ public interface VideoBoardDAO {
 
 	//조회수
 	public void viewCount(int boardId) throws Exception;
+
+	// 팔로우 체크
+	public int followCheck(int accountId, int accountId2);
 }

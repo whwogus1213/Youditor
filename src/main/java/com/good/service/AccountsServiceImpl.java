@@ -30,4 +30,18 @@ public class AccountsServiceImpl implements AccountsService {
 
 	}
 
+	@Override
+	public int checkEmail(String email) throws Exception {
+		return dao.checkEmail(email);
+	}
+
+	@Override
+	public int checkNickname(String nickname) throws Exception {
+		return dao.checkNickname(nickname);
+	}
+	
+	public void resetPassword(String email) throws Exception {
+		dao.resetPassword(email);
+	}
+
 }

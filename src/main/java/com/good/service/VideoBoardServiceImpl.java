@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.good.dao.VideoBoardDAO;
 import com.good.dto.VideoBoardVO;
+import com.good.dto.VideoCategoryVO;
 
 @Service
 public class VideoBoardServiceImpl implements VideoBoardService {
@@ -18,8 +19,8 @@ public class VideoBoardServiceImpl implements VideoBoardService {
 
 	// 게시물 목록
 	@Override
-	public List<VideoBoardVO> listAll() throws Exception {
-		return videoBoardDAO.listAll();
+	public List<VideoBoardVO> listAll(VideoCategoryVO videoCategory) throws Exception {
+		return videoBoardDAO.listAll(videoCategory);
 	}
 
 	// 게시물 읽기
@@ -51,6 +52,12 @@ public class VideoBoardServiceImpl implements VideoBoardService {
 	@Override
 	public void viewCount(int boardId) throws Exception {
 		videoBoardDAO.viewCount(boardId);
+	}
+
+	// 팔로우 체크
+	@Override
+	public int followCheck(int accountId, int accountId2) {
+		return videoBoardDAO.followCheck(accountId, accountId2);
 	}
 
 }

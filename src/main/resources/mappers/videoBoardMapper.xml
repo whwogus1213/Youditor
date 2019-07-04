@@ -4,20 +4,28 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.good.mapper.videoBoardMapper">
-	<select id="listAll" resultType="VideoBoardVO">
+	<select id="listAll" resultType="VideoBoardVO" parameterType="VideoCategoryVO">
 
-       select boardId, accountId, categoryId, subject, object, youtubeLink, 
-				reg_date, mod_date, viewCount, (select count(*) from videocomment where b.boardId = boardId) as replyCount,
-				(select star from videostar where b.boardId = boardId) as starCount
-		 from videoBoard b
+       select boardId, b.accountId, categoryId, subject, object, youtubeLink, 
+				CONVERT_TZ(b.reg_date,'+09:00','+00:00') as reg_date, CONVERT_TZ(b.mod_date,'+09:00','+00:00') as mod_date, viewCount, (select count(*) from videocomment where b.boardId = boardId) as replyCount
+				, ac.nickname, (select star from videostar where b.boardId = boardId) as starCount
+		 from videoBoard b, accounts ac where b.accountId = ac.accountId 
+		 <trim prefix="WHERE" prefixOverrides="AND|OR">
+			<if test='categoryId!=0'>
+				AND categoryId = #{categoryId}
+			</if>
+		</trim>
 		 order by boardId desc 
 
     </select>
 
     <!-- 게시물 조회 -->
-	<select id="view" parameterType="int" resultType="VideoBoardVO">
-		select * from videoBoard where boardId = #{boardId}
+	<select id="view" parameterType="int" resultType="VideoBoardVO">select boardId, b.accountId, categoryId, subject, object, youtubeLink, 
+				CONVERT_TZ(b.reg_date,'+09:00','+00:00') as reg_date, CONVERT_TZ(b.mod_date,'+09:00','+00:00') as mod_date, viewCount, (select count(*) from videocomment where b.boardId = boardId) as replyCount
+				, ac.nickname, ac.footer
+		 from videoBoard b, accounts ac where boardId = #{boardId} and b.accountId = ac.accountId
 	</select>
+	
     <!-- 글 쓰기 -->
     <insert id="insertVideoBoard" parameterType="VideoBoardVO">
 		insert into
@@ -44,7 +52,8 @@
 		  set
         subject = #{subject},
 		    object = #{object},
-        youtubeLink = #{youtubeLink}
+        youtubeLink = #{youtubeLink},
+        mod_date = now()
 		  where
         boardId = #{boardId}
 		 </update>
@@ -62,6 +71,10 @@
 		UPDATE videoBoard SET viewCount = viewCount+1 WHERE boardId=#{boardId}
 		</update>
 
-
+	<!-- 팔로우 체크 -->
+	<select id="followCheck" resultType="int" parameterType="map">
+		select EXISTS (select * from followlist where followAccountId = #{accountId2} and followerAccountId = #{accountId} )
+		
+	</select>
 
 </mapper>

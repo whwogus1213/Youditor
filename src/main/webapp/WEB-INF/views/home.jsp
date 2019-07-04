@@ -21,7 +21,8 @@
 </head>
 
 <body>
-  <jsp:include page="./module/top.jsp" flush="false"/>
+
+  <jsp:include page="./module/top2.jsp" flush="false"/>
 
   <header>
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
@@ -76,7 +77,7 @@
           <h4 class="card-header">영상 제목</h4>
           <div class="card-body">
 <!--           <a href="#"><img class="card-img-top" src="" alt=""></a> -->
-			<iframe width="300" height="200" src="https://img.youtube.com/vi/xZKVYhHInok/mqdefault.jpg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+			<img width="300" height="200" src="https://img.youtube.com/vi/xZKVYhHInok/mqdefault.jpg"></img>
           </div>
           <div class="card-footer">
             <a href="#" class="btn btn-primary">여기는 좋아요, 작성자 프로필 만들곳</a>
@@ -88,7 +89,7 @@
           <h4 class="card-header">영상 제목</h4>
           <div class="card-body">
 <!--           <a href="#"><img class="card-img-top" src="" alt=""></a> -->
-			<iframe width="300" height="200" src="https://img.youtube.com/vi/xZKVYhHInok/mqdefault.jpg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+			<img width="300" height="200" src="https://img.youtube.com/vi/xZKVYhHInok/mqdefault.jpg"></img>
           </div>
           <div class="card-footer">
             <a href="#" class="btn btn-primary">여기는 좋아요, 작성자 프로필 만들곳</a>
@@ -100,7 +101,7 @@
           <h4 class="card-header">영상 제목</h4>
           <div class="card-body">
 <!--           <a href="#"><img class="card-img-top" src="" alt=""></a> -->
-			<iframe width="300" height="200" src="https://img.youtube.com/vi/xZKVYhHInok/mqdefault.jpg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+			<img width="300" height="200" src="https://img.youtube.com/vi/xZKVYhHInok/mqdefault.jpg"></img>
           </div>
           <div class="card-footer">
             <a href="#" class="btn btn-primary">여기는 좋아요, 작성자 프로필 만들곳</a>
@@ -146,7 +147,7 @@
           </div>
         </div>
       </div>
-      
+
     <!-- /.row -->
 
     <hr>
@@ -158,7 +159,7 @@
 
   <!-- Footer -->
   <!--
-  
+
   <footer class="py-5 bg-dark container">
     <div class="container">
       <p class="m-0 text-center text-white">Copyright &copy; Your Website 2019 All contents Copyright 2013 SolWeb Inc. all rights reserved<br>
@@ -169,7 +170,7 @@
   <!-- </footer>  -->
   <jsp:include page="./module/bottom.jsp" flush="false"/>
 
-  
+
   <script src="/resources/vendor/jquery/jquery.min.js"></script>
   <script src="/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 

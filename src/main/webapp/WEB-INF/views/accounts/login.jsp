@@ -21,24 +21,26 @@
 
   <!-- Custom styles -->
   <link href="/resources/css/modern-business.css" rel="stylesheet">
+  <script type="text/javascript">
+    function DosignUp() {
+  		var email = $("#email").val();
+  		var pwd = $("#pwd").val();
+  		if(email.length == 0) { alert("이메일를 입력해 주세요."); $("#email").focus(); return; }
+  		if(pwd.length == 0) { alert("비밀번호를 입력해 주세요."); $("#pwd").focus(); return; }
+      $("#frm").submit();
+  	}
+  </script>
 </head>
 <body>
 	<jsp:include page="../module/top.jsp" flush="false"/>
-	<h2 align="center">&nbsp;</h2>
-	<h2 align="center">&nbsp;</h2>
-	<h1 align="center">YouditoR 로그인</h1>
-	<h2 align="center">&nbsp;</h2>
-	<h2 align="center">&nbsp;</h2>
-	
-
 	<div class="container" align ="center">
-	<form class="form-horizontal" method="post">
+	<form class="form-horizontal" id="frm" method="post">
 		<div class="form-inline">
 			<h2 align="center">&nbsp;</h2>
 			<label class="control-label col-sm-3">아이디</label>
 			<div class="col-sm-3">
-				<input type="text" class="form-control" id="email" 
-					name="email" maxlength="16" placeholder="Enter ID">
+				<input type="text" class="form-control" id="email"
+					name="email" maxlength="30" placeholder="Enter ID">
 			</div>
 		</div>
 		<br>
@@ -46,9 +48,10 @@
 			<h2 align="center">&nbsp;</h2>
 			<label class="control-label col-sm-3">비밀번호</label>
 			<div class="col-sm-3">
-				<input type="password" class="form-control" id="pwd" 
-					name="pwd" maxlength="16" placeholder="Enter Password">
-			</div>		
+				<input type="password" class="form-control" id="pwd"
+					name="pwd" maxlength="20" placeholder="Enter Password"><br>
+				<a href="/accounts/resetPassword.do">비밀번호를 잊어버리셨습니까?</a>
+			</div>
 		</div>
 		<h2 align="center">&nbsp;</h2>
 		<div class="form-group">
@@ -57,13 +60,14 @@
 <!-- 				<button type="button" class="btn btn-primary"
 					onclick="memberInsertCheckForm(this.form)">
 				로그인</button> -->
-				<button type="submit" class="btn btn-primary">
-				로그인</button>
+				<button type="button" class="btn btn-primary" onclick="DosignUp();">
+					로그인
+				</button>
 			</div>
 		</div>
 	</form>
 	</div>
-	
+
 	<c:if test="${msg == false }">
 		 <script>
 	      alert( '로그인에 실패했습니다. 아이디 또는 패스워드를 다시 입력해주십시오.' );
@@ -71,8 +75,8 @@
 	</c:if>
 	<h2 align="center">&nbsp;</h2>
 	<h2 align="center">&nbsp;</h2>
-	
+
 	<jsp:include page="../module/bottom.jsp" flush="false"/>
- 
+
 </body>
 </html>

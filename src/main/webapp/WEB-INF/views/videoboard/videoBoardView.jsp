@@ -31,6 +31,35 @@
 
 <jsp:include page="../module/header.jsp" flush="false"/>
 
+<script type="text/javascript">
+	// 팔로우 추가
+	function fn_following(accountId) {
+		//alert(accountId);
+		var json = {
+			"followAccountId" : accountId
+		}
+		$.ajax({
+			type : "POST",
+			url : "/follow/insert",
+			//data:$("#followingForm").serialize(),
+			data : json,
+			//dataType : : "json",
+			success : function(data) {
+				if (data == "success") {
+					//alert("성콩");
+					console.log("성공");
+					$('#followbtn').attr('class', 'btn btn-warning btn-sm');
+					$('#followbtn').html('팔로잉√');
+				}
+			},
+			error : function(data) {
+				alert("에러");
+			}
+		});
+	}
+</script>
+
+
 </head>
 <body>
 	<jsp:include page="../module/top.jsp" flush="false"/>
@@ -173,10 +202,22 @@
 		<h5 align="right">등록일 &nbsp;&nbsp; <fmt:formatDate value="${row.reg_date}" pattern="yyyy년 MM월 dd일  hh:mm:ss" /></h5>
 		<div align="right">평가 점수 : ${row.starCount}</div>
 		<hr>
-		<h6>${row.accountId } 프로필이 표시되게끔....</h6>
+		<h6><strong>${row.nickname }</strong><br><br>${row.footer }</h6>
 		<%-- 	<h1>${row.youtubeLink }</h1> --%>
 		<!-- 디자인 필요 -->
 		<div align="right">
+			<!-- 팔로우 버튼 -->
+			<div id="followDiv">
+				<c:if test="${login.accountId ne row.accountId}">
+					<c:if test="${followCheck ne 1}">
+						<button class="btn btn-primary btn-sm" id="followbtn" onclick="fn_following('${row.accountId}')">팔로우</button>
+					</c:if>
+					<c:if test="${followCheck ne 0}">
+						<button class="btn btn-warning btn-sm" id="followbtn" onclick="fn_following('${row.accountId}')">팔로잉√</button>
+					</c:if>
+				</c:if>
+			</div>
+			<!-- 수정/삭제 버튼 -->
 			<c:if test="${login.accountId eq row.accountId}">
 				<button class="btn btn-warning btn-sm" onclick="location.href='/videoboard/updateVideoBoard.do?boardId=${row.boardId}'">수정</button>
 				<button class="btn btn-danger btn-sm" id="deletebtn">삭제</button>
@@ -186,6 +227,7 @@
 	</div>
 	<div id="listReply">
 		<jsp:include page="../videoboard/videoBoardReply.jsp" flush="false"/>
+		
 	</div>
 
 	<jsp:include page="../module/bottom.jsp" flush="false"/>

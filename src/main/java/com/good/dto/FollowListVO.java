@@ -3,18 +3,9 @@ package com.good.dto;
 import java.util.Date;
 
 public class FollowListVO {
-	private int followId;
 	private int followAccountId;
 	private int followerAccountId;
 	private Date reg_date;
-
-	public int getFollowId() {
-		return followId;
-	}
-
-	public void setFollowId(int followId) {
-		this.followId = followId;
-	}
 
 	public int getFollowAccountId() {
 		return followAccountId;
@@ -38,6 +29,12 @@ public class FollowListVO {
 
 	public void setReg_date(Date reg_date) {
 		this.reg_date = reg_date;
+	}
+
+	@Override
+	public String toString() {
+		return "FollowListVO [followAccountId=" + followAccountId + ", followerAccountId=" + followerAccountId
+				+ ", reg_date=" + reg_date + "]";
 	}
 
 } // End - FollowListVO

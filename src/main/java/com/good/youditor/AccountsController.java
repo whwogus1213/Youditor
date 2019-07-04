@@ -1,15 +1,19 @@
 package com.good.youditor;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -91,6 +95,54 @@ public class AccountsController {
 
 		return "redirect:/";
 
+	}
+
+
+	//가입시 이메일 중복 체크
+	@RequestMapping("/checkEmail.do")
+	@ResponseBody
+	public Map<Object, Object> checkEmail(@RequestBody String email) throws Exception {
+
+		int count = 0;
+		Map<Object, Object> map = new HashMap<Object, Object>();
+
+		count = service.checkEmail(email);
+		map.put("cnt", count);
+
+		return map;
+	}
+
+	//가입시 닉네임 중복 체크
+	@RequestMapping("/checkNickname.do")
+	@ResponseBody
+	public Map<Object, Object> checkNickname(@RequestBody String nickname) throws Exception {
+
+		int count = 0;
+		Map<Object, Object> map = new HashMap<Object, Object>();
+
+		count = service.checkNickname(nickname);
+		map.put("cnt", count);
+
+		return map;
+	}
+	
+	@RequestMapping(value = "/resetPassword.do", method = RequestMethod.GET)
+	public ModelAndView resetPassword(Locale locale, Model model) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("accounts/resetPassword");
+		System.out.println("String resetPassword open");
+		return mav;
+	}
+	
+	@RequestMapping(value = "/resetPasswordPro")
+	public ModelAndView resetPasswordPro(String email) throws Exception {
+		service.resetPassword(email);
+		System.out.println("============resetPasswordPro 성공==============");
+
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("accounts/resetPwdMsg");
+		System.out.println("String resetPwdMsg open");
+		return mav;
 	}
 
 }

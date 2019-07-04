@@ -1,5 +1,6 @@
 package com.good.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -8,7 +9,9 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.fasterxml.jackson.core.sym.Name;
 import com.good.dto.VideoBoardVO;
+import com.good.dto.VideoCategoryVO;
 
 @Repository
 public class VideoBoardDAOImpl implements VideoBoardDAO {
@@ -21,8 +24,8 @@ public class VideoBoardDAOImpl implements VideoBoardDAO {
 
 	// 게시물 목록
 	@Override
-	public List<VideoBoardVO> listAll() throws Exception {
-		return sqlSession.selectList(NAMESPACE + ".listAll");
+	public List<VideoBoardVO> listAll(VideoCategoryVO videoCategory) throws Exception {
+		return sqlSession.selectList(NAMESPACE + ".listAll", videoCategory);
 	}
 
 	// 게시물 보기
@@ -53,5 +56,15 @@ public class VideoBoardDAOImpl implements VideoBoardDAO {
 	@Override
 	public void viewCount(int boardId) throws Exception {
 		sqlSession.update(NAMESPACE + ".viewCount", boardId);
+	}
+
+	// 팔로우 체크
+	@Override
+	public int followCheck(int accountId, int accountId2) {
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("accountId", accountId);
+		map.put("accountId2", accountId2);
+		
+		return sqlSession.selectOne(NAMESPACE + ".followCheck", map);
 	}
 }

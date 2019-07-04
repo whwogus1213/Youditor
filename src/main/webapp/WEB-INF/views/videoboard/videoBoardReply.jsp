@@ -20,9 +20,9 @@
     <br><br>
         <div>
             <div>
-                <span><strong>Comments</strong></span> <span id="cCnt"></span>
-               
+                <span><strong>Comments</strong></span>&nbsp;&nbsp;&nbsp;<span id="cCnt"></span>
             </div>
+            <hr style="2px dashed">
             <div>
             	<c:if test="${login.email != null }">
                 <div class="table input-group">           
@@ -47,10 +47,6 @@
         	<div id="commentList">
         	</div>
     </div>
-
-    
-    
-    
 </div>
 </div>
  
@@ -135,7 +131,7 @@ function getCommentList(){
                    }
                        
                    if(sessionAccountId == data[i].accountId){
-                	   html += "<div class='col-sm-10'; align='right'>";
+                	   html += "<div class='col-sm-10' align='right'>";
 	                   html += "<button class='btn btn-xs btn-link' onclick = 'replyUpdateForm("+data[i].commentId+", "+ data[i].accountId+", \""+data[i].object+"\")' style='color:#777777; font-size:smaller'>수정</button>|";
 	                   html += "<button class='btn btn-xs btn-link' onclick = 'replyDelete("+data[i].commentId+")' style='color:#777777; font-size:smaller'>삭제</button>";
 	                   html +="</div>";
@@ -170,10 +166,11 @@ function replyUpdateForm(commentId, accountId, object){
 	var html = "";
 	
 	$("#commentList #"+commentId).css("border","1px dashed black");
-	html += "<div>";
+	html += "<div class='input-group'><div>";
 	html += "<textarea style='width: 1000px' rows='3' cols='30' id='upObject"+commentId+"' name='upObject"+commentId+"'>"+object+"</textarea>";
-	html += "<a href='#' onClick='replyUpdate("+commentId+")' class='btn pull-right btn-success' style='height:100%; width:90px; text-align:center; line-height:65px;'>수정</a>";
-	html += "</div>";
+	html += "</div><div>";
+	html += "<button onClick='replyUpdate("+commentId+")' class='btn pull-right btn-success' style='height:93%; width:108px; text-align:center; line-height:65px;'>수정</button>";
+	html += "</div></div>";
 	$("#commentList #"+commentId).html(html);	
 }
 
@@ -183,7 +180,6 @@ function replyUpdate(commentId){
 			"commentId" : commentId,
 			"object" : object
 			};
-	alert("update");
 	$.ajax({
 		type:'POST',
 		url : "/reply/update",
