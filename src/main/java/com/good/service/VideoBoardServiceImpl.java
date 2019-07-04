@@ -54,4 +54,10 @@ public class VideoBoardServiceImpl implements VideoBoardService {
 		videoBoardDAO.viewCount(boardId);
 	}
 
+	// 팔로우 체크
+	@Override
+	public int followCheck(int accountId, int accountId2) {
+		return videoBoardDAO.followCheck(accountId, accountId2);
+	}
+
 }

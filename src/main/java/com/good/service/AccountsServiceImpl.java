@@ -39,5 +39,9 @@ public class AccountsServiceImpl implements AccountsService {
 	public int checkNickname(String nickname) throws Exception {
 		return dao.checkNickname(nickname);
 	}
+	
+	public void resetPassword(String email) throws Exception {
+		dao.resetPassword(email);
+	}
 
 }

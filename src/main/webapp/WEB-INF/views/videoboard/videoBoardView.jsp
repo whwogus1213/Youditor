@@ -1,4 +1,4 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page session="true" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -16,9 +16,91 @@
 <title>${row.subject} - YouDitor</title>
 <jsp:include page="../module/header.jsp" flush="false"/>
 
+<script type="text/javascript">
+	// 초기 팔로우 버튼
+	$(function(){
+		fn_followbtn();
+	});
+	
+	// 팔로우 추가
+	function fn_following(accountId) {
+		//alert("추가");
+		var json = {
+			"followAccountId" : accountId
+		}
+		$.ajax({
+			type : "POST",
+			url : "/follow/insert",
+			data : json,
+			success : function(data) {
+				if (data == "success") {
+					
+					alert("팔로우에 추가되었습니다.");
+					fn_followbtn();
+				}
+			},
+			error : function(data) {
+				alert("에러");
+			}
+		});
+	}
+
+	// 팔로우 삭제
+	function fn_unfollow(accountId) {
+		//alert("삭제");
+		var json = {
+			"followAccountId" : accountId
+		}
+		$.ajax({
+			type : "POST",
+			url : "/follow/delete",
+			data : json,
+			success : function(data) {
+				if (data == "success1") {
+					alert("팔로우가 취소되었습니다.");
+					fn_followbtn();
+				}
+			},
+			error : function(data) {
+				alert("에러");
+			}
+		});
+	}
+
+	// 팔로우 버튼 변경
+	function fn_followbtn() {
+		if(${login.accountId != row.accountId}) {
+			var loginId = ${login.accountId};
+			var boardAccountId = ${row.accountId};
+			var json = {
+					"followAccountId" : boardAccountId,
+					"followerAccountId" : loginId
+				}
+			$.ajax({
+				type : "POST",
+				url : "/follow/check",
+				data : json,
+				success : function(data) {
+					if (data == 1) {
+						var html = "<button class='btn btn-warning btn-sm' id='followbtn' onclick='fn_unfollow("+${row.accountId}+")'>팔로잉√</button>";			
+					} else {
+						var html = "<button class='btn btn-primary btn-sm' id='followbtn' onclick='fn_following("+${row.accountId}+")'>팔로우</button>";
+					}
+					$('#followDiv').html(html);
+				},
+				error : function(data) {
+					alert("에러");
+				}
+			});
+
+		}
+	}
+</script>
+
+
 </head>
 <body>
-	<jsp:include page="../module/top.jsp" flush="false"/>
+	<jsp:include page="../module/top2.jsp" flush="false"/>
 	
 	<!-- 게시글 상세정보 -->
 
@@ -55,12 +137,16 @@
 		<h5>${row.object }</h5>
 		<br>
 		<h6 style="color:gray"> 조회수&nbsp;&nbsp; ${row.viewCount }</h6>
-		<h5 align="right">등록일 &nbsp;&nbsp; <fmt:formatDate value="${row.reg_date}" pattern="yyyy년 MM월 dd일  hh:mm:ss" /></h5>
+		<h5 align="right">등록일 &nbsp;&nbsp; <fmt:formatDate value="${row.reg_date}" pattern="yyyy년 MM월 dd일  HH:mm:ss" /></h5>
 		<hr>
 		<h6><strong>${row.nickname }</strong><br><br>${row.footer }</h6>
 		<%-- 	<h1>${row.youtubeLink }</h1> --%>
 		<!-- 디자인 필요 -->
 		<div align="right">
+			<!-- 팔로우 버튼 -->
+			<div id="followDiv">
+			</div>
+
 			<c:if test="${login.accountId eq row.accountId}">
 				<button class="btn btn-warning btn-sm" onclick="location.href='/videoboard/updateVideoBoard.do?boardId=${row.boardId}'">수정</button>
 				<button class="btn btn-danger btn-sm" id="deletebtn">삭제</button>
@@ -70,6 +156,7 @@
 	</div>
 	<div id="listReply">
 		<jsp:include page="../videoboard/videoBoardReply.jsp" flush="false"/>
+		
 	</div>
 
 	<jsp:include page="../module/bottom.jsp" flush="false"/>

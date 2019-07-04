@@ -43,5 +43,10 @@ public class AccountsDAOImpl implements AccountsDAO {
 	public int checkNickname(String nickname) throws Exception {
 		return sqlSession.selectOne(NAMESPACE + ".checkNickname", nickname);
 	}
+	
+	@Override
+	public void resetPassword(String email) throws Exception {
+		sqlSession.update(NAMESPACE + ".resetPassword", email);
+	}
 
 }

@@ -26,9 +26,16 @@
 	<!-- 팔로잉 추가 -->
     <insert id="insert" parameterType="FollowListVO">
     	insert into followlist(followAccountId, followerAccountId, reg_date)
-		values(<!-- 뭘넣어야할까 followAccountId -->, #{followerAccountId}, now())
+		values(#{followAccountId}, #{followerAccountId}, now())
     </insert>
 
+    <!-- 팔로우 취소 -->
+    <delete id="delete" parameterType="FollowListVO">
+        delete from followlist
+        where followAccountId = #{followAccountId} and followerAccountId = #{followerAccountId}
+    </delete>
+	
+	
 	<!-- 페이징 -->
 <!-- 
 	<select id="paging" parameterType="PagingVo" resultType="FollowListVO">

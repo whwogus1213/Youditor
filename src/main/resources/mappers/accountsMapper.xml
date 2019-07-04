@@ -61,6 +61,15 @@
 	<select id="login" resultType="AccountsVO">
 		 select * from accounts where email = #{email} and pwd = #{pwd}
 	</select>
+	
+	<update id="resetPassword" parameterType="String">
+		UPDATE
+			accounts
+		SET
+			pwd = "tempPassword"
+		WHERE
+			email = #{email}
+	</update>
 
 </mapper>
 

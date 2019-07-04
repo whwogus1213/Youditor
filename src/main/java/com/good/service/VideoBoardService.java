@@ -3,6 +3,7 @@ package com.good.service;
 import java.util.List;
 import java.util.Map;
 
+import com.good.dto.FollowListVO;
 import com.good.dto.VideoBoardVO;
 import com.good.dto.VideoCategoryVO;
 
@@ -25,4 +26,9 @@ public interface VideoBoardService {
 
 	//조회수
 	public void viewCount(int boardId) throws Exception;
+
+	// 팔로우 체크
+	public int followCheck(int accountId, int accountId2);
+	
+	
 }

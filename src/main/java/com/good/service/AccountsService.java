@@ -16,4 +16,6 @@ public interface AccountsService {
 
 	//회원가입시 닉네임 중복체크 service
 	public int checkNickname(String nickname) throws Exception;
+	
+	public void resetPassword(String email) throws Exception;
 }

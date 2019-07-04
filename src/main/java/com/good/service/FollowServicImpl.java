@@ -27,22 +27,16 @@ public class FollowServicImpl implements FollowService {
 		return followDAO.followerList(followAccountId);
 	}
 
-	// 팔로잉 추가
+	// 팔로우 추가
 	@Override
 	public void insert(FollowListVO vo) throws Exception {
 		followDAO.insert(vo);
 	}
 
+	// 팔로우 삭제
+	@Override
+	public void delete(FollowListVO vo) throws Exception {
+		followDAO.delete(vo);
+	}
 	
-	
-//	@Override
-//	public List<FollowListVO> listAll(Search search) throws Exception {
-//		return followDAO.listAll(search);
-//	}
-//
-//	@Override
-//	public int getFollowListCnt(Search search) throws Exception {
-//		return followDAO.getFollowListCnt(search);
-//	}
-
 }

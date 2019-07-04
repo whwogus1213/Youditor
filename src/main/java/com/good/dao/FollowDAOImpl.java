@@ -29,20 +29,15 @@ public class FollowDAOImpl implements FollowDAO {
 		return sqlSession.selectList(NAMESPACE + ".followerList", followAccountId);
 	}
 
-	// 팔로잉 추가
+	// 팔로우 추가
 	@Override
 	public void insert(FollowListVO vo) throws Exception {
 		sqlSession.insert(NAMESPACE + ".insert", vo);
 	}
 
-
-//	@Override
-//	public List<FollowListVO> listAll(Search search) throws Exception {
-//		return sqlSession.selectList(NAMESPACE + ".listAll", search);
-//	}
-//
-//	@Override
-//	public int getFollowListCnt(Search search) {
-//		return sqlSession.selectOne(NAMESPACE + ".getFollowListCnt", search);
-//	}
+	// 팔로우 삭제
+	@Override
+	public void delete(FollowListVO vo) throws Exception {
+		sqlSession.delete(NAMESPACE + ".delete", vo);
+	}
 }

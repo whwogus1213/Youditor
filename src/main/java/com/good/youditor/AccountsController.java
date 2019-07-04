@@ -125,5 +125,24 @@ public class AccountsController {
 
 		return map;
 	}
+	
+	@RequestMapping(value = "/resetPassword.do", method = RequestMethod.GET)
+	public ModelAndView resetPassword(Locale locale, Model model) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("accounts/resetPassword");
+		System.out.println("String resetPassword open");
+		return mav;
+	}
+	
+	@RequestMapping(value = "/resetPasswordPro")
+	public ModelAndView resetPasswordPro(String email) throws Exception {
+		service.resetPassword(email);
+		System.out.println("============resetPasswordPro 성공==============");
+
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("accounts/resetPwdMsg");
+		System.out.println("String resetPwdMsg open");
+		return mav;
+	}
 
 }

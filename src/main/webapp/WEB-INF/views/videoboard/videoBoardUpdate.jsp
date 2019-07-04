@@ -18,7 +18,7 @@
 
 </head>
 <body>
-	<jsp:include page="../module/top.jsp" flush="false"/>
+	<jsp:include page="../module/top2.jsp" flush="false"/>
 	
 	<!-- 게시글 상세정보 -->
 	<form class="form-horizontal" method="post" action="${path}/videoboard/updateVideoBoardPro">
@@ -41,9 +41,6 @@
 		<h5 align="right">등록일 &nbsp;&nbsp; <fmt:formatDate value="${videoBoardUpdate.reg_date}" pattern="yyyy년 MM월 dd일  hh:mm:ss" /></h5>
 		<hr>
 		<input type="text" class="form-control" name="boardId" id="boardId" maxlength="50" value="${videoBoardUpdate.boardId}" style="visibility:hidden">
-		
-		<h6>${videoBoardUpdate.accountId } 프로필이 표시되게끔....</h6>
-		<hr>
 		<button type="button" class="btn btn-warning" id="submit">수정</button>
 		<button type="button" class="btn btn-danger" onclick="location.href='/videoboard/videoBoardView?boardId=${videoBoardUpdate.boardId}' ">취소</button>
 	</div>
