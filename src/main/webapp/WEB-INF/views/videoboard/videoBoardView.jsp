@@ -16,6 +16,35 @@
 <title>${row.subject} - YouDitor</title>
 <jsp:include page="../module/header.jsp" flush="false"/>
 
+<script type="text/javascript">
+
+function fn_following(accountId) {
+		alert(accountId);
+
+		var json = {
+			"followAccountId" : accountId
+		}
+	$.ajax({
+		type : "POST",
+		url : "/follow/insert",
+// 		data:$("#followingForm").serialize(),
+			data : json,
+		// 				dataType : : "json",
+		success : function(data) {
+			if (data == "success") {
+				alert("성콩");
+				console.log("성공");
+			}
+		},
+		error : function(data) {
+			alert("에러");
+		}
+	});
+}
+
+</script>
+
+
 </head>
 <body>
 	<jsp:include page="../module/top.jsp" flush="false"/>
@@ -61,7 +90,11 @@
 		<%-- 	<h1>${row.youtubeLink }</h1> --%>
 		<!-- 디자인 필요 -->
 		<div align="right">
-				<jsp:include page="../follow/follow.jsp" flush="false"/>
+			<div id="followDiv">
+				<c:if test="${login.accountId ne row.accountId}">
+					<button class="btn btn-primary btn-sm" onclick="fn_following('${row.accountId}')">팔로우</button>
+				</c:if>
+			</div>
 			<c:if test="${login.accountId eq row.accountId}">
 				<button class="btn btn-warning btn-sm" onclick="location.href='/videoboard/updateVideoBoard.do?boardId=${row.boardId}'">수정</button>
 				<button class="btn btn-danger btn-sm" id="deletebtn">삭제</button>
@@ -71,6 +104,7 @@
 	</div>
 	<div id="listReply">
 		<jsp:include page="../videoboard/videoBoardReply.jsp" flush="false"/>
+		
 	</div>
 
 	<jsp:include page="../module/bottom.jsp" flush="false"/>
