@@ -7,7 +7,7 @@
 	color: #9A9DA0;
 	text-decoration:none;
 	display: block;
-	width: 80px;
+	width: 90px;
 	font-size: 14px;
 	font-weight: bold;
 	text-align: center;
@@ -41,8 +41,8 @@
 .hire {
 	padding-left: 10%;
 }
-.follow {
-	padding-left: 60%;
+.accounts {
+	padding-left: 50%;
 }
 .submenuLink:hover {
 	color: #C4C6C8;
@@ -101,7 +101,7 @@
 				<c:if test="${login.accountId ne null }">
 					<li class="nav-item topMenuLi">
 						<a class="nav-link" href="#">회원기능</a>
-						<ul class="submenu follow">
+						<ul class="submenu accounts">
 							<li>|</li>
 							<li><a class="submenuLink" href="/follow/followingList">팔로잉</a></li>
 							<li>|</li>
