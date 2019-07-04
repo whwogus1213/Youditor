@@ -100,12 +100,14 @@
 			<ul class="navbar-nav ml-auto">
 				<c:if test="${login.accountId ne null }">
 					<li class="nav-item topMenuLi">
-						<a class="nav-link" href="#">팔로우</a>
+						<a class="nav-link" href="#">회원기능</a>
 						<ul class="submenu follow">
 							<li>|</li>
 							<li><a class="submenuLink" href="/follow/followingList">팔로잉</a></li>
 							<li>|</li>
 							<li><a class="submenuLink" href="/follow/followerList">팔로워</a></li>
+							<li>|</li>
+							<li><a class="submenuLink" href="/follow/followerList">회원정보수정</a></li>
 							<li>|</li>
 						</ul>
 					</li>

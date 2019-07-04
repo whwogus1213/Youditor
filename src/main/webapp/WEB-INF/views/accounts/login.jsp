@@ -33,13 +33,6 @@
 </head>
 <body>
 	<jsp:include page="../module/top.jsp" flush="false"/>
-	<h2 align="center">&nbsp;</h2>
-	<h2 align="center">&nbsp;</h2>
-	<h1 align="center">YouditoR 로그인</h1>
-	<h2 align="center">&nbsp;</h2>
-	<h2 align="center">&nbsp;</h2>
-
-
 	<div class="container" align ="center">
 	<form class="form-horizontal" id="frm" method="post">
 		<div class="form-inline">
@@ -56,7 +49,8 @@
 			<label class="control-label col-sm-3">비밀번호</label>
 			<div class="col-sm-3">
 				<input type="password" class="form-control" id="pwd"
-					name="pwd" maxlength="20" placeholder="Enter Password">
+					name="pwd" maxlength="20" placeholder="Enter Password"><br>
+				<a href="/accounts/resetPassword.do">비밀번호를 잊어버리셨습니까?</a>
 			</div>
 		</div>
 		<h2 align="center">&nbsp;</h2>
@@ -67,7 +61,8 @@
 					onclick="memberInsertCheckForm(this.form)">
 				로그인</button> -->
 				<button type="button" class="btn btn-primary" onclick="DosignUp();">
-				로그인</button>
+					로그인
+				</button>
 			</div>
 		</div>
 	</form>
