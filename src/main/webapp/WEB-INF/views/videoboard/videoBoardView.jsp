@@ -100,7 +100,7 @@
 
 </head>
 <body>
-	<jsp:include page="../module/top.jsp" flush="false"/>
+	<jsp:include page="../module/top2.jsp" flush="false"/>
 	
 	<!-- 게시글 상세정보 -->
 
