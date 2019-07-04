@@ -19,19 +19,15 @@
 <script type="text/javascript">
 	// 팔로우 추가
 	function fn_following(accountId) {
-		//alert(accountId);
 		var json = {
 			"followAccountId" : accountId
 		}
 		$.ajax({
 			type : "POST",
 			url : "/follow/insert",
-			//data:$("#followingForm").serialize(),
 			data : json,
-			//dataType : : "json",
 			success : function(data) {
 				if (data == "success") {
-					//alert("성콩");
 					console.log("성공");
 					$('#followbtn').attr('class', 'btn btn-warning btn-sm');
 					$('#followbtn').html('팔로잉√');
@@ -43,22 +39,18 @@
 		});
 	}
 
-/*
 	// 팔로우 삭제
 	function fn_unfollow(accountId) {
-		alert("언팔");
-		//alert(accountId);
 		var json = {
 			"followAccountId" : accountId
 		}
 		$.ajax({
-			type: "POST",
+			type : "POST",
 			url : "/follow/delete",
 			data : json,
 			success : function(data) {
 				if (data == "success") {
-					alert("삭제성콩");
-					console.long("삭제성공");
+					console.log("성공");
 					${'#followbtn'}.attr('class', 'btn btn-primary btn-sm');
 					${'#followbtn'}.html('팔로우');
 				}
@@ -68,7 +60,6 @@
 			}
 		});
 	}
-*/
 </script>
 
 
@@ -119,21 +110,25 @@
 		<div align="right">
 			<!-- 팔로우 버튼 -->
 			<div id="followDiv">
+				<!-- 로그인 아디이와 글쓴이 아이디가 같지 않을 때 -->
 				<c:if test="${login.accountId ne row.accountId}">
-					<c:if test="${followCheck ne 1}">
+					<!-- 팔로우 되어 있지 않을 때 -->
+					<c:if test="${followCheck eq 0}">
 						<button class="btn btn-primary btn-sm" id="followbtn" onclick="fn_following('${row.accountId}')">팔로우</button>
 					</c:if>
-					<c:if test="${followCheck ne 0}">
+					<!-- 팔로우 되어 있을 때 -->
+					<c:if test="${followCheck eq 1}">
 						<button class="btn btn-warning btn-sm" id="followbtn" onclick="fn_unfollow('${row.accountId}')">팔로잉√</button>
 					</c:if>
 				</c:if>
 				
-			</div>
 			<!-- 수정/삭제 버튼 -->
-			<c:if test="${login.accountId eq row.accountId}">
-				<button class="btn btn-warning btn-sm" onclick="location.href='/videoboard/updateVideoBoard.do?boardId=${row.boardId}'">수정</button>
-				<button class="btn btn-danger btn-sm" id="deletebtn">삭제</button>
-			</c:if>
+			</div>
+			<!-- 로그인 아이디와 글쓴이 아이디가 같을 때 -->
+				<c:if test="${login.accountId eq row.accountId}">
+					<button class="btn btn-warning btn-sm" onclick="location.href='/videoboard/updateVideoBoard.do?boardId=${row.boardId}'">수정</button>
+					<button class="btn btn-danger btn-sm" id="deletebtn">삭제</button>
+				</c:if>
 		</div>
 		<hr>
 	</div>
