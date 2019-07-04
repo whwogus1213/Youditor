@@ -17,7 +17,7 @@
 		리셋된 비밀번호는 바로 자신만의 비밀번호로 변경해주시기 바랍니다.
 		</div>
 		<div>
-			<a class="button" href="#">회원정보수정</a>
+			<a class="button" href="/accounts/login.do">로그인</a>
 		</div>
 	</div>
 </body>
