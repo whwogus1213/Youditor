@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.good.dto.AccountsVO;
 import com.good.dto.FollowListVO;
 import com.good.service.FollowService;
+import com.good.service.VideoBoardService;
 
 @Controller
 @RequestMapping("/follow")
@@ -39,7 +40,7 @@ public class FollowController {
 		System.out.println(followingList);
 		return "follow/followingList";
 	}
-	
+
 	// 팔로워(로그인유저를 팔로우하는 사람 리스트)
 	@RequestMapping(value = "/followerList")
 	public String followerList(Model model, FollowListVO vo, HttpServletRequest request) throws Exception {
@@ -56,34 +57,34 @@ public class FollowController {
 		System.out.println(followerList);
 		return "follow/followerList";
 	}
-	
+
 	// 팔로잉 추가
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
 	public @ResponseBody String insert(HttpServletRequest request, FollowListVO vo) throws Exception {
-		
+
 		System.out.println("----------Start follow insert");
 		System.out.println("글쓴이 아이디 정보 : " + vo);
-		
+
 		HttpSession session = request.getSession();
 		AccountsVO loginVO = (AccountsVO) session.getAttribute("login");
-		
-		// 로그인 유저 아이디 
+
+		// 로그인 유저 아이디
 		vo.setFollowerAccountId(loginVO.getAccountId());
-		
+
 		System.out.println("로그인 유저 아이디 -> followerAccountId : " + vo.getFollowerAccountId());
 //		System.out.println("accountId" + accountId);
 		System.out.println("followList : " + vo);
-		
+
 		// followService.insert(vo);
 		try {
 			System.out.println("followService.insert 진입");
 			followService.insert(vo);
 			System.out.println("followService.insert 성공");
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		System.out.println("----------End follow insert");
 		return "success";
 	}
@@ -95,7 +96,7 @@ public class FollowController {
 		System.out.println("-------------End follow delete");
 		System.out.println("글쓴이 아이디 정보 : " + vo);
 
-		// 로그인 유저 아이디 
+		// 로그인 유저 아이디
 		HttpSession session = request.getSession();
 		AccountsVO loginVO = (AccountsVO) session.getAttribute("login");
 
@@ -117,7 +118,19 @@ public class FollowController {
 		}
 
 		System.out.println("-------------End follow delete");
-		return "success";
+		return "success1";
+	}
+
+	@Inject
+	VideoBoardService vs;
+
+	// 팔로잉 check
+	@RequestMapping(value = "/check", method = RequestMethod.POST)
+	public @ResponseBody int check(FollowListVO vo) throws Exception {
+		System.out.println(vo);
+		int fc = vs.followCheck(vo.getFollowerAccountId(), vo.getFollowAccountId());
+		System.out.println(fc + "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+		return fc;
 	}
 
 }

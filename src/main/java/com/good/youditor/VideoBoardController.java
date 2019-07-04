@@ -72,6 +72,8 @@ public class VideoBoardController {
 		System.out.println("VideoBoardController boardView open");
 		return mav;
 	}
+	
+	
 
 	// 게시물 쓰기
 	@RequestMapping(value = "/write.do", method = RequestMethod.GET)

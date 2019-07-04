@@ -1,4 +1,4 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page session="true" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -17,8 +17,14 @@
 <jsp:include page="../module/header.jsp" flush="false"/>
 
 <script type="text/javascript">
+	// 초기 팔로우 버튼
+	$(function(){
+		fn_followbtn();
+	});
+	
 	// 팔로우 추가
 	function fn_following(accountId) {
+		//alert("추가");
 		var json = {
 			"followAccountId" : accountId
 		}
@@ -28,9 +34,9 @@
 			data : json,
 			success : function(data) {
 				if (data == "success") {
-					console.log("성공");
-					$('#followbtn').attr('class', 'btn btn-warning btn-sm');
-					$('#followbtn').html('팔로잉√');
+					
+					alert("팔로우에 추가되었습니다.");
+					fn_followbtn();
 				}
 			},
 			error : function(data) {
@@ -41,6 +47,7 @@
 
 	// 팔로우 삭제
 	function fn_unfollow(accountId) {
+		//alert("삭제");
 		var json = {
 			"followAccountId" : accountId
 		}
@@ -49,16 +56,44 @@
 			url : "/follow/delete",
 			data : json,
 			success : function(data) {
-				if (data == "success") {
-					console.log("성공");
-					${'#followbtn'}.attr('class', 'btn btn-primary btn-sm');
-					${'#followbtn'}.html('팔로우');
+				if (data == "success1") {
+					alert("팔로우가 취소되었습니다.");
+					fn_followbtn();
 				}
 			},
 			error : function(data) {
 				alert("에러");
 			}
 		});
+	}
+
+	// 팔로우 버튼 변경
+	function fn_followbtn() {
+		if(${login.accountId != row.accountId}) {
+			var loginId = ${login.accountId};
+			var boardAccountId = ${row.accountId};
+			var json = {
+					"followAccountId" : boardAccountId,
+					"followerAccountId" : loginId
+				}
+			$.ajax({
+				type : "POST",
+				url : "/follow/check",
+				data : json,
+				success : function(data) {
+					if (data == 1) {
+						var html = "<button class='btn btn-warning btn-sm' id='followbtn' onclick='fn_unfollow("+${row.accountId}+")'>팔로잉√</button>";			
+					} else {
+						var html = "<button class='btn btn-primary btn-sm' id='followbtn' onclick='fn_following("+${row.accountId}+")'>팔로우</button>";
+					}
+					$('#followDiv').html(html);
+				},
+				error : function(data) {
+					alert("에러");
+				}
+			});
+
+		}
 	}
 </script>
 
@@ -110,25 +145,12 @@
 		<div align="right">
 			<!-- 팔로우 버튼 -->
 			<div id="followDiv">
-				<!-- 로그인 아디이와 글쓴이 아이디가 같지 않을 때 -->
-				<c:if test="${login.accountId ne row.accountId}">
-					<!-- 팔로우 되어 있지 않을 때 -->
-					<c:if test="${followCheck eq 0}">
-						<button class="btn btn-primary btn-sm" id="followbtn" onclick="fn_following('${row.accountId}')">팔로우</button>
-					</c:if>
-					<!-- 팔로우 되어 있을 때 -->
-					<c:if test="${followCheck eq 1}">
-						<button class="btn btn-warning btn-sm" id="followbtn" onclick="fn_unfollow('${row.accountId}')">팔로잉√</button>
-					</c:if>
-				</c:if>
-				
-			<!-- 수정/삭제 버튼 -->
 			</div>
-			<!-- 로그인 아이디와 글쓴이 아이디가 같을 때 -->
-				<c:if test="${login.accountId eq row.accountId}">
-					<button class="btn btn-warning btn-sm" onclick="location.href='/videoboard/updateVideoBoard.do?boardId=${row.boardId}'">수정</button>
-					<button class="btn btn-danger btn-sm" id="deletebtn">삭제</button>
-				</c:if>
+
+			<c:if test="${login.accountId eq row.accountId}">
+				<button class="btn btn-warning btn-sm" onclick="location.href='/videoboard/updateVideoBoard.do?boardId=${row.boardId}'">수정</button>
+				<button class="btn btn-danger btn-sm" id="deletebtn">삭제</button>
+			</c:if>
 		</div>
 		<hr>
 	</div>
