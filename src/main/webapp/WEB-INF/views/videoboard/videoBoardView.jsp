@@ -42,6 +42,33 @@
 			}
 		});
 	}
+
+/*
+	// 팔로우 삭제
+	function fn_unfollow(accountId) {
+		alert("언팔");
+		//alert(accountId);
+		var json = {
+			"followAccountId" : accountId
+		}
+		$.ajax({
+			type: "POST",
+			url : "/follow/delete",
+			data : json,
+			success : function(data) {
+				if (data == "success") {
+					alert("삭제성콩");
+					console.long("삭제성공");
+					${'#followbtn'}.attr('class', 'btn btn-primary btn-sm');
+					${'#followbtn'}.html('팔로우');
+				}
+			},
+			error : function(data) {
+				alert("에러");
+			}
+		});
+	}
+*/
 </script>
 
 
@@ -97,9 +124,10 @@
 						<button class="btn btn-primary btn-sm" id="followbtn" onclick="fn_following('${row.accountId}')">팔로우</button>
 					</c:if>
 					<c:if test="${followCheck ne 0}">
-						<button class="btn btn-warning btn-sm" id="followbtn" onclick="fn_following('${row.accountId}')">팔로잉√</button>
+						<button class="btn btn-warning btn-sm" id="followbtn" onclick="fn_unfollow('${row.accountId}')">팔로잉√</button>
 					</c:if>
 				</c:if>
+				
 			</div>
 			<!-- 수정/삭제 버튼 -->
 			<c:if test="${login.accountId eq row.accountId}">
