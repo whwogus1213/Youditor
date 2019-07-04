@@ -28,6 +28,7 @@ public class ChatController {
 		AccountsVO login = (AccountsVO)session.getAttribute("login");
 		System.out.println(login);
 		mv.addObject("userid",login.getAccountId());
+		mv.addObject("userNickname",login.getNickname());
 		mv.setViewName("chat/chattingview");
 	
 		return mv;

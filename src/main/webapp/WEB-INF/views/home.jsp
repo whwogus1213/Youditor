@@ -22,7 +22,7 @@
 
 <body>
   <jsp:include page="./module/top.jsp" flush="false"/>
-	<h1><a href="/chatting.do">채팅방이동</a></h1>
+<!-- 	<h1><a href="/chatting.do">채팅방이동</a></h1> -->
   <header>
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
       <ol class="carousel-indicators">
