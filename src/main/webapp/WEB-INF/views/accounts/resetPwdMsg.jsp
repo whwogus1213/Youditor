@@ -9,7 +9,7 @@
 	<link href="/resources/css/modern-business.css" rel="stylesheet">
 </head>
 <body> 
-	<jsp:include page="../module/top.jsp" flush="false"/>
+	<jsp:include page="../module/top2.jsp" flush="false"/>
 	<div align="center">
 		<div>
 		비밀번호가 성공적으로 리셋되었습니다.<br>

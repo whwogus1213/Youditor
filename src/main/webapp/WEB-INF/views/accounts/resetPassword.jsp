@@ -44,7 +44,7 @@
 	</script>
 </head>
 <body>
-	<jsp:include page="../module/top.jsp" flush="false"/>
+	<jsp:include page="../module/top2.jsp" flush="false"/>
 	<form class="form-horizontal" id="frm" method="post" action="/accounts/resetPasswordPro">
 		<div class="form-inline">
 			<h2 align="center">&nbsp;</h2>
