@@ -35,25 +35,25 @@
 			<h1 align="center">oo</h1>
 			<h2 align="center">&nbsp;</h2>
 		</div>
-		<h5 align="center">ㅇㅇ유투버의 편집영상을 감상할 수 있습니다</h5>
-		<h2 align="center">&nbsp;</h2>
+		<h5 align="center">영상</h5>
+		<h2 align="center"></h2>
 		<div id="deleteOK" class="alert alert-danger hidden" role="alert" style="visibility:hidden">글이 삭제되었습니다.</div>
 	</div>
 		
 	<div class="container">
     	<!-- Marketing Icons Section -->
     	<div class="row">
-			<c:forEach items="${VideoBoardList}" var="VideoBoardList">
+			<c:forEach items="${follow}" var="follow">
      		 <div class="col-lg-4 mb-4">
         		<div class="card h-100" style="display:block">
         			<div align="center">
          				<h5 class="card-header" style="overflow:hidden; text-overflow: ellipsis; white-space:nowrap; width:100%; height: 50px">
-	         				<a href="/videoboard/videoBoardView?boardId=${VideoBoardList.boardId}">${VideoBoardList.subject}</a>
+	         				<a href="/videoboard/videoBoardView?boardId=${follow.boardId}">${follow.subject}</a>
 	         			</h5>
         			</div>
           			<div class="card-body" align="center">
 						<script>
-							var e = '${VideoBoardList.youtubeLink}';
+							var e = '${follow.youtubeLink}';
 							var eArray  = e.split('/');
 							var youtubeID;
 							youtubeID = eArray[3];
@@ -73,7 +73,7 @@
           						<strong>Made by.</strong>
           					</div>
           					<div class="col-sm-6" align="right">
-								${VideoBoardList.nickname}<br>
+								${follow.accountId}<br>
           					</div>
           				</div>
           				<div class="row">
@@ -81,7 +81,7 @@
           						<strong>Date</strong> 
           					</div>
           					<div class="col-sm-6" align="right">
-								<fmt:formatDate value="${VideoBoardList.reg_date}" pattern="yyyy-MM-dd" /><br>
+								<fmt:formatDate value="${follow.reg_date}" pattern="yyyy-MM-dd" /><br>
           					</div>
           				</div>
           				<div class="row">
@@ -89,7 +89,7 @@
           						<strong>Views</strong>
           					</div>
           					<div class="col-sm-6" align="right">
-								${VideoBoardList.viewCount }<br>
+								${follow.viewCount }<br>
           					</div>
           				</div>
           				<div class="row">
@@ -97,7 +97,7 @@
           						<strong>Comments</strong>
           					</div>
           					<div class="col-sm-6" align="right">
-						 		${VideoBoardList.replyCount}
+						 		${follow.replyCount}
           					</div>
           				</div>
           			</div>
@@ -107,11 +107,6 @@
       	</div>
       </div>
 	<h2 align="center">&nbsp;</h2>
-	<div class="col-sm-9" align="right">
-		<c:if test="${login.email != null }">  
-			<button type="button" class="btn btn-primary" onclick="location.href='/videoboard/write.do' ">유투브 올리기</button>
-		</c:if>
-	</div>
 	<h2 align="center">&nbsp;</h2>
 	<jsp:include page="../module/bottom.jsp" flush="false" />
 </body>

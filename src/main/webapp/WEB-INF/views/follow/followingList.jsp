@@ -12,67 +12,36 @@
 <!-- Custom styles -->
 <link href="/resources/css/modern-business.css" rel="stylesheet">
 <script type="text/javascript">
-// 초기 팔로우 버튼
-$(function(){
-	fn_followbtn();
-});
-
-//팔로우 삭제
-function fn_unfollow(followAccountId) {
-	console.log("ㄷㄷ");
-	 var tr = $("#followbtn"+followAccountId).parent().parent();
-
-	var json = {
-		"followAccountId" : followAccountId
-	}
-	$.ajax({
-		type : "POST",
-		url : "/follow/delete",
-		data : json,
-		success : function(data) {
-			if (data == "success1") {
-				alert("팔로우가 취소되었습니다.");
-				console.log("ㅅㅅ");
-				tr.remove();
-				console.log("ㅛ");
-				
-			}
-		},
-		error : function(data) {
-			alert("에러");
-		}
+	// 초기 팔로우 버튼
+	$(function() {
+		fn_followbtn();
 	});
-}
-/*
-// 팔로우 버튼 변경
-function fn_followbtn() {
-		var loginId = ${login.accountId};
-		var followAccountId = ${followList.followAccountId};
-		alert(loginId + "  " + followAccountId);
-		
+
+	//팔로우 삭제
+	function fn_unfollow(followAccountId) {
+		console.log("ㄷㄷ");
+		var tr = $("#followbtn" + followAccountId).parent().parent();
+
 		var json = {
-				"followAccountId" : followAccountId,
-				"followerAccountId" : loginId
-			}
+			"followAccountId" : followAccountId
+		}
 		$.ajax({
 			type : "POST",
-			url : "/follow/check",
+			url : "/follow/delete",
 			data : json,
 			success : function(data) {
-				if (data == 1) {
-					var html = "<button class='btn btn-warning btn-sm' id='followbtn' onclick='fn_unfollow("+${row.accountId}+")'>팔로잉√</button>";			
-				} else {
-					var html = "<button class='btn btn-primary btn-sm' id='followbtn' onclick='fn_following("+${row.accountId}+")'>팔로우</button>";
+				if (data == "success1") {
+					alert("팔로우가 취소되었습니다.");
+					console.log("ㅅㅅ");
+					tr.remove();
+					console.log("ㅛ");
 				}
-				$('#followDiv').html(html);
 			},
 			error : function(data) {
 				alert("에러");
 			}
 		});
-
-}
-*/
+	}
 </script>
 </head>
 <body>
@@ -85,7 +54,8 @@ function fn_followbtn() {
 		</div>
 	</div>
 	<div class="container">
-		<table class="table table-bordered table-striped nanum table-hover" id="followTable">
+		<table class="table table-bordered table-striped nanum table-hover"
+			id="followTable">
 			<!-- <table border="1"> -->
 			<thead>
 				<tr>
@@ -97,21 +67,18 @@ function fn_followbtn() {
 			<tbody>
 				<c:forEach items="${followingList}" var="followingList">
 					<tr>
-						<td><a href="/videoboard/videoBoardList?accountId=${follwingList.followAccountId}">${followingList.followAccountId}</a></td>
-						<td><fmt:formatDate value="${followingList.reg_date}"
-								pattern="yyyy-MM-dd" /></td>
+						<td><a
+							href="/videoboard/followBoardList?followAccountId=${followingList.followAccountId }">${followingList.followAccountId}</a></td>
+						<td><fmt:formatDate value="${followingList.reg_date}" pattern="yyyy-MM-dd" /></td>
 						<td>
-							<button class="btn btn-warning btn-sm" id="followbtn${followingList.followAccountId}"
-								onclick="fn_unfollow('${followingList.followAccountId}')">팔로우√</button>
+							<button class="btn btn-danger btn-sm" id="followbtn${followingList.followAccountId}"
+							onclick="fn_unfollow('${followingList.followAccountId}')">언팔로우</button>
 						</td>
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
-
-		<jsp:include page="../module/bottom.jsp" flush="false" />
 	</div>
-	<div id="followDiv">
-	</div>
+	<jsp:include page="../module/bottom.jsp" flush="false" />
 </body>
 </html>

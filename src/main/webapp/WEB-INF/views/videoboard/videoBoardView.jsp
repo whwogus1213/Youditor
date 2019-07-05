@@ -34,8 +34,6 @@
 			data : json,
 			success : function(data) {
 				if (data == "success") {
-					
-					alert("팔로우에 추가되었습니다.");
 					fn_followbtn();
 				}
 			},
@@ -57,7 +55,6 @@
 			data : json,
 			success : function(data) {
 				if (data == "success1") {
-					alert("팔로우가 취소되었습니다.");
 					fn_followbtn();
 				}
 			},
@@ -145,6 +142,7 @@
 		<div align="right">
 			<!-- 팔로우 버튼 -->
 			<div id="followDiv">
+			
 			</div>
 
 			<c:if test="${login.accountId eq row.accountId}">
@@ -156,10 +154,7 @@
 	</div>
 	<div id="listReply">
 		<jsp:include page="../videoboard/videoBoardReply.jsp" flush="false"/>
-		
 	</div>
-
 	<jsp:include page="../module/bottom.jsp" flush="false"/>
- 
 </body>
 </html>
