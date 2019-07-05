@@ -67,7 +67,7 @@
 	    </div>
 	  </header>
 
-    <h1 class="my-4">핫한 편집 영상</h1>
+    <h1 class="my-4"><span class="oi oi-video"></span>핫한 편집 영상</h1>
 
     <!-- Marketing Icons Section -->
     <div class="row">
