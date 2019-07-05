@@ -41,4 +41,19 @@ public class ReplyServiceImpl implements ReplyService {
 		
 	}
 
+	@Override
+	public void reInsert(ReplyVO vo) throws Exception {
+		dao.reInsert(vo);
+	}
+
+	@Override
+	public int isReReply(ReplyVO vo) throws Exception {
+		return dao.isReReply(vo);
+	}
+
+	@Override
+	public List<ReplyVO> reList(int replyCommentId) throws Exception {
+		return dao.reList(replyCommentId);
+	}
+
 }
