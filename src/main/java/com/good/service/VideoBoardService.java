@@ -28,7 +28,10 @@ public interface VideoBoardService {
 	public void viewCount(int boardId) throws Exception;
 
 	// 팔로우 체크
-	public int followCheck(int accountId, int accountId2);
+	public int followCheck(int accountId, int accountId2) throws Exception;
+
+	// 팔로잉 게시물 목록
+	public List<VideoBoardVO> followBoardList(int followAccountId) throws Exception;
 	
 	
 }

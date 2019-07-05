@@ -33,13 +33,13 @@ public class VideoBoardController {
 	// 게시물 목록
 	@RequestMapping(value = "/videoBoardList", method = RequestMethod.GET)
 	public ModelAndView list(@RequestParam(required = false, defaultValue = "0") int category) throws Exception {
-		System.out.println(category+"$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
-		
+		System.out.println(category + "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+
 		VideoCategoryVO videoCategoryVO = new VideoCategoryVO();
 		videoCategoryVO.setCategoryId(category);
 		
 		List<VideoBoardVO> list = videoBoardService.listAll(videoCategoryVO);
-
+		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("videoboard/videoBoardList");
 		System.out.println("VideoBoardController VideoBoardList open");
@@ -50,30 +50,28 @@ public class VideoBoardController {
 	// 게시물 상세정보
 	@RequestMapping(value = "/videoBoardView", method = RequestMethod.GET)
 	public ModelAndView view(@RequestParam("boardId") int boardId, HttpServletRequest request) throws Exception {
-		
+
 		// 로그인 세션->followerAccountId
 		HttpSession session = request.getSession();
-		AccountsVO loginVO = (AccountsVO)session.getAttribute("login");
-		
+		AccountsVO loginVO = (AccountsVO) session.getAttribute("login");
+
 		VideoBoardVO row = videoBoardService.view(boardId);
-		
+
 		System.out.println("로그인세션 : " + loginVO.getAccountId());
 		System.out.println("글쓴이아이디 : " + row.getAccountId());
-		
+
 		// 로그인 아이디, 글쓴이 아이디
 		int fc = videoBoardService.followCheck(loginVO.getAccountId(), row.getAccountId());
 		System.out.println(fc);
-		
+
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("videoboard/videoBoardView");
 		mav.addObject("row", row);
 		mav.addObject("followCheck", fc);
-		
+
 		System.out.println("VideoBoardController boardView open");
 		return mav;
 	}
-	
-	
 
 	// 게시물 쓰기
 	@RequestMapping(value = "/write.do", method = RequestMethod.GET)
@@ -107,7 +105,7 @@ public class VideoBoardController {
 	// 게시글 수정
 	// 'videoBoardUpdate.jsp' 로 이동 <-- 이동하고자 하는 파일로 명 바꾸면됨
 	@RequestMapping(value = "/updateVideoBoard.do", method = RequestMethod.GET)
-	public ModelAndView joinUpdate(Locale locale, Model model,@RequestParam("boardId") int boardId) throws Exception {
+	public ModelAndView joinUpdate(Locale locale, Model model, @RequestParam("boardId") int boardId) throws Exception {
 		VideoBoardVO update = videoBoardService.view(boardId);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("videoboard/videoBoardUpdate");
@@ -129,9 +127,28 @@ public class VideoBoardController {
 	@RequestMapping(value = "/deleteVideoBoardPro")
 	public String deleteVideoBoardPro(VideoBoardVO vo, RedirectAttributes rttr) throws Exception {
 		videoBoardService.deleteVideoBoard(vo);
-		rttr.addFlashAttribute("result","deleteOK");
+		rttr.addFlashAttribute("result", "deleteOK");
 		System.out.println("============ deleteVideoBoard 성공==============");
 
 		return "redirect:/videoboard/videoBoardList";
+	}
+
+	// 팔로잉 게시물 목록
+	@RequestMapping(value = "followBoardList")
+	public ModelAndView followBoardList(@RequestParam("followAccountId") int followAccountId) throws Exception {
+		System.out.println("팔로잉 게시물 목록 시작");
+		FollowListVO vo = new FollowListVO();
+		vo.setFollowAccountId(followAccountId);
+		System.out.println("        followAccountId             " + vo.getFollowAccountId());
+		
+		List<VideoBoardVO> follow = videoBoardService.followBoardList(vo.getFollowAccountId());
+		System.out.println(follow);
+		
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("videoboard/followBoardList");
+		mv.addObject("follow", follow);
+		
+		System.out.println("팔로잉 게시물 목록 끝");
+		return mv;
 	}
 }

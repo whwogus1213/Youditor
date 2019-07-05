@@ -32,7 +32,7 @@
   </script>
 </head>
 <body>
-	<jsp:include page="../module/top.jsp" flush="false"/>
+	<jsp:include page="../module/top2.jsp" flush="false"/>
 	<div class="container" align ="center">
 	<form class="form-horizontal" id="frm" method="post">
 		<div class="form-inline">
