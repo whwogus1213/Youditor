@@ -11,142 +11,107 @@
 <jsp:include page="../module/header.jsp" flush="false" />
 <!-- Custom styles -->
 <link href="/resources/css/modern-business.css" rel="stylesheet">
-<!-- 
-<script>
-// 이전 버튼
-	function fn_prev(page, range, rangeSize) {
-		var page = ((range - 2) * rangeSize) + 1;
-		var range = range - 1;
-		var url = "${pageContext.request.contextPath}/follow/followingList";
+<script type="text/javascript">
+// 초기 팔로우 버튼
+$(function(){
+	fn_followbtn();
+});
 
-		url = url + "?page=" + page;
-		url = url + "&range=" + range;
-		location.href = url;
+//팔로우 삭제
+function fn_unfollow(followAccountId) {
+	console.log("ㄷㄷ");
+	 var tr = $("#followbtn"+followAccountId).parent().parent();
+
+	var json = {
+		"followAccountId" : followAccountId
 	}
-
-	//페이지 번호 클릭
-	function fn_pagination(page, range, rangeSize, searchType, keyword) {
-		var url = "${pageContext.request.contextPath}/follow/followingList";
-
-		url = url + "?page=" + page;
-		url = url + "&range=" + range;
-		location.href = url;
-	}
-
-	//다음 버튼 이벤트
-	function fn_next(page, range, rangeSize) {
-		var page = parseInt((range * rangeSize)) + 1;
-		var range = parseInt(range) + 1;
-		var url = "${pageContext.request.contextPath}/follow/followingList";
-
-		url = url + "?page=" + page;
-		url = url + "&range=" + range;
-		location.href = url;
-	}
-
-	// 검색버튼 이벤트
-	$(document).on('click', '#btnSearch', function(e) {
-		e.preventDefault();
-		var url = "${pageContext.request.contextPath}/follow/followingList";
-		url = url + "?searchType=" + $('#searchType').val();
-		url = url + "&keyword=" + $('#keyword').val();
-
-		location.href = url;
-		console.log(url);
+	$.ajax({
+		type : "POST",
+		url : "/follow/delete",
+		data : json,
+		success : function(data) {
+			if (data == "success1") {
+				alert("팔로우가 취소되었습니다.");
+				console.log("ㅅㅅ");
+				tr.remove();
+				console.log("ㅛ");
+				
+			}
+		},
+		error : function(data) {
+			alert("에러");
+		}
 	});
+}
+/*
+// 팔로우 버튼 변경
+function fn_followbtn() {
+		var loginId = ${login.accountId};
+		var followAccountId = ${followList.followAccountId};
+		alert(loginId + "  " + followAccountId);
+		
+		var json = {
+				"followAccountId" : followAccountId,
+				"followerAccountId" : loginId
+			}
+		$.ajax({
+			type : "POST",
+			url : "/follow/check",
+			data : json,
+			success : function(data) {
+				if (data == 1) {
+					var html = "<button class='btn btn-warning btn-sm' id='followbtn' onclick='fn_unfollow("+${row.accountId}+")'>팔로잉√</button>";			
+				} else {
+					var html = "<button class='btn btn-primary btn-sm' id='followbtn' onclick='fn_following("+${row.accountId}+")'>팔로우</button>";
+				}
+				$('#followDiv').html(html);
+			},
+			error : function(data) {
+				alert("에러");
+			}
+		});
+
+}
+*/
 </script>
- -->
 </head>
 <body>
-	<jsp:include page="../module/top2.jsp" flush="false"/>
+	<jsp:include page="../module/top2.jsp" flush="false" />
 	<div class="form-group">
 		<div class="col-sm-12">
 			<h2 align="center">&nbsp;</h2>
 			<h1 align="center">Following List</h1>
-			<h2 align="center">내가 팔로우 중인 사람</h2>
+			<h2 align="center">${login.nickname}의팔로잉</h2>
 		</div>
 	</div>
 	<div class="container">
-		<table class="table table-bordered table-striped nanum table-hover">
+		<table class="table table-bordered table-striped nanum table-hover" id="followTable">
 			<!-- <table border="1"> -->
 			<thead>
 				<tr>
 					<th>아이디</th>
 					<th>날짜</th>
+					<th>언팔로우</th>
 				</tr>
 			</thead>
 			<tbody>
 				<c:forEach items="${followingList}" var="followingList">
 					<tr>
-						
-						<td>${followingList.followAccountId}</td>
-						<td><fmt:formatDate value="${followingList.reg_date}" pattern="yyyy-MM-dd" /></td>
+						<td><a href="/videoboard/videoBoardList?accountId=${follwingList.followAccountId}">${followingList.followAccountId}</a></td>
+						<td><fmt:formatDate value="${followingList.reg_date}"
+								pattern="yyyy-MM-dd" /></td>
+						<td>
+							<button class="btn btn-warning btn-sm" id="followbtn${followingList.followAccountId}"
+								onclick="fn_unfollow('${followingList.followAccountId}')">팔로우√</button>
+						</td>
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
 
-		<!-- 페이징 -->
-<!-- 
-		<div id="paginationBox">
-			<ul class="pagination">
-				<c:if test="${pagination.prev}">
-					<li class="page-item">
-						<a class="page-link" href="#"
-						onClick="fn_prev('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}')">Previous</a>
-					</li>
-				</c:if>
-				<c:forEach begin="${pagination.startPage}" end="${pagination.endPage}" var="idx">
-					<li class="page-item <c:out value="${pagination.page == idx ? 'active' : ''}"/> ">
-						<a class="page-link" href="#"
-						onClick="fn_pagination('${idx}', '${pagination.range}', '${pagination.rangeSize}')">${idx}</a>
-					</li>
-				</c:forEach>
-				<c:if test="${pagination.next}">
-					<li class="page-item">
-						<a class="page-link" href="#"
-						onClick="fn_next('${pagination.range}', '${pagination.range}',
-						'${pagination.rangeSize}')">Next</a>
-					</li>
-				</c:if>
-			</ul>
-		</div>
- -->
-		<!-- 페이징 -->
-
-		<!-- 검색 -->
-<!-- 
-		<div class="form-group row justify-content-center">
-			<div class="w100" style="padding-right: 10px">
-				<select class="form-control form-control-sm" name="searchType"
-					id="searchType">
-					<option value="followAccountId">아이디</option>
-				</select>
-			</div>
-			<div class="w300" style="padding-right: 10px">
-				<input type="text" class="form-control form-control-sm"
-					name="keyword" id="keyword">
-			</div>
-			<div>
-				<button class="btn btn-sm btn-primary" name="btnSearch"
-					id="btnSearch">검색</button>
-			</div>
-		</div>
- -->
-		<!-- 검색 -->
-
+		<jsp:include page="../module/bottom.jsp" flush="false" />
 	</div>
-
-	<h2 align="center">&nbsp;</h2>
-
-<!-- 팔로워 추가 기능? -->
-<!-- 
-	<div class="col-sm-9" align="right">
-		<button type="button" class="btn btn-primary"
-			onclick="location.href='/noticeboard/write.do' ">공지 올리기</button>
+	<div id="followDiv">
 	</div>
-	<h2 align="center">&nbsp;</h2>
-	<jsp:include page="./../module/bottom.jsp" flush="false" />
- -->
 </body>
 </html>
