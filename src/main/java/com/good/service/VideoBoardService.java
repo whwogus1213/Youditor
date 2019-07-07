@@ -33,5 +33,4 @@ public interface VideoBoardService {
 	// 팔로잉 게시물 목록
 	public List<VideoBoardVO> followBoardList(int followAccountId) throws Exception;
 	
-	
 }

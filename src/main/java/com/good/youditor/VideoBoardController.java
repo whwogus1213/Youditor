@@ -133,22 +133,4 @@ public class VideoBoardController {
 		return "redirect:/videoboard/videoBoardList";
 	}
 
-	// 팔로잉 게시물 목록
-	@RequestMapping(value = "followBoardList")
-	public ModelAndView followBoardList(@RequestParam("followAccountId") int followAccountId) throws Exception {
-		System.out.println("팔로잉 게시물 목록 시작");
-		FollowListVO vo = new FollowListVO();
-		vo.setFollowAccountId(followAccountId);
-		System.out.println("        followAccountId             " + vo.getFollowAccountId());
-		
-		List<VideoBoardVO> follow = videoBoardService.followBoardList(vo.getFollowAccountId());
-		System.out.println(follow);
-		
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("videoboard/followBoardList");
-		mv.addObject("follow", follow);
-		
-		System.out.println("팔로잉 게시물 목록 끝");
-		return mv;
-	}
 }

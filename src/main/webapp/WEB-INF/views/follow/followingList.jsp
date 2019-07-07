@@ -68,7 +68,7 @@
 				<c:forEach items="${followingList}" var="followingList">
 					<tr>
 						<td><a
-							href="/videoboard/followBoardList?followAccountId=${followingList.followAccountId }">${followingList.followAccountId}</a></td>
+							href="/follow/followBoardList?followAccountId=${followingList.followAccountId }">${followingList.followAccountId}</a></td>
 						<td><fmt:formatDate value="${followingList.reg_date}" pattern="yyyy-MM-dd" /></td>
 						<td>
 							<button class="btn btn-danger btn-sm" id="followbtn${followingList.followAccountId}"

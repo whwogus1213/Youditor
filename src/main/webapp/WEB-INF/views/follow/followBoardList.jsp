@@ -35,7 +35,7 @@
 			<h1 align="center">oo</h1>
 			<h2 align="center">&nbsp;</h2>
 		</div>
-		<h5 align="center">영상</h5>
+		<h5 align="center">팔로우영상</h5>
 		<h2 align="center"></h2>
 		<div id="deleteOK" class="alert alert-danger hidden" role="alert" style="visibility:hidden">글이 삭제되었습니다.</div>
 	</div>
@@ -48,7 +48,7 @@
         		<div class="card h-100" style="display:block">
         			<div align="center">
          				<h5 class="card-header" style="overflow:hidden; text-overflow: ellipsis; white-space:nowrap; width:100%; height: 50px">
-	         				<a href="/videoboard/videoBoardView?boardId=${follow.boardId}">${follow.subject}</a>
+	         				<a href="../videoboard/videoBoardView?boardId=${follow.boardId}">${follow.subject}</a>
 	         			</h5>
         			</div>
           			<div class="card-body" align="center">
