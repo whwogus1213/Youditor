@@ -32,14 +32,14 @@
 	<div class="form-group">
 		<div class="col-sm-12">
 			<h2 align="center">&nbsp;</h2>
-			<h1 align="center">oo</h1>
+			<h1 align="center"><strong><%=request.getAttribute("categoryName") %></strong></h1>
 			<h2 align="center">&nbsp;</h2>
 		</div>
-		<h5 align="center">ㅇㅇ유투버의 편집영상을 감상할 수 있습니다</h5>
+		<h5 align="center"><%=request.getAttribute("categoryName") %> 유투버들의 편집 영상입니다.</h5>
 		<h2 align="center">&nbsp;</h2>
 		<div id="deleteOK" class="alert alert-danger hidden" role="alert" style="visibility:hidden">글이 삭제되었습니다.</div>
 	</div>
-		
+	
 	<div class="container">
     	<!-- Marketing Icons Section -->
     	<div class="row">

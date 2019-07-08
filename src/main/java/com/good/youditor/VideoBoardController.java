@@ -32,7 +32,7 @@ public class VideoBoardController {
 
 	// 게시물 목록
 	@RequestMapping(value = "/videoBoardList", method = RequestMethod.GET)
-	public ModelAndView list(@RequestParam(required = false, defaultValue = "0") int category) throws Exception {
+	public ModelAndView list(@RequestParam(required = false, defaultValue = "0") int category, HttpServletRequest request) throws Exception {
 		System.out.println(category+"$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
 		
 		VideoCategoryVO videoCategoryVO = new VideoCategoryVO();
@@ -44,6 +44,23 @@ public class VideoBoardController {
 		mav.setViewName("videoboard/videoBoardList");
 		System.out.println("VideoBoardController VideoBoardList open");
 		mav.addObject("VideoBoardList", list);
+		String categoryName = "외않대";
+		if(category == 0) {
+			categoryName = "전체";
+		}else if(category == 1) {
+			categoryName = "게임";
+		}else if(category == 2) {
+			categoryName = "먹방";
+		}else if(category == 3) {
+			categoryName = "일상";
+		}else if(category == 4) {
+			categoryName = "모터";
+		}else if(category == 5) {
+			categoryName = "스포츠";
+		}else if(category == 6) {
+			categoryName = "예능";
+		}
+		request.setAttribute("categoryName", categoryName);
 		return mav;
 	}
 
