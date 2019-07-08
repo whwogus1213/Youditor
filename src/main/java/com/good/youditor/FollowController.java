@@ -142,11 +142,12 @@ public class FollowController {
 		System.out.println("팔로우 게시물 목록 시작");
 		System.out.println("   followAccountId   " + followAccountId);
 		
-		List<VideoBoardVO> follow = videoBoardService.followBoardList(followAccountId);
+		List<VideoBoardVO> VideoBoardList = videoBoardService.followBoardList(followAccountId);
 		
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("follow/followBoardList");
-		mv.addObject("follow", follow);
+//		mv.setViewName("follow/followBoardList");
+		mv.setViewName("videoboard/videoBoardList");
+		mv.addObject("VideoBoardList", VideoBoardList);
 		
 		System.out.println("팔로우 게시물 목록 끝");
 		return mv;
