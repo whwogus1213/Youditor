@@ -22,51 +22,7 @@
 <body>
 
   <jsp:include page="./module/top2.jsp" flush="false"/>
-  <header>
-    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-      <ol class="carousel-indicators">
-        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-      </ol>
-      <div class="carousel-inner" role="listbox">
-
-        <div class="carousel-item active" style="background-image: url('../resources/images/main_img1.jpg')">
-          <div class="carousel-caption d-none d-md-block">
-            <h3 style="color:black">YouDitor은 무슨 뜻인가요?</h3>
-            <p style="color:black">YouDitor 는 Youtube와 Editor의 합성어입니다.</p>
-          </div>
-        </div>
-
-        <div class="carousel-item" style="background-image: url('../resources/images/main_img2.jpg')">
-          <div class="carousel-caption d-none d-md-block">
-            <h3 style="color:gray">YouDitor은 어떤 곳인가요?</h3>
-            <p style="color:gray">YouDitor은 Youtube 편집자들을 위한 커뮤니티입니다.</p>
-          </div>
-        </div>
-
-        <div class="carousel-item" style="background-image: url('../resources/images/main_img.jpg')">
-          <div class="carousel-caption d-none d-md-block">
-            <h3 style="color:black">YouDitor에서는 무엇을 할 수 있나요?</h3>
-            <p style="color:black">다양한 YouDitor들과 당신의 결과물에 대해 토론하고 Creator와 협업할 수 있습니다.</p>
-          </div>
-        </div>
-      </div>
-      <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-      </a>
-      <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-      </a>
-    </div>
-  </header>
-
-  <!-- 페이지 내용 시작 -->
-  <div class="container">
-  
-	  <!-- 페이지 내용 시작 -->
+ 	<!-- 페이지 내용 시작 -->
 	  <header>
 	    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
 	      <ol class="carousel-indicators">
@@ -107,6 +63,7 @@
 	      </a>
 	    </div>
 	  </header>
+  <div class="container">
 
     <h1 class="my-4"><span class="oi oi-video"></span> 핫한 편집 영상</h1>
 
@@ -195,21 +152,6 @@
     <hr>
   	
   </div>
-  <!-- /.container -->
-
-<!-- <div class="clear"></div> div 초기화 -->
-
-  <!-- Footer -->
-  <!--
-
-  <footer class="py-5 bg-dark container">
-    <div class="container">
-      <p class="m-0 text-center text-white">Copyright &copy; Your Website 2019 All contents Copyright 2013 SolWeb Inc. all rights reserved<br>
-			Contact mail : solweb@lalala.com Tel: +82 02 966 1234 Fax: +82 02 123 4567</p>
-    </div>
-   -->
-    <!-- /.container -->
-  <!-- </footer>  -->
   <jsp:include page="./module/bottom.jsp" flush="false"/>
 
 

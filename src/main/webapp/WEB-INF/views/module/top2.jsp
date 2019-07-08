@@ -6,14 +6,13 @@
 /* The sidebar menu */
 .sidenav {
   height: 100%; /* Full-height: remove this if you want "auto" height */
-  width: 230px; /* Set the width of the sidebar */
+  width: 0px; /* Set the width of the sidebar */
   position: fixed; /* Fixed Sidebar (stay in place on scroll) */
-  z-index: 1; /* Stay on top */
+  z-index: 20; /* Stay on top */
   top: 55px; /* Stay at the top */
   right: 0;
   background-color: #ddd; /* Black */
   overflow-x: hidden; /* Disable horizontal scroll */
-  padding-top: 20px;
 }
 
 /* The navigation menu links */
@@ -185,7 +184,8 @@
 				</c:if>
 			</ul>
 		</div>
-		<button class="openbtn" onclick="openNav()">Chat</button>  
+	</div>
+		<button class="btn btn-light" onclick="openNav()">Chat</button>  
 		<script>
 		function openNav() {
 		  document.getElementById("mySidebar").style.width = "230px";
@@ -197,5 +197,4 @@
 		  document.getElementById("main").style.marginLeft= "0";
 		}
 		</script>
-	</div>
 </nav>
