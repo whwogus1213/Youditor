@@ -39,4 +39,19 @@ public class ReplyDAOImpl implements ReplyDAO {
 		sqlSession.update(NAMESPACE + ".update", vo);
 	}
 
+	@Override
+	public void reInsert(ReplyVO vo) throws Exception {
+		sqlSession.insert(NAMESPACE + ".reInsert", vo);
+	}
+
+	@Override
+	public int isReReply(ReplyVO vo) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + ".isReReply", vo);
+	}
+
+	@Override
+	public List<ReplyVO> reList(int replyCommentId) throws Exception {
+		return sqlSession.selectList(NAMESPACE + ".reList", replyCommentId);
+	}
+
 }

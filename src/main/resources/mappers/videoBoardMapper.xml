@@ -4,11 +4,10 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.good.mapper.videoBoardMapper">
-	<select id="listAll" resultType="VideoBoardVO" parameterType="VideoCategoryVO">
-
+	<select id="listAll" resultType="VideoBoardVO" parameterType="map">
        select boardId, b.accountId, categoryId, subject, object, youtubeLink, 
 				CONVERT_TZ(b.reg_date,'+09:00','+00:00') as reg_date, CONVERT_TZ(b.mod_date,'+09:00','+00:00') as mod_date, viewCount, (select count(*) from videocomment where b.boardId = boardId) as replyCount
-				, ac.nickname
+				, ac.nickname, (select round(AVG(star),2) from videostar  where b.boardId = boardId) as starCount
 		 from videoBoard b, accounts ac where b.accountId = ac.accountId 
 			<if test='categoryId!=0'>
 				AND categoryId = #{categoryId}
@@ -21,11 +20,9 @@
 	<select id="view" parameterType="int" resultType="VideoBoardVO">
 		select boardId, b.accountId, categoryId, subject, object, youtubeLink, 
 				CONVERT_TZ(b.reg_date,'+09:00','+00:00') as reg_date, CONVERT_TZ(b.mod_date,'+09:00','+00:00') as mod_date,
-				viewCount, (select count(*)
-							 from videocomment
-							 where b.boardId = boardId) as replyCount
-				, ac.nickname, ac.footer
-		 from videoBoard b, accounts ac
+				viewCount, (select count(*) from videocomment where b.boardId = boardId) as replyCount, ac.nickname, ac.footer, 
+				(select round(AVG(star),2) from videostar  where b.boardId = boardId) as starCount
+		 from videoBoard b, accounts ac 
 		 where boardId = #{boardId} and b.accountId = ac.accountId
 	</select>
 	
@@ -34,11 +31,11 @@
 		insert into
       videoBoard(accountId,
                 categoryId,
-								subject,
+				subject,
                 object,
-								youtubeLink,
-								reg_date,
-								mod_date)
+				youtubeLink,
+				reg_date,
+				mod_date)
 	    values(#{accountId},
             #{categoryId},
             #{subject},
@@ -94,7 +91,16 @@
 		 from videoBoard b, accounts ac 
 		 where b.accountId = ac.accountId and b.accountId = #{followAccountId}
 		 order by boardId desc 
-		
+	</select>
+	
+	<!-- 평점 체크 -->
+	<select id="starCheck" resultType="int" parameterType="map">
+		select EXISTS (select star from videostar where accountId = #{accountId} and boardId = #{boardId} )
+	</select>
+	
+	<!-- 평점 점수 체크 -->
+	<select id="selectstar" resultType="int" parameterType="map">
+		select  (select star from videostar where accountId = #{accountId} and boardId = #{boardId} )
 	</select>
 
 </mapper>

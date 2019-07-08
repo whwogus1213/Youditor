@@ -51,6 +51,29 @@ public class ReplyController {
         
         return "success";
     }
+
+	@RequestMapping(value = "/reInsert", method=RequestMethod.POST)
+	public String reInsertComment(ReplyVO vo, HttpServletRequest request) throws Exception{
+		
+		HttpSession session = request.getSession();
+		AccountsVO loginVO = (AccountsVO)session.getAttribute("login");
+		vo.setAccountId(loginVO.getAccountId());
+		
+		service.reInsert(vo);
+		
+		return "success";
+	}
+	
+	@RequestMapping(value = "/isReReply", method=RequestMethod.POST)
+	public int isReReply(ReplyVO vo, HttpServletRequest request) throws Exception{
+		System.out.println("isReReply : " + vo);
+		HttpSession session = request.getSession();
+		AccountsVO loginVO = (AccountsVO)session.getAttribute("login");
+		vo.setAccountId(loginVO.getAccountId());
+		
+		/* 대댓글이 있으면 1 없으면 0 */
+		return service.isReReply(vo);
+	}
 	
 	@RequestMapping(value="/listAll", method = {RequestMethod.GET,RequestMethod.POST})
 	public List<ReplyVO> listComment(ReplyVO vo) throws Exception{
@@ -64,6 +87,17 @@ public class ReplyController {
         return replyList;
         
     }
+
+	@RequestMapping(value="/reList", method = RequestMethod.POST)
+	public List<ReplyVO> reList(ReplyVO vo) throws Exception{
+		
+		// 해당 게시물 댓글
+		List<ReplyVO> rereplyList = service.reList(vo.getReplyCommentId());
+		
+		System.out.println(rereplyList);
+		return rereplyList;
+		
+	}
 	
 	
 	@RequestMapping(value = "/delete", method=RequestMethod.POST)

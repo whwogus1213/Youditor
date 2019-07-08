@@ -65,5 +65,11 @@ public class VideoBoardServiceImpl implements VideoBoardService {
 	public List<VideoBoardVO> followBoardList(int followAccountId) throws Exception {
 		return videoBoardDAO.followBoardList(followAccountId);
 	}
+	
+	//평점 체크
+	@Override
+	public int starCheck(int accountId, int boardId) {
+		return videoBoardDAO.starCheck(accountId, boardId);
+	}
 
 }

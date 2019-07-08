@@ -1,9 +1,7 @@
 package com.good.youditor;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -18,7 +16,6 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.good.dto.AccountsVO;
-import com.good.dto.FollowListVO;
 import com.good.dto.VideoBoardVO;
 import com.good.dto.VideoCategoryVO;
 import com.good.service.VideoBoardService;
@@ -63,17 +60,21 @@ public class VideoBoardController {
 
 		// 로그인 아이디, 글쓴이 아이디
 		int fc = videoBoardService.followCheck(loginVO.getAccountId(), row.getAccountId());
+		int sc = videoBoardService.starCheck(loginVO.getAccountId(), row.getBoardId());
 		System.out.println(fc);
-
+		System.out.println(sc);
+		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("videoboard/videoBoardView");
 		mav.addObject("row", row);
 		mav.addObject("followCheck", fc);
-
+		mav.addObject("starCheck", sc);
+		
 		System.out.println("VideoBoardController boardView open");
 		return mav;
 	}
 
+	
 	// 게시물 쓰기
 	@RequestMapping(value = "/write.do", method = RequestMethod.GET)
 	public ModelAndView writedo() throws Exception {

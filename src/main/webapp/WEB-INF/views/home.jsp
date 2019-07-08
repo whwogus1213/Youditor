@@ -23,7 +23,6 @@
 <body>
 
   <jsp:include page="./module/top2.jsp" flush="false"/>
-
   <header>
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
       <ol class="carousel-indicators">

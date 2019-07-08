@@ -9,7 +9,6 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
-import com.fasterxml.jackson.core.sym.Name;
 import com.good.dto.VideoBoardVO;
 import com.good.dto.VideoCategoryVO;
 
@@ -72,5 +71,15 @@ public class VideoBoardDAOImpl implements VideoBoardDAO {
 	@Override
 	public List<VideoBoardVO> followBoardList(int followAccountId) throws Exception {
 		return sqlSession.selectList(NAMESPACE + ".followBoardList", followAccountId);
+	}
+	
+	//평점 체크
+	@Override
+	public int starCheck(int accountId, int boardId) {
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("accountId", accountId);
+		map.put("boardId", boardId);
+		
+		return sqlSession.selectOne(NAMESPACE + ".starCheck", map);
 	}
 }
