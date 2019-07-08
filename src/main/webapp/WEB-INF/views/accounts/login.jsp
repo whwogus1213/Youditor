@@ -18,18 +18,31 @@
 
 <jsp:include page="../module/header.jsp" flush="false"/>
 
+	
+	<!-- Custom styles -->
+	<link href="/resources/css/modern-business.css" rel="stylesheet">
+	<script type="text/javascript">
+	$(function(){
+		$('#pwd').keypress(function(event) {
+			// var keycode = (event.keyCode ? event.keyCode : event.which);
+			var keycode = event.keyCode;
+			// enter를 쳤을 때 keycode가 13이다
+			console.log(keycode);
+			if (keycode == '13') {
+				DoLogin();
+			}
 
-  <!-- Custom styles -->
-  <link href="/resources/css/modern-business.css" rel="stylesheet">
-  <script type="text/javascript">
-    function DosignUp() {
+			event.stopPropagation();
+		});
+	});
+    function DoLogin() {
   		var email = $("#email").val();
   		var pwd = $("#pwd").val();
   		if(email.length == 0) { alert("이메일를 입력해 주세요."); $("#email").focus(); return; }
   		if(pwd.length == 0) { alert("비밀번호를 입력해 주세요."); $("#pwd").focus(); return; }
-      $("#frm").submit();
+		$("#frm").submit();
   	}
-  </script>
+  	</script>
 </head>
 <body>
 	<jsp:include page="../module/top2.jsp" flush="false"/>
@@ -60,7 +73,7 @@
 <!-- 				<button type="button" class="btn btn-primary"
 					onclick="memberInsertCheckForm(this.form)">
 				로그인</button> -->
-				<button type="button" class="btn btn-primary" onclick="DosignUp();">
+				<button type="button" class="btn btn-primary" onclick="DoLogin();">
 					로그인
 				</button>
 			</div>
@@ -68,10 +81,29 @@
 	</form>
 	</div>
 
-	<c:if test="${msg == false }">
-		 <script>
-	      alert( '로그인에 실패했습니다. 아이디 또는 패스워드를 다시 입력해주십시오.' );
-	    </script>
+	<c:if test="${error.error == false }">
+		<c:choose>
+			<c:when test="${error.msg eq 0 }">
+				<script>
+					alert( '탈퇴된 계정입니다.' );
+		   		</script>
+			</c:when>
+			<c:when test="${error.msg eq 1 }">
+				<script>
+					alert( '영구정지된 계정입니다.' );
+		   		</script>
+			</c:when>
+			<c:when test="${error.msg eq 2 }">
+				<script>
+					alert( '임시정지된 계정입니다.' );
+		   		</script>
+			</c:when>
+			<c:otherwise>
+				<script>
+					alert( '로그인에 실패했습니다. 아이디 또는 패스워드를 다시 입력해주십시오.' );
+		   		</script>
+			</c:otherwise>
+		</c:choose>
 	</c:if>
 	<h2 align="center">&nbsp;</h2>
 	<h2 align="center">&nbsp;</h2>

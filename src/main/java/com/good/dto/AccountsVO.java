@@ -2,10 +2,21 @@ package com.good.dto;
 
 import java.util.Date;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
+
 public class AccountsVO {
 	private int accountId;
+	@Email(message="올바른 이메일 형식이 아닙니다.")
+	@NotBlank(message="")
+	@Length(min=5, max=30, message="이메일은 5자 이상, 30자이하여야 합니다.")
 	private String email;
+	@NotBlank(message="")
+	@Length(min=8, max=20, message="비밀번호는 8자 이상, 20자이하여야 합니다.")
 	private String pwd;
+	@NotBlank(message="")
+	@Length(min=5, max=16, message="닉네임은 5자 이상, 16자이하여야 합니다.")
 	private String nickname;
 	private String picture;
 	private String footer;
