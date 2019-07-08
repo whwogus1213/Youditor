@@ -49,7 +49,7 @@
 				$("#star").html(data);
 			},
 			error : function(data) {
-				alert("에러123123213");
+				//alert("에러123123213");
 			}
 		});
 		}

@@ -30,13 +30,14 @@ public class FollowController {
 	// 팔로잉 (로그인유저가 팔로우하는 사람 리스트)
 	@RequestMapping(value = "/followingList")
 	public String followingList(Model model, FollowListVO vo, HttpServletRequest request) throws Exception {
+		System.out.println("Start following List");
+
 		HttpSession session = request.getSession();
 		AccountsVO loginVO = (AccountsVO) session.getAttribute("login");
 		vo.setFollowAccountId(loginVO.getAccountId());
 
-		System.out.println("Start following List : " + vo);
-
 		List<FollowListVO> followingList = followService.followingList(vo.getFollowAccountId());
+		
 		System.out.println(vo.getFollowAccountId());
 		model.addAttribute("followingList", followingList);
 
@@ -47,16 +48,17 @@ public class FollowController {
 	// 팔로워(로그인유저를 팔로우하는 사람 리스트)
 	@RequestMapping(value = "/followerList")
 	public String followerList(Model model, FollowListVO vo, HttpServletRequest request) throws Exception {
+		System.out.println("Start follower List");
+
 		HttpSession session = request.getSession();
 		AccountsVO loginVO = (AccountsVO) session.getAttribute("login");
 		vo.setFollowAccountId(loginVO.getAccountId());
-
-		System.out.println("Start follower List : " + vo);
-
-		List<FollowListVO> followerList = followService.followerList(vo.getFollowAccountId());
 		System.out.println(vo.getFollowAccountId());
+		
+		List<FollowListVO> followerList = followService.followerList(vo.getFollowAccountId());
+		
 		model.addAttribute("followerList", followerList);
-
+		System.out.println(vo.getFollowerAccountId());
 		System.out.println(followerList);
 		return "follow/followerList";
 	}
