@@ -73,7 +73,7 @@
           						<strong>Made by.</strong>
           					</div>
           					<div class="col-sm-6" align="right">
-								${follow.accountId}<br>
+								${follow.nickname}<br>
           					</div>
           				</div>
           				<div class="row">

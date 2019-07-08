@@ -83,10 +83,18 @@
 	</select>
 	
 	<!-- 팔로우 게시물 목록 -->
-	<select id="followBoardList" resultType="VideoBoardVO" parameterType="VideoCategoryVO">
-		select *
-		from videoboard
-		where accountId = #{followAccountId}
+	<select id="followBoardList" resultType="VideoBoardVO" parameterType="int">
+<!-- 		select * -->
+<!-- 		from videoboard -->
+<!-- 		where accountId = #{followAccountId} -->
+		
+		 select boardId, b.accountId, categoryId, subject, object, youtubeLink, 
+				CONVERT_TZ(b.reg_date,'+09:00','+00:00') as reg_date, CONVERT_TZ(b.mod_date,'+09:00','+00:00') as mod_date, viewCount, (select count(*) from videocomment where b.boardId = boardId) as replyCount
+				, ac.nickname
+		 from videoBoard b, accounts ac 
+		 where b.accountId = ac.accountId and b.accountId = #{followAccountId}
+		 order by boardId desc 
+		
 	</select>
 
 </mapper>
