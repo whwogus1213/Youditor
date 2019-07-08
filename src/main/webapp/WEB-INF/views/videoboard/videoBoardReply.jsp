@@ -129,6 +129,7 @@ $(function(){
 /**
  * 댓글 불러오기(Ajax)
  */
+ 
 function getCommentList(){
 
 	$.ajax({

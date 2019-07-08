@@ -1,9 +1,7 @@
 package com.good.youditor;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -18,7 +16,6 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.good.dto.AccountsVO;
-import com.good.dto.FollowListVO;
 import com.good.dto.VideoBoardVO;
 import com.good.dto.VideoCategoryVO;
 import com.good.service.VideoBoardService;
@@ -33,13 +30,13 @@ public class VideoBoardController {
 	// 게시물 목록
 	@RequestMapping(value = "/videoBoardList", method = RequestMethod.GET)
 	public ModelAndView list(@RequestParam(required = false, defaultValue = "0") int category) throws Exception {
-		System.out.println(category+"$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
-		
+		System.out.println(category + "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+
 		VideoCategoryVO videoCategoryVO = new VideoCategoryVO();
 		videoCategoryVO.setCategoryId(category);
 		
 		List<VideoBoardVO> list = videoBoardService.listAll(videoCategoryVO);
-
+		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("videoboard/videoBoardList");
 		System.out.println("VideoBoardController VideoBoardList open");
@@ -50,31 +47,34 @@ public class VideoBoardController {
 	// 게시물 상세정보
 	@RequestMapping(value = "/videoBoardView", method = RequestMethod.GET)
 	public ModelAndView view(@RequestParam("boardId") int boardId, HttpServletRequest request) throws Exception {
-		
+
 		// 로그인 세션->followerAccountId
 		HttpSession session = request.getSession();
-		AccountsVO loginVO = (AccountsVO)session.getAttribute("login");
-		
+		AccountsVO loginVO = (AccountsVO) session.getAttribute("login");
+
 		VideoBoardVO row = videoBoardService.view(boardId);
-		
+
 		System.out.println("로그인세션 : " + loginVO.getAccountId());
 		System.out.println("글쓴이아이디 : " + row.getAccountId());
-		
+		System.out.println("글쓴이닉네임 : " + row.getNickname());
+
 		// 로그인 아이디, 글쓴이 아이디
 		int fc = videoBoardService.followCheck(loginVO.getAccountId(), row.getAccountId());
+		int sc = videoBoardService.starCheck(loginVO.getAccountId(), row.getBoardId());
 		System.out.println(fc);
+		System.out.println(sc);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("videoboard/videoBoardView");
 		mav.addObject("row", row);
 		mav.addObject("followCheck", fc);
+		mav.addObject("starCheck", sc);
 		
 		System.out.println("VideoBoardController boardView open");
 		return mav;
 	}
-	
-	
 
+	
 	// 게시물 쓰기
 	@RequestMapping(value = "/write.do", method = RequestMethod.GET)
 	public ModelAndView writedo() throws Exception {
@@ -107,7 +107,7 @@ public class VideoBoardController {
 	// 게시글 수정
 	// 'videoBoardUpdate.jsp' 로 이동 <-- 이동하고자 하는 파일로 명 바꾸면됨
 	@RequestMapping(value = "/updateVideoBoard.do", method = RequestMethod.GET)
-	public ModelAndView joinUpdate(Locale locale, Model model,@RequestParam("boardId") int boardId) throws Exception {
+	public ModelAndView joinUpdate(Locale locale, Model model, @RequestParam("boardId") int boardId) throws Exception {
 		VideoBoardVO update = videoBoardService.view(boardId);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("videoboard/videoBoardUpdate");
@@ -129,9 +129,10 @@ public class VideoBoardController {
 	@RequestMapping(value = "/deleteVideoBoardPro")
 	public String deleteVideoBoardPro(VideoBoardVO vo, RedirectAttributes rttr) throws Exception {
 		videoBoardService.deleteVideoBoard(vo);
-		rttr.addFlashAttribute("result","deleteOK");
+		rttr.addFlashAttribute("result", "deleteOK");
 		System.out.println("============ deleteVideoBoard 성공==============");
 
 		return "redirect:/videoboard/videoBoardList";
 	}
+
 }

@@ -16,17 +16,18 @@
 	<script>
 	var result = '${result}';
 	$(function(){
-		//이건 아직 미구현
+		//수정이나 글쓰기 하면 추가할수 있음
+		/*
 		if(result === 'registerOK'){
 			$('#registerOK').removeClass('hidden');
 			$('#registerOK').fadeOut(2000);
-		}
+		}*/
 		if(result === 'deleteOK'){
 			$('#deleteOK').removeClass('hidden');
 			$('#deleteOK').removeAttr("style");
 			$('#deleteOK').fadeOut(2000);
 		}
-	})
+	});
 	</script>
 	<jsp:include page="../module/top2.jsp" flush="false" />
 	<div class="form-group">
@@ -47,7 +48,9 @@
      		 <div class="col-lg-4 mb-4">
         		<div class="card h-100" style="display:block">
         			<div align="center">
-         				<h5 class="card-header" style="overflow:hidden; text-overflow: ellipsis; white-space:nowrap; width:100%; height: 50px"><a href="/videoboard/videoBoardView?boardId=${VideoBoardList.boardId}">${VideoBoardList.subject}</a></h5>
+         				<h5 class="card-header" style="overflow:hidden; text-overflow: ellipsis; white-space:nowrap; width:100%; height: 50px">
+	         				<a href="/videoboard/videoBoardView?boardId=${VideoBoardList.boardId}">${VideoBoardList.subject}</a>
+	         			</h5>
         			</div>
           			<div class="card-body" align="center">
 						<script>
@@ -96,6 +99,14 @@
           					</div>
           					<div class="col-sm-6" align="right">
 						 		${VideoBoardList.replyCount}
+          					</div>
+          				</div>
+          				<div class="row">
+          					<div class="col-sm-6" align="left">
+          						<strong>평점</strong>
+          					</div>
+          					<div class="col-sm-6" align="right">
+						 		${VideoBoardList.starCount}
           					</div>
           				</div>
           			</div>

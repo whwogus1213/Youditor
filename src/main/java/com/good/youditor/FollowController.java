@@ -10,10 +10,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.good.dto.AccountsVO;
 import com.good.dto.FollowListVO;
+import com.good.dto.VideoBoardVO;
 import com.good.service.FollowService;
 import com.good.service.VideoBoardService;
 
@@ -122,15 +125,32 @@ public class FollowController {
 	}
 
 	@Inject
-	VideoBoardService vs;
+	VideoBoardService videoBoardService;
 
 	// 팔로잉 check
 	@RequestMapping(value = "/check", method = RequestMethod.POST)
 	public @ResponseBody int check(FollowListVO vo) throws Exception {
 		System.out.println(vo);
-		int fc = vs.followCheck(vo.getFollowerAccountId(), vo.getFollowAccountId());
+		int fc = videoBoardService.followCheck(vo.getFollowerAccountId(), vo.getFollowAccountId());
 		System.out.println(fc + "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 		return fc;
 	}
+	
+	// 팔로우 게시물 목록
+	@RequestMapping(value = "followBoardList")
+	public ModelAndView followBoardList(@RequestParam("followAccountId") int followAccountId) throws Exception {
+		System.out.println("팔로우 게시물 목록 시작");
+		System.out.println("   followAccountId   " + followAccountId);
+		
+		List<VideoBoardVO> VideoBoardList = videoBoardService.followBoardList(followAccountId);
+		
+		ModelAndView mv = new ModelAndView();
+//		mv.setViewName("follow/followBoardList");
+		mv.setViewName("videoboard/videoBoardList");
+		mv.addObject("VideoBoardList", VideoBoardList);
+		
+		System.out.println("팔로우 게시물 목록 끝");
+		return mv;
+	}	
 
 }
