@@ -33,8 +33,11 @@
 <script type="text/javascript">
 
 	$(function(){
+		if(${sessionScope.login != null}) {
+			
 		fn_followbtn();
-		fn_star();
+// 		fn_star();
+		}
 		var json = {
 			"boardId":${row.accountId},
 			"accountId":${login.accountId}
