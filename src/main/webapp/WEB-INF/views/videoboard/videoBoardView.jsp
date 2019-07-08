@@ -1,6 +1,4 @@
-<%@page import="com.good.dto.AccountsVO"%>
-<%@page import="com.good.dto.VideoStarVO"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page session="true" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -35,6 +33,7 @@
 <script type="text/javascript">
 
 $(function(){
+	fn_followbtn();
 	var json = {
 		"boardId":${row.accountId},
 		"accountId":${login.accountId}
@@ -67,6 +66,7 @@ $(function(){
 
 	// 팔로우 추가
 	function fn_following(accountId) {
+		//alert("추가");
 				
 		var json = {
 			"followAccountId" : accountId
@@ -74,16 +74,11 @@ $(function(){
 		$.ajax({
 			type : "POST",
 			url : "/follow/insert",
-			//data:$("#followingForm").serialize(),
 			data : json,
-			//dataType : : "json",
 			success : function(data) {
 				if (data == "success") {
-					//alert("성콩");
-					console.log("성공");
-					$('#followbtn').attr('class', 'btn btn-warning btn-sm');
-					$('#followbtn').html('팔로잉√');
-					$('#followbtn').remove('팔로잉√');
+					alert("팔로우에 추가되었습니다.");
+					fn_followbtn();
 					
 				}
 			},
@@ -146,13 +141,63 @@ $(function(){
 			}
 		});
 	}
-	
+
+	// 팔로우 삭제
+	function fn_unfollow(accountId) {
+		//alert("삭제");
+		var json = {
+			"followAccountId" : accountId
+		}
+		$.ajax({
+			type : "POST",
+			url : "/follow/delete",
+			data : json,
+			success : function(data) {
+				if (data == "success1") {
+					alert("팔로우가 취소되었습니다.");
+					fn_followbtn();
+				}
+			},
+			error : function(data) {
+				alert("에러");
+			}
+		});
+	}
+
+	// 팔로우 버튼 변경
+	function fn_followbtn() {
+		if(${login.accountId != row.accountId}) {
+			var loginId = ${login.accountId};
+			var boardAccountId = ${row.accountId};
+			var json = {
+					"followAccountId" : boardAccountId,
+					"followerAccountId" : loginId
+				}
+			$.ajax({
+				type : "POST",
+				url : "/follow/check",
+				data : json,
+				success : function(data) {
+					if (data == 1) {
+						var html = "<button class='btn btn-warning btn-sm' id='followbtn' onclick='fn_unfollow("+${row.accountId}+")'>팔로잉√</button>";			
+					} else {
+						var html = "<button class='btn btn-primary btn-sm' id='followbtn' onclick='fn_following("+${row.accountId}+")'>팔로우</button>";
+					}
+					$('#followDiv').html(html);
+				},
+				error : function(data) {
+					alert("에러");
+				}
+			});
+
+		}
+	}
 </script>
 
 
 </head>
 <body>
-	<jsp:include page="../module/top.jsp" flush="false"/>
+	<jsp:include page="../module/top2.jsp" flush="false"/>
 	
 	<!-- 게시글 상세정보 -->
 
@@ -248,16 +293,8 @@ $(function(){
 		<div align="right">
 			<!-- 팔로우 버튼 -->
 			<div id="followDiv">
-				<c:if test="${login.accountId ne row.accountId}">
-					<c:if test="${followCheck ne 1}">
-						<button class="btn btn-primary btn-sm" id="followbtn" onclick="fn_following('${row.accountId}')">팔로우</button>
-					</c:if>
-					<c:if test="${followCheck ne 0}">
-						<button class="btn btn-warning btn-sm" id="followbtn" onclick="fn_following('${row.accountId}')">팔로잉√</button>
-					</c:if>
-				</c:if>
 			</div>
-			<!-- 수정/삭제 버튼 -->
+
 			<c:if test="${login.accountId eq row.accountId}">
 				<button class="btn btn-warning btn-sm" onclick="location.href='/videoboard/updateVideoBoard.do?boardId=${row.boardId}'">수정</button>
 				<button class="btn btn-danger btn-sm" id="deletebtn">삭제</button>

@@ -9,11 +9,9 @@
 				CONVERT_TZ(b.reg_date,'+09:00','+00:00') as reg_date, CONVERT_TZ(b.mod_date,'+09:00','+00:00') as mod_date, viewCount, (select count(*) from videocomment where b.boardId = boardId) as replyCount
 				, ac.nickname, (select round(AVG(star),2) from videostar  where b.boardId = boardId) as starCount
 		 from videoBoard b, accounts ac where b.accountId = ac.accountId 
-		 <trim prefix="WHERE" prefixOverrides="AND|OR">
 			<if test='categoryId!=0'>
 				AND categoryId = #{categoryId}
 			</if>
-		</trim>
 		 order by boardId desc 
 
     </select>

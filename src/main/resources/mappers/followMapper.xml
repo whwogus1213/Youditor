@@ -29,8 +29,11 @@
 		values(#{followAccountId}, #{followerAccountId}, now())
     </insert>
 
-
-	
+    <!-- 팔로우 취소 -->
+    <delete id="delete" parameterType="FollowListVO">
+        delete from followlist
+        where followAccountId = #{followAccountId} and followerAccountId = #{followerAccountId}
+    </delete>
 	
 	
 	<!-- 페이징 -->

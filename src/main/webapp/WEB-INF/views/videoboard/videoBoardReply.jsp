@@ -9,7 +9,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<jsp:include page="../module/header.jsp" flush="false"/>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<%-- 	<jsp:include page="../module/header.jsp" flush="false"/> --%>
+
+<link href="/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<script src="/resources/vendor/jquery/jquery.min.js"></script>
+<script src="/resources/vendor/bootstrap/js/bootstrap.min.js"></script>
+
 </head>
 <body>
 
@@ -25,12 +32,13 @@
             <hr style="2px dashed">
             <div>
             	<c:if test="${login.email != null }">
-                <div class="table input-group">           
-                    <textarea style="width: 1000px" rows="3" cols="30" id="object" name="object" placeholder="댓글을 입력하세요"></textarea>
-                    <br>
-                    <div>
-                         <a href='#' onClick="fn_comment('${row.boardId }')" class="btn pull-right btn-success" style="height:100%; width:110px; text-align:center; line-height:65px;">등록</a>
-                    </div>
+
+				<div class="row">
+					<div class="col-sm-1">
+						<h4>${login.nickname}</h4>
+					</div>
+                    <textarea class="col-sm-11" style='resize:none;' rows="3" cols="20" id="object" name="object" placeholder="댓글을 입력하세요"></textarea>
+					<a href='#' onClick="fn_comment('${row.boardId }'); return false;" class="col-sm-offset-10 col-sm-1 btn pull-right btn-primary btn-lg" style="text-align:center;">등록</a>
 				</div>
 				</c:if>
             </div>
@@ -42,12 +50,8 @@
 
 
 <div class="container">
-<div class="row">
-	<div class="col-md-12">
-        	<div id="commentList">
-        	</div>
-    </div>
-</div>
+	<div id="commentList">
+	</div>
 </div>
  
  
@@ -78,6 +82,42 @@ function fn_comment(boardId){
         
     });
 }
+
+/* 대댓글 취소 */
+function fn_recommentCancel(commentId) {
+	$("#commentList #rereplyDiv"+commentId).html('');
+	
+}
+
+
+/* 대댓글 등록하기 */
+function fn_recomment(commentId, acccountId, replyCommentId, object) {
+	var object = $("#reObject"+commentId).val();
+	var json = {
+// 			"accountId" : accountId,
+			"boardId" : ${row.boardId},
+			"object" : object,
+			"replyCommentId" : commentId
+			};
+	
+   		$.ajax({
+      		type : 'POST',
+	        url : "/reply/reInsert",
+	        data : json,
+	        success : function(data){
+	            if(data == "success")
+	            {
+	            	$("#commentList #rereplyDiv"+commentId).html('');
+	                getCommentList();
+	            }
+	        },
+	        error:function(request,status,error){
+		        alert("댓글등록 실패");
+	       }
+	        
+	    });
+	
+}
  
 /**
  * 초기 페이지 로딩시 댓글 불러오기
@@ -94,14 +134,14 @@ $(function(){
  */
  
 function getCommentList(){
-    console.log($("#boardId").val());
-    $.ajax({
 
+	$.ajax({
         type:"POST",
         url : "/reply/listAll",
 //         dataType : "application/json; charset=utf-8",
         data:$("#boardId"),
 //         contentType: "application/json; charset=UTF-8", 
+		async : false,
         success : function(data){
            var html = "";
            var updel = "";
@@ -120,25 +160,62 @@ function getCommentList(){
                
                for(i=0; i<data.length; i++){
                    
-                   html += "<div id = "+data[i].commentId+">";
-                   html += "<div><table class='table'><h6><strong>"+data[i].nickname+"</strong></h6>";
-                   html += data[i].object;
-                   html += "<div class='row'>";
+                   html += "<div class='row' id = "+data[i].commentId+">";
+                   html += "<div class='col-sm-1'><h4><strong>"+data[i].nickname+"</strong></h4></div>";
+                   html += "<div class='col-sm-11'><h4>"+data[i].object+"</h4></div>";
+                   
                    if(sessionAccountId > 0){
-                       html += "<div class='col-sm-2' align='left'>";
-                       html += "<button class='btn btn-xs btn-link' onclick = 'replyUpdateForm("+data[i].commentId+")' style='color:#777777; font-size:smaller'>답글</button>|";
+                       
+                       /* 답글의 답글달기 */
+                       html += "<div class='col-sm-offset-1 col-sm-2' align='left'>";
+                       html += "<button class='btn btn-xs btn-link' onclick = 'rereplyForm("+data[i].commentId+", "+data[i].accountId+", "+data[i].replyCommentId+"); return false;' style='color:#777777; font-size:smaller'>답글</button>";
                        html +="</div>";
+                       if(sessionAccountId == data[i].accountId){
+                    	   html += "<div class='col-sm-9' align='right'>";
+    	                   html += "<button class='btn btn-xs btn-link' onclick = 'replyUpdateForm("+data[i].commentId+", "+ data[i].accountId+", \""+data[i].object+"\")' style='color:#777777; font-size:smaller'>수정</button>|";
+    	                   html += "<button class='btn btn-xs btn-link' onclick = 'replyDelete("+data[i].commentId+")' style='color:#777777; font-size:smaller'>삭제</button>";
+    	                   html +="</div>";
+    	               } else {
+    	            	   html += "<div class='col-sm-9' align='right'></div>";
+        	               }
+                       html += "<div id=rereplyDiv"+data[i].commentId+">";
+                       html += "</div>";
+                       
                    } else {
                 	   html += "<br>";
                    }
                        
-                   if(sessionAccountId == data[i].accountId){
-                	   html += "<div class='col-sm-10' align='right'>";
-	                   html += "<button class='btn btn-xs btn-link' onclick = 'replyUpdateForm("+data[i].commentId+", "+ data[i].accountId+", \""+data[i].object+"\")' style='color:#777777; font-size:smaller'>수정</button>|";
-	                   html += "<button class='btn btn-xs btn-link' onclick = 'replyDelete("+data[i].commentId+")' style='color:#777777; font-size:smaller'>삭제</button>";
-	                   html +="</div>";
-	               }
-                   html +="</div>";
+                   
+                   
+
+
+                   /* 대댓글이 있는지 체크후 처리 */
+                   
+                   var isReJson = {
+                           "boardId" : data[i].boardId,
+                           "commentId" : data[i].commentId
+                           };
+                   $.ajax({
+                 		type : 'POST',
+           	       		url : "/reply/isReReply",
+           	        	data : isReJson,
+           	        	async : false,
+           	        	success : function(check){
+               	        	console.log("대댓글 체크 : "+check);
+           	            if(check == 1) {
+           	            	/* 대댓글 있는 경우 펼치기 */
+     	                   html += "<div class='col-sm-offset-1 col-sm-11' align='left'>";
+     	                   html += "<button class='btn btn-xs btn-link' onclick = 'reGetCommentList("+data[i].commentId+"); return false;' style='color:#777777; font-size:smaller'>답글 보기 ▼</button>";
+     	                   html += "</div>";
+     	                   html += "<div id='reCommentList"+data[i].commentId+"'>";
+     	                   html +="</div>";
+
+               	            }
+           	        },
+           	        error:function(request,status,error){
+           	       }
+           	        
+           	    });
                    html += "<tr><td></td></tr>";
                    html += "</table></div>";
                    html += "</div>";
@@ -154,6 +231,7 @@ function getCommentList(){
                
            }
            
+           html += "<br>";
            $("#cCnt").html(cCnt);
            $("#commentList").html(html);
        }
@@ -163,17 +241,72 @@ function getCommentList(){
     });
 }
 
+function reGetCommentList(commentId){
+	var json = {
+			"replyCommentId" : commentId
+			};
+	$.ajax({
+        type:"POST",
+        url : "/reply/reList",
+        data : json,
+		async : false,
+        success : function(data){
+            var html="";
+            var cCnt = data.length;
+
+            var sessionAccountId = <%=saId%>;
+        	if(data.length > 0){
+                
+                for(i=0; i<data.length; i++){
+                    html += "<div id = "+data[i].commentId+">";
+                    html += "<div class='col-sm-offset-1 col-sm-1'>";
+                    html += "<h5><strong>"+data[i].nickname+"</strong></h5>";
+                    html += "</div>";
+                    html += "<div class='col-sm-10'><h5>" + data[i].object + "</h5></div>";
+                    html += "<br>";
+                        
+                    if(sessionAccountId == data[i].accountId){
+                 	   html += "<div class='col-sm-12' align='right'>";
+ 	                   html += "<button class='btn btn-xs btn-link' onclick = 'replyUpdateForm("+data[i].commentId+", "+ data[i].accountId+", \""+data[i].object+"\"); return false;' style='color:#777777; font-size:smaller'>수정</button>|";
+ 	                   html += "<button class='btn btn-xs btn-link' onclick = 'replyDelete("+data[i].commentId+"); return false;' style='color:#777777; font-size:smaller'>삭제</button>";
+ 	                   html +="</div>";
+ 	               }
+                }
+        	}
+        	/* 대댓글 추가 */
+        	$("#reCommentList"+commentId).html(html);
+        }
+    });
+                    
+}
+	
+/* 대댓글 추가 폼 */
+function rereplyForm(commentId, accountId, replyCommentId) {
+var html = "";
+html += "<textarea class='col-sm-offset-1 col-sm-11' rows='2' cols='30' id='reObject"+commentId+"' name='reObject"+commentId+"' placeholder='댓글을 입력하세요'></textarea>";
+
+html += "<a href='#' onClick='fn_recommentCancel("+commentId+"); return false;' class='col-sm-1 col-sm-offset-10 btn btn-default' style='text-align:center;'>취소</a>";
+html += "<a href='#' onClick='fn_recomment("+commentId+", "+accountId+", "+replyCommentId+"); return false;' class='col-sm-1 btn pull-right btn-primary' style='text-align:center;'>등록</a>";
+
+
+$("#commentList #rereplyDiv"+commentId).html(html);
+
+}
+
+
 
 function replyUpdateForm(commentId, accountId, object){
 	var html = "";
 	
-	$("#commentList #"+commentId).css("border","1px dashed black");
-	html += "<div class='input-group'><div>";
-	html += "<textarea style='width: 1000px' rows='3' cols='30' id='upObject"+commentId+"' name='upObject"+commentId+"'>"+object+"</textarea>";
-	html += "</div><div>";
-	html += "<button onClick='replyUpdate("+commentId+")' class='btn pull-right btn-success' style='height:93%; width:108px; text-align:center; line-height:65px;'>수정</button>";
-	html += "</div></div>";
+	html += "<textarea class='col-sm-offset-1 col-sm-11' style='resize:none;' rows='2' cols='30' id='upObject"+commentId+"' name='upObject"+commentId+"'>"+object+"</textarea>";
+	html += "<button onClick='replyUpdateCancel("+commentId+"); return false;' class='col-sm-offset-10 col-sm-1 btn btn-dafault' style='text-align:center;'>취소</button>";
+	html += "<button onClick='replyUpdate("+commentId+"); return false;' class='col-sm-1 btn pull-right btn-warning' style='text-align:center;'>수정</button>";
 	$("#commentList #"+commentId).html(html);	
+}
+
+/* 수정 취소버튼 클릭시 */
+function replyUpdateCancel(commentId) {
+	getCommentList();
 }
 
 function replyUpdate(commentId){

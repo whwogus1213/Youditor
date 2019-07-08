@@ -76,6 +76,8 @@ public class VideoBoardController {
 		System.out.println("VideoBoardController boardView open");
 		return mav;
 	}
+	
+	
 
 	
 	// 게시물 쓰기
