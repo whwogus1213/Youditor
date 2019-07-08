@@ -36,8 +36,7 @@
 		if(${sessionScope.login != null}) {
 			
 		fn_followbtn();
-// 		fn_star();
-		}
+		
 		var json = {
 			"boardId":${row.accountId},
 			"accountId":${login.accountId}
@@ -53,6 +52,7 @@
 				alert("에러123123213");
 			}
 		});
+		}
 	});
 	
 	var star=-1;
