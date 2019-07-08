@@ -22,7 +22,6 @@
 <body>
 
   <jsp:include page="./module/top2.jsp" flush="false"/>
-	<jsp:include page="./module/sideChat.jsp" flush="false"/>
   <div class="container">
   
 	  <!-- 페이지 내용 시작 -->
@@ -67,7 +66,7 @@
 	    </div>
 	  </header>
 
-    <h1 class="my-4"><span class="oi oi-video"></span>핫한 편집 영상</h1>
+    <h1 class="my-4"><span class="oi oi-video"></span> 핫한 편집 영상</h1>
 
     <!-- Marketing Icons Section -->
     <div class="row">
@@ -111,7 +110,7 @@
     <!-- /.row -->
 
     <!-- 편집자 프로필 -->
-    <h2>이번주 편집자 탑3</h2>
+    <h2><span class="oi oi-badge"></span> 이번주 편집자 탑3</h2>
 
     <div class="row">
       <div class="col-lg-4 col-sm-6 portfolio-item">

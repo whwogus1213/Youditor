@@ -13,7 +13,7 @@
 <link href="/resources/css/modern-business.css" rel="stylesheet">
 </head>
 <body>
-	<jsp:include page="../module/top.jsp" flush="false" />
+	<jsp:include page="../module/top2.jsp" flush="false" />
 	<div class="form-group">
 		<div class="col-sm-12">
 			<h2 align="center">&nbsp;</h2>
@@ -35,8 +35,11 @@
 				<div class="col-sm-3">
 	        		<select class="browser-default custom-select" name="categoryId" style="width:190px">
 		           		<option value="1">게임</option>
-		           		<option value="2">음식</option>
-		           		<option value="3">화장</option>
+		           		<option value="2">먹방</option>
+		           		<option value="3">일상</option>
+		           		<option value="4">모터</option>
+		           		<option value="5">스포츠</option>
+		           		<option value="6">예능</option>
 		           </select>
 				</div>
 			</div>
