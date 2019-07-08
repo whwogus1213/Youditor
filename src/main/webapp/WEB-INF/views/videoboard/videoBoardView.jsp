@@ -14,17 +14,61 @@
 <meta name="author" content="">
 
 <title>${row.subject} - YouDitor</title>
+	<style>
+		.star_rating {font-size:0; letter-spacing:-4px;}
+		.star_rating a {
+		    font-size:22px;
+		    letter-spacing:0;
+		    display:inline-block;
+		    margin-left:5px;
+		    color:#ccc;
+		    text-decoration:none;
+		}
+		.star_rating a:first-child {margin-left:0;}
+		.star_rating a.on {color:#777;}
+	</style>
+
 <jsp:include page="../module/header.jsp" flush="false"/>
 
 <script type="text/javascript">
-	// 초기 팔로우 버튼
+
 	$(function(){
 		fn_followbtn();
+		fn_star();
+		var json = {
+			"boardId":${row.accountId},
+			"accountId":${login.accountId}
+		};
+		$.ajax({
+			type : "POST",
+			url : "/videostar/starload",
+			data : json,
+			success : function(data) {
+				$("#star").html(data);
+			},
+			error : function(data) {
+				alert("에러123123213");
+			}
+		});
 	});
 	
+	var star=-1;
+	$(function(){
+		$( ".star_rating a" ).click(function() {
+		     $(this).parent().children("a").removeClass("on");
+		     $(this).addClass("on").prevAll("a").addClass("on");
+		     var index = $(".starqq").index(this);
+		     index++;
+		     star = index;
+		     console.log(index+"$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+		     return false;
+		});
+	});
+
 	// 팔로우 추가
 	function fn_following(accountId) {
 		//alert("추가");
+				
 		var json = {
 			"followAccountId" : accountId
 		}
@@ -34,9 +78,61 @@
 			data : json,
 			success : function(data) {
 				if (data == "success") {
-					
-					alert("팔로우에 추가되었습니다.");
 					fn_followbtn();
+				}
+			},
+			error : function(data) {
+				alert("에러");
+			}
+		});
+	}
+
+	// 평점 처음 등록
+	function fn_raiting(boardId) {
+		var json = {
+				"star":star,
+			"boardId" : boardId
+		}
+		console.log(star+"asdfasdfasdfasdf");
+		$.ajax({
+			type : "POST",
+			url : "/videostar/insertVideoStarPro",
+			//data:$("#followingForm").serialize(),
+			data : json,
+			//dataType : : "json",
+			success : function(data) {
+				if (data == "success2") {
+					console.log("성공");
+					$('#raitingbtn').attr('class', 'btn btn-warning btn-sm');
+					$('#raitingbtn').html('평가√');
+					$("#raitingbtn").attr('onclick', '').unbind('click');
+
+				}
+			},
+			error : function(data) {
+				alert("에러");
+			}
+		});
+	}
+	// 평점 업데이트
+	function fn_raitingupdate(boardId) {
+		var json = {
+				"star":star,
+			"boardId" : boardId
+		}
+		console.log(star+"asdfasdfasdfasdf");
+		$.ajax({
+			type : "POST",
+			url : "/videostar/updateVideoStarPro",
+			data : json,
+			//dataType : : "json",
+			success : function(data) {
+				if (data == "updatesuccess") {
+					console.log("성공");
+					$('#raitingupdatebtn').attr('class', 'btn btn-warning btn-sm');
+					$('#raitingupdatebtn').html('평가√');
+					$("#raitingupdatebtn").attr('onclick', '').unbind('click');
+
 				}
 			},
 			error : function(data) {
@@ -57,7 +153,6 @@
 			data : json,
 			success : function(data) {
 				if (data == "success1") {
-					alert("팔로우가 취소되었습니다.");
 					fn_followbtn();
 				}
 			},
@@ -106,6 +201,7 @@
 
 		<div align="center" style="background-color:black; padding-top:60px">
 		<script>
+		
 			var e = '${row.youtubeLink}';
 			var eArray  = e.split('/');
 			var youtubeID;
@@ -127,6 +223,23 @@
 					}
 				});
 			});
+			var result = '${result}';
+			
+			$(function(){
+				$('#deletebtn').click(function(){
+					if(confirm("정말 삭제하시겠습니까?")){
+						self.location.href = "${path}/videoboard/deleteVideoBoardPro?boardId=${row.boardId}";
+					}
+				});
+			});
+			$(function(){
+				
+				$('#notraiting').click(function(){
+						alert('로그인 후 이용해 주세요.');
+						
+				});
+			});
+			
 		</script>
 	</div>
 	<!-- <h1>${row.boardId }</h1> -->
@@ -137,7 +250,40 @@
 		<h5>${row.object }</h5>
 		<br>
 		<h6 style="color:gray"> 조회수&nbsp;&nbsp; ${row.viewCount }</h6>
-		<h5 align="right">등록일 &nbsp;&nbsp; <fmt:formatDate value="${row.reg_date}" pattern="yyyy년 MM월 dd일  HH:mm:ss" /></h5>
+		
+			
+        <input type="hidden" id="boardId" name="boardId" value="${row.boardId }" /> 
+        	<c:if test="${login.accountId ne row.accountId}">
+				<c:if test="${login.email ne null}">
+					<c:if test="${starCheck ne 0}">
+						<p class="star_rating">
+						    <a class = "starqq" href="#">★</a>
+						    <a class = "starqq" href="#">★</a>
+						    <a class = "starqq" href="#">★</a>
+						    <a class = "starqq" href="#">★</a>
+						    <a class = "starqq" href="#">★</a>
+						</p>
+						<button id ="raitingupdatebtn" onclick="fn_raitingupdate('${row.boardId}')">업데이트 평가</button>
+					</c:if>
+					<c:if test="${starCheck eq 0}">
+						<p class="star_rating">
+						    <a class = "starqq" href="#">★</a>
+						    <a class = "starqq" href="#">★</a>
+						    <a class = "starqq" href="#">★</a>
+						    <a class = "starqq" href="#">★</a>
+						    <a class = "starqq" href="#">★</a>
+						</p>
+						<button id ="raitingbtn"  onclick="fn_raiting('${row.boardId}')">처음 평가</button>
+					</c:if>
+				</c:if>
+			</c:if>
+			<c:if test="${login.email eq null}">
+				<button id ="notraiting">로그인 해라</button>
+			</c:if>
+		<h5 align="right">등록일 &nbsp;&nbsp; <fmt:formatDate value="${row.reg_date}" pattern="yyyy년 MM월 dd일  hh:mm:ss" /></h5>
+		<div align="right"><label>내가 평가한 점수</label>
+		<span id="star"></span><span> 점</span></div>
+		<div align="right">총 점수 ${row.starCount}</div>
 		<hr>
 		<h6><strong>${row.nickname }</strong><br><br>${row.footer }</h6>
 		<%-- 	<h1>${row.youtubeLink }</h1> --%>
@@ -145,6 +291,7 @@
 		<div align="right">
 			<!-- 팔로우 버튼 -->
 			<div id="followDiv">
+			
 			</div>
 
 			<c:if test="${login.accountId eq row.accountId}">
@@ -156,10 +303,7 @@
 	</div>
 	<div id="listReply">
 		<jsp:include page="../videoboard/videoBoardReply.jsp" flush="false"/>
-		
 	</div>
-
 	<jsp:include page="../module/bottom.jsp" flush="false"/>
- 
 </body>
 </html>

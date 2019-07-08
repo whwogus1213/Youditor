@@ -16,8 +16,8 @@ public class ReplyServiceImpl implements ReplyService {
 
 	@Inject
 	ReplyDAO dao;
+	
 	// 게시물 목록
-
 	@Override
 	public List<ReplyVO> listAll(int boardId) throws Exception {
 		return dao.listAll(boardId);
@@ -39,6 +39,21 @@ public class ReplyServiceImpl implements ReplyService {
 	public void update(ReplyVO vo) throws Exception {
 		dao.update(vo);
 		
+	}
+
+	@Override
+	public void reInsert(ReplyVO vo) throws Exception {
+		dao.reInsert(vo);
+	}
+
+	@Override
+	public int isReReply(ReplyVO vo) throws Exception {
+		return dao.isReReply(vo);
+	}
+
+	@Override
+	public List<ReplyVO> reList(int replyCommentId) throws Exception {
+		return dao.reList(replyCommentId);
 	}
 
 }
