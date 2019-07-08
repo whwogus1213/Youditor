@@ -164,7 +164,7 @@
 							<li>|</li>
 							<li><a class="submenuLink" href="/follow/followerList">팔로워</a></li>
 							<li>|</li>
-							<li><a class="submenuLink" href="/follow/modAccount.do">회원정보수정</a></li>
+							<li><a class="submenuLink" href="/accounts/modAccount.do">회원정보수정</a></li>
 							<li>|</li>
 						</ul>
 					</li>
@@ -177,7 +177,7 @@
 						<a class="nav-link" href="/accounts/login.do">로그인</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="/accounts/join.do">회원가입</a>
+						<a class="nav-link" href="/accounts/signUp.do">회원가입</a>
 					</li>
 				</c:if>
 			</ul>

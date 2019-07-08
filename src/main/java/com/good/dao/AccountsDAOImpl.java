@@ -1,5 +1,6 @@
 package com.good.dao;
 
+import java.sql.ResultSet;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -47,6 +48,24 @@ public class AccountsDAOImpl implements AccountsDAO {
 	@Override
 	public void resetPassword(String email) throws Exception {
 		sqlSession.update(NAMESPACE + ".resetPassword", email);
+	}
+	
+	@Override
+	public void deleteAccount(AccountsVO vo) throws Exception {
+		sqlSession.delete(NAMESPACE + ".deleteAccount", vo);
+	}
+	
+	@Override
+	public void updateAccount(AccountsVO vo) throws Exception {
+		sqlSession.update(NAMESPACE + ".updateAccount", vo);
+	}
+	
+	@Override
+	public void updatePassword(int accountId, String pwd) throws Exception {
+		AccountsVO vo = new AccountsVO();
+		vo.setAccountId(accountId);
+		vo.setPwd(pwd);
+		sqlSession.update(NAMESPACE + ".updatePassword", vo);
 	}
 
 }

@@ -66,9 +66,47 @@
 		UPDATE
 			accounts
 		SET
-			pwd = "tempPassword"
+			pwd = "tempPassword",
+			mod_date = now()
 		WHERE
 			email = #{email}
+	</update>
+	
+	<delete id="deleteAccount" parameterType="AccountsVO">
+		UPDATE
+			accounts
+		SET
+			mod_date = now(),
+			authority = 0
+		WHERE
+			accountId = #{accountId}
+			AND
+			pwd = #{pwd}
+	</delete>
+	
+	<update id="updateAccount" parameterType="AccountsVO">
+		UPDATE
+			accounts
+		SET
+			email = #{email},
+			nickname = #{nickname},
+			picture = #{picture},
+			footer = #{footer},
+			mod_date = now()
+		WHERE
+			accountId = #{accountId}
+			AND
+			pwd = #{pwd}
+	</update>
+	
+	<update id="updatePassword" parameterType="AccountsVO">
+		UPDATE
+			accounts
+		SET
+			pwd = #{pwd},
+			mod_date = now()
+		WHERE
+			accountId = #{accountId}
 	</update>
 
 </mapper>

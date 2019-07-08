@@ -43,5 +43,20 @@ public class AccountsServiceImpl implements AccountsService {
 	public void resetPassword(String email) throws Exception {
 		dao.resetPassword(email);
 	}
+		
+	@Override
+	public void deleteAccount(AccountsVO vo) throws Exception {
+		dao.deleteAccount(vo);
+	}
+	
+	@Override
+	public void updateAccount(AccountsVO vo) throws Exception {
+		dao.updateAccount(vo);
+	}
+	
+	@Override
+	public void updatePassword(int accountId, String newPwd) throws Exception {
+		dao.updatePassword(accountId, newPwd);
+	}
 
 }
