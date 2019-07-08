@@ -68,7 +68,7 @@ public class VideoBoardDAOImpl implements VideoBoardDAO {
 		return sqlSession.selectOne(NAMESPACE + ".followCheck", map);
 	}
 
-	// 팔로잉 게시물 목록
+	// 팔로우 게시물 목록
 	@Override
 	public List<VideoBoardVO> followBoardList(int followAccountId) throws Exception {
 		return sqlSession.selectList(NAMESPACE + ".followBoardList", followAccountId);

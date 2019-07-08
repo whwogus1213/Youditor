@@ -82,7 +82,7 @@
 						and followerAccountId = #{accountId} )
 	</select>
 	
-	<!-- 팔로잉 게시물 목록 -->
+	<!-- 팔로우 게시물 목록 -->
 	<select id="followBoardList" resultType="VideoBoardVO" parameterType="VideoCategoryVO">
 		select *
 		from videoboard

@@ -136,10 +136,10 @@ public class FollowController {
 		return fc;
 	}
 	
-	// 팔로잉 게시물 목록
+	// 팔로우 게시물 목록
 	@RequestMapping(value = "followBoardList")
 	public ModelAndView followBoardList(@RequestParam("followAccountId") int followAccountId) throws Exception {
-		System.out.println("팔로잉 게시물 목록 시작");
+		System.out.println("팔로우 게시물 목록 시작");
 		FollowListVO vo = new FollowListVO();
 		vo.setFollowAccountId(followAccountId);
 		System.out.println("        followAccountId             " + vo.getFollowAccountId());
@@ -151,7 +151,7 @@ public class FollowController {
 		mv.setViewName("follow/followBoardList");
 		mv.addObject("follow", follow);
 		
-		System.out.println("팔로잉 게시물 목록 끝");
+		System.out.println("팔로우 게시물 목록 끝");
 		return mv;
 	}	
 

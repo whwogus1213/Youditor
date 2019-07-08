@@ -13,7 +13,7 @@
 <link href="/resources/css/modern-business.css" rel="stylesheet">
 </head>
 <body>
-	<jsp:include page="../module/top2.jsp" flush="false"/>
+	<jsp:include page="../module/top2.jsp" flush="false" />
 	<div class="form-group">
 		<div class="col-sm-12">
 			<h2 align="center">&nbsp;</h2>
@@ -32,10 +32,14 @@
 			</thead>
 			<tbody>
 				<c:forEach items="${followerList}" var="followerList">
-						<tr>
-							<td>${followerList.followerAccountId}</td>
-							<td><fmt:formatDate value="${followerList.reg_date}" pattern="yyyy-MM-dd" /></td>
-						</tr>
+					<tr>
+						<td>
+							<a href="/follow/followBoardList?followAccountId=${followerList.followerAccountId }">${followerList.followerAccountId}</a>
+						</td>
+						<td>
+							<fmt:formatDate value="${followerList.reg_date}" pattern="yyyy-MM-dd" />
+						</td>
+					</tr>
 				</c:forEach>
 			</tbody>
 		</table>

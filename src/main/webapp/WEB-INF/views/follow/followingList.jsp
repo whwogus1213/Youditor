@@ -50,7 +50,7 @@
 		<div class="col-sm-12">
 			<h2 align="center">&nbsp;</h2>
 			<h1 align="center">Following List</h1>
-			<h2 align="center">${login.nickname}의팔로잉</h2>
+			<h2 align="center">${login.nickname}의 팔로잉</h2>
 		</div>
 	</div>
 	<div class="container">
@@ -67,9 +67,12 @@
 			<tbody>
 				<c:forEach items="${followingList}" var="followingList">
 					<tr>
-						<td><a
-							href="/follow/followBoardList?followAccountId=${followingList.followAccountId }">${followingList.followAccountId}</a></td>
-						<td><fmt:formatDate value="${followingList.reg_date}" pattern="yyyy-MM-dd" /></td>
+						<td>
+							<a href="/follow/followBoardList?followAccountId=${followingList.followAccountId }">${followingList.followAccountId}</a>
+						</td>
+						<td>
+							<fmt:formatDate value="${followingList.reg_date}" pattern="yyyy-MM-dd" />
+						</td>
 						<td>
 							<button class="btn btn-danger btn-sm" id="followbtn${followingList.followAccountId}"
 							onclick="fn_unfollow('${followingList.followAccountId}')">언팔로우</button>
