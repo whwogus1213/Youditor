@@ -33,7 +33,7 @@
 <script type="text/javascript">
 
 $(function(){
-	fn_followbtn();
+	fn_star();
 	var json = {
 		"boardId":${row.accountId},
 		"accountId":${login.accountId}
