@@ -140,12 +140,9 @@ public class FollowController {
 	@RequestMapping(value = "followBoardList")
 	public ModelAndView followBoardList(@RequestParam("followAccountId") int followAccountId) throws Exception {
 		System.out.println("팔로우 게시물 목록 시작");
-		FollowListVO vo = new FollowListVO();
-		vo.setFollowAccountId(followAccountId);
-		System.out.println("        followAccountId             " + vo.getFollowAccountId());
+		System.out.println("   followAccountId   " + followAccountId);
 		
-		List<VideoBoardVO> follow = videoBoardService.followBoardList(vo.getFollowAccountId());
-		System.out.println(follow);
+		List<VideoBoardVO> follow = videoBoardService.followBoardList(followAccountId);
 		
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("follow/followBoardList");

@@ -59,6 +59,7 @@ public class VideoBoardController {
 
 		System.out.println("로그인세션 : " + loginVO.getAccountId());
 		System.out.println("글쓴이아이디 : " + row.getAccountId());
+		System.out.println("글쓴이닉네임 : " + row.getNickname());
 
 		// 로그인 아이디, 글쓴이 아이디
 		int fc = videoBoardService.followCheck(loginVO.getAccountId(), row.getAccountId());
