@@ -6,25 +6,18 @@
 <mapper namespace="com.good.mapper.videoStarMapper">
 	<!-- 처음 평점 추가 -->
 	<insert id="insert" parameterType="VideoStarVO">
-    	insert into videostar(boardId, accountId, star, starCheck,  reg_date)
-		values(#{boardId}, #{accountId}, 1, 1, now())
+    	insert into videostar(boardId, accountId, star, reg_date)
+		values(#{boardId}, #{accountId}, #{star}, now())
     </insert>
 	<!-- 평점 업데이트 -->
-    <update id="update1" parameterType="VideoStarVO">
-		  UPDATE videostar SET star = +1 WHERE boardId=#{boardId}
-	</update>
-	<update id="update2" parameterType="VideoStarVO">
-		  UPDATE videostar SET star = +2 WHERE boardId=#{boardId}
-	</update>
-	<update id="update3" parameterType="VideoStarVO">
-		  UPDATE videostar SET star = +3 WHERE boardId=#{boardId}
-	</update>
-	<update id="update4" parameterType="VideoStarVO">
-		  UPDATE videostar SET star = +4 WHERE boardId=#{boardId}
-	</update>
-	<update id="update5" parameterType="VideoStarVO">
-		  UPDATE videostar SET star = +5 WHERE boardId=#{boardId}
+    <update id="update" parameterType="VideoStarVO">
+		  UPDATE videostar SET star = +#{star} WHERE boardId=#{boardId} and accountId=#{accountId}
 	</update>
 	
+	<select id="starload" parameterType="VideoStarVo" resultType="int">
+			select star from videostar where boardId = #{boardId} and accountId = #{accountId}
+	</select>
+	
+
 
 </mapper>

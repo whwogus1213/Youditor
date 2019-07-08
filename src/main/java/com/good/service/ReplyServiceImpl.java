@@ -16,8 +16,8 @@ public class ReplyServiceImpl implements ReplyService {
 
 	@Inject
 	ReplyDAO dao;
+	
 	// 게시물 목록
-
 	@Override
 	public List<ReplyVO> listAll(int boardId) throws Exception {
 		return dao.listAll(boardId);

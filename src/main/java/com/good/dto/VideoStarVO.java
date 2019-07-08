@@ -8,7 +8,6 @@ public class VideoStarVO {
 	private int accountId;
 	private int star;
 	private Date reg_date;
-	private int starCheck;
 	
 	public int getStarId() {
 		return starId;
@@ -50,13 +49,6 @@ public class VideoStarVO {
 		this.reg_date = reg_date;
 	}
 
-	public int getStarCheck() {
-		return starCheck;
-	}
-
-	public void setStarCheck(int starCheck) {
-		this.starCheck = starCheck;
-	}
 
 	
 } // End - VideoStarVO

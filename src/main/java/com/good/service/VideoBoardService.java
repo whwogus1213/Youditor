@@ -30,5 +30,8 @@ public interface VideoBoardService {
 	// 팔로우 체크
 	public int followCheck(int accountId, int accountId2);
 	
+	// 평점 체크
+	public int starCheck(int accountId, int boardId);
+	
 	
 }

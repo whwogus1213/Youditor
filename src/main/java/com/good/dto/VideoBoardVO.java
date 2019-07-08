@@ -13,7 +13,7 @@ public class VideoBoardVO {
 	private Date mod_date;
 	private int viewCount;
 	private int replyCount;
-	private int starCount;
+	private float starCount;
 	
 	private String nickname;
 	private String footer;
@@ -99,12 +99,13 @@ public class VideoBoardVO {
 		this.replyCount = replyCount;
 	}
 
-	public int getStarCount() {
+	public float getStarCount() {
 		return starCount;
 	}
 
-	public void setStarCount(int starCount) {
+	public void setStarCount(float starCount) {
 		this.starCount = starCount;
+	}
 	public String getNickname() {
 		return nickname;
 	}

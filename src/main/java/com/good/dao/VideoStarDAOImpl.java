@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.good.dto.ReplyVO;
 import com.good.dto.VideoStarVO;
 
 @Repository
@@ -18,6 +19,11 @@ public class VideoStarDAOImpl implements VideoStarDAO {
 
 	private static final String NAMESPACE = "com.good.mapper.videoStarMapper";
 	
+	@Override
+	public List<VideoStarVO> listAll(int boardId) throws Exception {
+		return sqlSession.selectList(NAMESPACE + ".listAll", boardId);
+	}
+	
 	//평점
 	@Override
 	public void insert(VideoStarVO vo) throws Exception {
@@ -26,28 +32,15 @@ public class VideoStarDAOImpl implements VideoStarDAO {
 	
 	//평점
 	@Override
-	public void update1(VideoStarVO vo) throws Exception {
-		sqlSession.update(NAMESPACE + ".update1", vo);
+	public void update(VideoStarVO vo) throws Exception {
+		sqlSession.update(NAMESPACE + ".update", vo);
 	}
-	//평점
+	
+
 	@Override
-	public void update2(VideoStarVO vo) throws Exception {
-		sqlSession.update(NAMESPACE + ".update2", vo);
-	}
-	//평점
-	@Override
-	public void update3(VideoStarVO vo) throws Exception {
-		sqlSession.update(NAMESPACE + ".update3", vo);
-	}
-	//평점
-	@Override
-	public void update4(VideoStarVO vo) throws Exception {
-		sqlSession.update(NAMESPACE + ".update4", vo);
-	}
-	//평점
-	@Override
-	public void update5(VideoStarVO vo) throws Exception {
-		sqlSession.update(NAMESPACE + ".update5", vo);
+	public int starload(VideoStarVO vo) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + ".starload", vo);
+
 	}
 
 }

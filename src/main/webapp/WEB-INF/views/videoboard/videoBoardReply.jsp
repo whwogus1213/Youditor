@@ -92,9 +92,11 @@ $(function(){
 /**
  * 댓글 불러오기(Ajax)
  */
+ 
 function getCommentList(){
     console.log($("#boardId").val());
     $.ajax({
+
         type:"POST",
         url : "/reply/listAll",
 //         dataType : "application/json; charset=utf-8",

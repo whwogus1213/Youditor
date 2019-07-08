@@ -60,4 +60,10 @@ public class VideoBoardServiceImpl implements VideoBoardService {
 		return videoBoardDAO.followCheck(accountId, accountId2);
 	}
 
+	//평점 체크
+	@Override
+	public int starCheck(int accountId, int boardId) {
+		return videoBoardDAO.starCheck(accountId, boardId);
+	}
+
 }

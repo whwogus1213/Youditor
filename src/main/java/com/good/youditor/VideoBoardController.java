@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -62,17 +63,21 @@ public class VideoBoardController {
 		
 		// 로그인 아이디, 글쓴이 아이디
 		int fc = videoBoardService.followCheck(loginVO.getAccountId(), row.getAccountId());
+		int sc = videoBoardService.starCheck(loginVO.getAccountId(), row.getBoardId());
 		System.out.println(fc);
+		System.out.println(sc);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("videoboard/videoBoardView");
 		mav.addObject("row", row);
 		mav.addObject("followCheck", fc);
+		mav.addObject("starCheck", sc);
 		
 		System.out.println("VideoBoardController boardView open");
 		return mav;
 	}
 
+	
 	// 게시물 쓰기
 	@RequestMapping(value = "/write.do", method = RequestMethod.GET)
 	public ModelAndView writedo() throws Exception {
