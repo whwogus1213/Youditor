@@ -44,7 +44,7 @@ public class VideoBoardController {
 		mav.setViewName("videoboard/videoBoardList");
 		System.out.println("VideoBoardController VideoBoardList open");
 		mav.addObject("VideoBoardList", list);
-		String categoryName = "외않대";
+		String categoryName = "";
 		if(category == 0) {
 			categoryName = "전체";
 		}else if(category == 1) {
