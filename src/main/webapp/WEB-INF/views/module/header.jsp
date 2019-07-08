@@ -3,6 +3,6 @@
 
 
 <link href="/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-<script src="/resources/vendor/jquery/jquery.min.js"></script>
-<script src="/resources/vendor/bootstrap/js/bootstrap.min.js"></script>
-<script src="/resources/vendor/bootstrap2/js/bootstrap.bundle.min.js"></script>
+<link href="/resources/vendor/bootstrap/css/bootstrap-grid.min.css" rel="stylesheet">
+<script src="/resources/js/jquery-3.3.1.min.js"></script>
+<script src="/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
