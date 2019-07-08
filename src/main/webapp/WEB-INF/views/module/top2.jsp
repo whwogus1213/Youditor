@@ -13,6 +13,7 @@
   right: 0;
   background-color: #ddd; /* Black */
   overflow-x: hidden; /* Disable horizontal scroll */
+  padding-top: 20px;
 }
 
 /* The navigation menu links */
@@ -91,9 +92,6 @@
 
 <!-- Side navigation -->
 <div class="sidenav" id="mySidebar">
-	<div align="right">
-		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
-	</div>
 	<div align="center">
 		<c:if test="${login.accountId ne null }">
 			<jsp:include page="../chat/chattingview.jsp" flush="false"/>
@@ -185,16 +183,18 @@
 			</ul>
 		</div>
 	</div>
-		<button class="btn btn-light" onclick="openNav()">Chat</button>  
-		<script>
+	<button class="btn btn-light" onclick="openNav()">Chat</button>  
+	<script>
 		function openNav() {
-		  document.getElementById("mySidebar").style.width = "230px";
-		  document.getElementById("main").style.marginLeft = "190px";
+			if(document.getElementById("mySidebar").getBoundingClientRect().width=="0"){
+				 document.getElementById("mySidebar").style.width = "230px";
+			} else {
+				 document.getElementById("mySidebar").style.width = "0";
+			}
 		}
 		
 		function closeNav() {
-		  document.getElementById("mySidebar").style.width = "0";
-		  document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("mySidebar").style.width = "0";
 		}
-		</script>
+	</script>
 </nav>
