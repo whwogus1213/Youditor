@@ -25,19 +25,56 @@
 		    text-decoration:none;
 		}
 		.star_rating a:first-child {margin-left:0;}
-		.star_rating a.on {color:#777;}
+		.star_rating a.on {color:#FF0000;}
+		.star_rating a.mouseon {color:#FF0000;}
 	</style>
 
 <jsp:include page="../module/header.jsp" flush="false"/>
 
 <script type="text/javascript">
+
+	/* 평가 점수(1~5) 전역변수  */
+	var star=-1;
+	var star_db;
+	
 	$(function(){
 		if(${sessionScope.login != null}) {
 			
-		fn_followbtn();
+			fn_followbtn();
+			getStarload();
 		
+		}
+	});
+
+	$(function(){
+		$( ".star_rating a" ).click(function() {
+		     $(this).parent().children("a").removeClass("on");
+		     $(this).addClass("on").prevAll("a").addClass("on");
+		     var index = $(".starqq").index(this);
+		     index++;
+		     
+		     star = index;
+
+		     if(star_db != star) {
+				$("#ratingbtn").removeAttr("style");
+			 }
+
+		     return false;
+		});
+
+		$(".starqq").hover(function(){
+			$(this).prevAll().addClass("mouseon");
+			$(this).addClaoss("mouseon");
+		}, function(){
+			$(this).prevAll().removeClass("mouseon");
+			$(this).removeClass("mouseon");	
+		});
+	});
+
+	/* star 점수 DB에서 읽어오기 */
+	function getStarload(){
 		var json = {
-			"boardId":${row.accountId},
+			"boardId":${row.boardId},
 			"accountId":${login.accountId}
 		};
 		$.ajax({
@@ -45,27 +82,69 @@
 			url : "/videostar/starload",
 			data : json,
 			success : function(data) {
+				console.log("starload star점수 : " + data);
+				star_db = data;
 				$("#star").html(data);
+				$(".star_rating a:lt("+data+")").addClass("on");
+				var html = "";
+				if(data == 0) {
+					html += "<button id ='ratingbtn' class='btn btn-info btn-sm' style='visibility:hidden' onclick='fn_rating("+${row.boardId}+"); return false;'>평가하기</button>";
+				} else {
+					html += "<button id ='ratingbtn' class='btn btn-warning btn-sm' style='visibility:hidden' onclick='fn_ratingupdate("+${row.boardId}+"); return false'>평가바꾸기</button>";
+				}
+				$("#ratingBtnDiv").html(html);
 			},
 			error : function(data) {
+				alert("starload 에러");
 			}
 		});
 		}
-	});
 	
-	var star=-1;
-	$(function(){
-		$( ".star_rating a" ).click(function() {
-		     $(this).parent().children("a").removeClass("on");
-		     $(this).addClass("on").prevAll("a").addClass("on");
-		     var index = $(".starqq").index(this);
-		     index++;
-		     star = index;
-		     console.log(index+"$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
-			$('#raitingupdatebtn').removeAttr("style");
-		     return false;
+	
+	// 평점 처음 등록
+	function fn_rating(boardId) {
+		var json = {
+				"star" : star,
+			"boardId" : boardId
+		};
+		$.ajax({
+			type : "POST",
+			url : "/videostar/insertVideoStarPro",
+			data : json,
+			success : function(data) {
+				if (data == "success2") {
+					getStarload();
+				}
+			},
+			error : function(data) {
+				alert("fn_rating 에러");
+			}
 		});
-	});
+	}
+	// 평점 업데이트
+	function fn_ratingupdate(boardId) {
+		var json = {
+				"star" : star,
+			"boardId" : boardId
+		}
+
+		$.ajax({
+			type : "POST",
+			url : "/videostar/updateVideoStarPro",
+			data : json,
+			success : function(data) {
+				if (data == "updatesuccess") {
+					console.log("성공");
+					getStarload();
+					
+				}
+			},
+			error : function(data) {
+				alert("fn_ratingupdate 에러");
+			}
+		});
+	}
+	
 
 	// 팔로우 추가
 	function fn_following(accountId) {
@@ -90,60 +169,6 @@
 	}
 	
 
-	// 평점 처음 등록
-	function fn_raiting(boardId) {
-		var json = {
-				"star":star,
-			"boardId" : boardId
-		}
-		console.log(star+"asdfasdfasdfasdf");
-		$.ajax({
-			type : "POST",
-			url : "/videostar/insertVideoStarPro",
-			//data:$("#followingForm").serialize(),
-			data : json,
-			//dataType : : "json",
-			success : function(data) {
-				if (data == "success2") {
-					console.log("성공");
-					$('#raitingbtn').attr('class', 'btn btn-warning btn-sm');
-					$('#raitingbtn').html('평가√');
-					$("#raitingbtn").attr('onclick', '').unbind('click');
-					getStarload();
-				}
-			},
-			error : function(data) {
-				alert("에러");
-			}
-		});
-	}
-	// 평점 업데이트
-	function fn_raitingupdate(boardId) {
-		var json = {
-				"star":star,
-			"boardId" : boardId
-		}
-		console.log(star+"asdfasdfasdfasdf");
-		$.ajax({
-			type : "POST",
-			url : "/videostar/updateVideoStarPro",
-			data : json,
-			//dataType : : "json",
-			success : function(data) {
-				if (data == "updatesuccess") {
-					console.log("성공");
-					$('#raitingupdatebtn').attr('class', 'btn btn-warning btn-sm');
-					$('#raitingupdatebtn').html('평가√');
-					$("#raitingupdatebtn").attr('onclick', '').unbind('click');
-					getStarload();
-					
-				}
-			},
-			error : function(data) {
-				alert("에러");
-			}
-		});
-	}
 
 	// 팔로우 삭제
 	function fn_unfollow(accountId) {
@@ -194,23 +219,7 @@
 
 		}
 	}
-	function getStarload(accountId, boardId){
-		var json = {
-			"boardId":${row.accountId},
-			"accountId":${login.accountId}
-		};
-		$.ajax({
-			type : "POST",
-			url : "/videostar/starload",
-			data : json,
-			success : function(data) {
-				$("#star").html(data);
-			},
-			error : function(data) {
-				alert("에러123123213");
-			}
-		});
-		}
+
 </script>
 
 
@@ -274,57 +283,8 @@
 		
 			
         <input type="hidden" id="boardId" name="boardId" value="${row.boardId }" />
-        	<c:if test="${login.accountId ne row.accountId}">
-				<c:if test="${login.email ne null}">
-					<c:if test="${starCheck ne 0}">
-						<c:if test="${starSelect eq 1 }">
-							<p class="star_rating">
-							    <a class = "starqq on" href="#">★</a>
-							    <a class = "starqq" href="#">★</a>
-							    <a class = "starqq" href="#">★</a>
-							    <a class = "starqq" href="#">★</a>
-							    <a class = "starqq" href="#">★</a>
-							</p>
-						</c:if>
-						<c:if test="${starSelect eq 2 }">
-							<p class="star_rating">
-							    <a class = "starqq on" href="#">★</a>
-							    <a class = "starqq on" href="#">★</a>
-							    <a class = "starqq" href="#">★</a>
-							    <a class = "starqq" href="#">★</a>
-							    <a class = "starqq" href="#">★</a>
-							</p>
-						</c:if>
-						<c:if test="${starSelect eq 3 }">
-							<p class="star_rating">
-							    <a class = "starqq on" href="#">★</a>
-							    <a class = "starqq on" href="#">★</a>
-							    <a class = "starqq on" href="#">★</a>
-							    <a class = "starqq" href="#">★</a>
-							    <a class = "starqq" href="#">★</a>
-							</p>
-						</c:if>
-						<c:if test="${starSelect eq 4 }">
-							<p class="star_rating">
-							    <a class = "starqq on" href="#">★</a>
-							    <a class = "starqq on" href="#">★</a>
-							    <a class = "starqq on" href="#">★</a>
-							    <a class = "starqq on" href="#">★</a>
-							    <a class = "starqq" href="#">★</a>
-							</p>
-						</c:if>
-						<c:if test="${starSelect eq 5 }">
-							<p class="star_rating">
-							    <a class = "starqq on" href="#">★</a>
-							    <a class = "starqq on" href="#">★</a>
-							    <a class = "starqq on" href="#">★</a>
-							    <a class = "starqq on" href="#">★</a>
-							    <a class = "starqq on" href="#">★</a>
-							</p>
-						</c:if>
-							<button id ="raitingupdatebtn" onclick="fn_raitingupdate('${row.boardId}')" style="visibility:hidden">업데이트 평가</button>
-					</c:if>
-					<c:if test="${starCheck eq 0}">
+			<c:if test="${login.email ne null}">
+	        	<c:if test="${login.accountId ne row.accountId}">
 						<p class="star_rating">
 						    <a class = "starqq" href="#">★</a>
 						    <a class = "starqq" href="#">★</a>
@@ -332,16 +292,23 @@
 						    <a class = "starqq" href="#">★</a>
 						    <a class = "starqq" href="#">★</a>
 						</p>
-						<button id ="raitingbtn"  onclick="fn_raiting('${row.boardId}')">처음 평가</button>
-					</c:if>
+						<div id='ratingBtnDiv'>
+						</div>
 				</c:if>
 			</c:if>
 			<c:if test="${login.email eq null}">
-				<button id ="notraiting">로그인 해라</button>
+				로그인 후 평가 가능
 			</c:if>
 		<h5 align="right">등록일 &nbsp;&nbsp; <fmt:formatDate value="${row.reg_date}" pattern="yyyy년 MM월 dd일  hh:mm:ss" /></h5>
-		<div align="right"><label>내가 평가한 점수</label>
-		<span id="star"></span><span> 점</span></div>
+		<c:if test="${login.email ne null}">
+		<c:if test="${login.accountId ne row.accountId}">
+		
+			<div align="right">
+				<label>내가 평가한 점수</label>
+				<span id="star"></span><span> 점</span>
+			</div>
+		</c:if>
+		</c:if>
 		<div align="right">총 점수 ${row.starCount}</div>
 		<hr>
 		<h6><strong>${row.nickname }</strong><br><br>${row.footer }</h6>

@@ -23,5 +23,10 @@
 	      select subject, accountId, boardId, SUM(star) sstar from videoBoard b, accounts ac where b.accountId = ac.accountId 
 		 order by sstar desc 
     </select>
+	<!-- 존재하면 1, 없으면 0 -->
+	<select id="starCheck" parameterType="map" resultType="int">
+		select EXISTS (select star from videostar where accountId = #{accountId} and boardId = #{boardId})
+	</select>
+
 
 </mapper>

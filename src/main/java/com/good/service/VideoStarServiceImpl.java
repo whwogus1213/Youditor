@@ -45,4 +45,10 @@ public class VideoStarServiceImpl implements VideoStarService {
 		return videoStarDAO.starSum(vo);
 	}
 
+	@Override
+	public int starCheck(int accountId, int boardId) throws Exception {
+		return videoStarDAO.starCheck(accountId, boardId);
+		
+	}
+
 }

@@ -17,4 +17,6 @@ public interface VideoStarDAO {
 	public int starload(VideoStarVO vo) throws Exception;
 	
 	public int starSum(VideoStarVO vo) throws Exception;
+	// 평점 체크
+	public int starCheck(int accountId, int boardId)  throws Exception;
 }
