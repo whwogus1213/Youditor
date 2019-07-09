@@ -103,16 +103,15 @@ $(function(){
 
 </head>
 <body>
-	<h1>Youditor 채팅방 (${userid})</h1>
-	
-	<br>
+	<h4>Youditor 채팅방 (${userid})</h4>
+	<hr>
 	<div class="container">
 	
 	
 		<form class="form-inline" onsubmit="return false">
 		<div class="form-group form-group-sm">
 		<div class="col-xs-offset-2 col-xs-4">
-			<input type="text" id="message" class="form-control"/>
+			<input type="text" id="message" class="form-control" style="width:180px"/>
     	</div>
     	</div>
     	<div class="form-group form-group-sm">
