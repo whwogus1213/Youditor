@@ -101,8 +101,7 @@
 							</div>
 						</td>
 						<td>${TipBoardList.accountId}</td>
-						<td><fmt:formatDate value="${TipBoardList.reg_date}"
-								pattern="yyyy-MM-dd" /></td>
+						<td><fmt:formatDate value="${TipBoardList.reg_date}" pattern="yyyy-MM-dd" /></td>
 						<td>${TipBoardList.viewCount}</td>
 					</tr>
 				</c:forEach>
