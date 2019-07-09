@@ -30,6 +30,11 @@ public class AdminController {
 		return "admin/adminLogin";
 	}
 
+	@RequestMapping(value = "/adminIndex", method = RequestMethod.GET)
+	public String adminIndex() throws Exception {
+		return "admin/adminIndex";
+	}
+
 	@RequestMapping(value = "/admin", method = RequestMethod.POST)
 	public String AccountsList(HttpSession session, AdminVO mavo, Model model) throws Exception {
 

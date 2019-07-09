@@ -36,6 +36,7 @@
             <exclude-mapping path="/accounts/**"/>
             <exclude-mapping path="/admin"/>
             <exclude-mapping path="/admin/**"/>
+            <exclude-mapping path="/adminIndex"/>
             <exclude-mapping path="/noticeboard"/>
             <exclude-mapping path="/notice/**"/>
             <exclude-mapping path="/noticeboard/**"/>
