@@ -38,8 +38,8 @@
 		fn_followbtn();
 		
 		var json = {
-			"boardId":${row.accountId},
-			"accountId":${login.accountId}
+			"boardId":${row.accountId};
+			"accountId":${login.accountId};
 		};
 		$.ajax({
 			type : "POST",
@@ -266,7 +266,7 @@
 						    <a class = "starqq" href="#">★</a>
 						    <a class = "starqq" href="#">★</a>
 						</p>
-						<button id ="raitingupdatebtn" onclick="fn_raitingupdate('${row.boardId}')">업데이트 평가</button>
+						<button class="btn btn-warning btn-sm" id ="raitingupdatebtn" onclick="fn_raitingupdate('${row.boardId}')">별점 수정</button>
 					</c:if>
 					<c:if test="${starCheck eq 0}">
 						<p class="star_rating">
@@ -276,7 +276,7 @@
 						    <a class = "starqq" href="#">★</a>
 						    <a class = "starqq" href="#">★</a>
 						</p>
-						<button id ="raitingbtn"  onclick="fn_raiting('${row.boardId}')">처음 평가</button>
+						<button class="btn btn-warning btn-sm" id ="raitingbtn"  onclick="fn_raiting('${row.boardId}')">별점 주기</button>
 					</c:if>
 				</c:if>
 			</c:if>
@@ -284,9 +284,13 @@
 				<button id ="notraiting">로그인 해라</button>
 			</c:if>
 		<h5 align="right">등록일 &nbsp;&nbsp; <fmt:formatDate value="${row.reg_date}" pattern="yyyy년 MM월 dd일  hh:mm:ss" /></h5>
-		<div align="right"><label>내가 평가한 점수</label>
-		<span id="star"></span><span> 점</span></div>
-		<div align="right">총 점수 ${row.starCount}</div>
+		<c:if test="${login.email ne null}">
+			<c:if test="${starCheck ne 0}">
+				<div align="right"><label>내가 평가한 점수</label>
+				<span id="star"></span><span> 점</span></div>
+			</c:if>
+		</c:if>
+		<div align="right">평점 ${row.starCount} / 5.0</div>
 		<hr>
 		<h6><strong>${row.nickname }</strong><br><br>${row.footer }</h6>
 		<%-- 	<h1>${row.youtubeLink }</h1> --%>
