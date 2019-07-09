@@ -3,7 +3,6 @@ package com.good.dao;
 import java.util.List;
 
 import com.good.dto.NoticeBoardVO;
-import com.good.dto.Pagination;
 import com.good.dto.Search;
 
 public interface NoticeBoardDAO {

@@ -84,7 +84,7 @@
 					</ul>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#">팁</a>
+					<a class="nav-link" href="/tipboard/tipBoardList">팁</a>
 				</li>
 				<li class="nav-item topMenuLi">
 					<a class="nav-link" href="#">구인구직</a>
