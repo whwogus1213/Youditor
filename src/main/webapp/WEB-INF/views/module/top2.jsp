@@ -2,6 +2,45 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <style type="text/css">
+
+/* The sidebar menu */
+.sidenav {
+  height: 100%; /* Full-height: remove this if you want "auto" height */
+  width: 0px; /* Set the width of the sidebar */
+  position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+  z-index: 20; /* Stay on top */
+  top: 55px; /* Stay at the top */
+  right: 0;
+  background-color: #ddd; /* Black */
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding-top: 20px;
+}
+
+/* The navigation menu links */
+.sidenav a {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+/* Style page content */
+.main {
+  margin-left: 160px; /* Same as the width of the sidebar */
+  padding: 0px 10px;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
 .submenuLink { /* 상위 메뉴와 하위 메뉴의 a 태그에 공통으로 설정할 스타일 */
 	position: static;
 	color: #9A9DA0;
@@ -49,6 +88,24 @@
 	text-decoration: none;
 }
 </style>
+
+
+<!-- Side navigation -->
+<div class="sidenav" id="mySidebar">
+	<div align="center">
+		<c:if test="${login.accountId ne null }">
+			<jsp:include page="../chat/chattingview.jsp" flush="false"/>
+		</c:if>
+		<c:if test="${login.accountId eq null }">
+			<h5>로그인 이후<br>채팅이<br>가능합니다.</h5>
+			<hr>
+			<h6><a href="accounts/login.do">로그인</a></h6>
+			<h6>or</h6>
+			<h6><a href="accounts/join.do">회원가입</a></h6>
+		</c:if>
+	</div>
+</div>
+
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
 		<a class="navbar-brand" href="/">YouDitor</a>
@@ -120,10 +177,24 @@
 						<a class="nav-link" href="/accounts/login.do">로그인</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="/accounts/join.do">회원가입</a>
+						<a class="nav-link" href="/accounts/signUp.do">회원가입</a>
 					</li>
 				</c:if>
 			</ul>
 		</div>
 	</div>
+	<button class="btn btn-light" onclick="openNav()">Chat</button>  
+	<script>
+		function openNav() {
+			if(document.getElementById("mySidebar").getBoundingClientRect().width=="0"){
+				 document.getElementById("mySidebar").style.width = "230px";
+			} else {
+				 document.getElementById("mySidebar").style.width = "0";
+			}
+		}
+		
+		function closeNav() {
+			document.getElementById("mySidebar").style.width = "0";
+		}
+	</script>
 </nav>

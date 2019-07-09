@@ -18,6 +18,10 @@
 			select star from videostar where boardId = #{boardId} and accountId = #{accountId}
 	</select>
 	
+	<!-- 존재하면 1, 없으면 0 -->
+	<select id="starCheck" parameterType="map" resultType="int">
+		select EXISTS (select star from videostar where accountId = #{accountId} and boardId = #{boardId})
+	</select>
 
 
 </mapper>

@@ -234,26 +234,35 @@ public class AccountsController {
 		return mav;
 	}
 	
-	@RequestMapping(value="/deleteAccount.do")
-	public String deleteAccount(HttpSession session, int accountId, String pwdCfm, RedirectAttributes rttr) throws Exception {
+	@RequestMapping(value = "/deleteAccount.do")
+	public ModelAndView deleteAccount(HttpSession session, int accountId, String email, String pwdCfm, RedirectAttributes rttr) throws Exception {
+		ModelAndView mav = new ModelAndView();
 		AccountsVO vo = new AccountsVO();
 		
 		vo.setAccountId(accountId);
+		vo.setEmail(email);
 		vo.setPwd(pwdCfm);
 		
 		service.deleteAccount(vo);
-		
-		if(service.login(vo).getAuthority() != 0) {	// 삭제에 실패한 경우
+		vo = service.login(vo);
+		int authority = vo.getAuthority(); 
+		if(authority == 0) {	// 탈퇴 성공
+			session.invalidate();
+			mav.setViewName("accounts/deleteAccount");
+			System.out.println("String deleteAccount open");
+		} else {	// 탈퇴 실패
 			rttr.addFlashAttribute("msg", false);
-			return "redirect:/accounts/modAccount.do";
+			mav.setViewName("accounts/modAccount");
+			System.out.println("String modAccount open");
 		}
-
-		if (session.getAttribute("login") != null) {
-			// 기존에 login이란 세션 값이 존재한다면
-			session.removeAttribute("login"); // 기존값을 제거해 준다.
-		}
-		
-		return "redirect:/accounts/deleteAccount.do";
+		return mav;
 	}
-	
+
+	@RequestMapping(value = "/signUp.do")
+	public ModelAndView signUp() throws Exception {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("accounts/signUp");
+		System.out.println("String signUp open");
+		return mav;
+	}
 }

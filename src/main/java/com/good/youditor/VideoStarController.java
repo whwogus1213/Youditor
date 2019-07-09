@@ -19,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.good.dto.AccountsVO;
 import com.good.dto.VideoStarVO;
+import com.good.service.VideoBoardService;
 import com.good.service.VideoStarService;
 
 @Controller
@@ -27,6 +28,7 @@ public class VideoStarController {
 
 	@Inject
 	VideoStarService videoStarService;
+	
 	/*
 	// 처음 평가
 	@RequestMapping(value = "/insertVideoStarPro")
@@ -70,12 +72,15 @@ public class VideoStarController {
 	
 	
 	@RequestMapping(value = "/starload", method = RequestMethod.POST)
-	public @ResponseBody int load( VideoStarVO vo) throws Exception {
+	public @ResponseBody int load(VideoStarVO vo) throws Exception {
 		
+		int check = videoStarService.starCheck(vo.getAccountId(), vo.getBoardId());
+		int star = 0;
+		if(check == 1) {
+			star = videoStarService.starload(vo);
+		}
 		
-			int sl = videoStarService.starload(vo);
-		
-		return sl;
+		return star;
 	}
 	
 	

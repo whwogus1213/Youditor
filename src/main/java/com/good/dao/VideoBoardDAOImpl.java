@@ -72,14 +72,5 @@ public class VideoBoardDAOImpl implements VideoBoardDAO {
 	public List<VideoBoardVO> followBoardList(int followAccountId) throws Exception {
 		return sqlSession.selectList(NAMESPACE + ".followBoardList", followAccountId);
 	}
-	
-	//평점 체크
-	@Override
-	public int starCheck(int accountId, int boardId) {
-		Map<String, Integer> map = new HashMap<String, Integer>();
-		map.put("accountId", accountId);
-		map.put("boardId", boardId);
-		
-		return sqlSession.selectOne(NAMESPACE + ".starCheck", map);
-	}
+
 }
