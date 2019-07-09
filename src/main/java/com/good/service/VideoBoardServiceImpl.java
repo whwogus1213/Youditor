@@ -68,8 +68,13 @@ public class VideoBoardServiceImpl implements VideoBoardService {
 	
 	//평점 체크
 	@Override
-	public int starCheck(int accountId, int boardId) {
+	public int starCheck(int accountId, int boardId) throws Exception {
 		return videoBoardDAO.starCheck(accountId, boardId);
 	}
 
+	//평점 선택
+	@Override
+	public int starSelect(int accountId, int boardId) throws Exception {
+		return videoBoardDAO.starSelect(accountId, boardId);
+	}
 }

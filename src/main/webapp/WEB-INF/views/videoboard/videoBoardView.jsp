@@ -31,7 +31,7 @@
 <jsp:include page="../module/header.jsp" flush="false"/>
 
 <script type="text/javascript">
-
+	var resultc = '';
 	$(function(){
 		if(${sessionScope.login != null}) {
 			
@@ -53,6 +53,11 @@
 			}
 		});
 		}
+		if(result === 'test'){
+			$('#star').removeClass('hidden');
+			$('#star').removeAttr("style");
+			$('#star').fadeOut(2000);
+		}
 	});
 	
 	var star=-1;
@@ -64,6 +69,7 @@
 		     index++;
 		     star = index;
 		     console.log(index+"$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+			$('#raitingupdatebtn').removeAttr("style");
 		     return false;
 		});
 	});
@@ -89,6 +95,7 @@
 			}
 		});
 	}
+	
 
 	// 평점 처음 등록
 	function fn_raiting(boardId) {
@@ -109,7 +116,7 @@
 					$('#raitingbtn').attr('class', 'btn btn-warning btn-sm');
 					$('#raitingbtn').html('평가√');
 					$("#raitingbtn").attr('onclick', '').unbind('click');
-
+					getStarload();
 				}
 			},
 			error : function(data) {
@@ -135,7 +142,8 @@
 					$('#raitingupdatebtn').attr('class', 'btn btn-warning btn-sm');
 					$('#raitingupdatebtn').html('평가√');
 					$("#raitingupdatebtn").attr('onclick', '').unbind('click');
-
+					getStarload();
+					
 				}
 			},
 			error : function(data) {
@@ -193,6 +201,23 @@
 
 		}
 	}
+	function getStarload(accountId, boardId){
+		var json = {
+			"boardId":${row.accountId},
+			"accountId":${login.accountId}
+		};
+		$.ajax({
+			type : "POST",
+			url : "/videostar/starload",
+			data : json,
+			success : function(data) {
+				$("#star").html(data);
+			},
+			error : function(data) {
+				alert("에러123123213");
+			}
+		});
+		}
 </script>
 
 
@@ -255,18 +280,56 @@
 		<h6 style="color:gray"> 조회수&nbsp;&nbsp; ${row.viewCount }</h6>
 		
 			
-        <input type="hidden" id="boardId" name="boardId" value="${row.boardId }" /> 
+        <input type="hidden" id="boardId" name="boardId" value="${row.boardId }" />
         	<c:if test="${login.accountId ne row.accountId}">
 				<c:if test="${login.email ne null}">
 					<c:if test="${starCheck ne 0}">
-						<p class="star_rating">
-						    <a class = "starqq" href="#">★</a>
-						    <a class = "starqq" href="#">★</a>
-						    <a class = "starqq" href="#">★</a>
-						    <a class = "starqq" href="#">★</a>
-						    <a class = "starqq" href="#">★</a>
-						</p>
-						<button id ="raitingupdatebtn" onclick="fn_raitingupdate('${row.boardId}')">업데이트 평가</button>
+						<c:if test="${starSelect eq 1 }">
+							<p class="star_rating">
+							    <a class = "starqq on" href="#">★</a>
+							    <a class = "starqq" href="#">★</a>
+							    <a class = "starqq" href="#">★</a>
+							    <a class = "starqq" href="#">★</a>
+							    <a class = "starqq" href="#">★</a>
+							</p>
+						</c:if>
+						<c:if test="${starSelect eq 2 }">
+							<p class="star_rating">
+							    <a class = "starqq on" href="#">★</a>
+							    <a class = "starqq on" href="#">★</a>
+							    <a class = "starqq" href="#">★</a>
+							    <a class = "starqq" href="#">★</a>
+							    <a class = "starqq" href="#">★</a>
+							</p>
+						</c:if>
+						<c:if test="${starSelect eq 3 }">
+							<p class="star_rating">
+							    <a class = "starqq on" href="#">★</a>
+							    <a class = "starqq on" href="#">★</a>
+							    <a class = "starqq on" href="#">★</a>
+							    <a class = "starqq" href="#">★</a>
+							    <a class = "starqq" href="#">★</a>
+							</p>
+						</c:if>
+						<c:if test="${starSelect eq 4 }">
+							<p class="star_rating">
+							    <a class = "starqq on" href="#">★</a>
+							    <a class = "starqq on" href="#">★</a>
+							    <a class = "starqq on" href="#">★</a>
+							    <a class = "starqq on" href="#">★</a>
+							    <a class = "starqq" href="#">★</a>
+							</p>
+						</c:if>
+						<c:if test="${starSelect eq 5 }">
+							<p class="star_rating">
+							    <a class = "starqq on" href="#">★</a>
+							    <a class = "starqq on" href="#">★</a>
+							    <a class = "starqq on" href="#">★</a>
+							    <a class = "starqq on" href="#">★</a>
+							    <a class = "starqq on" href="#">★</a>
+							</p>
+						</c:if>
+							<button id ="raitingupdatebtn" onclick="fn_raitingupdate('${row.boardId}')" style="visibility:hidden">업데이트 평가</button>
 					</c:if>
 					<c:if test="${starCheck eq 0}">
 						<p class="star_rating">

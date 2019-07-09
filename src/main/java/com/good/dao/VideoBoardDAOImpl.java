@@ -75,11 +75,20 @@ public class VideoBoardDAOImpl implements VideoBoardDAO {
 	
 	//평점 체크
 	@Override
-	public int starCheck(int accountId, int boardId) {
+	public int starCheck(int accountId, int boardId) throws Exception {
 		Map<String, Integer> map = new HashMap<String, Integer>();
 		map.put("accountId", accountId);
 		map.put("boardId", boardId);
 		
 		return sqlSession.selectOne(NAMESPACE + ".starCheck", map);
+	}
+	//평점 선택
+	@Override
+	public int starSelect(int accountId, int boardId) throws Exception {
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("accountId", accountId);
+		map.put("boardId", boardId);
+		
+		return sqlSession.selectOne(NAMESPACE + ".starSelect", map);
 	}
 }
