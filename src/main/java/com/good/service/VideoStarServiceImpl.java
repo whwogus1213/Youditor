@@ -38,8 +38,11 @@ public class VideoStarServiceImpl implements VideoStarService {
 	@Override
 	public int starload(VideoStarVO vo) throws Exception {
 		return videoStarDAO.starload(vo);
-		
-		
+	}
+	
+	@Override
+	public int starSum(VideoStarVO vo) throws Exception {
+		return videoStarDAO.starSum(vo);
 	}
 
 }

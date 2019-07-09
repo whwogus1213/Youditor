@@ -17,4 +17,6 @@ public interface VideoStarService {
 	public void update(VideoStarVO vo) throws Exception;
 
 	public int starload(VideoStarVO vo) throws Exception;
+
+	public int starSum(VideoStarVO vo) throws Exception;
 }

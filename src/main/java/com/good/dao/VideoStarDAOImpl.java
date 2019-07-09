@@ -7,7 +7,6 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
-import com.good.dto.ReplyVO;
 import com.good.dto.VideoStarVO;
 
 @Repository
@@ -40,7 +39,11 @@ public class VideoStarDAOImpl implements VideoStarDAO {
 	@Override
 	public int starload(VideoStarVO vo) throws Exception {
 		return sqlSession.selectOne(NAMESPACE + ".starload", vo);
+	}
 
+	@Override
+	public int starSum(VideoStarVO vo) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + ".starSum", vo);
 	}
 
 }

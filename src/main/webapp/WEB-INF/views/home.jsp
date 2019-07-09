@@ -16,7 +16,7 @@
   <title>YouditoR</title>
   <!-- Custom styles -->
   <link href="/resources/css/modern-business.css" rel="stylesheet">
-
+	
 </head>
 
 <body>
@@ -63,6 +63,8 @@
 	      </a>
 	    </div>
 	  </header>
+	  
+  <jsp:include page="./module/aside.jsp" flush="false"/>
   <div class="container">
 
     <h1 class="my-4"><span class="oi oi-video"></span> 핫한 편집 영상</h1>

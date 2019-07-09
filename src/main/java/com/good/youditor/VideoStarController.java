@@ -78,6 +78,15 @@ public class VideoStarController {
 		return sl;
 	}
 	
+	@RequestMapping(value = "/starSum", method = RequestMethod.POST)
+	public @ResponseBody int loadSum( VideoStarVO vo) throws Exception {
+		
+		
+			int ss = videoStarService.starSum(vo);
+		
+		return ss;
+	}
+	
 	
 	// 평점 업데이트
 	@RequestMapping(value = "/updateVideoStarPro", method = RequestMethod.POST)

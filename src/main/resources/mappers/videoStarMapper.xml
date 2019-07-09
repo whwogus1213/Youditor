@@ -18,6 +18,10 @@
 			select star from videostar where boardId = #{boardId} and accountId = #{accountId}
 	</select>
 	
-
+	<!-- 평점 랭킹 점수 -->
+	<select id="starSum" resultType="VideoStarVO" parameterType="map">
+	      select subject, accountId, boardId, SUM(star) sstar from videoBoard b, accounts ac where b.accountId = ac.accountId 
+		 order by sstar desc 
+    </select>
 
 </mapper>

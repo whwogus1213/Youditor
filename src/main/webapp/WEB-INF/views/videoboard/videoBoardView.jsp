@@ -31,7 +31,6 @@
 <jsp:include page="../module/header.jsp" flush="false"/>
 
 <script type="text/javascript">
-	var resultc = '';
 	$(function(){
 		if(${sessionScope.login != null}) {
 			
@@ -49,14 +48,8 @@
 				$("#star").html(data);
 			},
 			error : function(data) {
-				alert("에러123123213");
 			}
 		});
-		}
-		if(result === 'test'){
-			$('#star').removeClass('hidden');
-			$('#star').removeAttr("style");
-			$('#star').fadeOut(2000);
 		}
 	});
 	
