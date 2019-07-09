@@ -42,4 +42,10 @@ public class VideoStarServiceImpl implements VideoStarService {
 		
 	}
 
+	@Override
+	public int starCheck(int accountId, int boardId) throws Exception {
+		return videoStarDAO.starCheck(accountId, boardId);
+		
+	}
+
 }
