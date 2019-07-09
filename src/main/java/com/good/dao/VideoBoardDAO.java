@@ -32,5 +32,9 @@ public interface VideoBoardDAO {
 	public List<VideoBoardVO> followBoardList(int followAccountId) throws Exception;
 	
 	// 평점 체크
-	public int starCheck(int accountId, int boardId);
+	public int starCheck(int accountId, int boardId)  throws Exception;
+	
+
+	// 평점 선택
+	public int starSelect(int accountId, int boardId)  throws Exception;
 }

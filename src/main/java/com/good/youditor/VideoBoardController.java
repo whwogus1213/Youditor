@@ -83,11 +83,14 @@ public class VideoBoardController {
 			// 로그인 아이디, 글쓴이 아이디
 			int fc = videoBoardService.followCheck(loginVO.getAccountId(), row.getAccountId());
 			int sc = videoBoardService.starCheck(loginVO.getAccountId(), row.getBoardId());
+			int ss = videoBoardService.starSelect(loginVO.getAccountId(), row.getBoardId());
 			System.out.println(fc);
 			System.out.println(sc);
+			System.out.println(ss);
 
 			mav.addObject("followCheck", fc);
 			mav.addObject("starCheck", sc);
+			mav.addObject("starSelect", ss);
 		}
 		
 		System.out.println("VideoBoardController boardView open");
