@@ -13,13 +13,15 @@
 <link href="/resources/css/modern-business.css" rel="stylesheet">
 <script>
 	// 이전 버튼
-	function fn_prev(page, range, rangeSize) {
+	function fn_prev(page, range, rangeSize, searchType, keyword) {
 		var page = ((range - 2) * rangeSize) + 1;
 		var range = range - 1;
 		var url = "${pageContext.request.contextPath}/noticeboard/noticeBoardList";
 
 		url = url + "?page=" + page;
 		url = url + "&range=" + range;
+		url = url + "&searchType=" + searchType;
+		url = url + "&keyword=" + keyword;
 		location.href = url;
 	}
 
@@ -35,13 +37,15 @@
 	}
 
 	//다음 버튼 이벤트
-	function fn_next(page, range, rangeSize) {
+	function fn_next(page, range, rangeSize, searchType, keyword) {
 		var page = parseInt((range * rangeSize)) + 1;
 		var range = parseInt(range) + 1;
 		var url = "${pageContext.request.contextPath}/noticeboard/noticeBoardList";
 
 		url = url + "?page=" + page;
 		url = url + "&range=" + range;
+		url = url + "&searchType=" + searchType;
+		url = url + "&keyword=" + keyword;
 		location.href = url;
 	}
 
@@ -117,7 +121,8 @@
 				style="display: table; margin-left: auto; margin-right: auto;">
 				<c:if test="${pagination.prev}">
 					<li class="page-item"><a class="page-link" href="#"
-						onClick="fn_prev('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}')">Previous</a>
+						onClick="fn_prev('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}',
+						'${pagination.searchType}', '${pagination.keyword}')">Previous</a>
 					</li>
 				</c:if>
 				<c:forEach begin="${pagination.startPage}"
@@ -131,8 +136,8 @@
 				</c:forEach>
 				<c:if test="${pagination.next}">
 					<li class="page-item"><a class="page-link" href="#"
-						onClick="fn_next('${pagination.range}', '${pagination.range}',
-						'${pagination.rangeSize}')">Next</a>
+						onClick="fn_next('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}',
+						'${pagination.searchType}', '${pagination.keyword}')">Next</a>
 					</li>
 				</c:if>
 			</ul>
