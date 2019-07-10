@@ -69,7 +69,6 @@ public class VideoBoardServiceImpl implements VideoBoardService {
 	// 게시물 갯수
 	@Override
 	public int getBoardListCnt(VideoCategoryVO videoCategoryVO) throws Exception {
-		System.out.println(" videoCategoryVO : " + videoCategoryVO);
 		return videoBoardDAO.getBoardListCnt(videoCategoryVO);
 	}
 	

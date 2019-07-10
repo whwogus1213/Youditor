@@ -18,6 +18,7 @@
 	function fn_prev(page, range, rangeSize) {
 		var page = ((range - 2) * rangeSize) + 1;
 		var range = range - 1;
+
 		var url = "${pageContext.request.contextPath}/videoboard/videoBoardList";
 
 		url = url + "?page=" + page;
@@ -26,14 +27,16 @@
 	}
 
 	//페이지 번호 클릭
-	function fn_pagination(page, range, rangeSize, categoryId) {
+	function fn_pagination(page, range, rangeSize, categoryId, searchType, keyword) {
 		var url = "${pageContext.request.contextPath}/videoboard/videoBoardList";
-		console.log(categoryId);
-		
+
 		url = url + "?category=" + categoryId;
 		url = url + "&page=" + page;
 		url = url + "&range=" + range;
+		url = url + "&searchType=" + searchType;
+		url = url + "&keyword=" + keyword;
 		location.href = url;
+		
 	}
 
 	//다음 버튼 이벤트
@@ -51,12 +54,14 @@
 	$(document).on('click', '#btnSearch', function(e) {
 		e.preventDefault();
 		var url = "${pageContext.request.contextPath}/videoboard/videoBoardList";
-		
-		url = url + "?searchType=" + $('#searchType').val();
+
+		url = url + "?category=" + ${pagination.categoryId};
+		url = url + "&page=" + 1;
+		url = url + "&range=" + 1;
+		url = url + "&searchType=" + $('#searchType').val();
 		url = url + "&keyword=" + $('#keyword').val();
 
 		location.href = url;
-		console.log(url);
 	});
 	
 	var result = '${result}';
@@ -82,12 +87,12 @@
 			<h2 align="center">&nbsp;</h2>
 		</div>
 		<h5 align="center"><%=request.getAttribute("categoryName") %> 유투버들의 편집 영상입니다.</h5>
-		<h2 align="center">&nbsp;</h2>
 		<div id="deleteOK" class="alert alert-danger hidden" role="alert" style="visibility:hidden">글이 삭제되었습니다.</div>
 	</div>
 	
 	<div class="container">
     	<!-- Marketing Icons Section -->
+    	
     	<div class="row">
 			<c:forEach items="${VideoBoardList}" var="VideoBoardList">
      		 <div class="col-lg-4 mb-4">
@@ -173,7 +178,8 @@
 				<c:forEach begin="${pagination.startPage}" end="${pagination.endPage}" var="idx">
 					<li class="page-item <c:out value="${pagination.page == idx ? 'active' : ''}"/> ">
 						<a class="page-link" href="#"
-						onClick="fn_pagination('${idx}', '${pagination.range}', '${pagination.rangeSize}', '${pagination.categoryId}')">${idx}</a>
+						onClick="fn_pagination('${idx}', '${pagination.range}', '${pagination.rangeSize}',
+						 '${pagination.categoryId}', '${pagination.searchType}', '${pagination.keyword}')">${idx}</a>
 					</li>
 				</c:forEach>
 				<c:if test="${pagination.next}">

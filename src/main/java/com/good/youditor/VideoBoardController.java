@@ -35,8 +35,6 @@ public class VideoBoardController {
 							 @RequestParam(required = false, defaultValue = "1") int range,
 							 @RequestParam(required = false, defaultValue = "object") String searchType,
 							 @RequestParam(required = false) String keyword, HttpServletRequest request) throws Exception {		
-		System.out.println(category+"$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
-		
 		VideoCategoryVO videoCategoryVO = new VideoCategoryVO();
 		ModelAndView mav = new ModelAndView();
 		
@@ -45,8 +43,6 @@ public class VideoBoardController {
 		videoCategoryVO.setKeyword(keyword);
 		videoCategoryVO.setCategoryId(category);
 		
-		System.out.println(" category : " + category);
-		System.out.println(" getCategoryID: " + videoCategoryVO.getCategoryId());
 		
 		// 게시물 갯수
 		int listCnt = videoBoardService.getBoardListCnt(videoCategoryVO);
@@ -56,34 +52,29 @@ public class VideoBoardController {
 		videoCategoryVO.pageInfo(page, range, listCnt);
 		
 		mav.addObject("pagination", videoCategoryVO);
-		System.out.println("dddddddddddddd          " + videoCategoryVO);
 		
-		// 카테고리
-		videoCategoryVO.setCategoryId(category);
-
 		List<VideoBoardVO> list = videoBoardService.listAll(videoCategoryVO);
 		
 		mav.setViewName("videoboard/videoBoardList");
-		System.out.println("VideoBoardController VideoBoardList open");
 		mav.addObject("VideoBoardList", list);
 		
-		
 		String categoryName = "";
-		if(category == 0) {
+		if (category == 0) {
 			categoryName = "전체";
-		}else if(category == 1) {
+		} else if (category == 1) {
 			categoryName = "게임";
-		}else if(category == 2) {
+		} else if (category == 2) {
 			categoryName = "먹방";
-		}else if(category == 3) {
+		} else if (category == 3) {
 			categoryName = "일상";
-		}else if(category == 4) {
+		} else if (category == 4) {
 			categoryName = "모터";
-		}else if(category == 5) {
+		} else if (category == 5) {
 			categoryName = "스포츠";
-		}else if(category == 6) {
+		} else if (category == 6) {
 			categoryName = "예능";
 		}
+		
 		request.setAttribute("categoryName", categoryName);
 		return mav;
 	}
