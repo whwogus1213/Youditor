@@ -21,8 +21,9 @@ public class VideoStarDAOImpl implements VideoStarDAO {
 	private static final String NAMESPACE = "com.good.mapper.videoStarMapper";
 	
 	@Override
-	public List<VideoStarVO> listAll(int boardId) throws Exception {
-		return sqlSession.selectList(NAMESPACE + ".listAll", boardId);
+	public List<VideoStarVO> listAll() throws Exception {
+		System.out.println("daoimpl test");
+		return sqlSession.selectList(NAMESPACE + ".listAll");
 	}
 	
 	//평점

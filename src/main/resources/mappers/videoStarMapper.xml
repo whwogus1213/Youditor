@@ -14,15 +14,16 @@
 		  UPDATE videostar SET star = +#{star} WHERE boardId=#{boardId} and accountId=#{accountId}
 	</update>
 	
-	<select id="starload" parameterType="VideoStarVo" resultType="int">
+	<select id="starload" parameterType="VideoStarVO" resultType="int">
 			select star from videostar where boardId = #{boardId} and accountId = #{accountId}
 	</select>
 	
-	<!-- 평점 랭킹 점수 -->
-	<select id="starSum" resultType="VideoStarVO" parameterType="map">
-	      select subject, accountId, boardId, SUM(star) sstar from videoBoard b, accounts ac where b.accountId = ac.accountId 
-		 order by sstar desc 
+	<!-- 평점 랭킹 리스트 -->
+	<select id="listAll" resultType="VideoStarVO" parameterType="map">
+	      select boardId, reg_date, SUM(star) from videostar 
+	      WHERE boardId group by boardId ORDER BY SUM(star) DESC limit 5;
     </select>
+    
 	<!-- 존재하면 1, 없으면 0 -->
 	<select id="starCheck" parameterType="map" resultType="int">
 		select EXISTS (select star from videostar where accountId = #{accountId} and boardId = #{boardId})

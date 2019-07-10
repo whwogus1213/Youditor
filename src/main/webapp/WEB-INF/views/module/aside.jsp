@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page session="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <style type="text/css">
 		ul {
@@ -63,16 +64,15 @@
 </style>
 <script type="text/javascript">
 		$(function(){
-		var json = {
-		};
 		$.ajax({
 			type : "POST",
-			url : "/videostar/starSum",
-			data : json,
+			url : "/videostar/StarList",
 			success : function(data) {
 				//$("#star").html(data);
+				alert('불러오기 성공');
 			},
 			error : function(data) {
+				alert('불러오기 실패');
 			}
 		});
 		
@@ -88,7 +88,9 @@
     </section>
 	<div class="tab_item1">
         <ul class="item1">
-            <li><a href="#"><strong>HTML5 Canvas</strong><p>2019-03-15</p></a></li>
+        	<c:forEach items="${starList}" var="starList">
+            <li><a href="/videoboard/videoBoardView?boardId=${starList.star}">${starList.boardId}</a></li>
+            </c:forEach>
         </ul>
     </div>
     <div class="tab_item2">

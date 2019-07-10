@@ -9,7 +9,7 @@ import com.good.dto.VideoStarVO;
 public interface VideoStarService {
 
 	// 게시물 목록
-	public List<VideoStarVO> listAll(int boardId) throws Exception;
+	public List<VideoStarVO> listAll() throws Exception;
 	//평점
 	public void insert(VideoStarVO vo) throws Exception;
 
