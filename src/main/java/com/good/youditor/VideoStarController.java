@@ -34,7 +34,7 @@ public class VideoStarController {
 	public List<VideoStarVO> list() throws Exception {
 		System.out.println("Start videostar List");
 		List<VideoStarVO> list = videoStarService.listAll();
-		
+		System.out.println("List : " + list);
 		return list;
 	}
 	
