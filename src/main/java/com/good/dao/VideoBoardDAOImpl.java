@@ -73,4 +73,10 @@ public class VideoBoardDAOImpl implements VideoBoardDAO {
 		return sqlSession.selectList(NAMESPACE + ".followBoardList", followAccountId);
 	}
 
+	// 게시물 갯수
+	@Override
+	public int getBoardListCnt(VideoCategoryVO videoCategoryVO) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + ".getBoardListCnt", videoCategoryVO);
+	}
+
 }

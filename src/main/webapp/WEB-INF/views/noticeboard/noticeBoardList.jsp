@@ -62,7 +62,7 @@
 			$('#deleteOK').removeAttr("style");
 			$('#deleteOK').fadeOut(2000);
 		}
-	})
+	});
 </script>
 </head>
 <body>

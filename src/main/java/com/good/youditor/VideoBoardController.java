@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.good.dto.AccountsVO;
+import com.good.dto.Search;
 import com.good.dto.VideoBoardVO;
 import com.good.dto.VideoCategoryVO;
 import com.good.service.VideoBoardService;
@@ -29,18 +30,36 @@ public class VideoBoardController {
 
 	// 게시물 목록
 	@RequestMapping(value = "/videoBoardList", method = RequestMethod.GET)
-	public ModelAndView list(@RequestParam(required = false, defaultValue = "0") int category, HttpServletRequest request) throws Exception {
+	public ModelAndView list(HttpServletRequest request, @RequestParam(required = false, defaultValue = "0") int category,
+						 @RequestParam(required = false, defaultValue = "1") int page,  @RequestParam(required = false, defaultValue = "1") int range,
+						 @RequestParam(required = false, defaultValue = "object") String searchType, @RequestParam(required = false) String keyword) throws Exception {		
 		System.out.println(category+"$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
-		
 		VideoCategoryVO videoCategoryVO = new VideoCategoryVO();
-		videoCategoryVO.setCategoryId(category);
+		ModelAndView mav = new ModelAndView();
 		
+		// 페이징 + 검색
+		videoCategoryVO.setSearchType(searchType);
+		videoCategoryVO.setKeyword(keyword);
+		
+		// 게시물 갯수
+		int listCnt = videoBoardService.getBoardListCnt(videoCategoryVO);
+		System.out.println(" videoboard 게시물 갯수 : " + listCnt);
+		
+		videoCategoryVO.setListSize(6);
+		videoCategoryVO.pageInfo(page, range, listCnt);
+		
+		mav.addObject("pagination", videoCategoryVO);
+		
+		// 카테고리
+		videoCategoryVO.setCategoryId(category);
+
 		List<VideoBoardVO> list = videoBoardService.listAll(videoCategoryVO);
 		
-		ModelAndView mav = new ModelAndView();
 		mav.setViewName("videoboard/videoBoardList");
 		System.out.println("VideoBoardController VideoBoardList open");
 		mav.addObject("VideoBoardList", list);
+		
+		
 		String categoryName = "";
 		if(category == 0) {
 			categoryName = "전체";

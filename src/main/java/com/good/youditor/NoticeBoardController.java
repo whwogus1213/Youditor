@@ -37,6 +37,8 @@ public class NoticeBoardController {
 		// 전체 게시글 개수
 		int listCnt = noticeBoardService.getBoardListCnt(search);
 		
+		System.out.println(" listCnt : " + listCnt);
+		
 		search.pageInfo(page, range, listCnt);
 
 		model.addAttribute("pagination", search);
