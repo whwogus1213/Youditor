@@ -103,10 +103,10 @@
           				</div>
           				<div class="row">
           					<div class="col-sm-6" align="left">
-          						<strong>평점</strong>
+          						<strong>Rate</strong>
           					</div>
           					<div class="col-sm-6" align="right">
-						 		${VideoBoardList.starCount}
+						 		${VideoBoardList.starCount} / 5.0
           					</div>
           				</div>
           			</div>

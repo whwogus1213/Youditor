@@ -344,7 +344,7 @@
 				</c:if>
 			</c:if>
 			<c:if test="${login.email eq null}">
-				<button id ="notraiting">로그인 해라</button>
+				<button class="btn btn-warning btn-sm" id ="notraiting" disabled>로그인 필요</button>
 			</c:if>
 		<h5 align="right">등록일 &nbsp;&nbsp; <fmt:formatDate value="${row.reg_date}" pattern="yyyy년 MM월 dd일  hh:mm:ss" /></h5>
 		<c:if test="${login.email ne null}">
