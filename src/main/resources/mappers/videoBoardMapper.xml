@@ -26,40 +26,6 @@
 		</trim>
 		 order by boardId desc
 		 LIMIT #{startList}, #{listSize} 
-		 
-		<!-- 
- 		SELECT boardId, accountId, categoryId, subject, object, 
- 			CONVERT_TZ(reg_date,'+09:00','+00:00') as reg_date, CONVERT_TZ(mod_date,'+09:00','+00:00') as mod_date, viewCount 
-		FROM noticeboard
-		<trim prefix="WHERE" prefixOverrides="AND|OR">
-			<if test="searchType=='subject' and keyword != null and keyword != '' ">
-				AND subject like CONCAT('%', #{keyword}, '%')
-			</if>
-			<if test="searchType=='object' and keyword != null and keyword != '' ">
-				AND object like CONCAT('%', #{keyword}, '%')
-			</if>
-			<if test="searchType=='accountId' and keyword != null and keyword != '' ">
-				AND accountId like CONCAT('%', #{keyword}, '%')
-			</if>
-		</trim>
-		order by boardId desc
-		LIMIT #{startList}, #{listSize}
-		  -->
-		  
-		<!--  
-        select boardId, b.accountId, categoryId, subject, object, youtubeLink, 
-				CONVERT_TZ(b.reg_date,'+09:00','+00:00') as reg_date, CONVERT_TZ(b.mod_date,'+09:00','+00:00') as mod_date, viewCount, (select count(*) from videocomment where b.boardId = boardId) as replyCount
-				, ac.nickname, (select round(AVG(star),2) from videostar  where b.boardId = boardId) as starCount
-		 from videoBoard b, accounts ac
-		 where b.accountId = ac.accountId 
-			<if test='categoryId!=0'>
-				AND categoryId = #{categoryId}
-			</if>
-		 order by boardId desc
-		 LIMIT #{startList}, #{listSize}
-		 -->
-		
-
     </select>
 
     <!-- 게시물 조회 -->

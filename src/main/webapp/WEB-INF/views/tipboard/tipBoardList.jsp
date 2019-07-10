@@ -29,6 +29,9 @@
 
 		url = url + "?page=" + page;
 		url = url + "&range=" + range;
+		url = url + "&searchType=" + searchType;
+		url = url + "&keyword=" + keyword;
+		
 		location.href = url;
 	}
 
@@ -100,7 +103,7 @@
 							<a href="/tipboard/tipBoardView?boardId=${TipBoardList.boardId}">${TipBoardList.subject}</a>
 							</div>
 						</td>
-						<td>${TipBoardList.accountId}</td>
+						<td>${TipBoardList.nickname}</td>
 						<td><fmt:formatDate value="${TipBoardList.reg_date}" pattern="yyyy-MM-dd" /></td>
 						<td>${TipBoardList.viewCount}</td>
 					</tr>
@@ -110,22 +113,24 @@
 
 		<!-- 페이징 -->
 		<div id="paginationBox">
-			<ul class="pagination" style="display:table; margin-left:auto; margin-right: auto;">
+			<ul class="pagination"
+				style="display: table; margin-left: auto; margin-right: auto;">
 				<c:if test="${pagination.prev}">
-					<li class="page-item">
-						<a class="page-link" href="#"
+					<li class="page-item"><a class="page-link" href="#"
 						onClick="fn_prev('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}')">Previous</a>
 					</li>
 				</c:if>
-				<c:forEach begin="${pagination.startPage}" end="${pagination.endPage}" var="idx">
-					<li class="page-item <c:out value="${pagination.page == idx ? 'active' : ''}"/> ">
+				<c:forEach begin="${pagination.startPage}"
+					end="${pagination.endPage}" var="idx">
+					<li
+						class="page-item <c:out value="${pagination.page == idx ? 'active' : ''}"/> ">
 						<a class="page-link" href="#"
-						onClick="fn_pagination('${idx}', '${pagination.range}', '${pagination.rangeSize}')">${idx}</a>
+						onClick="fn_pagination('${idx}', '${pagination.range}', '${pagination.rangeSize}',
+						'${pagination.searchType}', '${pagination.keyword}')">${idx}</a>
 					</li>
 				</c:forEach>
 				<c:if test="${pagination.next}">
-					<li class="page-item">
-						<a class="page-link" href="#"
+					<li class="page-item"><a class="page-link" href="#"
 						onClick="fn_next('${pagination.range}', '${pagination.range}',
 						'${pagination.rangeSize}')">Next</a>
 					</li>
@@ -134,7 +139,7 @@
 		</div>
 		<!-- 페이징 -->
 		<hr>
-		<!-- 검색 -->
+	<!-- 검색 -->
 		<div class="row input-group">
 			<div class="col-sm-2">
 			</div>
@@ -142,7 +147,7 @@
 				<select class="form-control form-control-sm" name="searchType" id="searchType" style="width:66.6%">
 					<option value="subject">제목</option>
 					<option value="object">본문</option>
-					<option value="accountId">작성자</option>
+					<option value="nickname">작성자</option>
 				</select>
 			</div>
 			<div class="col-sm-4" align="right" >
@@ -152,8 +157,9 @@
 				<button class="btn btn-sm btn-primary" name="btnSearch" id="btnSearch">검색</button>
 			</div>
 			<div class="col-sm-3" align="center">
-				<button type="button" class="btn btn-sm btn-primary"
-					onclick="location.href='/tipboard/write.do' ">게시물 올리기</button>
+				<c:if test="${login.email != null}">
+					<button type="button" class="btn btn-primary" onclick="location.href='/tipboard/write.do' ">공지 올리기</button>
+				</c:if>
 			</div>
 		</div>
 		<!-- 검색 -->

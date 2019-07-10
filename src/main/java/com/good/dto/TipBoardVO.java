@@ -11,6 +11,8 @@ public class TipBoardVO {
 	private Date reg_date;
 	private Date mod_date;
 	private int viewCount;
+	
+	private String nickname;
 
 	public int getBoardId() {
 		return boardId;
@@ -76,4 +78,19 @@ public class TipBoardVO {
 		this.viewCount = viewCount;
 	}
 
+	public final String getNickname() {
+		return nickname;
+	}
+
+	public final void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+
+	@Override
+	public String toString() {
+		return "TipBoardVO [boardId=" + boardId + ", accountId=" + accountId + ", categoryId=" + categoryId
+				+ ", subject=" + subject + ", object=" + object + ", reg_date=" + reg_date + ", mod_date=" + mod_date
+				+ ", viewCount=" + viewCount + ", nickname=" + nickname + "]";
+	}
+	
 } // End - public class TipBoardVO

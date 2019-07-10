@@ -12,6 +12,8 @@ public class NoticeBoardVO {
 	private Date mod_date;
 	private int viewCount;
 
+	private String nickname;
+
 	public int getBoardId() {
 		return boardId;
 	}
@@ -74,6 +76,15 @@ public class NoticeBoardVO {
 
 	public final void setViewCount(int viewCount) {
 		this.viewCount = viewCount;
+	}
+
+	
+	public final String getNickname() {
+		return nickname;
+	}
+
+	public final void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 
 	@Override
