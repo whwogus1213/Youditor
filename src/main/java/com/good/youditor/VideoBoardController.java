@@ -74,26 +74,7 @@ public class VideoBoardController {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("videoboard/videoBoardView");
 		mav.addObject("row", row);
-		
-		if(loginVO != null) {
-			System.out.println("로그인세션 : " + loginVO.getAccountId());
-			System.out.println("글쓴이아이디 : " + row.getAccountId());
-			System.out.println("글쓴이닉네임 : " + row.getNickname());
 
-			// 로그인 아이디, 글쓴이 아이디
-			int fc = videoBoardService.followCheck(loginVO.getAccountId(), row.getAccountId());
-			int sc = videoBoardService.starCheck(loginVO.getAccountId(), row.getBoardId());
-			int ss = videoBoardService.starSelect(loginVO.getAccountId(), row.getBoardId());
-			System.out.println(fc);
-			System.out.println(sc);
-			System.out.println(ss);
-
-			mav.addObject("followCheck", fc);
-			mav.addObject("starCheck", sc);
-			mav.addObject("starSelect", ss);
-		}
-		
-		System.out.println("VideoBoardController boardView open");
 		return mav;
 	}
 

@@ -1,6 +1,8 @@
 package com.good.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -41,6 +43,14 @@ public class VideoStarDAOImpl implements VideoStarDAO {
 	public int starload(VideoStarVO vo) throws Exception {
 		return sqlSession.selectOne(NAMESPACE + ".starload", vo);
 
+	}
+
+	@Override
+	public int starCheck(int accountId, int boardId) throws Exception {
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("accountId", accountId);
+		map.put("boardId", boardId);
+		return sqlSession.selectOne(NAMESPACE + ".starCheck", map);
 	}
 
 }

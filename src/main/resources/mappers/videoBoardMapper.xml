@@ -93,13 +93,4 @@
 		 order by boardId desc 
 	</select>
 	
-	<!-- 평점 체크 -->
-	<select id="starCheck" resultType="int" parameterType="map">
-		select EXISTS (select star from videostar where accountId = #{accountId} and boardId = #{boardId} )
-	</select>
-
-	<!-- 평점 선택 체크 -->
-	<select id="starSelect" resultType="int" parameterType="map">
-		select star from videostar where accountId = #{accountId} and boardId = #{boardId}
-	</select>
 </mapper>
