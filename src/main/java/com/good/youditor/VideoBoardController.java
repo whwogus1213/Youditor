@@ -30,16 +30,23 @@ public class VideoBoardController {
 
 	// 게시물 목록
 	@RequestMapping(value = "/videoBoardList", method = RequestMethod.GET)
-	public ModelAndView list(HttpServletRequest request, @RequestParam(required = false, defaultValue = "0") int category,
-						 @RequestParam(required = false, defaultValue = "1") int page,  @RequestParam(required = false, defaultValue = "1") int range,
-						 @RequestParam(required = false, defaultValue = "object") String searchType, @RequestParam(required = false) String keyword) throws Exception {		
+	public ModelAndView list(@RequestParam(required = false, defaultValue = "0") int category,
+							 @RequestParam(required = false, defaultValue = "1") int page,
+							 @RequestParam(required = false, defaultValue = "1") int range,
+							 @RequestParam(required = false, defaultValue = "object") String searchType,
+							 @RequestParam(required = false) String keyword, HttpServletRequest request) throws Exception {		
 		System.out.println(category+"$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+		
 		VideoCategoryVO videoCategoryVO = new VideoCategoryVO();
 		ModelAndView mav = new ModelAndView();
 		
-		// 페이징 + 검색
+		// 검색
 		videoCategoryVO.setSearchType(searchType);
 		videoCategoryVO.setKeyword(keyword);
+		videoCategoryVO.setCategoryId(category);
+		
+		System.out.println(" category : " + category);
+		System.out.println(" getCategoryID: " + videoCategoryVO.getCategoryId());
 		
 		// 게시물 갯수
 		int listCnt = videoBoardService.getBoardListCnt(videoCategoryVO);
@@ -49,6 +56,7 @@ public class VideoBoardController {
 		videoCategoryVO.pageInfo(page, range, listCnt);
 		
 		mav.addObject("pagination", videoCategoryVO);
+		System.out.println("dddddddddddddd          " + videoCategoryVO);
 		
 		// 카테고리
 		videoCategoryVO.setCategoryId(category);

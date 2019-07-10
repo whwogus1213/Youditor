@@ -26,10 +26,12 @@
 	}
 
 	//페이지 번호 클릭
-	function fn_pagination(page, range, rangeSize, searchType, keyword) {
+	function fn_pagination(page, range, rangeSize, categoryId) {
 		var url = "${pageContext.request.contextPath}/videoboard/videoBoardList";
-
-		url = url + "?page=" + page;
+		console.log(categoryId);
+		
+		url = url + "?category=" + categoryId;
+		url = url + "&page=" + page;
 		url = url + "&range=" + range;
 		location.href = url;
 	}
@@ -49,6 +51,7 @@
 	$(document).on('click', '#btnSearch', function(e) {
 		e.preventDefault();
 		var url = "${pageContext.request.contextPath}/videoboard/videoBoardList";
+		
 		url = url + "?searchType=" + $('#searchType').val();
 		url = url + "&keyword=" + $('#keyword').val();
 
@@ -101,7 +104,7 @@
 							var youtubeID;
 							youtubeID = eArray[3];
 							//document.write('<p>' + youtubeID + '</p>');
-							if(youtubeID.length >11){
+							if(youtubeID.length > 100){
 								eArray = youtubeID.split("=");
 								youtubeID = eArray[1];
 								youtubeID = youtubeID.substr(0,11);
@@ -170,7 +173,7 @@
 				<c:forEach begin="${pagination.startPage}" end="${pagination.endPage}" var="idx">
 					<li class="page-item <c:out value="${pagination.page == idx ? 'active' : ''}"/> ">
 						<a class="page-link" href="#"
-						onClick="fn_pagination('${idx}', '${pagination.range}', '${pagination.rangeSize}')">${idx}</a>
+						onClick="fn_pagination('${idx}', '${pagination.range}', '${pagination.rangeSize}', '${pagination.categoryId}')">${idx}</a>
 					</li>
 				</c:forEach>
 				<c:if test="${pagination.next}">
@@ -183,7 +186,7 @@
 			</ul>
 		</div>
 		<!-- 페이징 -->
-				<!-- 검색 -->
+		<!-- 검색 -->
 		<div class="row input-group">
 			<div class="col-sm-2">
 			</div>
@@ -191,7 +194,7 @@
 				<select class="form-control form-control-sm" name="searchType" id="searchType" style="width:66.6%">
 					<option value="subject">제목</option>
 					<option value="object">본문</option>
-					<option value="accountId">작성자</option>
+					<option value="nickname">작성자</option>
 				</select>
 			</div>
 			<div class="col-sm-4" align="right" >
@@ -201,10 +204,13 @@
 				<button class="btn btn-sm btn-primary" name="btnSearch" id="btnSearch">검색</button>
 			</div>
 			<div class="col-sm-3" align="center">
-				<button type="button" class="btn btn-primary" onclick="location.href='/videoboard/write.do' ">유투브 올리기</button>
+				<c:if test="${login.email != null}">
+					<button type="button" class="btn btn-primary" onclick="location.href='/videoboard/write.do' ">유투브 올리기</button>
+				</c:if>
 			</div>
 		</div>
 		<!-- 검색 -->
+		
 	<h2 align="center">&nbsp;</h2>
 	<jsp:include page="../module/bottom.jsp" flush="false" />
 </body>

@@ -17,8 +17,8 @@
 			<if test="searchType=='object' and keyword != null and keyword != '' ">
 				AND object like CONCAT('%', #{keyword}, '%')
 			</if>
-			<if test="searchType=='accountId' and keyword != null and keyword != '' ">
-				AND accountId like CONCAT('%', #{keyword}, '%')
+			<if test="searchType=='nickname' and keyword != null and keyword != '' ">
+				AND nickname like CONCAT('%', #{keyword}, '%')
 			</if>
 			<if test='categoryId!=0'>
 				AND categoryId = #{categoryId}
@@ -142,19 +142,20 @@
 	<!-- 게시물 총 갯수 구하기 -->
 	<select id="getBoardListCnt" resultType="int">
 		select count(boardId)
-		from videoboard
-		<trim prefix="WHERE" prefixOverrides="AND|OR">
-			<if test="keyword != null and keyword != '' ">
-				<if test="searchType=='subject'">
-					AND subject like CONCAT('%', #{keyword}, '%')
-				</if>
-				<if test="searchType=='object'">
-					AND object like CONCAT('%', #{keyword}, '%')
-				</if>
-				<if test="searchType=='accountId'">
-					AND accountId like CONCAT('%', #{keyword}, '%')
-				</if>
-      		</if>
+		from videoboard b join accounts a on b.accountId=a.accountId  
+		 <trim prefix="WHERE" prefixOverrides="AND|OR">
+			<if test='categoryId!=0'>
+				AND categoryId = #{categoryId}
+			</if>
+			<if test="searchType=='subject' and keyword != null and keyword != '' ">
+				AND subject like CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType=='object' and keyword != null and keyword != '' ">
+				AND object like CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType=='nickname' and keyword != null and keyword != '' ">
+				AND nickname like CONCAT('%', #{keyword}, '%')
+			</if>
 		</trim>
 	</select>
 </mapper>
