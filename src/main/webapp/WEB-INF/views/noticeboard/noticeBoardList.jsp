@@ -163,7 +163,9 @@
 			</div>
 			<div class="col-sm-3" align="center">
 				<c:if test="${login.email != null}">
-					<button type="button" class="btn btn-primary" onclick="location.href='/noticeboard/write.do' ">공지 올리기</button>
+					<c:if test="${login.authority == 5}">
+						<button type="button" class="btn btn-primary" onclick="location.href='/noticeboard/write.do' ">글쓰기</button>
+					</c:if>
 				</c:if>
 			</div>
 		</div>

@@ -91,6 +91,7 @@ public class NoticeBoardVO {
 	public String toString() {
 		return "NoticeBoardVO [boardId=" + boardId + ", accountId=" + accountId + ", categoryId=" + categoryId
 				+ ", subject=" + subject + ", object=" + object + ", reg_date=" + reg_date + ", mod_date=" + mod_date
-				+ ", viewCount=" + viewCount + "]";
+				+ ", viewCount=" + viewCount + ", nickname=" + nickname + "]";
 	}
+	
 } // End - public class NoticeBoardVO

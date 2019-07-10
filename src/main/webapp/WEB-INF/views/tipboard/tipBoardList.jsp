@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@ page session="false"%>
+<%@ page session="true"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -163,7 +163,7 @@
 			</div>
 			<div class="col-sm-3" align="center">
 				<c:if test="${login.email != null}">
-					<button type="button" class="btn btn-primary" onclick="location.href='/tipboard/write.do' ">공지 올리기</button>
+					<button type="button" class="btn btn-primary" onclick="location.href='/tipboard/write.do' ">글쓰기</button>
 				</c:if>
 			</div>
 		</div>
