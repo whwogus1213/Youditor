@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import com.good.dao.RecruitBoardDAO;
 import com.good.dto.RecruitBoardVO;
 import com.good.dto.RecruitCategoryVO;
-import com.good.dto.VideoCategoryVO;
 
 @Service
 public class RecruitBoardServiceImpl implements RecruitBoardService {

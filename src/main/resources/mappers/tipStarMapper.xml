@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.good.mapper.videoStarMapper">
+	<!-- 처음 평점 추가 -->
+	<insert id="insert" parameterType="VideoStarVO">
+		insert into tipstar(boardId,
+		accountId, star, reg_date)
+		values(#{boardId},
+		#{accountId}, #{star},
+		now())
+	</insert>
+	<!-- 평점 업데이트 -->
+	<update id="update" parameterType="VideoStarVO">
+		UPDATE tipstar SET star =
+		+#{star} WHERE boardId=#{boardId} and
+		accountId=#{accountId}
+	</update>
+
+	<select id="starload" parameterType="VideoStarVO"
+		resultType="int">
+		select star from tipstar where boardId = #{boardId} and
+		accountId =
+		#{accountId}
+	</select>
+
+	<!-- 평점 랭킹 리스트 -->
+	<select id="listAll" resultType="VideoStarVO"
+		parameterType="map">
+		<!-- select boardId, SUM(star) as starsum from videostar -->
+		<!-- WHERE boardId group by boardId ORDER BY SUM(star) DESC limit 5; -->
+
+		select a.boardId, b.subject, a.star
+		from (select boardId, SUM(star) as star from tipstar
+		WHERE boardId group by boardId ORDER BY SUM(star) DESC limit 5) a,
+		tipboard b
+		where a.boardId = b.boardId
+		order by star desc;
+	</select>
+
+	<!-- 존재하면 1, 없으면 0 -->
+	<select id="starCheck" parameterType="map" resultType="int">
+		select
+		EXISTS (select star from tipstar where accountId = #{accountId} and
+		boardId = #{boardId})
+	</select>
+
+
+</mapper>

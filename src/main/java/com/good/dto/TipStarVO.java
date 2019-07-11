@@ -8,7 +8,8 @@ public class TipStarVO {
 	private int accountId;
 	private int star;
 	private Date reg_date;
-
+	private String subject;
+	
 	public int getStarId() {
 		return starId;
 	}
@@ -47,6 +48,20 @@ public class TipStarVO {
 
 	public void setReg_date(Date reg_date) {
 		this.reg_date = reg_date;
+	}
+	
+	public String getSubject() {
+		return subject;
+	}
+
+	public void setSubject(String subject) {
+		this.subject = subject;
+	}
+
+	@Override
+	public String toString() {
+		return "VideoStarVO [starId=" + starId + ", boardId=" + boardId + ", accountId=" + accountId + ", star=" + star
+				+ ", reg_date=" + reg_date + ", subject=" + subject + "]";
 	}
 
 } // End - TipStarVO

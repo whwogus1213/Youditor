@@ -13,7 +13,7 @@ li {
 .aside {
 	margin: 20px;
 	width: 200px;
-	height: 279.2px;
+	height: 325px;
 	float: left;
 	background-color: #eee;
 }
@@ -65,7 +65,7 @@ li {
 
 		//스크롤 이벤트가 발생하면
 		$(window).scroll(function() {
-			yPosition = $win.scrollTop() - 500; //이부분을 조정해서 화면에 보이도록 맞추세요
+			yPosition = $win.scrollTop() - 400; //이부분을 조정해서 화면에 보이도록 맞추세요
 			if (yPosition < 0) {
 				yPosition = 0;
 			}
@@ -84,13 +84,22 @@ li {
 
 	<div class="float_sidebar">
 		<div class="aside">
-			<table class="table table-hover">
+		<input id="best1" type="radio" name="tab" checked="checked" />
+    	<input id="best2" type="radio" name="tab"  />
+   		<input id="best3" type="radio" name="tab"  />
+    	<input id="best4" type="radio" name="tab"  />
+   
+			<table class="table">
 				<thead class="thead-dark">
 					<tr>
-						<th scope="col">#</th>
-						<th colspan="3">편집동영상 랭킹</th>
+						<th colspan="1"><label id="bestbtn1" for="best1">전체</label></th>
+						<th colspan="1"><label id="bestbtn2" for="best2">팁</label></th>
+						<th colspan="1"><label id="bestbtn3" for="best3">공지</label></th>
+						<th colspan="1"><label id="bestbtn3" for="best4">유저</label></th>
 					</tr>
-				</thead>
+			</table>
+			<table class="table table-hover">
+				
 				<tbody id="boardRank">
 					
 
