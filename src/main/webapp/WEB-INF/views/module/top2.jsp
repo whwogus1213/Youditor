@@ -147,9 +147,9 @@
 					<a class="nav-link" href="#">구인구직</a>
 					<ul class="submenu hire">
 						<li>|</li>
-						<li><a class="submenuLink" href="#">구인</a></li>
+						<li><a class="submenuLink" href="/recruitboard/recruitBoardList?categoryId=1">구인</a></li>
 						<li>|</li>
-						<li><a class="submenuLink" href="#">구직</a></li>
+						<li><a class="submenuLink" href="/recruitboard/recruitBoardList?categoryId=2">구직</a></li>
 						<li>|</li>
 					</ul>
 				</li>

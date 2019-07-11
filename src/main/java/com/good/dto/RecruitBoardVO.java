@@ -12,6 +12,12 @@ public class RecruitBoardVO {
 	private Date reg_date;
 	private Date mod_date;
 	private int viewCount;
+	private int replyCount;
+	private float starCount;
+	private int starSelect;
+	
+	private String nickname;
+	private String footer;
 
 	public int getBoardId() {
 		return boardId;
@@ -84,5 +90,56 @@ public class RecruitBoardVO {
 	public void setViewCount(int viewCount) {
 		this.viewCount = viewCount;
 	}
+
+	public int getReplyCount() {
+		return replyCount;
+	}
+
+	public void setReplyCount(int replyCount) {
+		this.replyCount = replyCount;
+	}
+
+	public float getStarCount() {
+		return starCount;
+	}
+
+	public void setStarCount(float starCount) {
+		this.starCount = starCount;
+	}
+
+	public int getStarSelect() {
+		return starSelect;
+	}
+
+	public void setStarSelect(int starSelect) {
+		this.starSelect = starSelect;
+	}
+
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+
+	public String getFooter() {
+		return footer;
+	}
+
+	public void setFooter(String footer) {
+		this.footer = footer;
+	}
+
+	@Override
+	public String toString() {
+		return "RecruitBoardVO [boardId=" + boardId + ", accountId=" + accountId + ", categoryId=" + categoryId
+				+ ", subject=" + subject + ", object=" + object + ", fee=" + fee + ", reg_date=" + reg_date
+				+ ", mod_date=" + mod_date + ", viewCount=" + viewCount + ", replyCount=" + replyCount + ", starCount="
+				+ starCount + ", starSelect=" + starSelect + ", nickname=" + nickname + ", footer=" + footer + "]";
+	}
+	
+	
+	
 
 } // End - public class RecruitBoardVO

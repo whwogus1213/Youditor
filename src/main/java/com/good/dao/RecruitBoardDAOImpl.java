@@ -9,6 +9,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.good.dto.RecruitBoardVO;
+import com.good.dto.RecruitCategoryVO;
+import com.good.dto.VideoCategoryVO;
 
 @Repository
 public class RecruitBoardDAOImpl implements RecruitBoardDAO {
@@ -21,8 +23,8 @@ public class RecruitBoardDAOImpl implements RecruitBoardDAO {
 
 	// 게시물 목록
 	@Override
-	public List<RecruitBoardVO> listAll() throws Exception {
-		return sqlSession.selectList(NAMESPACE + ".listAll");
+	public List<RecruitBoardVO> listAll(RecruitCategoryVO rcvo) throws Exception {
+		return sqlSession.selectList(NAMESPACE + ".listAll", rcvo);
 	}
 
 	// 게시물 보기
@@ -47,6 +49,18 @@ public class RecruitBoardDAOImpl implements RecruitBoardDAO {
 	@Override
 	public void deleteRecruitBoard(int boardId) throws Exception {
 		sqlSession.delete(NAMESPACE + ".deleteRecruitBoard", boardId);
+	}
+	
+	//조회수 증가
+	@Override
+	public void viewCount(int boardId) throws Exception {
+		sqlSession.update(NAMESPACE + ".viewCount", boardId);
+	}
+
+	// 게시물 갯수
+	@Override
+	public int getBoardListCnt(RecruitCategoryVO rcvo) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + ".getBoardListCnt", rcvo);
 	}
 
 }
