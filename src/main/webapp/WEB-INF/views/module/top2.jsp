@@ -80,6 +80,9 @@
 .hire {
 	padding-left: 10%;
 }
+.message {
+	padding-left: 47%;
+}
 .accounts {
 	padding-left: 50%;
 }
@@ -157,6 +160,16 @@
 			<ul class="navbar-nav ml-auto">
 				<c:if test="${login.accountId ne null }">
 					<li class="nav-item topMenuLi">
+						<a class="nav-link" href="#">메세지</a>
+						<ul class="submenu message">
+							<li>|</li>
+							<li><a class="submenuLink" href="/message/messageReceiveList">받은 메세지</a></li>
+							<li>|</li>
+							<li><a class="submenuLink" href="/message/messageSendList">보낸 메세지</a></li>
+							<li>|</li>
+						</ul>
+					</li>
+					<li class="nav-item topMenuLi">
 						<a class="nav-link" href="#">회원기능</a>
 						<ul class="submenu accounts">
 							<li>|</li>
@@ -177,7 +190,7 @@
 						<a class="nav-link" href="/accounts/login.do">로그인</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="/accounts/signUp.do">회원가입</a>
+						<a class="nav-link" href="/accounts/join.do">회원가입</a>
 					</li>
 				</c:if>
 			</ul>

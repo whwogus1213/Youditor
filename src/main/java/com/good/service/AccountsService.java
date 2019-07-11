@@ -24,4 +24,6 @@ public interface AccountsService {
 	public void updateAccount(AccountsVO vo) throws Exception;
 	
 	public void updatePassword(int accountId, String pwd) throws Exception;
+	
+	public boolean insertAccount(AccountsVO vo) throws Exception;
 }

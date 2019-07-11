@@ -22,4 +22,6 @@ public interface AccountsDAO {
 	public void updateAccount(AccountsVO vo) throws Exception;
 	
 	public void updatePassword(int accountId, String pwd) throws Exception;
+	
+	public int insertAccount(AccountsVO vo) throws Exception;
 }

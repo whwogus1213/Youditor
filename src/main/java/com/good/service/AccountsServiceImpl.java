@@ -58,5 +58,9 @@ public class AccountsServiceImpl implements AccountsService {
 	public void updatePassword(int accountId, String newPwd) throws Exception {
 		dao.updatePassword(accountId, newPwd);
 	}
-
+	
+	@Override
+	public boolean insertAccount(AccountsVO vo) throws Exception {
+		return dao.insertAccount(vo) > 0;
+	}
 }

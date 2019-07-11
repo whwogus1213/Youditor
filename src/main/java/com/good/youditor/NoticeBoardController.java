@@ -14,7 +14,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.good.dto.NoticeBoardVO;
 import com.good.dto.Search;
-import com.good.dto.VideoBoardVO;
 import com.good.service.NoticeBoardService;
 
 @Controller
