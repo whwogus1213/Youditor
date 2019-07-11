@@ -109,6 +109,26 @@
 			accountId = #{accountId}
 	</update>
 
+	<!-- 회원 가입 -->
+	<insert id="insertAccount" parameterType="com.good.dto.AccountsVO">
+		INSERT INTO
+				accounts(
+						email,
+						pwd,
+						nickname,
+						picture,
+						footer,
+						reg_date,
+						mod_date)
+				VALUES(
+					#{email},
+					#{pwd},
+					#{nickname},
+					#{picture},
+					#{footer},
+					now(),
+					now())
+	</insert>
 </mapper>
 
 

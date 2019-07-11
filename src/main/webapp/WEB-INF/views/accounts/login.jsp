@@ -46,6 +46,13 @@
 </head>
 <body>
 	<jsp:include page="../module/top2.jsp" flush="false"/>
+	<div align="center">
+		<div class="col-sm-12">
+			<h2 align="center">&nbsp;</h2>
+			<h1 align="center">로그인</h1>
+			<h2 align="center">&nbsp;</h2>
+		</div>
+	</div>
 	<div class="container" align ="center">
 	<form class="form-horizontal" id="frm" method="post">
 		<div class="form-inline">
