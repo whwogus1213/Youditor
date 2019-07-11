@@ -20,17 +20,19 @@ public class AccountsDAOImpl implements AccountsDAO {
 
 	@Override
 	public List<AccountsVO> selectAccounts() throws Exception {
+		// TODO Auto-generated method stub
 		return sqlSession.selectList(NAMESPACE + ".selectAccounts");
+//		return null;
 	}
 
 	@Override
-	public void insertAccounts(AccountsVO accountsVO) throws Exception {
-		sqlSession.insert(NAMESPACE + ".insertAccounts", accountsVO);
+	public void insertAccounts(AccountsVO vo) throws Exception {
+		sqlSession.insert(NAMESPACE + ".insertAccounts", vo);
 	}
 
 	@Override
-	public int checkEmail(String email) throws Exception {
-		return sqlSession.selectOne(NAMESPACE + ".checkEmail", email);
+	public AccountsVO login(AccountsVO vo) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + ".login", vo);
 	}
 	
 	@Override
@@ -70,16 +72,5 @@ public class AccountsDAOImpl implements AccountsDAO {
 	public int insertAccount(AccountsVO vo) throws Exception {
 		return sqlSession.insert(NAMESPACE + ".insertAccount", vo);
 	}
-
-	@Override
-	public int checkNickname(String nickname) throws Exception {
-		return sqlSession.selectOne(NAMESPACE + ".checkNickname", nickname);
-	}
-
-	@Override
-	public AccountsVO login(AccountsVO accountsVO) throws Exception {
-		return sqlSession.selectOne(NAMESPACE + ".login", accountsVO);
-	}
-
 
 }
