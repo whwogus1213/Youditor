@@ -1,5 +1,6 @@
 package com.good.dao;
 
+import java.sql.ResultSet;
 import java.util.List;
 
 import javax.inject.Inject;

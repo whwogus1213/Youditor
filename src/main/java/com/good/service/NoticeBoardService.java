@@ -3,6 +3,7 @@ package com.good.service;
 import java.util.List;
 
 import com.good.dto.NoticeBoardVO;
+import com.good.dto.Pagination;
 import com.good.dto.Search;
 
 public interface NoticeBoardService {

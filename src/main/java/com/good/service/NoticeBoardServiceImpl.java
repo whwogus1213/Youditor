@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.good.dao.NoticeBoardDAO;
 import com.good.dto.NoticeBoardVO;
+import com.good.dto.Pagination;
 import com.good.dto.Search;
 
 @Service

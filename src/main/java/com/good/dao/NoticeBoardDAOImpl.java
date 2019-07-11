@@ -1,5 +1,6 @@
 package com.good.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -8,6 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.good.dto.NoticeBoardVO;
+import com.good.dto.Pagination;
 import com.good.dto.Search;
 
 @Repository

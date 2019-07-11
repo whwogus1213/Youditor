@@ -7,7 +7,9 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.good.dao.ReplyDAO;
+import com.good.dao.VideoBoardDAO;
 import com.good.dto.ReplyVO;
+import com.good.dto.VideoBoardVO;
 
 @Service
 public class ReplyServiceImpl implements ReplyService {

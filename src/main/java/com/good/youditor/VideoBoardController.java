@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.good.dto.AccountsVO;
+import com.good.dto.Search;
 import com.good.dto.VideoBoardVO;
 import com.good.dto.VideoCategoryVO;
 import com.good.service.VideoBoardService;
