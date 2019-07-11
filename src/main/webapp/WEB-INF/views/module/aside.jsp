@@ -13,76 +13,12 @@ li {
 .aside {
 	margin: 20px;
 	width: 200px;
-	height: 30%;
-	/* 			border: 1px solid black; */
+	height: 279.2px;
 	float: left;
 	background-color: #eee;
 }
 
-#best {
-	display: none;
-}
 
-#weekbest {
-	display: none;
-}
-
-#bestbtn {
-	width: 100px;
-	height: 30px;
-	line-height: 30px;
-	text-align: center;
-	box-sizing: border-box;
-	border: 1px solid black;
-	background: black;
-	color: white;
-}
-
-#best:checked ~ #bestbtn1 {
-	background: white;
-	color: black;
-}
-
-#weekbest:checked ~ #bestbtn2 {
-	background: white;
-	color: black;
-}
-
-.tab_item1 {
-	display: none;
-}
-
-.tab_item2 {
-	display: none;
-}
-
-#best ~ .tab_item1 {
-	display: none;
-}
-
-#weekbest ~ .tab_item2 {
-	display: none;
-}
-
-#best:checked ~ .tab_item1 {
-	display: block;
-}
-
-#weekbest:checked ~ .tab_item2 {
-	display: block;
-}
-
-#bestbtn1 {
-	float: left;
-	border: 0.1px solid black;
-	background-color: yellowgreen;
-}
-
-#bestbtn2 {
-	float: left;
-	border: 0.1px solid black;
-	background-color: blue;
-}
 </style>
 <script type="text/javascript">
 	$(function() {
