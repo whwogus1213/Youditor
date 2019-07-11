@@ -39,14 +39,13 @@
 	
 	$(function(){
 		if(${sessionScope.login != null}) {
-			
 			fn_followbtn();
 			getStarload();
 		
 		var json = {
 			"boardId":${row.accountId},
 			"accountId":${login.accountId}
-		};
+		}
 		$.ajax({
 			type : "POST",
 			url : "/videostar/starload",

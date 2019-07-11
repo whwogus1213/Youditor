@@ -42,7 +42,7 @@
         </div>
         
         <input type="hidden" id="boardId" name="boardId" value="${row.boardId }" />        
-        <input type="hidden" id="boardClass" name="boardClass" value="videocomment" />
+        <input type="hidden" id="boardClass" name="boardClass" value="recruitcomment" />
         <c:if test="${login ne null}">
 	        <input type="hidden" id="loginAccountId" name="loginAccountId" value="${login.accountId }" />        
         </c:if>
