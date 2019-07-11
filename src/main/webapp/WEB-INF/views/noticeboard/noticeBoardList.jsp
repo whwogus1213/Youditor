@@ -100,7 +100,7 @@
 				<c:forEach items="${NoticeBoardList}" var="NoticeBoardList">
 					<tr>
 						<td>${NoticeBoardList.boardId}</td>
-						<td>${NoticeBoardList.categoryId}</td>
+						<td>${NoticeBoardList.categoryName}</td>
 						<td>
 							<div style="overflow:hidden; text-overflow: ellipsis; white-space:nowrap; width:700px; height: 100%">
 							<a href="/noticeboard/noticeBoardView?boardId=${NoticeBoardList.boardId}">${NoticeBoardList.subject}</a>

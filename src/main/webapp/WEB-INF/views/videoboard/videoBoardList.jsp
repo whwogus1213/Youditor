@@ -56,8 +56,8 @@
 		var url = "${pageContext.request.contextPath}/videoboard/videoBoardList";
 
 		url = url + "?category=" + ${pagination.categoryId};
-		url = url + "&page=" + 1;
-		url = url + "&range=" + 1;
+		//url = url + "&page=" + 1;
+		//url = url + "&range=" + 1;
 		url = url + "&searchType=" + $('#searchType').val();
 		url = url + "&keyword=" + $('#keyword').val();
 
@@ -80,16 +80,30 @@
 	});
 	</script>
 	<jsp:include page="../module/top2.jsp" flush="false" />
-	<div class="form-group">
-		<div class="col-sm-12">
-			<h2 align="center">&nbsp;</h2>
-			<h1 align="center"><strong><%=request.getAttribute("categoryName") %></strong></h1>
-			<h2 align="center">&nbsp;</h2>
+	<!-- 카테고리로 들어갔을 때 상단 -->
+	<% if (request.getAttribute("categoryId") != null) { %>
+		<div class="form-group">
+			<div class="col-sm-12">
+				<h2 align="center">&nbsp;</h2>
+				<h1 align="center">
+					<strong><%=request.getAttribute("categoryName")%></strong>
+				</h1>
+			</div>
+			<h5 align="center"><%=request.getAttribute("categoryName")%> 유투버들의 편집 영상입니다.</h5>
+			<div id="deleteOK" class="alert alert-danger hidden" role="alert" style="visibility: hidden">글이 삭제되었습니다.</div>
 		</div>
-		<h5 align="center"><%=request.getAttribute("categoryName") %> 유투버들의 편집 영상입니다.</h5>
-		<div id="deleteOK" class="alert alert-danger hidden" role="alert" style="visibility:hidden">글이 삭제되었습니다.</div>
-	</div>
-	
+	<!-- 팔로잉, 팔로워로 들어갔을 때 상단 -->
+	<% } else { %>
+		<div class="form-group">
+			<div class="col-sm-12">
+				<h2 align="center">&nbsp;</h2>
+				<h1 align="center">
+					<strong><%=request.getAttribute("nickname") %>의 편집영상</strong>
+				</h1>
+			</div>
+			<div id="deleteOK" class="alert alert-danger hidden" role="alert" style="visibility: hidden">글이 삭제되었습니다.</div>
+		</div>
+	<% } %>
 	<div class="container">
     	<!-- Marketing Icons Section -->
     	
@@ -200,7 +214,7 @@
 				<select class="form-control form-control-sm" name="searchType" id="searchType" style="width:66.6%">
 					<option value="subject">제목</option>
 					<option value="object">본문</option>
-					<option value="nickname">작성자</option>
+					<option value="nickname">닉네임</option>
 				</select>
 			</div>
 			<div class="col-sm-4" align="right" >

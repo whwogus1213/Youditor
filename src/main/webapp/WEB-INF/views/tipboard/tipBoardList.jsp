@@ -78,12 +78,10 @@
 		<div class="col-sm-12">
 			<h2 align="center">&nbsp;</h2>
 			<h1 align="center"><strong>편집 팁</strong></h1>
-			<h2 align="center">&nbsp;</h2>
 		</div>
 	</div>
 	<h5 align="center">유튜버 편집 팁</h5>
 	<div id="deleteOK" class="alert alert-danger hidden" role="alert" style="visibility:hidden">글이 삭제되었습니다.</div>
-	<h2 align="center">&nbsp;</h2>
 	<div class="container">
 		<table class="table table-bordered table-striped nanum table-hover">
 			<!-- <table border="1"> -->
@@ -92,7 +90,7 @@
 					<th>번호</th>
 					<th>분류</th>
 					<th>제목</th>
-					<th>작성자</th>
+					<th>닉네임</th>
 					<th>작성일</th>
 					<th>조회수</th>
 				</tr>
@@ -101,7 +99,7 @@
 				<c:forEach items="${TipBoardList}" var="TipBoardList">
 					<tr>
 						<td>${TipBoardList.boardId}</td>
-						<td>${TipBoardList.categoryId}</td>
+						<td>${TipBoardList.categoryName}</td>
 						<td>
 							<div style="overflow:hidden; text-overflow: ellipsis; white-space:nowrap; width:700px; height: 100%">
 							<a href="/tipboard/tipBoardView?boardId=${TipBoardList.boardId}">${TipBoardList.subject}</a>
@@ -152,7 +150,7 @@
 				<select class="form-control form-control-sm" name="searchType" id="searchType" style="width:66.6%">
 					<option value="subject">제목</option>
 					<option value="object">본문</option>
-					<option value="nickname">작성자</option>
+					<option value="nickname">닉네임</option>
 				</select>
 			</div>
 			<div class="col-sm-4" align="right" >
@@ -163,7 +161,7 @@
 			</div>
 			<div class="col-sm-3" align="center">
 				<c:if test="${login.email != null}">
-					<button type="button" class="btn btn-primary" onclick="location.href='/tipboard/write.do' ">글쓰기</button>
+					<button type="button" class="btn btn-primary" onclick="location.href='/tipboard/write.do'">글쓰기</button>
 				</c:if>
 			</div>
 		</div>
