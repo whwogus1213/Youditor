@@ -10,6 +10,7 @@ public class ReplyVO {
 	private int replyCommentId;
 	private Date reg_date;
 	private Date mod_date;
+	private String boardClass;
 
 	private int countReply;
 	private String nickname;
@@ -86,11 +87,20 @@ public class ReplyVO {
 		this.nickname = nickname;
 	}
 
+	public String getBoardClass() {
+		return boardClass;
+	}
+
+	public void setBoardClass(String boardClass) {
+		this.boardClass = boardClass;
+	}
+
 	@Override
 	public String toString() {
 		return "ReplyVO [commentId=" + commentId + ", accountId=" + accountId + ", boardId=" + boardId + ", object="
 				+ object + ", replyCommentId=" + replyCommentId + ", reg_date=" + reg_date + ", mod_date=" + mod_date
-				+ ", countReply=" + countReply + ", nickname=" + nickname + "]";
+				+ ", boardClass=" + boardClass + ", countReply=" + countReply + ", nickname=" + nickname + "]";
 	}
+
 
 }
