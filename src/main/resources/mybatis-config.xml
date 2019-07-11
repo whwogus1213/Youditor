@@ -10,6 +10,8 @@
     		<typeAlias type="com.good.dto.AdminVO" alias="AdminVO"/>
     		<typeAlias type="com.good.dto.FollowListVO" alias="FollowListVO"/>
     		<typeAlias type="com.good.dto.MessageVO" alias="MessageVO"/>
+    		<typeAlias type="com.good.dto.MessageList" alias="MessageList"/>
+    		<typeAlias type="com.good.dto.MessageSearch" alias="MessageSearch"/>
     		<typeAlias type="com.good.dto.NoticeBoardVO" alias="NoticeBoardVO"/>
 
     		<typeAlias type="com.good.dto.ReplyVO" alias="ReplyVO"/>
