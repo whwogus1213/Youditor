@@ -101,12 +101,7 @@
 				<c:forEach items="${RecruitBoardList}" var="RecruitBoardList">
 					<tr>
 						<td>${RecruitBoardList.boardId}</td>
-						<c:if test="${RecruitBoardList.categoryId eq 1}">
-							<td>구인</td>
-						</c:if>
-						<c:if test="${RecruitBoardList.categoryId eq 2}">
-							<td>구직</td>
-						</c:if>
+						<td>${RecruitBoardList.categoryId}</td>
 						<td>
 							<div style="overflow:hidden; text-overflow: ellipsis; white-space:nowrap; width:700px; height: 100%">
 							<a href="/recruitboard/recruitBoardView?boardId=${RecruitBoardList.boardId}">${RecruitBoardList.subject}</a>

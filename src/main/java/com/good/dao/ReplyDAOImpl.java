@@ -18,9 +18,8 @@ public class ReplyDAOImpl implements ReplyDAO {
 	private static final String NAMESPACE = "com.good.mapper.replyMapper";
 
 	@Override
-	public List<ReplyVO> listAll(ReplyVO vo) throws Exception {
-		System.out.println(vo.getBoardClass()+"           $$$$$$$$$$$$$$$$$$$$$$");
-		return sqlSession.selectList(NAMESPACE + ".listAll",vo);
+	public List<ReplyVO> listAll(int boardId) throws Exception {
+		return sqlSession.selectList(NAMESPACE + ".listAll", boardId);
 	}
 
 	@Override
@@ -49,8 +48,8 @@ public class ReplyDAOImpl implements ReplyDAO {
 	}
 
 	@Override
-	public List<ReplyVO> reList(ReplyVO vo) throws Exception {
-		return sqlSession.selectList(NAMESPACE + ".reList", vo);
+	public List<ReplyVO> reList(int replyCommentId) throws Exception {
+		return sqlSession.selectList(NAMESPACE + ".reList", replyCommentId);
 	}
 
 }
