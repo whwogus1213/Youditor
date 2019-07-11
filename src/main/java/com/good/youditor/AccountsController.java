@@ -1,22 +1,32 @@
 package com.good.youditor;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.StringTokenizer;
+import java.util.UUID;
 
+import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -32,6 +42,10 @@ public class AccountsController {
 
 	@Inject
 	AccountsService service;
+	
+	//servlet-context,xml에 선언한 bean을 참조
+	@Resource(name="uploadPath")
+	String uploadPath;// <== 공통으로 사용하기 위해서
 
 	@RequestMapping(value = "/show", method = RequestMethod.GET)
 	public void show(Model model) throws Exception {
@@ -105,8 +119,27 @@ public class AccountsController {
 	}
 
 	// insertAccountsForm-> insertAccountsPro
-	@RequestMapping(value = "/insertAccountsPro")
-	public String insertAccountsPro(AccountsVO vo) throws Exception {
+	@RequestMapping(value = "/insertAccountsPro", method = RequestMethod.POST)
+	public String insertAccountsPro(HttpSession session, AccountsVO vo) throws Exception {
+
+		System.out.println(vo.getPicture());
+		System.out.println(vo.getUploadFile());
+		
+		MultipartFile uploadfile = vo.getUploadFile();
+		String savedName = uploadfile.getOriginalFilename();
+		
+		//파일 이름 수정 후 저장
+		StringTokenizer pst = new StringTokenizer(savedName,".");
+		pst.nextToken();
+		String file_ext = pst.nextToken();
+		savedName = vo.getAccountId() + "." + file_ext;	// 저장 이름
+		
+		// new File (디렉토리, 파일이름)
+		File target = new File(uploadPath, savedName);
+		
+		vo.setPicture(savedName);
+
+		FileCopyUtils.copy(uploadfile.getBytes(), target);
 		service.insertAccounts(vo);
 		System.out.println("============insertAccountsPro 성공==============");
 
@@ -199,6 +232,7 @@ public class AccountsController {
 		
 		session.setAttribute("login", vo);
 		
+		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("accounts/modAccount");
 		System.out.println("String modAccount open");
@@ -207,15 +241,27 @@ public class AccountsController {
 	
 	// 회원정보수정처리
 	@RequestMapping(value = "/updateAccount.do")
-	public ModelAndView updateAccount(HttpSession session, int accountId, String email, String pwdCfm, String nickname, String picture, String footer) throws Exception {
+	public ModelAndView updateAccount(HttpSession session, int accountId, String email, String pwdCfm, String nickname, MultipartFile picture, String footer) throws Exception {
 		AccountsVO vo = new AccountsVO();
 		
 		vo.setAccountId(accountId);
 		vo.setEmail(email);
 		vo.setPwd(pwdCfm);
 		vo.setNickname(nickname);
-		vo.setPicture(picture);
+		
+		String savedName = picture.getOriginalFilename();
+		StringTokenizer pst = new StringTokenizer(savedName,".");
+		pst.nextToken();
+		String file_ext = pst.nextToken();
+		savedName = accountId + "." + file_ext;	// 저장 이름
+		
+		// new File (디렉토리, 파일이름)
+		File target = new File(uploadPath, savedName);
+		
+		vo.setPicture(savedName);
 		vo.setFooter(footer);
+
+		FileCopyUtils.copy(picture.getBytes(), target);
 		
 		service.updateAccount(vo);
 		

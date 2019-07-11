@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%> 
 <%@ page session="true" %>
 <!DOCTYPE html>
 <html>
@@ -65,7 +66,7 @@
 	<jsp:include page="../module/top2.jsp" flush="false"/>
 	<div align="center">
 		<c:if test="${login.accountId ne null }">
-			<form:form name="modForm" method="POST">
+			<form:form name="modForm" method="POST" enctype="multipart/form-data">
 				<table>
 					<tr>
 						<td>가입날자</td>
@@ -100,7 +101,27 @@
 					</tr>
 					<tr>
 						<td>포트레이트</td>
-						<td>차후구현예정<input type="hidden" name="picture" id="picture" value="${login.picture }"></td>
+						<td>
+						 	<!-- name="picture"의 변수명과 컨트롤러의 MultipartFile file과 일치해야 한다. -->
+							<input type="file" name="picture" id="picture" value="${login.picture }">
+						 </td>
+					</tr>
+					<tr>
+						 <td>미리보기 - 준비중</td>
+						<td>
+							<c:choose>
+						 		<c:when test="${empty picture }">
+									<div>
+										<img id ="profileImg" src = "<spring:url value = '/image/${login.picture}'/>" style = "border-radius:0%; padding-top : 10px; height:100px; width:100px;">
+									</div>
+								</c:when>
+								<c:otherwise>
+									<div>
+										<img id="profileImg" style="height:100px; width:100px" />
+									</div>
+								</c:otherwise>
+							</c:choose>
+						</td>
 					</tr>
 					<tr>
 						<td>자기소개</td>

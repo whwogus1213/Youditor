@@ -177,7 +177,7 @@
 						<a class="nav-link" href="/accounts/login.do">로그인</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="/accounts/signUp.do">회원가입</a>
+						<a class="nav-link" href="/accounts/join.do">회원가입</a>
 					</li>
 				</c:if>
 			</ul>
