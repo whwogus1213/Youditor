@@ -44,10 +44,21 @@ public class MessageDAOImpl implements MessageDAO {
 		return sqlSession.selectOne(NAMESPACE + ".getSendListCnt", search);
 	}
 	
-	// 메세지 읽기
+	// 받은 메세지 읽기
 	@Override
-	public MessageVO view(int messageId) throws Exception {
-		return sqlSession.selectOne(NAMESPACE + ".view", messageId);
+	public MessageList receiveMessageView(int messageId) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + ".receiveMessageView", messageId);
+	}
+
+	// 받은 메세지를 처음 읽었을 경우 read_date에 읽은 날짜를 update해준다.
+	public void updateReadDate(int messageId) throws Exception {
+		sqlSession.update(NAMESPACE + ".updateReadDate", messageId);
+	}
+	
+	// 보낸 메세지 읽기
+	@Override
+	public MessageList sendMessageView(int messageId) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + ".sendMessageView", messageId);
 	}
 	
 	// 메세지 보내기

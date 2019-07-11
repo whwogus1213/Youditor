@@ -78,7 +78,7 @@
 	
 }
 .hire {
-	padding-left: 10%;
+	padding-left: 0%;
 }
 .message {
 	padding-left: 47%;

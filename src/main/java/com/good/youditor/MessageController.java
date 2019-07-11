@@ -3,7 +3,6 @@ package com.good.youditor;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -64,7 +63,6 @@ public class MessageController {
 		AccountsVO vo = (AccountsVO) session.getAttribute("login");
 		search.setAccountId(vo.getAccountId());
 		List<MessageList> messageSendList = service.sendListAll(search);
-		
 		// 전체 게시글 개수
 		int listCnt = service.getSendListCnt(search);
 		
@@ -76,17 +74,30 @@ public class MessageController {
 		return "message/messageSendList";
 	}
 
-	// 메시지 읽기
-	@RequestMapping(value = "/messageView", method = RequestMethod.GET)
-	public ModelAndView messageView(@RequestParam("messageId") int messageId) throws Exception {
+	// 받은 메시지 읽기
+	@RequestMapping(value = "/messageReceiveView", method = RequestMethod.GET)
+	public String receiveMessageView(Model model, @RequestParam("messageId") int messageId) throws Exception {
 		System.out.println("*************************************************");
-		MessageVO row = service.view(messageId);
+		MessageList rMessage = service.receiveMessageView(messageId);
+		if(rMessage.getRead_date() == null) {
+			service.updateReadDate(messageId);
+			rMessage = service.receiveMessageView(messageId);
+		}
 
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("message/messageView");
-		mav.addObject("row", row);
-		System.out.println("MessageController messageView open");
-		return mav;
+		model.addAttribute("rMessage", rMessage);
+		System.out.println("MessageController messageReceiveView open");
+		return "message/messageReceiveView";
+	}
+
+	// 보낸 메시지 읽기
+	@RequestMapping(value = "/messageSendView", method = RequestMethod.GET)
+	public String sendMessageView(Model model, @RequestParam("messageId") int messageId) throws Exception {
+		System.out.println("*************************************************");
+		MessageList rMessage = service.sendMessageView(messageId);
+
+		model.addAttribute("rMessage", rMessage);
+		System.out.println("MessageController messageSendView open");
+		return "message/messageSendView";
 	}
 	
 	// 메시지 쓰기
@@ -100,14 +111,14 @@ public class MessageController {
 		return mav;
 	}
 	
-	// 메시지 쓰기
+	// 메시지 답장 쓰기
 	@RequestMapping(value = "/reply.do", method = RequestMethod.GET)
 	public ModelAndView replydo(@RequestParam("messageId") int messageId) throws Exception {
 		System.out.println("*************************************************");
-		MessageVO row = service.view(messageId);
+		// MessageVO row = service.view(messageId);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("message/messageReply");
-		mav.addObject("row", row);
+		// mav.addObject("row", row);
 		System.out.println("MessageController messageReply open");
 		return mav;
 	}

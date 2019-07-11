@@ -41,10 +41,22 @@ public class MessageServiceImpl implements MessageService {
 		return dao.getSendListCnt(search);
 	}
 	
-	// 메세지 읽기
+	// 받은 메세지 읽기
 	@Override
-	public MessageVO view(int messageId) throws Exception {
-		return dao.view(messageId);
+	public MessageList receiveMessageView(int messageId) throws Exception {
+		return dao.receiveMessageView(messageId);
+	}
+	
+	// 받은 메세지를 처음 읽었을 경우 read_date에 읽은 날짜를 update해준다.
+	@Override
+	public void updateReadDate(int messageId) throws Exception {
+		dao.updateReadDate(messageId);
+	}
+	
+	// 보낸 메세지 읽기
+	@Override
+	public MessageList sendMessageView(int messageId) throws Exception {
+		return dao.sendMessageView(messageId);
 	}
 	
 	// 메세지 보내기

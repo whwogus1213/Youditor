@@ -101,13 +101,13 @@
 						<td>${MessageSendList.nickname}</td>
 						<td>
 							<div style="overflow:hidden; text-overflow: ellipsis; white-space:nowrap; width:700px; height: 100%">
-							<a href="/noticeboard/messageView?messageId=${MessageSendList.messageId}">${MessageSendList.subject}</a>
+							<a href="/message/messageSendView?messageId=${MessageSendList.messageId}">${MessageSendList.subject}</a>
 							</div>
 						</td>
 						<td><fmt:formatDate value="${MessageSendList.send_date}" pattern="yyyy-MM-dd" /></td>
 						<td>
 							<c:if test="${empty MessageSendList.read_date }">
-								
+								unread
 							</c:if>
 							<c:if test="${not empty MessageSendList.read_date}">
 								<fmt:formatDate value="${MessageSendList.read_date}" pattern="yyyy-MM-dd" />
