@@ -4,55 +4,121 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.good.mapper.recruitBoardMapper">
-	<select id="listAll" resultType="RecruitBoardVO">
-        SELECT * FROM recruitBoard order by boardID desc
-    </select>
+	<select id="listAll" resultType="RecruitBoardVO"
+		parameterType="map">
 
-    <!-- 게시물 조회 -->
-	<select id="view" parameterType="int" resultType="RecruitBoardVO">
-		select * from recruitBoard where boardId = #{boardId}
+		SELECT boardId, b.accountId, categoryId, subject, object,
+		CONVERT_TZ(b.reg_date,'+09:00','+00:00') as reg_date,
+		CONVERT_TZ(b.mod_date,'+09:00','+00:00') as mod_date, viewCount,
+		nickname
+		FROM recruitboard b join accounts ac on b.accountId =
+		ac.accountId
+		<trim prefix="WHERE" prefixOverrides="AND|OR">
+			<if
+				test="searchType=='subject' and keyword != null and keyword != '' ">
+				AND subject like CONCAT('%', #{keyword}, '%')
+			</if>
+			<if
+				test="searchType=='object' and keyword != null and keyword != '' ">
+				AND object like CONCAT('%', #{keyword}, '%')
+			</if>
+			<if
+				test="searchType=='nickname' and keyword != null and keyword != '' ">
+				AND nickname like CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test='categoryId!=0'>
+				AND categoryId = #{categoryId}
+			</if>
+		</trim>
+
+		order by boardId desc
+		LIMIT #{startList}, #{listSize}
 	</select>
-    <!-- 글 쓰기 -->
-    <insert id="insertRecruitBoard" parameterType="RecruitBoardVO">
+
+	<!-- 게시물 조회 -->
+	<select id="view" parameterType="int"
+		resultType="RecruitBoardVO">
+
+		select boardId, b.accountId, categoryId, subject, object, fee, 
+		CONVERT_TZ(b.reg_date,'+09:00','+00:00') as reg_date,
+		CONVERT_TZ(b.mod_date,'+09:00','+00:00') as mod_date,
+		viewCount, (select count(*) from videocomment where b.boardId = boardId) as
+		replyCount, ac.nickname
+		from recruitBoard b, accounts ac
+		where boardId = #{boardId} and b.accountId = ac.accountId
+
+	</select>
+	<!-- 글 쓰기 -->
+	<insert id="insertRecruitBoard" parameterType="RecruitBoardVO">
 		insert into
-      recruitBoard(accountId,
-                categoryId,
-								subject,
-                object,
-								fee,
-								reg_date,
-								mod_date)
-	    values(#{accountId},
-            #{categoryId},
-            #{subject},
-            #{object},
-            #{fee},
-            now(),
-            now())
-    </insert>
+		recruitBoard(accountId,
+		categoryId,
+		subject,
+		object,
+		fee,
+		reg_date,
+		mod_date)
+		values(#{accountId},
+		#{categoryId},
+		#{subject},
+		#{object},
+		#{fee},
+		now(),
+		now())
+	</insert>
 
-    <!-- 글 수정 -->
-		 <update id="updateRecruitBoard">
-		  update
-        recruitBoard
-		  set
-        subject = #{subject},
-		    object = #{object},
-        fee = #{fee}
-		  where
-        boardId = #{boardId}
-		 </update>
+	<!-- 글 수정 -->
+	<update id="updateRecruitBoard">
+		update
+		recruitboard
+		set
+		subject = #{subject},
+		object =
+		#{object},
+		fee = #{fee}
+		where
+		boardId = #{boardId}
+	</update>
 
- 	<!-- 글 삭제 -->
-		 <delete id="deleteRecruitBoard">
-		  delete from
-		    recruitBoard
-		  where
-        boardId = #{boardId}
-		 </delete>
+	<!-- 글 삭제 -->
+	<delete id="deleteRecruitBoard">
+		delete from
+		recruitBoard
+		where
+		boardId = #{boardId}
+	</delete>
 
 
+	<!-- 조회수 증가 -->
+	<update id="viewCount">
+		UPDATE recruitBoard SET viewCount = viewCount+1 WHERE
+		boardId=#{boardId}
+	</update>
 
+
+	<!-- 게시물 총 갯수 구하기 -->
+	<select id="getBoardListCnt" resultType="int">
+		select count(boardId)
+		from recruitboard b join accounts a on
+		b.accountId=a.accountId
+		<trim prefix="WHERE" prefixOverrides="AND|OR">
+			<if test='categoryId!=0'>
+				AND categoryId = #{categoryId}
+			</if>
+			<if
+				test="searchType=='subject' and keyword != null and keyword != '' ">
+				AND subject like CONCAT('%', #{keyword}, '%')
+			</if>
+			<if
+				test="searchType=='object' and keyword != null and keyword != '' ">
+				AND object like CONCAT('%', #{keyword}, '%')
+			</if>
+			<if
+				test="searchType=='nickname' and keyword != null and keyword != '' ">
+				AND nickname like CONCAT('%', #{keyword}, '%')
+			</if>
+		</trim>
+	</select>
 
 
 

@@ -1,7 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
+<%@ page session="true" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@include file="/WEB-INF/views/module/header.jsp" %>
+<%@include file="/WEB-INF/views/module/header2.jsp" %>
 
 <!DOCTYPE html>
 <html>
@@ -16,7 +16,11 @@
   <title>YouditoR</title>
   <!-- Custom styles -->
   <link href="/resources/css/modern-business.css" rel="stylesheet">
-
+  <style>
+  footer{
+  clear: both;
+  }
+  </style>
 </head>
 
 <body>
@@ -63,6 +67,8 @@
 	      </a>
 	    </div>
 	  </header>
+	  
+  <jsp:include page="./module/aside.jsp" flush="false"/>
   <div class="container">
 
     <h1 class="my-4"><span class="oi oi-video"></span> 핫한 편집 영상</h1>
@@ -74,7 +80,7 @@
           <h4 class="card-header">영상 제목</h4>
           <div class="card-body">
 <!--           <a href="#"><img class="card-img-top" src="" alt=""></a> -->
-			<img width="300" height="200" src="https://img.youtube.com/vi/xZKVYhHInok/mqdefault.jpg"></img>
+			<img width="100%" height="20%" src="https://img.youtube.com/vi/xZKVYhHInok/mqdefault.jpg"></img>
           </div>
           <div class="card-footer">
             <a href="#" class="btn btn-primary">여기는 좋아요, 작성자 프로필 만들곳</a>
@@ -86,7 +92,7 @@
           <h4 class="card-header">영상 제목</h4>
           <div class="card-body">
 <!--           <a href="#"><img class="card-img-top" src="" alt=""></a> -->
-			<img width="300" height="200" src="https://img.youtube.com/vi/xZKVYhHInok/mqdefault.jpg"></img>
+			<img width="100%" height="20%" src="https://img.youtube.com/vi/xZKVYhHInok/mqdefault.jpg"></img>
           </div>
           <div class="card-footer">
             <a href="#" class="btn btn-primary">여기는 좋아요, 작성자 프로필 만들곳</a>
@@ -98,7 +104,7 @@
           <h4 class="card-header">영상 제목</h4>
           <div class="card-body">
 <!--           <a href="#"><img class="card-img-top" src="" alt=""></a> -->
-			<img width="300" height="200" src="https://img.youtube.com/vi/xZKVYhHInok/mqdefault.jpg"></img>
+			<img width="100%" height="20%" src="https://img.youtube.com/vi/xZKVYhHInok/mqdefault.jpg"></img>
           </div>
           <div class="card-footer">
             <a href="#" class="btn btn-primary">여기는 좋아요, 작성자 프로필 만들곳</a>

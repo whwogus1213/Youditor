@@ -78,7 +78,10 @@
 	
 }
 .hire {
-	padding-left: 10%;
+	padding-left: 0%;
+}
+.message {
+	padding-left: 47%;
 }
 .accounts {
 	padding-left: 50%;
@@ -141,21 +144,31 @@
 					</ul>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#">팁</a>
+					<a class="nav-link" href="/tipboard/tipBoardList">팁</a>
 				</li>
 				<li class="nav-item topMenuLi">
 					<a class="nav-link" href="#">구인구직</a>
 					<ul class="submenu hire">
 						<li>|</li>
-						<li><a class="submenuLink" href="#">구인</a></li>
+						<li><a class="submenuLink" href="/recruitboard/recruitBoardList?categoryId=1">구인</a></li>
 						<li>|</li>
-						<li><a class="submenuLink" href="#">구직</a></li>
+						<li><a class="submenuLink" href="/recruitboard/recruitBoardList?categoryId=2">구직</a></li>
 						<li>|</li>
 					</ul>
 				</li>
 			</ul>
 			<ul class="navbar-nav ml-auto">
 				<c:if test="${login.accountId ne null }">
+					<li class="nav-item topMenuLi">
+						<a class="nav-link" href="#">메세지</a>
+						<ul class="submenu message">
+							<li>|</li>
+							<li><a class="submenuLink" href="/message/messageReceiveList">받은 메세지</a></li>
+							<li>|</li>
+							<li><a class="submenuLink" href="/message/messageSendList">보낸 메세지</a></li>
+							<li>|</li>
+						</ul>
+					</li>
 					<li class="nav-item topMenuLi">
 						<a class="nav-link" href="#">회원기능</a>
 						<ul class="submenu accounts">

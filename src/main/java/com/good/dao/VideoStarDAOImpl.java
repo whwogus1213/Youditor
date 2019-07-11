@@ -9,7 +9,6 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
-import com.good.dto.ReplyVO;
 import com.good.dto.VideoStarVO;
 
 @Repository
@@ -22,8 +21,9 @@ public class VideoStarDAOImpl implements VideoStarDAO {
 	private static final String NAMESPACE = "com.good.mapper.videoStarMapper";
 	
 	@Override
-	public List<VideoStarVO> listAll(int boardId) throws Exception {
-		return sqlSession.selectList(NAMESPACE + ".listAll", boardId);
+	public List<VideoStarVO> listAll() throws Exception {
+		System.out.println("daoimpl test");
+		return sqlSession.selectList(NAMESPACE + ".listAll");
 	}
 	
 	//평점
@@ -42,7 +42,11 @@ public class VideoStarDAOImpl implements VideoStarDAO {
 	@Override
 	public int starload(VideoStarVO vo) throws Exception {
 		return sqlSession.selectOne(NAMESPACE + ".starload", vo);
+	}
 
+	@Override
+	public int starSum(VideoStarVO vo) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + ".starSum", vo);
 	}
 
 	@Override

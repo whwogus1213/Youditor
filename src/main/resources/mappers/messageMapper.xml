@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.good.mapper.messageMapper">
+	<!-- 받은 메시지 목록 + 페이징 + 검색 -->
+	<select id="receiveListAll" resultType="MessageList">
+		SELECT
+			messageId, senderAccountId, nickname, subject, send_date, read_date, receiverView
+		FROM
+			message as m
+		JOIN
+			accounts as a
+		ON
+			m.senderAccountId = a.accountId
+		<trim prefix="WHERE" prefixOverrides="AND|OR">
+			<if test="searchType=='subject' and keyword != null and keyword != '' ">
+				AND subject like CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType=='object' and keyword != null and keyword != '' ">
+				AND object like CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType=='receiverAccountId' and keyword != null and keyword != '' ">
+				AND senderAccountId like CONCAT('%', #{keyword}, '%')
+			</if>
+			AND receiverAccountId = #{accountId}
+		</trim>
+		ORDER BY
+			send_date desc
+		LIMIT
+			#{startList}, #{listSize}
+	</select>
+	
+	<!-- 받은 메시지 총 갯수 구하기 -->
+	<select id="getReceiveListCnt" resultType="int">
+		SELECT
+			count(messageId)
+		FROM
+			message
+		<trim prefix="WHERE" prefixOverrides="AND|OR">
+			<if test="keyword != null and keyword != '' ">
+				<if test="searchType=='subject'">
+					AND subject like CONCAT('%', #{keyword}, '%')
+				</if>
+				<if test="searchType=='object'">
+					AND object like CONCAT('%', #{keyword}, '%')
+				</if>
+				<if test="searchType=='senderAccountId'">
+					AND senderAccountId like CONCAT('%', #{keyword}, '%')
+				</if>
+      		</if>
+			AND receiverView = 1
+			AND receiverAccountId = #{accountId}
+		</trim>
+	</select>
+	
+	<!-- 보낸 메시지 목록 + 페이징 + 검색 -->
+	<select id="sendListAll" resultType="MessageList">
+		SELECT
+			messageId, receiverAccountId, nickname, subject, send_date, read_date, receiverView
+		FROM
+			message as m
+		JOIN
+			accounts as a
+		ON
+			m.receiverAccountId = a.accountId
+		<trim prefix="WHERE" prefixOverrides="AND|OR">
+			<if test="searchType=='subject' and keyword != null and keyword != '' ">
+				AND subject like CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType=='object' and keyword != null and keyword != '' ">
+				AND object like CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType=='receiverAccountId' and keyword != null and keyword != '' ">
+				AND senderAccountId like CONCAT('%', #{keyword}, '%')
+			</if>
+			AND senderAccountId = #{accountId}
+		</trim>
+		ORDER BY
+			send_date desc
+		LIMIT
+			#{startList}, #{listSize}
+	</select>
+	
+	<!-- 보낸 메시지 총 갯수 구하기 -->
+	<select id="getSendListCnt" resultType="int">
+		SELECT
+			count(messageId)
+		FROM
+			message
+		<trim prefix="WHERE" prefixOverrides="AND|OR">
+			<if test="keyword != null and keyword != '' ">
+				<if test="searchType=='subject'">
+					AND subject like CONCAT('%', #{keyword}, '%')
+				</if>
+				<if test="searchType=='object'">
+					AND object like CONCAT('%', #{keyword}, '%')
+				</if>
+				<if test="searchType=='receiverAccountId'">
+					AND receiverAccountId like CONCAT('%', #{keyword}, '%')
+				</if>
+      		</if>
+			AND senderView = 1
+			AND senderAccountId = #{accountId}
+		</trim>
+	</select>
+	
+	<!-- 받은 메시지 조회 -->
+	<select id="receiveMessageView" parameterType="int" resultType="MessageList">
+		SELECT
+			messageId, senderAccountId, nickname, subject, object, send_date, read_date
+		FROM
+			message as m
+		JOIN
+			accounts as a
+		ON
+			m.senderAccountId = a.accountId
+		WHERE
+			messageId = #{messageId}
+			AND
+			receiverView = 1
+	</select>
+	
+	<!-- 받은 메세지를 처음 읽었을 경우 read_date에 읽은 날짜를 update -->
+	<update id="updateReadDate" parameterType="int">
+		UPDATE
+			message
+		SET
+			read_date = now()
+		WHERE
+			messageId = #{messageId}
+	</update>
+	
+	<!-- 보낸 메시지 조회 -->
+	<select id="sendMessageView" parameterType="int" resultType="MessageList">
+		SELECT
+			messageId, receiverAccountId, nickname, subject, object, send_date, read_date
+		FROM
+			message as m
+		JOIN
+			accounts as a
+		ON
+			m.receiverAccountId = a.accountId
+		WHERE
+			messageId = #{messageId}
+			AND
+			senderView = 1
+	</select>
+	
+	<!-- 메시지 보내기 -->
+	<insert id="sendMessage" parameterType="messageVO">
+		INSERT INTO
+			message(senderAccountId,
+					receiverAccountId,
+					subject,
+					object,
+					send_date,
+					senderView,
+					receiverView)
+		VALUES(#{senderAccountId},
+				#{receiverAccountId},
+				#{subject},
+				#{object},
+				now(),
+				1,
+				1)
+	</insert>
+	
+	<!-- 받은 메세지 숨기기 -->
+	<update id="hideReceivedMessage" parameterType="List">
+		UPDATE
+			message
+		SET
+			receiverView = 0
+		WHERE
+			messageId = ${messageId}
+	</update>
+	
+	<!-- 보낸 메세지 숨기기 -->
+	<update id="hideSendMessage" parameterType="List">
+		UPDATE
+			message
+		SET
+			senderView = 0
+		WHERE
+			messageId = ${messageId}
+	</update>
+</mapper>

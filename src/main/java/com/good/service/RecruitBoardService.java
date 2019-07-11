@@ -4,11 +4,13 @@ import java.util.List;
 import java.util.Map;
 
 import com.good.dto.RecruitBoardVO;
+import com.good.dto.RecruitCategoryVO;
+import com.good.dto.VideoCategoryVO;
 
 public interface RecruitBoardService {
 
 	// 게시물 목록
-	public List<RecruitBoardVO> listAll() throws Exception;
+	public List<RecruitBoardVO> listAll(RecruitCategoryVO rcvo) throws Exception;
 
 	// 게시물 보기
 	public RecruitBoardVO view(int boardId) throws Exception;
@@ -21,5 +23,8 @@ public interface RecruitBoardService {
 
 	// 삭제
 	public void deleteRecruitBoard(int boardId) throws Exception;
+	
+	// 게시물 갯수
+	public int getBoardListCnt(RecruitCategoryVO rcvo) throws Exception;
 
 }

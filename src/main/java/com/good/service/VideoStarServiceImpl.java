@@ -19,8 +19,10 @@ public class VideoStarServiceImpl implements VideoStarService {
 
 	// 게시물 목록
 	@Override
-	public List<VideoStarVO> listAll(int boardId) throws Exception {
-		return videoStarDAO.listAll(boardId);
+	public List<VideoStarVO> listAll() throws Exception {
+
+		System.out.println("serviceimpl test");
+		return videoStarDAO.listAll();
 	}
 	
 	//평점
@@ -38,8 +40,11 @@ public class VideoStarServiceImpl implements VideoStarService {
 	@Override
 	public int starload(VideoStarVO vo) throws Exception {
 		return videoStarDAO.starload(vo);
-		
-		
+	}
+	
+	@Override
+	public int starSum(VideoStarVO vo) throws Exception {
+		return videoStarDAO.starSum(vo);
 	}
 
 	@Override

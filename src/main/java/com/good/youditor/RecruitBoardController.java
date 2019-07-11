@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Locale;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +16,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.good.dto.AccountsVO;
 import com.good.dto.RecruitBoardVO;
+import com.good.dto.RecruitCategoryVO;
+import com.good.dto.TipBoardVO;
 import com.good.service.RecruitBoardService;
 
 @Controller
@@ -25,11 +28,31 @@ public class RecruitBoardController {
 	RecruitBoardService recruitBoardService;
 
 	// 게시물 목록
-	@RequestMapping(value = "/recruitBoardList")
-	public ModelAndView list() throws Exception {
-		List<RecruitBoardVO> list = recruitBoardService.listAll();
-
+	@RequestMapping(value = "/recruitBoardList", method = RequestMethod.GET)
+	public ModelAndView list(@RequestParam(required = false, defaultValue = "1") int categoryId,
+			 @RequestParam(required = false, defaultValue = "1") int page,
+			 @RequestParam(required = false, defaultValue = "1") int range,
+			 @RequestParam(required = false, defaultValue = "object") String searchType,
+			 @RequestParam(required = false) String keyword, HttpServletRequest request) throws Exception {
+		
 		ModelAndView mav = new ModelAndView();
+		RecruitCategoryVO recruitCategoryVO = new RecruitCategoryVO();
+		// 검색
+		recruitCategoryVO.setSearchType(searchType);
+		recruitCategoryVO.setKeyword(keyword);
+		recruitCategoryVO.setCategoryId(categoryId);
+
+		// 게시물 갯수
+		int listCnt = recruitBoardService.getBoardListCnt(recruitCategoryVO);
+		System.out.println(" recruitboard 게시물 갯수 : " + listCnt);
+
+		recruitCategoryVO.setListSize(6);
+		recruitCategoryVO.pageInfo(page, range, listCnt);
+
+		mav.addObject("pagination", recruitCategoryVO);
+		List<RecruitBoardVO> list = recruitBoardService.listAll(recruitCategoryVO);
+
+		
 		mav.setViewName("recruitboard/recruitBoardList");
 		System.out.println("RecruitBoardController RecruitBoardList open");
 		mav.addObject("RecruitBoardList", list);
@@ -39,7 +62,7 @@ public class RecruitBoardController {
 	// 게시물 상세정보
 	@RequestMapping(value = "/recruitBoardView", method = RequestMethod.GET)
 	public ModelAndView view(@RequestParam("boardId") int boardId) throws Exception {
-		System.out.println("*************************************************");
+
 		RecruitBoardVO row = recruitBoardService.view(boardId);
 
 		ModelAndView mav = new ModelAndView();
@@ -55,7 +78,7 @@ public class RecruitBoardController {
 		System.out.println("*************************************************");
 
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("recruitboard/boardWrite");
+		mav.setViewName("recruitboard/recruitBoardWrite");
 		System.out.println("RecruitBoardController boardWrite open");
 		return mav;
 	}
@@ -67,58 +90,40 @@ public class RecruitBoardController {
 	}
 
 	// 글작성 완료
-	// insertRecruitBoardForm-> insertRecruitBoardPro
 	@RequestMapping(value = "/insertRecruitBoardPro", method = RequestMethod.POST)
 	public String insertRecruitBoardPro(RecruitBoardVO vo) throws Exception {
 		System.out.println("============insertRecruitBoardPro 성공==============");
 		System.out.println(vo);
 		recruitBoardService.insertRecruitBoard(vo);
 
-		return "redirect:/";
+		return "redirect:/recruitboard/recruitBoardList";
 
-	}
-
-	// 파일 이동
-	// 게시글 수정
-	// 'recruitBoardUpdate.jsp' 로 이동 <-- 이동하고자 하는 파일로 명 바꾸면됨
-	@RequestMapping(value = "/recruitBoardUpdate", method = RequestMethod.GET)
-	public ModelAndView join(Locale locale, Model model) throws Exception {
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("recruitboard/recruitBoardUpdate");
-		System.out.println("String recruitboardlist open");
-		return mav;
 	}
 
 	// 글 수정
-	@RequestMapping(value = "/update", method = RequestMethod.GET)
-	public void getUpdatey(@RequestParam("boardId") int boardId, Model model) throws Exception {
+	@RequestMapping(value = "/updateRecruitBoard", method = RequestMethod.GET)
+	public ModelAndView getUpdate(@RequestParam("boardId") int boardId) throws Exception {
+		
+		ModelAndView mav = new ModelAndView();
 		RecruitBoardVO vo = recruitBoardService.view(boardId);
-
-		model.addAttribute("updateRecruitBoard", vo);
-
+		mav.addObject("row",vo);
+		mav.setViewName("recruitboard/recruitBoardUpdate");
+		return mav;
 	}
 
 	// 글 삭제
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
-	public void getDelete(@RequestParam("boardId") int boardId, Model model) throws Exception {
-
-		model.addAttribute("deleteRecruitBoard", boardId);
+	public String getDelete(@RequestParam("boardId") int boardId) throws Exception {
+		recruitBoardService.deleteRecruitBoard(boardId);
+		return "redirect:/recruitboard/recruitBoardList";
 	}
 
 	// 글 수정  POST
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	public String postUpdate(RecruitBoardVO vo) throws Exception {
 		recruitBoardService.updateRecruitBoard(vo);
-
-		return "redirect:/recruitboard/recruitBoardList";
-
+		System.out.println("============ updateRecruitBoard 성공==============");
+		return "redirect:/recruitboard/recruitBoardList";		
 	}
 
-	// 글 삭제  POST
-	@RequestMapping(value = "/delete", method = RequestMethod.POST)
-	public String postDelete(@RequestParam("boardId") int boardId) throws Exception {
-		recruitBoardService.deleteRecruitBoard(boardId);
-
-		return "redirect:/recruitboard/recruitBoardList";
-	}
 }

@@ -6,8 +6,10 @@
 <mapper namespace="com.good.mapper.noticeBoardMapper">
 	<!-- 게시물 목록 + 페이징 + 검색 -->
 	<select id="listAll" resultType="NoticeBoardVO">
-		SELECT boardId, accountId, categoryId, subject, object, CONVERT_TZ(reg_date,'+09:00','+00:00') as reg_date, CONVERT_TZ(mod_date,'+09:00','+00:00') as mod_date, viewCount 
-		FROM noticeboard
+		SELECT boardId, b.accountId, subject, object,
+			CONVERT_TZ(b.reg_date,'+09:00','+00:00') as reg_date, CONVERT_TZ(b.mod_date,'+09:00','+00:00') as mod_date, viewCount, nickname, categoryName 
+			FROM noticeboard b join accounts a on b.accountId = a.accountId
+							   join noticecategory c on b.categoryId=c.categoryId
 		<trim prefix="WHERE" prefixOverrides="AND|OR">
 			<if test="searchType=='subject' and keyword != null and keyword != '' ">
 				AND subject like CONCAT('%', #{keyword}, '%')
@@ -15,8 +17,8 @@
 			<if test="searchType=='object' and keyword != null and keyword != '' ">
 				AND object like CONCAT('%', #{keyword}, '%')
 			</if>
-			<if test="searchType=='accountId' and keyword != null and keyword != '' ">
-				AND accountId like CONCAT('%', #{keyword}, '%')
+			<if test="searchType=='nickname' and keyword != null and keyword != '' ">
+				AND nickname like CONCAT('%', #{keyword}, '%')
 			</if>
 		</trim>
 		order by boardId desc
@@ -32,19 +34,17 @@
 	<!-- 게시물 총 갯수 구하기 -->
 	<select id="getBoardListCnt" resultType="int">
 		select count(boardId)
-		from noticeboard
-		<trim prefix="WHERE" prefixOverrides="AND|OR">
-			<if test="keyword != null and keyword != '' ">
-				<if test="searchType=='subject'">
-					AND subject like CONCAT('%', #{keyword}, '%')
-				</if>
-				<if test="searchType=='object'">
-					AND object like CONCAT('%', #{keyword}, '%')
-				</if>
-				<if test="searchType=='accountId'">
-					AND accountId like CONCAT('%', #{keyword}, '%')
-				</if>
-      		</if>
+		from noticeboard b join accounts a on b.accountId=a.accountId  
+		 <trim prefix="WHERE" prefixOverrides="AND|OR">
+			<if test="searchType=='subject' and keyword != null and keyword != '' ">
+				AND subject like CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType=='object' and keyword != null and keyword != '' ">
+				AND object like CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType=='nickname' and keyword != null and keyword != '' ">
+				AND nickname like CONCAT('%', #{keyword}, '%')
+			</if>
 		</trim>
 	</select>
 	

@@ -11,7 +11,6 @@ import java.util.UUID;
 import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -303,7 +302,7 @@ public class AccountsController {
 		}
 		return mav;
 	}
-
+	
 	@RequestMapping(value = "/signUp.do")
 	public ModelAndView signUp() throws Exception {
 		ModelAndView mav = new ModelAndView();
@@ -311,4 +310,5 @@ public class AccountsController {
 		System.out.println("String signUp open");
 		return mav;
 	}
+	
 }

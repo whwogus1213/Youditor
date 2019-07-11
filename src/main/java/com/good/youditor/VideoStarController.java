@@ -19,7 +19,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.good.dto.AccountsVO;
 import com.good.dto.VideoStarVO;
-import com.good.service.VideoBoardService;
 import com.good.service.VideoStarService;
 
 @Controller
@@ -29,16 +28,15 @@ public class VideoStarController {
 	@Inject
 	VideoStarService videoStarService;
 	
-	/*
-	// 처음 평가
-	@RequestMapping(value = "/insertVideoStarPro")
-	public String insert(VideoStarVO vo) throws Exception {
-		System.out.println("============insertVideoBoardPro 성공==============");
-		System.out.println(vo);
-		videoStarService.insert(vo);
-
-		return "redirect:/videoboard/videoBoardList";
-	}*/
+	// 게시물 목록
+	@ResponseBody
+	@RequestMapping(value = "/StarList", method = {RequestMethod.GET,RequestMethod.POST})
+	public List<VideoStarVO> list() throws Exception {
+		System.out.println("Start videostar List");
+		List<VideoStarVO> list = videoStarService.listAll();
+		System.out.println("List : " + list);
+		return list;
+	}
 	
 	// 평점 추가
 	@RequestMapping(value = "/insertVideoStarPro", method = RequestMethod.POST)
