@@ -4,53 +4,81 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.good.mapper.tipBoardMapper">
+	<!-- 게시물 목록 + 페이징 + 검색 -->
 	<select id="listAll" resultType="TipBoardVO">
-        SELECT * FROM tipBoard order by boardID desc
-    </select>
-
-    <!-- 게시물 조회 -->
+		SELECT boardId, b.accountId, subject, object,
+			CONVERT_TZ(b.reg_date,'+09:00','+00:00') as reg_date, CONVERT_TZ(b.mod_date,'+09:00','+00:00') as mod_date, viewCount, nickname, categoryName 
+			FROM tipboard b join accounts a on b.accountId = a.accountId
+							   join tipcategory c on b.categoryId=c.categoryId
+		<trim prefix="WHERE" prefixOverrides="AND|OR">
+			<if test="searchType=='subject' and keyword != null and keyword != '' ">
+				AND subject like CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType=='object' and keyword != null and keyword != '' ">
+				AND object like CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType=='nickname' and keyword != null and keyword != '' ">
+				AND nickname like CONCAT('%', #{keyword}, '%')
+			</if>
+		</trim>
+		order by boardId desc
+		LIMIT #{startList}, #{listSize}	</select>
+	<!-- 게시물 조회 -->
 	<select id="view" parameterType="int" resultType="TipBoardVO">
-		select * from tipBoard where boardId = #{boardId}
+		select boardId, accountId, categoryId, subject, object, CONVERT_TZ(reg_date,'+09:00','+00:00') as reg_date, CONVERT_TZ(mod_date,'+09:00','+00:00') as mod_date, viewCount 
+		from tipboard
+		where boardId = #{boardId}
 	</select>
+
+	<!-- 게시물 총 갯수 구하기 -->
+	<select id="getBoardListCnt" resultType="int">
+		select count(boardId)
+		from tipboard b join accounts a on b.accountId=a.accountId  
+		 <trim prefix="WHERE" prefixOverrides="AND|OR">
+			<if test="searchType=='subject' and keyword != null and keyword != '' ">
+				AND subject like CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType=='object' and keyword != null and keyword != '' ">
+				AND object like CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType=='nickname' and keyword != null and keyword != '' ">
+				AND nickname like CONCAT('%', #{keyword}, '%')
+			</if>
+		</trim>
+	</select>
+	
     <!-- 글 쓰기 -->
     <insert id="insertTipBoard" parameterType="TipBoardVO">
-		insert into
-      tipBoard(accountId,
-                categoryId,
+		insert into tipBoard(accountId,
+								categoryId,
 								subject,
-                object,
+								object,
 								reg_date,
 								mod_date)
-	    values(#{accountId},
-            #{categoryId},
-            #{subject},
-            #{object},
-            now(),
-            now())
+		values(#{accountId},
+				#{categoryId},
+				#{subject},
+				#{object},
+				now(),
+				now())
     </insert>
 
     <!-- 글 수정 -->
-		 <update id="updateTipBoard">
-		  update
-        tipBoard
-		  set
-        subject = #{subject},
-		    object = #{object}
-		  where
-        boardId = #{boardId}
-		 </update>
+	 <update id="updateTipBoard">
+		update tipBoard
+		set subject = #{subject}, object = #{object}
+		where boardId = #{boardId}
+	 </update>
 
  	<!-- 글 삭제 -->
-		 <delete id="deleteTipBoard">
-		  delete from
-		    tipBoard
-		  where
-        boardId = #{boardId}
-		 </delete>
+	 <delete id="deleteTipBoard">
+		delete from tipBoard
+		where boardId = #{boardId}
+	 </delete>
 
-
-
-
-
+	<!-- 조회수 증가 -->
+	<update id="viewCount">
+	UPDATE tipBoard SET viewCount = viewCount+1 WHERE boardId=#{boardId}
+	</update>
 
 </mapper>

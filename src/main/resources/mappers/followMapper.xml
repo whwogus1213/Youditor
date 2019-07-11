@@ -18,7 +18,7 @@
 	<select id="followerList" resultType="FollowListVO" parameterType="int">
 		select *
 		from accounts acc, followlist fol
-		where acc.accountId = fol.followAccountId
+		where acc.accountId = fol.followerAccountId
 		and fol.followAccountId = #{followAccountId}
 		order by fol.reg_date desc
     </select>

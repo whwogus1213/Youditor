@@ -1,6 +1,6 @@
 package com.good.dto;
 
-public class RecruitCategoryVO {
+public class RecruitCategoryVO extends Search {
 	private int categoryId;
 	private String categoryName;
 	private int authority;

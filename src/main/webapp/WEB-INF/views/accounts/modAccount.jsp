@@ -100,7 +100,9 @@
 					</tr>
 					<tr>
 						<td>포트레이트</td>
-						<td>차후구현예정<input type="hidden" name="picture" id="picture" value="${login.picture }"></td>
+						<td>
+							차후구현예정<input type="hidden" name="picture" id="picture" value="${login.picture }">
+						</td>
 					</tr>
 					<tr>
 						<td>자기소개</td>

@@ -16,9 +16,9 @@
 	<jsp:include page="../module/top2.jsp" flush="false" />
 	<div class="form-group">
 		<div class="col-sm-12">
-			<h2 align="center">&nbsp;</h2>
+			<h4 align="center">&nbsp;</h4>
 			<h1 align="center">Follower List</h1>
-			<h2 align="center">나를 팔로우 중인 사람</h2>
+			<h4 align="center">${login.nickname }의 팔로워</h4>
 		</div>
 	</div>
 	<div class="container">
@@ -26,7 +26,8 @@
 			<!-- <table border="1"> -->
 			<thead>
 				<tr>
-					<th>아이디</th>
+					<th>닉네임</th>
+					<th>e-mail</th>
 					<th>날짜</th>
 				</tr>
 			</thead>
@@ -34,7 +35,10 @@
 				<c:forEach items="${followerList}" var="followerList">
 					<tr>
 						<td>
-							<a href="/follow/followBoardList?followAccountId=${followerList.followerAccountId }">${followerList.followerAccountId}</a>
+							<a href="/follow/followBoardList?followAccountId=${followerList.followerAccountId }">${followerList.nickname}</a>
+						</td>
+						<td>
+							${followerList.followerAccountId }
 						</td>
 						<td>
 							<fmt:formatDate value="${followerList.reg_date}" pattern="yyyy-MM-dd" />

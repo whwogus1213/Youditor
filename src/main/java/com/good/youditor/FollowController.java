@@ -30,16 +30,17 @@ public class FollowController {
 	// 팔로잉 (로그인유저가 팔로우하는 사람 리스트)
 	@RequestMapping(value = "/followingList")
 	public String followingList(Model model, FollowListVO vo, HttpServletRequest request) throws Exception {
+		System.out.println("Start following List");
+
 		HttpSession session = request.getSession();
 		AccountsVO loginVO = (AccountsVO) session.getAttribute("login");
 		vo.setFollowAccountId(loginVO.getAccountId());
 
-		System.out.println("Start following List : " + vo);
-
 		List<FollowListVO> followingList = followService.followingList(vo.getFollowAccountId());
+		
 		System.out.println(vo.getFollowAccountId());
 		model.addAttribute("followingList", followingList);
-
+		
 		System.out.println(followingList);
 		return "follow/followingList";
 	}
@@ -47,16 +48,17 @@ public class FollowController {
 	// 팔로워(로그인유저를 팔로우하는 사람 리스트)
 	@RequestMapping(value = "/followerList")
 	public String followerList(Model model, FollowListVO vo, HttpServletRequest request) throws Exception {
+		System.out.println("Start follower List");
+
 		HttpSession session = request.getSession();
 		AccountsVO loginVO = (AccountsVO) session.getAttribute("login");
 		vo.setFollowAccountId(loginVO.getAccountId());
-
-		System.out.println("Start follower List : " + vo);
-
-		List<FollowListVO> followerList = followService.followerList(vo.getFollowAccountId());
 		System.out.println(vo.getFollowAccountId());
+		
+		List<FollowListVO> followerList = followService.followerList(vo.getFollowAccountId());
+		
 		model.addAttribute("followerList", followerList);
-
+		System.out.println(vo.getFollowerAccountId());
 		System.out.println(followerList);
 		return "follow/followerList";
 	}
@@ -138,16 +140,16 @@ public class FollowController {
 	
 	// 팔로우 게시물 목록
 	@RequestMapping(value = "followBoardList")
-	public ModelAndView followBoardList(@RequestParam("followAccountId") int followAccountId) throws Exception {
+	public ModelAndView followBoardList(@RequestParam("followAccountId") int followAccountId, HttpServletRequest request) throws Exception {
 		System.out.println("팔로우 게시물 목록 시작");
 		System.out.println("   followAccountId   " + followAccountId);
 		
 		List<VideoBoardVO> VideoBoardList = videoBoardService.followBoardList(followAccountId);
 		
 		ModelAndView mv = new ModelAndView();
-//		mv.setViewName("follow/followBoardList");
 		mv.setViewName("videoboard/videoBoardList");
 		mv.addObject("VideoBoardList", VideoBoardList);
+		request.setAttribute("nickname", VideoBoardList.get(0).getNickname());
 		
 		System.out.println("팔로우 게시물 목록 끝");
 		return mv;

@@ -7,6 +7,8 @@ public class FollowListVO {
 	private int followerAccountId;
 	private Date reg_date;
 
+	private String nickname;
+
 	public int getFollowAccountId() {
 		return followAccountId;
 	}
@@ -29,6 +31,15 @@ public class FollowListVO {
 
 	public void setReg_date(Date reg_date) {
 		this.reg_date = reg_date;
+	}
+
+	
+	public final String getNickname() {
+		return nickname;
+	}
+
+	public final void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 
 	@Override

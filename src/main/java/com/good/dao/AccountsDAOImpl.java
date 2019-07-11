@@ -67,5 +67,10 @@ public class AccountsDAOImpl implements AccountsDAO {
 		vo.setPwd(pwd);
 		sqlSession.update(NAMESPACE + ".updatePassword", vo);
 	}
+	
+	@Override
+	public int insertAccount(AccountsVO vo) throws Exception {
+		return sqlSession.insert(NAMESPACE + ".insertAccount", vo);
+	}
 
 }

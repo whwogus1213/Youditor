@@ -43,6 +43,21 @@
 			fn_followbtn();
 			getStarload();
 		
+		var json = {
+			"boardId":${row.accountId},
+			"accountId":${login.accountId}
+		};
+		$.ajax({
+			type : "POST",
+			url : "/videostar/starload",
+			data : json,
+			success : function(data) {
+				$("#star").html(data);
+			},
+			error : function(data) {
+				//alert("에러123123213");
+			}
+		});
 		}
 	});
 
@@ -254,7 +269,7 @@
 				});
 			});
 			var result = '${result}';
-			
+			/*
 			$(function(){
 				$('#deletebtn').click(function(){
 					if(confirm("정말 삭제하시겠습니까?")){
@@ -262,6 +277,7 @@
 					}
 				});
 			});
+			*/
 			$(function(){
 				
 				$('#notraiting').click(function(){

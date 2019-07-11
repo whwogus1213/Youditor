@@ -5,15 +5,27 @@
 
 <mapper namespace="com.good.mapper.videoBoardMapper">
 	<select id="listAll" resultType="VideoBoardVO" parameterType="map">
-       select boardId, b.accountId, categoryId, subject, object, youtubeLink, 
-				CONVERT_TZ(b.reg_date,'+09:00','+00:00') as reg_date, CONVERT_TZ(b.mod_date,'+09:00','+00:00') as mod_date, viewCount, (select count(*) from videocomment where b.boardId = boardId) as replyCount
-				, ac.nickname, (select round(AVG(star),2) from videostar  where b.boardId = boardId) as starCount
-		 from videoBoard b, accounts ac where b.accountId = ac.accountId 
+       select boardId, b.accountId, b.categoryId, subject, object, youtubeLink, 
+				CONVERT_TZ(b.reg_date,'+09:00','+00:00') as reg_date, CONVERT_TZ(b.mod_date,'+09:00','+00:00') as mod_date, viewCount,
+				(select count(*) from videocomment where b.boardId = boardId) as replyCount	, ac.nickname,
+				(select round(AVG(star), 2) from videostar  where b.boardId = boardId) as starCount
+		 from videoBoard b join accounts ac on b.accountId = ac.accountId
+		 <trim prefix="WHERE" prefixOverrides="AND|OR">
+			<if test="searchType=='subject' and keyword != null and keyword != '' ">
+				AND subject like CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType=='object' and keyword != null and keyword != '' ">
+				AND object like CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType=='nickname' and keyword != null and keyword != '' ">
+				AND nickname like CONCAT('%', #{keyword}, '%')
+			</if>
 			<if test='categoryId!=0'>
 				AND categoryId = #{categoryId}
 			</if>
-		 order by boardId desc 
-
+		</trim>
+		 order by boardId desc
+		 LIMIT #{startList}, #{listSize} 
     </select>
 
     <!-- 게시물 조회 -->
@@ -81,16 +93,32 @@
 	
 	<!-- 팔로우 게시물 목록 -->
 	<select id="followBoardList" resultType="VideoBoardVO" parameterType="int">
-<!-- 		select * -->
-<!-- 		from videoboard -->
-<!-- 		where accountId = #{followAccountId} -->
-		
 		 select boardId, b.accountId, categoryId, subject, object, youtubeLink, 
-				CONVERT_TZ(b.reg_date,'+09:00','+00:00') as reg_date, CONVERT_TZ(b.mod_date,'+09:00','+00:00') as mod_date, viewCount, (select count(*) from videocomment where b.boardId = boardId) as replyCount
-				, ac.nickname
-		 from videoBoard b, accounts ac 
-		 where b.accountId = ac.accountId and b.accountId = #{followAccountId}
+				CONVERT_TZ(b.reg_date,'+09:00','+00:00') as reg_date, CONVERT_TZ(b.mod_date,'+09:00','+00:00') as mod_date, viewCount,
+				(select count(*) from videocomment where b.boardId = boardId) as replyCount
+				, a.nickname
+		 from videoBoard b, accounts a 
+		 where b.accountId = a.accountId and b.accountId = #{followAccountId}
 		 order by boardId desc 
 	</select>
 	
+	<!-- 게시물 총 갯수 구하기 -->
+	<select id="getBoardListCnt" resultType="int">
+		select count(boardId)
+		from videoboard b join accounts a on b.accountId=a.accountId  
+		 <trim prefix="WHERE" prefixOverrides="AND|OR">
+			<if test='categoryId!=0'>
+				AND categoryId = #{categoryId}
+			</if>
+			<if test="searchType=='subject' and keyword != null and keyword != '' ">
+				AND subject like CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType=='object' and keyword != null and keyword != '' ">
+				AND object like CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType=='nickname' and keyword != null and keyword != '' ">
+				AND nickname like CONCAT('%', #{keyword}, '%')
+			</if>
+		</trim>
+	</select>
 </mapper>
