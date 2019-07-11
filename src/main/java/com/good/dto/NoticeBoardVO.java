@@ -12,6 +12,9 @@ public class NoticeBoardVO {
 	private Date mod_date;
 	private int viewCount;
 
+	private String nickname;
+	private String categoryName;
+	
 	public int getBoardId() {
 		return boardId;
 	}
@@ -76,10 +79,29 @@ public class NoticeBoardVO {
 		this.viewCount = viewCount;
 	}
 
+	
+	public final String getNickname() {
+		return nickname;
+	}
+
+	public final void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+
+	
+	public final String getCategoryName() {
+		return categoryName;
+	}
+
+	public final void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
+	}
+
 	@Override
 	public String toString() {
 		return "NoticeBoardVO [boardId=" + boardId + ", accountId=" + accountId + ", categoryId=" + categoryId
 				+ ", subject=" + subject + ", object=" + object + ", reg_date=" + reg_date + ", mod_date=" + mod_date
-				+ ", viewCount=" + viewCount + "]";
+				+ ", viewCount=" + viewCount + ", nickname=" + nickname + "]";
 	}
+	
 } // End - public class NoticeBoardVO

@@ -4,26 +4,38 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.good.mapper.videoBoardMapper">
-	<select id="listAll" resultType="VideoBoardVO" parameterType="VideoCategoryVO">
-
-       select boardId, b.accountId, categoryId, subject, object, youtubeLink, 
-				b.reg_date, b.mod_date, viewCount, (select count(*) from videocomment where b.boardId = boardId) as replyCount
-				, ac.nickname
-		 from videoBoard b, accounts ac where b.accountId = ac.accountId 
+	<select id="listAll" resultType="VideoBoardVO" parameterType="map">
+       select boardId, b.accountId, b.categoryId, subject, object, youtubeLink, 
+				CONVERT_TZ(b.reg_date,'+09:00','+00:00') as reg_date, CONVERT_TZ(b.mod_date,'+09:00','+00:00') as mod_date, viewCount,
+				(select count(*) from videocomment where b.boardId = boardId) as replyCount	, ac.nickname,
+				(select round(AVG(star), 2) from videostar  where b.boardId = boardId) as starCount
+		 from videoBoard b join accounts ac on b.accountId = ac.accountId
 		 <trim prefix="WHERE" prefixOverrides="AND|OR">
+			<if test="searchType=='subject' and keyword != null and keyword != '' ">
+				AND subject like CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType=='object' and keyword != null and keyword != '' ">
+				AND object like CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType=='nickname' and keyword != null and keyword != '' ">
+				AND nickname like CONCAT('%', #{keyword}, '%')
+			</if>
 			<if test='categoryId!=0'>
 				AND categoryId = #{categoryId}
 			</if>
 		</trim>
-		 order by boardId desc 
-
+		 order by boardId desc
+		 LIMIT #{startList}, #{listSize} 
     </select>
 
     <!-- 게시물 조회 -->
-	<select id="view" parameterType="int" resultType="VideoBoardVO">select boardId, b.accountId, categoryId, subject, object, youtubeLink, 
-				b.reg_date, b.mod_date, viewCount, (select count(*) from videocomment where b.boardId = boardId) as replyCount
-				, ac.nickname, ac.footer
-		 from videoBoard b, accounts ac where boardId = #{boardId} and b.accountId = ac.accountId
+	<select id="view" parameterType="int" resultType="VideoBoardVO">
+		select boardId, b.accountId, categoryId, subject, object, youtubeLink, 
+				CONVERT_TZ(b.reg_date,'+09:00','+00:00') as reg_date, CONVERT_TZ(b.mod_date,'+09:00','+00:00') as mod_date,
+				viewCount, (select count(*) from videocomment where b.boardId = boardId) as replyCount, ac.nickname, ac.footer, 
+				(select round(AVG(star),2) from videostar  where b.boardId = boardId) as starCount
+		 from videoBoard b, accounts ac 
+		 where boardId = #{boardId} and b.accountId = ac.accountId
 	</select>
 	
     <!-- 글 쓰기 -->
@@ -31,11 +43,11 @@
 		insert into
       videoBoard(accountId,
                 categoryId,
-								subject,
+				subject,
                 object,
-								youtubeLink,
-								reg_date,
-								mod_date)
+				youtubeLink,
+				reg_date,
+				mod_date)
 	    values(#{accountId},
             #{categoryId},
             #{subject},
@@ -52,7 +64,8 @@
 		  set
         subject = #{subject},
 		    object = #{object},
-        youtubeLink = #{youtubeLink}
+        youtubeLink = #{youtubeLink},
+        mod_date = now()
 		  where
         boardId = #{boardId}
 		 </update>
@@ -70,6 +83,42 @@
 		UPDATE videoBoard SET viewCount = viewCount+1 WHERE boardId=#{boardId}
 		</update>
 
-
-
+	<!-- 팔로우 체크 -->
+	<select id="followCheck" resultType="int" parameterType="map">
+		select EXISTS (select *
+						from followlist
+						where followAccountId = #{accountId2}
+						and followerAccountId = #{accountId} )
+	</select>
+	
+	<!-- 팔로우 게시물 목록 -->
+	<select id="followBoardList" resultType="VideoBoardVO" parameterType="int">
+		 select boardId, b.accountId, categoryId, subject, object, youtubeLink, 
+				CONVERT_TZ(b.reg_date,'+09:00','+00:00') as reg_date, CONVERT_TZ(b.mod_date,'+09:00','+00:00') as mod_date, viewCount,
+				(select count(*) from videocomment where b.boardId = boardId) as replyCount
+				, a.nickname
+		 from videoBoard b, accounts a 
+		 where b.accountId = a.accountId and b.accountId = #{followAccountId}
+		 order by boardId desc 
+	</select>
+	
+	<!-- 게시물 총 갯수 구하기 -->
+	<select id="getBoardListCnt" resultType="int">
+		select count(boardId)
+		from videoboard b join accounts a on b.accountId=a.accountId  
+		 <trim prefix="WHERE" prefixOverrides="AND|OR">
+			<if test='categoryId!=0'>
+				AND categoryId = #{categoryId}
+			</if>
+			<if test="searchType=='subject' and keyword != null and keyword != '' ">
+				AND subject like CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType=='object' and keyword != null and keyword != '' ">
+				AND object like CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType=='nickname' and keyword != null and keyword != '' ">
+				AND nickname like CONCAT('%', #{keyword}, '%')
+			</if>
+		</trim>
+	</select>
 </mapper>

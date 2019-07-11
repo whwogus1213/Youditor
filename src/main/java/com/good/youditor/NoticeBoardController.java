@@ -14,7 +14,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.good.dto.NoticeBoardVO;
 import com.good.dto.Search;
-import com.good.dto.VideoBoardVO;
 import com.good.service.NoticeBoardService;
 
 @Controller
@@ -36,6 +35,8 @@ public class NoticeBoardController {
 		
 		// 전체 게시글 개수
 		int listCnt = noticeBoardService.getBoardListCnt(search);
+		
+		System.out.println(" listCnt : " + listCnt);
 		
 		search.pageInfo(page, range, listCnt);
 

@@ -54,4 +54,22 @@ public class VideoBoardServiceImpl implements VideoBoardService {
 		videoBoardDAO.viewCount(boardId);
 	}
 
+	// 팔로우 체크
+	@Override
+	public int followCheck(int accountId, int accountId2) throws Exception {
+		return videoBoardDAO.followCheck(accountId, accountId2);
+	}
+
+	// 팔로우 게시물 목록
+	@Override
+	public List<VideoBoardVO> followBoardList(int followAccountId) throws Exception {
+		return videoBoardDAO.followBoardList(followAccountId);
+	}
+
+	// 게시물 갯수
+	@Override
+	public int getBoardListCnt(VideoCategoryVO videoCategoryVO) throws Exception {
+		return videoBoardDAO.getBoardListCnt(videoCategoryVO);
+	}
+	
 }

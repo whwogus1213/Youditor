@@ -26,6 +26,6 @@ public interface NoticeBoardService {
 	// 삭제
 	public void deleteNoticeBoard(NoticeBoardVO vo) throws Exception;
 
-	//조회수
+	// 조회수
 	public void viewCount(int boardId) throws Exception;
 }

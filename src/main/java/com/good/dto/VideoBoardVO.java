@@ -13,6 +13,8 @@ public class VideoBoardVO {
 	private Date mod_date;
 	private int viewCount;
 	private int replyCount;
+	private float starCount;
+	private int starSelect;
 	
 	private String nickname;
 	private String footer;
@@ -98,6 +100,13 @@ public class VideoBoardVO {
 		this.replyCount = replyCount;
 	}
 
+	public float getStarCount() {
+		return starCount;
+	}
+
+	public void setStarCount(float starCount) {
+		this.starCount = starCount;
+	}
 	public String getNickname() {
 		return nickname;
 	}
@@ -114,12 +123,25 @@ public class VideoBoardVO {
 		this.footer = footer;
 	}
 
+	public int getStarSelect() {
+		return starSelect;
+	}
+
+	public void setStarSelect(int starSelect) {
+		this.starSelect = starSelect;
+	}
+
 	@Override
 	public String toString() {
 		return "VideoBoardVO [boardId=" + boardId + ", accountId=" + accountId + ", subject=" + subject + ", object="
 				+ object + ", reg_date=" + reg_date + ", categoryId=" + categoryId + ", youtubeLink=" + youtubeLink
-				+ ", mod_date=" + mod_date + ", viewCount=" + viewCount + ", replyCount=" + replyCount + "]";
+				+ ", mod_date=" + mod_date + ", viewCount=" + viewCount + ", replyCount=" + replyCount + ", starCount="
+				+ starCount + ", starSelect=" + starSelect + ", nickname=" + nickname + ", footer=" + footer + "]";
 	}
+
+	
+
+	
 
 	
 	

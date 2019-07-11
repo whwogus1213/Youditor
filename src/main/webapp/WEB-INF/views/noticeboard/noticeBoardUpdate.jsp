@@ -18,7 +18,7 @@
 <link href="/resources/css/modern-business.css" rel="stylesheet">
 </head>
 <body>
-	<jsp:include page="../module/top.jsp" flush="false"/>
+	<jsp:include page="../module/top2.jsp" flush="false"/>
 	<form class="form-horizontal" method="post" action="${path}/noticeboard/updateNoticeBoardPro">
 	
 	<!-- 게시글 상세정보 -->

@@ -18,7 +18,7 @@
 <link href="/resources/css/modern-business.css" rel="stylesheet">
 </head>
 <body>
-	<jsp:include page="../module/top.jsp" flush="false"/>
+	<jsp:include page="../module/top2.jsp" flush="false"/>
 
 	<!-- 게시글 상세정보 -->
 	<div class="container">
@@ -43,10 +43,22 @@
 		<h1>${row.subject }</h1>
 		<br>
 		<div align="right">
-		<h4>작성자 ${row.accountId } 카테고리 ${row.categoryId}
-		</h4>
-		<h4>작성 일시 <fmt:formatDate value="${row.reg_date}" pattern="yyyy-MM-dd" /> 조회수 ${row.viewCount }
-		</h4>
+			<div class="form-inline">
+				<div class="col-sm-10" align="right">
+					<h4>작성자 ${row.accountId }</h4>
+				</div>
+				<div class="col-sm-2" align="right">
+					<h4>카테고리 ${row.categoryId}</h4>
+				</div>
+			</div>
+			<div class="form-inline">
+				<div class="col-sm-10" align="right">
+					<h4>작성 일시 <fmt:formatDate value="${row.reg_date}" pattern="yyyy-MM-dd" /></h4>
+				</div>
+				<div class="col-sm-2" align="right">
+					<h4>조회수 ${row.viewCount }</h4>
+				</div>
+			</div>
 		</div>
 		<hr>
 		<br>

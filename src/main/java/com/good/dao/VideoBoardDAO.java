@@ -24,4 +24,14 @@ public interface VideoBoardDAO {
 
 	//조회수
 	public void viewCount(int boardId) throws Exception;
+
+	// 팔로우 체크
+	public int followCheck(int accountId, int accountId2) throws Exception;
+
+	// 팔로우 게시물 목록
+	public List<VideoBoardVO> followBoardList(int followAccountId) throws Exception;
+
+	// 게시물 갯수
+	public int getBoardListCnt(VideoCategoryVO videoCategoryVO) throws Exception;
+
 }

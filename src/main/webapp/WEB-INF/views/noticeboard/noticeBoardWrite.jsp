@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@ page session="false"%>
+<%@ page session="true"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,7 +13,7 @@
 <link href="/resources/css/modern-business.css" rel="stylesheet">
 </head>
 <body>
-	<jsp:include page="../module/top.jsp" flush="false" />
+	<jsp:include page="../module/top2.jsp" flush="false"/>
 	<div class="form-group">
 		<div class="col-sm-12">
 			<h2 align="center">&nbsp;</h2>
@@ -43,7 +43,8 @@
 			<div class="form-inline">
 		        <label class="control-label col-sm-2">작성자</label>
 		        <div class="col-sm-3">
-					<input type="text" class="form-control" name="accountId" maxlength="50" placeholder="Enter Title">
+		        	<input type="text" class="form-control" maxlength="50" value="${login.nickname}" readonly>
+					<input type="text" class="form-control" name="accountId" maxlength="50" value="${login.accountId}" style="display:none" readonly>
 		        </div>
 			</div>
 			<br>

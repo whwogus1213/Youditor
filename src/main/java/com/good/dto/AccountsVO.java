@@ -2,6 +2,7 @@ package com.good.dto;
 
 import java.util.Date;
 
+
 public class AccountsVO {
 	private int accountId;
 	private String email;

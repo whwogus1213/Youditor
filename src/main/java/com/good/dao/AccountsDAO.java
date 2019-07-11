@@ -19,4 +19,14 @@ public interface AccountsDAO {
 	public int checkEmail(String email) throws Exception;
 
 	public int checkNickname(String nickname) throws Exception;
+	
+	public void resetPassword(String email) throws Exception;
+		
+	public void deleteAccount(AccountsVO vo) throws Exception;
+	
+	public void updateAccount(AccountsVO vo) throws Exception;
+	
+	public void updatePassword(int accountId, String pwd) throws Exception;
+	
+	public int insertAccount(AccountsVO vo) throws Exception;
 }
