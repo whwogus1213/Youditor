@@ -41,14 +41,14 @@
             </div>
         </div>
         
-        <input type="hidden" id="boardId" name="boardId" value="${row.boardId }" />
-        <input type="hidden" id="boardClass" name="boardClass" value="videocomment" />
+        <input type="hidden" id="boardId" name="boardId" value="${row.boardId }" />        
+        <input type="hidden" id="boardClass" name="boardClass" value="recruitcomment" />
         <c:if test="${login ne null}">
 	        <input type="hidden" id="loginAccountId" name="loginAccountId" value="${login.accountId }" />        
         </c:if>
         <c:if test="${login eq null}">
 	        <input type="hidden" id="loginAccountId" name="loginAccountId" value="-1" />        
-        </c:if>        
+        </c:if>
     </form>
 </div>
 
@@ -58,7 +58,8 @@
 	</div>
 </div>
  
-<script src="/resources/js/reply.js"></script>  
+<script src="/resources/js/reply.js"></script> 
+
  
 </body>
 </html>

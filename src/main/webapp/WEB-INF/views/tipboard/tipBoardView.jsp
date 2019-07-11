@@ -74,6 +74,9 @@
 		</div>
 		<br>
 	</div>
+	<div id="listReply">
+		<jsp:include page="../tipboard/tipBoardReply.jsp" flush="false"/>
+	</div>
 	<jsp:include page="../module/bottom.jsp" flush="false"/>
 
 </body>

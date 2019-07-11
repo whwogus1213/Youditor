@@ -34,7 +34,7 @@
 	</script>
 		<div align="center">
 			<br><br>
-			<h1>편집 팁</h1>
+			<h1>구인 구직</h1>
 			<br><br>
 		</div>
 		<hr>
@@ -78,6 +78,9 @@
 			</c:if>
 		</div>
 		<br>
+	</div>
+	<div id="listReply">
+		<jsp:include page="../recruitboard/recruitBoardReply.jsp" flush="false"/>
 	</div>
 	<jsp:include page="../module/bottom.jsp" flush="false"/>
 

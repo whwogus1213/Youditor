@@ -65,24 +65,20 @@ public class ReplyController {
 	}
 	
 	@RequestMapping(value = "/isReReply", method=RequestMethod.POST)
-	public int isReReply(ReplyVO vo, HttpServletRequest request) throws Exception{
-		System.out.println("isReReply : " + vo);
-		HttpSession session = request.getSession();
-		AccountsVO loginVO = (AccountsVO)session.getAttribute("login");
-		vo.setAccountId(loginVO.getAccountId());
+	public int isReReply(ReplyVO vo) throws Exception{
 		
 		/* 대댓글이 있으면 1 없으면 0 */
 		return service.isReReply(vo);
 	}
 	
-	@RequestMapping(value="/listAll", method = {RequestMethod.GET,RequestMethod.POST})
+	@RequestMapping(value="/listAll", method = RequestMethod.POST)
 	public List<ReplyVO> listComment(ReplyVO vo) throws Exception{
         
 		System.out.println("-----listComment : "+vo);
 
         // 해당 게시물 댓글
-        List<ReplyVO> replyList = service.listAll(vo.getBoardId());
-        
+        List<ReplyVO> replyList = service.listAll(vo);
+
         System.out.println(replyList);
         return replyList;
         
@@ -92,7 +88,7 @@ public class ReplyController {
 	public List<ReplyVO> reList(ReplyVO vo) throws Exception{
 		
 		// 해당 게시물 댓글
-		List<ReplyVO> rereplyList = service.reList(vo.getReplyCommentId());
+		List<ReplyVO> rereplyList = service.reList(vo);
 		
 		System.out.println(rereplyList);
 		return rereplyList;

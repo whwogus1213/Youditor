@@ -19,8 +19,8 @@ public class ReplyServiceImpl implements ReplyService {
 	
 	// 게시물 목록
 	@Override
-	public List<ReplyVO> listAll(int boardId) throws Exception {
-		return dao.listAll(boardId);
+	public List<ReplyVO> listAll(ReplyVO vo) throws Exception {
+		return dao.listAll(vo);
 	}
 
 	@Override
@@ -52,8 +52,8 @@ public class ReplyServiceImpl implements ReplyService {
 	}
 
 	@Override
-	public List<ReplyVO> reList(int replyCommentId) throws Exception {
-		return dao.reList(replyCommentId);
+	public List<ReplyVO> reList(ReplyVO vo) throws Exception {
+		return dao.reList(vo);
 	}
 
 }
