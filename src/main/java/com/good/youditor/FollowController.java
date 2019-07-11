@@ -40,7 +40,7 @@ public class FollowController {
 		
 		System.out.println(vo.getFollowAccountId());
 		model.addAttribute("followingList", followingList);
-
+		
 		System.out.println(followingList);
 		return "follow/followingList";
 	}
@@ -140,16 +140,16 @@ public class FollowController {
 	
 	// 팔로우 게시물 목록
 	@RequestMapping(value = "followBoardList")
-	public ModelAndView followBoardList(@RequestParam("followAccountId") int followAccountId) throws Exception {
+	public ModelAndView followBoardList(@RequestParam("followAccountId") int followAccountId, HttpServletRequest request) throws Exception {
 		System.out.println("팔로우 게시물 목록 시작");
 		System.out.println("   followAccountId   " + followAccountId);
 		
 		List<VideoBoardVO> VideoBoardList = videoBoardService.followBoardList(followAccountId);
 		
 		ModelAndView mv = new ModelAndView();
-//		mv.setViewName("follow/followBoardList");
 		mv.setViewName("videoboard/videoBoardList");
 		mv.addObject("VideoBoardList", VideoBoardList);
+		request.setAttribute("nickname", VideoBoardList.get(0).getNickname());
 		
 		System.out.println("팔로우 게시물 목록 끝");
 		return mv;

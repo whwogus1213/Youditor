@@ -26,9 +26,10 @@ public class TipBoardController {
 	// 게시물 목록 + 페이징 + 검색
 	@RequestMapping(value = "/tipBoardList", method = RequestMethod.GET)
 	public String list(Model model, @RequestParam(required = false, defaultValue = "1") int page,
-			@RequestParam(required = false, defaultValue = "1") int range,
-			@RequestParam(required = false, defaultValue = "object") String searchType,
-			@RequestParam(required = false) String keyword) throws Exception {
+						@RequestParam(required = false, defaultValue = "1") int range,
+						@RequestParam(required = false, defaultValue = "object") String searchType,
+						@RequestParam(required = false) String keyword) throws Exception {
+		
 		Search search = new Search();
 		search.setSearchType(searchType);
 		search.setKeyword(keyword);

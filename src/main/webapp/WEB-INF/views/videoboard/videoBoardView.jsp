@@ -269,7 +269,7 @@
 				});
 			});
 			var result = '${result}';
-			
+			/*
 			$(function(){
 				$('#deletebtn').click(function(){
 					if(confirm("정말 삭제하시겠습니까?")){
@@ -277,6 +277,7 @@
 					}
 				});
 			});
+			*/
 			$(function(){
 				
 				$('#notraiting').click(function(){

@@ -74,7 +74,7 @@ public class VideoBoardController {
 		} else if (category == 6) {
 			categoryName = "예능";
 		}
-		
+		request.setAttribute("categoryId", category);
 		request.setAttribute("categoryName", categoryName);
 		return mav;
 	}

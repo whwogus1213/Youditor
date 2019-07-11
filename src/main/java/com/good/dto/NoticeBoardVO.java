@@ -13,7 +13,8 @@ public class NoticeBoardVO {
 	private int viewCount;
 
 	private String nickname;
-
+	private String categoryName;
+	
 	public int getBoardId() {
 		return boardId;
 	}
@@ -85,6 +86,15 @@ public class NoticeBoardVO {
 
 	public final void setNickname(String nickname) {
 		this.nickname = nickname;
+	}
+
+	
+	public final String getCategoryName() {
+		return categoryName;
+	}
+
+	public final void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
 	}
 
 	@Override

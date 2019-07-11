@@ -56,8 +56,8 @@
 		var url = "${pageContext.request.contextPath}/videoboard/videoBoardList";
 
 		url = url + "?category=" + ${pagination.categoryId};
-		url = url + "&page=" + 1;
-		url = url + "&range=" + 1;
+		//url = url + "&page=" + 1;
+		//url = url + "&range=" + 1;
 		url = url + "&searchType=" + $('#searchType').val();
 		url = url + "&keyword=" + $('#keyword').val();
 
@@ -80,30 +80,46 @@
 	});
 	</script>
 	<jsp:include page="../module/top2.jsp" flush="false" />
+	<!-- 카테고리로 들어갔을 때 상단 -->
+	<% if (request.getAttribute("categoryId") != null) { %>
+		<div class="form-group">
+			<div class="col-sm-12">
+				<h2 align="center">&nbsp;</h2>
+				<h1 align="center">
+					<strong><%=request.getAttribute("categoryName")%></strong>
+				</h1>
+			</div>
+			<h5 align="center"><%=request.getAttribute("categoryName")%> 유투버들의 편집 영상입니다.</h5>
+			<div id="deleteOK" class="alert alert-danger hidden" role="alert" style="visibility: hidden">글이 삭제되었습니다.</div>
+		</div>
+	<!-- 팔로잉, 팔로워로 들어갔을 때 상단 -->
+	<% } else { %>
 	<div class="form-group">
 		<div class="col-sm-12">
 			<h2 align="center">&nbsp;</h2>
-			<h1 align="center"><strong><%=request.getAttribute("categoryName") %></strong></h1>
-			<h2 align="center">&nbsp;</h2>
+			<h1 align="center">
+				<strong><%=request.getAttribute("nickname") %>의 편집영상</strong>
+			</h1>
 		</div>
-		<h5 align="center"><%=request.getAttribute("categoryName") %> 유투버들의 편집 영상입니다.</h5>
-		<div id="deleteOK" class="alert alert-danger hidden" role="alert" style="visibility:hidden">글이 삭제되었습니다.</div>
 	</div>
-	
+	<% } %>
 	<div class="container">
-    	<!-- Marketing Icons Section -->
-    	
-    	<div class="row">
+		<!-- Marketing Icons Section -->
+		<h2 align="center">&nbsp;</h2>
+
+		<div class="row">
 			<c:forEach items="${VideoBoardList}" var="VideoBoardList">
-     		 <div class="col-lg-4 mb-4">
-        		<div class="card h-100" style="display:block">
-        			<div align="center">
-         				<h5 class="card-header" style="overflow:hidden; text-overflow: ellipsis; white-space:nowrap; width:100%; height: 50px">
-	         				<a href="/videoboard/videoBoardView?boardId=${VideoBoardList.boardId}">${VideoBoardList.subject}</a>
-	         			</h5>
-        			</div>
-          			<div class="card-body" align="center">
-						<script>
+				<div class="col-lg-4 mb-4">
+					<div class="card h-100" style="display: block">
+						<div align="center">
+							<h5 class="card-header"
+								style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; width: 100%; height: 50px">
+								<a
+									href="/videoboard/videoBoardView?boardId=${VideoBoardList.boardId}">${VideoBoardList.subject}</a>
+							</h5>
+						</div>
+						<div class="card-body" align="center">
+							<script>
 							var e = '${VideoBoardList.youtubeLink}';
 							var eArray  = e.split('/');
 							var youtubeID;
@@ -117,54 +133,54 @@
 							//document.write('<p>' + youtubeID + '</p>');
 							document.write('<img width="300" height="200" src="https://img.youtube.com/vi/' + youtubeID + '/mqdefault.jpg"></img>');
 						</script>
-          			</div>
-          			<div class="card-footer" align="left">
-          				<div class="row">
-          					<div class="col-sm-6" align="left">
-          						<strong>Made by.</strong>
-          					</div>
-          					<div class="col-sm-6" align="right">
-								${VideoBoardList.nickname}<br>
-          					</div>
-          				</div>
-          				<div class="row">
-          					<div class="col-sm-6" align="left">
-          						<strong>Date</strong> 
-          					</div>
-          					<div class="col-sm-6" align="right">
-								<fmt:formatDate value="${VideoBoardList.reg_date}" pattern="yyyy-MM-dd" /><br>
-          					</div>
-          				</div>
-          				<div class="row">
-          					<div class="col-sm-6" align="left">
-          						<strong>Views</strong>
-          					</div>
-          					<div class="col-sm-6" align="right">
-								${VideoBoardList.viewCount }<br>
-          					</div>
-          				</div>
-          				<div class="row">
-          					<div class="col-sm-6" align="left">
-          						<strong>Comments</strong>
-          					</div>
-          					<div class="col-sm-6" align="right">
-						 		${VideoBoardList.replyCount}
-          					</div>
-          				</div>
-          				<div class="row">
-          					<div class="col-sm-6" align="left">
-          						<strong>평점</strong>
-          					</div>
-          					<div class="col-sm-6" align="right">
-						 		${VideoBoardList.starCount}
-          					</div>
-          				</div>
-          			</div>
-        		</div>
-      		</div>
+						</div>
+						<div class="card-footer" align="left">
+							<div class="row">
+								<div class="col-sm-6" align="left">
+									<strong>Made by.</strong>
+								</div>
+								<div class="col-sm-6" align="right">
+									${VideoBoardList.nickname}<br>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-6" align="left">
+									<strong>Date</strong>
+								</div>
+								<div class="col-sm-6" align="right">
+									<fmt:formatDate value="${VideoBoardList.reg_date}"
+										pattern="yyyy-MM-dd" />
+									<br>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-6" align="left">
+									<strong>Views</strong>
+								</div>
+								<div class="col-sm-6" align="right">
+									${VideoBoardList.viewCount }<br>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-6" align="left">
+									<strong>Comments</strong>
+								</div>
+								<div class="col-sm-6" align="right">
+									${VideoBoardList.replyCount}</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-6" align="left">
+									<strong>평점</strong>
+								</div>
+								<div class="col-sm-6" align="right">
+									${VideoBoardList.starCount}</div>
+							</div>
+						</div>
+					</div>
+				</div>
 			</c:forEach>
-      	</div>
-      </div>
+		</div>
+	</div>
 	<h2 align="center">&nbsp;</h2>
 	<!-- 페이징 -->
 		<div id="paginationBox">
@@ -200,7 +216,7 @@
 				<select class="form-control form-control-sm" name="searchType" id="searchType" style="width:66.6%">
 					<option value="subject">제목</option>
 					<option value="object">본문</option>
-					<option value="nickname">작성자</option>
+					<option value="nickname">닉네임</option>
 				</select>
 			</div>
 			<div class="col-sm-4" align="right" >
