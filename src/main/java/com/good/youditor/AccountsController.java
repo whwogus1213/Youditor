@@ -132,23 +132,25 @@ public class AccountsController {
 
 		System.out.println(vo.getPicture());
 		System.out.println(vo.getUploadFile());
-		
-		MultipartFile uploadfile = vo.getUploadFile();
-		String savedName = uploadfile.getOriginalFilename();
-		UUID uid = UUID.randomUUID();
-		
-		//파일 이름 수정 후 저장
-		StringTokenizer pst = new StringTokenizer(savedName,".");
-		pst.nextToken();
-		String file_ext = pst.nextToken();
-		savedName = uid.toString().substring(0, 10) + "." + file_ext;	// 저장 이름
-		
-		// new File (디렉토리, 파일이름)
-		File target = new File(uploadPath, savedName);
-		
+		String savedName = "nothing.jpg";
+		if(!vo.getUploadFile().isEmpty()) {
+			MultipartFile uploadfile = vo.getUploadFile();
+			savedName = uploadfile.getOriginalFilename();
+			UUID uid = UUID.randomUUID();
+			
+			//파일 이름 수정 후 저장
+			StringTokenizer pst = new StringTokenizer(savedName,".");
+			pst.nextToken();
+			String file_ext = pst.nextToken();
+			savedName = uid.toString().substring(0, 10) + "." + file_ext;	// 저장 이름
+			
+			// new File (디렉토리, 파일이름)
+			File target = new File(uploadPath, savedName);
+			
+			FileCopyUtils.copy(uploadfile.getBytes(), target);
+		}
 		vo.setPicture(savedName);
 
-		FileCopyUtils.copy(uploadfile.getBytes(), target);
 		service.insertAccounts(vo);
 		System.out.println("============insertAccountsPro 성공==============");
 
