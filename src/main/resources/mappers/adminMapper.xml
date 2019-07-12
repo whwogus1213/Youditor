@@ -6,9 +6,9 @@
 <mapper namespace="com.good.mapper.adminMapper">
 	<!-- 계정 조회 -->
 	<select id="selectAccounts" resultType="AccountsVO">
-		SELECT @rownum:=@rownum+1 as no, accountId, email, nickname, authority, picture, footer, 
+		SELECT accountId, email, nickname, authority, picture, footer, 
 				CONVERT_TZ(ac.reg_date,'+09:00','+00:00') as reg_date, CONVERT_TZ(ac.mod_date,'+09:00','+00:00') as mod_date
-		FROM accounts ac, (SELECT @rownum:=0) TMP
+		FROM accounts ac
 		<trim prefix="WHERE" prefixOverrides="AND|OR">
 			<if test="searchType=='email' and keyword != null and keyword != '' ">
 				AND email like CONCAT('%', #{keyword}, '%')

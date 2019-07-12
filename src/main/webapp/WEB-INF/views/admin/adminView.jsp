@@ -6,9 +6,7 @@
 
 <!DOCTYPE html>
 <html>
-
 <head>
-
 <meta charset="UTF-8" />
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -16,7 +14,6 @@
 <meta name="author" content="">
 <title>YouditoR</title>
 <jsp:include page="../module/header.jsp" flush="false" />
-
 <script type="text/javascript">
 function authorUp(accountId, authority){
 	var json = {
@@ -111,7 +108,6 @@ $(document).on('click', '#btnSearch', function(e) {
 	<table class="table table-borderd table-striped nanum table-hover">
 		<thead>
 			<tr>
-				<th>번호</th>
 				<th>계정번호</th>
 				<th>이메일</th>
 				<th>닉네임</th>
@@ -123,7 +119,6 @@ $(document).on('click', '#btnSearch', function(e) {
 		<tbody>
 			<c:forEach items="${list}" var="list">
 				<tr>
-					<td>${list.no}</td>
 					<td>${list.accountId}</td>
 					<td>${list.email}</td>
 					<td>${list.nickname}</td>
