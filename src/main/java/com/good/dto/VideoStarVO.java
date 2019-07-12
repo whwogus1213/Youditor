@@ -9,6 +9,7 @@ public class VideoStarVO {
 	private int star;
 	private Date reg_date;
 	private String subject;
+	private float starCount;
 	
 	public int getStarId() {
 		return starId;
@@ -58,12 +59,22 @@ public class VideoStarVO {
 		this.subject = subject;
 	}
 
+	
+	public float getStarCount() {
+		return starCount;
+	}
+
+	public void setStarCount(float starCount) {
+		this.starCount = starCount;
+	}
+
 	@Override
 	public String toString() {
 		return "VideoStarVO [starId=" + starId + ", boardId=" + boardId + ", accountId=" + accountId + ", star=" + star
-				+ ", reg_date=" + reg_date + ", subject=" + subject + "]";
+				+ ", reg_date=" + reg_date + ", subject=" + subject + ", starCount=" + starCount + "]";
 	}
 
+	
 	
 	
 } // End - VideoStarVO

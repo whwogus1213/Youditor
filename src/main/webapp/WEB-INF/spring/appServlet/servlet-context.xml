@@ -49,6 +49,8 @@
             <exclude-mapping path="/follow"/>
             <exclude-mapping path="/follow/**"/>
             <exclude-mapping path="/echo"/>
+            <exclude-mapping path="/tipstar"/>
+            <exclude-mapping path="/tipstar/**"/>
             <beans:ref bean="authenticationInterceptor"/>
         </interceptor>
     </interceptors>

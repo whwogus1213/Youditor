@@ -45,6 +45,15 @@ public class AccountsController {
 	//servlet-context,xml에 선언한 bean을 참조
 	@Resource(name="uploadPath")
 	String uploadPath;// <== 공통으로 사용하기 위해서
+	
+	@ResponseBody
+	@RequestMapping(value = "/accountsList", method = {RequestMethod.GET,RequestMethod.POST})
+	public List<AccountsVO> list() throws Exception {
+		System.out.println("Start accounts List");
+		List<AccountsVO> list = service.selectAccounts();
+		System.out.println("List : " + list);
+		return list;
+	}
 
 	@RequestMapping(value = "/show", method = RequestMethod.GET)
 	public void show(Model model) throws Exception {

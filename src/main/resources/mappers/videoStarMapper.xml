@@ -32,7 +32,7 @@
 		<!-- select boardId, SUM(star) as starsum from videostar -->
 		<!-- WHERE boardId group by boardId ORDER BY SUM(star) DESC limit 5; -->
 
-		select a.boardId, b.subject, a.star
+		select a.boardId, b.subject, (select round(AVG(star),2) from videostar  where b.boardId = boardId) as starCount
 		from (select boardId, SUM(star) as star from videostar
 		WHERE boardId group by boardId ORDER BY SUM(star) DESC limit 5) a,
 		videoboard b
