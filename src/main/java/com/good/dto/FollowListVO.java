@@ -45,7 +45,7 @@ public class FollowListVO {
 	@Override
 	public String toString() {
 		return "FollowListVO [followAccountId=" + followAccountId + ", followerAccountId=" + followerAccountId
-				+ ", reg_date=" + reg_date + ", nickname=" + nickname + "]";
+				+ ", reg_date=" + reg_date + "]";
 	}
 
 } // End - FollowListVO

@@ -60,18 +60,6 @@ public class MessageDAOImpl implements MessageDAO {
 	public MessageList sendMessageView(int messageId) throws Exception {
 		return sqlSession.selectOne(NAMESPACE + ".sendMessageView", messageId);
 	}
-
-	// 답장시 답장보낼 메세지의 정보 취득
-	@Override
-	public MessageList getReplyInfo(int messageId) throws Exception {
-		return sqlSession.selectOne(NAMESPACE + ".getReplyInfo", messageId);
-	}
-	
-	// 닉네임으로 회원번호 취득
-	@Override
-	public int getAccountIdByNickname(String nickname) throws Exception {
-		return sqlSession.selectOne(NAMESPACE + ".getAccountIdByNickname", nickname);
-	}
 	
 	// 메세지 보내기
 	@Override

@@ -60,11 +60,11 @@ public class VideoBoardServiceImpl implements VideoBoardService {
 		return videoBoardDAO.followCheck(accountId, accountId2);
 	}
 
-//	// 팔로우 게시물 목록
-//	@Override
-//	public List<VideoBoardVO> followBoardList(int followAccountId) throws Exception {
-//		return videoBoardDAO.followBoardList(followAccountId);
-//	}
+	// 팔로우 게시물 목록
+	@Override
+	public List<VideoBoardVO> followBoardList(int followAccountId) throws Exception {
+		return videoBoardDAO.followBoardList(followAccountId);
+	}
 
 	// 게시물 갯수
 	@Override

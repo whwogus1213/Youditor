@@ -35,7 +35,7 @@
 				<c:forEach items="${followerList}" var="followerList">
 					<tr>
 						<td>
-							<a href="/videoboard/videoBoardList?searchType=nickname&keyword=${followerList.nickname }">${followerList.nickname}</a>
+							<a href="/follow/followBoardList?followAccountId=${followerList.followerAccountId }">${followerList.nickname}</a>
 						</td>
 						<td>
 							${followerList.followerAccountId }

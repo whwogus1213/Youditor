@@ -20,13 +20,11 @@
 <div align="center">
 	<div class="col-sm-12">
 		<h2 align="center">&nbsp;</h2>
-		<h1 align="center">보낸 메세지 읽기</h1>
+		<h1 align="center">보낸 메세지</h1>
 		<h2 align="center">&nbsp;</h2>
 	</div>
 	<div>
-		<button type="button" class="btn btn-sm btn-primary" onclick="location.href='/message/messageReceiveList' ">받은 메세지 보기</button>
-		&nbsp;|&nbsp;
-		<button type="button" class="btn btn-sm btn-primary" onclick="location.href='/message/messageSendList' ">보낸 메세지 보기</button>
+		<a href="/message/messageReceiveList">받은 메세지 보기</a>
 	</div>
 </div>
 <hr>
@@ -82,7 +80,7 @@
 			내용
 		</div>
 		<div class="col-sm-6" align="left">
-			<pre><c:out value="${rMessage.object }" /></pre>
+			${rMessage.object }
 		</div>
 	</div>
 	<hr>
@@ -93,13 +91,15 @@
 		</div>
 		<div class="col-sm-4"></div>
 		<div class="col-sm-2">
-			<button type="button" class="btn btn-sm btn-primary" onclick="location.href='/message/reply.do?messageId=${param.messageId}' ">답장</button>
+			<button type="button" class="btn btn-sm btn-primary" onclick="location.href='/message/messageReply' ">답장</button>
 			&nbsp;|&nbsp;
 			<button type="button" class="btn btn-sm btn-danger" onclick="location.href='/message/messagehideReceivedMessage' ">지우기</button>
 		</div>
 	</div>
 </div>
-<br>
+<div>
+	&nbsp;<br>
+</div>
 <jsp:include page="../module/bottom.jsp" flush="false"/>
 </body>
 </html>

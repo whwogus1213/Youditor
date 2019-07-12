@@ -31,6 +31,7 @@
 			data : json,
 			success : function(data) {
 				if (data == "success1") {
+					alert("팔로우가 취소되었습니다.");
 					console.log("ㅅㅅ");
 					tr.remove();
 					console.log("ㅛ");
@@ -68,7 +69,7 @@
 				<c:forEach items="${followingList}" var="followingList">
 					<tr>
 						<td>
-							<a href="/videoboard/videoBoardList?searchType=nickname&keyword=${followingList.nickname }">${followingList.nickname}</a>
+							<a href="/follow/followBoardList?followAccountId=${followingList.followAccountId }">${followingList.nickname}</a>
 						</td>
 						<td>
 							${followingList.followAccountId }

@@ -102,41 +102,35 @@ public class MessageController {
 	
 	// 메시지 쓰기
 	@RequestMapping(value = "/write.do", method = RequestMethod.GET)
-	public String writedo() throws Exception {
+	public ModelAndView writedo() throws Exception {
 		System.out.println("*************************************************");
-		
+
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("message/messageWrite");
 		System.out.println("MessageController messageWrite open");
-		return "message/messageWrite";
+		return mav;
 	}
 	
 	// 메시지 답장 쓰기
 	@RequestMapping(value = "/reply.do", method = RequestMethod.GET)
-	public String replydo(Model model, @RequestParam("messageId") int messageId) throws Exception {
+	public ModelAndView replydo(@RequestParam("messageId") int messageId) throws Exception {
 		System.out.println("*************************************************");
-		// senderAccountId로 nickname 추출, subject & object 추출
-		MessageList replyInfo = service.getReplyInfo(messageId);
-		
-		model.addAttribute("replyInfo", replyInfo);
-		System.out.println("MessageController messageWrite open");
-		return "message/messageWrite";
+		// MessageVO row = service.view(messageId);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("message/messageReply");
+		// mav.addObject("row", row);
+		System.out.println("MessageController messageReply open");
+		return mav;
 	}
 	
 	// 메시지 보내기
 	@RequestMapping(value = "/sendMessagePro", method = RequestMethod.POST)
-	public String sendMessagePro(@RequestParam("senderAccountId") int senderAccountId,
-								@RequestParam("nickname") String nickname,
-								@RequestParam("subject") String subject,
-								@RequestParam("object") String object) throws Exception {
+	public String sendMessagePro(MessageVO vo) throws Exception {
 		System.out.println("============sendMessagePro 성공==============");
-		MessageVO vo = new MessageList();
-		vo.setSenderAccountId(senderAccountId);
-		
-		int receiverAccountId = service.getAccountIdByNickname(nickname);
-		vo.setReceiverAccountId(receiverAccountId);
-		vo.setSubject(subject);
-		vo.setObject(object);
+		System.out.println(vo);
 		service.sendMessage(vo);
-		return "message/messageWritePro";
+
+		return "redirect:/";
 	}
 	
 	// 받은 메시지 숨기기
