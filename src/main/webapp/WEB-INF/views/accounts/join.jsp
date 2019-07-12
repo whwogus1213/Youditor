@@ -203,24 +203,25 @@
 				<h2 align="center">&nbsp;</h2>
 				<label class="control-label col-sm-3">사진</label>
 				<div class="col-sm-3">
-					<input type="file" class="form-control" name="uploadFile"  id="uploadFile">
+					<input type="file" class="form-control" name="uploadFile"  id="uploadFile" style="border:none">
 				</div>
-				<label class="col-sm-2">미리보기</label>
+				<label class="col-sm-2">미리보기<br>(용량: 10mb 미만)</label>
 				<div class="img_wrap">
 					<c:choose>
 				 		<c:when test="${empty uploadFile }">
 							<div>
-								<img id ="picture_ex" src = "/resources/images/profile/default_img.jpg" style = "border-radius:0%; padding-top : 10px; height:100px; width:100px;">
+								<img id ="picture_ex" src = "/resources/images/profile/default_img.jpg" class=" mx-auto rounded-circle" width="100px" height="100px">
 							</div>
 						</c:when>
 						<c:otherwise>
 							<div>
-								<img id="picture_ex" style="height:100px; width:100px" />
+								<img id="picture_ex" class=" mx-auto rounded-circle" width="40px" height="40px" />
 							</div>
 						</c:otherwise>
 					</c:choose>
 				</div>
 			</div>
+			<br>
 			<div class="form-inline">
 				<h2 align="center">&nbsp;</h2>
 				<label class="control-label col-sm-3">자기소개</label>
