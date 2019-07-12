@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.good.dto.AccountsVO;
 import com.good.dto.FollowListVO;
 import com.good.dto.VideoBoardVO;
+import com.good.dto.VideoCategoryVO;
 import com.good.service.FollowService;
 import com.good.service.VideoBoardService;
 
@@ -138,21 +139,24 @@ public class FollowController {
 		return fc;
 	}
 	
-	// 팔로우 게시물 목록
-	@RequestMapping(value = "followBoardList")
-	public ModelAndView followBoardList(@RequestParam("followAccountId") int followAccountId, HttpServletRequest request) throws Exception {
-		System.out.println("팔로우 게시물 목록 시작");
-		System.out.println("   followAccountId   " + followAccountId);
-		
-		List<VideoBoardVO> VideoBoardList = videoBoardService.followBoardList(followAccountId);
-		
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("videoboard/videoBoardList");
-		mv.addObject("VideoBoardList", VideoBoardList);
-		request.setAttribute("nickname", VideoBoardList.get(0).getNickname());
-		
-		System.out.println("팔로우 게시물 목록 끝");
-		return mv;
-	}	
+//	// 팔로우 게시물 목록
+//	@RequestMapping(value = "followBoardList")
+//	public ModelAndView followBoardList(@RequestParam("followAccountId") int followAccountId, HttpServletRequest request) throws Exception {
+//		System.out.println("팔로우 게시물 목록 시작");
+//		System.out.println("   followAccountId   " + followAccountId);
+//		
+//		
+//		List<VideoBoardVO> VideoBoardList = videoBoardService.followBoardList(followAccountId);
+//		
+//		
+//		
+//		ModelAndView mv = new ModelAndView();
+//		mv.setViewName("videoboard/videoBoardList");
+//		mv.addObject("VideoBoardList", VideoBoardList);
+//		request.setAttribute("nickname", VideoBoardList.get(0).getNickname());
+//		
+//		System.out.println("팔로우 게시물 목록 끝");
+//		return mv;
+//	}	
 
 }
