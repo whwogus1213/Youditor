@@ -84,7 +84,7 @@
 	
 	<!-- 최신 공지 사항 -->
 	<select id="rankList" resultType="NoticeBoardVO">
-		SELECT boardId, b.accountId, object, a.nickname
+		SELECT boardId, b.accountId, subject, a.nickname
 		FROM noticeboard b join accounts a on b.accountId = a.accountId
 		join noticecategory c on b.categoryId=c.categoryId
         order by b.reg_date DESC limit 5;

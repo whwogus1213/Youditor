@@ -199,6 +199,8 @@
 			receiverView = 0
 		WHERE
 			messageId = ${messageId}
+			AND
+			receiverView = 1
 	</update>
 	
 	<!-- 보낸 메세지 숨기기 -->
@@ -209,5 +211,7 @@
 			senderView = 0
 		WHERE
 			messageId = ${messageId}
+			AND
+			senderView = 1
 	</update>
 </mapper>

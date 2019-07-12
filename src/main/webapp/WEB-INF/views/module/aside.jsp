@@ -157,7 +157,7 @@ function getNoticeList(){
 				for(var i = 0; i < data.length; i++){
 						html += "<tr onclick=\"location.href='/noticeboard/noticeBoardView?boardId="+data[i].boardId+"'\" style='cursor:pointer;'>";
 						html += "<th scope='row'>"+(i+1)+"</th>";
-						html += "<td>"+data[i].object+"</td>";
+						html += "<td>"+data[i].subject+"</td>";
 						html += "<td>"+data[i].nickname+"</td>";
 						html += "</tr>";
 				}

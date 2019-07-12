@@ -68,110 +68,136 @@
 			}
 		})
 	</script>
+	<script type="text/javascript">
+		$(document).ready(function {
+			$("#hide").on("click", function() {
+				var param = "";
+				$(".mListForm :checked").each(function() {
+					if(param == "") {
+						param = "messageId=" + $(this).parent().children("#messageId").val();
+					} else {
+						param = "&messageId=" + $(this).parent().children("#messageId").val();
+					}
+				});
+
+				$.ajax({
+					url : '/message/hideSendMessage',
+					type : 'post',
+					data : param,
+					dataType : 'text',
+					success : function(data) {
+						console.log('return String : ' + data);
+					},
+					error : function() {
+						console.log(error);
+					}
+				});
+			});
+		});
+	</script>
 </head>
 <body>
-	<jsp:include page="../module/top2.jsp" flush="false"/>
-	<div align="center">
-		<div class="col-sm-12">
-			<h2 align="center">&nbsp;</h2>
-			<h1 align="center">보낸 메세지</h1>
-			<h2 align="center">&nbsp;</h2>
-		</div>
-		<div>
-			<button type="button" class="btn btn-sm btn-primary" onclick="location.href='/message/messageReceiveList' ">받은 메세지 보기</button>
-			&nbsp;|&nbsp;
-			<button type="button" class="btn btn-sm btn-success" onclick="location.href='/message/messageSendList' ">보낸 메세지 보기</button>
-		</div>
+<jsp:include page="../module/top2.jsp" flush="false"/>
+<div align="center">
+	<div class="col-sm-12">
+		<h2 align="center">&nbsp;</h2>
+		<h1 align="center">보낸 메세지</h1>
+		<h2 align="center">&nbsp;</h2>
 	</div>
-	<hr>
-	<div class="container" align="center">
-		<table>
-			<thead>
+	<div>
+		<button type="button" class="btn btn-sm btn-primary" onclick="location.href='/message/messageReceiveList' ">받은 메세지 보기</button>
+		&nbsp;|&nbsp;
+		<button type="button" class="btn btn-sm btn-success" onclick="location.href='/message/messageSendList' ">보낸 메세지 보기</button>
+	</div>
+</div>
+<hr>
+<div class="container" align="center">
+	<table>
+		<thead>
+			<tr>
+				<td>받는이</td>
+				<td>
+					<div style="overflow:hidden; text-overflow: ellipsis; white-space:nowrap; width:700px; height: 100%">제목</div>
+				</td>
+				<td>보낸 날짜</td>
+				<td>읽은 날짜</td>
+				<td><div><label><span class="glyphicon glyphicon-check"></span></label></div></td>
+			</tr>
+		</thead>
+		<tbody class="mListForm">
+			<c:forEach items="${MessageSendList }" var="MessageSendList">
 				<tr>
-					<td>받는이</td>
+					<td>${MessageSendList.nickname}</td>
 					<td>
-						<div style="overflow:hidden; text-overflow: ellipsis; white-space:nowrap; width:700px; height: 100%">제목</div>
+						<div style="overflow:hidden; text-overflow: ellipsis; white-space:nowrap; width:700px; height: 100%">
+						<a href="/message/messageSendView?messageId=${MessageSendList.messageId}">${MessageSendList.subject}</a>
+						</div>
 					</td>
-					<td>보낸 날짜</td>
-					<td>읽은 날짜</td>
-					<td><div><label><span class="glyphicon glyphicon-check"></span></label></div></td>
+					<td><fmt:formatDate value="${MessageSendList.send_date}" pattern="yyyy-MM-dd" /></td>
+					<td>
+						<c:if test="${empty MessageSendList.read_date }">
+							unread
+						</c:if>
+						<c:if test="${not empty MessageSendList.read_date}">
+							<fmt:formatDate value="${MessageSendList.read_date}" pattern="yyyy-MM-dd" />
+						</c:if>
+					</td>
+					<td><input type="checkbox" name="messageId" id="messageId" data-toggle="checkbox" value="${MessageSendList.messageId }"></td>
 				</tr>
-			</thead>
-			<tbody>
-				<c:forEach items="${MessageSendList }" var="MessageSendList">
-					<tr>
-						<td>${MessageSendList.nickname}</td>
-						<td>
-							<div style="overflow:hidden; text-overflow: ellipsis; white-space:nowrap; width:700px; height: 100%">
-							<a href="/message/messageSendView?messageId=${MessageSendList.messageId}">${MessageSendList.subject}</a>
-							</div>
-						</td>
-						<td><fmt:formatDate value="${MessageSendList.send_date}" pattern="yyyy-MM-dd" /></td>
-						<td>
-							<c:if test="${empty MessageSendList.read_date }">
-								unread
-							</c:if>
-							<c:if test="${not empty MessageSendList.read_date}">
-								<fmt:formatDate value="${MessageSendList.read_date}" pattern="yyyy-MM-dd" />
-							</c:if>
-						</td>
-						<td><input type="checkbox" name="messageId" id="messageId" value="${MessageSendList.messageId }"></td>
-					</tr>
-				</c:forEach>
-			</tbody>
-		</table>
-		<!-- 페이징 -->
-		<div id="paginationBox">
-			<ul class="pagination" style="display:table; margin-left:auto; margin-right: auto;">
-				<c:if test="${pagination.prev}">
-					<li class="page-item">
-						<a class="page-link" href="#"
-						onClick="fn_prev('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}')">Previous</a>
-					</li>
-				</c:if>
-				<c:forEach begin="${pagination.startPage}" end="${pagination.endPage}" var="idx">
-					<li class="page-item <c:out value="${pagination.page == idx ? 'active' : ''}"/> ">
-						<a class="page-link" href="#"
-						onClick="fn_pagination('${idx}', '${pagination.range}', '${pagination.rangeSize}')">${idx}</a>
-					</li>
-				</c:forEach>
-				<c:if test="${pagination.next}">
-					<li class="page-item">
-						<a class="page-link" href="#"
-						onClick="fn_next('${pagination.range}', '${pagination.range}',
-						'${pagination.rangeSize}')">Next</a>
-					</li>
-				</c:if>
-			</ul>
-		</div>
-		<!-- 페이징 -->
-		<hr>
-		<!-- 검색 -->
-		<div class="row input-group">
-			<div class="col-sm-2" align="center">
-				<button type="button" class="btn btn-sm btn-primary" onclick="location.href='/message/write.do' ">메세지 쓰기</button>
-			</div>
-			<div class="col-sm-2" align="right">
-				<select class="form-control form-control-sm" name="searchType" id="searchType" style="width:66.6%">
-					<option value="subject">제목</option>
-					<option value="object">본문</option>
-					<option value="accountId">보낸이</option>
-				</select>
-			</div>
-			<div class="col-sm-4" align="right" >
-				<input type="text" class="form-control form-control-sm" name="keyword" id="keyword" >
-			</div>
-			<div class="col-sm-1">
-				<button class="btn btn-sm btn-primary" name="btnSearch" id="btnSearch">검색</button>
-			</div>
-			<div class="col-sm-3" align="center">
-			<button type="button" class="btn btn-sm btn-primary"
-				onclick="location.href='/message/hideReceivedMessage' ">지우기</button>
-			</div>
-		</div>
-		<!-- 검색 -->
+			</c:forEach>
+		</tbody>
+	</table>
+	<!-- 페이징 -->
+	<div id="paginationBox">
+		<ul class="pagination" style="display:table; margin-left:auto; margin-right: auto;">
+			<c:if test="${pagination.prev}">
+				<li class="page-item">
+					<a class="page-link" href="#"
+					onClick="fn_prev('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}')">Previous</a>
+				</li>
+			</c:if>
+			<c:forEach begin="${pagination.startPage}" end="${pagination.endPage}" var="idx">
+				<li class="page-item <c:out value="${pagination.page == idx ? 'active' : ''}"/> ">
+					<a class="page-link" href="#"
+					onClick="fn_pagination('${idx}', '${pagination.range}', '${pagination.rangeSize}')">${idx}</a>
+				</li>
+			</c:forEach>
+			<c:if test="${pagination.next}">
+				<li class="page-item">
+					<a class="page-link" href="#"
+					onClick="fn_next('${pagination.range}', '${pagination.range}',
+					'${pagination.rangeSize}')">Next</a>
+				</li>
+			</c:if>
+		</ul>
 	</div>
-	<br>
-	<jsp:include page="../module/bottom.jsp" flush="false"/>
+	<!-- 페이징 -->
+	<hr>
+	<!-- 검색 -->
+	<div class="row input-group">
+		<div class="col-sm-2" align="center">
+			<button type="button" class="btn btn-sm btn-primary" onclick="location.href='/message/write.do' ">메세지 쓰기</button>
+		</div>
+		<div class="col-sm-2" align="right">
+			<select class="form-control form-control-sm" name="searchType" id="searchType" style="width:66.6%">
+				<option value="subject">제목</option>
+				<option value="object">본문</option>
+				<option value="accountId">보낸이</option>
+			</select>
+		</div>
+		<div class="col-sm-4" align="right" >
+			<input type="text" class="form-control form-control-sm" name="keyword" id="keyword" >
+		</div>
+		<div class="col-sm-1">
+			<button class="btn btn-sm btn-primary" name="btnSearch" id="btnSearch">검색</button>
+		</div>
+		<div class="col-sm-3" align="center">
+			<button class="btn btn-sm btn-primary" id="hide">지우기</button>
+		</div>
+	</div>
+	<!-- 검색 -->
+</div>
+<br>
+<jsp:include page="../module/bottom.jsp" flush="false"/>
 </body>
 </html>
