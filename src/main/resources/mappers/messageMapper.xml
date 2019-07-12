@@ -148,6 +148,30 @@
 			senderView = 1
 	</select>
 	
+	<!-- 답장시 답장할 메세지의 정보 취득 -->
+	<select id="getReplyInfo" parameterType="int" resultType="MessageList">
+		SELECT
+			senderAccountId, nickname, subject, object
+		FROM
+			message as m
+		JOIN
+			accounts as a
+		ON
+			m.receiverAccountId = a.accountId
+		WHERE
+			messageId = #{messageId} 
+	</select>
+	
+	<!-- 닉네임으로 회원번호 취득 -->
+	<select id="getAccountIdByNickname" parameterType="String" resultType="int">
+		SELECT
+			accountId
+		FROM
+			accounts
+		WHERE
+			nickname = #{nickname}
+	</select>
+	
 	<!-- 메시지 보내기 -->
 	<insert id="sendMessage" parameterType="messageVO">
 		INSERT INTO
