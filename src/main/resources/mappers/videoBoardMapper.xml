@@ -92,6 +92,7 @@
 	</select>
 	
 	<!-- 팔로우 게시물 목록 -->
+	<!-- 
 	<select id="followBoardList" resultType="VideoBoardVO" parameterType="int">
 		 select boardId, b.accountId, categoryId, subject, object, youtubeLink, 
 				CONVERT_TZ(b.reg_date,'+09:00','+00:00') as reg_date, CONVERT_TZ(b.mod_date,'+09:00','+00:00') as mod_date, viewCount,
@@ -101,7 +102,8 @@
 		 where b.accountId = a.accountId and b.accountId = #{followAccountId}
 		 order by boardId desc 
 	</select>
-	
+	 -->
+	 
 	<!-- 게시물 총 갯수 구하기 -->
 	<select id="getBoardListCnt" resultType="int">
 		select count(boardId)

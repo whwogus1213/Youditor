@@ -25,8 +25,9 @@
 		LIMIT #{startList}, #{listSize}	</select>
 	<!-- 게시물 조회 -->
 	<select id="view" parameterType="int" resultType="TipBoardVO">
-		select boardId, accountId, categoryId, subject, object, CONVERT_TZ(reg_date,'+09:00','+00:00') as reg_date, CONVERT_TZ(mod_date,'+09:00','+00:00') as mod_date, viewCount 
-		from tipboard
+		select boardId, accountId, categoryId, subject, object, CONVERT_TZ(reg_date,'+09:00','+00:00') as reg_date, CONVERT_TZ(mod_date,'+09:00','+00:00') as mod_date, viewCount,
+		(select round(AVG(star),2) from tipstar  where b.boardId = boardId) as starCount 
+		from tipboard b
 		where boardId = #{boardId}
 	</select>
 

@@ -11,6 +11,7 @@ public class TipBoardVO {
 	private Date reg_date;
 	private Date mod_date;
 	private int viewCount;
+	private float starCount;
 	
 	private String nickname;
 	private String categoryName;
@@ -96,11 +97,23 @@ public class TipBoardVO {
 		this.categoryName = categoryName;
 	}
 
+	
+	public float getStarCount() {
+		return starCount;
+	}
+
+	public void setStarCount(float starCount) {
+		this.starCount = starCount;
+	}
+
 	@Override
 	public String toString() {
 		return "TipBoardVO [boardId=" + boardId + ", accountId=" + accountId + ", categoryId=" + categoryId
 				+ ", subject=" + subject + ", object=" + object + ", reg_date=" + reg_date + ", mod_date=" + mod_date
-				+ ", viewCount=" + viewCount + ", nickname=" + nickname + "]";
+				+ ", viewCount=" + viewCount + ", starCount=" + starCount + ", nickname=" + nickname + ", categoryName="
+				+ categoryName + "]";
 	}
+
+	
 	
 } // End - public class TipBoardVO
