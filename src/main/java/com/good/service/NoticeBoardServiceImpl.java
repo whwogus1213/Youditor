@@ -60,4 +60,9 @@ public class NoticeBoardServiceImpl implements NoticeBoardService {
 	public void viewCount(int boardId) throws Exception {
 		noticeBoardDAO.viewCount(boardId);
 	}
+
+	@Override
+	public List<NoticeBoardVO> rankList() throws Exception {
+		return noticeBoardDAO.rankList();
+	}
 }

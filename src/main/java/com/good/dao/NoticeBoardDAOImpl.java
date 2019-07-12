@@ -63,4 +63,11 @@ public class NoticeBoardDAOImpl implements NoticeBoardDAO {
 		sqlSession.update(NAMESPACE + ".viewCount", boardId);
 	}
 
+	@Override
+	public List<NoticeBoardVO> rankList() throws Exception {
+		return sqlSession.selectList(NAMESPACE + ".rankList");
+	}
+	
+	
+
 }
