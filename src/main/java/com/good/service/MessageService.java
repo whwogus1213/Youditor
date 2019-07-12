@@ -29,6 +29,12 @@ public interface MessageService {
 	// 보낸 메세지 읽기
 	public MessageList sendMessageView(int messageId) throws Exception;
 	
+	// 답장시 답장보낼 메세지의 정보 취득
+	public MessageList getReplyInfo(int messageId) throws Exception;
+	
+	// 닉네임으로 회원번호 취득
+	public int getAccountIdByNickname(String nickname) throws Exception;
+	
 	// 메세지 보내기
 	public void sendMessage(MessageVO vo) throws Exception;
 	
