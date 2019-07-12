@@ -68,6 +68,33 @@
 			}
 		})
 	</script>
+	<script type="text/javascript">
+		$(document).ready(function {
+			$("#hide").on("click", function() {
+				var param = "";
+				$(".mListForm :checked").each(function() {
+					if(param == "") {
+						param = "messageId=" + $(this).parent().children("#messageId").val();
+					} else {
+						param = "&messageId=" + $(this).parent().children("#messageId").val();
+					}
+				});
+
+				$.ajax({
+					url : '/message/hideReceivedMessage',
+					type : 'post',
+					data : param,
+					dataType : 'text',
+					success : function(data) {
+						console.log('return String : ' + data);
+					},
+					error : function() {
+						console.log(error);
+					}
+				});
+			});
+		});
+	</script>
 </head>
 <body>
 <jsp:include page="../module/top2.jsp" flush="false"/>
@@ -97,7 +124,7 @@
 				<td><div><label><span class="glyphicon glyphicon-check"></span></label></div></td>
 			</tr>
 		</thead>
-		<tbody>
+		<tbody class="mListForm">
 			<c:forEach items="${MessageReceiveList }" var="MessageReceiveList">
 				<c:if test="${MessageReceiveList.receiverView == 1 }">
 					<tr>
@@ -116,7 +143,7 @@
 								<fmt:formatDate value="${MessageReceiveList.read_date}" pattern="yyyy-MM-dd" />
 							</c:if>
 						</td>
-						<td><input type="checkbox" name="messageId" id="messageId" value="${MessageReceiveList.messageId }"></td>
+						<td><input type="checkbox" name="messageId" id="messageId" data-toggle="checkbox" value="${MessageReceiveList.messageId }"></td>
 					</tr>
 				</c:if>
 			</c:forEach>
@@ -167,7 +194,7 @@
 			<button class="btn btn-sm btn-primary" name="btnSearch" id="btnSearch">검색</button>
 		</div>
 		<div class="col-sm-3" align="center">
-			<button type="button" class="btn btn-sm btn-primary" onclick="location.href='/message/hideReceivedMessage' ">지우기</button>
+			<button class="btn btn-sm btn-primary" id="hide">지우기</button>
 		</div>
 	</div>
 	<!-- 검색 -->
