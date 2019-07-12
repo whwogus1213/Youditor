@@ -13,8 +13,16 @@
 	이렇게 해야 한다.
 	-->
 
-	<select id="selectAccounts" resultType="AccountsVO">
-		SELECT * FROM accounts
+	<!-- 회원 랭킹 리스트 -->
+	<select id="selectAccounts" resultType="AccountsVO"
+		parameterType="map">
+		select vbvs.accountId, sum(star) as star, ac.nickname
+		from (select vb.boardId, vb.accountId, vs.star
+		from videoboard vb, videostar vs
+		where vb.boardId = vs.boardId) vbvs, accounts ac
+		where vbvs.accountId = ac.accountId
+		group by vbvs.accountId
+		order by star desc limit 5;
 	</select>
 
 	<!-- 회원 가입 -->

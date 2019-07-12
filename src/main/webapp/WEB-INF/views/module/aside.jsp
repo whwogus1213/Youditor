@@ -77,6 +77,7 @@ li {
 				$("#boardRank").html(html);
 				getTipStar();
 				getNoticeList();
+				getAccountsList();
 			},
 			error : function(data) {
 				alert('불러오기 실패');
@@ -170,6 +171,31 @@ function getNoticeList(){
 		}
 	});
 }
+function getAccountsList(){
+	$.ajax({
+		type : "POST",
+		url : "/accounts/accountsList",
+		success : function(data) {
+
+			var html = "";
+
+			if(data.length > 0) {
+				for(var i = 0; i < data.length; i++){
+						html += "<tr onclick=\"location.href='/noticeboard/noticeBoardView?boardId="+data[i].boardId+"'\" style='cursor:pointer;'>";
+						html += "<th scope='row'>"+(i+1)+"</th>";
+						html += "<td>"+data[i].nickname+"</td>";
+						html += "</tr>";
+				}
+			}
+
+			$("#accountsRank").html(html);
+
+		},
+		error : function(data) {
+			alert('불러오기 실패');
+		}
+	});
+}
 </script>
 
 <div class="container-fluid">
@@ -213,8 +239,7 @@ function getNoticeList(){
 			</div>
 			<div class="tab_item4">
 			<table class="table table-hover">
-				<tbody id="#">
-					4444444444
+				<tbody id="accountsRank">
 				</tbody>
 			</table>
 			</div>
