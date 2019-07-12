@@ -16,9 +16,17 @@ public class AuthenticationInterceptor extends HandlerInterceptorAdapter {
 		HttpSession session = request.getSession();
 		// login처리를 담당하는 사용자 정보를 담고 있는 객체를 가져옴
 		Object obj = session.getAttribute("login");
-
-		if (obj == null) {
+		Object objAdmin = session.getAttribute("loginAdmin");
+		
+		System.out.println(request.getRequestURI()+"                ####################");
+		if(request.getRequestURI().equals("/adminView")) {
+			if(objAdmin == null) {
+				response.sendRedirect("/admin");
+				return false; // 더이상 컨트롤러 요청으로 가지 않도록 false로 반환함
+			} 
+		} else if (obj == null) {
 			// 로그인이 안되어 있는 상태임으로 로그인 폼으로 다시 돌려보냄(redirect)
+			
 			response.sendRedirect("/accounts/login.do");
 			return false; // 더이상 컨트롤러 요청으로 가지 않도록 false로 반환함
 		}
