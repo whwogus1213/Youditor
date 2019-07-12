@@ -1,5 +1,6 @@
 package com.good.youditor;
 
+import java.util.List;
 import java.util.Locale;
 
 import javax.inject.Inject;
@@ -9,11 +10,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.good.dto.NoticeBoardVO;
 import com.good.dto.Search;
+import com.good.dto.VideoStarVO;
 import com.good.service.NoticeBoardService;
 
 @Controller
@@ -118,5 +121,14 @@ public class NoticeBoardController {
 		System.out.println("============ deleteVideoBoard 성공==============");
 
 		return "redirect:/noticeboard/noticeBoardList";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/newNotice", method = {RequestMethod.GET,RequestMethod.POST})
+	public List<NoticeBoardVO> rankList() throws Exception {
+		System.out.println("Start videostar List");
+		List<NoticeBoardVO> rankList = noticeBoardService.rankList();
+		System.out.println("List : " + rankList);
+		return rankList;
 	}
 }

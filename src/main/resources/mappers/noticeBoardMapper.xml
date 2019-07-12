@@ -81,5 +81,12 @@
 	<update id="viewCount">
 	UPDATE noticeBoard SET viewCount = viewCount+1 WHERE boardId=#{boardId}
 	</update>
-
+	
+	<!-- 최신 공지 사항 -->
+	<select id="rankList" resultType="NoticeBoardVO">
+		SELECT boardId, b.accountId, object, a.nickname
+		FROM noticeboard b join accounts a on b.accountId = a.accountId
+		join noticecategory c on b.categoryId=c.categoryId
+        order by b.reg_date DESC limit 5;
+	</select>
 </mapper>
