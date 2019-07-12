@@ -14,6 +14,8 @@ public class AccountsVO {
 	private Date mod_date;
 	private int authority;
 
+	private int no;
+	
 	public int getAccountId() {
 		return accountId;
 	}
@@ -84,6 +86,15 @@ public class AccountsVO {
 
 	public void setAuthority(int authority) {
 		this.authority = authority;
+	}
+
+	
+	public final int getNo() {
+		return no;
+	}
+
+	public final void setNo(int no) {
+		this.no = no;
 	}
 
 	@Override

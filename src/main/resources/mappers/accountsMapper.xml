@@ -13,10 +13,6 @@
 	이렇게 해야 한다.
 	-->
 
-	<select id="selectAccounts" resultType="AccountsVO">
-		SELECT * FROM accounts
-	</select>
-
 	<!-- 회원 가입 -->
 	<insert id="insertAccounts" parameterType="com.good.dto.AccountsVO">
 		INSERT INTO

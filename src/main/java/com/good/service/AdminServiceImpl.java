@@ -10,6 +10,7 @@ import com.good.dao.AccountsDAO;
 import com.good.dao.AdminDAO;
 import com.good.dto.AccountsVO;
 import com.good.dto.AdminVO;
+import com.good.dto.Search;
 
 @Service
 public class AdminServiceImpl implements AdminService {
@@ -17,9 +18,9 @@ public class AdminServiceImpl implements AdminService {
 	private AdminDAO dao;
 
 	@Override
-	public List<AccountsVO> selectAccounts() throws Exception {
+	public List<AccountsVO> selectAccounts(Search search) throws Exception {
 		// TODO Auto-generated method stub
-		return dao.selectAccounts();
+		return dao.selectAccounts(search);
 	}
 
 	@Override
@@ -44,7 +45,11 @@ public class AdminServiceImpl implements AdminService {
 			vo.setAuthority(vo.getAuthority() - 1);
 			dao.authorDown(vo);
 		}
+	}
 
+	@Override
+	public int getAccountListCnt(Search search) throws Exception {
+		return dao.getAccountListCnt(search);
 	}
 
 }

@@ -4,7 +4,36 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.good.mapper.adminMapper">
-
+	<!-- 계정 조회 -->
+	<select id="selectAccounts" resultType="AccountsVO">
+		SELECT @rownum:=@rownum+1 as no, accountId, email, nickname, authority, picture, footer, 
+				CONVERT_TZ(ac.reg_date,'+09:00','+00:00') as reg_date, CONVERT_TZ(ac.mod_date,'+09:00','+00:00') as mod_date
+		FROM accounts ac, (SELECT @rownum:=0) TMP
+		<trim prefix="WHERE" prefixOverrides="AND|OR">
+			<if test="searchType=='email' and keyword != null and keyword != '' ">
+				AND email like CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType=='nickname' and keyword != null and keyword != '' ">
+				AND nickname like CONCAT('%', #{keyword}, '%')
+			</if>
+		</trim>
+		LIMIT #{startList}, #{listSize}
+	</select>
+	
+	<!-- 계정 수 -->
+	<select id="getAccountListCnt" resultType="int">
+		select count(accountId)
+		from accounts  
+		 <trim prefix="WHERE" prefixOverrides="AND|OR">
+			<if test="searchType=='email' and keyword != null and keyword != '' ">
+				AND email like CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType=='nickname' and keyword != null and keyword != '' ">
+				AND nickname like CONCAT('%', #{keyword}, '%')
+			</if>
+		</trim>
+	</select>
+	
 	<select id="login" resultType="AdminVO">
         select * from admin where adminId = #{adminId} and adminPwd = #{adminPwd}
     </select>

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.good.dto.AccountsVO;
 import com.good.dto.AdminVO;
+import com.good.dto.Search;
 
 @Repository
 public class AdminDAOImpl implements AdminDAO {
@@ -19,8 +20,8 @@ public class AdminDAOImpl implements AdminDAO {
 	private static final String NAMESPACE = "com.good.mapper.adminMapper";
 
 	@Override
-	public List<AccountsVO> selectAccounts() throws Exception {
-		return sqlSession.selectList("com.good.mapper.accountsMapper.selectAccounts");
+	public List<AccountsVO> selectAccounts(Search search) throws Exception {
+		return sqlSession.selectList(NAMESPACE + ".selectAccounts", search);
 	}
 
 	@Override
@@ -36,6 +37,11 @@ public class AdminDAOImpl implements AdminDAO {
 	@Override
 	public void authorDown(AccountsVO vo) throws Exception {
 		sqlSession.update(NAMESPACE + ".authorUp", vo);
+	}
+
+	@Override
+	public int getAccountListCnt(Search search) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + ".getAccountListCnt", search);
 	}
 
 }
