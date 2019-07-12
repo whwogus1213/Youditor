@@ -181,7 +181,7 @@ function getAccountsList(){
 
 			if(data.length > 0) {
 				for(var i = 0; i < data.length; i++){
-						html += "<tr onclick=\"location.href='/noticeboard/noticeBoardView?boardId="+data[i].boardId+"'\" style='cursor:pointer;'>";
+						html += "<tr onclick=\"location.href='videoboard/videoBoardList?searchType=nickname&keyword="+data[i].nickname+"'\" style='cursor:pointer;'>";
 						html += "<th scope='row'>"+(i+1)+"</th>";
 						html += "<td>"+data[i].nickname+"</td>";
 						html += "</tr>";
