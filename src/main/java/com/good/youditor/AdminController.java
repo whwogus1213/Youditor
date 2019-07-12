@@ -34,15 +34,15 @@ public class AdminController {
 	public String AccountsList(HttpSession session, AdminVO mavo, Model model) throws Exception {
 
 		String returnURL = "";
-		if (session.getAttribute("login") != null) {
+		if (session.getAttribute("loginAdmin") != null) {
 			// 기존에 login이란 세션 값이 존재한다면
-			session.removeAttribute("login"); // 기존값을 제거해 준다.
+			session.removeAttribute("loginAdmin"); // 기존값을 제거해 준다.
 		}
 
 		AdminVO vo = service.login(mavo);
 
 		if (vo != null) { // 로그인 성공
-			session.setAttribute("login", vo);
+			session.setAttribute("loginAdmin", vo);
 			returnURL = "redirect:/adminView";
 		} else { // 로그인에 실패한 경우
 			returnURL = "redirect:/admin"; // 로그인 폼으로 다시 가도록 함
