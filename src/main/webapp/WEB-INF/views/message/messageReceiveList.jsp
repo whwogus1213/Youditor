@@ -78,7 +78,9 @@
 		<h2 align="center">&nbsp;</h2>
 	</div>
 	<div>
-		<a href="/message/messageSendList">보낸 메세지 보기</a>
+		<button type="button" class="btn btn-sm btn-success" onclick="location.href='/message/messageReceiveList' ">받은 메세지 보기</button>
+		&nbsp;|&nbsp;
+		<button type="button" class="btn btn-sm btn-primary" onclick="location.href='/message/messageSendList' ">보낸 메세지 보기</button>
 	</div>
 </div>
 <hr>
@@ -149,7 +151,7 @@
 	<!-- 검색 -->
 	<div class="row input-group">
 		<div class="col-sm-2" align="center">
-			<button type="button" class="btn btn-sm btn-primary" onclick="location.href='/message/messageWrite' ">메세지 쓰기</button>
+			<button type="button" class="btn btn-sm btn-primary" onclick="location.href='/message/write.do' ">메세지 쓰기</button>
 		</div>
 		<div class="col-sm-2" align="right">
 			<select class="form-control form-control-sm" name="searchType" id="searchType" style="width:66.6%">
@@ -170,6 +172,7 @@
 	</div>
 	<!-- 검색 -->
 </div>
+<br>
 <jsp:include page="../module/bottom.jsp" flush="false"/>
 </body>
 </html>
