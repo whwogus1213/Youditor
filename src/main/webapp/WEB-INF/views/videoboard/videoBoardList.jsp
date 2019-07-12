@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ page session="true"%>
 <!DOCTYPE html>
 <html>
@@ -125,7 +126,7 @@
 							var youtubeID;
 							youtubeID = eArray[3];
 							//document.write('<p>' + youtubeID + '</p>');
-							if(youtubeID.length > 100){
+							if(youtubeID.length > 11){
 								eArray = youtubeID.split("=");
 								youtubeID = eArray[1];
 								youtubeID = youtubeID.substr(0,11);
@@ -140,7 +141,7 @@
           						<strong>Made by.</strong>
           					</div>
           					<div class="col-sm-6" align="right">
-								${VideoBoardList.nickname}<br>
+								<img src="<spring:url value='/image/${VideoBoardList.picture}'/>" class=" mx-auto rounded-circle" width="20px" height="20px"/>&nbsp;${VideoBoardList.nickname}<br>
           					</div>
           				</div>
           				<div class="row">

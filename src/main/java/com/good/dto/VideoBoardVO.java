@@ -18,7 +18,8 @@ public class VideoBoardVO {
 	
 	private String nickname;
 	private String footer;
-
+	private String picture;
+	
 	public int getBoardId() {
 		return boardId;
 	}
@@ -129,6 +130,14 @@ public class VideoBoardVO {
 
 	public void setStarSelect(int starSelect) {
 		this.starSelect = starSelect;
+	}
+
+	public String getPicture() {
+		return picture;
+	}
+
+	public void setPicture(String picture) {
+		this.picture = picture;
 	}
 
 	@Override

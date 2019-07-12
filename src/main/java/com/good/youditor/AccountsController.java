@@ -126,12 +126,13 @@ public class AccountsController {
 		
 		MultipartFile uploadfile = vo.getUploadFile();
 		String savedName = uploadfile.getOriginalFilename();
+		UUID uid = UUID.randomUUID();
 		
 		//파일 이름 수정 후 저장
 		StringTokenizer pst = new StringTokenizer(savedName,".");
 		pst.nextToken();
 		String file_ext = pst.nextToken();
-		savedName = vo.getAccountId() + "." + file_ext;	// 저장 이름
+		savedName = uid.toString().substring(0, 10) + "." + file_ext;	// 저장 이름
 		
 		// new File (디렉토리, 파일이름)
 		File target = new File(uploadPath, savedName);
@@ -248,12 +249,30 @@ public class AccountsController {
 		vo.setPwd(pwdCfm);
 		vo.setNickname(nickname);
 		
+		AccountsVO login = (AccountsVO)session.getAttribute("login");
+		
+		//사진 파일 삭제
+		String filePath = uploadPath + "/"+  login.getPicture();
+		System.out.println(filePath);
+		File picture_old = new File(filePath);
+		if(picture_old.exists()) {
+			if(picture_old.delete()) {
+				System.out.println("기존 사진 삭제 성공");
+			} else {
+				System.out.println("기존 사진 삭제 실패");
+			}
+		} else {
+			System.out.println("기존에 사진이 없었습니다.");
+		}
+		
+		
+		//새로운 사진 등록
 		String savedName = picture.getOriginalFilename();
 		StringTokenizer pst = new StringTokenizer(savedName,".");
 		pst.nextToken();
 		String file_ext = pst.nextToken();
-		savedName = accountId + "." + file_ext;	// 저장 이름
-		
+		UUID uid = UUID.randomUUID();
+		savedName = uid.toString().substring(0, 16) + "." + file_ext;	// 저장 이름
 		// new File (디렉토리, 파일이름)
 		File target = new File(uploadPath, savedName);
 		
@@ -288,9 +307,24 @@ public class AccountsController {
 		vo.setEmail(email);
 		vo.setPwd(pwdCfm);
 		
+		//사진 파일 삭제
+		String filePath = uploadPath + "/"+  vo.getPicture();
+		File picture = new File(filePath);
+		if(picture.exists()) {
+			if(picture.delete()) {
+				System.out.println("사진 삭제 성공");
+			} else {
+				System.out.println("사진 삭제 실패");
+			}
+		} else {
+			System.out.println("사진이 없습니다.");
+		}
+		
 		service.deleteAccount(vo);
 		vo = service.login(vo);
 		int authority = vo.getAuthority(); 
+		
+		
 		if(authority == 0) {	// 탈퇴 성공
 			session.invalidate();
 			mav.setViewName("accounts/deleteAccount");

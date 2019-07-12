@@ -7,7 +7,7 @@
 	<select id="listAll" resultType="VideoBoardVO" parameterType="map">
        select boardId, b.accountId, b.categoryId, subject, object, youtubeLink, 
 				CONVERT_TZ(b.reg_date,'+09:00','+00:00') as reg_date, CONVERT_TZ(b.mod_date,'+09:00','+00:00') as mod_date, viewCount,
-				(select count(*) from videocomment where b.boardId = boardId) as replyCount	, ac.nickname,
+				(select count(*) from videocomment where b.boardId = boardId) as replyCount	, ac.nickname, ac.picture,
 				(select round(AVG(star), 2) from videostar  where b.boardId = boardId) as starCount
 		 from videoBoard b join accounts ac on b.accountId = ac.accountId
 		 <trim prefix="WHERE" prefixOverrides="AND|OR">
@@ -32,7 +32,7 @@
 	<select id="view" parameterType="int" resultType="VideoBoardVO">
 		select boardId, b.accountId, categoryId, subject, object, youtubeLink, 
 				CONVERT_TZ(b.reg_date,'+09:00','+00:00') as reg_date, CONVERT_TZ(b.mod_date,'+09:00','+00:00') as mod_date,
-				viewCount, (select count(*) from videocomment where b.boardId = boardId) as replyCount, ac.nickname, ac.footer, 
+				viewCount, (select count(*) from videocomment where b.boardId = boardId) as replyCount, ac.nickname, ac.footer, ac.picture,
 				(select round(AVG(star),2) from videostar  where b.boardId = boardId) as starCount
 		 from videoBoard b, accounts ac 
 		 where boardId = #{boardId} and b.accountId = ac.accountId

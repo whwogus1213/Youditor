@@ -15,6 +15,7 @@ public class ReplyVO {
 
 	private int countReply;
 	private String nickname;
+	private String picture;
 
 	public int getCommentId() {
 		return commentId;
@@ -94,6 +95,14 @@ public class ReplyVO {
 
 	public void setBoardClass(String boardClass) {
 		this.boardClass = boardClass;
+	}
+
+	public String getPicture() {
+		return picture;
+	}
+
+	public void setPicture(String picture) {
+		this.picture = picture;
 	}
 
 	@Override

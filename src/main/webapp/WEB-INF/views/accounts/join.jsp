@@ -205,7 +205,7 @@
 				<div class="col-sm-3">
 					<input type="file" class="form-control" name="uploadFile"  id="uploadFile">
 				</div>
-				<label class="col-sm-2">미리보거</label>
+				<label class="col-sm-2">미리보기</label>
 				<div class="img_wrap">
 					<c:choose>
 				 		<c:when test="${empty uploadFile }">
