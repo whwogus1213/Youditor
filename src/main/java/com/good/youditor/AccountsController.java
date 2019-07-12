@@ -269,7 +269,7 @@ public class AccountsController {
 		}
 		finally{
 			savedName = login.getPicture();
-			if(!login.getPicture().equals("nothing.jpg")) {
+			if(!login.getPicture().equals("nothing.jpg") && !picture.isEmpty()) {
 				String filePath = uploadPath + "/"+  login.getPicture();
 				System.out.println(filePath);
 				File picture_old = new File(filePath);
