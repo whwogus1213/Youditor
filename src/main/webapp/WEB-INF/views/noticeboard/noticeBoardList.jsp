@@ -144,7 +144,7 @@
 		</div>
 		<!-- 페이징 -->
 		<hr>
-	<!-- 검색 -->
+		<!-- 검색 -->
 		<div class="row input-group">
 			<div class="col-sm-2">
 			</div>
