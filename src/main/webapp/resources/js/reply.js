@@ -81,6 +81,7 @@ $(function(){
  */
  
 function getCommentList(){
+
 	var json = {
 			"boardId" : boardId,
 			"boardClass" : boardClass
@@ -114,11 +115,15 @@ function getCommentList(){
            
 //            var sessionAccountId = ${sessionScope.login};
            if(data.length > 0){
+
                
                for(i=0; i<data.length; i++){
-                   
                    html += "<div class='row' style='margin-top: 40px;' id = "+data[i].commentId+">";
-                   html += "<div class='col-1'><h4><strong>"+data[i].nickname+"</strong></h4></div>";
+                   html += "<div class='col-1' align='center'>";
+            	   html += "<img src=\"";
+            	   html += "/image/"+ data[i].picture;
+            	   html += "\" class=\" mx-auto rounded-circle\" width=\"40px\" height=\"40px\"/>";
+                   html += "<strong><h6>"+data[i].nickname+"</h6></strong></div>";
                    html += "<div class='col-11'><h4>"+data[i].object+"</h4></div>";
                    if(sessionAccountId > 0){
                        

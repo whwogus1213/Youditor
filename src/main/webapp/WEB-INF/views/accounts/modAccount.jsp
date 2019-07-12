@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%> 
 <%@ page session="true" %>
 <!DOCTYPE html>
 <html>
@@ -14,6 +15,31 @@
 	<jsp:include page="../module/header.jsp" flush="false"/>
 	<link href="/resources/css/modern-business.css" rel="stylesheet">
 	<script type="text/javascript">
+	// 변경될 사진을 미리 보여준다.
+	var sel_file;
+
+	$(document).ready(function(){
+		$("#picture").on("change", handleImgFileSelect);
+	});
+
+	function handleImgFileSelect(e) {
+		var files = e.target.files;
+		var filesArr = Array.prototype.slice.call(files);
+		filesArr.forEach(function(f){
+			if(!f.type.match("image.*")) {
+				alert("확장자는 이미지 확장자만 가능합니다.");
+				return;
+			}
+			sel_file = f;
+
+			var reader = new FileReader();
+			reader.onload = function(e) {
+				$("#profileImg").attr("src", e.target.result);
+			}
+			reader.readAsDataURL(f);
+		});
+	}
+	
 	function btnRePwd() {
 		var pwdCfm = $("#pwdCfm").val();
 		var pwd = $("#pwd").val();
@@ -65,7 +91,7 @@
 	<jsp:include page="../module/top2.jsp" flush="false"/>
 	<div align="center">
 		<c:if test="${login.accountId ne null }">
-			<form:form name="modForm" method="POST">
+			<form:form name="modForm" method="POST" enctype="multipart/form-data">
 				<table>
 					<tr>
 						<td>가입날자</td>
@@ -101,7 +127,25 @@
 					<tr>
 						<td>포트레이트</td>
 						<td>
-							차후구현예정<input type="hidden" name="picture" id="picture" value="${login.picture }">
+						 	<!-- name="picture"의 변수명과 컨트롤러의 MultipartFile file과 일치해야 한다. -->
+							<input type="file" name="picture" id="picture" value="${login.picture }">
+						 </td>
+					</tr>
+					<tr>
+						 <td>미리보기<br> (용량: 10mb미만)</td>
+						<td>
+							<c:choose>
+						 		<c:when test="${empty picture }">
+									<div>
+										<img id ="profileImg" src = "<spring:url value = '/image/${login.picture}'/>" class=" mx-auto rounded-circle" width="100px" height="100px">
+									</div>
+								</c:when>
+								<c:otherwise>
+									<div>
+										<img id="profileImg" class=" mx-auto rounded-circle" width="100px" height="100px"" />
+									</div>
+								</c:otherwise>
+							</c:choose>
 						</td>
 					</tr>
 					<tr>

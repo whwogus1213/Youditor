@@ -30,12 +30,12 @@
             <div>
             	<c:if test="${login.email != null }">
 
-				<div class="row">
+				<div class="table input-group">
 					<div class="col-1">
-						<h4>${login.nickname}</h4>
+						<img src="<spring:url value='/image/${login.picture}'/>" class=" mx-auto rounded-circle" width="40px" height="40px"/>
 					</div>
-                    <textarea class="col-11" style='resize:none;' rows="3" cols="20" id="object" name="object" placeholder="댓글을 입력하세요"></textarea>
-						<a href='#' onClick="fn_comment('${row.boardId }'); return false;" class="offset-11 col-1 pull-right btn btn-primary btn-lg" style="text-align:center;">등록</a>
+                    <textarea class="col-10" style='resize:none;' rows="3" cols="20" id="object" name="object" placeholder="댓글을 입력하세요"></textarea>
+					<button onClick="fn_comment('${row.boardId }'); return false;" class="col-1 pull-right btn btn-primary btn-lg" style="text-align:center;">등록</button>
 				</div>
 				</c:if>
             </div>

@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ page session="true"%>
 <!DOCTYPE html>
 <html>
@@ -115,7 +116,7 @@
 							var youtubeID;
 							youtubeID = eArray[3];
 							//document.write('<p>' + youtubeID + '</p>');
-							if(youtubeID.length > 100){
+							if(youtubeID.length > 11){
 								eArray = youtubeID.split("=");
 								youtubeID = eArray[1];
 								youtubeID = youtubeID.substr(0,11);
@@ -123,51 +124,51 @@
 							//document.write('<p>' + youtubeID + '</p>');
 							document.write('<img width="300" height="200" src="https://img.youtube.com/vi/' + youtubeID + '/mqdefault.jpg"></img>');
 						</script>
-						</div>
-						<div class="card-footer" align="left">
-							<div class="row">
-								<div class="col-sm-6" align="left">
-									<strong>Made by.</strong>
-								</div>
-								<div class="col-sm-6" align="right">
-									${VideoBoardList.nickname}<br>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-sm-6" align="left">
-									<strong>Date</strong>
-								</div>
-								<div class="col-sm-6" align="right">
-									<fmt:formatDate value="${VideoBoardList.reg_date}"
-										pattern="yyyy-MM-dd" />
-									<br>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-sm-6" align="left">
-									<strong>Views</strong>
-								</div>
-								<div class="col-sm-6" align="right">
-									${VideoBoardList.viewCount }<br>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-sm-6" align="left">
-									<strong>Comments</strong>
-								</div>
-								<div class="col-sm-6" align="right">
-									${VideoBoardList.replyCount}</div>
-							</div>
-							<div class="row">
-								<div class="col-sm-6" align="left">
-									<strong>평점</strong>
-								</div>
-								<div class="col-sm-6" align="right">
-									${VideoBoardList.starCount}</div>
-							</div>
-						</div>
-					</div>
-				</div>
+          			</div>
+          			<div class="card-footer" align="left">
+          				<div class="row">
+          					<div class="col-sm-6" align="left">
+          						<strong>Made by.</strong>
+          					</div>
+          					<div class="col-sm-6" align="right">
+								<img src="<spring:url value='/image/${VideoBoardList.picture}'/>" class=" mx-auto rounded-circle" width="20px" height="20px"/>&nbsp;${VideoBoardList.nickname}<br>
+          					</div>
+          				</div>
+          				<div class="row">
+          					<div class="col-sm-6" align="left">
+          						<strong>Date</strong> 
+          					</div>
+          					<div class="col-sm-6" align="right">
+								<fmt:formatDate value="${VideoBoardList.reg_date}" pattern="yyyy-MM-dd" /><br>
+          					</div>
+          				</div>
+          				<div class="row">
+          					<div class="col-sm-6" align="left">
+          						<strong>Views</strong>
+          					</div>
+          					<div class="col-sm-6" align="right">
+								${VideoBoardList.viewCount }<br>
+          					</div>
+          				</div>
+          				<div class="row">
+          					<div class="col-sm-6" align="left">
+          						<strong>Comments</strong>
+          					</div>
+          					<div class="col-sm-6" align="right">
+						 		${VideoBoardList.replyCount}
+          					</div>
+          				</div>
+          				<div class="row">
+          					<div class="col-sm-6" align="left">
+          						<strong>Rate</strong>
+          					</div>
+          					<div class="col-sm-6" align="right">
+						 		${VideoBoardList.starCount} / 5.0
+          					</div>
+          				</div>
+          			</div>
+        		</div>
+      		</div>
 			</c:forEach>
 		</div>
 	</div>

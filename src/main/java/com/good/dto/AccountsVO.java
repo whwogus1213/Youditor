@@ -2,6 +2,10 @@ package com.good.dto;
 
 import java.util.Date;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.web.multipart.MultipartFile;
 
 public class AccountsVO {
 	private int accountId;
@@ -13,6 +17,7 @@ public class AccountsVO {
 	private Date reg_date;
 	private Date mod_date;
 	private int authority;
+	private MultipartFile uploadFile;
 
 	public int getAccountId() {
 		return accountId;
@@ -85,6 +90,18 @@ public class AccountsVO {
 	public void setAuthority(int authority) {
 		this.authority = authority;
 	}
+	
+	public MultipartFile getUploadFile() {
+
+		return uploadFile;
+
+    }
+
+    public void setUploadFile(MultipartFile uploadFile) {
+
+    	this.uploadFile = uploadFile;
+
+    }
 
 	@Override
 	public String toString() {

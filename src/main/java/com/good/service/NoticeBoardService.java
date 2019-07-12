@@ -28,4 +28,6 @@ public interface NoticeBoardService {
 
 	// 조회수
 	public void viewCount(int boardId) throws Exception;
+	// 공지사항 랭킹
+	public List<NoticeBoardVO> rankList() throws Exception;
 }

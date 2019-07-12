@@ -17,7 +17,42 @@ li {
 	float: left;
 	background-color: #eee;
 }
+.tab_item1 {
+	display: none;
+}
+.tab_item2 {
+	display: none;
+}
+#best1:checked ~ #bestbtn1 {
+	background: white;
+    color: black;
+}
+#best2:checked ~ #bestbtn2 {
+	background: white;
+    color: black;
+}
+#best3:checked ~ #bestbtn3 {
+	background: white;
+    color: black;
+}
+#best4:checked ~ #bestbtn4 {
+	background: white;
+    color: black;
+}
+#best1 { display: none; }
+#best2 { display: none; }
+#best3 { display: none; }
+#best4 { display: none; }
 
+#best1 ~ .tab_item1 { display: none; }
+#best2 ~ .tab_item2 { display: none; }
+#best3 ~ .tab_item3 { display: none; }
+#best4 ~ .tab_item4 { display: none; }
+ 
+#best1:checked ~ .tab_item1 { display: block; }
+#best2:checked ~ .tab_item2 { display: block; }
+#best3:checked ~ .tab_item3 { display: block; }
+#best4:checked ~ .tab_item4 { display: block; }
 
 </style>
 <script type="text/javascript">
@@ -34,18 +69,24 @@ li {
 						html += "<tr onclick=\"location.href='/videoboard/videoBoardView?boardId="+data[i].boardId+"'\" style='cursor:pointer;'>";
 						html += "<th scope='row'>"+(i+1)+"</th>";
 						html += "<td>"+data[i].subject+"</td>";
-						html += "<td>"+data[i].star+"</td>";
+						html += "<td>"+data[i].starCount+"</td>";
 						html += "</tr>";
 					}
 				}
 
 				$("#boardRank").html(html);
-
+				getTipStar();
+				getNoticeList();
+				getAccountsList();
 			},
 			error : function(data) {
 				alert('불러오기 실패');
 			}
+			
 		});
+		
+		
+			
 		var $win = $(window);
 		var top = $(window).scrollTop();
 
@@ -78,6 +119,83 @@ li {
 			})
 		});
 	});
+function getTipStar(){
+	$.ajax({
+		type : "POST",
+		url : "/tipstar/StarList",
+		success : function(data) {
+
+			var html = "";
+
+			if(data.length > 0) {
+				for(var i = 0; i < data.length; i++){
+						html += "<tr onclick=\"location.href='/tipboard/tipBoardView?boardId="+data[i].boardId+"'\" style='cursor:pointer;'>";
+						html += "<th scope='row'>"+(i+1)+"</th>";
+						html += "<td>"+data[i].subject+"</td>";
+						html += "<td>"+data[i].starCount+"</td>";
+						html += "</tr>";
+				}
+			}
+
+			$("#tipBoardRank").html(html);
+
+		},
+		error : function(data) {
+			alert('불러오기 실패');
+		}
+	});
+}
+function getNoticeList(){
+	$.ajax({
+		type : "POST",
+		url : "/noticeboard/newNotice",
+		success : function(data) {
+
+			var html = "";
+
+			if(data.length > 0) {
+				for(var i = 0; i < data.length; i++){
+						html += "<tr onclick=\"location.href='/noticeboard/noticeBoardView?boardId="+data[i].boardId+"'\" style='cursor:pointer;'>";
+						html += "<th scope='row'>"+(i+1)+"</th>";
+						html += "<td>"+data[i].subject+"</td>";
+						html += "<td>"+data[i].nickname+"</td>";
+						html += "</tr>";
+				}
+			}
+
+			$("#noticeBoardRank").html(html);
+
+		},
+		error : function(data) {
+			alert('불러오기 실패');
+		}
+	});
+}
+function getAccountsList(){
+	$.ajax({
+		type : "POST",
+		url : "/accounts/accountsList",
+		success : function(data) {
+
+			var html = "";
+
+			if(data.length > 0) {
+				for(var i = 0; i < data.length; i++){
+						html += "<tr onclick=\"location.href='videoboard/videoBoardList?searchType=nickname&keyword="+data[i].nickname+"'\" style='cursor:pointer;'>";
+						html += "<th scope='row'>"+(i+1)+"</th>";
+						html += "<td>"+data[i].nickname+"</td>";
+						html += "</tr>";
+				}
+			}
+
+			$("#accountsRank").html(html);
+
+		},
+		error : function(data) {
+			alert('불러오기 실패');
+		}
+	});
+}
 </script>
 
 <div class="container-fluid">
@@ -98,14 +216,33 @@ li {
 						<th colspan="1"><label id="bestbtn3" for="best4">유저</label></th>
 					</tr>
 				</table>
+			<div class="tab_item1">
 			<table class="table table-hover">
-			
 				<tbody id="boardRank">
 					
-
 				</tbody>
 			</table>
-
+			</div>
+			
+			<div class="tab_item2">
+			<table class="table table-hover">
+				<tbody id="tipBoardRank">
+					
+				</tbody>
+			</table>
+			</div>
+			<div class="tab_item3">
+			<table class="table table-hover">
+				<tbody id="noticeBoardRank">
+				</tbody>
+			</table>
+			</div>
+			<div class="tab_item4">
+			<table class="table table-hover">
+				<tbody id="accountsRank">
+				</tbody>
+			</table>
+			</div>
 
 		</div>
 	</div>

@@ -3,6 +3,7 @@
 <%@ page session="true" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html>
 <html>
 
@@ -301,7 +302,7 @@
 			<c:if test="${login.email eq null}">
 				로그인 후 평가 가능
 			</c:if>
-		<h5 align="right">등록일 &nbsp;&nbsp; <fmt:formatDate value="${row.reg_date}" pattern="yyyy년 MM월 dd일  hh:mm:ss" /></h5>
+		<h5 align="right">등록일 &nbsp;&nbsp; <fmt:formatDate value="${row.reg_date}" pattern="yyyy년 MM월 dd일  HH:mm:ss" /></h5>
 		<c:if test="${login.email ne null}">
 		<c:if test="${login.accountId ne row.accountId}">
 		
@@ -313,7 +314,7 @@
 		</c:if>
 		<div align="right">총 점수 ${row.starCount}</div>
 		<hr>
-		<h6><strong>${row.nickname }</strong><br><br>${row.footer }</h6>
+		<h5><img src="<spring:url value='/image/${row.picture}'/>" class=" mx-auto rounded-circle" width="40px" height="40px"/><strong>&nbsp;&nbsp;${row.nickname }</strong></h5><br><br><h6>${row.footer }</h6>
 		<%-- 	<h1>${row.youtubeLink }</h1> --%>
 		<!-- 디자인 필요 -->
 		<div align="right">

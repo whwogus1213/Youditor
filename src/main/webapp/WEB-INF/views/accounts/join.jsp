@@ -1,10 +1,13 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ page session="true" %>
 <!DOCTYPE html>
 <html>
-<head>  <meta charset="UTF-8" />
+<head>
+	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
 	<meta name="description" content="">
 	<meta name="author" content="">
@@ -22,24 +25,22 @@
 		var sel_file;
 
 		$(document).ready(function(){
-			$("#picture").on("change", handleImgFileSelect);
+			$("#uploadFile").on("change", handleImgFileSelect);
 		});
 
 		function handleImgFileSelect(e) {
 			var files = e.target.files;
 			var filesArr = Array.prototype.slice.call(files);
-
 			filesArr.forEach(function(f){
 				if(!f.type.match("image.*")) {
 					alert("확장자는 이미지 확장자만 가능합니다.");
 					return;
 				}
-
 				sel_file = f;
 
 				var reader = new FileReader();
 				reader.onload = function(e) {
-					$("#profileImg").attr("src", e.target.result);
+					$("#picture_ex").attr("src", e.target.result);
 				}
 				reader.readAsDataURL(f);
 			});
@@ -103,7 +104,7 @@
   						//닉네임이 존재할 경우 빨강으로 , 아니면 파랑으로 처리하는 디자인
   						$("#divInputNickname").addClass("has-success")
   						$("#divInputNickname").removeClass("has-error")
-  						$("#picture").focus();
+  						$("#uploadFile").focus();
   						//닉네임이 중복하지 않으면  isCheckEmail = 1
   						isCheckNickname = 1;
   			        }
@@ -137,8 +138,8 @@
         		$("#nickname").focus();
   			return false;
         	} else {
-          		alert("회원가입을 축하합니다");
           		$("#frm").submit();
+          		alert("회원가입을 축하합니다");
         	}
       	}
   	}
@@ -161,7 +162,7 @@
 		</div>
 	</div>
 	<div class="container">
-		<form class="form-horizontal" id="frm" method="post" name="memInsForm"
+		<form:form  id="frm" method="post" enctype="multipart/form-data" name="memInsForm"
 		action="${path}/accounts/insertAccountsPro">
 
 			<div class="form-inline">
@@ -202,24 +203,25 @@
 				<h2 align="center">&nbsp;</h2>
 				<label class="control-label col-sm-3">사진</label>
 				<div class="col-sm-3">
-					<input type="file" name="picture"  id="picture">
+					<input type="file" class="form-control" name="uploadFile"  id="uploadFile" style="border:none">
 				</div>
-				<label class="col-sm-2">미리보기</label>
+				<label class="col-sm-2">미리보기<br>(용량: 10mb 미만)</label>
 				<div class="img_wrap">
 					<c:choose>
-				 		<c:when test="${empty picture }">
+				 		<c:when test="${empty uploadFile }">
 							<div>
-								<img id ="profileImg" src = "/resources/images/profile/default_img.jpg" style = "border-radius:0%; padding-top : 10px; height:100px; width:100px;">
+								<img id ="picture_ex" src = "/resources/images/profile/default_img.jpg" class=" mx-auto rounded-circle" width="100px" height="100px">
 							</div>
 						</c:when>
 						<c:otherwise>
 							<div>
-								<img id="profileImg" style="height:100px; width:100px" />
+								<img id="picture_ex" class=" mx-auto rounded-circle" width="40px" height="40px" />
 							</div>
 						</c:otherwise>
 					</c:choose>
 				</div>
 			</div>
+			<br>
 			<div class="form-inline">
 				<h2 align="center">&nbsp;</h2>
 				<label class="control-label col-sm-3">자기소개</label>
@@ -265,7 +267,7 @@
 					다시 작성</button>
 				</div>
 			</div>
-		</form>
+		</form:form>
 	</div>
 
 	<jsp:include page="../module/bottom.jsp" flush="false"/>
