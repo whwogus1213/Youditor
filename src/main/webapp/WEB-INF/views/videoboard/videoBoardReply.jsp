@@ -53,12 +53,17 @@
 </div>
 
 
-<div class="container">
-	<div id="commentList">
+	<div class="container">
+		<div id="commentList">
+			<div class="text-center">
+				<div class="spinner-border" role="status">
+					<span class="sr-only">Loading...</span>
+				</div>
+			</div>
+		</div>
 	</div>
-</div>
- 
-<script src="/resources/js/reply.js"></script>  
+	
+	<script src="/resources/js/reply.js"></script>  
  
 </body>
 </html>
