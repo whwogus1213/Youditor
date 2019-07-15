@@ -155,7 +155,7 @@ a {
 										<img src="<spring:url value='/image/${VideoBoardList.picture}'/>" class=" mx-auto rounded-circle" width="20px" height="20px"/>&nbsp;${VideoBoardList.nickname}<br>
           							</a>
           							<div class="dropdown-menu">
-          								<a class="dropdown-item" href="#">
+          								<a class="dropdown-item" href="/videoboard/videoBoardList?searchType=nickname&keyword=${VideoBoardList.nickname}">
           									<img alt="more" src="/resources/images/icon/more.png" width="20" height="20">
           									영상 더보기
           								</a>
@@ -240,8 +240,8 @@ a {
 				<li
 					class="page-item <c:out value="${pagination.page == idx ? 'active' : ''}"/> ">
 					<a class="page-link" href="#"
-					onClick="fn_pagination('${idx}', '${pagination.range}', '${pagination.rangeSize}',
-						'${pagination.searchType}', '${pagination.keyword}')">${idx}</a>
+						onClick="fn_pagination('${idx}', '${pagination.range}', '${pagination.rangeSize}',
+						 '${pagination.categoryId}', '${pagination.searchType}', '${pagination.keyword}')">${idx}</a>
 				</li>
 			</c:forEach>
 			<c:if test="${pagination.next}">
