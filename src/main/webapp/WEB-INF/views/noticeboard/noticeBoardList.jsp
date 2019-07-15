@@ -126,11 +126,11 @@
 
 		<!-- 페이징 -->
 		<div id="paginationBox">
-			<ul class="pagination" style="margin-left: auto; margin-right: auto;">
+			<ul class="pagination">
 				<c:if test="${pagination.prev}">
 					<li class="page-item"><a class="page-link" href="#"
 						onClick="fn_prev('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}',
-						'${pagination.searchType}', '${pagination.keyword}')">Previous</a>
+						'${pagination.searchType}', '${pagination.keyword}')">Pre</a>
 					</li>
 				</c:if>
 				<c:forEach begin="${pagination.startPage}"
@@ -148,11 +148,44 @@
 						'${pagination.searchType}', '${pagination.keyword}')">Next</a>
 					</li>
 				</c:if>
+
+				<!-- 검색 -->
+				<div class="row input-group">
+					<div class="col-sm-2" align="right">
+						<select class="form-control form-control-sm" name="searchType"
+							id="searchType" style="width: 66.6%">
+							<option value="subject">제목</option>
+							<option value="object">본문</option>
+							<option value="nickname">닉네임</option>
+						</select>
+					</div>
+					<div class="col-sm-6" align="right">
+						<input type="text" class="form-control form-control-sm"
+							name="keyword" id="keyword">
+					</div>
+					<div class="col-sm-2">
+						<button class="btn btn-sm btn-primary" name="btnSearch"
+							id="btnSearch">검색</button>
+					</div>
+					<div class="col-sm-2" align="right">
+						<c:if test="${login.email != null}">
+							<c:if test="${login.authority == 5}">
+								<button type="button" class="btn btn-sm btn-primary" 
+									onclick="location.href='/noticeboard/write.do' ">글쓰기</button>
+							</c:if>
+						</c:if>
+					</div>
+				</div>
+				<!-- 검색 -->
 			</ul>
 		</div>
 		<!-- 페이징 -->
-		<hr>
+
+
+
+
 		<!-- 검색 -->
+		<!-- 
 		<div class="row input-group">
 			<div class="col-sm-2"></div>
 			<div class="col-sm-2" align="right">
@@ -180,6 +213,7 @@
 				</c:if>
 			</div>
 		</div>
+		 -->
 		<!-- 검색 -->
 
 	</div>
