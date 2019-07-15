@@ -36,7 +36,7 @@
 	      </ol>
 	      <div class="carousel-inner" role="listbox">
 	
-	        <div class="carousel-item active" style="background-image: url('../resources/images/main_img1.jpg')">
+	        <div class="carousel-item active" style="background-image: url('../resources/images/main_img1.png')">
 	          <div class="carousel-caption d-none d-md-block">
 	            <h3 style="color:black">YouDitor은 무슨 뜻인가요?</h3>
 	            <p style="color:black">YouDitor 는 Youtube와 Editor의 합성어입니다.</p>
@@ -45,12 +45,12 @@
 	
 	        <div class="carousel-item" style="background-image: url('../resources/images/main_img2.jpg')">
 	          <div class="carousel-caption d-none d-md-block">
-	            <h3 style="color:gray">YouDitor은 어떤 곳인가요?</h3>
-	            <p style="color:gray">YouDitor은 Youtube 편집자들을 위한 커뮤니티입니다.</p>
+	            <h3 style="color:white">YouDitor은 어떤 곳인가요?</h3>
+	            <p style="color:white">YouDitor은 Youtube 편집자들을 위한 커뮤니티입니다.</p>
 	          </div>
 	        </div>
 	
-	        <div class="carousel-item" style="background-image: url('../resources/images/main_img.jpg')">
+	        <div class="carousel-item" style="background-image: url('../resources/images/main_img3.jpg')">
 	          <div class="carousel-caption d-none d-md-block">
 	            <h3 style="color:black">YouDitor에서는 무엇을 할 수 있나요?</h3>
 	            <p style="color:black">다양한 YouDitor들과 당신의 결과물에 대해 토론하고 Creator와 협업할 수 있습니다.</p>
@@ -71,7 +71,7 @@
   <jsp:include page="./module/aside.jsp" flush="false"/>
   <div class="container">
 
-    <h1 class="my-4"><span class="oi oi-video"></span> 핫한 편집 영상</h1>
+    <h1 class="my-4">핫한 편집 영상</h1>
 
     <!-- Marketing Icons Section -->
     <div class="row">
@@ -115,7 +115,7 @@
     <!-- /.row -->
 
     <!-- 편집자 프로필 -->
-    <h2><span class="oi oi-badge"></span> 이번주 편집자 탑3</h2>
+    <h2>이번주 편집자 탑3</h2>
 
     <div class="row">
       <div class="col-lg-4 col-sm-6 portfolio-item">
