@@ -128,7 +128,7 @@ li {
 
 		//스크롤 이벤트가 발생하면
 		$(window).scroll(function() {
-			yPosition = $win.scrollTop() - 400; //이부분을 조정해서 화면에 보이도록 맞추세요
+			yPosition = $win.scrollTop() - 180; //이부분을 조정해서 화면에 보이도록 맞추세요
 			if (yPosition < 0) {
 				yPosition = 0;
 			}

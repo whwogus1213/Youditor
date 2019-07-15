@@ -28,6 +28,13 @@ a {
 /* 		opacity: 0.3; */
 /* 		filter: alpha(opacity=30); */
 	}
+	.container {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: 0;
+	}
 </style>
 </head>
 <body>
@@ -112,6 +119,7 @@ a {
 	</div>
 	
 	<div class="container">
+  <jsp:include page="../module/VideoBoardListAside.jsp" flush="false"/>
 		<!-- Marketing Icons Section -->
 		<h2 align="center">&nbsp;</h2>
 

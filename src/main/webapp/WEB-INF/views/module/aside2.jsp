@@ -16,6 +16,7 @@
 			border: 1px solid black;
 			float: left;
 			background-color: #777;
+			border: solid 3px rgba(255, 0, 0, 0.5);
 		}
 		#best { display: none; }
 		#weekbest { display: none; }
@@ -60,7 +61,14 @@
             border: 0.1px solid black;
             background-color: blue;
         }
-        
+        .table .thead-dark th {
+	    color: rgb(255, 255, 255);
+	    background-color: rgba(255, 0, 0);
+		border: 2px solid #FFFFFF;
+		}
+		label {
+	    text-align: center;
+		}
 </style>
 <script type="text/javascript">
 		$(function(){
