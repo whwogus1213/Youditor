@@ -120,10 +120,9 @@ a {
 				<div class="col-lg-4 mb-4">
 					<div class="card h-100" style="display: block;">
 						<div align="center">
-							<h5 class="card-header"
-								style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; width: 100%; height: 50px">
-								<a
-									href="/videoboard/videoBoardView?boardId=${VideoBoardList.boardId}">${VideoBoardList.subject}</a>
+							<h5 class="card-header" onclick="location.href='/videoboard/videoBoardView?boardId=${VideoBoardList.boardId}'"
+								style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; width: 100%; height: 50px; cursor: pointer;">
+								${VideoBoardList.subject}
 							</h5>
 						</div>
 						<div class="card-body" align="center" style="margin: 0; border: 0; padding: 0;">
