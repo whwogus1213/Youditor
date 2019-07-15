@@ -261,36 +261,49 @@ public class AccountsController {
 		vo.setNickname(nickname);
 		
 		AccountsVO login = (AccountsVO)session.getAttribute("login");
-		
-		//사진 파일 삭제
-		String filePath = uploadPath + "/"+  login.getPicture();
-		System.out.println(filePath);
-		File picture_old = new File(filePath);
-		if(picture_old.exists()) {
-			if(picture_old.delete()) {
-				System.out.println("기존 사진 삭제 성공");
-			} else {
-				System.out.println("기존 사진 삭제 실패");
-			}
-		} else {
-			System.out.println("기존에 사진이 없었습니다.");
+		//기본 사진이 아닌 경우사진 파일 삭제
+		String savedName = "";
+		try {login.getPicture().isEmpty();}
+		catch(Exception e){
+			login.setPicture("nothing.jpg");
 		}
-		
-		
+		finally{
+			savedName = login.getPicture();
+			if(!login.getPicture().equals("nothing.jpg") && !picture.isEmpty()) {
+				String filePath = uploadPath + "/"+  login.getPicture();
+				System.out.println(filePath);
+				File picture_old = new File(filePath);
+				if(picture_old.exists()) {
+					if(picture_old.delete()) {
+						System.out.println("기존 사진 삭제 성공");
+					} else {
+						System.out.println("기존 사진 삭제 실패");
+					}
+				} else {
+					System.out.println("기존에 사진이 없었습니다.");
+				}
+				
+			}
+		}
+
 		//새로운 사진 등록
-		String savedName = picture.getOriginalFilename();
-		StringTokenizer pst = new StringTokenizer(savedName,".");
-		pst.nextToken();
-		String file_ext = pst.nextToken();
-		UUID uid = UUID.randomUUID();
-		savedName = uid.toString().substring(0, 16) + "." + file_ext;	// 저장 이름
-		// new File (디렉토리, 파일이름)
-		File target = new File(uploadPath, savedName);
-		
+		if(!picture.isEmpty()) {
+			savedName = picture.getOriginalFilename();
+			StringTokenizer pst = new StringTokenizer(savedName,".");
+			pst.nextToken();
+			String file_ext = pst.nextToken();
+			UUID uid = UUID.randomUUID();
+			savedName = uid.toString().substring(0, 16) + "." + file_ext;	// 저장 이름
+			// new File (디렉토리, 파일이름)
+			File target = new File(uploadPath, savedName);
+			
+			FileCopyUtils.copy(picture.getBytes(), target);
+		}
 		vo.setPicture(savedName);
+		
+		
 		vo.setFooter(footer);
 
-		FileCopyUtils.copy(picture.getBytes(), target);
 		
 		service.updateAccount(vo);
 		

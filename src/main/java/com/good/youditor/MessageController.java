@@ -10,7 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.good.dto.MessageVO;
 import com.good.dto.AccountsVO;
@@ -101,7 +100,7 @@ public class MessageController {
 	}
 	
 	// 메시지 쓰기
-	@RequestMapping(value = "/write.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/write.do")
 	public String writedo() throws Exception {
 		System.out.println("*************************************************");
 		
@@ -110,7 +109,7 @@ public class MessageController {
 	}
 	
 	// 메시지 답장 쓰기
-	@RequestMapping(value = "/reply.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/reply.do", method = RequestMethod.POST)
 	public String replydo(Model model, @RequestParam("messageId") int messageId) throws Exception {
 		System.out.println("*************************************************");
 		// senderAccountId로 nickname 추출, subject & object 추출
@@ -136,25 +135,25 @@ public class MessageController {
 		vo.setSubject(subject);
 		vo.setObject(object);
 		service.sendMessage(vo);
-		return "message/messageWritePro";
+		return "message/messageReSendList";
 	}
 	
 	// 받은 메시지 숨기기
 	@RequestMapping(value="/hideReceivedMessage")
-	public String hideReceivedMessage(List<String> list) throws Exception {
-		System.out.println(list);
+	public String hideReceivedMessage(@RequestParam(value="messageId",required=true) List<String> list) throws Exception {
+		
 		service.hideReceivedMessage(list);
 		
-		return "redirect:/";
+		return "message/messageReReceiveList";
 	}
 	
 	// 보낸 메시지 숨기기
 	@RequestMapping(value="/hideSendMessage")
-	public String hideSendMessage(List<String> list) throws Exception {
-		System.out.println(list);
+	public String hideSendMessage(@RequestParam(value="messageId",required=true) List<String> list) throws Exception {
+		
 		service.hideSendMessage(list);
 		
-		return "redirect:/";
+		return "message/messageReSendList";
 	}
 	
 	

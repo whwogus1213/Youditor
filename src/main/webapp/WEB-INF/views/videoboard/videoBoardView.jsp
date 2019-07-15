@@ -16,6 +16,9 @@
 
 <title>${row.subject} - YouDitor</title>
 	<style>
+		a {
+			text-decoration: none;
+		}
 		.star_rating {font-size:0; letter-spacing:-4px;}
 		.star_rating a {
 		    font-size:22px;
@@ -333,6 +336,9 @@
 	<div id="listReply">
 		<jsp:include page="../videoboard/videoBoardReply.jsp" flush="false"/>
 	</div>
+	<br>
+	<br>
+	<br>
 	<jsp:include page="../module/bottom.jsp" flush="false"/>
 </body>
 </html>

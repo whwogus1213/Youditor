@@ -5,8 +5,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<jsp:include page="../module/header.jsp" flush="false"/>
-<script src="https://code.jquery.com/jquery-1.9.0.js"></script>
+<%-- <jsp:include page="../module/header.jsp" flush="false"/> --%>
+<!-- <script src="https://code.jquery.com/jquery-1.9.0.js"></script> -->
 <script src="/resources/js/sockjs.min.js"></script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -74,16 +74,19 @@ $(function(){
 		if (sessionid == currentuser_session) {
 			var printHTML = "<div class='well'>";
 			printHTML += "<div class='alert alert-info'>";
-			printHTML += "<strong>[" + ${userNickname}+"] -> " + message + "</strong>";
+// 			printHTML += "<strong>[" + ${login.nickname}+"] -> " + message + "</strong>";
+			printHTML += "<strong>[" + "] -> " + message + "</strong>";
 			printHTML += "</div>";
 			printHTML += "</div>";
 
 			$("#chatdata").append(printHTML);
 
+			
 		} else {
 			var printHTML = "<div class='well'>";
 			printHTML += "<div class='alert alert-warning'>";
-			printHTML += "<strong>[" + ${userNickname}+"] -> " + message + "</strong>";
+// 			printHTML += "<strong>[" + ${login.nickname}+"] -> " + message + "</strong>";
+			printHTML += "<strong>[" +"] -> " + message + "</strong>";
 			printHTML += "</div>";
 			printHTML += "</div>";
 
@@ -103,7 +106,7 @@ $(function(){
 
 </head>
 <body>
-	<h4>Youditor 채팅방 (${userid})</h4>
+	<h4>Youditor 채팅방 (${login.nickname})</h4>
 	<hr>
 	<div class="container">
 	
@@ -124,7 +127,7 @@ $(function(){
     	
     	<div class="well" id="chatdata">
     		<!-- User Session Info Hidden -->
-    		<input type="hidden" value='${userid}' id="sessionuserid">
+    		<input type="hidden" value="${login.accountId}" id="sessionuserid">
     	</div>
     	
 	</div>

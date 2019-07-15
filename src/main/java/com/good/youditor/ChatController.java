@@ -26,7 +26,7 @@ public class ChatController {
 		//사용자정보 출력(세션)
 		HttpSession session = req.getSession();
 		AccountsVO login = (AccountsVO)session.getAttribute("login");
-		System.out.println(login);
+		System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"+login);
 		mv.addObject("userid",login.getAccountId());
 		mv.addObject("userNickname",login.getNickname());
 		mv.setViewName("chat/chattingview");
