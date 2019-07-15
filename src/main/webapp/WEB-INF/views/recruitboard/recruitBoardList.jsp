@@ -9,7 +9,7 @@
 <meta charset="UTF-8">
 <title>구인구직 - YouditoR</title>
 <jsp:include page="../module/header.jsp" flush="false" />
-
+<script src="https://kit.fontawesome.com/e83fabbb47.js"></script>
 <script>
 	// 이전 버튼
 	function fn_prev(page, range, rangeSize, searchType, keyword) {
@@ -50,6 +50,26 @@
 	}
 
 	// 검색버튼 이벤트
+	
+	$(function(){
+		$('#keyword').keypress(function(e) {
+
+			var keycode = event.keyCode;
+			// enter를 쳤을 때 keycode가 13이다
+			if (keycode == '13') {
+				e.preventDefault();
+				var url = "${pageContext.request.contextPath}/recruitboard/recruitBoardList";
+				url = url + "?searchType=" + $('#searchType').val();
+				url = url + "&keyword=" + $('#keyword').val();
+
+				location.href = url;
+			}
+
+			e.stopPropagation();
+		});
+
+	});
+	
 	$(document).on('click', '#btnSearch', function(e) {
 		e.preventDefault();
 		var url = "${pageContext.request.contextPath}/recruitboard/recruitBoardList";
@@ -120,8 +140,12 @@
 			</tbody>
 		</table>
 
+
+		<!-- 페이징 검색 시작 -->
+		<div class="row">
+		
 		<!-- 페이징 -->
-		<div id="paginationBox">
+		<div id="paginationBox" class="col-4">
 			<ul class="pagination">
 				<c:if test="${pagination.prev}">
 					<li class="page-item"><a class="page-link" href="#"
@@ -147,9 +171,10 @@
 			</ul>
 		</div>
 		<!-- 페이징 -->
+		
 		<!-- 검색 -->
-		<div class="row input-group">
-			<div class="col-sm-2" align="right">
+		<div class="input-group col-8" style="padding-top: 6px;">
+			<div class="col-sm-3 offset-2" align="right" style="padding-right: 0px;">
 				<select class="form-control form-control-sm" name="searchType"
 					id="searchType" style="width: 66.6%">
 					<option value="subject">제목</option>
@@ -157,15 +182,17 @@
 					<option value="nickname">닉네임</option>
 				</select>
 			</div>
-			<div class="col-sm-6" align="right">
+			<div class="col-sm-4" align="right" style="padding-right: 0px; padding-left: 5px;">
 				<input type="text" class="form-control form-control-sm"
-					name="keyword" id="keyword">
+					name="keyword" id="keyword" style="float: left;">
 			</div>
-			<div class="col-sm-2">
-				<button class="btn btn-sm btn-primary" name="btnSearch"
-					id="btnSearch">검색</button>
+
+			<div class="col-1" style="padding-left: 5px; text-align: center; padding-top: 2px;">
+				<i class="fas fa-search" name="btnSearch" id="btnSearch"></i>
 			</div>
+			
 			<div class="col-sm-2" align="right">
+			
 				<c:if test="${login.email != null}">
 					<button type="button" class="btn btn-sm btn-primary"
 						onclick="location.href='/recruitboard/write.do' ">글쓰기</button>
@@ -173,6 +200,8 @@
 			</div>
 		</div>
 		<!-- 검색 -->
+	</div>
+	<!-- 페이징, 검색 끝 -->
 
 	</div>
 	<br>
