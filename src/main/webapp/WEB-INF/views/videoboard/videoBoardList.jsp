@@ -33,7 +33,7 @@ a {
     padding-right: 15px;
     padding-left: 15px;
     margin-right: auto;
-    margin-left: 0;
+    margin-left: 180px;
 	}
 </style>
 </head>
@@ -118,8 +118,8 @@ a {
 		<div id="deleteOK" class="alert alert-danger hidden" role="alert" style="visibility: hidden">글이 삭제되었습니다.</div>
 	</div>
 	
-	<div class="container">
   <jsp:include page="../module/VideoBoardListAside.jsp" flush="false"/>
+	<div class="container">
 		<!-- Marketing Icons Section -->
 		<h2 align="center">&nbsp;</h2>
 

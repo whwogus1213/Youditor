@@ -16,7 +16,7 @@ li {
 	height: 325px;
 	float: left;
 	background-color: #FFFFFF;
-	border: solid 3px rgba(255, 0, 0, 0.533);
+	border: solid 4px rgb(109, 109, 109);
 }
 .tab_item1 {
 	display: none;
@@ -57,17 +57,17 @@ li {
 
 		.table .thead-dark th {
 		    color: rgb(255, 255, 255);
-		    background-color: rgba(255, 0, 0);
-			border: 2px solid #FFFFFF;
+		    background-color: rgb(52, 61, 70);
 		}
 		label {
 	    	text-align: center;
 		}
 		.table th {
-		    color: rgba(255, 0, 0);
+		    color: rgb(109, 109, 109);
 		}
 		#best5 {
-			background-color: #FFFFFF;
+			color: #FFFFFF;
+			background-color: rgb(52, 61, 70);
 			text-align: center;
 		}
 		.table {
@@ -75,6 +75,7 @@ li {
 		}
 		.table td, .table th {
 		    padding: .55rem;
+		    
 		}
 </style>
 <script type="text/javascript">

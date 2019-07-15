@@ -16,7 +16,7 @@
 			border: 1px solid black;
 			float: left;
 			background-color: #777;
-			border: solid 3px rgba(255, 0, 0, 0.5);
+			border: solid 3px rgb(52, 61, 70,0.5);;
 		}
 		#best { display: none; }
 		#weekbest { display: none; }
@@ -63,7 +63,7 @@
         }
         .table .thead-dark th {
 	    color: rgb(255, 255, 255);
-	    background-color: rgba(255, 0, 0);
+	    background-color: rgb(52, 61, 70);;
 		border: 2px solid #FFFFFF;
 		}
 		label {
