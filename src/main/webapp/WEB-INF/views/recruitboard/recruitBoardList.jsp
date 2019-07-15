@@ -98,12 +98,10 @@
 		<div class="col-sm-12">
 			<h2 align="center">&nbsp;</h2>
 			<h1 align="center"><strong>구인/구직</strong></h1>
-			<h2 align="center">&nbsp;</h2>
 		</div>
 	</div>
 	<h5 align="center">유튜버 구인/구직</h5>
 	<div id="deleteOK" class="alert alert-danger hidden" role="alert" style="visibility:hidden">글이 삭제되었습니다.</div>
-	<h2 align="center">&nbsp;</h2>
 	<div class="container">
 		<table class="table table-striped nanum table-hover">
 			<!-- <table border="1"> -->

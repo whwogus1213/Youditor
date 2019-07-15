@@ -67,12 +67,34 @@ a {
 		url = url + "&range=" + range;
 		location.href = url;
 	}
-
+	
 	// 검색버튼 이벤트
+	
+	$(function(){
+		$('#keyword').keypress(function(e) {
+
+			var keycode = event.keyCode;
+			// enter를 쳤을 때 keycode가 13이다
+			if (keycode == '13') {
+				e.preventDefault();
+				var url = "${pageContext.request.contextPath}/videoboard/videoBoardList";
+		url = url + "?category=" + ${pagination.categoryId};
+		//url = url + "&page=" + 1;
+		//url = url + "&range=" + 1;
+		url = url + "&searchType=" + $('#searchType').val();
+		url = url + "&keyword=" + $('#keyword').val();
+
+				location.href = url;
+			}
+
+			e.stopPropagation();
+		});
+
+	});
+	
 	$(document).on('click', '#btnSearch', function(e) {
 		e.preventDefault();
 		var url = "${pageContext.request.contextPath}/videoboard/videoBoardList";
-
 		url = url + "?category=" + ${pagination.categoryId};
 		//url = url + "&page=" + 1;
 		//url = url + "&range=" + 1;
@@ -80,8 +102,8 @@ a {
 		url = url + "&keyword=" + $('#keyword').val();
 
 		location.href = url;
+		console.log(url);
 	});
-	
 	var result = '${result}';
 	$(function(){
 		//수정이나 글쓰기 하면 추가할수 있음
@@ -225,59 +247,68 @@ a {
       		</div>
 			</c:forEach>
 		</div>
-	<!-- 페이징 -->
-	<div id="paginationBox">
-		<ul class="pagination">
-			<c:if test="${pagination.prev}">
-				<li class="page-item"><a class="page-link" href="#"
-					onClick="fn_prev('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}',
+		<!-- 페이징 검색 시작 -->
+		<div class="row">
+		
+		<!-- 페이징 -->
+		<div id="paginationBox" class="col-4">
+			<ul class="pagination">
+				<c:if test="${pagination.prev}">
+					<li class="page-item"><a class="page-link" href="#"
+						onClick="fn_prev('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}',
 						'${pagination.searchType}', '${pagination.keyword}')">Pre</a>
-				</li>
-			</c:if>
-			<c:forEach begin="${pagination.startPage}"
-				end="${pagination.endPage}" var="idx">
-				<li
-					class="page-item <c:out value="${pagination.page == idx ? 'active' : ''}"/> ">
-					<a class="page-link" href="#"
+					</li>
+				</c:if>
+				<c:forEach begin="${pagination.startPage}"
+					end="${pagination.endPage}" var="idx">
+					<li
+						class="page-item <c:out value="${pagination.page == idx ? 'active' : ''}"/> ">
+						<a class="page-link" href="#"
 						onClick="fn_pagination('${idx}', '${pagination.range}', '${pagination.rangeSize}',
-						 '${pagination.categoryId}', '${pagination.searchType}', '${pagination.keyword}')">${idx}</a>
-				</li>
-			</c:forEach>
-			<c:if test="${pagination.next}">
-				<li class="page-item"><a class="page-link" href="#"
-					onClick="fn_next('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}',
+						'${pagination.categoryId}', '${pagination.searchType}', '${pagination.keyword}')">${idx}</a>
+					</li>
+				</c:forEach>
+				<c:if test="${pagination.next}">
+					<li class="page-item"><a class="page-link" href="#"
+						onClick="fn_next('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}',
 						'${pagination.searchType}', '${pagination.keyword}')">Next</a>
-				</li>
-			</c:if>
-		</ul>
+					</li>
+				</c:if>
+			</ul>
+		</div>
+		<!-- 페이징 -->
+		
+		<!-- 검색 -->
+		<div class="input-group col-8" style="padding-top: 6px;">
+			<div class="col-sm-3 offset-2" align="right" style="padding-right: 0px;">
+				<select class="form-control form-control-sm" name="searchType"
+					id="searchType" style="width: 66.6%">
+					<option value="subject">제목</option>
+					<option value="object">본문</option>
+					<option value="nickname">닉네임</option>
+				</select>
+			</div>
+			<div class="col-sm-4" align="right" style="padding-right: 0px; padding-left: 5px;">
+				<input type="text" class="form-control form-control-sm"
+					name="keyword" id="keyword" style="float: left;">
+			</div>
+
+			<div class="col-1" style="padding-left: 5px; text-align: center; padding-top: 2px;">
+				<i class="fas fa-search" name="btnSearch" id="btnSearch"></i>
+			</div>
+			
+			<div class="col-sm-2" align="right">
+			
+				<c:if test="${login.email != null}">
+					<button type="button" class="btn btn-sm btn-primary"
+						onclick="location.href='/videoboard/write.do' ">글쓰기</button>
+				</c:if>
+			</div>
+		</div>
+		<!-- 검색 -->
 	</div>
-	<!-- 페이징 -->
-	<!-- 검색 -->
-	<div class="row input-group">
-		<div class="col-sm-2" align="right">
-			<select class="form-control form-control-sm" name="searchType"
-				id="searchType" style="width: 66.6%">
-				<option value="subject">제목</option>
-				<option value="object">본문</option>
-				<option value="nickname">닉네임</option>
-			</select>
-		</div>
-		<div class="col-sm-6" align="right">
-			<input type="text" class="form-control form-control-sm"
-				name="keyword" id="keyword">
-		</div>
-		<div class="col-sm-2">
-			<button class="btn btn-sm btn-primary" name="btnSearch"
-				id="btnSearch">검색</button>
-		</div>
-		<div class="col-sm-2" align="right">
-			<c:if test="${login.email != null}">
-				<button type="button" class="btn btn-sm btn-primary"
-					onclick="location.href='/recruitboard/write.do' ">글쓰기</button>
-			</c:if>
-		</div>
-	</div>
-	<!-- 검색 -->
+	<!-- 페이징, 검색 끝 -->
+
 	</div>
 
 	<h2 align="center">&nbsp;</h2>

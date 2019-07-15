@@ -9,8 +9,7 @@
 <meta charset="UTF-8">
 <title>공지사항 - YouditoR</title>
 <jsp:include page="../module/header.jsp" flush="false" />
-<!-- Custom styles -->
-<link href="/resources/css/modern-business.css" rel="stylesheet">
+<script src="https://kit.fontawesome.com/e83fabbb47.js"></script>
 <script>
 	// 이전 버튼
 	function fn_prev(page, range, rangeSize, searchType, keyword) {
@@ -50,20 +49,35 @@
 	}
 
 	// 검색버튼 이벤트
-	$(document)
-			.on(
-					'click',
-					'#btnSearch',
-					function(e) {
-						e.preventDefault();
-						var url = "${pageContext.request.contextPath}/noticeboard/noticeBoardList";
-						url = url + "?searchType=" + $('#searchType').val();
-						url = url + "&keyword=" + $('#keyword').val();
+	
+	$(function(){
+		$('#keyword').keypress(function(e) {
 
-						location.href = url;
-						console.log(url);
-					});
+			var keycode = event.keyCode;
+			// enter를 쳤을 때 keycode가 13이다
+			if (keycode == '13') {
+				e.preventDefault();
+				var url = "${pageContext.request.contextPath}/noticeboard/noticeBoardList";
+				url = url + "?searchType=" + $('#searchType').val();
+				url = url + "&keyword=" + $('#keyword').val();
 
+				location.href = url;
+			}
+
+			e.stopPropagation();
+		});
+
+	});
+	
+	$(document).on('click', '#btnSearch', function(e) {
+		e.preventDefault();
+		var url = "${pageContext.request.contextPath}/noticeboard/noticeBoardList";
+		url = url + "?searchType=" + $('#searchType').val();
+		url = url + "&keyword=" + $('#keyword').val();
+
+		location.href = url;
+		console.log(url);
+	});
 	//게시글을 삭제 했을시 삭제했다고 경고창이 떳다가 사라지는 기능
 	var result = '${result}';
 	$(function() {
@@ -76,13 +90,12 @@
 </script>
 </head>
 <body>
-	<jsp:include page="../module/top2.jsp" flush="false" />
+	<jsp:include page="../module/top2.jsp" flush="false"/>
+	<br><br>
 	<div class="form-group">
 		<div class="col-sm-12">
-			<h5 align="center">&nbsp;</h5>
-			<h1 align="center">
-				<strong>공지 사항</strong>
-			</h1>
+			<h2 align="center">&nbsp;</h2>
+			<h1 align="center"><strong>공지사항</strong></h1>
 		</div>
 	</div>
 	<h5 align="center">YouditoR의 최신 소식과 이벤트를 알려드립니다.</h5>
@@ -119,8 +132,11 @@
 			</tbody>
 		</table>
 
+		<!-- 페이징 검색 시작 -->
+		<div class="row">
+		
 		<!-- 페이징 -->
-		<div id="paginationBox">
+		<div id="paginationBox" class="col-4">
 			<ul class="pagination">
 				<c:if test="${pagination.prev}">
 					<li class="page-item"><a class="page-link" href="#"
@@ -143,47 +159,13 @@
 						'${pagination.searchType}', '${pagination.keyword}')">Next</a>
 					</li>
 				</c:if>
-
-				<!-- 검색 -->
-				<div class="row input-group">
-					<div class="col-sm-2" align="right">
-						<select class="form-control form-control-sm" name="searchType"
-							id="searchType" style="width: 66.6%">
-							<option value="subject">제목</option>
-							<option value="object">본문</option>
-							<option value="nickname">닉네임</option>
-						</select>
-					</div>
-					<div class="col-sm-6" align="right">
-						<input type="text" class="form-control form-control-sm"
-							name="keyword" id="keyword">
-					</div>
-					<div class="col-sm-2">
-						<button class="btn btn-sm btn-primary" name="btnSearch"
-							id="btnSearch">검색</button>
-					</div>
-					<div class="col-sm-2" align="right">
-						<c:if test="${login.email != null}">
-							<c:if test="${login.authority == 5}">
-								<button type="button" class="btn btn-sm btn-primary" 
-									onclick="location.href='/noticeboard/write.do' ">글쓰기</button>
-							</c:if>
-						</c:if>
-					</div>
-				</div>
-				<!-- 검색 -->
 			</ul>
 		</div>
 		<!-- 페이징 -->
-
-
-
-
+		
 		<!-- 검색 -->
-		<!-- 
-		<div class="row input-group">
-			<div class="col-sm-2"></div>
-			<div class="col-sm-2" align="right">
+		<div class="input-group col-8" style="padding-top: 6px;">
+			<div class="col-sm-3 offset-2" align="right" style="padding-right: 0px;">
 				<select class="form-control form-control-sm" name="searchType"
 					id="searchType" style="width: 66.6%">
 					<option value="subject">제목</option>
@@ -191,25 +173,26 @@
 					<option value="nickname">닉네임</option>
 				</select>
 			</div>
-			<div class="col-sm-4" align="right">
+			<div class="col-sm-4" align="right" style="padding-right: 0px; padding-left: 5px;">
 				<input type="text" class="form-control form-control-sm"
-					name="keyword" id="keyword">
+					name="keyword" id="keyword" style="float: left;">
 			</div>
-			<div class="col-sm-1">
-				<button class="btn btn-sm btn-primary" name="btnSearch"
-					id="btnSearch">검색</button>
+
+			<div class="col-1" style="padding-left: 5px; text-align: center; padding-top: 2px;">
+				<i class="fas fa-search" name="btnSearch" id="btnSearch"></i>
 			</div>
-			<div class="col-sm-3" align="center">
+			
+			<div class="col-sm-2" align="right">
+			
 				<c:if test="${login.email != null}">
-					<c:if test="${login.authority == 5}">
-						<button type="button" class="btn btn-primary"
-							onclick="location.href='/noticeboard/write.do' ">글쓰기</button>
-					</c:if>
+					<button type="button" class="btn btn-sm btn-primary"
+						onclick="location.href='/noticeboard/write.do' ">글쓰기</button>
 				</c:if>
 			</div>
 		</div>
-		 -->
 		<!-- 검색 -->
+	</div>
+	<!-- 페이징, 검색 끝 -->
 
 	</div>
 	<br>
