@@ -79,21 +79,19 @@
 	<jsp:include page="../module/top2.jsp" flush="false" />
 	<div class="form-group">
 		<div class="col-sm-12">
-			<h2 align="center">&nbsp;</h2>
+			<h5 align="center">&nbsp;</h5>
 			<h1 align="center">
 				<strong>공지 사항</strong>
 			</h1>
-			<h2 align="center">&nbsp;</h2>
 		</div>
 	</div>
 	<h5 align="center">YouditoR의 최신 소식과 이벤트를 알려드립니다.</h5>
-	<div id="deleteOK" class="alert alert-danger hidden" role="alert"
-		style="visibility: hidden">글이 삭제되었습니다.</div>
-	<h2 align="center">&nbsp;</h2>
+	<div id="deleteOK" class="alert alert-danger hidden" role="alert" style="visibility: hidden">글이 삭제되었습니다.</div>
+		
 	<div class="container">
 		<table class="table table-striped nanum table-hover">
 			<!-- <table border="1"> -->
-			<thead>
+			<thead align="center">
 				<tr>
 					<th style="width: 80px;">번호</th>
 					<th style="width: 80px;">분류</th>
@@ -103,17 +101,14 @@
 					<th style="width: 80px;">조회수</th>
 				</tr>
 			</thead>
-			<tbody>
+			<tbody align="center">
 				<c:forEach items="${NoticeBoardList}" var="NoticeBoardList">
 					<tr>
 						<td>${NoticeBoardList.boardId}</td>
 						<td>${NoticeBoardList.categoryName}</td>
-						<td>
-							<div
-								style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; height: 100%">
-								<a
-									href="/noticeboard/noticeBoardView?boardId=${NoticeBoardList.boardId}">${NoticeBoardList.subject}</a>
-							</div>
+						<td align="left" style="padding-left: 30px; cursor: pointer;"
+						onclick="location.href='/noticeboard/noticeBoardView?boardId=${NoticeBoardList.boardId}'">
+								${NoticeBoardList.subject}
 						</td>
 						<td>${NoticeBoardList.nickname}</td>
 						<td><fmt:formatDate value="${NoticeBoardList.reg_date}"

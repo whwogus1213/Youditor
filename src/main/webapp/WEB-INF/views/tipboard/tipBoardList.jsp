@@ -82,10 +82,11 @@
 	</div>
 	<h5 align="center">유튜버 편집 팁</h5>
 	<div id="deleteOK" class="alert alert-danger hidden" role="alert" style="visibility:hidden">글이 삭제되었습니다.</div>
+	
 	<div class="container">
 		<table class="table table-striped nanum table-hover">
 			<!-- <table border="1"> -->
-			<thead>
+			<thead align="center">
 				<tr>
 					<th style="width: 80px;">번호</th>
 					<th style="width: 80px;">분류</th>
@@ -95,18 +96,17 @@
 					<th style="width: 80px;">조회수</th>
 				</tr>
 			</thead>
-			<tbody>
+			<tbody align="center">
 				<c:forEach items="${TipBoardList}" var="TipBoardList">
 					<tr>
 						<td>${TipBoardList.boardId}</td>
 						<td>${TipBoardList.categoryName}</td>
-						<td>
-							<div style="overflow:hidden; text-overflow: ellipsis; white-space:nowrap; height: 100%">
-							<a href="/tipboard/tipBoardView?boardId=${TipBoardList.boardId}">${TipBoardList.subject}</a>
-							</div>
-						</td>
+						<td align="left" style="padding-left: 30px; cursor: pointer;"
+							onclick="location.href='/tipboard/tipBoardView?boardId=${TipBoardList.boardId}'">
+							${TipBoardList.subject}</td>
 						<td>${TipBoardList.nickname}</td>
-						<td><fmt:formatDate value="${TipBoardList.reg_date}" pattern="yyyy-MM-dd" /></td>
+						<td><fmt:formatDate value="${TipBoardList.reg_date}"
+								pattern="yyyy-MM-dd" /></td>
 						<td>${TipBoardList.viewCount}</td>
 					</tr>
 				</c:forEach>

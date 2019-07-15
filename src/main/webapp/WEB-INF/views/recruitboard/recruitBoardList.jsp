@@ -87,7 +87,7 @@
 	<div class="container">
 		<table class="table table-striped nanum table-hover">
 			<!-- <table border="1"> -->
-			<thead>
+			<thead align="center">
 				<tr>
 					<th style="width: 80px;">번호</th>
 					<th style="width: 80px;">분류</th>
@@ -97,7 +97,7 @@
 					<th style="width: 80px;">조회수</th>
 				</tr>
 			</thead>
-			<tbody>
+			<tbody align="center">
 				<c:forEach items="${RecruitBoardList}" var="RecruitBoardList">
 					<tr>
 						<td>${RecruitBoardList.boardId}</td>
@@ -108,10 +108,9 @@
 							<td>구직</td>
 						</c:if>
 						
-						<td>
-							<div style="overflow:hidden; text-overflow: ellipsis; white-space:nowrap; height: 100%">
-							<a href="/recruitboard/recruitBoardView?boardId=${RecruitBoardList.boardId}">${RecruitBoardList.subject}</a>
-							</div>
+						<td align="left" style="padding-left: 30px; cursor: pointer;"
+						onclick="location.href='/recruitboard/recruitBoardView?boardId=${RecruitBoardList.boardId}'">
+								${RecruitBoardList.subject}
 						</td>
 						<td>${RecruitBoardList.nickname}</td>
 						<td><fmt:formatDate value="${RecruitBoardList.reg_date}" pattern="yyyy-MM-dd" /></td>
@@ -123,11 +122,11 @@
 
 		<!-- 페이징 -->
 		<div id="paginationBox">
-			<ul class="pagination" style="margin-left: auto; margin-right: auto;">
+			<ul class="pagination">
 				<c:if test="${pagination.prev}">
 					<li class="page-item"><a class="page-link" href="#"
 						onClick="fn_prev('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}',
-						'${pagination.searchType}', '${pagination.keyword}')">Previous</a>
+						'${pagination.searchType}', '${pagination.keyword}')">Pre</a>
 					</li>
 				</c:if>
 				<c:forEach begin="${pagination.startPage}"
@@ -148,27 +147,28 @@
 			</ul>
 		</div>
 		<!-- 페이징 -->
-		<hr>
-	<!-- 검색 -->
+		<!-- 검색 -->
 		<div class="row input-group">
-			<div class="col-sm-2">
-			</div>
 			<div class="col-sm-2" align="right">
-				<select class="form-control form-control-sm" name="searchType" id="searchType" style="width:66.6%">
+				<select class="form-control form-control-sm" name="searchType"
+					id="searchType" style="width: 66.6%">
 					<option value="subject">제목</option>
 					<option value="object">본문</option>
 					<option value="nickname">닉네임</option>
 				</select>
 			</div>
-			<div class="col-sm-4" align="right" >
-				<input type="text" class="form-control form-control-sm" name="keyword" id="keyword" >
+			<div class="col-sm-6" align="right">
+				<input type="text" class="form-control form-control-sm"
+					name="keyword" id="keyword">
 			</div>
-			<div class="col-sm-1">
-				<button class="btn btn-sm btn-primary" name="btnSearch" id="btnSearch">검색</button>
+			<div class="col-sm-2">
+				<button class="btn btn-sm btn-primary" name="btnSearch"
+					id="btnSearch">검색</button>
 			</div>
-			<div class="col-sm-3" align="center">
+			<div class="col-sm-2" align="right">
 				<c:if test="${login.email != null}">
-					<button type="button" class="btn btn-primary" onclick="location.href='/recruitboard/write.do' ">글쓰기</button>
+					<button type="button" class="btn btn-sm btn-primary"
+						onclick="location.href='/recruitboard/write.do' ">글쓰기</button>
 				</c:if>
 			</div>
 		</div>
