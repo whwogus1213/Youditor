@@ -53,10 +53,10 @@
 		</div>
 	</div>
 	<div class="container">
-		<table class="table table-bordered table-striped nanum table-hover"
+		<table class="table table-striped nanum table-hover"
 			id="followTable">
 			<!-- <table border="1"> -->
-			<thead>
+			<thead align="center">
 				<tr>
 					<th>닉네임</th>
 					<th>e-mail</th>
@@ -64,12 +64,12 @@
 					<th>언팔로우</th>
 				</tr>
 			</thead>
-			<tbody>
+			<tbody align="center">
 				<c:forEach items="${followingList}" var="followingList">
 					<tr>
-						<td>
-							<a href="/videoboard/videoBoardList?searchType=nickname&keyword=${followingList.nickname }">${followingList.nickname}</a>
-						</td>
+						<td style="cursor: pointer;"
+							onclick="location.href='/videoboard/videoBoardList?searchType=nickname&keyword=${followingList.nickname}'">
+							${followingList.nickname}</td>
 						<td>
 							${followingList.followAccountId }
 						</td>
