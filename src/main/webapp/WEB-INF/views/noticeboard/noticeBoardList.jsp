@@ -50,20 +50,24 @@
 	}
 
 	// 검색버튼 이벤트
-	$(document).on('click', '#btnSearch', function(e) {
-		e.preventDefault();
-		var url = "${pageContext.request.contextPath}/noticeboard/noticeBoardList";
-		url = url + "?searchType=" + $('#searchType').val();
-		url = url + "&keyword=" + $('#keyword').val();
+	$(document)
+			.on(
+					'click',
+					'#btnSearch',
+					function(e) {
+						e.preventDefault();
+						var url = "${pageContext.request.contextPath}/noticeboard/noticeBoardList";
+						url = url + "?searchType=" + $('#searchType').val();
+						url = url + "&keyword=" + $('#keyword').val();
 
-		location.href = url;
-		console.log(url);
-	});
-	
+						location.href = url;
+						console.log(url);
+					});
+
 	//게시글을 삭제 했을시 삭제했다고 경고창이 떳다가 사라지는 기능
 	var result = '${result}';
-	$(function(){
-		if(result === 'deleteOK'){
+	$(function() {
+		if (result === 'deleteOK') {
 			$('#deleteOK').removeClass('hidden');
 			$('#deleteOK').removeAttr("style");
 			$('#deleteOK').fadeOut(2000);
@@ -72,28 +76,31 @@
 </script>
 </head>
 <body>
-	<jsp:include page="../module/top2.jsp" flush="false"/>
+	<jsp:include page="../module/top2.jsp" flush="false" />
 	<div class="form-group">
 		<div class="col-sm-12">
 			<h2 align="center">&nbsp;</h2>
-			<h1 align="center"><strong>공지 사항</strong></h1>
+			<h1 align="center">
+				<strong>공지 사항</strong>
+			</h1>
 			<h2 align="center">&nbsp;</h2>
 		</div>
 	</div>
 	<h5 align="center">YouditoR의 최신 소식과 이벤트를 알려드립니다.</h5>
-	<div id="deleteOK" class="alert alert-danger hidden" role="alert" style="visibility:hidden">글이 삭제되었습니다.</div>
+	<div id="deleteOK" class="alert alert-danger hidden" role="alert"
+		style="visibility: hidden">글이 삭제되었습니다.</div>
 	<h2 align="center">&nbsp;</h2>
 	<div class="container">
-		<table class="table table-bordered table-striped nanum table-hover">
+		<table class="table table-striped nanum table-hover">
 			<!-- <table border="1"> -->
 			<thead>
 				<tr>
-					<th>번호</th>
-					<th>분류</th>
+					<th style="width: 80px;">번호</th>
+					<th style="width: 80px;">분류</th>
 					<th>제목</th>
-					<th>작성자</th>
-					<th>작성일</th>
-					<th>조회수</th>
+					<th style="width: 100px;">작성자</th>
+					<th style="width: 130px;">작성일</th>
+					<th style="width: 80px;">조회수</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -102,8 +109,10 @@
 						<td>${NoticeBoardList.boardId}</td>
 						<td>${NoticeBoardList.categoryName}</td>
 						<td>
-							<div style="overflow:hidden; text-overflow: ellipsis; white-space:nowrap; width:700px; height: 100%">
-							<a href="/noticeboard/noticeBoardView?boardId=${NoticeBoardList.boardId}">${NoticeBoardList.subject}</a>
+							<div
+								style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; height: 100%">
+								<a
+									href="/noticeboard/noticeBoardView?boardId=${NoticeBoardList.boardId}">${NoticeBoardList.subject}</a>
 							</div>
 						</td>
 						<td>${NoticeBoardList.nickname}</td>
@@ -117,8 +126,7 @@
 
 		<!-- 페이징 -->
 		<div id="paginationBox">
-			<ul class="pagination"
-				style="display: table; margin-left: auto; margin-right: auto;">
+			<ul class="pagination" style="margin-left: auto; margin-right: auto;">
 				<c:if test="${pagination.prev}">
 					<li class="page-item"><a class="page-link" href="#"
 						onClick="fn_prev('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}',
@@ -146,25 +154,28 @@
 		<hr>
 		<!-- 검색 -->
 		<div class="row input-group">
-			<div class="col-sm-2">
-			</div>
+			<div class="col-sm-2"></div>
 			<div class="col-sm-2" align="right">
-				<select class="form-control form-control-sm" name="searchType" id="searchType" style="width:66.6%">
+				<select class="form-control form-control-sm" name="searchType"
+					id="searchType" style="width: 66.6%">
 					<option value="subject">제목</option>
 					<option value="object">본문</option>
-					<option value="nickname">작성자</option>
+					<option value="nickname">닉네임</option>
 				</select>
 			</div>
-			<div class="col-sm-4" align="right" >
-				<input type="text" class="form-control form-control-sm" name="keyword" id="keyword" >
+			<div class="col-sm-4" align="right">
+				<input type="text" class="form-control form-control-sm"
+					name="keyword" id="keyword">
 			</div>
 			<div class="col-sm-1">
-				<button class="btn btn-sm btn-primary" name="btnSearch" id="btnSearch">검색</button>
+				<button class="btn btn-sm btn-primary" name="btnSearch"
+					id="btnSearch">검색</button>
 			</div>
 			<div class="col-sm-3" align="center">
 				<c:if test="${login.email != null}">
 					<c:if test="${login.authority == 5}">
-						<button type="button" class="btn btn-primary" onclick="location.href='/noticeboard/write.do' ">글쓰기</button>
+						<button type="button" class="btn btn-primary"
+							onclick="location.href='/noticeboard/write.do' ">글쓰기</button>
 					</c:if>
 				</c:if>
 			</div>

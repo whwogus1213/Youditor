@@ -85,16 +85,16 @@
 	<div id="deleteOK" class="alert alert-danger hidden" role="alert" style="visibility:hidden">글이 삭제되었습니다.</div>
 	<h2 align="center">&nbsp;</h2>
 	<div class="container">
-		<table class="table table-bordered table-striped nanum table-hover">
+		<table class="table table-striped nanum table-hover">
 			<!-- <table border="1"> -->
 			<thead>
 				<tr>
-					<th>번호</th>
-					<th>분류</th>
+					<th style="width: 80px;">번호</th>
+					<th style="width: 80px;">분류</th>
 					<th>제목</th>
-					<th>작성자</th>
-					<th>작성일</th>
-					<th>조회수</th>
+					<th style="width: 100px;">작성자</th>
+					<th style="width: 130px;">작성일</th>
+					<th style="width: 80px;">조회수</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -109,7 +109,7 @@
 						</c:if>
 						
 						<td>
-							<div style="overflow:hidden; text-overflow: ellipsis; white-space:nowrap; width:700px; height: 100%">
+							<div style="overflow:hidden; text-overflow: ellipsis; white-space:nowrap; height: 100%">
 							<a href="/recruitboard/recruitBoardView?boardId=${RecruitBoardList.boardId}">${RecruitBoardList.subject}</a>
 							</div>
 						</td>
@@ -123,8 +123,7 @@
 
 		<!-- 페이징 -->
 		<div id="paginationBox">
-			<ul class="pagination"
-				style="display: table; margin-left: auto; margin-right: auto;">
+			<ul class="pagination" style="margin-left: auto; margin-right: auto;">
 				<c:if test="${pagination.prev}">
 					<li class="page-item"><a class="page-link" href="#"
 						onClick="fn_prev('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}',
@@ -158,7 +157,7 @@
 				<select class="form-control form-control-sm" name="searchType" id="searchType" style="width:66.6%">
 					<option value="subject">제목</option>
 					<option value="object">본문</option>
-					<option value="nickname">작성자</option>
+					<option value="nickname">닉네임</option>
 				</select>
 			</div>
 			<div class="col-sm-4" align="right" >

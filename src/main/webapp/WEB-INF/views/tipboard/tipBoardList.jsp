@@ -83,16 +83,16 @@
 	<h5 align="center">유튜버 편집 팁</h5>
 	<div id="deleteOK" class="alert alert-danger hidden" role="alert" style="visibility:hidden">글이 삭제되었습니다.</div>
 	<div class="container">
-		<table class="table table-bordered table-striped nanum table-hover">
+		<table class="table table-striped nanum table-hover">
 			<!-- <table border="1"> -->
 			<thead>
 				<tr>
-					<th>번호</th>
-					<th>분류</th>
+					<th style="width: 80px;">번호</th>
+					<th style="width: 80px;">분류</th>
 					<th>제목</th>
-					<th>닉네임</th>
-					<th>작성일</th>
-					<th>조회수</th>
+					<th style="width: 100px;">작성자</th>
+					<th style="width: 130px;">작성일</th>
+					<th style="width: 80px;">조회수</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -101,7 +101,7 @@
 						<td>${TipBoardList.boardId}</td>
 						<td>${TipBoardList.categoryName}</td>
 						<td>
-							<div style="overflow:hidden; text-overflow: ellipsis; white-space:nowrap; width:700px; height: 100%">
+							<div style="overflow:hidden; text-overflow: ellipsis; white-space:nowrap; height: 100%">
 							<a href="/tipboard/tipBoardView?boardId=${TipBoardList.boardId}">${TipBoardList.subject}</a>
 							</div>
 						</td>
@@ -115,8 +115,7 @@
 
 		<!-- 페이징 -->
 		<div id="paginationBox">
-			<ul class="pagination"
-				style="display: table; margin-left: auto; margin-right: auto;">
+			<ul class="pagination" style="margin-left: auto; margin-right: auto;">
 				<c:if test="${pagination.prev}">
 					<li class="page-item"><a class="page-link" href="#"
 						onClick="fn_prev('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}',
