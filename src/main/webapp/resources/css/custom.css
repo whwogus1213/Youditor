@@ -1,0 +1,9 @@
+
+.star_filled {
+	margin: 0;
+	width: 40px;
+	height: 40px;
+	border: 1px solid;
+	background-repeat: no-repeat;
+	background-image: url("/resources/images/icon/star-filled.png");
+}

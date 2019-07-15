@@ -11,7 +11,24 @@
 <title>비디오게시판- YouditoR</title>
 <jsp:include page="../module/header.jsp" flush="false"/>
 <!-- Custom styles -->
-<link href="/resources/css/modern-business.css" rel="stylesheet">
+<script src="https://kit.fontawesome.com/e83fabbb47.js"></script>
+<style type="text/css">
+a {
+	text-decoration: none;
+}
+.card-body:hover
+	{
+		/* 그림자 이펙트 */
+ 		-moz-box-shadow: 0 0 20px #999; 
+ 		-webkit-box-shadow: 0 0 20px #999; 
+ 		box-shadow: 0 0 20px #999;
+ 		-webkit-transform: scale(1.05);
+    	transform: scale(1.05);
+ 		/* 흐려짐 이펙트 */ 
+/* 		opacity: 0.3; */
+/* 		filter: alpha(opacity=30); */
+	}
+</style>
 </head>
 <body>
 	<script>
@@ -81,7 +98,7 @@
 	});
 	</script>
 	<jsp:include page="../module/top2.jsp" flush="false" />
-	
+	<br>
 	
 	<div class="form-group">
 		<div class="col-sm-12">
@@ -101,7 +118,7 @@
 		<div class="row">
 			<c:forEach items="${VideoBoardList}" var="VideoBoardList">
 				<div class="col-lg-4 mb-4">
-					<div class="card h-100" style="display: block">
+					<div class="card h-100" style="display: block;">
 						<div align="center">
 							<h5 class="card-header"
 								style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; width: 100%; height: 50px">
@@ -109,7 +126,8 @@
 									href="/videoboard/videoBoardView?boardId=${VideoBoardList.boardId}">${VideoBoardList.subject}</a>
 							</h5>
 						</div>
-						<div class="card-body" align="center">
+						<div class="card-body" align="center" style="margin: 0; border: 0; padding: 0;">
+						<a href="/videoboard/videoBoardView?boardId=${VideoBoardList.boardId}">
 							<script>
 							var e = '${VideoBoardList.youtubeLink}';
 							var eArray  = e.split('/');
@@ -122,8 +140,9 @@
 								youtubeID = youtubeID.substr(0,11);
 							}
 							//document.write('<p>' + youtubeID + '</p>');
-							document.write('<img width="300" height="200" src="https://img.youtube.com/vi/' + youtubeID + '/mqdefault.jpg"></img>');
+							document.write('<img width="100%" height="100%" src="https://img.youtube.com/vi/' + youtubeID + '/mqdefault.jpg"></img>');
 						</script>
+          			</a>
           			</div>
           			<div class="card-footer" align="left">
           				<div class="row">
@@ -131,7 +150,25 @@
           						<strong>Made by.</strong>
           					</div>
           					<div class="col-sm-6" align="right">
-								<img src="<spring:url value='/image/${VideoBoardList.picture}'/>" class=" mx-auto rounded-circle" width="20px" height="20px"/>&nbsp;${VideoBoardList.nickname}<br>
+          						<div class="dropright">
+          							<a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="cursor:pointer">
+										<img src="<spring:url value='/image/${VideoBoardList.picture}'/>" class=" mx-auto rounded-circle" width="20px" height="20px"/>&nbsp;${VideoBoardList.nickname}<br>
+          							</a>
+          							<div class="dropdown-menu">
+          								<a class="dropdown-item" href="#">
+          									<img alt="more" src="/resources/images/icon/more.png" width="20" height="20">
+          									영상 더보기
+          								</a>
+          								<a class="dropdown-item" href="#">
+          									<img alt="message" src="/resources/images/icon/message.png" width="20" height="20">
+          									쪽지 보내기
+          								</a>
+          								<a class="dropdown-item" href="#">
+          									<img alt="follow" src="/resources/images/icon/follow.png" width="20" height="20">
+          									팔로우하기
+          								</a>
+          							</div>
+          						</div>
           					</div>
           				</div>
           				<div class="row">
@@ -163,7 +200,25 @@
           						<strong>Rate</strong>
           					</div>
           					<div class="col-sm-6" align="right">
-						 		${VideoBoardList.starCount} / 5.0
+          					
+          						<fmt:parseNumber var="starCnt" value="${VideoBoardList.starCount}" integerOnly="true"/>
+          					
+          						<c:forEach var="starDraw" begin="1" end="5">
+          							<c:choose>
+          								<c:when test="${starDraw <= starCnt}">
+          									<i class="fas fa-star" style="color: #ffd400; margin: 0;"></i>
+          								</c:when>
+          								<c:when test="${starDraw > starCnt && starDraw-1 < VideoBoardList.starCount && VideoBoardList.starCount > starCnt}">
+          									<i class="fas fa-star-half-alt" style="color: #ffd400;"></i>
+          								</c:when>
+          								<c:otherwise>
+          									<i class="far fa-star" style="color: #ffd400;"></i>
+          								</c:otherwise>
+          							</c:choose>
+          						</c:forEach>
+          						
+          						<h6>${VideoBoardList.starCount}</h6>
+						 		
           					</div>
           				</div>
           			</div>
