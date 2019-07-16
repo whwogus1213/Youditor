@@ -192,7 +192,7 @@
   </div>
 </div>
 <!-- Side navigation -->
-<div class="sidenav" id="mySidebar"  style="padding: 0;">
+<div class="sidenav" id="mySidebar"  style="padding: 0; margin-top: 10px; border-radius: 10px;">
 	<div align="center">
 		<c:if test="${login.accountId ne null }">
 			<jsp:include page="../chat/chattingview.jsp" flush="false"/>
@@ -296,34 +296,33 @@
 			</ul>
 		</div>
 	</div>
-	<button class="btn btn-light" onclick="openNav()">Chat</button>  
+	
+	<!-- Chat 채팅 아이콘 -->
+	<i id="chatBtn" class="far fa-comments" style="font-size: 1.8em; color: white; cursor: pointer;" onclick="openNav();"></i>
+	  
 	<script>
 		function openNav() {
+				 
 			if(document.getElementById("mySidebar").getBoundingClientRect().width=="0"){
-				 document.getElementById("mySidebar").style.width = "230px";
+// 				 document.getElementById("mySidebar").style.width = "230px";
+				$("#mySidebar").animate({width:"230px"},500,"swing");
+				$("#chatBtn").animate({fontSize:"2.3em"},250,"linear",function(){
+					$("#chatBtn").animate({fontSize:"1.8em"},250,"linear",function(){
+						$("#chatBtn").attr("class","fas fa-comments");
+					});
+				});
+				
 			} else {
-				 document.getElementById("mySidebar").style.width = "0";
+// 				document.getElementById("mySidebar").style.width = "0";
+				$("#mySidebar").animate({width:"0px"},500,"swing");
+				$("#chatBtn").animate({fontSize:"2.3em"},250,"linear",function(){
+					$("#chatBtn").animate({fontSize:"1.8em"},250,"linear",function(){
+						$("#chatBtn").attr("class","far fa-comments");
+					});
+				});
 			}
 		}
 		
-		function closeNav() {
-			document.getElementById("mySidebar").style.width = "0";
-		}
 	</script>
 </nav>
 
-<!-- Side navigation -->
-<div class="sidenav" id="mySidebar">
-	<div align="center">
-		<c:if test="${login.accountId ne null }">
-			<jsp:include page="../chat/chattingview.jsp" flush="false"/>
-		</c:if>
-		<c:if test="${login.accountId eq null }">
-			<h5>로그인 이후<br>채팅이<br>가능합니다.</h5>
-			<hr>
-			<h6><a href="accounts/login.do">로그인</a></h6>
-			<h6>or</h6>
-			<h6><a href="accounts/join.do">회원가입</a></h6>
-		</c:if>
-	</div>
-</div>
