@@ -9,15 +9,25 @@ ul {
 li {
 	list-style: none;
 }
-
+.style {
+    display: block;
+    color: #BBB;
+    font-size: 14px;
+    font-weight: 500;
+    border-bottom: 1px solid #FFF;
+}
+.active {
+    color: #993399;
+    border-color: #663399;
+	}
 .aside {
 	margin: 20px;
 	width: 200px;
 	height: 325px;
-	float: left;
-	background-color: #FFFFFF;
-	border: solid 4px rgb(109, 109, 109);
-}
+	float: left;    
+	border: 1px solid #EAEAEA;
+    background: #FFF;
+	}
 .tab_item1 {
 	display: none;
 }
@@ -62,9 +72,13 @@ li {
 		label {
 	    	text-align: center;
 		}
-		.table th {
-		    color: rgb(109, 109, 109);
-		}
+		
+.table .thead-dark th {
+    vertical-align: bottom;
+    background-color: #FFF;
+    border-bottom: 0 solid #dee2e6;
+    border-color: #FFF;
+}
 		#best5 {
 			color: #FFFFFF;
 			background-color: rgb(52, 61, 70);
@@ -75,8 +89,22 @@ li {
 		}
 		.table td, .table th {
 		    padding: .55rem;
-		    
+		    font-size: 13.5px;
+	}
+		
+		_col .most_popular .cell a span {
+		    overflow: hidden;
+		    display: inline-block;
+		    text-overflow: ellipsis;
+		    white-space: nowrap;
+		    max-width: 220px;
+		    vertical-align: top;
+		    line-height: 28px;
 		}
+		.str{
+		color: #FF4949;
+		}
+		
 </style>
 <script type="text/javascript">
 	$(function() {
@@ -89,11 +117,19 @@ li {
 
 				if(data.length > 0) {
 					for(var i = 0; i < data.length; i++){
+						if(i < 3){
 						html += "<tr onclick=\"location.href='/videoboard/videoBoardView?boardId="+data[i].boardId+"'\" style='cursor:pointer;'>";
-						html += "<th scope='row'>"+(i+1)+"</th>";
+						html += "<th class='str' scope='row'>"+(i+1)+"</th>";
 						html += "<td>"+data[i].subject+"</td>";
 						html += "<td>"+data[i].starCount+"</td>";
 						html += "</tr>";
+						}else{
+							html += "<tr onclick=\"location.href='/videoboard/videoBoardView?boardId="+data[i].boardId+"'\" style='cursor:pointer;'>";
+							html += "<th scope='row'>"+(i+1)+"</th>";
+							html += "<td>"+data[i].subject+"</td>";
+							html += "<td>"+data[i].starCount+"</td>";
+							html += "</tr>";
+						}
 					}
 				}
 
@@ -141,6 +177,35 @@ li {
 				queue : false
 			})
 		});
+		////////////////////////////////////////////////////////////
+		$( "#bestbtn1" ).click(function() {
+		     $(this).addClass("active");
+		     $("#bestbtn2").removeClass("active");
+		     $("#bestbtn3").removeClass("active");
+		     $("#bestbtn4").removeClass("active");
+
+		});
+		$( "#bestbtn2" ).click(function() {
+		     $(this).addClass("active");
+		     $("#bestbtn1").removeClass("active");
+		     $("#bestbtn3").removeClass("active");
+		     $("#bestbtn4").removeClass("active");
+
+		});
+		$( "#bestbtn3" ).click(function() {
+		     $(this).addClass("active");
+		     $("#bestbtn2").removeClass("active");
+		     $("#bestbtn1").removeClass("active");
+		     $("#bestbtn4").removeClass("active");
+
+		});
+		$( "#bestbtn4" ).click(function() {
+		     $(this).addClass("active");
+		     $("#bestbtn2").removeClass("active");
+		     $("#bestbtn3").removeClass("active");
+		     $("#bestbtn1").removeClass("active");
+
+		});
 	});
 function getTipStar(){
 	$.ajax({
@@ -152,11 +217,20 @@ function getTipStar(){
 
 			if(data.length > 0) {
 				for(var i = 0; i < data.length; i++){
+					if(i < 3){
+						html += "<tr onclick=\"location.href='/tipboard/tipBoardView?boardId="+data[i].boardId+"'\" style='cursor:pointer;'>";
+						html += "<th class='str' scope='row'>"+(i+1)+"</th>";
+						html += "<td>"+data[i].subject+"</td>";
+						html += "<td>"+data[i].starCount+"</td>";
+						html += "</tr>";
+					}else{
 						html += "<tr onclick=\"location.href='/tipboard/tipBoardView?boardId="+data[i].boardId+"'\" style='cursor:pointer;'>";
 						html += "<th scope='row'>"+(i+1)+"</th>";
 						html += "<td>"+data[i].subject+"</td>";
 						html += "<td>"+data[i].starCount+"</td>";
 						html += "</tr>";
+					}
+						
 				}
 			}
 
@@ -178,11 +252,20 @@ function getNoticeList(){
 
 			if(data.length > 0) {
 				for(var i = 0; i < data.length; i++){
+					if(i < 3){
+						html += "<tr onclick=\"location.href='/noticeboard/noticeBoardView?boardId="+data[i].boardId+"'\" style='cursor:pointer;'>";
+						html += "<th class='str'scope='row'>"+(i+1)+"</th>";
+						html += "<td>"+data[i].subject+"</td>";
+						html += "<td>"+data[i].nickname+"</td>";
+						html += "</tr>";
+					}else{
 						html += "<tr onclick=\"location.href='/noticeboard/noticeBoardView?boardId="+data[i].boardId+"'\" style='cursor:pointer;'>";
 						html += "<th scope='row'>"+(i+1)+"</th>";
 						html += "<td>"+data[i].subject+"</td>";
 						html += "<td>"+data[i].nickname+"</td>";
 						html += "</tr>";
+						
+					}
 				}
 			}
 
@@ -204,10 +287,17 @@ function getAccountsList(){
 
 			if(data.length > 0) {
 				for(var i = 0; i < data.length; i++){
+					if(i < 3){
+						html += "<tr onclick=\"location.href='videoboard/videoBoardList?searchType=nickname&keyword="+data[i].nickname+"'\" style='cursor:pointer;'>";
+						html += "<th class='str' scope='row'>"+(i+1)+"</th>";
+						html += "<td>"+data[i].nickname+"</td>";
+						html += "</tr>";
+					}else{
 						html += "<tr onclick=\"location.href='videoboard/videoBoardList?searchType=nickname&keyword="+data[i].nickname+"'\" style='cursor:pointer;'>";
 						html += "<th scope='row'>"+(i+1)+"</th>";
 						html += "<td>"+data[i].nickname+"</td>";
 						html += "</tr>";
+					}
 				}
 			}
 
@@ -232,12 +322,11 @@ function getAccountsList(){
    
 			<table class="table">
 				<thead class="thead-dark">
-					<div id="best5">top 5</div>
 					<tr>
-						<th colspan="1"><label id="bestbtn1" for="best1">전체</label></th>
-						<th colspan="1"><label id="bestbtn2" for="best2">팁  </label></th>
-						<th colspan="1"><label id="bestbtn3" for="best3">공지</label></th>
-						<th colspan="1"><label id="bestbtn3" for="best4">유저</label></th>
+						<th colspan="1"><label class="style" id="bestbtn1" for="best1">전체</label></th>
+						<th colspan="1"><label class="style" id="bestbtn2" for="best2">팁  </label></th>
+						<th colspan="1"><label class="style" id="bestbtn3" for="best3">공지</label></th>
+						<th colspan="1"><label class="style" id="bestbtn4" for="best4">유저</label></th>
 					</tr>
 				</table>
 			<div class="tab_item1">
