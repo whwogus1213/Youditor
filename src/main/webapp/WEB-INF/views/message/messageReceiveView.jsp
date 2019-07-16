@@ -90,7 +90,31 @@
 		<div class="col-sm-2">
 			<button type="button" class="btn btn-sm btn-primary" onclick="location.href='/message/reply.do?messageId=${param.messageId}' ">답장</button>
 			&nbsp;|&nbsp;
-			<button type="button" class="btn btn-sm btn-danger" onclick="location.href='/message/messagehideReceivedMessage' ">지우기</button>
+			<button type="button" class="btn btn-sm btn-danger" name="hideBtn" id="hideBtn">지우기</button>
+			<script>
+			$("#hideBtn").click(function(){
+				var chArr = new Array();
+				
+				chArr.push(${rMessage.messageId});
+				
+				var confirm_val = confirm("정말 삭제하시겠습니까?");
+					
+				if(confirm_val) {
+					$.ajax({
+						url : "/message/hideReceivedMessage",
+						type : "post",
+						data : { chBox : chArr },
+						success : function(result){
+							if(result == 1) {
+								location.href='/message/messageReceiveList';
+							} else {
+								alert("삭제 실패");
+							}
+						}
+					});
+				}
+			});
+			</script>
 		</div>
 	</div>
 </div>

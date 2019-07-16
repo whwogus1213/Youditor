@@ -35,12 +35,15 @@ public interface MessageService {
 	// 닉네임으로 회원번호 취득
 	public int getAccountIdByNickname(String nickname) throws Exception;
 	
+	// 존재하는 닉네임인지 확인
+	public int checkNickname(String nickname) throws Exception;
+	
 	// 메세지 보내기
 	public void sendMessage(MessageVO vo) throws Exception;
 	
 	// 받은 메세지 안보기
-	public void hideReceivedMessage(List<String> list) throws Exception;
+	public void hideReceivedMessage(int mId) throws Exception;
 	
 	// 보낸 메세지 안보기
-	public void hideSendMessage(List<String> list) throws Exception;
+	public void hideSendMessage(int mId) throws Exception;
 }
