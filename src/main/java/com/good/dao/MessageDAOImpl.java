@@ -67,6 +67,11 @@ public class MessageDAOImpl implements MessageDAO {
 		return sqlSession.selectOne(NAMESPACE + ".getReplyInfo", messageId);
 	}
 	
+	// 존재하는 닉네임인지 확인
+	public int checkNickname(String nickname) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + ".checkNickname", nickname);
+	}
+	
 	// 닉네임으로 회원번호 취득
 	@Override
 	public int getAccountIdByNickname(String nickname) throws Exception {
@@ -81,13 +86,13 @@ public class MessageDAOImpl implements MessageDAO {
 
 	// 받은 메세지 숨기기
 	@Override
-	public void hideReceivedMessage(List<String> list) throws Exception {
-		sqlSession.update(NAMESPACE + ".hideReceivedMessage", list);
+	public void hideReceivedMessage(int mId) throws Exception {
+		sqlSession.update(NAMESPACE + ".hideReceivedMessage", mId);
 	}
 	
 	// 보낸 메세지 숨기기
 	@Override
-	public void hideSendMessage(List<String> list) throws Exception {
-		sqlSession.update(NAMESPACE + ".hideSendMessage", list);
+	public void hideSendMessage(int mId) throws Exception {
+		sqlSession.update(NAMESPACE + ".hideSendMessage", mId);
 	}
 }

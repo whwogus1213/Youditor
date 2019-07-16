@@ -25,6 +25,7 @@
 				AND senderAccountId like CONCAT('%', #{keyword}, '%')
 			</if>
 			AND receiverAccountId = #{accountId}
+			AND receiverView = 1
 		</trim>
 		ORDER BY
 			send_date desc
@@ -58,7 +59,7 @@
 	<!-- 보낸 메시지 목록 + 페이징 + 검색 -->
 	<select id="sendListAll" resultType="MessageList">
 		SELECT
-			messageId, receiverAccountId, nickname, subject, send_date, read_date, receiverView
+			messageId, receiverAccountId, nickname, subject, send_date, read_date, senderView
 		FROM
 			message as m
 		JOIN
@@ -76,6 +77,7 @@
 				AND senderAccountId like CONCAT('%', #{keyword}, '%')
 			</if>
 			AND senderAccountId = #{accountId}
+			AND senderView = 1
 		</trim>
 		ORDER BY
 			send_date desc
@@ -162,6 +164,16 @@
 			messageId = #{messageId} 
 	</select>
 	
+	<!-- 닉네임 체크 -->
+	<select id="checkNickname" parameterType="String" resultType="Integer">
+	    SELECT
+	      COUNT(*)
+	    FROM
+	      accounts
+	    WHERE
+	      nickname = #{nickname}
+	</select>
+	
 	<!-- 닉네임으로 회원번호 취득 -->
 	<select id="getAccountIdByNickname" parameterType="String" resultType="int">
 		SELECT
@@ -192,26 +204,22 @@
 	</insert>
 	
 	<!-- 받은 메세지 숨기기 -->
-	<update id="hideReceivedMessage" parameterType="List">
+	<update id="hideReceivedMessage" parameterType="int">
 		UPDATE
 			message
 		SET
 			receiverView = 0
 		WHERE
-			messageId = ${messageId}
-			AND
-			receiverView = 1
+			messageId = #{mId}
 	</update>
 	
 	<!-- 보낸 메세지 숨기기 -->
-	<update id="hideSendMessage" parameterType="List">
+	<update id="hideSendMessage" parameterType="int">
 		UPDATE
 			message
 		SET
 			senderView = 0
 		WHERE
-			messageId = ${messageId}
-			AND
-			senderView = 1
+			messageId = #{mId}
 	</update>
 </mapper>

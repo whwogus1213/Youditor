@@ -64,6 +64,11 @@ public class MessageServiceImpl implements MessageService {
 		return dao.getReplyInfo(messageId);
 	}
 	
+	// 존재하는 닉네임인지 확인
+	public int checkNickname(String nickname) throws Exception {
+		return dao.checkNickname(nickname);
+	}
+	
 	// 닉네임으로 회원번호 취득
 	@Override
 	public int getAccountIdByNickname(String nickname) throws Exception {
@@ -78,13 +83,13 @@ public class MessageServiceImpl implements MessageService {
 	
 	// 받은 메세지 안보기
 	@Override
-	public void hideReceivedMessage(List<String> list) throws Exception {
-		dao.hideReceivedMessage(list);
+	public void hideReceivedMessage(int mId) throws Exception {
+		dao.hideReceivedMessage(mId);
 	}
 	
 	// 보낸 메세지 안보기
 	@Override
-	public void hideSendMessage(List<String> list) throws Exception {
-		dao.hideSendMessage(list);
+	public void hideSendMessage(int mId) throws Exception {
+		dao.hideSendMessage(mId);
 	}
 }
