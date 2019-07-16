@@ -88,9 +88,9 @@ li {
 	    margin-bottom: 0rem;
 		}
 		.table td, .table th {
-		    padding: .55rem;
-		    font-size: 13.5px;
-	}
+    padding: 13px 0 13px 4px;
+    font-size: 13px;
+}
 		
 		_col .most_popular .cell a span {
 		    overflow: hidden;
@@ -102,9 +102,32 @@ li {
 		    line-height: 28px;
 		}
 		.str{
+		width: 20px;
 		color: #FF4949;
 		}
-		
+		.fa-star:before {
+    content: "\f005";
+}
+
+
+.fa, .fas {
+    font-weight: 900;
+}
+.fa, .far, .fas {
+    font-family: "Font Awesome 5 Pro";
+}
+.fa, .fab, .fal, .far, .fas {
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    display: inline-block;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    line-height: 1;
+}
+.str2{
+	width: 75px;
+}
 </style>
 <script type="text/javascript">
 	$(function() {
@@ -117,11 +140,76 @@ li {
 
 				if(data.length > 0) {
 					for(var i = 0; i < data.length; i++){
-						if(i < 3){
+						if(i < 5){
 						html += "<tr onclick=\"location.href='/videoboard/videoBoardView?boardId="+data[i].boardId+"'\" style='cursor:pointer;'>";
 						html += "<th class='str' scope='row'>"+(i+1)+"</th>";
-						html += "<td>"+data[i].subject+"</td>";
-						html += "<td>"+data[i].starCount+"</td>";
+						html += "<td class='str2'>"+data[i].subject+"</td>";
+						if(data[i].starCount == 5 ){
+						html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
+						html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
+						html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
+						html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
+						html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
+						}
+						else if(4 < data[i].starCount < 5){
+							html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
+							html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
+							html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
+							html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
+							if(data[i].starCount+0.99 > 5){
+
+								html += "<td class='fas fa-star-half-alt' style='color: #ffd400;'></td>";
+							}else{
+								html += "<td class='far fa-star' style='color: #ffd400;'></td>";
+							}
+							}
+						else if(3 < data[i].starCount < 4){
+							html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
+							html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
+							html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
+							if(data[i].starCount+0.99 > 4){
+								html += "<td class='fas fa-star-half-alt' style='color: #ffd400;'></td>";
+							}else{
+								html += "<td class='far fa-star' style='color: #ffd400;'></td>";
+							}
+							html += "<td class='far fa-star' style='color: #ffd400;'></td>";
+							}
+						else if(2 < data[i].starCount < 3){
+							html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
+							html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
+							if(data[i].starCount+0.99 > 5){
+
+								html += "<td class='fas fa-star-half-alt' style='color: #ffd400;'></td>";
+							}else{
+								html += "<td class='far fa-star' style='color: #ffd400;'></td>";
+							}
+							html += "<td class='far fa-star' style='color: #ffd400;'></td>";
+							html += "<td class='far fa-star' style='color: #ffd400;'></td>";
+							}
+						else if(1 < data[i].starCount < 2){
+							html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
+							if(data[i].starCount+0.99 > 5){
+
+								html += "<td class='fas fa-star-half-alt' style='color: #ffd400;'></td>";
+							}else{
+								html += "<td class='far fa-star' style='color: #ffd400;'></td>";
+							}
+							html += "<td class='far fa-star' style='color: #ffd400;'></td>";
+							html += "<td class='far fa-star' style='color: #ffd400;'></td>";
+							html += "<td class='far fa-star' style='color: #ffd400;'></td>";
+							}
+						else if(0 < data[i].starCount < 1){
+							if(data[i].starCount+0.99 > 5){
+
+								html += "<td class='fas fa-star-half-alt' style='color: #ffd400;'></td>";
+							}else{
+								html += "<td class='far fa-star' style='color: #ffd400;'></td>";
+							}
+							html += "<td class='far fa-star' style='color: #ffd400;'></td>";
+							html += "<td class='far fa-star' style='color: #ffd400;'></td>";
+							html += "<td class='far fa-star' style='color: #ffd400;'></td>";
+							html += "<td class='far fa-star' style='color: #ffd400;'></td>";
+							}
 						html += "</tr>";
 						}else{
 							html += "<tr onclick=\"location.href='/videoboard/videoBoardView?boardId="+data[i].boardId+"'\" style='cursor:pointer;'>";
@@ -217,11 +305,76 @@ function getTipStar(){
 
 			if(data.length > 0) {
 				for(var i = 0; i < data.length; i++){
-					if(i < 3){
+					if(i < 5){
 						html += "<tr onclick=\"location.href='/tipboard/tipBoardView?boardId="+data[i].boardId+"'\" style='cursor:pointer;'>";
 						html += "<th class='str' scope='row'>"+(i+1)+"</th>";
-						html += "<td>"+data[i].subject+"</td>";
-						html += "<td>"+data[i].starCount+"</td>";
+						html += "<td class='str2'>"+data[i].subject+"</td>";
+						if(data[i].starCount == 5 ){
+							html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
+							html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
+							html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
+							html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
+							html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
+							}
+							else if(4 < data[i].starCount < 5){
+								html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
+								html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
+								html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
+								html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
+								if(data[i].starCount+0.99 > 5){
+
+									html += "<td class='fas fa-star-half-alt' style='color: #ffd400;'></td>";
+								}else{
+									html += "<td class='far fa-star' style='color: #ffd400;'></td>";
+								}
+								}
+							else if(3 < data[i].starCount < 4){
+								html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
+								html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
+								html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
+								if(data[i].starCount+0.99 > 4){
+									html += "<td class='fas fa-star-half-alt' style='color: #ffd400;'></td>";
+								}else{
+									html += "<td class='far fa-star' style='color: #ffd400;'></td>";
+								}
+								html += "<td class='far fa-star' style='color: #ffd400;'></td>";
+								}
+							else if(2 < data[i].starCount < 3){
+								html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
+								html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
+								if(data[i].starCount+0.99 > 5){
+
+									html += "<td class='fas fa-star-half-alt' style='color: #ffd400;'></td>";
+								}else{
+									html += "<td class='far fa-star' style='color: #ffd400;'></td>";
+								}
+								html += "<td class='far fa-star' style='color: #ffd400;'></td>";
+								html += "<td class='far fa-star' style='color: #ffd400;'></td>";
+								}
+							else if(1 < data[i].starCount < 2){
+								html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
+								if(data[i].starCount+0.99 > 5){
+
+									html += "<td class='fas fa-star-half-alt' style='color: #ffd400;'></td>";
+								}else{
+									html += "<td class='far fa-star' style='color: #ffd400;'></td>";
+								}
+								html += "<td class='far fa-star' style='color: #ffd400;'></td>";
+								html += "<td class='far fa-star' style='color: #ffd400;'></td>";
+								html += "<td class='far fa-star' style='color: #ffd400;'></td>";
+								}
+							else if(0 < data[i].starCount < 1){
+								if(data[i].starCount+0.99 > 5){
+
+									html += "<td class='fas fa-star-half-alt' style='color: #ffd400;'></td>";
+								}else{
+									html += "<td class='far fa-star' style='color: #ffd400;'></td>";
+								}
+								html += "<td class='far fa-star' style='color: #ffd400;'></td>";
+								html += "<td class='far fa-star' style='color: #ffd400;'></td>";
+								html += "<td class='far fa-star' style='color: #ffd400;'></td>";
+								html += "<td class='far fa-star' style='color: #ffd400;'></td>";
+								}
 						html += "</tr>";
 					}else{
 						html += "<tr onclick=\"location.href='/tipboard/tipBoardView?boardId="+data[i].boardId+"'\" style='cursor:pointer;'>";
