@@ -302,35 +302,35 @@
 		</script>
 	</div>
 	<!-- <h1>${row.boardId }</h1> -->
-	<div class="container">
+	<div class="container" style="font-family: 'Nanum Gothic', sans-serif;">
 		<br>
 		<h2>${row.subject }</h2>
 		<span style="line-height: 30%"><br></span>
 		<h5>${row.object }</h5>
 		<br>
-		<h6 style="color: gray">조회수&nbsp;&nbsp; ${row.viewCount }</h6>
-
-
-		<input type="hidden" id="boardId" name="boardId"
-			value="${row.boardId }" />
-		<c:if test="${login.email ne null}">
-			<c:if test="${login.accountId ne row.accountId}">
-				<p class="star_rating">
-					<a class="starqq" href="#">★</a> <a class="starqq" href="#">★</a> <a
-						class="starqq" href="#">★</a> <a class="starqq" href="#">★</a> <a
-						class="starqq" href="#">★</a>
-				</p>
-				<div id='ratingBtnDiv'></div>
+		<h6 style="color:gray"> 조회수&nbsp;&nbsp; ${row.viewCount }</h6>
+		
+		
+        <input type="hidden" id="boardId" name="boardId" value="${row.boardId }" />
+        <div class="input-group">
+			<c:if test="${login.email ne null}">
+	        	<c:if test="${login.accountId ne row.accountId}">
+						<p class="star_rating">
+						    <a class = "starqq" href="#">★</a>
+						    <a class = "starqq" href="#">★</a>
+						    <a class = "starqq" href="#">★</a>
+						    <a class = "starqq" href="#">★</a>
+						    <a class = "starqq" href="#">★</a>
+						</p>
+						<div id='ratingBtnDiv'>
+						</div>
+				</c:if>
 			</c:if>
-		</c:if>
 		<c:if test="${login.email eq null}">
 				로그인 후 평가 가능
 			</c:if>
-		<h5 align="right">
-			등록일 &nbsp;&nbsp;
-			<fmt:formatDate value="${row.reg_date}"
-				pattern="yyyy년 MM월 dd일  HH:mm:ss" />
-		</h5>
+        </div>
+		<h5 align="right">등록일 &nbsp;&nbsp; <fmt:formatDate value="${row.reg_date}" pattern="yyyy년 MM월 dd일  HH:mm:ss" /></h5>
 		<c:if test="${login.email ne null}">
 			<c:if test="${login.accountId ne row.accountId}">
 

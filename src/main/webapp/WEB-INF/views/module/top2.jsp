@@ -207,9 +207,9 @@
 	</div>
 </div>
 
-<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top" style="font-family: 'Nanum Gothic', sans-serif;">
     <div class="container">
-		<a class="navbar-brand" href="/">YouDitor</a>
+		<a class="navbar-brand" href="/"><img src="/resources/images/main_logo.png" height="40px"></a>
 		<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
@@ -311,3 +311,19 @@
 		}
 	</script>
 </nav>
+
+<!-- Side navigation -->
+<div class="sidenav" id="mySidebar">
+	<div align="center">
+		<c:if test="${login.accountId ne null }">
+			<jsp:include page="../chat/chattingview.jsp" flush="false"/>
+		</c:if>
+		<c:if test="${login.accountId eq null }">
+			<h5>로그인 이후<br>채팅이<br>가능합니다.</h5>
+			<hr>
+			<h6><a href="accounts/login.do">로그인</a></h6>
+			<h6>or</h6>
+			<h6><a href="accounts/join.do">회원가입</a></h6>
+		</c:if>
+	</div>
+</div>
