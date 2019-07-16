@@ -91,10 +91,107 @@
 	color: #C4C6C8;
 	text-decoration: none;
 }
+@media (min-width: 576px){
+.col-sm-3 {
+    max-width: 100%;
+}
+}
+@media (min-width: 576px){
+.form-inline .form-control {
+    width: 280px;
+}
+}
+.form-control2{
+	padding-top: 20px;
+}
+.button-style{
+	background-color: #343A40;
+	border: 0px;
+}
+.modal-title {
+    margin-left: 20px;
+}
+.modal-header .close {
+    margin: -1rem -1rem -1rem 10px;
+}
 </style>
+<script type="text/javascript">
+	$(function(){
+		$('#pwd').keypress(function(event) {
+			// var keycode = (event.keyCode ? event.keyCode : event.which);
+			var keycode = event.keyCode;
+			// enter를 쳤을 때 keycode가 13이다
+			console.log(keycode);
+			if (keycode == '13') {
+				DoLogin();
+			}
 
+			event.stopPropagation();
+		});
+});
+
+	function DoLogin() {
+		var email = $("#email").val();
+		var pwd = $("#pwd").val();
+		if(email.length == 0) { alert("이메일를 입력해 주세요."); $("#email").focus(); return; }
+		if(pwd.length == 0) { alert("비밀번호를 입력해 주세요."); $("#pwd").focus(); return; }
+	$("#frm").submit();
+}
+</script>
 
 <!-- Side navigation -->
+
+<!-- Trigger the modal with a button -->
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header"><h4 class="modal-title">로그인</h4>
+        <button type="button" class="close" data-dismiss="modal">x</button>
+      </div>
+      <div class="modal-body">
+        <form class="form-horizontal" id="frm" method="post" action="${path}/accounts/login.do">
+		<div class="form-inline">
+			<h2 align="center">&nbsp;</h2>
+			<label class="control-label col-sm-3">아이디</label>
+			<div class="col-sm-3">
+				<input type="text" class="form-control" id="email"
+					name="email" maxlength="30" placeholder="Enter ID">
+			</div>
+		</div>
+		<br>
+		<div class="form-inline">
+			<h2 align="center">&nbsp;</h2>
+			<label class="control-label col-sm-3">비밀번호</label>
+			<div class="col-sm-3 form-control2">
+				<input type="password" class="form-control" id="pwd"
+					name="pwd" maxlength="20" placeholder="Enter Password"><br>
+				<a href="/accounts/resetPassword.do">비밀번호를 잊어버리셨습니까?</a>
+			</div>
+		</div>
+		<h2 align="center">&nbsp;</h2>
+		<div class="form-group">
+			<h2 align="center">&nbsp;</h2>
+			<div class="col-sm-offset-2 col-sm-12" align="center">
+<!-- 				<button type="button" class="btn btn-primary"
+					onclick="memberInsertCheckForm(this.form)">
+				로그인</button> -->
+				<button type="button" class="btn btn-primary" onclick="DoLogin();">
+					로그인
+				</button>
+			</div>
+		</div>
+	</form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
 <div class="sidenav" id="mySidebar">
 	<div align="center">
 		<c:if test="${login.accountId ne null }">
@@ -189,11 +286,12 @@
 				</c:if>
 				<c:if test="${login.accountId eq null }">
 					<li class="nav-item">
-						<a class="nav-link" href="/accounts/login.do">로그인</a>
-					</li>
+					<button type="button" class="nav-link button-style" data-toggle="modal" 
+					data-target="#myModal">로그인</button></li>
 					<li class="nav-item">
 						<a class="nav-link" href="/accounts/join.do">회원가입</a>
 					</li>
+					
 				</c:if>
 			</ul>
 		</div>

@@ -1,6 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/views/module/header.jsp" %>
+<%@ include file="/WEB-INF/views/module/header2.jsp" %>
+
 <%@ page session="true" %>
 
 <!DOCTYPE html>
@@ -16,6 +17,7 @@
   <title>YouditoR</title>
   <!-- Custom styles -->
   <link href="/resources/css/modern-business.css" rel="stylesheet">
+<script src="https://kit.fontawesome.com/e83fabbb47.js"></script>
   <style>
   footer{
   clear: both;
@@ -27,6 +29,8 @@
 
   <jsp:include page="./module/top2.jsp" flush="false"/>
  	<!-- 페이지 내용 시작 -->
+ 	
+<div id="dologinform"></div>
 	  <header>
 	    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
 	      <ol class="carousel-indicators">
