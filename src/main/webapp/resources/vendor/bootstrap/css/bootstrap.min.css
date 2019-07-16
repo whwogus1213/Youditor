@@ -42,7 +42,6 @@
 *, ::after, ::before {
 	box-sizing: border-box
 }
-
 html {
 	font-family: sans-serif;
 	line-height: 1.15;
@@ -152,7 +151,7 @@ sup {
 a {
 	color: #000000;
 	text-decoration: none;
-	background-color: transparent
+	background-color: transparent;
 }
 
 a:hover {

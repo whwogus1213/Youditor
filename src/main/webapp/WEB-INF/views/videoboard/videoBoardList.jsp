@@ -13,8 +13,9 @@
 <!-- Custom styles -->
 <script src="https://kit.fontawesome.com/e83fabbb47.js"></script>
 <style type="text/css">
-a {
-	text-decoration: none;
+.fa-search:before {
+    content: "\f002";
+    cursor: pointer;
 }
 .card-body:hover
 	{
@@ -120,6 +121,7 @@ a {
 	});
 	</script>
 	<jsp:include page="../module/top2.jsp" flush="false" />
+	
 	<br>
 	
 	<div class="form-group">
@@ -177,16 +179,13 @@ a {
           							</a>
           							<div class="dropdown-menu">
           								<a class="dropdown-item" href="/videoboard/videoBoardList?searchType=nickname&keyword=${VideoBoardList.nickname}">
-          									<img alt="more" src="/resources/images/icon/more.png" width="20" height="20">
-          									영상 더보기
-          								</a>
-          								<a class="dropdown-item" href="#">
-          									<img alt="message" src="/resources/images/icon/message.png" width="20" height="20">
-          									쪽지 보내기
-          								</a>
-          								<a class="dropdown-item" href="#">
-          									<img alt="follow" src="/resources/images/icon/follow.png" width="20" height="20">
-          									팔로우하기
+											<i class="fab fa-youtube"></i>&nbsp;&nbsp;영상 더보기
+										</a>
+										<a class="dropdown-item" href="#">
+											<i class="far fa-envelope"></i>&nbsp;&nbsp;쪽지 보내기
+										</a>
+										<a class="dropdown-item" href="#">
+											<i class="far fa-heart"></i>&nbsp;&nbsp;팔로우하기
           								</a>
           							</div>
           						</div>
