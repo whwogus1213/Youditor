@@ -129,10 +129,12 @@
 	</script>
 	<jsp:include page="../module/top2.jsp" flush="false" />
 	
-	<br>
+
+	<div class="container" style="background-color: #E8E8E8 ; font-family: 'Nanum Gothic', sans-serif;">
+		<br>
 	<c:choose>
 		<c:when test="${ categoryName eq '전체'}">
-			<div style="background-color: #000000; margin-left:221px; margin-right:221px;">
+			<div style="background-image:url('/resources/images/videoList/all.jpg'); background-position:43% 70%; color:white; text-shadow: -1px 0 #0099CC, 0 1px #0099CC, 1px 0 #0099CC, 0 -1px #0099CC">
 				<div class="col-sm-12">
 					<br><br><br><br>
 					<h1 align="center" style="font-size:60px; letter-spacing:60px">
@@ -145,7 +147,7 @@
 			</div>
 		</c:when>
 		<c:when test="${ categoryName eq '게임'}">
-			<div style="background-image:url('/resources/images/videoList/game.png'); background-position:43% 50%; font-family: 'Do Hyeon', sans-serif; color:#3366FF; margin-left:221px; margin-right:221px;">
+			<div style="background-image:url('/resources/images/videoList/game.png'); background-position:43% 50%; font-family: 'Do Hyeon', sans-serif; color:#3366FF;">
 				<div class="col-sm-12">
 					<br><br><br><br>
 					<h1 align="center" style="font-size:60px; letter-spacing:60px">
@@ -158,7 +160,7 @@
 			</div>
 		</c:when>
 		<c:when test="${ categoryName eq '먹방'}">
-			<div style="background-image:url('/resources/images/videoList/social_dining.jpg'); background-position:50% 25%; font-family: 'Nanum Brush Script', sans-serif; color:white; margin-left:221px; margin-right:221px;">
+			<div style="background-image:url('/resources/images/videoList/social_dining.jpg'); background-position:50% 25%; font-family: 'Nanum Brush Script', sans-serif; color:white;">
 				<div class="col-sm-12">
 					<br><br><br><br>
 					<h1 align="center" style="font-size:60px; letter-spacing:60px">
@@ -171,7 +173,7 @@
 			</div>
 		</c:when>
 		<c:when test="${ categoryName eq '일상'}">
-			<div style="background-image:url('/resources/images/videoList/daily_life.jpg'); background-position:70% 60%; font-family: 'Hi Melody', sans-serif; color:#FFCC00; text-shadow: -1px 0 #996600, 0 1px #996600, 1px 0 #996600, 0 -1px #996600; margin-left:221px; margin-right:221px;">
+			<div style="background-image:url('/resources/images/videoList/daily_life.jpg'); background-position:70% 60%; font-family: 'Hi Melody', sans-serif; color:#FFCC00; text-shadow: -1px 0 #996600, 0 1px #996600, 1px 0 #996600, 0 -1px #996600;">
 				<div class="col-sm-12">
 					<br><br><br><br>
 					<h1 align="center" style="font-size:60px; letter-spacing:60px">
@@ -184,7 +186,7 @@
 			</div>
 		</c:when>
 		<c:when test="${ categoryName eq '모터'}">
-			<div style="background-image:url('/resources/images/videoList/motor.jpg'); background-position:50% 75%; font-family: 'Do Hyeon', sans-serif; color:#EEEEEE; text-shadow: -1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000; margin-left:221px; margin-right:221px;">
+			<div style="background-image:url('/resources/images/videoList/motor.jpg'); background-position:70% 50%; background-size:120% 120%; font-family: 'Do Hyeon', sans-serif; color:white; text-shadow: -1px 0 #990033, 0 1px #990033, 1px 0 #990033, 0 -1px #990033;">
 				<div class="col-sm-12">
 					<br><br><br><br>
 					<h1 align="center" style="font-size:60px; letter-spacing:60px">
@@ -197,7 +199,7 @@
 			</div>
 		</c:when>
 		<c:when test="${ categoryName eq '스포츠'}">
-			<div style="background-image:url('/resources/images/videoList/sports.jpg'); background-position:50% 75%; font-family: 'Black Han Sans', sans-serif; color:white; text-shadow: -2px 0 #51A149, 0 2px #51A149, 2px 0 #51A149, 0 -2px #51A149; margin-left:221px; margin-right:221px;">
+			<div style="background-image:url('/resources/images/videoList/sports.jpg'); background-position:50% 75%; font-family: 'Black Han Sans', sans-serif; color:white; text-shadow: -2px 0 #51A149, 0 2px #51A149, 2px 0 #51A149, 0 -2px #51A149;">
 				<div class="col-sm-12">
 					<br><br><br><br>
 					<h1 align="center" style="font-size:60px; letter-spacing:60px">
@@ -210,7 +212,7 @@
 			</div>
 		</c:when>
 		<c:when test="${ categoryName eq '예능'}">
-			<div style="background-image:url('/resources/images/videoList/entertainment.jpg'); background-position:50% 60%; font-family: 'Cute Font', sans-serif; color:white;  text-shadow: -1px 0 #339966, 0 1px #339966, 1px 0 #339966, 0 -1px #339966; margin-left:221px; margin-right:221px;">
+			<div style="background-image:url('/resources/images/videoList/entertainment.jpg'); background-position:50% 60%; font-family: 'Cute Font', sans-serif; color:white;  text-shadow: -1px 0 #339966, 0 1px #339966, 1px 0 #339966, 0 -1px #339966;">
 				<div class="col-sm-12">
 					<br><br><br><br>
 					<h1 align="center" style="font-size:60px; letter-spacing:60px">
@@ -223,7 +225,7 @@
 			</div>
 		</c:when>
 		<c:otherwise>
-			<div style="background-color: #C8C8C8; font-family: 'Do Hyeon', sans-serif; margin-left:221px; margin-right:221px;">
+			<div style="background-color: #C8C8C8; font-family: 'Do Hyeon', sans-serif; ">
 				<div class="col-sm-12">
 					<br><br><br><br>
 					<h1 align="center" style="font-size:60px; letter-spacing:60px">
@@ -236,8 +238,6 @@
 			</div>
 		</c:otherwise>
 	</c:choose>
-
-	<div class="container" style="background-color: #E8E8E8 ; font-family: 'Nanum Gothic', sans-serif;">
 		<!-- Marketing Icons Section -->
 		<br>
 		<div class="row">
