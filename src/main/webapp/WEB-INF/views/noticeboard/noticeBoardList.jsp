@@ -9,8 +9,7 @@
 <meta charset="UTF-8">
 <title>공지사항 - YouditoR</title>
 <jsp:include page="../module/header.jsp" flush="false" />
-<!-- Custom styles -->
-<link href="/resources/css/modern-business.css" rel="stylesheet">
+<script src="https://kit.fontawesome.com/e83fabbb47.js"></script>
 <script>
 	// 이전 버튼
 	function fn_prev(page, range, rangeSize, searchType, keyword) {
@@ -50,6 +49,26 @@
 	}
 
 	// 검색버튼 이벤트
+	
+	$(function(){
+		$('#keyword').keypress(function(e) {
+
+			var keycode = event.keyCode;
+			// enter를 쳤을 때 keycode가 13이다
+			if (keycode == '13') {
+				e.preventDefault();
+				var url = "${pageContext.request.contextPath}/noticeboard/noticeBoardList";
+				url = url + "?searchType=" + $('#searchType').val();
+				url = url + "&keyword=" + $('#keyword').val();
+
+				location.href = url;
+			}
+
+			e.stopPropagation();
+		});
+
+	});
+	
 	$(document).on('click', '#btnSearch', function(e) {
 		e.preventDefault();
 		var url = "${pageContext.request.contextPath}/noticeboard/noticeBoardList";
@@ -59,11 +78,10 @@
 		location.href = url;
 		console.log(url);
 	});
-	
 	//게시글을 삭제 했을시 삭제했다고 경고창이 떳다가 사라지는 기능
 	var result = '${result}';
-	$(function(){
-		if(result === 'deleteOK'){
+	$(function() {
+		if (result === 'deleteOK') {
 			$('#deleteOK').removeClass('hidden');
 			$('#deleteOK').removeAttr("style");
 			$('#deleteOK').fadeOut(2000);
@@ -73,38 +91,37 @@
 </head>
 <body>
 	<jsp:include page="../module/top2.jsp" flush="false"/>
+	<br><br>
 	<div class="form-group">
 		<div class="col-sm-12">
 			<h2 align="center">&nbsp;</h2>
-			<h1 align="center"><strong>공지 사항</strong></h1>
-			<h2 align="center">&nbsp;</h2>
+			<h1 align="center"><strong>공지사항</strong></h1>
 		</div>
 	</div>
 	<h5 align="center">YouditoR의 최신 소식과 이벤트를 알려드립니다.</h5>
-	<div id="deleteOK" class="alert alert-danger hidden" role="alert" style="visibility:hidden">글이 삭제되었습니다.</div>
-	<h2 align="center">&nbsp;</h2>
+	<div id="deleteOK" class="alert alert-danger hidden" role="alert" style="visibility: hidden">글이 삭제되었습니다.</div>
+		
 	<div class="container">
-		<table class="table table-bordered table-striped nanum table-hover">
+		<table class="table table-striped nanum table-hover">
 			<!-- <table border="1"> -->
-			<thead>
+			<thead align="center">
 				<tr>
-					<th>번호</th>
-					<th>분류</th>
+					<th style="width: 80px;">번호</th>
+					<th style="width: 80px;">분류</th>
 					<th>제목</th>
-					<th>작성자</th>
-					<th>작성일</th>
-					<th>조회수</th>
+					<th style="width: 100px;">작성자</th>
+					<th style="width: 130px;">작성일</th>
+					<th style="width: 80px;">조회수</th>
 				</tr>
 			</thead>
-			<tbody>
+			<tbody align="center">
 				<c:forEach items="${NoticeBoardList}" var="NoticeBoardList">
 					<tr>
 						<td>${NoticeBoardList.boardId}</td>
 						<td>${NoticeBoardList.categoryName}</td>
-						<td>
-							<div style="overflow:hidden; text-overflow: ellipsis; white-space:nowrap; width:700px; height: 100%">
-							<a href="/noticeboard/noticeBoardView?boardId=${NoticeBoardList.boardId}">${NoticeBoardList.subject}</a>
-							</div>
+						<td align="left" style="padding-left: 30px; cursor: pointer;"
+						onclick="location.href='/noticeboard/noticeBoardView?boardId=${NoticeBoardList.boardId}'">
+								${NoticeBoardList.subject}
 						</td>
 						<td>${NoticeBoardList.nickname}</td>
 						<td><fmt:formatDate value="${NoticeBoardList.reg_date}"
@@ -115,14 +132,16 @@
 			</tbody>
 		</table>
 
+		<!-- 페이징 검색 시작 -->
+		<div class="row">
+		
 		<!-- 페이징 -->
-		<div id="paginationBox">
-			<ul class="pagination"
-				style="display: table; margin-left: auto; margin-right: auto;">
+		<div id="paginationBox" class="col-4">
+			<ul class="pagination">
 				<c:if test="${pagination.prev}">
 					<li class="page-item"><a class="page-link" href="#"
 						onClick="fn_prev('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}',
-						'${pagination.searchType}', '${pagination.keyword}')">Previous</a>
+						'${pagination.searchType}', '${pagination.keyword}')">Pre</a>
 					</li>
 				</c:if>
 				<c:forEach begin="${pagination.startPage}"
@@ -143,33 +162,37 @@
 			</ul>
 		</div>
 		<!-- 페이징 -->
-		<hr>
+		
 		<!-- 검색 -->
-		<div class="row input-group">
-			<div class="col-sm-2">
-			</div>
-			<div class="col-sm-2" align="right">
-				<select class="form-control form-control-sm" name="searchType" id="searchType" style="width:66.6%">
+		<div class="input-group col-8" style="padding-top: 6px;">
+			<div class="col-sm-3 offset-2" align="right" style="padding-right: 0px;">
+				<select class="form-control form-control-sm" name="searchType"
+					id="searchType" style="width: 66.6%">
 					<option value="subject">제목</option>
 					<option value="object">본문</option>
-					<option value="nickname">작성자</option>
+					<option value="nickname">닉네임</option>
 				</select>
 			</div>
-			<div class="col-sm-4" align="right" >
-				<input type="text" class="form-control form-control-sm" name="keyword" id="keyword" >
+			<div class="col-sm-4" align="right" style="padding-right: 0px; padding-left: 5px;">
+				<input type="text" class="form-control form-control-sm"
+					name="keyword" id="keyword" style="float: left;">
 			</div>
-			<div class="col-sm-1">
-				<button class="btn btn-sm btn-primary" name="btnSearch" id="btnSearch">검색</button>
+
+			<div class="col-1" style="padding-left: 5px; text-align: center; padding-top: 2px;">
+				<i class="fas fa-search" name="btnSearch" id="btnSearch"></i>
 			</div>
-			<div class="col-sm-3" align="center">
+			
+			<div class="col-sm-2" align="right">
+			
 				<c:if test="${login.email != null}">
-					<c:if test="${login.authority == 5}">
-						<button type="button" class="btn btn-primary" onclick="location.href='/noticeboard/write.do' ">글쓰기</button>
-					</c:if>
+					<button type="button" class="btn btn-sm btn-primary"
+						onclick="location.href='/noticeboard/write.do' ">글쓰기</button>
 				</c:if>
 			</div>
 		</div>
 		<!-- 검색 -->
+	</div>
+	<!-- 페이징, 검색 끝 -->
 
 	</div>
 	<br>

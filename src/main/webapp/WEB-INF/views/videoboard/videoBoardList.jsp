@@ -28,6 +28,13 @@ a {
 /* 		opacity: 0.3; */
 /* 		filter: alpha(opacity=30); */
 	}
+	.container {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: 180px;
+	}
 </style>
 </head>
 <body>
@@ -67,12 +74,34 @@ a {
 		url = url + "&range=" + range;
 		location.href = url;
 	}
-
+	
 	// 검색버튼 이벤트
+	
+	$(function(){
+		$('#keyword').keypress(function(e) {
+
+			var keycode = event.keyCode;
+			// enter를 쳤을 때 keycode가 13이다
+			if (keycode == '13') {
+				e.preventDefault();
+				var url = "${pageContext.request.contextPath}/videoboard/videoBoardList";
+		url = url + "?category=" + ${pagination.categoryId};
+		//url = url + "&page=" + 1;
+		//url = url + "&range=" + 1;
+		url = url + "&searchType=" + $('#searchType').val();
+		url = url + "&keyword=" + $('#keyword').val();
+
+				location.href = url;
+			}
+
+			e.stopPropagation();
+		});
+
+	});
+	
 	$(document).on('click', '#btnSearch', function(e) {
 		e.preventDefault();
 		var url = "${pageContext.request.contextPath}/videoboard/videoBoardList";
-
 		url = url + "?category=" + ${pagination.categoryId};
 		//url = url + "&page=" + 1;
 		//url = url + "&range=" + 1;
@@ -80,8 +109,8 @@ a {
 		url = url + "&keyword=" + $('#keyword').val();
 
 		location.href = url;
+		console.log(url);
 	});
-	
 	var result = '${result}';
 	$(function(){
 		//수정이나 글쓰기 하면 추가할수 있음
@@ -101,7 +130,7 @@ a {
 	<br>
 	<c:choose>
 		<c:when test="${ categoryName eq '전체'}">
-			<div style="background-color: #00000; margin-left:221px; margin-right:221px;">
+			<div style="background-color: #000000; margin-left:221px; margin-right:221px;">
 				<div class="col-sm-12">
 					<br><br><br><br>
 					<h1 align="center" style="font-size:60px; letter-spacing:60px">
@@ -214,9 +243,9 @@ a {
 				<div class="col-lg-4 mb-4">
 					<div class="card h-100" style="display: block;">
 						<div align="center">
-							<h5 class="card-header"
-								style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; width: 100%; height: 50px">
-								<a href="/videoboard/videoBoardView?boardId=${VideoBoardList.boardId}" style="color:black; text-decoration:none">${VideoBoardList.subject}</a>
+							<h5 class="card-header" onclick="location.href='/videoboard/videoBoardView?boardId=${VideoBoardList.boardId}'"
+								style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; width: 100%; height: 50px; cursor: pointer;">
+								${VideoBoardList.subject}
 							</h5>
 						</div>
 						<div class="card-body" align="center" style="margin: 0; border: 0; padding: 0;">
@@ -248,7 +277,7 @@ a {
 										<img src="<spring:url value='/image/${VideoBoardList.picture}'/>" class=" mx-auto rounded-circle" width="20px" height="20px"/>&nbsp;${VideoBoardList.nickname}<br>
           							</a>
           							<div class="dropdown-menu">
-          								<a class="dropdown-item" href="#">
+          								<a class="dropdown-item" href="/videoboard/videoBoardList?searchType=nickname&keyword=${VideoBoardList.nickname}">
           									<img alt="more" src="/resources/images/icon/more.png" width="20" height="20">
           									영상 더보기
           								</a>
@@ -319,60 +348,71 @@ a {
       		</div>
 			</c:forEach>
 		</div>
-	<!-- 페이징 -->
-		<div id="paginationBox">
-			<ul class="pagination" style="display:table; margin-left:auto; margin-right: auto;">
+		<!-- 페이징 검색 시작 -->
+		<div class="row">
+		
+		<!-- 페이징 -->
+		<div id="paginationBox" class="col-4">
+			<ul class="pagination">
 				<c:if test="${pagination.prev}">
-					<li class="page-item">
-						<a class="page-link" href="#"
-						onClick="fn_prev('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}')">Previous</a>
+					<li class="page-item"><a class="page-link" href="#"
+						onClick="fn_prev('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}',
+						'${pagination.searchType}', '${pagination.keyword}')">Pre</a>
 					</li>
 				</c:if>
-				<c:forEach begin="${pagination.startPage}" end="${pagination.endPage}" var="idx">
-					<li class="page-item <c:out value="${pagination.page == idx ? 'active' : ''}"/> ">
+				<c:forEach begin="${pagination.startPage}"
+					end="${pagination.endPage}" var="idx">
+					<li
+						class="page-item <c:out value="${pagination.page == idx ? 'active' : ''}"/> ">
 						<a class="page-link" href="#"
 						onClick="fn_pagination('${idx}', '${pagination.range}', '${pagination.rangeSize}',
-						 '${pagination.categoryId}', '${pagination.searchType}', '${pagination.keyword}')">${idx}</a>
+						'${pagination.categoryId}', '${pagination.searchType}', '${pagination.keyword}')">${idx}</a>
 					</li>
 				</c:forEach>
 				<c:if test="${pagination.next}">
-					<li class="page-item">
-						<a class="page-link" href="#"
-						onClick="fn_next('${pagination.range}', '${pagination.range}',
-						'${pagination.rangeSize}')">Next</a>
+					<li class="page-item"><a class="page-link" href="#"
+						onClick="fn_next('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}',
+						'${pagination.searchType}', '${pagination.keyword}')">Next</a>
 					</li>
 				</c:if>
 			</ul>
 		</div>
 		<!-- 페이징 -->
+		
 		<!-- 검색 -->
-		<div class="row input-group">
-			<div class="col-sm-2">
-			</div>
-			<div class="col-sm-2" align="right">
-				<select class="form-control form-control-sm" name="searchType" id="searchType" style="width:66.6%">
+		<div class="input-group col-8" style="padding-top: 6px;">
+			<div class="col-sm-3 offset-2" align="right" style="padding-right: 0px;">
+				<select class="form-control form-control-sm" name="searchType"
+					id="searchType" style="width: 66.6%">
 					<option value="subject">제목</option>
 					<option value="object">본문</option>
 					<option value="nickname">닉네임</option>
 				</select>
 			</div>
-			<div class="col-sm-4" align="right" >
-				<input type="text" class="form-control form-control-sm" name="keyword" id="keyword" >
+			<div class="col-sm-4" align="right" style="padding-right: 0px; padding-left: 5px;">
+				<input type="text" class="form-control form-control-sm"
+					name="keyword" id="keyword" style="float: left;">
 			</div>
-			<div class="col-sm-1">
-				<button class="btn btn-sm btn-primary" name="btnSearch" id="btnSearch">검색</button>
+
+			<div class="col-1" style="padding-left: 5px; text-align: center; padding-top: 2px;">
+				<i class="fas fa-search" name="btnSearch" id="btnSearch"></i>
 			</div>
-			<div class="col-sm-3" align="center">
+			
+			<div class="col-sm-2" align="right">
+			
 				<c:if test="${login.email != null}">
-					<button type="button" class="btn btn-sm btn-danger" onclick="location.href='/videoboard/write.do' ">유투브 올리기</button>
+					<button type="button" class="btn btn-sm btn-primary"
+						onclick="location.href='/videoboard/write.do' ">글쓰기</button>
 				</c:if>
 			</div>
 		</div>
 		<!-- 검색 -->
-		<h2 align="center">&nbsp;</h2>
-			
-		<h2 align="center">&nbsp;</h2>
 	</div>
+	<!-- 페이징, 검색 끝 -->
+
+	</div>
+
+	<h2 align="center">&nbsp;</h2>
 	<jsp:include page="../module/bottom.jsp" flush="false" />
 </body>
 </html>

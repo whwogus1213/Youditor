@@ -16,26 +16,9 @@ li {
     font-weight: 500;
     border-bottom: 1px solid #FFF;
 }
-.style1 {
-    display: block;
-    color: #BBB;
-    font-size: 14px;
-    font-weight: 500;
-    border-bottom: 1px solid #FFF;
-}
-.style:hover {
-    color: #993399;
-}
 .active {
     color: #993399;
-    padding-bottom: 3px;
-    border-bottom: 2px solid #FFF;
-    
-	border-color: rgb(102, 51, 153, 0.5);
-	}
-	.active:hover {
-    color: #e472e4;
-    border-color: rgb(147, 97, 197, 0.5);
+    border-color: #663399;
 	}
 .aside {
 	margin: 20px;
@@ -96,6 +79,11 @@ li {
     border-bottom: 0 solid #dee2e6;
     border-color: #FFF;
 }
+		#best5 {
+			color: #FFFFFF;
+			background-color: rgb(52, 61, 70);
+			text-align: center;
+		}
 		.table {
 	    margin-bottom: 0rem;
 		}
@@ -117,7 +105,7 @@ li {
 		width: 20px;
 		color: #FF4949;
 		}
-				.fa-star:before {
+		.fa-star:before {
     content: "\f005";
 }
 
@@ -140,7 +128,6 @@ li {
 .str2{
 	width: 75px;
 }
-		
 </style>
 <script type="text/javascript">
 	$(function() {
@@ -158,71 +145,71 @@ li {
 						html += "<th class='str' scope='row'>"+(i+1)+"</th>";
 						html += "<td class='str2'>"+data[i].subject+"</td>";
 						if(data[i].starCount == 5 ){
+						html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
+						html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
+						html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
+						html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
+						html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
+						}
+						else if(4 < data[i].starCount < 5){
 							html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
 							html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
 							html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
 							html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
-							html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
+							if(data[i].starCount+0.99 > 5){
+
+								html += "<td class='fas fa-star-half-alt' style='color: #ffd400;'></td>";
+							}else{
+								html += "<td class='far fa-star' style='color: #ffd400;'></td>";
 							}
-							else if(4 < data[i].starCount < 5){
-								html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
-								html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
-								html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
-								html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
-								if(data[i].starCount+0.99 > 5){
+							}
+						else if(3 < data[i].starCount < 4){
+							html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
+							html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
+							html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
+							if(data[i].starCount+0.99 > 4){
+								html += "<td class='fas fa-star-half-alt' style='color: #ffd400;'></td>";
+							}else{
+								html += "<td class='far fa-star' style='color: #ffd400;'></td>";
+							}
+							html += "<td class='far fa-star' style='color: #ffd400;'></td>";
+							}
+						else if(2 < data[i].starCount < 3){
+							html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
+							html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
+							if(data[i].starCount+0.99 > 5){
 
-									html += "<td class='fas fa-star-half-alt' style='color: #ffd400;'></td>";
-								}else{
-									html += "<td class='far fa-star' style='color: #ffd400;'></td>";
-								}
-								}
-							else if(3 < data[i].starCount < 4){
-								html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
-								html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
-								html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
-								if(data[i].starCount+0.99 > 4){
-									html += "<td class='fas fa-star-half-alt' style='color: #ffd400;'></td>";
-								}else{
-									html += "<td class='far fa-star' style='color: #ffd400;'></td>";
-								}
+								html += "<td class='fas fa-star-half-alt' style='color: #ffd400;'></td>";
+							}else{
 								html += "<td class='far fa-star' style='color: #ffd400;'></td>";
-								}
-							else if(2 < data[i].starCount < 3){
-								html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
-								html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
-								if(data[i].starCount+0.99 > 5){
+							}
+							html += "<td class='far fa-star' style='color: #ffd400;'></td>";
+							html += "<td class='far fa-star' style='color: #ffd400;'></td>";
+							}
+						else if(1 < data[i].starCount < 2){
+							html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
+							if(data[i].starCount+0.99 > 5){
 
-									html += "<td class='fas fa-star-half-alt' style='color: #ffd400;'></td>";
-								}else{
-									html += "<td class='far fa-star' style='color: #ffd400;'></td>";
-								}
+								html += "<td class='fas fa-star-half-alt' style='color: #ffd400;'></td>";
+							}else{
 								html += "<td class='far fa-star' style='color: #ffd400;'></td>";
-								html += "<td class='far fa-star' style='color: #ffd400;'></td>";
-								}
-							else if(1 < data[i].starCount < 2){
-								html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
-								if(data[i].starCount+0.99 > 5){
+							}
+							html += "<td class='far fa-star' style='color: #ffd400;'></td>";
+							html += "<td class='far fa-star' style='color: #ffd400;'></td>";
+							html += "<td class='far fa-star' style='color: #ffd400;'></td>";
+							}
+						else if(0 < data[i].starCount < 1){
+							if(data[i].starCount+0.99 > 5){
 
-									html += "<td class='fas fa-star-half-alt' style='color: #ffd400;'></td>";
-								}else{
-									html += "<td class='far fa-star' style='color: #ffd400;'></td>";
-								}
+								html += "<td class='fas fa-star-half-alt' style='color: #ffd400;'></td>";
+							}else{
 								html += "<td class='far fa-star' style='color: #ffd400;'></td>";
-								html += "<td class='far fa-star' style='color: #ffd400;'></td>";
-								html += "<td class='far fa-star' style='color: #ffd400;'></td>";
-								}
-							else if(0 < data[i].starCount < 1){
-								if(data[i].starCount+0.99 > 5){
-
-									html += "<td class='fas fa-star-half-alt' style='color: #ffd400;'></td>";
-								}else{
-									html += "<td class='far fa-star' style='color: #ffd400;'></td>";
-								}
-								html += "<td class='far fa-star' style='color: #ffd400;'></td>";
-								html += "<td class='far fa-star' style='color: #ffd400;'></td>";
-								html += "<td class='far fa-star' style='color: #ffd400;'></td>";
-								html += "<td class='far fa-star' style='color: #ffd400;'></td>";
-								}
+							}
+							html += "<td class='far fa-star' style='color: #ffd400;'></td>";
+							html += "<td class='far fa-star' style='color: #ffd400;'></td>";
+							html += "<td class='far fa-star' style='color: #ffd400;'></td>";
+							html += "<td class='far fa-star' style='color: #ffd400;'></td>";
+							}
 						html += "</tr>";
 						}else{
 							html += "<tr onclick=\"location.href='/videoboard/videoBoardView?boardId="+data[i].boardId+"'\" style='cursor:pointer;'>";
@@ -266,7 +253,7 @@ li {
 
 		//스크롤 이벤트가 발생하면
 		$(window).scroll(function() {
-			yPosition = $win.scrollTop() - 400; //이부분을 조정해서 화면에 보이도록 맞추세요
+			yPosition = $win.scrollTop() - 180; //이부분을 조정해서 화면에 보이도록 맞추세요
 			if (yPosition < 0) {
 				yPosition = 0;
 			}
@@ -280,31 +267,31 @@ li {
 		});
 		////////////////////////////////////////////////////////////
 		$( "#bestbtn1" ).click(function() {
-		     $(this).addClass("active").removeClass("style").addClass("style1");
-		     $("#bestbtn2").removeClass("active").removeClass("style1").addClass("style");
-		     $("#bestbtn3").removeClass("active").removeClass("style1").addClass("style");
-		     $("#bestbtn4").removeClass("active").removeClass("style1").addClass("style");
+		     $(this).addClass("active");
+		     $("#bestbtn2").removeClass("active");
+		     $("#bestbtn3").removeClass("active");
+		     $("#bestbtn4").removeClass("active");
 
 		});
 		$( "#bestbtn2" ).click(function() {
-		     $(this).addClass("active").removeClass("style").addClass("style1");
-		     $("#bestbtn1").removeClass("active").removeClass("style1").addClass("style");
-		     $("#bestbtn3").removeClass("active").removeClass("style1").addClass("style");
-		     $("#bestbtn4").removeClass("active").removeClass("style1").addClass("style");
+		     $(this).addClass("active");
+		     $("#bestbtn1").removeClass("active");
+		     $("#bestbtn3").removeClass("active");
+		     $("#bestbtn4").removeClass("active");
 
 		});
 		$( "#bestbtn3" ).click(function() {
-		     $(this).addClass("active").removeClass("style").addClass("style1");
-		     $("#bestbtn1").removeClass("active").removeClass("style1").addClass("style");
-		     $("#bestbtn2").removeClass("active").removeClass("style1").addClass("style");
-		     $("#bestbtn4").removeClass("active").removeClass("style1").addClass("style");
+		     $(this).addClass("active");
+		     $("#bestbtn2").removeClass("active");
+		     $("#bestbtn1").removeClass("active");
+		     $("#bestbtn4").removeClass("active");
 
 		});
 		$( "#bestbtn4" ).click(function() {
-		     $(this).addClass("active").removeClass("style").addClass("style1");
-		     $("#bestbtn1").removeClass("active").removeClass("style1").addClass("style");
-		     $("#bestbtn3").removeClass("active").removeClass("style1").addClass("style");
-		     $("#bestbtn2").removeClass("active").removeClass("style1").addClass("style");
+		     $(this).addClass("active");
+		     $("#bestbtn2").removeClass("active");
+		     $("#bestbtn3").removeClass("active");
+		     $("#bestbtn1").removeClass("active");
 
 		});
 	});
