@@ -81,8 +81,9 @@
 .hire {
 	padding-left: 0%;
 }
-.message {
-	padding-left: 47%;
+.messageMain {
+ 	padding-left: 47%;
+/* 	padding-left: 0%; */
 }
 .accounts {
 	padding-left: 50%;
@@ -95,7 +96,7 @@
 
 
 <!-- Side navigation -->
-<div class="sidenav" id="mySidebar">
+<div class="sidenav" id="mySidebar" style="padding: 0;">
 	<div align="center">
 		<c:if test="${login.accountId ne null }">
 			<jsp:include page="../chat/chattingview.jsp" flush="false"/>
@@ -163,7 +164,7 @@
 					<img src="<spring:url value='/image/${login.picture}'/>" class=" mx-auto rounded-circle" width="40px" height="40px"/>
 					<li class="nav-item topMenuLi">
 						<a class="nav-link" href="#">메세지</a>
-						<ul class="submenu message">
+						<ul class="submenu messageMain">
 							<li>|</li>
 							<li><a class="submenuLink" href="/message/messageReceiveList">받은 메세지</a></li>
 							<li>|</li>
