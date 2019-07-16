@@ -29,6 +29,8 @@
 
   <jsp:include page="./module/top2.jsp" flush="false"/>
  	<!-- 페이지 내용 시작 -->
+ 	
+<div id="dologinform"></div>
 	  <header>
 	    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
 	      <ol class="carousel-indicators">
