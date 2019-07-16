@@ -9,7 +9,7 @@
 <meta charset="UTF-8">
 <title>구인구직 - YouditoR</title>
 <jsp:include page="../module/header.jsp" flush="false" />
-
+<script src="https://kit.fontawesome.com/e83fabbb47.js"></script>
 <script>
 	// 이전 버튼
 	function fn_prev(page, range, rangeSize, searchType, keyword) {
@@ -50,6 +50,26 @@
 	}
 
 	// 검색버튼 이벤트
+	
+	$(function(){
+		$('#keyword').keypress(function(e) {
+
+			var keycode = event.keyCode;
+			// enter를 쳤을 때 keycode가 13이다
+			if (keycode == '13') {
+				e.preventDefault();
+				var url = "${pageContext.request.contextPath}/recruitboard/recruitBoardList";
+				url = url + "?searchType=" + $('#searchType').val();
+				url = url + "&keyword=" + $('#keyword').val();
+
+				location.href = url;
+			}
+
+			e.stopPropagation();
+		});
+
+	});
+	
 	$(document).on('click', '#btnSearch', function(e) {
 		e.preventDefault();
 		var url = "${pageContext.request.contextPath}/recruitboard/recruitBoardList";
@@ -78,26 +98,24 @@
 		<div class="col-sm-12">
 			<h2 align="center">&nbsp;</h2>
 			<h1 align="center"><strong>구인/구직</strong></h1>
-			<h2 align="center">&nbsp;</h2>
 		</div>
 	</div>
 	<h5 align="center">유튜버 구인/구직</h5>
 	<div id="deleteOK" class="alert alert-danger hidden" role="alert" style="visibility:hidden">글이 삭제되었습니다.</div>
-	<h2 align="center">&nbsp;</h2>
 	<div class="container">
-		<table class="table table-bordered table-striped nanum table-hover">
+		<table class="table table-striped nanum table-hover">
 			<!-- <table border="1"> -->
-			<thead>
+			<thead align="center">
 				<tr>
-					<th>번호</th>
-					<th>분류</th>
+					<th style="width: 80px;">번호</th>
+					<th style="width: 80px;">분류</th>
 					<th>제목</th>
-					<th>작성자</th>
-					<th>작성일</th>
-					<th>조회수</th>
+					<th style="width: 100px;">작성자</th>
+					<th style="width: 130px;">작성일</th>
+					<th style="width: 80px;">조회수</th>
 				</tr>
 			</thead>
-			<tbody>
+			<tbody align="center">
 				<c:forEach items="${RecruitBoardList}" var="RecruitBoardList">
 					<tr>
 						<td>${RecruitBoardList.boardId}</td>
@@ -108,10 +126,9 @@
 							<td>구직</td>
 						</c:if>
 						
-						<td>
-							<div style="overflow:hidden; text-overflow: ellipsis; white-space:nowrap; width:700px; height: 100%">
-							<a href="/recruitboard/recruitBoardView?boardId=${RecruitBoardList.boardId}">${RecruitBoardList.subject}</a>
-							</div>
+						<td align="left" style="padding-left: 30px; cursor: pointer;"
+						onclick="location.href='/recruitboard/recruitBoardView?boardId=${RecruitBoardList.boardId}'">
+								${RecruitBoardList.subject}
 						</td>
 						<td>${RecruitBoardList.nickname}</td>
 						<td><fmt:formatDate value="${RecruitBoardList.reg_date}" pattern="yyyy-MM-dd" /></td>
@@ -121,14 +138,17 @@
 			</tbody>
 		</table>
 
+
+		<!-- 페이징 검색 시작 -->
+		<div class="row">
+		
 		<!-- 페이징 -->
-		<div id="paginationBox">
-			<ul class="pagination"
-				style="display: table; margin-left: auto; margin-right: auto;">
+		<div id="paginationBox" class="col-4">
+			<ul class="pagination">
 				<c:if test="${pagination.prev}">
 					<li class="page-item"><a class="page-link" href="#"
 						onClick="fn_prev('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}',
-						'${pagination.searchType}', '${pagination.keyword}')">Previous</a>
+						'${pagination.searchType}', '${pagination.keyword}')">Pre</a>
 					</li>
 				</c:if>
 				<c:forEach begin="${pagination.startPage}"
@@ -149,31 +169,37 @@
 			</ul>
 		</div>
 		<!-- 페이징 -->
-		<hr>
-	<!-- 검색 -->
-		<div class="row input-group">
-			<div class="col-sm-2">
-			</div>
-			<div class="col-sm-2" align="right">
-				<select class="form-control form-control-sm" name="searchType" id="searchType" style="width:66.6%">
+		
+		<!-- 검색 -->
+		<div class="input-group col-8" style="padding-top: 6px;">
+			<div class="col-sm-3 offset-2" align="right" style="padding-right: 0px;">
+				<select class="form-control form-control-sm" name="searchType"
+					id="searchType" style="width: 66.6%">
 					<option value="subject">제목</option>
 					<option value="object">본문</option>
-					<option value="nickname">작성자</option>
+					<option value="nickname">닉네임</option>
 				</select>
 			</div>
-			<div class="col-sm-4" align="right" >
-				<input type="text" class="form-control form-control-sm" name="keyword" id="keyword" >
+			<div class="col-sm-4" align="right" style="padding-right: 0px; padding-left: 5px;">
+				<input type="text" class="form-control form-control-sm"
+					name="keyword" id="keyword" style="float: left;">
 			</div>
-			<div class="col-sm-1">
-				<button class="btn btn-sm btn-primary" name="btnSearch" id="btnSearch">검색</button>
+
+			<div class="col-1" style="padding-left: 5px; text-align: center; padding-top: 2px;">
+				<i class="fas fa-search" name="btnSearch" id="btnSearch"></i>
 			</div>
-			<div class="col-sm-3" align="center">
+			
+			<div class="col-sm-2" align="right">
+			
 				<c:if test="${login.email != null}">
-					<button type="button" class="btn btn-primary" onclick="location.href='/recruitboard/write.do' ">글쓰기</button>
+					<button type="button" class="btn btn-sm btn-primary"
+						onclick="location.href='/recruitboard/write.do' ">글쓰기</button>
 				</c:if>
 			</div>
 		</div>
 		<!-- 검색 -->
+	</div>
+	<!-- 페이징, 검색 끝 -->
 
 	</div>
 	<br>
