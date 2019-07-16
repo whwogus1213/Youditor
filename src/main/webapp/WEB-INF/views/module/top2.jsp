@@ -82,7 +82,7 @@
 	padding-left: 0%;
 }
 .message {
-	padding-left: 47%;
+	padding-left: 44%;
 }
 .accounts {
 	padding-left: 50%;
