@@ -234,7 +234,7 @@
 	
 	<!-- 게시글 상세정보 -->
 
-		<div align="center" style="background-color:black; padding-top:60px">
+		<div align="center" style="background-color:black; padding-top:60px" >
 		<script>
 		
 			var e = '${row.youtubeLink}';
@@ -279,7 +279,7 @@
 		</script>
 	</div>
 	<!-- <h1>${row.boardId }</h1> -->
-	<div class="container">
+	<div class="container" style="font-family: 'Nanum Gothic', sans-serif;">
 		<br>
 		<h2> ${row.subject }</h2>
 		<span style="line-height:30%"><br></span>
@@ -287,8 +287,9 @@
 		<br>
 		<h6 style="color:gray"> 조회수&nbsp;&nbsp; ${row.viewCount }</h6>
 		
-			
+		
         <input type="hidden" id="boardId" name="boardId" value="${row.boardId }" />
+        <div class="input-group">
 			<c:if test="${login.email ne null}">
 	        	<c:if test="${login.accountId ne row.accountId}">
 						<p class="star_rating">
@@ -305,6 +306,7 @@
 			<c:if test="${login.email eq null}">
 				로그인 후 평가 가능
 			</c:if>
+        </div>
 		<h5 align="right">등록일 &nbsp;&nbsp; <fmt:formatDate value="${row.reg_date}" pattern="yyyy년 MM월 dd일  HH:mm:ss" /></h5>
 		<c:if test="${login.email ne null}">
 		<c:if test="${login.accountId ne row.accountId}">

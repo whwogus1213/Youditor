@@ -10,15 +10,12 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
-	<jsp:include page="../module/header.jsp" flush="false"/>
-
-
+<jsp:include page="../module/header.jsp" flush="false"/>
 </head>
 <body>
 
 
-<div class="container">
+<div class="container" style="font-family: 'Nanum Gothic', sans-serif;">
     <form id="commentForm" name="commentForm" method="post">
 	
     <br><br>
@@ -53,17 +50,17 @@
 </div>
 
 
-	<div class="container">
-		<div id="commentList">
-			<div class="text-center">
-				<div class="spinner-border" role="status">
-					<span class="sr-only">Loading...</span>
-				</div>
+<div class="container" style="font-family: 'Nanum Gothic', sans-serif;">
+	<div id="commentList">
+		<div class="text-center">
+			<div class="spinner-border" role="status">
+				<span class="sr-only">Loading...</span>
 			</div>
 		</div>
 	</div>
+</div>
 	
-	<script src="/resources/js/reply.js"></script>  
+<script src="/resources/js/reply.js"></script>  
  
 </body>
 </html>
