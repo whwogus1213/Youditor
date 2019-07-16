@@ -68,33 +68,6 @@
 			}
 		})
 	</script>
-	<script type="text/javascript">
-		$(document).ready(function {
-			$("#hide").on("click", function() {
-				var param = "";
-				$(".mListForm :checked").each(function() {
-					if(param == "") {
-						param = "messageId=" + $(this).parent().children("#messageId").val();
-					} else {
-						param = "&messageId=" + $(this).parent().children("#messageId").val();
-					}
-				});
-
-				$.ajax({
-					url : '/message/hideReceivedMessage',
-					type : 'post',
-					data : param,
-					dataType : 'text',
-					success : function(data) {
-						console.log('return String : ' + data);
-					},
-					error : function() {
-						console.log(error);
-					}
-				});
-			});
-		});
-	</script>
 </head>
 <body>
 <jsp:include page="../module/top2.jsp" flush="false"/>
@@ -112,40 +85,57 @@
 </div>
 <hr>
 <div class="container" align="center">
-	<table>
-		<thead>
+	<table class="table table-striped table-hover">
+		<thead class="thead-dark">
 			<tr>
-				<td>보낸이</td>
-				<td>
-					<div style="overflow:hidden; text-overflow: ellipsis; white-space:nowrap; width:700px; height: 100%">제목</div>
-				</td>
-				<td>보낸 날짜</td>
-				<td>읽은 날짜</td>
-				<td><div><label><span class="glyphicon glyphicon-check"></span></label></div></td>
+				<th scope="col"><div style="overflow:hidden; text-overflow: ellipsis; white-space:nowrap; width:100px; height: 100%">보낸이</div></th>
+				<th scope="col"><div style="overflow:hidden; text-overflow: ellipsis; white-space:nowrap; width:400px; height: 100%">제목</div></th>
+				<th scope="col"><div style="overflow:hidden; text-overflow: ellipsis; white-space:nowrap; width:100px; height: 100%">보낸 날짜</div></th>
+				<th scope="col"><div style="overflow:hidden; text-overflow: ellipsis; white-space:nowrap; width:100px; height: 100%">읽은 날짜</div></th>
+				<th scope="col">
+					<input type="checkbox" name="allCheck" id="allCheck" />
+					<script>
+					$("#allCheck").click(function(){
+						var chk = $("#allCheck").prop("checked");
+						if(chk) {
+							$(".chBox").prop("checked", true);
+						} else {
+							$(".chBox").prop("checked", false);
+						}
+					});
+					</script>
+				</th>
 			</tr>
 		</thead>
-		<tbody class="mListForm">
+		<tbody>
 			<c:forEach items="${MessageReceiveList }" var="MessageReceiveList">
-				<c:if test="${MessageReceiveList.receiverView == 1 }">
-					<tr>
-						<td>${MessageReceiveList.nickname}</td>
-						<td>
-							<div style="overflow:hidden; text-overflow: ellipsis; white-space:nowrap; width:700px; height: 100%">
-							<a href="/message/messageReceiveView?messageId=${MessageReceiveList.messageId}">${MessageReceiveList.subject}</a>
-							</div>
-						</td>
-						<td><fmt:formatDate value="${MessageReceiveList.send_date}" pattern="yyyy-MM-dd" /></td>
-						<td>
-							<c:if test="${empty MessageReceiveList.read_date }">
-								New!
-							</c:if>
-							<c:if test="${not empty MessageReceiveList.read_date}">
-								<fmt:formatDate value="${MessageReceiveList.read_date}" pattern="yyyy-MM-dd" />
-							</c:if>
-						</td>
-						<td><input type="checkbox" name="messageId" id="messageId" data-toggle="checkbox" value="${MessageReceiveList.messageId }"></td>
-					</tr>
-				</c:if>
+				<tr>
+					<td>${MessageReceiveList.nickname}</td>
+					<td>
+						<div style="overflow:hidden; text-overflow: ellipsis; white-space:nowrap; width:400px; height: 100%">
+						<a href="/message/messageReceiveView?messageId=${MessageReceiveList.messageId}">${MessageReceiveList.subject}</a>
+						</div>
+					</td>
+					<td><fmt:formatDate value="${MessageReceiveList.send_date}" pattern="yyyy-MM-dd" /></td>
+					<td>
+						<c:if test="${empty MessageReceiveList.read_date }">
+							unread
+						</c:if>
+						<c:if test="${not empty MessageReceiveList.read_date}">
+							<fmt:formatDate value="${MessageReceiveList.read_date}" pattern="yyyy-MM-dd" />
+						</c:if>
+					</td>
+					<td>
+						<div class="checkBox">
+							<input type="checkbox" name="chBox" class="chBox" data-messageId="${MessageReceiveList.messageId }">
+							<script>
+							$(".chBox").click(function(){
+								$("#allCheck").prop("checked", false);
+							});
+							</script>
+						</div>
+					</td>
+				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
@@ -193,8 +183,38 @@
 		<div class="col-sm-1">
 			<button class="btn btn-sm btn-primary" name="btnSearch" id="btnSearch">검색</button>
 		</div>
-		<div class="col-sm-3" align="center">
-			<button class="btn btn-sm btn-primary" id="hide">지우기</button>
+		<div class="col-sm-3 delBtn" align="center">
+			<button class="btn btn-sm btn-primary selectHideBtn" name="selectHideBtn" id="selectHideBtn">지우기</button>
+			<script>
+			$("#selectHideBtn").click(function(){
+				var chArr = new Array();
+				
+				$("input[class='chBox']:checked").each(function(){
+					chArr.push($(this).attr("data-messageId"));
+				});
+	
+				if(chArr.length < 1) {
+					alert("체크된 항목이 없습니다.")
+				} else {
+					var confirm_val = confirm("정말 삭제하시겠습니까?");
+					
+					if(confirm_val) {
+						$.ajax({
+							url : "/message/hideReceivedMessage",
+							type : "post",
+							data : { chBox : chArr },
+							success : function(result){
+								if(result == 1) {
+									location.href='/message/messageReceiveList';
+								} else {
+									alert("삭제 실패");
+								}
+							}
+						});
+					}
+				}				
+			});
+			</script>
 		</div>
 	</div>
 	<!-- 검색 -->
