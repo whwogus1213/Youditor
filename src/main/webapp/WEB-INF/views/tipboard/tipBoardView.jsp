@@ -5,32 +5,75 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-
-<head>  <meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<meta name="description" content="">
-	<meta name="author" content="">
-
-  <title>${row.subject } - 팁 - YouDitor</title>
-<jsp:include page="../module/header.jsp" flush="false"/>
-
-  <!-- Custom styles -->
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>${row.subject}- 팁 - YouDitor</title>
+<jsp:include page="../module/header.jsp" flush="false" />
+<!-- Custom styles -->
 <link href="/resources/css/modern-business.css" rel="stylesheet">
+<script src="https://kit.fontawesome.com/e83fabbb47.js"></script>
+
 <style>
-		.star_rating {font-size:0; letter-spacing:-4px;}
-		.star_rating a {
-		    font-size:22px;
-		    letter-spacing:0;
-		    display:inline-block;
-		    margin-left:5px;
-		    color:#ccc;
-		    text-decoration:none;
-		}
-		.star_rating a:first-child {margin-left:0;}
-		.star_rating a.on {color:#FF0000;}
-		.star_rating a.mouseon {color:#FF0000;}
-	</style>
-	<script type="text/javascript">
+.dropdown-button {
+	background-color: #FFDAB9;
+	padding: 8px;
+	font-size: 15px;
+	border: none;
+}
+.dropdown {
+	position: relative;
+	display: inline-block;
+}
+.dropdown-content {
+	display: none;
+	position: absolute;
+	background-color: #ffffff;
+	min-width: 75px;
+	padding: 5px;
+	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+}
+
+.dropdown-content a {
+	color: black;
+	padding: 8px;
+	text-decoration: none;
+	display: block;
+}
+
+.dropdown-content a:hover {background-color: #f8f9fa;}
+.dropdown:hover .dropdown-content {display: block;}
+.dropdown:hover .dropdown-button {background-color: #ffffff;}
+
+.star_rating {
+	font-size: 0;
+	letter-spacing: -4px;
+}
+
+.star_rating a {
+	font-size: 22px;
+	letter-spacing: 0;
+	display: inline-block;
+	margin-left: 5px;
+	color: #ccc;
+	text-decoration: none;
+}
+
+.star_rating a:first-child {
+	margin-left: 0;
+}
+
+.star_rating a.on {
+	color: #FF0000;
+}
+
+.star_rating a.mouseon {
+	color: #FF0000;
+}
+</style>
+<script type="text/javascript">
 
 	/* 평가 점수(1~5) 전역변수  */
 	var star=-1;
@@ -263,7 +306,7 @@
 		<div align="right">
 			<div class="form-inline">
 				<div class="col-sm-10" align="right">
-					<h4>작성자 ${row.accountId }</h4>
+					<h4>작성자 ${row.nickname}</h4>
 				</div>
 				<div class="col-sm-2" align="right">
 					<h4>카테고리 ${row.categoryId}</h4>

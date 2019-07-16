@@ -32,6 +32,9 @@ public interface MessageDAO {
 	// 답장시 답장보낼 메세지의 정보 취득
 	public MessageList getReplyInfo(int messageId) throws Exception;
 	
+	// 존재하는 닉네임인지 확인
+	public int checkNickname(String nickname) throws Exception;
+	
 	// 닉네임으로 회원번호 취득
 	public int getAccountIdByNickname(String nickname) throws Exception;
 	
@@ -39,8 +42,8 @@ public interface MessageDAO {
 	public void sendMessage(MessageVO vo) throws Exception;
 
 	// 받은 메세지 숨기기
-	public void hideReceivedMessage(List<String> list) throws Exception;
+	public void hideReceivedMessage(int mId) throws Exception;
 	
 	// 보낸 메세지 굼기기
-	public void hideSendMessage(List<String> list) throws Exception;
+	public void hideSendMessage(int mId) throws Exception;
 }

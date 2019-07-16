@@ -15,6 +15,12 @@ button[type="button"] {
 </style>
 <jsp:include page="../module/header.jsp" flush="false" />
 <script src="https://kit.fontawesome.com/e83fabbb47.js"></script>
+<style type="text/css">
+.fa-search:before {
+    content: "\f002";
+    cursor: pointer;
+}
+</style>
 <script>
 	// 이전 버튼
 	function fn_prev(page, range, rangeSize, searchType, keyword) {
@@ -135,7 +141,22 @@ button[type="button"] {
 						onclick="location.href='/recruitboard/recruitBoardView?boardId=${RecruitBoardList.boardId}'">
 								${RecruitBoardList.subject}
 						</td>
-						<td>${RecruitBoardList.nickname}</td>
+						<td class="dropright">						
+							<a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="cursor:pointer">
+								${RecruitBoardList.nickname}
+							</a>
+							<div class="dropdown-menu">
+								<a class="dropdown-item" href="/recruitboard/recruitBoardList?searchType=nickname&keyword=${RecruitBoardList.nickname}">
+									<i class="far fa-file-alt" style="width: 20; height: 20"></i>&nbsp;&nbsp;글 더보기
+								</a>
+								<a class="dropdown-item" href="#">
+									<i class="far fa-envelope"></i>&nbsp;&nbsp;쪽지 보내기
+								</a>
+								<a class="dropdown-item" href="#">
+									<i class="far fa-heart"></i>&nbsp;&nbsp;팔로우하기
+								</a>
+							</div>
+						</td>
 						<td><fmt:formatDate value="${RecruitBoardList.reg_date}" pattern="yyyy-MM-dd" /></td>
 						<td>${RecruitBoardList.viewCount}</td>
 					</tr>

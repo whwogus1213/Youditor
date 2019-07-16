@@ -66,7 +66,28 @@
 	color: red;
 	background-color: #dddddd;
 }
+.article1{
+	clear: both;
+	position: relative;
+	width: 1000px;
+	height: 700px;
+	background-color: yellow;
+}
+.article2{
+	width: 90%;
+	height: 90%px;
+	background-color: green;
+}
 </style>
+<script type="text/javascript">
+$( ".dologin" ).click(function() {
+	var html = "";
+		html += "<div class='article1'>";
+		html += "<div class='article2'></div>";
+		html += "</div>";
+	 }
+});
+</script>
   <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
       <a class="navbar-brand" href="/">YouDitor</a>
@@ -116,6 +137,8 @@
 						href="/accounts/login.do">로그인</a></li>
 					<li class="nav-item"><a class="nav-link"
 						href="/accounts/join.do">회원가입</a></li>
+					<li class="nav-item"><a class="dologin"
+						href="#">로그인 테스트</a></li>
 				</c:if>
 			</ul>
       </div>

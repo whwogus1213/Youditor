@@ -13,8 +13,9 @@
 <!-- Custom styles -->
 <script src="https://kit.fontawesome.com/e83fabbb47.js"></script>
 <style type="text/css">
-a {
-	text-decoration: none;
+.fa-search:before {
+    content: "\f002";
+    cursor: pointer;
 }
 .card-body:hover
 	{
@@ -27,6 +28,13 @@ a {
  		/* 흐려짐 이펙트 */ 
 /* 		opacity: 0.3; */
 /* 		filter: alpha(opacity=30); */
+	}
+	.container {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: 180px;
 	}
 </style>
 </head>
@@ -120,23 +128,118 @@ a {
 	});
 	</script>
 	<jsp:include page="../module/top2.jsp" flush="false" />
-	<br>
 	
-	<div class="form-group">
-		<div class="col-sm-12">
-			<h2 align="center">&nbsp;</h2>
-			<h1 align="center">
-				<strong><%=request.getAttribute("categoryName")%></strong>
-			</h1>
-		</div>
-		<h5 align="center"><%=request.getAttribute("categoryName")%> 유투버들의 편집 영상입니다.</h5>
-		<div id="deleteOK" class="alert alert-danger hidden" role="alert" style="visibility: hidden">글이 삭제되었습니다.</div>
-	</div>
-	
-	<div class="container">
-		<!-- Marketing Icons Section -->
-		<h2 align="center">&nbsp;</h2>
 
+	<div class="container" style="background-color: #E8E8E8 ; font-family: 'Nanum Gothic', sans-serif;">
+		<br>
+	<c:choose>
+		<c:when test="${ categoryName eq '전체'}">
+			<div style="background-image:url('/resources/images/videoList/all.jpg'); background-position:43% 70%; color:white; text-shadow: -1px 0 #0099CC, 0 1px #0099CC, 1px 0 #0099CC, 0 -1px #0099CC">
+				<div class="col-sm-12">
+					<br><br><br><br>
+					<h1 align="center" style="font-size:60px; letter-spacing:60px">
+						<strong>&nbsp;전체보기</strong>
+					</h1>
+				</div>
+				<br>
+				<h4 align="center"><%=request.getAttribute("categoryName")%> 유투버들의 편집 영상입니다.</h4>
+				<div id="deleteOK" class="alert alert-danger hidden" role="alert" style="visibility: hidden">글이 삭제되었습니다.</div>
+			</div>
+		</c:when>
+		<c:when test="${ categoryName eq '게임'}">
+			<div style="background-image:url('/resources/images/videoList/game.png'); background-position:43% 50%; font-family: 'Do Hyeon', sans-serif; color:#3366FF;">
+				<div class="col-sm-12">
+					<br><br><br><br>
+					<h1 align="center" style="font-size:60px; letter-spacing:60px">
+						<strong>&nbsp;<%=request.getAttribute("categoryName")%></strong>
+					</h1>
+				</div>
+				<br>
+				<h4 align="center"><%=request.getAttribute("categoryName")%> 유투버들의 편집 영상입니다.</h4>
+				<div id="deleteOK" class="alert alert-danger hidden" role="alert" style="visibility: hidden">글이 삭제되었습니다.</div>
+			</div>
+		</c:when>
+		<c:when test="${ categoryName eq '먹방'}">
+			<div style="background-image:url('/resources/images/videoList/social_dining.jpg'); background-position:50% 25%; font-family: 'Nanum Brush Script', sans-serif; color:white;">
+				<div class="col-sm-12">
+					<br><br><br><br>
+					<h1 align="center" style="font-size:60px; letter-spacing:60px">
+						<strong>&nbsp;<%=request.getAttribute("categoryName")%></strong>
+					</h1>
+				</div>
+				<br>
+				<h4 align="center"><%=request.getAttribute("categoryName")%> 유투버들의 편집 영상입니다.</h4>
+				<div id="deleteOK" class="alert alert-danger hidden" role="alert" style="visibility: hidden">글이 삭제되었습니다.</div>
+			</div>
+		</c:when>
+		<c:when test="${ categoryName eq '일상'}">
+			<div style="background-image:url('/resources/images/videoList/daily_life.jpg'); background-position:70% 60%; font-family: 'Hi Melody', sans-serif; color:#FFCC00; text-shadow: -1px 0 #996600, 0 1px #996600, 1px 0 #996600, 0 -1px #996600;">
+				<div class="col-sm-12">
+					<br><br><br><br>
+					<h1 align="center" style="font-size:60px; letter-spacing:60px">
+						<strong>&nbsp;<%=request.getAttribute("categoryName")%></strong>
+					</h1>
+				</div>
+				<br>
+				<h4 align="center"><%=request.getAttribute("categoryName")%> 유투버들의 편집 영상입니다.</h4>
+				<div id="deleteOK" class="alert alert-danger hidden" role="alert" style="visibility: hidden">글이 삭제되었습니다.</div>
+			</div>
+		</c:when>
+		<c:when test="${ categoryName eq '모터'}">
+			<div style="background-image:url('/resources/images/videoList/motor.jpg'); background-position:70% 50%; background-size:120% 120%; font-family: 'Do Hyeon', sans-serif; color:white; text-shadow: -1px 0 #990033, 0 1px #990033, 1px 0 #990033, 0 -1px #990033;">
+				<div class="col-sm-12">
+					<br><br><br><br>
+					<h1 align="center" style="font-size:60px; letter-spacing:60px">
+						<strong>&nbsp;<%=request.getAttribute("categoryName")%></strong>
+					</h1>
+				</div>
+				<br>
+				<h4 align="center"><%=request.getAttribute("categoryName")%> 유투버들의 편집 영상입니다.</h4>
+				<div id="deleteOK" class="alert alert-danger hidden" role="alert" style="visibility: hidden">글이 삭제되었습니다.</div>
+			</div>
+		</c:when>
+		<c:when test="${ categoryName eq '스포츠'}">
+			<div style="background-image:url('/resources/images/videoList/sports.jpg'); background-position:50% 75%; font-family: 'Black Han Sans', sans-serif; color:white; text-shadow: -2px 0 #51A149, 0 2px #51A149, 2px 0 #51A149, 0 -2px #51A149;">
+				<div class="col-sm-12">
+					<br><br><br><br>
+					<h1 align="center" style="font-size:60px; letter-spacing:60px">
+						<strong>&nbsp;<%=request.getAttribute("categoryName")%></strong>
+					</h1>
+				</div>
+				<br>
+				<h4 align="center"><%=request.getAttribute("categoryName")%> 유투버들의 편집 영상입니다.</h4>
+				<div id="deleteOK" class="alert alert-danger hidden" role="alert" style="visibility: hidden">글이 삭제되었습니다.</div>
+			</div>
+		</c:when>
+		<c:when test="${ categoryName eq '예능'}">
+			<div style="background-image:url('/resources/images/videoList/entertainment.jpg'); background-position:50% 60%; font-family: 'Cute Font', sans-serif; color:white;  text-shadow: -1px 0 #339966, 0 1px #339966, 1px 0 #339966, 0 -1px #339966;">
+				<div class="col-sm-12">
+					<br><br><br><br>
+					<h1 align="center" style="font-size:60px; letter-spacing:60px">
+						<strong>&nbsp;<%=request.getAttribute("categoryName")%></strong>
+					</h1>
+				</div>
+				<br>
+				<h3 align="center"><%=request.getAttribute("categoryName")%> 유투버들의 편집 영상입니다.</h3>
+				<div id="deleteOK" class="alert alert-danger hidden" role="alert" style="visibility: hidden">글이 삭제되었습니다.</div>
+			</div>
+		</c:when>
+		<c:otherwise>
+			<div style="background-color: #C8C8C8; font-family: 'Do Hyeon', sans-serif; ">
+				<div class="col-sm-12">
+					<br><br><br><br>
+					<h1 align="center" style="font-size:60px; letter-spacing:60px">
+						<strong>&nbsp;<%=request.getAttribute("categoryName")%></strong>
+					</h1>
+				</div>
+				<br>
+				<h5 align="center"><%=request.getAttribute("categoryName")%> 유투버들의 편집 영상입니다.</h5>
+				<div id="deleteOK" class="alert alert-danger hidden" role="alert" style="visibility: hidden">글이 삭제되었습니다.</div>
+			</div>
+		</c:otherwise>
+	</c:choose>
+		<!-- Marketing Icons Section -->
+		<br>
 		<div class="row">
 			<c:forEach items="${VideoBoardList}" var="VideoBoardList">
 				<div class="col-lg-4 mb-4">
@@ -177,16 +280,13 @@ a {
           							</a>
           							<div class="dropdown-menu">
           								<a class="dropdown-item" href="/videoboard/videoBoardList?searchType=nickname&keyword=${VideoBoardList.nickname}">
-          									<img alt="more" src="/resources/images/icon/more.png" width="20" height="20">
-          									영상 더보기
-          								</a>
-          								<a class="dropdown-item" href="#">
-          									<img alt="message" src="/resources/images/icon/message.png" width="20" height="20">
-          									쪽지 보내기
-          								</a>
-          								<a class="dropdown-item" href="#">
-          									<img alt="follow" src="/resources/images/icon/follow.png" width="20" height="20">
-          									팔로우하기
+											<i class="fab fa-youtube"></i>&nbsp;&nbsp;영상 더보기
+										</a>
+										<a class="dropdown-item" href="#">
+											<i class="far fa-envelope"></i>&nbsp;&nbsp;쪽지 보내기
+										</a>
+										<a class="dropdown-item" href="#">
+											<i class="far fa-heart"></i>&nbsp;&nbsp;팔로우하기
           								</a>
           							</div>
           						</div>

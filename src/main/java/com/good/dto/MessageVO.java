@@ -10,8 +10,8 @@ public class MessageVO {
 	private String object;
 	private Date send_date;
 	private Date read_date;
-	private int senderView;
-	private int receiverView;
+	private boolean senderView;
+	private boolean receiverView;
 	
 	public int getMessageId() {
 		return messageId;
@@ -55,16 +55,16 @@ public class MessageVO {
 	public void setRead_date(Date read_date) {
 		this.read_date = read_date;
 	}
-	public int getSenderView() {
+	public boolean getSenderView() {
 		return senderView;
 	}
-	public void setSenderView(int senderView) {
+	public void setSenderView(boolean senderView) {
 		this.senderView = senderView;
 	}
-	public int getReceiverView() {
+	public boolean getReceiverView() {
 		return receiverView;
 	}
-	public void setReceiverView(int receiverView) {
+	public void setReceiverView(boolean receiverView) {
 		this.receiverView = receiverView;
 	}
 

@@ -14,14 +14,16 @@
 </head>
 <body>
 	<jsp:include page="../module/top2.jsp" flush="false" />
-	<div class="form-group">
-		<div class="col-sm-12">
-			<h2 align="center">&nbsp;</h2>
-			<h1 align="center">유투브 올리기</h1>
-			<h2 align="center">&nbsp;</h2>
-		</div>
-	</div>
+	<div  style="font-family: 'Nanum Gothic', sans-serif;">
+		
 	<div class="container">
+		<div class="form-group">
+			<div class="col-sm-12">
+				<h2 align="center">&nbsp;</h2>
+				<h1 align="center"><strong>유투브 올리기</strong></h1>
+				<h2 align="center">&nbsp;</h2>
+			</div>
+		</div>
 	    <form class="form-horizontal" method="post" action="${path}/videoboard/insertVideoBoardPro">
 	    	<div class="form-inline">
 	        	<label class="control-label col-sm-2">제목</label>
@@ -102,6 +104,7 @@
 			</div>
 			<br>
 		</form>
+	</div>
 	</div>
 	<jsp:include page="../module/bottom.jsp" flush="false" />
 </body>

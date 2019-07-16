@@ -1,5 +1,6 @@
 package com.good.youditor;
 
+import java.io.Console;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -10,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.good.dto.MessageVO;
 import com.good.dto.AccountsVO;
@@ -109,7 +111,7 @@ public class MessageController {
 	}
 	
 	// 메시지 답장 쓰기
-	@RequestMapping(value = "/reply.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/reply.do", method = RequestMethod.GET)
 	public String replydo(Model model, @RequestParam("messageId") int messageId) throws Exception {
 		System.out.println("*************************************************");
 		// senderAccountId로 nickname 추출, subject & object 추출
@@ -121,40 +123,66 @@ public class MessageController {
 	}
 	
 	// 메시지 보내기
+	@ResponseBody
 	@RequestMapping(value = "/sendMessagePro", method = RequestMethod.POST)
-	public String sendMessagePro(@RequestParam("senderAccountId") int senderAccountId,
-								@RequestParam("nickname") String nickname,
-								@RequestParam("subject") String subject,
-								@RequestParam("object") String object) throws Exception {
-		System.out.println("============sendMessagePro 성공==============");
-		MessageVO vo = new MessageList();
-		vo.setSenderAccountId(senderAccountId);
+	public int sendMessagePro(@RequestParam(value="senderAccountId") String senderAccountId,
+								@RequestParam(value="nickname") String nickname,
+								@RequestParam(value="subject") String subject,
+								@RequestParam(value="object") String object) throws Exception {
+		System.out.println(senderAccountId + ", " + nickname + ", " + subject + ", " + object);
 		
-		int receiverAccountId = service.getAccountIdByNickname(nickname);
-		vo.setReceiverAccountId(receiverAccountId);
-		vo.setSubject(subject);
-		vo.setObject(object);
-		service.sendMessage(vo);
-		return "message/messageReSendList";
+		int result = 0;
+		
+		int count = 0;
+		count = service.checkNickname(nickname);
+		
+		if(count >= 1) {
+			int receiverAccountId = service.getAccountIdByNickname(nickname);
+			MessageVO vo = new MessageList();
+			vo.setSenderAccountId(Integer.parseInt(senderAccountId));
+			vo.setReceiverAccountId(receiverAccountId);
+			vo.setSubject(subject);
+			vo.setObject(object);
+			service.sendMessage(vo);
+			
+			result = 1;
+		}
+		
+		return result;
 	}
 	
 	// 받은 메시지 숨기기
-	@RequestMapping(value="/hideReceivedMessage")
-	public String hideReceivedMessage(@RequestParam(value="messageId",required=true) List<String> list) throws Exception {
+	@ResponseBody
+	@RequestMapping(value="/hideReceivedMessage", method=RequestMethod.POST)
+	public int hideReceivedMessage(@RequestParam(value = "chBox[]") List<String> chArr) throws Exception {
+		int result = 0;
 		
-		service.hideReceivedMessage(list);
+		for(String i : chArr) {
+			int mId = Integer.parseInt(i);
+			
+			service.hideReceivedMessage(mId);
+			
+			result = 1;
+		}
 		
-		return "message/messageReReceiveList";
+		return result;
 	}
 	
 	// 보낸 메시지 숨기기
-	@RequestMapping(value="/hideSendMessage")
-	public String hideSendMessage(@RequestParam(value="messageId",required=true) List<String> list) throws Exception {
+	@ResponseBody
+	@RequestMapping(value="/hideSendMessage", method=RequestMethod.POST)
+	public int hideSendMessage(@RequestParam(value = "chBox[]") List<String> chArr) throws Exception {
+		int result = 0;
 		
-		service.hideSendMessage(list);
+		for(String i : chArr) {
+			int mId = Integer.parseInt(i);
+			
+			service.hideSendMessage(mId);
+			
+			result = 1;
+		}
 		
-		return "message/messageReSendList";
+		return result;
 	}
-	
 	
 }

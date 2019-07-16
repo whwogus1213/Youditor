@@ -10,6 +10,12 @@
 <title>공지사항 - YouditoR</title>
 <jsp:include page="../module/header.jsp" flush="false" />
 <script src="https://kit.fontawesome.com/e83fabbb47.js"></script>
+<style type="text/css">
+.fa-search:before {
+    content: "\f002";
+    cursor: pointer;
+}
+</style>
 <script>
 	// 이전 버튼
 	function fn_prev(page, range, rangeSize, searchType, keyword) {
@@ -179,7 +185,7 @@
 			</div>
 
 			<div class="col-1" style="padding-left: 5px; text-align: center; padding-top: 2px;">
-				<i class="fas fa-search" name="btnSearch" id="btnSearch"></i>
+				<i class="fas fa-search" name="btnSearch" id="btnSearch" style="cursor: "></i>
 			</div>
 			
 			<div class="col-sm-2" align="right">

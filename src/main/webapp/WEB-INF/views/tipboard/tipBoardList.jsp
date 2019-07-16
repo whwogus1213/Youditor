@@ -122,9 +122,24 @@
 						<td>${TipBoardList.boardId}</td>
 						<td>${TipBoardList.categoryName}</td>
 						<td align="left" style="padding-left: 30px; cursor: pointer;"
-							onclick="location.href='/tipboard/tipBoardView?boardId=${TipBoardList.boardId}'">
-							${TipBoardList.subject}</td>
-						<td>${TipBoardList.nickname}</td>
+							onclick="location.href='/tipboard/tipBoardView?boardId=${TipBoardList.boardId}'">${TipBoardList.subject}
+						</td>
+						<td class="dropright">						
+							<a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="cursor:pointer">
+								${TipBoardList.nickname}
+							</a>
+							<div class="dropdown-menu">
+								<a class="dropdown-item" href="/tipboard/tipBoardList?searchType=nickname&keyword=${TipBoardList.nickname}">
+									<i class="far fa-file-alt" style="width: 20; height: 20"></i>&nbsp;&nbsp;팁 더보기
+								</a>
+								<a class="dropdown-item" href="#">
+									<i class="far fa-envelope"></i>&nbsp;&nbsp;쪽지 보내기
+								</a>
+								<a class="dropdown-item" href="#">
+									<i class="far fa-heart"></i>&nbsp;&nbsp;팔로우하기
+								</a>
+							</div>
+						</td>
 						<td><fmt:formatDate value="${TipBoardList.reg_date}"
 								pattern="yyyy-MM-dd" /></td>
 						<td>${TipBoardList.viewCount}</td>
@@ -132,6 +147,7 @@
 				</c:forEach>
 			</tbody>
 		</table>
+
 
 		<!-- 페이징 검색 시작 -->
 		<div class="row">
