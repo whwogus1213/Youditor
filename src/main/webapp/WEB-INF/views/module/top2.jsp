@@ -2,6 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+
+<link href="/resources/css/chat.css" rel="stylesheet">
+
 <style type="text/css">
 
 /* The sidebar menu */
@@ -192,17 +195,31 @@
   </div>
 </div>
 <!-- Side navigation -->
-<div class="sidenav" id="mySidebar"  style="padding: 0; margin-top: 10px; border-radius: 10px;">
+<div class="sidenav" id="mySidebar"  style="padding: 0; margin-top: 7px; border-radius: 10px;">
 	<div align="center">
 		<c:if test="${login.accountId ne null }">
 			<jsp:include page="../chat/chattingview.jsp" flush="false"/>
 		</c:if>
 		<c:if test="${login.accountId eq null }">
-			<h5>로그인 이후<br>채팅이<br>가능합니다.</h5>
-			<hr>
-			<h6><a href="accounts/login.do">로그인</a></h6>
-			<h6>or</h6>
-			<h6><a href="accounts/join.do">회원가입</a></h6>
+<!-- 			<h5>로그인 이후<br>채팅이<br>가능합니다.</h5> -->
+<!-- 			<hr> -->
+<!-- 			<h6><a href="accounts/login.do">로그인</a></h6> -->
+<!-- 			<h6>or</h6> -->
+<!-- 			<h6><a href="accounts/join.do">회원가입</a></h6> -->
+			
+			<div class="chat_window">
+    			<div class="top_menu">
+        			<div class="title">유디터(<span id='sessionCnt'></span>)</div>
+    			</div>
+    			<ul class="messages"></ul>
+    			<div class="bottom_wrapper clearfix">
+					<p style="font-size: 10px;margin-bottom: 3px;text-align: left;font-weight: 300;">${login.nickname}</p>
+	       			<div class="message_input_wrapper">
+			            <input class="message_input" disabled="disabled" placeholder="로그인후 사용가능.."/>
+        			</div>
+    			</div>
+			</div>
+			
 		</c:if>
 	</div>
 </div>
