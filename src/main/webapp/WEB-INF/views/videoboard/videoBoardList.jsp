@@ -130,7 +130,7 @@
 	<jsp:include page="../module/top2.jsp" flush="false" />
 	
 
-	<div class="container" style="background-color: #E8E8E8 ; font-family: 'Nanum Gothic', sans-serif;">
+	<div class="container" style="background-color: #E8E8E8 ;">
 		<br>
 	<c:choose>
 		<c:when test="${ categoryName eq '전체'}">
