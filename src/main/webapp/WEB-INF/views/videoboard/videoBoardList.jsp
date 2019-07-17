@@ -156,7 +156,7 @@
 			</div>
 		</c:when>
 		<c:when test="${ categoryName eq '게임'}">
-			<div style="background-image:url('/resources/images/videoList/game.png'); background-position:50% 50%; font-family: 'Do Hyeon', sans-serif; color:#3366FF;">
+			<div style="background-image:url('/resources/images/videoList/game.png'); background-position:44% 50%; font-family: 'Do Hyeon', sans-serif; color:#3366FF;">
 				<div class="col-sm-12">
 					<br><br><br><br>
 					<h1 align="center" style="font-size:60px; letter-spacing:60px">
@@ -294,9 +294,16 @@
           								<a class="dropdown-item" href="/videoboard/videoBoardList?searchType=nickname&keyword=${VideoBoardList.nickname}">
 											<i class="fab fa-youtube"></i>&nbsp;&nbsp;영상 더보기
 										</a>
-										<a class="dropdown-item" href="#">
+										<a class="dropdown-item" href="#" onclick="messagePopup();">
 											<i class="far fa-envelope"></i>&nbsp;&nbsp;쪽지 보내기
 										</a>
+										<script type="text/javascript">
+										function messagePopup() {
+											var nickname = "${VideoBoardList.nickname }";
+											var win = window.open("/message/writePopup.do?nickname=" + nickname, "_blank", 
+													"width=650, height=470, left=200, top=200, location=no, menubar=no, resizble=no, scrollbars=no, status=no, titlebar=no, toolbar=no");
+										}
+										</script>
 										<a class="dropdown-item" href="#">
 											<i class="far fa-heart"></i>&nbsp;&nbsp;팔로우하기
           								</a>
