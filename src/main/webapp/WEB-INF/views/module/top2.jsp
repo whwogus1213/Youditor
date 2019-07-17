@@ -2,6 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+
+<link href="/resources/css/chat.css" rel="stylesheet">
+
 <style type="text/css">
 
 /* The sidebar menu */
@@ -81,7 +84,8 @@
 .hire {
 	padding-left: 0%;
 }
-.message {
+
+.messageMain {
 	padding-left: 44%;
 }
 .accounts {
@@ -139,8 +143,6 @@
 }
 </script>
 
-<!-- Side navigation -->
-
 <!-- Trigger the modal with a button -->
 <!-- Modal -->
 <div id="myModal" class="modal fade" role="dialog">
@@ -192,17 +194,32 @@
 
   </div>
 </div>
-<div class="sidenav" id="mySidebar">
+<!-- Side navigation -->
+<div class="sidenav" id="mySidebar"  style="padding: 0; margin-top: 7px; border-radius: 10px;">
 	<div align="center">
 		<c:if test="${login.accountId ne null }">
 			<jsp:include page="../chat/chattingview.jsp" flush="false"/>
 		</c:if>
 		<c:if test="${login.accountId eq null }">
-			<h5>로그인 이후<br>채팅이<br>가능합니다.</h5>
-			<hr>
-			<h6><a href="accounts/login.do">로그인</a></h6>
-			<h6>or</h6>
-			<h6><a href="accounts/join.do">회원가입</a></h6>
+<!-- 			<h5>로그인 이후<br>채팅이<br>가능합니다.</h5> -->
+<!-- 			<hr> -->
+<!-- 			<h6><a href="accounts/login.do">로그인</a></h6> -->
+<!-- 			<h6>or</h6> -->
+<!-- 			<h6><a href="accounts/join.do">회원가입</a></h6> -->
+			
+			<div class="chat_window">
+    			<div class="top_menu">
+        			<div class="title">유디터(<span id='sessionCnt'></span>)</div>
+    			</div>
+    			<ul class="messages"></ul>
+    			<div class="bottom_wrapper clearfix">
+					<p style="font-size: 10px;margin-bottom: 3px;text-align: left;font-weight: 300;">${login.nickname}</p>
+	       			<div class="message_input_wrapper">
+			            <input class="message_input" disabled="disabled" placeholder="로그인후 사용가능.."/>
+        			</div>
+    			</div>
+			</div>
+			
 		</c:if>
 	</div>
 </div>
@@ -260,7 +277,7 @@
 					<img src="<spring:url value='/image/${login.picture}'/>" class=" mx-auto rounded-circle" width="40px" height="40px"/>
 					<li class="nav-item topMenuLi">
 						<a class="nav-link" href="#">메세지</a>
-						<ul class="submenu message">
+						<ul class="submenu messageMain">
 							<li>|</li>
 							<li><a class="submenuLink" href="/message/messageReceiveList">받은 메세지</a></li>
 							<li>|</li>
@@ -286,8 +303,9 @@
 				</c:if>
 				<c:if test="${login.accountId eq null }">
 					<li class="nav-item">
-					<button type="button" class="nav-link button-style" data-toggle="modal" 
-					data-target="#myModal">로그인</button></li>
+						<button type="button" class="nav-link button-style" data-toggle="modal" 
+						data-target="#myModal">로그인</button>
+					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="/accounts/join.do">회원가입</a>
 					</li>
@@ -296,34 +314,33 @@
 			</ul>
 		</div>
 	</div>
-	<button class="btn btn-light" onclick="openNav()">Chat</button>  
+	
+	<!-- Chat 채팅 아이콘 -->
+	<i id="chatBtn" class="far fa-comments" style="font-size: 1.8em; color: white; cursor: pointer;" onclick="openNav();"></i>
+	  
 	<script>
 		function openNav() {
+				 
 			if(document.getElementById("mySidebar").getBoundingClientRect().width=="0"){
-				 document.getElementById("mySidebar").style.width = "230px";
+// 				 document.getElementById("mySidebar").style.width = "230px";
+				$("#mySidebar").animate({width:"230px"},500,"swing");
+				$("#chatBtn").animate({fontSize:"2.3em"},250,"linear",function(){
+					$("#chatBtn").animate({fontSize:"1.8em"},250,"linear",function(){
+						$("#chatBtn").attr("class","fas fa-comments");
+					});
+				});
+				
 			} else {
-				 document.getElementById("mySidebar").style.width = "0";
+// 				document.getElementById("mySidebar").style.width = "0";
+				$("#mySidebar").animate({width:"0px"},500,"swing");
+				$("#chatBtn").animate({fontSize:"2.3em"},250,"linear",function(){
+					$("#chatBtn").animate({fontSize:"1.8em"},250,"linear",function(){
+						$("#chatBtn").attr("class","far fa-comments");
+					});
+				});
 			}
 		}
 		
-		function closeNav() {
-			document.getElementById("mySidebar").style.width = "0";
-		}
 	</script>
 </nav>
 
-<!-- Side navigation -->
-<div class="sidenav" id="mySidebar">
-	<div align="center">
-		<c:if test="${login.accountId ne null }">
-			<jsp:include page="../chat/chattingview.jsp" flush="false"/>
-		</c:if>
-		<c:if test="${login.accountId eq null }">
-			<h5>로그인 이후<br>채팅이<br>가능합니다.</h5>
-			<hr>
-			<h6><a href="accounts/login.do">로그인</a></h6>
-			<h6>or</h6>
-			<h6><a href="accounts/join.do">회원가입</a></h6>
-		</c:if>
-	</div>
-</div>

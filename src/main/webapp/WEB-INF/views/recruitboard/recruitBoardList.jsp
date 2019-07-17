@@ -8,6 +8,11 @@
 <head>
 <meta charset="UTF-8">
 <title>구인구직 - YouditoR</title>
+<style type="text/css">
+button[type="button"] {
+	font-family: FontAwesome;
+}
+</style>
 <jsp:include page="../module/header.jsp" flush="false" />
 <script src="https://kit.fontawesome.com/e83fabbb47.js"></script>
 <style type="text/css">
@@ -213,8 +218,10 @@
 			<div class="col-sm-2" align="right">
 			
 				<c:if test="${login.email != null}">
-					<button type="button" class="btn btn-sm btn-primary"
-						onclick="location.href='/recruitboard/write.do' ">글쓰기</button>
+					
+					<button type="button" class="btn btn-sm btn-primary" value="f040" 
+						onclick="location.href='/recruitboard/write.do'">
+						글쓰기</button>
 				</c:if>
 			</div>
 		</div>
