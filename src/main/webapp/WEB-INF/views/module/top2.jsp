@@ -118,6 +118,22 @@
 .modal-header .close {
     margin: -1rem -1rem -1rem 10px;
 }
+.modal-body {
+    padding-top: 60px;
+}
+#myModal2 {
+    z-index: 1100;
+}
+.modal2 {
+    width: 400px;
+    margin-top: 100px;
+}
+.button-style3{
+	background-color: #fff;
+	border: 0;
+	color: blue;
+	margin-left: 130px;
+}
 </style>
 <script type="text/javascript">
 	$(function(){
@@ -141,7 +157,74 @@
 		if(pwd.length == 0) { alert("비밀번호를 입력해 주세요."); $("#pwd").focus(); return; }
 	$("#frm").submit();
 }
+	var isCheckEmail = 0;
+	function DosignUp() {
+		var email = $("#email").val();
+		$.ajax({
+			async: true,
+			type: "POST",
+			data: email,
+			url: "/accounts/checkEmail.do",
+			dataType : "json",
+			contentType: "application/json; charset=UTF-8",
+			success: function (data) {
+		        if(data.cnt == 1) {
+					isCheckEmail = 1;
+		        } else {
+					alert("존재하지 않는 이메일입니다.");
+					$("#email").focus();
+		        }
+			}
+		});
+		var email = $("#email").val();
+		if(email.length == 0) {
+			alert("이메일를 입력해 주세요.");
+			$("#email").focus();
+			return;
+		}
+		if(isCheckEmail == 1) {
+			$("#frm2").submit();
+		}
+	}
+	
 </script>
+<!-- forgetModal -->
+<div id="myModal2" class="modal fade" role="dialog">
+  <div class="modal-dialog modal2">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header"><h4 class="modal-title">비밀번호 찾기</h4>
+        <button type="button" class="close" data-dismiss="modal">x</button>
+      </div>
+      <div class="modal-body">
+        
+		<form class="form-horizontal" id="frm2" method="post" action="/accounts/resetPasswordPro">
+		<div class="form-inline">
+			<h2 align="center">&nbsp;</h2>
+			<label class="control-label col-sm-3">이메일</label>
+			<div class="col-sm-3">
+				<input type="text" class="form-control" id="email"
+					name="email" maxlength="30" placeholder="Enter ID">
+			</div>
+		</div>
+		<div class="form-group">
+			<h2 align="center">&nbsp;</h2>
+			<div class="col-sm-offset-2 col-sm-12" align="center">
+				<button type="button" class="btn btn-primary" onclick="DosignUp();">
+					비번리셋
+				</button>
+			</div>
+		</div>
+	</form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
 
 <!-- Trigger the modal with a button -->
 <!-- Modal -->
@@ -170,9 +253,11 @@
 			<div class="col-sm-3 form-control2">
 				<input type="password" class="form-control" id="pwd"
 					name="pwd" maxlength="20" placeholder="Enter Password"><br>
-				<a href="/accounts/resetPassword.do">비밀번호를 잊어버리셨습니까?</a>
 			</div>
-		</div>
+			<div>
+			<button type="button" class="nav-link button-style3" data-toggle="modal" 
+						data-target="#myModal2">비밀번호를 잊어버리셨습니까?</button>
+		</div></div>
 		<h2 align="center">&nbsp;</h2>
 		<div class="form-group">
 			<h2 align="center">&nbsp;</h2>
@@ -186,9 +271,6 @@
 			</div>
 		</div>
 	</form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
 
