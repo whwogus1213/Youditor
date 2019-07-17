@@ -286,8 +286,9 @@
 				</c:if>
 				<c:if test="${login.accountId eq null }">
 					<li class="nav-item">
-					<button type="button" class="nav-link button-style" data-toggle="modal" 
-					data-target="#myModal">로그인</button></li>
+						<button type="button" class="nav-link button-style" data-toggle="modal" 
+						data-target="#myModal">로그인</button>
+					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="/accounts/join.do">회원가입</a>
 					</li>
