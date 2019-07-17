@@ -129,7 +129,25 @@
 						onclick="location.href='/noticeboard/noticeBoardView?boardId=${NoticeBoardList.boardId}'">
 								${NoticeBoardList.subject}
 						</td>
-						<td>${NoticeBoardList.nickname}</td>
+						<td>
+							<div class="dropright">
+								<a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="cursor:pointer">
+									${NoticeBoardList.nickname}
+								</a>
+								<div class="dropdown-menu">
+									<a class="dropdown-item" href="#" onclick="messagePopup();">
+										<i class="far fa-envelope"></i>&nbsp;&nbsp;쪽지 보내기
+									</a>
+									<script type="text/javascript">
+									function messagePopup() {
+										var nickname = "${NoticeBoardList.nickname }";
+										var win = window.open("/message/writePopup.do?nickname=" + nickname, "_blank", 
+												"width=650, height=470, left=200, top=200, location=no, menubar=no, resizble=no, scrollbars=no, status=no, titlebar=no, toolbar=no");
+									}
+									</script>
+								</div>
+							</div>
+						</td>
 						<td><fmt:formatDate value="${NoticeBoardList.reg_date}"
 								pattern="yyyy-MM-dd" /></td>
 						<td>${NoticeBoardList.viewCount}</td>
@@ -190,9 +208,10 @@
 			
 			<div class="col-sm-2" align="right">
 			
-				<c:if test="${login.email != null}">
+				<c:if test="${login.authority >= 3 }">
 					<button type="button" class="btn btn-sm btn-primary"
 						onclick="location.href='/noticeboard/write.do' ">글쓰기</button>
+						권한3↑
 				</c:if>
 			</div>
 		</div>
