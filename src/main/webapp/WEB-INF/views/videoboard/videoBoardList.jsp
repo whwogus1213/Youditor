@@ -131,7 +131,7 @@
 	<jsp:include page="../module/VideoBoardListAside.jsp" flush="false" />
 	
 
-	<div class="container" style="background-color: #E8E8E8 ; font-family: 'Nanum Gothic', sans-serif;">
+	<div class="container" style="background-color: #E8E8E8 ;">
 		<br>
 	<c:choose>
 		<c:when test="${ categoryName eq '전체'}">
@@ -148,7 +148,7 @@
 			</div>
 		</c:when>
 		<c:when test="${ categoryName eq '게임'}">
-			<div style="background-image:url('/resources/images/videoList/game.png'); background-position:43% 50%; font-family: 'Do Hyeon', sans-serif; color:#3366FF;">
+			<div style="background-image:url('/resources/images/videoList/game.png'); background-position:50% 50%; font-family: 'Do Hyeon', sans-serif; color:#3366FF;">
 				<div class="col-sm-12">
 					<br><br><br><br>
 					<h1 align="center" style="font-size:60px; letter-spacing:60px">
