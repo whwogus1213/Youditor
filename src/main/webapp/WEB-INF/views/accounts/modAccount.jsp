@@ -14,6 +14,53 @@
 	<title>회원정보수정 - YouDitor</title>
 	<jsp:include page="../module/header.jsp" flush="false"/>
 	<link href="/resources/css/modern-business.css" rel="stylesheet">
+	<style>
+	
+	table {
+    	margin: 40px;
+    	width: 800px;
+	}
+	textarea, input {
+    padding-left: 5px;
+}
+textarea{
+	width: 300px;
+}
+td, th {
+    line-height: 14px;
+    text-align: left;
+    vertical-align: top;
+    letter-spacing: -1px;
+    border: 0;
+    border: 1px solid #e5e5e5;
+    padding: 32px 0 32px 30px;
+}
+th {
+    color: #333;
+    border-right: 1px solid #e5e5e5;
+    background: #f9f9f9;
+}
+.thcell {
+    padding: 32px 31px 32px;
+}
+#pass-st{
+	margin-top: 30px;
+}
+.ud-st{
+	margin-bottom: 40px;
+}
+#bt-st {
+    background-color: #fff;
+    padding: 15px;
+    border: 1px solid #777;
+    margin-left: 35px;
+}
+#bt-st1 {
+    background-color: #fff;
+    padding: 15px;
+    border: 1px solid #777;
+}
+	</style>
 	<script type="text/javascript">
 	// 변경될 사진을 미리 보여준다.
 	var sel_file;
@@ -41,35 +88,35 @@
 	}
 	
 	function btnRePwd() {
-		var pwdCfm = $("#pwdCfm").val();
-		var pwd = $("#pwd").val();
-  		if(pwd == pwdCfm) {
+		var ppwdCfm = $("#ppwdCfm").val();
+		var ppwd = $("#ppwd").val();
+  		if(ppwd == ppwdCfm) {
   			document.modForm.action = "${path}/accounts/updatePassword.do";
 			document.modForm.submit();
   	  	} else {
 	  	  	alert("비밀번호가 틀렸습니다.");
-  			$("#pwdCfm").focus();
+  			$("#ppwdCfm").focus();
   			return;
 		}
   	}
 	
 	function btnUpdate() {
-		var pwdCfm = $("#pwdCfm").val();
-		var pwd = $("#pwd").val();
+		var ppwdCfm = $("#ppwdCfm").val();
+		var ppwd = $("#ppwd").val();
 		if(pwd == pwdCfm) {
 			document.modForm.action = "${path}/accounts/updateAccount.do";
 			document.modForm.submit();
   	  	} else {
   	  		alert("비밀번호가 틀렸습니다.");
-			$("#pwdCfm").focus();
+			$("#ppwdCfm").focus();
 			return;
 		}
   	}
 	
 	function btnDelete() {
-		var pwdCfm = $("#pwdCfm").val();
-		var pwd = $("#pwd").val();
-		if(pwd == pwdCfm) {
+		var ppwdCfm = $("#ppwdCfm").val();
+		var ppwd = $("#ppwd").val();
+		if(ppwd == ppwdCfm) {
 			msg = "정말로 계정을 삭제하시겠습니까?";
             if (confirm(msg)!=0) {
 				// Yes click
@@ -81,58 +128,58 @@
 			}
   		} else {
   			alert("비밀번호가 틀렸습니다.");
-  			$("#pwdCfm").focus();
+  			$("#ppwdCfm").focus();
   			return;
   	  	}
   	}
 	</script>
 </head>
-<body>
+<body style="background-color: #FFF;">
 	<jsp:include page="../module/top2.jsp" flush="false"/>
 	<div align="center">
 		<c:if test="${login.accountId ne null }">
 			<form:form name="modForm" method="POST" enctype="multipart/form-data">
 				<table>
 					<tr>
-						<td>가입날자</td>
+						<th class="thcell">가입날자</th>
 						<td>${login.reg_date }</td>
 					</tr>
 					<tr>
-						<td>마지막수정날자</td>
+						<th class="thcell">마지막수정날자</th>
 						<td>${login.mod_date }</td>
 					</tr>
 					<tr>
-						<td>이메일</td>
+						<th class="thcell">이메일</th>
 						<td><input type="text" name="email" id="email" value="${login.email }" readonly="readonly"></td>
 					</tr>
 					<tr>
-						<td>비밀번호 확인</td>
+						<th class="thcell">비밀번호 확인</th>
 						<td>
-							<input type="password" name="pwdCfm" id="pwdCfm" value="">
-							<input type="hidden" name="pwd" id="pwd" value="${login.pwd }">
+						<p>
+							<input type="password" name="ppwdCfm" id="ppwdCfm" value="">
+							<input type="hidden" name="ppwd" id="ppwd" value="${login.pwd }">
+						</p>
+						<p id="pass-st">
+							<input id="bt-st1" type="button" value="비밀번호변경" onclick="btnRePwd();">
+						</p>
 						</td>
 					</tr>
 					<tr>
-						<td>
-							&nbsp;
-						</td>
-						<td>
-							<input type="button" value="비밀번호바꾸기" onclick="btnRePwd();">
-						</td>
+						
 					</tr>
 					<tr>
-						<td>닉네임</td>
+						<th class="thcell">닉네임</th>
 						<td><input type="text" name="nickname" id="nickname" value="${login.nickname }"></td>
 					</tr>
 					<tr>
-						<td>포트레이트</td>
+						<th class="thcell">포트레이트</th>
 						<td>
 						 	<!-- name="picture"의 변수명과 컨트롤러의 MultipartFile file과 일치해야 한다. -->
 							<input type="file" name="picture" id="picture" value="${login.picture }">
 						 </td>
 					</tr>
 					<tr>
-						 <td>미리보기<br> (용량: 10mb미만)</td>
+						 <th class="thcell">미리보기<br> (용량: 10mb미만)</th>
 						<td>
 							<c:choose>
 						 		<c:when test="${empty picture }">
@@ -142,24 +189,23 @@
 								</c:when>
 								<c:otherwise>
 									<div>
-										<img id="profileImg" class=" mx-auto rounded-circle" width="100px" height="100px"" />
+										<img id="profileImg" class=" mx-auto rounded-circle" width="100px" height="100px" />
 									</div>
 								</c:otherwise>
 							</c:choose>
 						</td>
 					</tr>
 					<tr>
-						<td>자기소개</td>
+						<th class="thcell">자기소개</th>
 						<td><textarea name="footer" id="footer" rows="4" cols="10">${login.footer }</textarea>
 					</tr>
-					<tr>
-						<td align="center">
-							<input type="hidden" name="accountId" id="accountId" value="${login.accountId }">
-							<input type="button" value="수정하기" onclick="btnUpdate();">
-							<input type="button" value="삭제하기" onclick="btnDelete();">
-						</td>
-					</tr>
+							
 				</table>
+				<div class="ud-st">
+					<input  type="hidden" name="accountId" id="accountId" value="${login.accountId }">
+					<input id="bt-st" type="button" value="수정하기" onclick="btnUpdate();">
+					<input id="bt-st" type="button" value="삭제하기" onclick="btnDelete();">	
+				</div>
 			</form:form>
 		</c:if>
 		<c:if test="${login.accountId eq null }">

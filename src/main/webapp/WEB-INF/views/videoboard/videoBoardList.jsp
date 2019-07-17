@@ -34,7 +34,7 @@
     padding-right: 15px;
     padding-left: 15px;
     margin-right: auto;
-    margin-left: 180px;
+    margin-left: 230px;
 	}
 </style>
 </head>
@@ -128,6 +128,7 @@
 	});
 	</script>
 	<jsp:include page="../module/top2.jsp" flush="false" />
+	<jsp:include page="../module/VideoBoardListAside.jsp" flush="false" />
 	
 
 	<div class="container" style="background-color: #E8E8E8 ;">

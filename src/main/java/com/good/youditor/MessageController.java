@@ -1,6 +1,5 @@
 package com.good.youditor;
 
-import java.io.Console;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -114,7 +113,7 @@ public class MessageController {
 	@RequestMapping(value = "/reply.do", method = RequestMethod.GET)
 	public String replydo(Model model, @RequestParam("messageId") int messageId) throws Exception {
 		System.out.println("*************************************************");
-		// senderAccountId로 nickname 추출, subject & object 추출
+		// messageId로 nickname 추출, subject & object 추출
 		MessageList replyInfo = service.getReplyInfo(messageId);
 		
 		model.addAttribute("replyInfo", replyInfo);
@@ -185,4 +184,12 @@ public class MessageController {
 		return result;
 	}
 	
+	// 메세지 팝업 쓰기
+	@RequestMapping(value="/writePopup.do", method=RequestMethod.GET)
+	String replydo(Model model, @RequestParam("nickname") String nickname) throws Exception {
+		System.out.println("*************************************************");
+		model.addAttribute("to", nickname);
+		System.out.println("MessageController messageWritePopup open");
+		return "message/messageWritePopup";
+	}
 }
