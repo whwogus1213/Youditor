@@ -351,7 +351,7 @@
 				<a class="dropdown-item" href="/videoboard/videoBoardList?searchType=nickname&keyword=${row.nickname}">
 					<i class="fab fa-youtube"></i>&nbsp;&nbsp;영상 더보기
 				</a>
-				<a class="dropdown-item" onclick="messagePopup();">
+				<a class="dropdown-item" href="#" onclick="messagePopup();">
 					<i class="far fa-envelope"></i>&nbsp;&nbsp;쪽지 보내기
 				</a>
 				<script type="text/javascript">
