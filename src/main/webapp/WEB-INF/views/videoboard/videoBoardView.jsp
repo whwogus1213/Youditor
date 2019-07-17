@@ -255,15 +255,6 @@
 </head>
 <body>
 <jsp:include page="../module/top2.jsp" flush="false" />
-
-<!-- Trigger the modal with a button -->
-<!-- Modal -->
-<div id="messageModal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-  	<jsp:include page="../module/messageSendModule.jsp" flush="false" />
-  </div>
- </div>
-
 	<!-- 게시글 상세정보 -->
 	<div align="center" style="background-color: black; padding-top: 60px">
 		<script>
@@ -279,7 +270,7 @@
 				youtubeID = eArray[1];
 				youtubeID = youtubeID.substr(0,11);
 			}
-			document.write('<iframe width="667" height="375" src="https://www.youtube.com/embed/' + youtubeID + '" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
+			document.write('<iframe width="854" height="480" src="https://www.youtube.com/embed/' + youtubeID + '?autoplay=1" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
 		
 			//삭제 버튼 누르면 삭제할 것이냐고 묻고 삭제한다고 하면 videoboardcontroller 의 deleteVideoBoardPro 메서드 호출
 			$(function(){
@@ -358,13 +349,18 @@
 			</h5>
 			<div class="dropdown-content">
 				<a class="dropdown-item" href="/videoboard/videoBoardList?searchType=nickname&keyword=${row.nickname}">
-					<i class="fab fa-youtube"></i>
-					&nbsp;&nbsp;영상 더보기
+					<i class="fab fa-youtube"></i>&nbsp;&nbsp;영상 더보기
 				</a>
-				<a class="dropdown-item" href="#">
-					<i class="far fa-envelope"></i>
-					&nbsp;&nbsp;<button type="button" class="btn-link" data-toggle="modal" data-target="#messageModal">쪽지 보내기</button>
+				<a class="dropdown-item" onclick="messagePopup();">
+					<i class="far fa-envelope"></i>&nbsp;&nbsp;쪽지 보내기
 				</a>
+				<script type="text/javascript">
+				function messagePopup() {
+					var nickname = "${row.nickname }";
+					var win = window.open("/message/writePopup.do?nickname=" + nickname, "_blank", 
+							"width=650, height=470, left=200, top=200, location=no, menubar=no, resizble=no, scrollbars=no, status=no, titlebar=no, toolbar=no");
+				}
+				</script>
 			</div>
 		</div>
 		
