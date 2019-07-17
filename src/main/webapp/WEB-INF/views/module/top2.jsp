@@ -2,9 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-
-<link href="/resources/css/chat.css" rel="stylesheet">
-
 <style type="text/css">
 
 /* The sidebar menu */
@@ -23,7 +20,6 @@
 /* The navigation menu links */
 .sidenav a {
   padding: 6px 8px 6px 16px;
-  text-decoration: none;
   font-size: 25px;
   color: #818181;
   display: block;
@@ -48,12 +44,19 @@
 .submenuLink { /* 상위 메뉴와 하위 메뉴의 a 태그에 공통으로 설정할 스타일 */
 	position: static;
 	color: #9A9DA0;
-	text-decoration:none;
 	display: block;
 	width: 90px;
 	font-size: 14px;
 	font-weight: bold;
 	text-align: center;
+}
+.navbar {
+	background-color:white;
+	box-shadow: 0 1px 1px 0 rgba(0,0,0,0.50);
+}
+.navbar a{
+	text-decoration:none;
+	color: #990033;
 }
 .longLink { /* 좀 더 긴 메뉴 스타일 설정 */
 	width: 190px;
@@ -69,11 +72,16 @@
 	/* width: 5; /* [변경] 가로 드랍다운 메뉴의 넓이 */
 	left: 0; /* [추가] 가장 왼쪽으로 하위 메뉴 위치 설정 */
 	right: 0;
-	background-color: #343A40;
+	background-color: white;
 	text-align: center;
+	box-shadow: 0 1px 1px 0 rgba(0,0,0,0.50);
+}
+.submenu a{
+	color: #006666
 }
 .submenu li {
 	display: inline-block;
+	color: #006666
 }
 .topMenuLi:hover .submenu {
 	height: 32px;
@@ -92,8 +100,7 @@
 	padding-left: 50%;
 }
 .submenuLink:hover {
-	color: #C4C6C8;
-	text-decoration: none;
+	color: #66CC99;
 }
 @media (min-width: 576px){
 .col-sm-3 {
@@ -201,12 +208,6 @@
 			<jsp:include page="../chat/chattingview.jsp" flush="false"/>
 		</c:if>
 		<c:if test="${login.accountId eq null }">
-<!-- 			<h5>로그인 이후<br>채팅이<br>가능합니다.</h5> -->
-<!-- 			<hr> -->
-<!-- 			<h6><a href="accounts/login.do">로그인</a></h6> -->
-<!-- 			<h6>or</h6> -->
-<!-- 			<h6><a href="accounts/join.do">회원가입</a></h6> -->
-			
 			<div class="chat_window">
     			<div class="top_menu">
         			<div class="title">유디터(<span id='sessionCnt'></span>)</div>
@@ -224,22 +225,22 @@
 	</div>
 </div>
 
-<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top" style="font-family: 'Nanum Gothic', sans-serif;">
+<nav class="navbar fixed-top navbar-expand-lg fixed-top">
     <div class="container">
-		<a class="navbar-brand" href="/"><img src="/resources/images/main_logo.png" height="40px"></a>
+		<a class="navbar-brand" href="/"><img src="/resources/images/main_logo.png" style="height:30px"></a>
 		<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
 		<div class="collapse navbar-collapse" id="navbarResponsive">
 			<ul class="navbar-nav ml-auto">
 				<li class="nav-item">
-					<a class="nav-link" href="/">홈</a>
+					<a class="nav-link" href="/"><strong>홈</strong></a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="/noticeboard/noticeBoardList">공지</a>
+					<a class="nav-link" href="/noticeboard/noticeBoardList"><strong>공지</strong></a>
 				</li>
 				<li class="nav-item topMenuLi">
-					<a class="nav-link" href="#">카테고리</a>
+					<a class="nav-link" href="#"><strong>카테고리</strong></a>
 					<ul class="submenu category">
 						<li>|</li>
 						<li><a class="submenuLink" href="/videoboard/videoBoardList?category=0">전체</a></li>
@@ -259,10 +260,10 @@
 					</ul>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="/tipboard/tipBoardList">팁</a>
+					<a class="nav-link" href="/tipboard/tipBoardList"><strong>팁</strong></a>
 				</li>
 				<li class="nav-item topMenuLi">
-					<a class="nav-link" href="#">구인구직</a>
+					<a class="nav-link" href="#"><strong>구인구직</strong></a>
 					<ul class="submenu hire">
 						<li>|</li>
 						<li><a class="submenuLink" href="/recruitboard/recruitBoardList?categoryId=1">구인</a></li>
@@ -276,7 +277,7 @@
 				<c:if test="${login.accountId ne null }">
 					<img src="<spring:url value='/image/${login.picture}'/>" class=" mx-auto rounded-circle" width="40px" height="40px"/>
 					<li class="nav-item topMenuLi">
-						<a class="nav-link" href="#">메세지</a>
+						<a class="nav-link" href="#"><strong>메세지</strong></a>
 						<ul class="submenu messageMain">
 							<li>|</li>
 							<li><a class="submenuLink" href="/message/messageReceiveList">받은 메세지</a></li>
@@ -286,7 +287,7 @@
 						</ul>
 					</li>
 					<li class="nav-item topMenuLi">
-						<a class="nav-link" href="#">회원기능</a>
+						<a class="nav-link" href="#"><strong>회원기능</strong></a>
 						<ul class="submenu accounts">
 							<li>|</li>
 							<li><a class="submenuLink" href="/follow/followingList">팔로잉</a></li>
@@ -298,16 +299,16 @@
 						</ul>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="/accounts/logout">로그아웃</a>
+						<a class="nav-link" href="/accounts/logout"><strong>로그아웃</strong></a>
 					</li>
 				</c:if>
 				<c:if test="${login.accountId eq null }">
 					<li class="nav-item">
-						<button type="button" class="nav-link button-style" data-toggle="modal" 
-						data-target="#myModal">로그인</button>
+						<button type="button" class="nav-link btn-link" data-toggle="modal" 
+						data-target="#myModal" style="background-color:white; border:0; color:#990033 "><strong>로그인</strong></button>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="/accounts/join.do">회원가입</a>
+						<a class="nav-link" href="/accounts/join.do"><strong>회원가입</strong></a>
 					</li>
 					
 				</c:if>
@@ -316,7 +317,7 @@
 	</div>
 	
 	<!-- Chat 채팅 아이콘 -->
-	<i id="chatBtn" class="far fa-comments" style="font-size: 1.8em; color: white; cursor: pointer;" onclick="openNav();"></i>
+	<i id="chatBtn" class="far fa-comments" style="font-size: 1.8em; color: black; cursor: pointer;" onclick="openNav();"></i>
 	  
 	<script>
 		function openNav() {

@@ -7,3 +7,4 @@
 <script src="/resources/js/jquery-3.3.1.min.js"></script>
 <script src="/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 <link href="https://fonts.googleapis.com/css?family=Song+Myung|Cute+Font|Black+Han+Sans|Gothic+A1|Hi+Melody|Nanum+Brush+Script|Do+Hyeon|Nanum+Gothic&display=swap" rel="stylesheet">
+<link href="/resources/css/default.css" rel="stylesheet" type="text/css"/>
