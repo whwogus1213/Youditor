@@ -304,13 +304,14 @@
 	<div class="container" style="font-family: 'Nanum Gothic', sans-serif;">
 		<br>
 		<h2>${row.subject }</h2>
-		<span style="line-height: 30%"><br></span>
 		<h5>${row.object }</h5>
-		<br>
-		<h6 style="color:gray"> 조회수&nbsp;&nbsp; ${row.viewCount }</h6>
-		
-		
+		<div class="row">
+			<h6 class="col-sm-6" align="left" style="color:gray;">조회수&nbsp;${row.viewCount }회</h6>
+			<h6 class="col-sm-6" align="right" align="right">게시일 :&nbsp; <fmt:formatDate value="${row.reg_date}" pattern="yyyy. MM. dd." /></h6>
+		</div>				
         <input type="hidden" id="boardId" name="boardId" value="${row.boardId }" />
+        
+        <!-- 별점 주는 화면 -->
         <div class="input-group">
 			<c:if test="${login.email ne null}">
 	        	<c:if test="${login.accountId ne row.accountId}">
@@ -325,65 +326,68 @@
 						</div>
 				</c:if>
 			</c:if>
-		<c:if test="${login.email eq null}">
+			<c:if test="${login.email eq null}">
 				로그인 후 평가 가능
 			</c:if>
         </div>
-		<h5 align="right">등록일 &nbsp;&nbsp; <fmt:formatDate value="${row.reg_date}" pattern="yyyy년 MM월 dd일  HH:mm:ss" /></h5>
+
 		<c:if test="${login.email ne null}">
 			<c:if test="${login.accountId ne row.accountId}">
-
 				<div align="right">
 					<label>내가 평가한 점수</label> <span id="star"></span><span> 점</span>
 				</div>
 			</c:if>
 		</c:if>
 		<div align="right">총 점수 ${row.starCount}</div>
-		<hr>
-		<div class="dropdown">
-			<h5 style="width: 150px;">
-				<a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="cursor:pointer">
-					<img src="<spring:url value='/image/${row.picture}'/>" class=" mx-auto rounded-circle" width="40px" height="40px" />
-					<strong>&nbsp;&nbsp;${row.nickname}</strong>
-				</a>
-			</h5>
-			<div class="dropdown-content">
-				<a class="dropdown-item" href="/videoboard/videoBoardList?searchType=nickname&keyword=${row.nickname}">
-					<i class="fab fa-youtube"></i>&nbsp;&nbsp;영상 더보기
-				</a>
-				<a class="dropdown-item" href="#" onclick="messagePopup();">
-					<i class="far fa-envelope"></i>&nbsp;&nbsp;쪽지 보내기
-				</a>
-				<script type="text/javascript">
-				function messagePopup() {
-					var nickname = "${row.nickname }";
-					var win = window.open("/message/writePopup.do?nickname=" + nickname, "_blank", 
-							"width=650, height=470, left=200, top=200, location=no, menubar=no, resizble=no, scrollbars=no, status=no, titlebar=no, toolbar=no");
-				}
-				</script>
+		
+		<hr style="margin-bottom: 10px; margin-top: 10px;">
+		
+		<!-- 작성자 정보 -->
+		<div class="row">
+			<div class="dropdown col-sm-2">
+				<div style="width: 150px;">
+					<a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="cursor:pointer">
+						<img src="<spring:url value='/image/${row.picture}'/>" class=" mx-auto rounded-circle" width="30px" height="30px" />
+						<strong>&nbsp;${row.nickname}</strong>
+					</a>
+				</div>
+				<div class="dropdown-content">
+					<a class="dropdown-item" href="/videoboard/videoBoardList?searchType=nickname&keyword=${row.nickname}">
+						<i class="fab fa-youtube"></i>&nbsp;&nbsp;영상 더보기
+					</a>
+					<a class="dropdown-item" href="#" onclick="messagePopup();">
+						<i class="far fa-envelope"></i>&nbsp;&nbsp;쪽지 보내기
+					</a>
+					<script type="text/javascript">
+					function messagePopup() {
+						var nickname = "${row.nickname }";
+						var win = window.open("/message/writePopup.do?nickname=" + nickname, "_blank", 
+								"width=650, height=470, left=200, top=200, location=no, menubar=no, resizble=no, scrollbars=no, status=no, titlebar=no, toolbar=no");
+					}
+					</script>
+				</div>
+			</div>
+			<div class="col-sm-10" align="right">
+				<c:if test="${login.accountId eq row.accountId}">
+					<i class="far fa-edit" onclick="location.href='/videoboard/updateVideoBoard.do?boardId=${row.boardId}'" style="cursor: pointer;">수정</i>&nbsp;	
+					<i class="far fa-trash-alt" id="deletebtn" style="cursor: pointer;">삭제</i>
+				</c:if>
 			</div>
 		</div>
-		
-		<br> <br>
+		<br>
 		<h6>${row.footer }</h6>
 		<%-- 	<h1>${row.youtubeLink }</h1> --%>
 		<!-- 디자인 필요 -->
 		<div align="right">
 			<!-- 팔로우 버튼 -->
 			<div id="followDiv"></div>
-
-			<c:if test="${login.accountId eq row.accountId}">
-				<button class="btn btn-warning btn-sm"
-					onclick="location.href='/videoboard/updateVideoBoard.do?boardId=${row.boardId}'">수정</button>
-				<button class="btn btn-danger btn-sm" id="deletebtn">삭제</button>
-			</c:if>
 		</div>
-		<hr>
 	</div>
+	<hr style="margin-bottom: 10px; margin-top: 10px;">
+	
 	<div id="listReply">
 		<jsp:include page="../videoboard/videoBoardReply.jsp" flush="false" />
 	</div>
-	<br>
 	<br>
 	<br>
 	<jsp:include page="../module/bottom.jsp" flush="false" />

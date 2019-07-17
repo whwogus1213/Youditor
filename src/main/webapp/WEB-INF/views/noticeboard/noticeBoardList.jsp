@@ -138,8 +138,7 @@
 								<c:if test="${NoticeBoardList.categoryName == '이벤트'}">
 									<i class="fas fa-gift"></i>&nbsp;[${NoticeBoardList.categoryName}]
 								</c:if>
-								No.${NoticeBoardList.boardId}
-								&nbsp;${NoticeBoardList.subject}
+								No.${NoticeBoardList.boardId}&nbsp;${NoticeBoardList.subject}
 							</div>
 						</div>
 						<div class="card-body" align="left" style="margin: 0; border: 0; padding: 10px; height: 70px; cursor: pointer;"
