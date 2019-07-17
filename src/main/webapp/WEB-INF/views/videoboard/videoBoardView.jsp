@@ -258,7 +258,7 @@
 
 <!-- Trigger the modal with a button -->
 <!-- Modal -->
-<div id="myModal" class="modal fade" role="dialog">
+<div id="messageModal" class="modal fade" role="dialog">
   <div class="modal-dialog">
   	<jsp:include page="../module/messageSendModule.jsp" flush="false" />
   </div>
@@ -363,7 +363,7 @@
 				</a>
 				<a class="dropdown-item" href="#">
 					<i class="far fa-envelope"></i>
-					&nbsp;&nbsp;<button type="button" class="btn-link" data-toggle="modal" data-target="#myModal">쪽지 보내기</button>
+					&nbsp;&nbsp;<button type="button" class="btn-link" data-toggle="modal" data-target="#messageModal">쪽지 보내기</button>
 				</a>
 			</div>
 		</div>
