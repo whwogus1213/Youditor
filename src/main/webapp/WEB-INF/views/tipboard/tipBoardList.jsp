@@ -93,17 +93,17 @@
 </head>
 <body>
 	<jsp:include page="../module/top2.jsp" flush="false"/>
-	<br><br>
-	<div class="form-group">
-		<div class="col-sm-12">
-			<h2 align="center">&nbsp;</h2>
-			<h1 align="center"><strong>편집 팁</strong></h1>
-		</div>
-	</div>
-	<h5 align="center">유튜버 편집 팁</h5>
 	<div id="deleteOK" class="alert alert-danger hidden" role="alert" style="visibility:hidden">글이 삭제되었습니다.</div>
 	
 	<div class="container">
+		<div class="form-group">
+			<div class="col-sm-12" style="background-image:url('/resources/images/tipboard/tip-board.jpg'); background-position:50% 30%; font-family: 'Song Myung', sans-serif; color:white;"  >
+
+				<h1 align="center"><br><strong>편집 Tip</strong></h1>
+				<h5 align="center"><br>나만의 편집 팁을 공유하세요.</h5>
+				<h1 align="center"><br></h1>
+			</div>
+		</div>
 		<table class="table table-striped nanum table-hover">
 			<!-- <table border="1"> -->
 			<thead align="center">
