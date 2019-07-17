@@ -26,14 +26,14 @@ li {
 .style:hover {
     color: #993399;
 }
-.active {
+.activebnt {
     color: #993399;
     padding-bottom: 3px;
     border-bottom: 2px solid #FFF;
     
 	border-color: rgb(102, 51, 153, 0.5);
 	}
-	.active:hover {
+	.activebnt:hover {
     color: #e472e4;
     border-color: rgb(147, 97, 197, 0.5);
 	}
@@ -155,7 +155,12 @@ li {
 					for(var i = 0; i < data.length; i++){
 						if(i < 5){
 						html += "<tr onclick=\"location.href='/videoboard/videoBoardView?boardId="+data[i].boardId+"'\" style='cursor:pointer;'>";
+						if(i < 3){
 						html += "<th class='str' scope='row'>"+(i+1)+"</th>";
+						}
+						else if(3 <= i < 5){
+							html += "<th scope='row'>"+(i+1)+"</th>";
+							}
 						html += "<td class='str2'>"+data[i].subject+"</td>";
 						if(data[i].starCount == 5 ){
 							html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
@@ -280,31 +285,31 @@ li {
 		});
 		////////////////////////////////////////////////////////////
 		$( "#bestbtn1" ).click(function() {
-		     $(this).addClass("active").removeClass("style").addClass("style1");
-		     $("#bestbtn2").removeClass("active").removeClass("style1").addClass("style");
-		     $("#bestbtn3").removeClass("active").removeClass("style1").addClass("style");
-		     $("#bestbtn4").removeClass("active").removeClass("style1").addClass("style");
+		     $(this).addClass("activebnt").removeClass("style").addClass("style1");
+		     $("#bestbtn2").removeClass("activebnt").removeClass("style1").addClass("style");
+		     $("#bestbtn3").removeClass("activebnt").removeClass("style1").addClass("style");
+		     $("#bestbtn4").removeClass("activebnt").removeClass("style1").addClass("style");
 
 		});
 		$( "#bestbtn2" ).click(function() {
-		     $(this).addClass("active").removeClass("style").addClass("style1");
-		     $("#bestbtn1").removeClass("active").removeClass("style1").addClass("style");
-		     $("#bestbtn3").removeClass("active").removeClass("style1").addClass("style");
-		     $("#bestbtn4").removeClass("active").removeClass("style1").addClass("style");
+		     $(this).addClass("activebnt").removeClass("style").addClass("style1");
+		     $("#bestbtn1").removeClass("activebnt").removeClass("style1").addClass("style");
+		     $("#bestbtn3").removeClass("activebnt").removeClass("style1").addClass("style");
+		     $("#bestbtn4").removeClass("activebnt").removeClass("style1").addClass("style");
 
 		});
 		$( "#bestbtn3" ).click(function() {
-		     $(this).addClass("active").removeClass("style").addClass("style1");
-		     $("#bestbtn1").removeClass("active").removeClass("style1").addClass("style");
-		     $("#bestbtn2").removeClass("active").removeClass("style1").addClass("style");
-		     $("#bestbtn4").removeClass("active").removeClass("style1").addClass("style");
+		     $(this).addClass("activebnt").removeClass("style").addClass("style1");
+		     $("#bestbtn1").removeClass("activebnt").removeClass("style1").addClass("style");
+		     $("#bestbtn2").removeClass("activebnt").removeClass("style1").addClass("style");
+		     $("#bestbtn4").removeClass("activebnt").removeClass("style1").addClass("style");
 
 		});
 		$( "#bestbtn4" ).click(function() {
-		     $(this).addClass("active").removeClass("style").addClass("style1");
-		     $("#bestbtn1").removeClass("active").removeClass("style1").addClass("style");
-		     $("#bestbtn3").removeClass("active").removeClass("style1").addClass("style");
-		     $("#bestbtn2").removeClass("active").removeClass("style1").addClass("style");
+		     $(this).addClass("activebnt").removeClass("style").addClass("style1");
+		     $("#bestbtn1").removeClass("activebnt").removeClass("style1").addClass("style");
+		     $("#bestbtn3").removeClass("activebnt").removeClass("style1").addClass("style");
+		     $("#bestbtn2").removeClass("activebnt").removeClass("style1").addClass("style");
 
 		});
 	});
@@ -320,7 +325,12 @@ function getTipStar(){
 				for(var i = 0; i < data.length; i++){
 					if(i < 5){
 						html += "<tr onclick=\"location.href='/tipboard/tipBoardView?boardId="+data[i].boardId+"'\" style='cursor:pointer;'>";
-						html += "<th class='str' scope='row'>"+(i+1)+"</th>";
+						if(i < 3){
+							html += "<th class='str' scope='row'>"+(i+1)+"</th>";
+							}
+						else if(3 <= i < 5){
+								html += "<th scope='row'>"+(i+1)+"</th>";
+								}
 						html += "<td class='str2'>"+data[i].subject+"</td>";
 						if(data[i].starCount == 5 ){
 							html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
