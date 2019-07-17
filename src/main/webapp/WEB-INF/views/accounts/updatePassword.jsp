@@ -29,37 +29,77 @@
 		}
 	}
 	</script>
+	<style>
+input {
+    padding-left: 5px;
+}
+.passform {
+    margin: 80px;
+    padding-bottom: 230px;
+    padding-top: 50px;
+}
+.button-style1 {
+    color: #fff;
+    background-color: #007bff;
+    font-weight: 400;
+    text-align: center;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: 1px solid transparent;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: 0.25rem;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    
+}
+.thcell {
+    background: #f9f9f9;
+}
+.pbnt-st{
+	margin-top: 40px;
+}
+td {
+	border: 1px solid #e5e5e5;
+	padding: 32px 31px 32px;
+}
+	</style>
 </head>
-<body>
+<body style="background-color: #FFF;">
 	<jsp:include page="../module/top2.jsp" flush="false"/>
-	<div align="center">
+	<div align="center" class="passform">
 		<c:if test="${login.accountId ne null }">
 			<form:form id="newPwdForm" commandName="newPwdForm" action="${path}/accounts/updatePasswordPro">
 				<table>
 					<tr>
-						<td>새비밀번호</td>
+						<td class="thcell">새비밀번호</td>
 						<td><input type="password" name="pwd" id="pwd" maxlength="20" placeholder="Enter New Password"></td>
-						<td><form:errors path="pwd" /></td>
+						<form:errors path="pwd" />
 					</tr>
 					<tr>
-						<td>새비밀번호 확인</td>
+						<td class="thcell">새비밀번호 확인</td>
 						<td>
 							<input type="password" name="pwdCfm" id="pwdCfm" maxlength="20" placeholder="Confirm New Password">
 						</td>
 					</tr>
-					<tr>
-						<td>
+				</table>
+				
+						<div>
 							<input type="hidden" name="accountId" id="accountId" value="${login.accountId }">
 							<input type="hidden" name="email" id="email" value="${login.email }">
+							<p class="pbnt-st">
 							<input type="button" value="비밀번호 변경" onclick="changePwd();">
-						</td>
-					</tr>
-				</table>
+						 	</p>
+						</div>
 			</form:form>
 		</c:if>
 		<c:if test="${login.accountId eq null }">
-			로그인상태가 아닙니다.<br>
-			<a class="button" href="/accounts/login.do">로그인하러 가기</a>
+			로그인상태가 아닙니다.<br><br><br>
+			<button type="button" class="nav-link button-style1" data-toggle="modal" 
+					data-target="#myModal">로그인</button>
 		</c:if>
 	</div>
 	<jsp:include page="../module/bottom.jsp" flush="false"/>

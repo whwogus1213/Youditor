@@ -29,19 +29,19 @@
 /* 		opacity: 0.3; */
 /* 		filter: alpha(opacity=30); */
 	}
-.container {
-	width: 100%;
-	padding-right: 15px;
-	padding-left: 15px;
-	margin-right: auto;
-    margin-left: 180px;
-}
+
+	.container {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: 230px;
+	}
 	
-.vbrow:hover {
+	.vbrow:hover {
 	border: 1px solid black;
 	box-shadow: 0px 0px 20px #000;
 }	
-
 </style>
 
 
@@ -136,6 +136,7 @@
 	});
 	</script>
 	<jsp:include page="../module/top2.jsp" flush="false" />
+	<jsp:include page="../module/VideoBoardListAside.jsp" flush="false" />
 	
 
 	<div class="container" style="background-color: #E8E8E8 ; font-family: 'Nanum Gothic', sans-serif;">
