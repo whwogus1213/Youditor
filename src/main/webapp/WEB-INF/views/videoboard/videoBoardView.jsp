@@ -256,6 +256,14 @@
 <body>
 <jsp:include page="../module/top2.jsp" flush="false" />
 
+<!-- Trigger the modal with a button -->
+<!-- Modal -->
+<div id="messageModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+  	<jsp:include page="../module/messageSendModule.jsp" flush="false" />
+  </div>
+ </div>
+
 	<!-- 게시글 상세정보 -->
 	<div align="center" style="background-color: black; padding-top: 60px">
 		<script>
@@ -350,10 +358,12 @@
 			</h5>
 			<div class="dropdown-content">
 				<a class="dropdown-item" href="/videoboard/videoBoardList?searchType=nickname&keyword=${row.nickname}">
-					<i class="fab fa-youtube"></i>&nbsp;&nbsp;영상 더보기
+					<i class="fab fa-youtube"></i>
+					&nbsp;&nbsp;영상 더보기
 				</a>
 				<a class="dropdown-item" href="#">
-					<i class="far fa-envelope"></i>&nbsp;&nbsp;쪽지 보내기
+					<i class="far fa-envelope"></i>
+					&nbsp;&nbsp;<button type="button" class="btn-link" data-toggle="modal" data-target="#messageModal">쪽지 보내기</button>
 				</a>
 			</div>
 		</div>
