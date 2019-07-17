@@ -23,6 +23,162 @@
   clear: both;
   }
   </style>
+  <script>
+  $(function() {
+  $.ajax({
+			type : "POST",
+			url : "/videostar/StarList",
+			success : function(data) {
+
+				var html = "";
+
+				if(data.length > 0) {
+					for(var i = 0; i < data.length; i++){
+						if(i < 3){
+							html += "<div class='col-lg-4 mb-4'>";
+							html += "<div class='card h-100'>";
+							html += "<h4 class='card-header'>영상 제목</h4>";
+							html += "<div class='card-body'>";
+							html += "<img width='100%' height='20%' src='"+data[i].youtubeLink+"'></img>";
+							html += "</div>";
+							html += "<div class='card-footer'>";
+							html += "<table>"
+							html += "<tr>"
+							///////////////////////////////////////////////////////////////////////
+							if(data[i].starCount == 5 ){
+								html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
+								html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
+								html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
+								html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
+								html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
+								}
+								else if(4 < data[i].starCount < 5){
+									html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
+									html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
+									html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
+									html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
+									if(data[i].starCount+0.99 > 5){
+
+										html += "<td class='fas fa-star-half-alt' style='color: #ffd400;'></td>";
+									}else{
+										html += "<td class='far fa-star' style='color: #ffd400;'></td>";
+									}
+									}
+								else if(3 < data[i].starCount < 4){
+									html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
+									html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
+									html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
+									if(data[i].starCount+0.99 > 4){
+										html += "<td class='fas fa-star-half-alt' style='color: #ffd400;'></td>";
+									}else{
+										html += "<td class='far fa-star' style='color: #ffd400;'></td>";
+									}
+									html += "<td class='far fa-star' style='color: #ffd400;'></td>";
+									}
+								else if(2 < data[i].starCount < 3){
+									html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
+									html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
+									if(data[i].starCount+0.99 > 5){
+
+										html += "<td class='fas fa-star-half-alt' style='color: #ffd400;'></td>";
+									}else{
+										html += "<td class='far fa-star' style='color: #ffd400;'></td>";
+									}
+									html += "<td class='far fa-star' style='color: #ffd400;'></td>";
+									html += "<td class='far fa-star' style='color: #ffd400;'></td>";
+									}
+								else if(1 < data[i].starCount < 2){
+									html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
+									if(data[i].starCount+0.99 > 5){
+
+										html += "<td class='fas fa-star-half-alt' style='color: #ffd400;'></td>";
+									}else{
+										html += "<td class='far fa-star' style='color: #ffd400;'></td>";
+									}
+									html += "<td class='far fa-star' style='color: #ffd400;'></td>";
+									html += "<td class='far fa-star' style='color: #ffd400;'></td>";
+									html += "<td class='far fa-star' style='color: #ffd400;'></td>";
+									}
+								else if(0 < data[i].starCount < 1){
+									if(data[i].starCount+0.99 > 5){
+
+										html += "<td class='fas fa-star-half-alt' style='color: #ffd400;'></td>";
+									}else{
+										html += "<td class='far fa-star' style='color: #ffd400;'></td>";
+									}
+									html += "<td class='far fa-star' style='color: #ffd400;'></td>";
+									html += "<td class='far fa-star' style='color: #ffd400;'></td>";
+									html += "<td class='far fa-star' style='color: #ffd400;'></td>";
+									html += "<td class='far fa-star' style='color: #ffd400;'></td>";
+									}
+							///////////////////////////////////////////////////////////////////////
+							html += "</table>"
+							html += "</tr>"
+							html += "</div>";
+							html += "</div>";
+							html += "</div>";
+						}
+					}
+				}
+
+				$("#top3-1").html(html);
+				getAccountsRankList();
+			},
+			error : function(data) {
+				alert('불러오기 실패');
+			}
+			
+		});
+  
+});
+function getAccountsRankList(){
+	$.ajax({
+		type : "POST",
+		url : "/accounts/accountsList",
+		success : function(data) {
+
+			var html = "";
+
+			if(data.length > 0) {
+				for(var i = 0; i < 3; i++){
+					if(i < 3){
+						html += "<div class='col-lg-4 col-sm-6 portfolio-item'>";
+						html += "<div class='card h-100'>";
+						html += "<a href='#'><img class='card-img-top' src='"+data[i].picture+"' alt='' width='80' height='200'></a>";
+						html += "<div class='card-body'>";
+						html += "<h4 class='card-title'>";
+						html += "<a href='#'>"+data[i].nickname+"</a>";
+						html += "</h4>";
+						html += "<p class='card-text'>"+data[i].footer+"</p>";
+						html += "</div>";
+						html += "</div>";
+						html += "</div>";
+						
+					}else{
+						html += "<div class='col-lg-4 col-sm-6 portfolio-item'>";
+						html += "<div class='card h-100'>";
+						html += "<a href='#'><img class='card-img-top' src='/resources/images/member1.jpg' alt='' width='80' height='200'></a>";
+						html += "<div class='card-body'>";
+						html += "<h4 class='card-title'>";
+						html += "<a href='#'>편집자 아이디</a>";
+						html += "</h4>";
+						html += "<p class='card-text'>편집자 설명</p>";
+						html += "</div>";
+						html += "</div>";
+						html += "</div>";
+					}
+				}
+			}
+
+			$("#top3-2").html(html);
+
+		},
+		error : function(data) {
+			alert('불러오기 실패');
+		}
+	});
+}
+  </script>
 </head>
 
 <body>
@@ -31,133 +187,27 @@
  	<!-- 페이지 내용 시작 -->
  	
 <div id="dologinform"></div>
-	  <header>
-	    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-	      <ol class="carousel-indicators">
-	        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-	        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-	        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-	      </ol>
-	      <div class="carousel-inner" role="listbox">
-	
-	        <div class="carousel-item active" style="background-image: url('../resources/images/main_img1.jpg'); background-position:50% 40%;">
-	          <div class="carousel-caption d-none d-md-block">
-	            <h3 style="color:black">YouDitor은 무슨 뜻인가요?</h3>
-	            <p style="color:black">YouDitor 는 Youtube와 Editor의 합성어입니다.</p>
-	          </div>
-	        </div>
-	
-	        <div class="carousel-item" style="background-image: url('../resources/images/main_img2.jpg');  background-position:50% 60%;">
-	          <div class="carousel-caption d-none d-md-block">
-	            <h3 style="color:black">YouDitor은 어떤 곳인가요?</h3>
-	            <p style="color:black">YouDitor은 Youtube 편집자들을 위한 커뮤니티입니다.</p>
-	          </div>
-	        </div>
-	
-	        <div class="carousel-item" style="background-image: url('../resources/images/main_img3.jpg')">
-	          <div class="carousel-caption d-none d-md-block">
-	            <h3 style="color:white">YouDitor에서는 무엇을 할 수 있나요?</h3>
-	            <p style="color:white">다양한 YouDitor들과 당신의 결과물에 대해 토론하고 Creator와 협업할 수 있습니다.</p>
-	          </div>
-	        </div>
-	      </div>
-	      <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-	        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-	        <span class="sr-only">Previous</span>
-	      </a>
-	      <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-	        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-	        <span class="sr-only">Next</span>
-	      </a>
-	    </div>
-	  </header>
 	  
   <jsp:include page="./module/aside.jsp" flush="false"/>
   <div class="container">
 
-    <h1 class="my-4">핫한 편집 영상</h1>
+    <h1 class="my-4">핫한 편집 영상</h1><hr/>
 
     <!-- Marketing Icons Section -->
-    <div class="row">
-      <div class="col-lg-4 mb-4">
-        <div class="card h-100">
-          <h4 class="card-header">영상 제목</h4>
-          <div class="card-body">
-<!--           <a href="#"><img class="card-img-top" src="" alt=""></a> -->
-			<img width="100%" height="20%" src="https://img.youtube.com/vi/xZKVYhHInok/mqdefault.jpg"></img>
-          </div>
-          <div class="card-footer">
-            <a href="#" class="btn btn-primary">여기는 좋아요, 작성자 프로필 만들곳</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 mb-4">
-        <div class="card h-100">
-          <h4 class="card-header">영상 제목</h4>
-          <div class="card-body">
-<!--           <a href="#"><img class="card-img-top" src="" alt=""></a> -->
-			<img width="100%" height="20%" src="https://img.youtube.com/vi/xZKVYhHInok/mqdefault.jpg"></img>
-          </div>
-          <div class="card-footer">
-            <a href="#" class="btn btn-primary">여기는 좋아요, 작성자 프로필 만들곳</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 mb-4">
-        <div class="card h-100">
-          <h4 class="card-header">영상 제목</h4>
-          <div class="card-body">
-<!--           <a href="#"><img class="card-img-top" src="" alt=""></a> -->
-			<img width="100%" height="20%" src="https://img.youtube.com/vi/xZKVYhHInok/mqdefault.jpg"></img>
-          </div>
-          <div class="card-footer">
-            <a href="#" class="btn btn-primary">여기는 좋아요, 작성자 프로필 만들곳</a>
-          </div>
-        </div>
-      </div>
-    </div>
+    <div class="row" id="top3-1">
+      
+	</div><hr/>
     <!-- /.row -->
 
     <!-- 편집자 프로필 -->
-    <h2>이번주 편집자 탑3</h2>
+    <h2>이번주 편집자 탑3</h2><hr/>
 
-    <div class="row">
-      <div class="col-lg-4 col-sm-6 portfolio-item">
-        <div class="card h-100">
-          <a href="#"><img class="card-img-top" src="/resources/images/member1.jpg" alt="" width="80" height="200"></a>
-          <div class="card-body">
-            <h4 class="card-title">
-              <a href="#">편집자 아이디</a>
-            </h4>
-            <p class="card-text">편집자 설명</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 col-sm-6 portfolio-item">
-        <div class="card h-100">
-          <a href="#"><img class="card-img-top" src="/resources/images/member2.jpg" alt="" width="80" height="200"></a>
-          <div class="card-body">
-            <h4 class="card-title">
-              <a href="#">편집자 아이디</a>
-            </h4>
-            <p class="card-text">편집자 설명</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 col-sm-6 portfolio-item">
-        <div class="card h-100">
-          <a href="#"><img class="card-img-top" src="/resources/images/member3.png" alt="" width="80" height="200"></a>
-          <div class="card-body">
-            <h4 class="card-title">
-              <a href="#">편집자 아이디</a>
-            </h4>
-            <p class="card-text">편집자 설명</p>
-          </div>
-        </div>
-      </div>
+    <div class="row" id="top3-2">
+      
+      
 
     <!-- /.row -->
-  	</div>
+  	</div><hr/>
   	
   </div>
   <jsp:include page="./module/bottom.jsp" flush="false"/>

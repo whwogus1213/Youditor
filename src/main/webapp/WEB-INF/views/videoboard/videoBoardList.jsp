@@ -128,8 +128,10 @@
 	});
 	</script>
 	<jsp:include page="../module/top2.jsp" flush="false" />
-	<jsp:include page="../module/VideoBoardListAside.jsp" flush="false" />
 	
+	<p>
+	<jsp:include page="../module/VideoBoardListAside.jsp" flush="false" />
+	</p>
 
 	<div class="container" style="background-color: #E8E8E8 ;">
 		<br>
