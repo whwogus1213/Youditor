@@ -148,7 +148,7 @@
 			</div>
 		</c:when>
 		<c:when test="${ categoryName eq '게임'}">
-			<div style="background-image:url('/resources/images/videoList/game.png'); background-position:50% 50%; font-family: 'Do Hyeon', sans-serif; color:#3366FF;">
+			<div style="background-image:url('/resources/images/videoList/game.png'); background-position:44% 50%; font-family: 'Do Hyeon', sans-serif; color:#3366FF;">
 				<div class="col-sm-12">
 					<br><br><br><br>
 					<h1 align="center" style="font-size:60px; letter-spacing:60px">
