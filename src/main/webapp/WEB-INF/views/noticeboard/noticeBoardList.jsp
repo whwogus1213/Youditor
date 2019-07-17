@@ -97,17 +97,15 @@
 </head>
 <body>
 	<jsp:include page="../module/top2.jsp" flush="false"/>
-	<br><br>
-	<div class="form-group">
-		<div class="col-sm-12">
-			<h2 align="center">&nbsp;</h2>
-			<h1 align="center"><strong>공지사항</strong></h1>
-		</div>
-	</div>
-	<h5 align="center">YouditoR의 최신 소식과 이벤트를 알려드립니다.</h5>
 	<div id="deleteOK" class="alert alert-danger hidden" role="alert" style="visibility: hidden">글이 삭제되었습니다.</div>
-		
 	<div class="container">
+		<div class="form-group">
+			<div class="col-sm-12"  style="background-image:url('/resources/images/notice/notice.jpg'); background-position:50% 60%; font-family: 'Jua', sans-serif; color:white;">
+				<h1 align="center" style="font-size:50px; letter-spacing:10px"><br><strong>공지사항</strong></h1>
+				<h5 align="center"><br>YouditoR의 최신 소식과 이벤트를 알려드립니다.</h5>
+				<h1 align="center"><br></h1>
+			</div>
+		</div>
 		<table class="table table-striped nanum table-hover">
 			<!-- <table border="1"> -->
 			<thead align="center">

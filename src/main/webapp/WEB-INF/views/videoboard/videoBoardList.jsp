@@ -161,7 +161,7 @@
 			</div>
 		</c:when>
 		<c:when test="${ categoryName eq '먹방'}">
-			<div style="background-image:url('/resources/images/videoList/social_dining.jpg'); background-position:50% 25%; font-family: 'Nanum Brush Script', sans-serif; color:white;">
+			<div style="background-image:url('/resources/images/videoList/social_dining.jpg'); background-position:65% 25%; font-family: 'Nanum Brush Script', sans-serif; color:white;">
 				<div class="col-sm-12">
 					<br><br><br><br>
 					<h1 align="center" style="font-size:60px; letter-spacing:60px">
