@@ -29,14 +29,22 @@
 /* 		opacity: 0.3; */
 /* 		filter: alpha(opacity=30); */
 	}
-	.container {
-    width: 100%;
-    padding-right: 15px;
-    padding-left: 15px;
-    margin-right: auto;
+.container {
+	width: 100%;
+	padding-right: 15px;
+	padding-left: 15px;
+	margin-right: auto;
     margin-left: 180px;
-	}
+}
+	
+.vbrow:hover {
+	border: 1px solid black;
+	box-shadow: 0px 0px 20px #000;
+}	
+
 </style>
+
+
 </head>
 <body>
 	<script>
@@ -238,12 +246,15 @@
 			</div>
 		</c:otherwise>
 	</c:choose>
+	
+	
+	
 		<!-- Marketing Icons Section -->
 		<br>
 		<div class="row">
 			<c:forEach items="${VideoBoardList}" var="VideoBoardList">
 				<div class="col-lg-4 mb-4">
-					<div class="card h-100" style="display: block;">
+					<div class="card h-100 vbrow" style="display: block;">
 						<div align="center">
 							<h5 class="card-header" onclick="location.href='/videoboard/videoBoardView?boardId=${VideoBoardList.boardId}'"
 								style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; width: 100%; height: 50px; cursor: pointer;">
