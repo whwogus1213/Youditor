@@ -223,7 +223,7 @@ function getTipNew(){
 	      </ol>
 	      <div class="carousel-inner" role="listbox">
 	
-	        <div class="carousel-item active" style="background-image: url('../resources/images/main_img1.jpg'); background-position:50% 40%;">
+	        <div class="carousel-item active" style="background-image: url('../resources/images/main_img1.jpg'); background-position:50% 36%;">
 	          <div class="carousel-caption d-none d-md-block">
 	            <h3 style="color:black">YouDitor은 무슨 뜻인가요?</h3>
 	            <p style="color:black">YouDitor 는 Youtube와 Editor의 합성어입니다.</p>
@@ -237,7 +237,7 @@ function getTipNew(){
 	          </div>
 	        </div>
 	
-	        <div class="carousel-item" style="background-image: url('../resources/images/main_img3.jpg')">
+	        <div class="carousel-item" style="background-image: url('../resources/images/main_img3.jpg');  background-position:50% 60%;">
 	          <div class="carousel-caption d-none d-md-block">
 	            <h3 style="color:white">YouDitor에서는 무엇을 할 수 있나요?</h3>
 	            <p style="color:white">다양한 YouDitor들과 당신의 결과물에 대해 토론하고 Creator와 협업할 수 있습니다.</p>

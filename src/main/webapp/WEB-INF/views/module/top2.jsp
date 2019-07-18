@@ -58,6 +58,12 @@
 	text-decoration:none;
 	color: #990033;
 }
+.navbar a:hover{
+	color:#CC0033;
+}
+.navbar button:hover{
+	color:#CC0033;
+}
 .longLink { /* 좀 더 긴 메뉴 스타일 설정 */
 	width: 190px;
 }
@@ -83,6 +89,9 @@
 	display: inline-block;
 	color: #006666
 }
+.submenu a:hover {
+	color: #66CC99;
+}
 .topMenuLi:hover .submenu {
 	height: 32px;
 }
@@ -98,9 +107,6 @@
 }
 .accounts {
 	padding-left: 50%;
-}
-.submenuLink:hover {
-	color: #66CC99;
 }
 @media (min-width: 576px){
 .col-sm-3 {
@@ -383,8 +389,9 @@
 				</c:if>
 				<c:if test="${login.accountId eq null }">
 					<li class="nav-item">
-						<button type="button" class="nav-link btn-link" data-toggle="modal" 
-						data-target="#myModal" style="background-color:white; border:0; color:#990033 "><strong>로그인</strong></button>
+						<a data-toggle="modal" class="nav-link" data-target="#myModal" href="#myModal"><strong>로그인</strong></a>
+						<!-- <button type="button" class="nav-link" data-toggle="modal" 
+						data-target="#myModal" style="background-color:white; border:0; color:#990033 "><strong>로그인</strong></button> -->
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="/accounts/join.do"><strong>회원가입</strong></a>
@@ -396,7 +403,7 @@
 	</div>
 	
 	<!-- Chat 채팅 아이콘 -->
-	<i id="chatBtn" class="far fa-comments" style="font-size: 1.8em; color: black; cursor: pointer;" onclick="openNav();"></i>
+	<i id="chatBtn" class="far fa-comments" style="font-size: 1.8em; color:orange; cursor: pointer;" onclick="openNav();"></i>
 	  
 	<script>
 		function openNav() {

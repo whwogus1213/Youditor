@@ -24,11 +24,19 @@
 		order by boardId desc
 		LIMIT #{startList}, #{listSize}
 	</select>
+	
 	<!-- 게시물 조회 -->
 	<select id="view" parameterType="int" resultType="NoticeBoardVO">
-		select boardId, accountId, categoryId, subject, object, CONVERT_TZ(reg_date,'+09:00','+00:00') as reg_date, CONVERT_TZ(mod_date,'+09:00','+00:00') as mod_date, viewCount 
-		from noticeboard
-		where boardId = #{boardId}
+		SELECT
+			boardId, n.accountId, nickname, categoryId, subject, object, n.reg_date, n.mod_date, viewCount 
+		FROM
+			noticeboard as n
+		JOIN
+			accounts as a
+		ON
+			n.accountId = a.accountId
+		WHERE
+			boardId = #{boardId}
 	</select>
 
 	<!-- 게시물 총 갯수 구하기 -->

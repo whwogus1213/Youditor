@@ -44,7 +44,23 @@
 		<div align="right">
 			<div class="form-inline">
 				<div class="col-sm-8" align="right">
-					<h4>작성자 ${row.nickname }</h4>
+					<div class="dropdown"></div>
+						<h4>작성자 <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="cursor:pointer">
+							${row.nickname }
+						</a></h4>
+						<div class="dropdown-content">
+							<a class="dropdown-item" href="#" onclick="messagePopup();">
+								<i class="far fa-envelope"></i>&nbsp;&nbsp;쪽지 보내기
+							</a>
+							<script type="text/javascript">
+							function messagePopup() {
+								var nickname = "${row.nickname }";
+								var win = window.open("/message/writePopup.do?nickname=" + nickname, "_blank", 
+										"width=650, height=470, left=200, top=200, location=no, menubar=no, resizble=no, scrollbars=no, status=no, titlebar=no, toolbar=no");
+							}
+							</script>
+						</div>
+					</div>
 				</div>
 				<div class="col-sm-4" align="right">
 					<h4><c:if test="${row.categoryId eq 1}">일할분을 찾습니다.</c:if></h4>
