@@ -147,6 +147,12 @@
 	color: blue;
 	margin-left: 130px;
 }
+#doPass1 {
+	margin-left: 30px;
+}
+.passbtn-st{
+	margin-left: 15px;
+	}
 </style>
 <script type="text/javascript">
 	$(function(){
@@ -199,42 +205,45 @@
 			$("#frm2").submit();
 		}
 	}
-	
+function DoPass() {
+	alert("dfasf");
+	var html = "";
+		html += "<label class='label-st' float='left' width='10px;'>이메일</label>";
+		html += "<input type='text' class='form-control' id='emailqq' name='email' maxlength='30' placeholder='Enter ID'>";
+		html += "<button type='button' class='btn btn-primary passbtn-st' onclick='DosignUp();'>비번리셋</button>";
+		$("#doPass1").html(html);
+}
+var isCheckEmail = 0;
+function DosignUp() {
+	var email = $("#emailqq").val();
+	$.ajax({
+		async: true,
+		type: "POST",
+		data: email,
+		url: "checkEmail.do",
+		dataType : "json",
+		contentType: "application/json; charset=UTF-8",
+		success: function (data) {
+	        if(data.cnt == 1) {
+				isCheckEmail = 1;
+	        } else {
+				alert("존재하지 않는 이메일입니다.");
+				$("#emailqq").focus();
+	        }
+		}
+	});
+	var email = $("#emailqq").val();
+	if(email.length == 0) {
+		alert("이메일를 입력해 주세요.");
+		$("#emailqq").focus();
+		return;
+	}
+	if(isCheckEmail == 1) {
+		//$("#frm").submit(); ->resetPasswordPro 로 이동하게 해야함
+	}
+}
 </script>
-<!-- forgetModal -->
-<div id="myModal2" class="modal fade" role="dialog">
-  <div class="modal-dialog modal2">
 
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header"><h4 class="modal-title">비밀번호 찾기</h4>
-        <button type="button" class="close" data-dismiss="modal">x</button>
-      </div>
-      <div class="modal-body">
-        
-		<form class="form-horizontal" id="frm2" method="post" action="/accounts/resetPasswordPro">
-		<div class="form-inline">
-			<h2 align="center">&nbsp;</h2>
-			<label class="control-label col-sm-3">이메일</label>
-			<div class="col-sm-3">
-				<input type="text" class="form-control" id="emailqq"
-					name="email" maxlength="30" placeholder="Enter ID">
-			</div>
-		</div>
-		<div class="form-group">
-			<h2 align="center">&nbsp;</h2>
-			<div class="col-sm-offset-2 col-sm-12" align="center">
-				<button type="button" class="btn btn-primary" onclick="DosignUp();">
-					비번리셋
-				</button>
-			</div>
-		</div>
-	</form>
-      </div>
-    </div>
-
-  </div>
-</div>
 
 <!-- Trigger the modal with a button -->
 <!-- Modal -->
@@ -265,8 +274,10 @@
 					name="pwd" maxlength="20" placeholder="Enter Password"><br>
 			</div>
 			<div>
-			<button type="button" class="nav-link button-style3" data-toggle="modal" 
-						data-target="#myModal2">비밀번호를 잊어버리셨습니까?</button>
+			<button type="button" class="nav-link button-style3" onclick="DoPass();">비밀번호를 잊어버리셨습니까?</button>
+			<div id="doPass1">
+			
+			</div>
 		</div></div>
 		<h2 align="center">&nbsp;</h2>
 		<div class="form-group">
@@ -345,15 +356,30 @@
 					</ul>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="/tipboard/tipBoardList"><strong>팁</strong></a>
+					<c:if test="${login.accountId eq null }">
+						<a class="nav-link" data-toggle="modal" data-target="#myModal" href="#myModal"><strong>팁</strong></a>
+					</c:if>
+					<c:if test="${login.accountId ne null }">
+						<a class="nav-link" href="/tipboard/tipBoardList"><strong>팁</strong></a>
+					</c:if>
 				</li>
 				<li class="nav-item topMenuLi">
 					<a class="nav-link" href="#"><strong>구인구직</strong></a>
 					<ul class="submenu hire">
 						<li>|</li>
+						<c:if test="${login.accountId ne null }">
 						<li><a class="submenuLink" href="/recruitboard/recruitBoardList?categoryId=1">구인</a></li>
+						</c:if>
+						<c:if test="${login.accountId eq null }">
+							<li><a class="submenuLink" data-toggle="modal" data-target="#myModal" href="#myModal"><strong>구인</strong></a></li>
+						</c:if>
 						<li>|</li>
+						<c:if test="${login.accountId ne null }">
 						<li><a class="submenuLink" href="/recruitboard/recruitBoardList?categoryId=2">구직</a></li>
+						</c:if>
+						<c:if test="${login.accountId eq null }">
+							<li><a class="submenuLink" data-toggle="modal" data-target="#myModal" href="#myModal"><strong>구직</strong></a></li>
+						</c:if>
 						<li>|</li>
 					</ul>
 				</li>
@@ -362,39 +388,69 @@
 				<c:if test="${login.accountId ne null }">
 					<img src="<spring:url value='/image/${login.picture}'/>" class=" mx-auto rounded-circle" width="40px" height="40px"/>
 					<li class="nav-item topMenuLi">
-						<a class="nav-link" href="#"><strong>메세지</strong></a>
+						<a class="nav-link" href="#">
+							<c:choose>		
+								<c:when test="${mCount >= 1 }">		
+									<i class="far fa-envelope"></i>		
+								</c:when>		
+								<c:otherwise>		
+									<i class="far fa-envelope-open"></i>		
+								</c:otherwise>		
+							</c:choose>
+							<strong>메세지</strong>
+						</a>
 						<ul class="submenu messageMain">
 							<li>|</li>
-							<li><a class="submenuLink" href="/message/messageReceiveList">받은 메세지</a></li>
+							<li><a class="submenuLink" href="/message/messageReceiveList"><i class="fas fa-inbox"></i>받은 메세지</a></li>
 							<li>|</li>
-							<li><a class="submenuLink" href="/message/messageSendList">보낸 메세지</a></li>
+							<li><a class="submenuLink" href="/message/messageSendList"><i class="far fa-paper-plane"></i>보낸 메세지</a></li>
 							<li>|</li>
 						</ul>
 					</li>
 					<li class="nav-item topMenuLi">
-						<a class="nav-link" href="#"><strong>회원기능</strong></a>
+						<a class="nav-link" href="#">
+							<c:choose>		
+								<c:when test="${fCount >= 1 }">		
+									<i class="far fa-heart"></i>		
+								</c:when>		
+								<c:otherwise>		
+									<i class="fas fa-user-cog"></i>		
+								</c:otherwise>		
+							</c:choose>
+							<strong>회원기능</strong>
+						</a>
 						<ul class="submenu accounts">
 							<li>|</li>
-							<li><a class="submenuLink" href="/follow/followingList">팔로잉</a></li>
+							<li><a class="submenuLink" href="/follow/followingList"><i class="fas fa-user-friends"></i>팔로잉</a></li>
 							<li>|</li>
-							<li><a class="submenuLink" href="/follow/followerList">팔로워</a></li>
+							<li><a class="submenuLink" href="/follow/followerList">
+								<c:choose>		
+									<c:when test="${fCount >= 1 }">		
+										<i class="far fa-heart"></i>		
+									</c:when>		
+									<c:otherwise>		
+										<i class="fas fa-users"></i>		
+									</c:otherwise>		
+								</c:choose>
+								팔로워
+							</a></li>
 							<li>|</li>
-							<li><a class="submenuLink" href="/accounts/modAccount.do">회원정보수정</a></li>
+							<li><a class="submenuLink" href="/accounts/modAccount.do"><i class="fas fa-user-edit"></i>정보수정</a></li>
 							<li>|</li>
 						</ul>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="/accounts/logout"><strong>로그아웃</strong></a>
+						<a class="nav-link" href="/accounts/logout"><i class="fas fa-sign-out-alt"></i><strong>로그아웃</strong></a>
 					</li>
 				</c:if>
 				<c:if test="${login.accountId eq null }">
 					<li class="nav-item">
-						<a data-toggle="modal" class="nav-link" data-target="#myModal" href="#myModal"><strong>로그인</strong></a>
+						<a data-toggle="modal" class="nav-link" data-target="#myModal" href="#myModal"><i class="fas fa-sign-in-alt"></i><strong>로그인</strong></a>
 						<!-- <button type="button" class="nav-link" data-toggle="modal" 
 						data-target="#myModal" style="background-color:white; border:0; color:#990033 "><strong>로그인</strong></button> -->
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="/accounts/join.do"><strong>회원가입</strong></a>
+						<a class="nav-link" href="/accounts/join.do"><i class="fas fa-user-plus"></i><strong>회원가입</strong></a>
 					</li>
 					
 				</c:if>

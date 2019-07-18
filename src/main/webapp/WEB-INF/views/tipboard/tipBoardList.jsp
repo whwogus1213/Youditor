@@ -10,6 +10,21 @@
 <title>팁 - YouditoR</title>
 <jsp:include page="../module/header.jsp" flush="false" />
 <script src="https://kit.fontawesome.com/e83fabbb47.js"></script>
+<style>
+ @media (min-width:476px){.container{max-width: 240px;}}
+ @media (min-width:576px){.container{max-width: 300px;}}
+ @media (min-width:768px){.container{max-width: 440px;}}
+ @media (min-width:992px){.container{max-width: 640px;}}
+ @media (min-width:1080px){.container{max-width: 800;}}
+ @media (min-width:1200px){.container{max-width: 925px;}}
+ @media (min-width:1400px){.container{max-width: 1100px;}}
+ .container {
+    float: left;
+}
+footer{
+    margin-top: 250px;
+}
+</style>
 <script>
 	// 이전 버튼
 	function fn_prev(page, range, rangeSize, searchType, keyword) {
@@ -101,8 +116,10 @@
 			<h4 align="center"><br>나만의 편집 팁을 공유하세요.</h4>
 		</div>
 	</div>
+	
 	<div id="deleteOK" class="alert alert-danger hidden" role="alert" style="visibility:hidden">글이 삭제되었습니다.</div>
 	
+	<jsp:include page="../module/aside.jsp" flush="false" />
 	<div class="container">
 		<table class="table table-striped nanum table-hover">
 			<!-- <table border="1"> -->

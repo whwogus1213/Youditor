@@ -38,7 +38,7 @@ li {
     border-color: rgb(147, 97, 197, 0.5);
 	}
 .aside {
-	margin: 60px 20px 20px 10px;
+	margin: 60px 20px 20px 0;
 	width: 200px;
 	height: 325px;
 	float: left;    
@@ -268,7 +268,7 @@ li {
 
 		//스크롤 이벤트가 발생하면
 		$(window).scroll(function() {
-			yPosition = $win.scrollTop() + 100; //이부분을 조정해서 화면에 보이도록 맞추세요
+			yPosition = $win.scrollTop() - 180; //이부분을 조정해서 화면에 보이도록 맞추세요
 			if (yPosition < 0) {
 				yPosition = 0;
 			}

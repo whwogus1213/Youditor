@@ -129,9 +129,6 @@
 	</script>
 	<jsp:include page="../module/top2.jsp" flush="false" />
 	
-	<p>
-	<jsp:include page="../module/VideoBoardListAside.jsp" flush="false" />
-	</p>
 	
 	<!-- 배너 목록 -->
 	<c:choose>
@@ -225,10 +222,13 @@
 		</c:otherwise>
 	</c:choose>
 
+	<jsp:include page="../module/ListAside.jsp" flush="false" />
 	<div class="container" style="background-color: #E8E8E8 ;">
+	
 		<!-- Marketing Icons Section -->
 		<br>
 		<div class="row">
+		
 			<c:forEach items="${VideoBoardList}" var="VideoBoardList">
 				<div class="col-lg-4 mb-4">
 					<div class="card h-100 vbrow" style="display: block;">

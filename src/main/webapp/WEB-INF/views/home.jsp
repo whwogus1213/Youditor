@@ -26,9 +26,20 @@
  	 width: 48%;
  	 float: left;
  	 margin-right: 2%;
+ 	 text-overflow: ellipsis;
   }
   .table th, .table td {
     border-top: 0 solid #dee2e6; 
+}
+ @media (min-width:476px){.container{max-width: 240px;}}
+ @media (min-width:576px){.container{max-width: 300px;}}
+ @media (min-width:768px){.container{max-width: 440px;}}
+ @media (min-width:992px){.container{max-width: 640px;}}
+ @media (min-width:1080px){.container{max-width: 800;}}
+ @media (min-width:1200px){.container{max-width: 925px;}}
+ @media (min-width:1400px){.container{max-width: 1100px;}}
+ .container {
+    float: left;
 }
   </style>
   <script>
@@ -87,7 +98,7 @@ function getAccountsRankList(){
 					if(i < 3){
 						html += "<div class='col-lg-4 col-sm-6 portfolio-item'>";
 						html += "<div class='card h-100'>";
-						html += "<a href='#'><img class='card-img-top' src='"+data[i].picture+"' alt='' width='80' height='200'></a>";
+						html += "<a href='#'><img class='card-img-top' src='/image/"+data[i].picture+"' alt='' width='80' height='200'></a>";
 						html += "<div class='card-body'>";
 						html += "<h4 class='card-title'>";
 						html += "<a href='#'>"+data[i].nickname+"</a>";
@@ -207,6 +218,7 @@ function getTipNew(){
 		}
 	});
 }
+
   </script>
 </head>
 
