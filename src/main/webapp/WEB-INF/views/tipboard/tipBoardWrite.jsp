@@ -9,18 +9,18 @@
 <meta charset="UTF-8">
 <title>편집 팁 - 작성 - YouditoR</title>
 <jsp:include page="./../module/header.jsp" flush="false"/>
-<!-- Custom styles -->
-<link href="/resources/css/modern-business.css" rel="stylesheet">
 </head>
 <body>
 	<jsp:include page="../module/top2.jsp" flush="false"/>
+	
+	<!-- 배너 -->
 	<div class="form-group">
-		<div class="col-sm-12">
-			<h2 align="center">&nbsp;</h2>
-			<h2 align="center">편집 팁 올리기</h2>
-			<h2 align="center">&nbsp;</h2>
+		<div class="col-sm-12" style="background-image:url('/resources/images/tipboard/tipboard.jpg'); background-position:50% 20%; background-size:100%; font-family: 'Noto Serif KR', sans-serif; color:Peru; padding-top:130px; padding-bottom:5%"  >
+			<h1 align="center" style="font-size:50px; letter-spacing:10px"><strong>편집 Tip</strong></h1>
+			<h4 align="center"><br>나만의 편집 팁을 공유하세요.</h4>
 		</div>
 	</div>
+	
 	<div class="container">
 	    <form class="form-horizontal" method="post" action=" ${path}/tipboard/insertTipBoardPro">
 	    	<div class="form-inline">

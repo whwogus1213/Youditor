@@ -104,15 +104,17 @@ button[type="button"] {
 </head>
 <body>
 	<jsp:include page="../module/top2.jsp" flush="false"/>
+	
+	<!-- 배너 -->
+	<div class="form-group">
+		<div class="col-sm-12" style="background-image:url('/resources/images/recruit/recruit.jpg'); background-position:50% 60%; background-size:100%; font-family: 'Song Myung', sans-serif; color:white; text-shadow: -1px 0 LightPink, 0 1px LightPink, 1px 0 LightPink, 0 -1px LightPink; padding-top:130px; padding-bottom:5%">
+			<h1 align="center" style="font-size:50px; letter-spacing:10px"><strong>구인/구직</strong></h1>
+			<h4 align="center"><br>당신의 파트너가 될 YouditoR가 있습니다.</h4>
+		</div>
+	</div>
+	
 	<div id="deleteOK" class="alert alert-danger hidden" role="alert" style="visibility:hidden">글이 삭제되었습니다.</div>
 	<div class="container">
-		<div class="form-group">
-			<div class="col-sm-12" style="background-image:url('/resources/images/recruit/recruit.jpg'); background-position:50% 60%; font-family: 'Song Myung', sans-serif; color:white; text-shadow: -1px 0 LightPink, 0 1px LightPink, 1px 0 LightPink, 0 -1px LightPink;">
-				<h1 align="center" style="font-size:50px; letter-spacing:10px"><br><strong>구인/구직</strong></h1>
-				<h4 align="center"><br>당신의 파트너가 될 YouditoR가 있습니다.</h4>
-				<h1 align="center"><br></h1>
-			</div>
-		</div>
 		<table class="table table-striped nanum table-hover">
 			<!-- <table border="1"> -->
 			<thead align="center">

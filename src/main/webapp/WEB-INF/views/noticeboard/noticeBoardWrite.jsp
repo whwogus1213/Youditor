@@ -9,18 +9,18 @@
 <meta charset="UTF-8">
 <title>공지게시판 - 작성 - YouditoR</title>
 <jsp:include page="./../module/header.jsp" flush="false"/>
-<!-- Custom styles -->
-<link href="/resources/css/modern-business.css" rel="stylesheet">
 </head>
 <body>
 	<jsp:include page="../module/top2.jsp" flush="false"/>
+	
+	<!-- 배너 -->
 	<div class="form-group">
-		<div class="col-sm-12">
-			<h2 align="center">&nbsp;</h2>
-			<h1 align="center">공지 올리기</h1>
-			<h2 align="center">&nbsp;</h2>
+		<div class="col-sm-12"  style="background-image:url('/resources/images/notice/notice.jpg'); background-position:50% 60%; font-family: 'Jua', sans-serif; color:white; padding-top:130px; padding-bottom:5%">
+			<h1 align="center" style="font-size:50px; letter-spacing:10px"><strong>공지사항</strong></h1>
+			<h5 align="center"><br>YouditoR의 최신 소식과 이벤트를 알려드립니다.</h5>
 		</div>
 	</div>
+	
 	<div class="container">
 	    <form class="form-horizontal" method="post"action=" ${path}/noticeboard/insertNoticeBoardPro">
 	    	<div class="form-inline">
