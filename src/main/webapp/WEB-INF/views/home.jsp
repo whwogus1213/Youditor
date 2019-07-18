@@ -31,6 +31,16 @@
   .table th, .table td {
     border-top: 0 solid #dee2e6; 
 }
+ @media (min-width:476px){.container{max-width: 240px;}}
+ @media (min-width:576px){.container{max-width: 300px;}}
+ @media (min-width:768px){.container{max-width: 440px;}}
+ @media (min-width:992px){.container{max-width: 640px;}}
+ @media (min-width:1080px){.container{max-width: 800;}}
+ @media (min-width:1200px){.container{max-width: 925px;}}
+ @media (min-width:1400px){.container{max-width: 1100px;}}
+ .container {
+    float: left;
+}
   </style>
   <script>
   $(function() {

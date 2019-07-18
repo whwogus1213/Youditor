@@ -122,6 +122,7 @@
 	</div>
 	<div id="deleteOK" class="alert alert-danger hidden" role="alert" style="visibility: hidden">글이 삭제되었습니다.</div>
 
+	<jsp:include page="../module/aside.jsp" flush="false" />
 	<div class="container">
 		<div class="row">
 			<c:forEach items="${NoticeBoardList}" var="NoticeBoardList">
