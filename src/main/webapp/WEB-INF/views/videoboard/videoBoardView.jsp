@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
@@ -8,42 +9,26 @@
 
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="">
 <meta name="author" content="">
 <title>${row.subject}-YouDitor</title>
-<jsp:include page="../module/header.jsp" flush="false"/>
+<link href="/resources/vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
+<link href="/resources/vendor/bootstrap/css/bootstrap-grid.min.css" rel="stylesheet">
+<script src="/resources/js/jquery-3.3.1.min.js"></script>
 <script src="https://kit.fontawesome.com/e83fabbb47.js"></script>
 <style>
-.dropdown-button {
-	background-color: #FFDAB9;
-	padding: 8px;
-	font-size: 15px;
-	border: none;
+i {
+	cursor: pointer;
+	padding-top: 5px;
 }
-.dropdown {
-	position: relative;
-	display: inline-block;
-}
-.dropdown-content {
-	display: none;
-	position: absolute;
+
+.fa-heart {
+	border: 0;
+	outline: 0;
 	background-color: #ffffff;
-	min-width: 75px;
-	padding: 5px;
-	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
 }
-
-.dropdown-content a {
-	color: black;
-	padding: 8px;
-	text-decoration: none;
-	display: block;
-}
-
-.dropdown-content a:hover {background-color: #f8f9fa;}
-.dropdown:hover .dropdown-content {display: block;}
-.dropdown:hover .dropdown-button {background-color: #ffffff;}
 
 .star_rating {
 	font-size: 0;
@@ -129,9 +114,9 @@
 				$(".star_rating a:lt("+data+")").addClass("on");
 				var html = "";
 				if(data == 0) {
-					html += "<button id ='ratingbtn' class='btn btn-info btn-sm' style='visibility:hidden' onclick='fn_rating("+${row.boardId}+"); return false;'>평가하기</button>";
+					html += "<button id ='ratingbtn' class='btn btn-sm' style='visibility:hidden' onclick='fn_rating("+${row.boardId}+"); return false;'>확인</button>";
 				} else {
-					html += "<button id ='ratingbtn' class='btn btn-warning btn-sm' style='visibility:hidden' onclick='fn_ratingupdate("+${row.boardId}+"); return false'>평가바꾸기</button>";
+					html += "<button id ='ratingbtn' class='btn btn-sm' style='visibility:hidden' onclick='fn_ratingupdate("+${row.boardId}+"); return false'>확인</button>";
 				}
 				$("#ratingBtnDiv").html(html);
 			},
@@ -239,10 +224,11 @@
 				data : json,
 				success : function(data) {
 					if (data == 1) {
-						var html = "<button class='btn btn-warning btn-sm' id='followbtn' onclick='fn_unfollow("+${row.accountId}+")'>팔로잉√</button>";			
+						var html = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class='fas fa-heart' id='followbtn' onclick='fn_unfollow("+${row.accountId}+")' style='color: red;'>Follow</i>";
 					} else {
-						var html = "<button class='btn btn-primary btn-sm' id='followbtn' onclick='fn_following("+${row.accountId}+")'>팔로우</button>";
+						var html = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class='far fa-heart' id='followbtn' onclick='fn_following("+${row.accountId}+")' style='color: black;'>Follow</i>";
 					}
+
 					$('#followDiv').html(html);
 				},
 				error : function(data) {
@@ -254,11 +240,10 @@
 </script>
 </head>
 <body>
-<jsp:include page="../module/top2.jsp" flush="false" />
+	<jsp:include page="../module/top2.jsp" flush="false" />
 	<!-- 게시글 상세정보 -->
 	<div align="center" style="background-color: black; padding-top: 60px">
 		<script>
-		
 			var e = '${row.youtubeLink}';
 			var eArray  = e.split('/');
 			var youtubeID;
@@ -297,93 +282,104 @@
 						
 				});
 			});
-			
+		
 		</script>
 	</div>
 	<!-- <h1>${row.boardId }</h1> -->
 	<div class="container" style="font-family: 'Nanum Gothic', sans-serif;">
 		<br>
-		<h2>${row.subject }</h2>
-		<span style="line-height: 30%"><br></span>
-		<h5>${row.object }</h5>
-		<br>
-		<h6 style="color:gray"> 조회수&nbsp;&nbsp; ${row.viewCount }</h6>
-		
-		
-        <input type="hidden" id="boardId" name="boardId" value="${row.boardId }" />
-        <div class="input-group">
-			<c:if test="${login.email ne null}">
-	        	<c:if test="${login.accountId ne row.accountId}">
-						<p class="star_rating">
-						    <a class = "starqq" href="#">★</a>
-						    <a class = "starqq" href="#">★</a>
-						    <a class = "starqq" href="#">★</a>
-						    <a class = "starqq" href="#">★</a>
-						    <a class = "starqq" href="#">★</a>
-						</p>
-						<div id='ratingBtnDiv'>
-						</div>
-				</c:if>
-			</c:if>
-		<c:if test="${login.email eq null}">
-				로그인 후 평가 가능
-			</c:if>
-        </div>
-		<h5 align="right">등록일 &nbsp;&nbsp; <fmt:formatDate value="${row.reg_date}" pattern="yyyy년 MM월 dd일  HH:mm:ss" /></h5>
-		<c:if test="${login.email ne null}">
-			<c:if test="${login.accountId ne row.accountId}">
+		<div class="row">
+			<h2 class="col-sm-9">${row.subject }</h2>
+			<div class="col-sm-3" align="right">
+				게시일 :&nbsp;
+				<fmt:formatDate value="${row.reg_date}" pattern="yyyy. MM. dd." />
+			</div>
+		</div>
+		<div>${row.object }</div>
 
-				<div align="right">
-					<label>내가 평가한 점수</label> <span id="star"></span><span> 점</span>
-				</div>
-			</c:if>
-		</c:if>
-		<div align="right">총 점수 ${row.starCount}</div>
-		<hr>
-		<div class="dropdown">
-			<h5 style="width: 150px;">
-				<a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="cursor:pointer">
-					<img src="<spring:url value='/image/${row.picture}'/>" class=" mx-auto rounded-circle" width="40px" height="40px" />
-					<strong>&nbsp;&nbsp;${row.nickname}</strong>
-				</a>
-			</h5>
-			<div class="dropdown-content">
-				<a class="dropdown-item" href="/videoboard/videoBoardList?searchType=nickname&keyword=${row.nickname}">
-					<i class="fab fa-youtube"></i>&nbsp;&nbsp;영상 더보기
-				</a>
-				<a class="dropdown-item" href="#" onclick="messagePopup();">
-					<i class="far fa-envelope"></i>&nbsp;&nbsp;쪽지 보내기
-				</a>
-				<script type="text/javascript">
-				function messagePopup() {
-					var nickname = "${row.nickname }";
-					var win = window.open("/message/writePopup.do?nickname=" + nickname, "_blank", 
-							"width=650, height=470, left=200, top=200, location=no, menubar=no, resizble=no, scrollbars=no, status=no, titlebar=no, toolbar=no");
-				}
-				</script>
+		<div class="row">
+			<div class="col-sm-6" align="left"
+				style="color: gray; font-size: 14px;">조회수&nbsp;${row.viewCount }회</div>
+		</div>
+		<input type="hidden" id="boardId" name="boardId"
+			value="${row.boardId }" />
+
+		<!-- 별점 주는 화면 -->
+		<div class="row">
+			<div class="input-group col-sm-6">
+				<c:if test="${login.email ne null}">
+					<c:if test="${login.accountId ne row.accountId}">
+						<p class="star_rating">
+							<a class="starqq" href="#">★</a>
+							<a class="starqq" href="#">★</a>
+							<a class="starqq" href="#">★</a>
+							<a class="starqq" href="#">★</a>
+							<a class="starqq" href="#">★</a>
+						</p>
+						<div id='ratingBtnDiv'></div>
+					</c:if>
+				</c:if>
+				<c:if test="${login.email eq null}">
+					로그인 후 평가 가능
+				</c:if>
 			</div>
 		</div>
 		
-		<br> <br>
-		<h6>${row.footer }</h6>
-		<%-- 	<h1>${row.youtubeLink }</h1> --%>
-		<!-- 디자인 필요 -->
-		<div align="right">
-			<!-- 팔로우 버튼 -->
-			<div id="followDiv"></div>
-
-			<c:if test="${login.accountId eq row.accountId}">
-				<button class="btn btn-warning btn-sm"
-					onclick="location.href='/videoboard/updateVideoBoard.do?boardId=${row.boardId}'">수정</button>
-				<button class="btn btn-danger btn-sm" id="deletebtn">삭제</button>
-			</c:if>
+		<div class="row">
+			<div class="col-sm-2" align="left">
+				평점 ${row.starCount}
+			</div>
+			<div class="col-sm-2 offset-8" align="right">
+				<c:if test="${login.accountId eq row.accountId}">
+					<i class="far fa-edit"
+						onclick="location.href='/videoboard/updateVideoBoard.do?boardId=${row.boardId}'"
+						style="cursor: pointer;">수정</i>&nbsp; <i class="far fa-trash-alt"
+						id="deletebtn" style="cursor: pointer;">삭제</i>
+				</c:if>
+			</div>
 		</div>
+		
+		<hr>
+
+		<!-- 작성자 정보 -->
+		<div class="row">
+			<div class="dropright" style="padding-left: 18px">
+				<a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+					style="cursor: pointer"> <img
+					src="<spring:url value='/image/${row.picture}'/>"
+					class=" mx-auto rounded-circle" width="30px" height="30px" /> <strong>&nbsp;${row.nickname}</strong>
+				</a>
+				<div class="dropdown-menu">
+					<a class="dropdown-item"
+						href="/videoboard/videoBoardList?searchType=nickname&keyword=${row.nickname}">
+						<i class="fab fa-youtube"></i>&nbsp;&nbsp;영상 더보기
+					</a> <a class="dropdown-item" href="#" onclick="messagePopup();"> <i
+						class="far fa-envelope"></i>&nbsp;&nbsp;쪽지 보내기
+					</a>
+					<script type="text/javascript">
+					function messagePopup() {
+						var nickname = "${row.nickname }";
+						var win = window.open("/message/writePopup.do?nickname=" + nickname, "_blank", 
+								"width=650, height=470, left=200, top=200, location=no, menubar=no, resizble=no, scrollbars=no, status=no, titlebar=no, toolbar=no");
+					}
+					</script>
+				</div>
+			</div>
+			<!-- 팔로우 버튼 -->
+			<div id="followDiv" style="padding-top: 1px;"></div>
+		</div>
+		<br>
+		<h6>${row.footer }</h6>
 		<hr>
 	</div>
-	<div id="listReply">
-		<jsp:include page="../videoboard/videoBoardReply.jsp" flush="false" />
+	
+	<!-- 댓글 -->
+	<div class="container">
+		<div id="listReply">
+			<jsp:include page="../videoboard/videoBoardReply.jsp" flush="false" />
+		</div>
 	</div>
-	<br>
+	
 	<br>
 	<br>
 	<jsp:include page="../module/bottom.jsp" flush="false" />

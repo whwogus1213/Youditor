@@ -51,6 +51,8 @@
             <exclude-mapping path="/echo"/>
             <exclude-mapping path="/tipstar"/>
             <exclude-mapping path="/tipstar/**"/>
+            <exclude-mapping path="/tipboard"/>
+            <exclude-mapping path="/tipboard/**"/>
             <beans:ref bean="authenticationInterceptor"/>
         </interceptor>
     </interceptors>

@@ -92,9 +92,9 @@
 	
 	<!-- 최신 공지 사항 -->
 	<select id="rankList" resultType="NoticeBoardVO">
-		SELECT boardId, b.accountId, subject, a.nickname
+		SELECT boardId, b.accountId, subject, a.nickname, viewCount, b.mod_date, b.categoryId
 		FROM noticeboard b join accounts a on b.accountId = a.accountId
 		join noticecategory c on b.categoryId=c.categoryId
-        order by b.reg_date DESC limit 5;
+        order by b.mod_date DESC limit 5;
 	</select>
 </mapper>

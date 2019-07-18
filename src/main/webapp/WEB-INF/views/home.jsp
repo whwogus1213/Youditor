@@ -22,16 +22,199 @@
   footer{
   clear: both;
   }
+  .jy {
+ 	 width: 48%;
+ 	 float: left;
+ 	 margin-right: 2%;
+  }
+  .table th, .table td {
+    border-top: 0 solid #dee2e6; 
+}
   </style>
+  <script>
+  $(function() {
+  $.ajax({
+			type : "POST",
+			url : "/videostar/StarList",
+			success : function(data) {
+
+				var html = "";
+
+				if(data.length > 0) {
+					for(var i = 0; i < data.length; i++){
+						if(i < 3){
+							html += "<div class='col-lg-4 mb-4'>";
+							html += "<div class='card h-100'>";
+							html += "<h4 class='card-header'>"+data[i].subject+"</h4>";
+							html += "<div class='card-body'>";
+							html += "<img width='100%' height='20%' src='"+data[i].youtubeLink+"'></img>";
+							html += "</div>";
+							html += "<div class='card-footer'>";
+							html += "<table>"
+							html += "<tr>"
+							///////////////////////////
+							html += "</table>"
+							html += "</tr>"
+							html += "</div>";
+							html += "</div>";
+							html += "</div>";
+						}
+					}
+				}
+
+				$("#top3-1").html(html);
+				getAccountsRankList();
+				getNoticeNew();
+				getTipNew();
+			},
+			error : function(data) {
+				alert('불러오기 실패');
+			}
+			
+		});
+  
+});
+function getAccountsRankList(){
+	$.ajax({
+		type : "POST",
+		url : "/accounts/accountsList",
+		success : function(data) {
+
+			var html = "";
+
+			if(data.length > 0) {
+				for(var i = 0; i < 3; i++){
+					if(i < 3){
+						html += "<div class='col-lg-4 col-sm-6 portfolio-item'>";
+						html += "<div class='card h-100'>";
+						html += "<a href='#'><img class='card-img-top' src='"+data[i].picture+"' alt='' width='80' height='200'></a>";
+						html += "<div class='card-body'>";
+						html += "<h4 class='card-title'>";
+						html += "<a href='#'>"+data[i].nickname+"</a>";
+						html += "</h4>";
+						html += "</div>";
+						html += "</div>";
+						html += "</div>";
+						
+					}else{
+						html += "<div class='col-lg-4 col-sm-6 portfolio-item'>";
+						html += "<div class='card h-100'>";
+						html += "<a href='#'><img class='card-img-top' src='/resources/images/member1.jpg' alt='' width='80' height='200'></a>";
+						html += "<div class='card-body'>";
+						html += "<h4 class='card-title'>";
+						html += "<a href='#'>편집자 아이디</a>";
+						html += "</h4>";
+						html += "<p class='card-text'>편집자 설명</p>";
+						html += "</div>";
+						html += "</div>";
+						html += "</div>";
+					}
+				}
+			}
+
+			$("#top3-2").html(html);
+
+		},
+		error : function(data) {
+			alert('불러오기 실패');
+		}
+	});
+}
+
+function getNoticeNew(){
+	$.ajax({
+		type : "POST",
+		url : "/noticeboard/newNotice",
+		success : function(data) {
+
+			var html = "";
+
+			if(data.length > 0) {
+				for(var i = 0; i < data.length; i++){
+					if(i < 5){
+						html += "<tr>";
+						html += "<td>"+(i+1)+"</td>";
+						html += "<td>"+data[i].categoryId+"</td>";
+						html += "<td align='left' style='padding-left: 30px; cursor: pointer;' onclick='location.href='/noticeboard/noticeBoardView?boardId="+data[i].boardId+"''>"+data[i].subject+"</td>";
+						html += "<td>"+data[i].nickname+"</td>";
+						html += "<td><fmt:formatDate value="+data[i].mod_date+"pattern='yyyy-MM-dd' /></td>";
+						html += "<td>"+data[i].viewCount+"</td>";
+						html += "</tr>";
+					}else{
+						html += "<div class='col-lg-4 col-sm-6 portfolio-item'>";
+						html += "<div class='card h-100'>";
+						html += "<a href='#'><img class='card-img-top' src='/resources/images/member1.jpg' alt='' width='80' height='200'></a>";
+						html += "<div class='card-body'>";
+						html += "<h4 class='card-title'>";
+						html += "<a href='#'>편집자 아이디</a>";
+						html += "</h4>";
+						html += "<p class='card-text'>편집자 설명</p>";
+						html += "</div>";
+						html += "</div>";
+						html += "</div>";
+					}
+				}
+			}
+
+			$("#newNotice").html(html);
+
+		},
+		error : function(data) {
+			alert('불러오기 실패');
+		}
+	});
+}
+function getTipNew(){
+	$.ajax({
+		type : "POST",
+		url : "/tipboard/newTip",
+		success : function(data) {
+
+			var html = "";
+
+			if(data.length > 0) {
+				for(var i = 0; i < data.length; i++){
+					if(i < 5){
+						html += "<tr>";
+						html += "<td>"+(i+1)+"</td>";
+						html += "<td>"+data[i].categoryId+"</td>";
+						html += "<td align='left' style='padding-left: 30px; cursor: pointer;' onclick='location.href='/noticeboard/noticeBoardView?boardId="+data[i].boardId+"''>"+data[i].subject+"</td>";
+						html += "<td>"+data[i].nickname+"</td>";
+						html += "<td><fmt:formatDate value="+data[i].mod_date+"pattern='yyyy-MM-dd' /></td>";
+						html += "<td>"+data[i].viewCount+"</td>";
+						html += "</tr>";
+					}else{
+						html += "<div class='col-lg-4 col-sm-6 portfolio-item'>";
+						html += "<div class='card h-100'>";
+						html += "<a href='#'><img class='card-img-top' src='/resources/images/member1.jpg' alt='' width='80' height='200'></a>";
+						html += "<div class='card-body'>";
+						html += "<h4 class='card-title'>";
+						html += "<a href='#'>편집자 아이디</a>";
+						html += "</h4>";
+						html += "<p class='card-text'>편집자 설명</p>";
+						html += "</div>";
+						html += "</div>";
+						html += "</div>";
+					}
+				}
+			}
+
+			$("#newTip").html(html);
+
+		},
+		error : function(data) {
+			alert('불러오기 실패');
+		}
+	});
+}
+  </script>
 </head>
 
-<body>
+<body style="background-color: #fff;">
 
   <jsp:include page="./module/top2.jsp" flush="false"/>
  	<!-- 페이지 내용 시작 -->
- 	
-<div id="dologinform"></div>
-	  <header>
+ 	<header>
 	    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
 	      <ol class="carousel-indicators">
 	        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -71,94 +254,68 @@
 	      </a>
 	    </div>
 	  </header>
+<div id="dologinform"></div>
 	  
   <jsp:include page="./module/aside.jsp" flush="false"/>
   <div class="container">
 
-    <h1 class="my-4">핫한 편집 영상</h1>
+    <h1 class="my-4">핫한 편집 영상</h1><hr/>
 
     <!-- Marketing Icons Section -->
-    <div class="row">
-      <div class="col-lg-4 mb-4">
-        <div class="card h-100">
-          <h4 class="card-header">영상 제목</h4>
-          <div class="card-body">
-<!--           <a href="#"><img class="card-img-top" src="" alt=""></a> -->
-			<img width="100%" height="20%" src="https://img.youtube.com/vi/xZKVYhHInok/mqdefault.jpg"></img>
-          </div>
-          <div class="card-footer">
-            <a href="#" class="btn btn-primary">여기는 좋아요, 작성자 프로필 만들곳</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 mb-4">
-        <div class="card h-100">
-          <h4 class="card-header">영상 제목</h4>
-          <div class="card-body">
-<!--           <a href="#"><img class="card-img-top" src="" alt=""></a> -->
-			<img width="100%" height="20%" src="https://img.youtube.com/vi/xZKVYhHInok/mqdefault.jpg"></img>
-          </div>
-          <div class="card-footer">
-            <a href="#" class="btn btn-primary">여기는 좋아요, 작성자 프로필 만들곳</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 mb-4">
-        <div class="card h-100">
-          <h4 class="card-header">영상 제목</h4>
-          <div class="card-body">
-<!--           <a href="#"><img class="card-img-top" src="" alt=""></a> -->
-			<img width="100%" height="20%" src="https://img.youtube.com/vi/xZKVYhHInok/mqdefault.jpg"></img>
-          </div>
-          <div class="card-footer">
-            <a href="#" class="btn btn-primary">여기는 좋아요, 작성자 프로필 만들곳</a>
-          </div>
-        </div>
-      </div>
-    </div>
+    <div class="row" id="top3-1">
+      
+	</div><hr/>
     <!-- /.row -->
 
     <!-- 편집자 프로필 -->
-    <h2>이번주 편집자 탑3</h2>
+    <h2>이번주 편집자 탑3</h2><hr/>
 
-    <div class="row">
-      <div class="col-lg-4 col-sm-6 portfolio-item">
-        <div class="card h-100">
-          <a href="#"><img class="card-img-top" src="/resources/images/member1.jpg" alt="" width="80" height="200"></a>
-          <div class="card-body">
-            <h4 class="card-title">
-              <a href="#">편집자 아이디</a>
-            </h4>
-            <p class="card-text">편집자 설명</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 col-sm-6 portfolio-item">
-        <div class="card h-100">
-          <a href="#"><img class="card-img-top" src="/resources/images/member2.jpg" alt="" width="80" height="200"></a>
-          <div class="card-body">
-            <h4 class="card-title">
-              <a href="#">편집자 아이디</a>
-            </h4>
-            <p class="card-text">편집자 설명</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 col-sm-6 portfolio-item">
-        <div class="card h-100">
-          <a href="#"><img class="card-img-top" src="/resources/images/member3.png" alt="" width="80" height="200"></a>
-          <div class="card-body">
-            <h4 class="card-title">
-              <a href="#">편집자 아이디</a>
-            </h4>
-            <p class="card-text">편집자 설명</p>
-          </div>
-        </div>
-      </div>
+    <div class="row" id="top3-2">
+      
+      
 
     <!-- /.row -->
+  	</div><hr/>
+  	<div class="jy">
+  		<h2>최신 공지사항</h2><hr/>
+  		<div id="notice">
+  			<table class="table table-striped nanum table-hover">
+			<!-- <table border="1"> -->
+			<thead align="center">
+				<tr>
+					<th style="width: 10%;">번호</th>
+					<th style="width: 10%;">분류</th>
+					<th style="width: 40%;">제목</th>
+					<th style="width: 10%;">작성자</th>
+					<th style="width: 20%;">작성일</th>
+					<th style="width: 10%;">조회수</th>
+				</tr>
+			</thead>
+			<tbody align="center" id="newNotice">
+			</tbody>
+		</table>
+  		</div>
   	</div>
-  	
+  	<div class="jy">
+  		<h2>최신 TIP 게시판</h2><hr/>
+  		<div id="tip">
+  			<table class="table table-striped nanum table-hover">
+				<!-- <table border="1"> -->
+				<thead align="center">
+					<tr>
+						<th style="width: 10%;">번호</th>
+						<th style="width: 10%;">분류</th>
+						<th style="width: 40%;">제목</th>
+						<th style="width: 10%;">작성자</th>
+						<th style="width: 20%;">작성일</th>
+						<th style="width: 10%;">조회수</th>
+					</tr>
+				</thead>
+				<tbody align="center" id="newTip">
+				</tbody>
+			</table>
+  		</div>
+  	</div>
   </div>
   <jsp:include page="./module/bottom.jsp" flush="false"/>
 

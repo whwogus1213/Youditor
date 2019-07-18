@@ -90,5 +90,13 @@
 	<update id="viewCount">
 	UPDATE tipBoard SET viewCount = viewCount+1 WHERE boardId=#{boardId}
 	</update>
+	
+	<!-- 최신 게시물 -->
+	<select id="newList" resultType="TipBoardVO">
+		SELECT boardId, b.accountId, subject, a.nickname, viewCount, b.reg_date, b.categoryId
+		FROM tipboard b join accounts a on b.accountId = a.accountId
+		join tipcategory c on b.categoryId=c.categoryId
+        order by b.reg_date DESC limit 5
+	</select>
 
 </mapper>

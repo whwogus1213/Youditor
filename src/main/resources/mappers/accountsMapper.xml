@@ -16,11 +16,11 @@
 	<!-- 회원 랭킹 리스트 -->
 	<select id="selectAccounts" resultType="AccountsVO"
 		parameterType="map">
-		select accountId, sum(star) as star, nickname 
-		from ( (select tbts.accountId, sum(star) as star, ac.nickname 
+		select accountId, sum(star) as star, nickname ,picture, footer
+		from ( (select tbts.accountId, sum(star) as star, ac.nickname, ac.picture, ac.footer
 				from (select tb.boardId, tb.accountId, ts.star from tipboard tb, tipstar ts where tb.boardId = ts.boardId) tbts,
 						accounts ac where tbts.accountId = ac.accountId group by tbts.accountId)
-		                union all (select vbvs.accountId, sum(star) as star, ac.nickname 
+		                union all (select vbvs.accountId, sum(star) as star, ac.nickname, ac.picture, ac.footer
 		                from (select vb.boardId, vb.accountId, vs.star from videoboard vb, videostar vs where vb.boardId = vs.boardId) vbvs,
 		                accounts ac where vbvs.accountId = ac.accountId group by vbvs.accountId)) union_vt 
 		group by accountId order by star desc limit 5;
