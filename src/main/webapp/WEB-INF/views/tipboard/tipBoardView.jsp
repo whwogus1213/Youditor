@@ -266,6 +266,14 @@
 </head>
 <body>
 	<jsp:include page="../module/top2.jsp" flush="false"/>
+	
+	<!-- 배너 -->
+	<div class="form-group">
+		<div class="col-sm-12" style="background-image:url('/resources/images/tipboard/tipboard.jpg'); background-position:50% 20%; background-size:100%; font-family: 'Noto Serif KR', sans-serif; color:Peru; padding-top:130px; padding-bottom:5%"  >
+			<h1 align="center" style="font-size:50px; letter-spacing:10px"><strong>편집 Tip</strong></h1>
+			<h4 align="center"><br>나만의 편집 팁을 공유하세요.</h4>
+		</div>
+	</div>
 
 	<!-- 게시글 상세정보 -->
 	<div class="container">

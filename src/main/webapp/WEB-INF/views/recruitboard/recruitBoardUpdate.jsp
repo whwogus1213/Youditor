@@ -19,20 +19,24 @@
 	<jsp:include page="../module/top2.jsp" flush="false"/>
 	<form class="form-horizontal" method="post" action="${path}/recruitboard/update">
 	
+	<!-- 배너 -->
+	<div class="form-group">
+		<div class="col-sm-12" style="background-image:url('/resources/images/recruit/recruit.jpg'); background-position:50% 60%; background-size:100%; font-family: 'Song Myung', sans-serif; color:white; text-shadow: -1px 0 LightPink, 0 1px LightPink, 1px 0 LightPink, 0 -1px LightPink; padding-top:130px; padding-bottom:5%">
+			<h1 align="center" style="font-size:50px; letter-spacing:10px"><strong>구인/구직</strong></h1>
+			<h4 align="center"><br>당신의 파트너가 될 YouditoR가 있습니다.</h4>
+		</div>
+	</div>
+	
 	<!-- 게시글 상세정보 -->
 	<div class="container">
-		<div align="center">
-			<br><br>
-			<h1>구인 구직</h1>
-			<br><br>
-		</div>
 		<hr>
 		<br>
 		<label class="control-label col-sm-2">제목</label>
 		<input type="text" class="form-control" name="subject" id="subject" maxlength="50" value="${row.subject }">
 		<br>
 		<label class="control-label col-sm-2">내용</label>
-		<input type="text" class="form-control" name="object" id="object" maxlength="50" value="${row.object }">
+		
+		<textarea rows="10" cols="100" name="object" id="object">${row.object }</textarea>
 		<br>
 		<input type="text" class="form-control" name="boardId" id="boardId" maxlength="50" value="${row.boardId}" style="visibility:hidden">
 		<br>

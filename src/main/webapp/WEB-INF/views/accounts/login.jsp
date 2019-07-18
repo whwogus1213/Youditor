@@ -9,6 +9,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<meta name="description" content="">
 	<meta name="author" content="">
+	<!-- <link href="/resources/css/chat.css" rel="stylesheet"> -->
 
   <title>로그인 - YouDitor</title>
 <!-- 	<link href="/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">

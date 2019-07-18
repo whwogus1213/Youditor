@@ -1,6 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/views/module/header2.jsp" %>
+<%@ include file="/WEB-INF/views/module/header.jsp" %>
 
 <%@ page session="true" %>
 
@@ -247,11 +247,11 @@ function getTipNew(){
 	        </div>
 	      </div>
 	      <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-	        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+	        <span class="carousel-control-prev-icon" aria-hidden="false"></span>
 	        <span class="sr-only">Previous</span>
 	      </a>
 	      <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-	        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+	        <span class="carousel-control-next-icon" aria-hidden="false"></span>
 	        <span class="sr-only">Next</span>
 	      </a>
 	    </div>
