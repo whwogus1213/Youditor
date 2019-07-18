@@ -26,6 +26,7 @@
  	 width: 48%;
  	 float: left;
  	 margin-right: 2%;
+ 	 text-overflow: ellipsis;
   }
   .table th, .table td {
     border-top: 0 solid #dee2e6; 
@@ -87,7 +88,7 @@ function getAccountsRankList(){
 					if(i < 3){
 						html += "<div class='col-lg-4 col-sm-6 portfolio-item'>";
 						html += "<div class='card h-100'>";
-						html += "<a href='#'><img class='card-img-top' src='"+data[i].picture+"' alt='' width='80' height='200'></a>";
+						html += "<a href='#'><img class='card-img-top' src='/image/"+data[i].picture+"' alt='' width='80' height='200'></a>";
 						html += "<div class='card-body'>";
 						html += "<h4 class='card-title'>";
 						html += "<a href='#'>"+data[i].nickname+"</a>";
@@ -207,6 +208,7 @@ function getTipNew(){
 		}
 	});
 }
+
   </script>
 </head>
 
