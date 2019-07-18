@@ -5,12 +5,63 @@
 var boardId = $("#boardId").val();
 var boardClass=$("#boardClass").val();
 var loginAccountId = $("#loginAccountId").val();
-console.log(loginAccountId);
+var loginPicture = $("#loginPicture").val();
+//console.log(loginAccountId);
+
+
+function formatDate(date) {
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+
+    return [year, month, day].join('.');
+}
+
+/**
+ * 초기 페이지 로딩시 댓글 불러오기
+ */
+$(function(){
+
+	$(".textInput").bind('focus', function(event) {
+    	var html = "";
+    	html += "<button onClick='fn_commentCancel(); return false;' class='btn btn-outline-light' style='text-align:center;'><span style='color: black;'>취소</span></button>";
+    	html += "<button id='fn_commentBtn' onClick='fn_comment(\"${row.boardId}\"); return false;' class='btn btn-outline-primary' style='text-align:center;' disabled='disabled'>등록</button>";
+    	$('.textInputBtn').html(html);
+    });
+	
+	$('.textInput').keyup(function(e){
+		var textInputVal = $('.textInput').val();
+		if(textInputVal.trim() === '') {
+			$('#fn_commentBtn').attr('disabled','disabled');
+			$('#fn_commentBtn').attr('class','btn btn-outline-primary');
+			return;
+		} else {
+			$('#fn_commentBtn').removeAttr('disabled');
+			$('#fn_commentBtn').attr('class','btn btn-primary');
+		}
+	});
+	
+//	console.log(boardId);
+    getCommentList();
+    console.log("댓글 리스트 로딩완료");
+});
+
+function fn_commentCancel(){
+	$('.textInput').val('');
+	$('.textInputBtn').html('');
+}
+
+
 /*
  * 댓글 등록하기(Ajax)
  */
 function fn_comment(boardId){
-    
+	$('#inputGroup').attr('style','display:none');
+	$('.loadingSpin').html("<div class='spinner-border text-primary' role='status'><span class='sr-only'>Loading...</span></div>");
     $.ajax({
         type:'POST',
         url : "/reply/insert",
@@ -19,6 +70,9 @@ function fn_comment(boardId){
             if(data == "success")
             {
                 $("#object").val("");
+                $('.textInputBtn').html('');
+                $('.loadingSpin').html('');
+                $('#inputGroup').removeAttr('style');
                 getCommentList();
             }
         },
@@ -66,15 +120,7 @@ function fn_recomment(commentId, acccountId, replyCommentId, object) {
 	
 }
  
-/**
- * 초기 페이지 로딩시 댓글 불러오기
- */
-$(function(){
-	console.log(boardId);
-    getCommentList();
-    console.log("댓글 리스트 로딩완료");
-    
-});
+
  
 /**
  * 댓글 불러오기(Ajax)
@@ -96,6 +142,7 @@ function getCommentList(){
 		async : false,
         success : function(data){
            var html = "";
+           var list_template;
            var updel = "";
            var cCnt = data.length;
 //           <%
@@ -118,39 +165,36 @@ function getCommentList(){
 
                
                for(i=0; i<data.length; i++){
-                   html += "<div class='row' style='margin-top: 40px;' id = "+data[i].commentId+">";
-                   html += "<div class='col-1' align='center'>";
-            	   html += "<img src=\"";
-            	   html += "/image/"+ data[i].picture;
-            	   html += "\" class=\" mx-auto rounded-circle\" width=\"40px\" height=\"40px\"/>";
-                   html += "<strong><h6>"+data[i].nickname+"</h6></strong></div>";
-                   html += "<div class='col-11'><h4>"+data[i].object+"</h4></div>";
+            	   list_template = $($('.list_template').clone());
+            	   
+            	   list_template.find('.listTable').attr('id',data[i].commentId);
+            	   list_template.find('.listImage').attr('src',data[i].picture);
+            	   list_template.find('.listNickname').html(data[i].nickname);
+
+            	   list_template.find('.listDate').html(formatDate(data[i].reg_date));
+            	   list_template.find('.listObject').html(data[i].object);
+            	   
                    if(sessionAccountId > 0){
                        
                        /* 답글의 답글달기 */
-                       html += "<div class='offset-1 col-2' align='left'>";
-                       html += "<button class='btn btn-xs btn-link' onclick = 'rereplyForm("+data[i].commentId+", "+data[i].accountId+", "+data[i].replyCommentId+"); return false;' style='color:#777777; font-size:smaller'>답글</button>";
-                       html += "</div>";
-                       if(sessionAccountId == data[i].accountId){
-                    	   html += "<div class='col-9' align='right'>";
-    	                   html += "<button class='btn btn-xs btn-link' onclick = 'replyUpdateForm("+data[i].commentId+", "+ data[i].accountId+", \""+data[i].object+"\")' style='color:#777777; font-size:smaller'>수정</button>|";
-    	                   html += "<button class='btn btn-xs btn-link' onclick = 'replyDelete("+data[i].commentId+")' style='color:#777777; font-size:smaller'>삭제</button>";
-    	                   html += "</div>";
+                	   list_template.find('.listRereply').attr("onclick","rereplyForm("+data[i].commentId+", "+data[i].accountId+", "+data[i].replyCommentId+"); return false;");
+
+                	   if(sessionAccountId == data[i].accountId){
+                    	   list_template.find('.listEdit').attr("onclick","replyUpdateForm("+data[i].commentId+", "+ data[i].accountId+", \""+data[i].object+"\"); return false;");
+                    	   list_template.find('.listRemove').attr("onclick","replyDelete("+data[i].commentId+"); return false;");
+                    	   
     	               } else {
-    	            	   html += "<div class='col-9' align='right'></div>";
+    	            	   list_template.find('.listER').html('');
         	               }
     	               
-                       html += "<div class='col-12' id=rereplyDiv"+data[i].commentId+">";
+    	               html += list_template.html();
+    	               html += "<div class='col-12' id=rereplyDiv"+data[i].commentId+">";
                        html += "</div>";
                        
                    } else {
                 	   html += "<br>";
                    }
                        
-                   html += "</div>";
-                   
-                   
-
 
                    /* 대댓글이 있는지 체크후 처리 */
                    var isReJson = {
@@ -170,10 +214,10 @@ function getCommentList(){
            	            	/* 대댓글 있는 경우 펼치기 */
            	               html += "<div class='row'>";
      	                   html += "<div class='offset-1 col-11' align='left'>";
-     	                   html += "<button id='reCommentListBtn"+data[i].commentId+"' class='btn btn-xs btn-link' onclick = 'reGetCommentList("+data[i].commentId+"); return false;' style='color:#777777; font-size:smaller' value='1'>답글 보기 ▼</button>";
+     	                   html += "<button id='reCommentListBtn"+data[i].commentId+"' class='btn btn-xs btn-link' onclick = 'reGetCommentList("+data[i].commentId+"); return false;' style='color:#444; font-size:smaller; padding-left: 0px; border-left: 0px;' value='1'>답글 보기 ▼</button>";
      	                   html += "</div>";
      	                   html += "</div>";
-     	                   html += "<div id='reCommentList"+data[i].commentId+"'>";
+     	                   html += "<div id='reCommentList"+data[i].commentId+"' class='offset-1 col-11'>";
      	                   html += "</div>";
 
                	            }
@@ -195,7 +239,6 @@ function getCommentList(){
                
            }
            
-           html += "<br>";
            $("#cCnt").html(cCnt);
            $("#commentList").html(html);
        }
@@ -228,25 +271,27 @@ function reGetCommentList(commentId){
         	if(data.length > 0){
                 
                 for(i=0; i<data.length; i++){
-                    html += "<div id = "+data[i].commentId+" style='margin-top: 10px;'>";
-                    html += "<div class='row'>";
-                    html += "<div class='offset-1 col-1'>";
-                    html += "<h5><strong>"+data[i].nickname+"</strong></h5>";
-                    html += "</div>";
-                    html += "<div class='col-10'><h5>" + data[i].object + "</h5></div>";
+                	
+                	
+                	list_template = $($('.list_template').clone());
+             	   
+                	list_template.find('.listTable').attr('id',data[i].commentId);
+                	list_template.find('.listImage').attr('src',data[i].picture);
+                	list_template.find('.listNickname').html(data[i].nickname);
+                	list_template.find('.listDate').html(formatDate(data[i].reg_date));
+                	list_template.find('.listObject').html(data[i].object);
 
-                    
                     if(sessionAccountId == data[i].accountId){
-                 	   html += "<div class='col-12' align='right'>";
- 	                   html += "<button class='btn btn-xs btn-link' onclick = 'replyUpdateForm("+data[i].commentId+", "+ data[i].accountId+", \""+data[i].object+"\"); return false;' style='color:#777777; font-size:smaller'>수정</button>|";
- 	                   html += "<button class='btn btn-xs btn-link' onclick = 'replyDelete("+data[i].commentId+"); return false;' style='color:#777777; font-size:smaller'>삭제</button>";
- 	                   html +="</div>";
+                    	
+                    	list_template.find('.listEdit').attr("onclick","replyUpdateForm("+data[i].commentId+", "+ data[i].accountId+", \""+data[i].object+"\"); return false;");
+                    	list_template.find('.listRemove').attr("onclick","replyDelete("+data[i].commentId+"); return false;");
+                 	   
  	               } else {
- 	            	  html += "<div class='col-12'>";
-
- 	 	               }
-                html += "</div>";
-  		      	html += "</div>";
+ 	            	  list_template.find('.listER').html('');
+ 	 	           }
+                    
+                    list_template.find('.listRereply').html('');
+                   html += list_template.html();
                 }
         	}
         	/* 대댓글 추가 */
@@ -263,17 +308,36 @@ function reGetCommentList(commentId){
 	
 /* 대댓글 추가 폼 */
 function rereplyForm(commentId, accountId, replyCommentId) {
-var html = "";
-html += "<textarea class='offset-1 col-11' style='resize: none;' rows='2' cols='30' id='reObject"+commentId+"' name='reObject"+commentId+"' placeholder='댓글을 입력하세요'></textarea>";
-html += "<a href='#' onClick='fn_recommentCancel("+commentId+"); return false;' class='col-1 offset-10 btn btn-default' style='text-align:center;'>취소</a>";
-html += "<a href='#' onClick='fn_recomment("+commentId+", "+accountId+", "+replyCommentId+"); return false;' class='col-1 btn pull-right btn-primary' style='text-align:center;'>등록</a>";
-$("#commentList #rereplyDiv"+commentId).html(html);
+	
+	var html = "";
+	
+
+//	html += "<textarea class='offset-1 col-11' style='resize: none;' rows='2' cols='30' id='reObject"+commentId+"' name='reObject"+commentId+"' placeholder='댓글을 입력하세요'></textarea>";
+//	html += "<a href='#' onClick='fn_recommentCancel("+commentId+"); return false;' class='col-1 offset-10 btn btn-default' style='text-align:center;'>취소</a>";
+//	html += "<a href='#' onClick='fn_recomment("+commentId+", "+accountId+", "+replyCommentId+"); return false;' class='col-1 btn pull-right btn-primary' style='text-align:center;'>등록</a>";
+
+	html += "<div id='inputGroup' class='table input-group'>";
+	html += "<div class='col-1' style='text-align: center; padding-top: 7px;'>";
+	html += "<img src='/image/"+loginPicture+"'class='mx-auto rounded-circle' width='40px' height='40px'/>";
+	html += "</div>";	
+	html += "<div class='col-11' style='margin: 0; padding: 0;'>";
+	html += "<textarea class='col-12 textInput' style='resize:none;' rows='1' cols='20' id='reObject"+commentId+"' name='object' maxlength='100' placeholder='댓글을 입력하세요'></textarea>";
+	html += "<span class='focus-border'></span>";
+    html += "</div>";    
+    html += "<div class='offset-10 col-2' style='padding-right: 0; padding-top: 5px; text-align: right;'>";
+    html += "<button onClick='fn_recommentCancel("+commentId+"); return false;' class='btn btn-outline-light' style='text-align:center;'><span style='color: black;'>취소</span></button>";
+    html += "<button onClick='fn_recomment("+commentId+", "+accountId+", "+replyCommentId+"); return false;' class='btn btn-outline-primary' style='text-align:center;'>등록</button>";
+ 	html += "</div>";
+ 	html += "</div>";
+
+ 	$("#commentList #rereplyDiv"+commentId).html(html);
 
 }
 
 
 
 function replyUpdateForm(commentId, accountId, object){
+	console.log("replyUpdateForm 펑션 진입");
 	var html = "";
 	
 	html += "<textarea class='offset-1 col-11' style='resize:none;' rows='2' cols='30' id='upObject"+commentId+"' name='upObject"+commentId+"'>"+object+"</textarea>";
