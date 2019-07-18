@@ -166,7 +166,7 @@
 }
 	var isCheckEmail = 0;
 	function DosignUp() {
-		var email = $("#email").val();
+		var email = $("#emailqq").val();
 		$.ajax({
 			async: true,
 			type: "POST",
@@ -179,14 +179,14 @@
 					isCheckEmail = 1;
 		        } else {
 					alert("존재하지 않는 이메일입니다.");
-					$("#email").focus();
+					$("#emailqq").focus();
 		        }
 			}
 		});
-		var email = $("#email").val();
+		var email = $("#emailqq").val();
 		if(email.length == 0) {
 			alert("이메일를 입력해 주세요.");
-			$("#email").focus();
+			$("#emailqq").focus();
 			return;
 		}
 		if(isCheckEmail == 1) {
@@ -211,7 +211,7 @@
 			<h2 align="center">&nbsp;</h2>
 			<label class="control-label col-sm-3">이메일</label>
 			<div class="col-sm-3">
-				<input type="text" class="form-control" id="email"
+				<input type="text" class="form-control" id="emailqq"
 					name="email" maxlength="30" placeholder="Enter ID">
 			</div>
 		</div>

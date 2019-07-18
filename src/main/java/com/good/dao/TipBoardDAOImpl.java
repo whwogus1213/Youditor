@@ -61,4 +61,9 @@ public class TipBoardDAOImpl implements TipBoardDAO {
 		sqlSession.update(NAMESPACE + ".viewCount", boardId);
 	}
 
+	@Override
+	public List<TipBoardVO> newList() throws Exception {
+		return sqlSession.selectList(NAMESPACE + ".newList");
+	}
+
 }
