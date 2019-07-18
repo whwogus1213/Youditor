@@ -9,6 +9,7 @@
 <title>공지사항 - YouditoR</title>
 <jsp:include page="../module/header.jsp" flush="false" />
 <script src="https://kit.fontawesome.com/e83fabbb47.js"></script>
+<link href="/resources/css/pagination.css" rel="stylesheet">
 <style type="text/css">
 .fa-search:before {
 	content: "\f002";
@@ -178,72 +179,31 @@
 			</c:forEach>
 		</div>
 
-		<!-- 	
-		<table class="table table-striped nanum table-hover">
-			<thead align="center">
-				<tr>
-					<th style="width: 80px;">번호</th>
-					<th style="width: 80px;">분류</th>
-					<th>제목</th>
-					<th style="width: 100px;">작성자</th>
-					<th style="width: 130px;">작성일</th>
-					<th style="width: 80px;">조회수</th>
-				</tr>
-			</thead>
-			<tbody align="center">
-				<c:forEach items="${NoticeBoardList}" var="NoticeBoardList">
-					<tr>
-						<td>${NoticeBoardList.boardId}</td>
-						<td>${NoticeBoardList.categoryName}</td>
-						<td align="left" style="padding-left: 30px; cursor: pointer;"
-						onclick="location.href='/noticeboard/noticeBoardView?boardId=${NoticeBoardList.boardId}'">
-								${NoticeBoardList.subject}
-						</td>
-						<td>${NoticeBoardList.nickname}</td>
-						<td><fmt:formatDate value="${NoticeBoardList.reg_date}"
-								pattern="yyyy-MM-dd" /></td>
-						<td>${NoticeBoardList.viewCount}</td>
-					</tr>
-				</c:forEach>
-			</tbody>
-		</table>
-	 -->
-
 		<!-- 페이징 검색 시작 -->
 		<div class="row">
-
 			<!-- 페이징 -->
-			<div id="paginationBox" class="col-4">
-				<ul class="pagination">
+			<div class="p1 pagination col-4">
+				<ul>
 					<c:if test="${pagination.prev}">
-						<li class="page-item"><a class="page-link" href="#"
-							onClick="fn_prev('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}',
-						'${pagination.searchType}', '${pagination.keyword}')">Pre</a>
-						</li>
+						<a href="#" onClick="fn_prev('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}',
+						'${pagination.searchType}', '${pagination.keyword}')"><li><</li></a>
 					</c:if>
-					<c:forEach begin="${pagination.startPage}"
-						end="${pagination.endPage}" var="idx">
-						<li
-							class="page-item <c:out value="${pagination.page == idx ? 'active' : ''}"/> ">
-							<a class="page-link" href="#"
-							onClick="fn_pagination('${idx}', '${pagination.range}', '${pagination.rangeSize}',
-						'${pagination.searchType}', '${pagination.keyword}')">${idx}</a>
-						</li>
+					<c:forEach begin="${pagination.startPage}" end="${pagination.endPage}" var="idx">
+						<a class="<c:out value="${pagination.page == idx ? 'is-active' : ''}"/>" href="#" onClick="fn_pagination('${idx}', '${pagination.range}', '${pagination.rangeSize}',
+						'${pagination.searchType}', '${pagination.keyword}')">
+							<li>${idx}</li></a>
 					</c:forEach>
 					<c:if test="${pagination.next}">
-						<li class="page-item"><a class="page-link" href="#"
-							onClick="fn_next('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}',
-						'${pagination.searchType}', '${pagination.keyword}')">Next</a>
-						</li>
+						<a href="#" onClick="fn_next('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}',
+						'${pagination.searchType}', '${pagination.keyword}')"><li>></li></a>
 					</c:if>
 				</ul>
 			</div>
 			<!-- 페이징 -->
 
 			<!-- 검색 -->
-			<div class="input-group col-8" style="padding-top: 6px;">
-				<div class="col-sm-3 offset-2" align="right"
-					style="padding-right: 0px;">
+			<div class="input-group col-8" style="padding-top: 6px;" align="right">
+				<div class="col-3" align="right" style="padding-right: 0px;">
 					<select class="form-control form-control-sm" name="searchType"
 						id="searchType" style="width: 66.6%">
 						<option value="subject">제목</option>
@@ -251,21 +211,18 @@
 						<option value="nickname">닉네임</option>
 					</select>
 				</div>
-				<div class="col-sm-4" align="right"
-					style="padding-right: 0px; padding-left: 5px;">
+				<div class="col-6" align="right" style="padding-right: 0px; padding-left: 5px;">
 					<input type="text" class="form-control form-control-sm" name="keyword" id="keyword" style="float: left;">
 				</div>
 
-				<div class="col-1"
-					style="padding-left: 5px; text-align: center; padding-top: 2px;">
+				<div class="col-1" style="padding-left: 0px;text-align: center;padding-right: 0px;padding-top: 5px;">
 					<i class="fas fa-search" name="btnSearch" id="btnSearch" style="cursor:"></i>
 				</div>
 
-				<div class="col-sm-2" align="right">
-
+				<div class="col-2" align="right" style="padding-left: 0px; padding-right: 5px;">
 					<c:if test="${login.authority >= 3 }">
-						<button type="button" class="btn btn-sm btn-primary"
-							onclick="location.href='/noticeboard/write.do' ">글쓰기</button>
+						<button type="button" class="btn btn-sm"
+							onclick="location.href='/noticeboard/write.do' " style="background-color: #2ecc71; color: white;">글쓰기</button>
 					</c:if>
 				</div>
 			</div>
