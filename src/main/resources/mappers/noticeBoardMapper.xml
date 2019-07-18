@@ -7,7 +7,7 @@
 	<!-- 게시물 목록 + 페이징 + 검색 -->
 	<select id="listAll" resultType="NoticeBoardVO">
 		SELECT boardId, b.accountId, subject, object,
-			CONVERT_TZ(b.reg_date,'+09:00','+00:00') as reg_date, CONVERT_TZ(b.mod_date,'+09:00','+00:00') as mod_date, viewCount, nickname, categoryName 
+			CONVERT_TZ(b.reg_date,'+09:00','+00:00') as reg_date, CONVERT_TZ(b.mod_date,'+09:00','+00:00') as mod_date, viewCount, nickname, categoryName, picture 
 			FROM noticeboard b join accounts a on b.accountId = a.accountId
 							   join noticecategory c on b.categoryId=c.categoryId
 		<trim prefix="WHERE" prefixOverrides="AND|OR">

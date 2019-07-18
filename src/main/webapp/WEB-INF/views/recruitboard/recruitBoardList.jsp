@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ page session="true"%>
 <!DOCTYPE html>
 <html>
@@ -120,7 +121,7 @@ button[type="button"] {
 			<thead align="center">
 				<tr>
 					<th style="width: 80px;">번호</th>
-					<th style="width: 80px;">분류</th>
+					<th style="width: 100px;">분류</th>
 					<th>제목</th>
 					<th style="width: 100px;">작성자</th>
 					<th style="width: 130px;">작성일</th>
@@ -132,10 +133,10 @@ button[type="button"] {
 					<tr>
 						<td>${RecruitBoardList.boardId}</td>
 						<c:if test="${RecruitBoardList.categoryId eq 1}">
-							<td>구인</td>
+							<td><button type="button" class="btn btn-info btn-sm" disabled>구인</button></td>
 						</c:if>
 						<c:if test="${RecruitBoardList.categoryId eq 2}">
-							<td>구직</td>
+							<td><button type="button" class="btn btn-secondary btn-sm" disabled>구직</button></td>
 						</c:if>
 						
 						<td align="left" style="padding-left: 30px; cursor: pointer;"

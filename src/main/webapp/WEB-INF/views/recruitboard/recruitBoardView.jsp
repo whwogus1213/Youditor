@@ -46,8 +46,8 @@
 			<div class="form-inline">
 				<div class="col-sm-12 row" align="center" style="margin-bottom:50px">
 					<div class="col-sm-2">
-						<h4><c:if test="${row.categoryId eq 1}"><button type="button" class="btn btn-info btn-md" disabled>구인</button></c:if></h4>
-						<h4><c:if test="${row.categoryId eq 2}"><button type="button" class="btn btn-secondary btn-md" disabled>구직</button></c:if></h4>
+						<h4><c:if test="${row.categoryId eq 1}"><button type="button" class="btn btn-info btn-md" disabled>구인</button></c:if>
+						<c:if test="${row.categoryId eq 2}"><button type="button" class="btn btn-secondary btn-md" disabled>구직</button></c:if></h4>
 					</div>
 					<div class="col-sm-10" >
 						<h1>${row.subject }</h1>
