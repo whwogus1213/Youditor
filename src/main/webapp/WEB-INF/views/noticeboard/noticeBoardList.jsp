@@ -10,6 +10,7 @@
 <jsp:include page="../module/header.jsp" flush="false" />
 <script src="https://kit.fontawesome.com/e83fabbb47.js"></script>
 <link href="/resources/css/pagination.css" rel="stylesheet">
+
 <style type="text/css">
 .fa-search:before {
 	content: "\f002";
