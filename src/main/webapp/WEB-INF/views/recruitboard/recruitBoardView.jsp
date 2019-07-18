@@ -11,9 +11,10 @@
 	<meta name="description" content="">
 	<meta name="author" content="">
 
-  <title>${row.subject } - 구인구직 - YouDitor</title>
-<jsp:include page="../module/header.jsp" flush="false"/>
-
+  	<title>${row.subject } - 구인구직 - YouDitor</title>
+	<jsp:include page="../module/header.jsp" flush="false"/>
+	<!-- Custom styles -->
+	<script src="https://kit.fontawesome.com/e83fabbb47.js"></script>
 
 </head>
 <body>
@@ -21,6 +22,13 @@
 
 	<!-- 게시글 상세정보 -->
 	<div class="container">
+		<div class="form-group">
+			<div class="col-sm-12" style="background-image:url('/resources/images/recruit/recruit.jpg'); background-position:50% 60%; font-family: 'Song Myung', sans-serif; color:white; text-shadow: -1px 0 LightPink, 0 1px LightPink, 1px 0 LightPink, 0 -1px LightPink; margin-top:70px;">
+				<h1 align="center" style="font-size:50px; letter-spacing:10px"><br><strong>구인/구직</strong></h1>
+				<h4 align="center"><br>당신의 파트너가 될 YouditoR가 있습니다.</h4>
+				<h1 align="center"><br></h1>
+			</div>
+		</div>
 	<script>
 		
 		//삭제 버튼 누르면 삭제할 것이냐고 묻고 삭제한다고 하면 noticeboardcontroller 의 deleteVideoBoardPro 메서드 호출
@@ -32,69 +40,71 @@
 			});
 		});
 	</script>
-		<div align="center">
-			<br><br>
-			<h1>구인 구직</h1>
-			<br><br>
-		</div>
 		<hr>
-		<br>
-		<h1>${row.subject }</h1>
-		<br>
-		<div align="right">
+		<div style="padding-left:5%; padding-right:5%;">
 			<div class="form-inline">
-				<div class="col-sm-8" align="right">
-					<div class="dropdown"></div>
-						<h4>작성자 <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="cursor:pointer">
-							${row.nickname }
-						</a></h4>
-						<div class="dropdown-content">
-							<a class="dropdown-item" href="#" onclick="messagePopup();">
-								<i class="far fa-envelope"></i>&nbsp;&nbsp;쪽지 보내기
+				<div class="col-sm-12 row" align="center" style="margin-bottom:50px">
+					<div class="col-sm-2">
+						<h4><c:if test="${row.categoryId eq 1}"><button type="button" class="btn btn-info btn-md" disabled>구인</button></c:if></h4>
+						<h4><c:if test="${row.categoryId eq 2}"><button type="button" class="btn btn-secondary btn-md" disabled>구직</button></c:if></h4>
+					</div>
+					<div class="col-sm-10" >
+						<h1>${row.subject }</h1>
+						<h4 style="color:brown">| 급여 : ${row.fee}\ |</h4>
+					</div>
+				</div>
+				<div class="col-sm-12 row">
+					<div class="col-sm-2"  style="padding-right:0">
+						<div class="dropdown" align="right">
+							<h6>작성자&nbsp;&nbsp;<a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="cursor:pointer">
+								${row.nickname }
 							</a>
-							<script type="text/javascript">
-							function messagePopup() {
-								var nickname = "${row.nickname }";
-								var win = window.open("/message/writePopup.do?nickname=" + nickname, "_blank", 
-										"width=650, height=470, left=200, top=200, location=no, menubar=no, resizble=no, scrollbars=no, status=no, titlebar=no, toolbar=no");
-							}
-							</script>
+							</h6>
+						</div>
+					</div>
+					<div class="col-sm-1" style="padding-left:0;">
+						<div class="dropdown" align="center">
+							<h6 style="margin:0">
+							<a class="dropdown-item" href="#" onclick="messagePopup();" style="padding-top:0; padding-left:0; padding-right:0;">
+								<i class="far fa-envelope"></i>
+							</a>
+							</h6>
+							<div class="dropdown-content">
+								<script type="text/javascript">
+								function messagePopup() {
+									var nickname = "${row.nickname }";
+									var win = window.open("/message/writePopup.do?nickname=" + nickname, "_blank", 
+											"width=650, height=470, left=200, top=200, location=no, menubar=no, resizble=no, scrollbars=no, status=no, titlebar=no, toolbar=no");
+								}
+								</script>
+							</div>
 						</div>
 					</div>
 				</div>
-				<div class="col-sm-4" align="right">
-					<h4><c:if test="${row.categoryId eq 1}">일할분을 찾습니다.</c:if></h4>
-					<h4><c:if test="${row.categoryId eq 2}">직장 구합니다.</c:if></h4>
+			</div>
+				<div class="form-inline">
+					<div class="col-sm-10" align="right">
+						<h6>작성 일시&nbsp;&nbsp;<fmt:formatDate value="${row.reg_date}" pattern="yyyy-MM-dd" /></h6>
+					</div>
+					<div class="col-sm-2" align="right">
+						<h6>조회수&nbsp;&nbsp;${row.viewCount }</h6>
+					</div>
 				</div>
 			</div>
-			<div class="form-inline">
-				<div class="col-sm-8" align="right">
-					<h4>작성 일시 <fmt:formatDate value="${row.reg_date}" pattern="yyyy-MM-dd" /></h4>
-				</div>
-				<div class="col-sm-4" align="right">
-					<h4>조회수 ${row.viewCount }</h4>
-				</div>
+			<hr>
+			<div class="form-inline" style="white-space:pre-line; padding-left:5%; padding-right:5%;">
+				<c:out value="${row.object}"/><br>
 			</div>
-			<div class="form-inline">
-				<div class="col-sm-4 offset-4" align="right">
-					<h4>급 여   ${row.fee}</h4>
-				</div>
+			<hr>
+			<div align="center">
+				<button type="button" class="btn btn-primary" onclick="location.href='/recruitboard/recruitBoardList' ">목록으로</button>
+				<c:if test="${login.accountId eq row.accountId}">
+				<button type="button" class="btn btn-success" onclick="location.href='/recruitboard/updateRecruitBoard?boardId=${row.boardId}' ">수정</button>
+				<button class="btn btn-danger" id="deletebtn">삭제</button>
+				</c:if>
 			</div>
 		</div>
-		<hr>
 		<br>
-		<h2>${row.object }</h2>
-		<br>
-		<hr>
-		<div align="center">
-			<button type="button" class="btn btn-primary" onclick="location.href='/recruitboard/recruitBoardList' ">목록으로</button>
-			<c:if test="${login.accountId eq row.accountId}">
-			<button type="button" class="btn btn-success" onclick="location.href='/recruitboard/updateRecruitBoard?boardId=${row.boardId}' ">수정</button>
-			<button class="btn btn-danger" id="deletebtn">삭제</button>
-			</c:if>
-		</div>
-		<br>
-	</div>
 	<div id="listReply">
 		<jsp:include page="../recruitboard/recruitBoardReply.jsp" flush="false"/>
 	</div>
