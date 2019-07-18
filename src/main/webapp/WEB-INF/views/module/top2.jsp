@@ -388,39 +388,69 @@ function DosignUp() {
 				<c:if test="${login.accountId ne null }">
 					<img src="<spring:url value='/image/${login.picture}'/>" class=" mx-auto rounded-circle" width="40px" height="40px"/>
 					<li class="nav-item topMenuLi">
-						<a class="nav-link" href="#"><strong>메세지</strong></a>
+						<a class="nav-link" href="#">
+							<c:choose>		
+								<c:when test="${mCount >= 1 }">		
+									<i class="far fa-envelope"></i>		
+								</c:when>		
+								<c:otherwise>		
+									<i class="far fa-envelope-open"></i>		
+								</c:otherwise>		
+							</c:choose>
+							<strong>메세지</strong>
+						</a>
 						<ul class="submenu messageMain">
 							<li>|</li>
-							<li><a class="submenuLink" href="/message/messageReceiveList">받은 메세지</a></li>
+							<li><a class="submenuLink" href="/message/messageReceiveList"><i class="fas fa-inbox"></i>받은 메세지</a></li>
 							<li>|</li>
-							<li><a class="submenuLink" href="/message/messageSendList">보낸 메세지</a></li>
+							<li><a class="submenuLink" href="/message/messageSendList"><i class="far fa-paper-plane"></i>보낸 메세지</a></li>
 							<li>|</li>
 						</ul>
 					</li>
 					<li class="nav-item topMenuLi">
-						<a class="nav-link" href="#"><strong>회원기능</strong></a>
+						<a class="nav-link" href="#">
+							<c:choose>		
+								<c:when test="${fCount >= 1 }">		
+									<i class="far fa-heart"></i>		
+								</c:when>		
+								<c:otherwise>		
+									<i class="fas fa-user-cog"></i>		
+								</c:otherwise>		
+							</c:choose>
+							<strong>회원기능</strong>
+						</a>
 						<ul class="submenu accounts">
 							<li>|</li>
-							<li><a class="submenuLink" href="/follow/followingList">팔로잉</a></li>
+							<li><a class="submenuLink" href="/follow/followingList"><i class="fas fa-user-friends"></i>팔로잉</a></li>
 							<li>|</li>
-							<li><a class="submenuLink" href="/follow/followerList">팔로워</a></li>
+							<li><a class="submenuLink" href="/follow/followerList">
+								<c:choose>		
+									<c:when test="${fCount >= 1 }">		
+										<i class="far fa-heart"></i>		
+									</c:when>		
+									<c:otherwise>		
+										<i class="fas fa-users"></i>		
+									</c:otherwise>		
+								</c:choose>
+								팔로워
+							</a></li>
 							<li>|</li>
-							<li><a class="submenuLink" href="/accounts/modAccount.do">회원정보수정</a></li>
+							<li><a class="submenuLink" href="/accounts/modAccount.do"><i class="fas fa-user-edit"></i>정보수정</a></li>
 							<li>|</li>
 						</ul>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="/accounts/logout"><strong>로그아웃</strong></a>
+						<a class="nav-link" href="/accounts/logout"><i class="fas fa-sign-out-alt"></i><strong>로그아웃</strong></a>
 					</li>
 				</c:if>
 				<c:if test="${login.accountId eq null }">
 					<li class="nav-item">
-						<a data-toggle="modal" class="nav-link" data-target="#myModal" href="#myModal"><strong>로그인</strong></a>
+						<a data-toggle="modal" class="nav-link" data-target="#myModal" href="#myModal"><i class="fas fa-sign-in-alt"></i><strong>로그인</strong></a>
 						<!-- <button type="button" class="nav-link" data-toggle="modal" 
 						data-target="#myModal" style="background-color:white; border:0; color:#990033 "><strong>로그인</strong></button> -->
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="/accounts/join.do"><strong>회원가입</strong></a>
+						<a class="nav-link" href="/accounts/join.do"><i class="fas fa-user-plus"></i><strong>회원가입</strong></a>
 					</li>
 					
 				</c:if>
