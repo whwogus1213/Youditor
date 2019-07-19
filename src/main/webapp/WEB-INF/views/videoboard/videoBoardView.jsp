@@ -355,7 +355,7 @@ i {
 			<div id="followDiv" style="padding-top: 1px;"></div>
 		</div>
 		<br>
-		<h6>${row.footer }</h6>
+		<h6>${row.footer}</h6>
 	</div>
 	
 	<!-- 댓글 -->
