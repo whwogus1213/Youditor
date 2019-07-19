@@ -63,4 +63,9 @@ public class AccountsServiceImpl implements AccountsService {
 	public boolean insertAccount(AccountsVO vo) throws Exception {
 		return dao.insertAccount(vo) > 0;
 	}
+	
+	@Override
+	public void loginDate(AccountsVO vo) throws Exception {
+		dao.loginDate(vo);
+	}
 }

@@ -10,14 +10,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.good.dto.AccountsVO;
 import com.good.dto.FollowListVO;
-import com.good.dto.VideoBoardVO;
-import com.good.dto.VideoCategoryVO;
 import com.good.service.FollowService;
 import com.good.service.VideoBoardService;
 
@@ -30,48 +26,58 @@ public class FollowController {
 
 	// 팔로잉 (로그인유저가 팔로우하는 사람 리스트)
 	@RequestMapping(value = "/followingList")
-	public String followingList(Model model, FollowListVO vo, HttpServletRequest request) throws Exception {
+	public String followingList(Model model, FollowListVO vo, HttpSession session) throws Exception {
 		System.out.println("Start following List");
 
-		HttpSession session = request.getSession();
-		AccountsVO loginVO = (AccountsVO) session.getAttribute("login");
-		vo.setFollowAccountId(loginVO.getAccountId());
-
-		List<FollowListVO> followingList = followService.followingList(vo.getFollowAccountId());
+		AccountsVO login = (AccountsVO) session.getAttribute("login");
+		int accountId = login.getAccountId();
 		
-		System.out.println(vo.getFollowAccountId());
+		List<FollowListVO> followingList = followService.followingList(accountId);
+		for(int i = 0; i < followingList.size(); i++) {
+			FollowListVO fListVO = followingList.get(i);
+			int followAccountId = fListVO.getFollowAccountId();
+			fListVO.setFollowerAccountId(followAccountId);
+			fListVO.setFollowAccountId(accountId);
+			boolean result = followService.followEachOtherCheck(fListVO);
+			
+			FollowListVO checkListVO = new FollowListVO();
+			checkListVO.setFollowAccountId(followAccountId);
+			checkListVO.setFollowerAccountId(accountId);
+			checkListVO.setReg_date(fListVO.getReg_date());
+			checkListVO.setNickname(fListVO.getNickname());
+			checkListVO.setCheck(result);
+			followingList.set(i, checkListVO);
+		}
+		
 		model.addAttribute("followingList", followingList);
-		
+		System.out.println(accountId);
 		System.out.println(followingList);
 		return "follow/followingList";
 	}
 
 	// 팔로워(로그인유저를 팔로우하는 사람 리스트)
 	@RequestMapping(value = "/followerList")
-	public String followerList(Model model, FollowListVO vo, HttpServletRequest request) throws Exception {
+	public String followerList(Model model, FollowListVO vo, HttpSession session) throws Exception {
 		System.out.println("Start follower List");
-
-		HttpSession session = request.getSession();
-		AccountsVO loginVO = (AccountsVO) session.getAttribute("login");
-		vo.setFollowAccountId(loginVO.getAccountId());
-		System.out.println(vo.getFollowAccountId());
 		
-		List<FollowListVO> followerList = followService.followerList(vo.getFollowAccountId());
+		AccountsVO login = (AccountsVO) session.getAttribute("login");
+		int accountId = login.getAccountId();
+		
+		List<FollowListVO> followerList = followService.followerList(accountId);
 		
 		model.addAttribute("followerList", followerList);
-		System.out.println(vo.getFollowerAccountId());
+		System.out.println(accountId);
 		System.out.println(followerList);
 		return "follow/followerList";
 	}
 
 	// 팔로잉 추가
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
-	public @ResponseBody String insert(HttpServletRequest request, FollowListVO vo) throws Exception {
+	public @ResponseBody String insert(HttpSession session, FollowListVO vo) throws Exception {
 
 		System.out.println("----------Start follow insert");
 		System.out.println("글쓴이 아이디 정보 : " + vo);
-
-		HttpSession session = request.getSession();
+		
 		AccountsVO loginVO = (AccountsVO) session.getAttribute("login");
 
 		// 로그인 유저 아이디
@@ -97,13 +103,12 @@ public class FollowController {
 
 	// 팔로잉 삭제
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
-	public @ResponseBody String delete(HttpServletRequest request, FollowListVO vo) throws Exception {
+	public @ResponseBody String delete(HttpSession session, FollowListVO vo) throws Exception {
 
 		System.out.println("-------------End follow delete");
 		System.out.println("글쓴이 아이디 정보 : " + vo);
 
 		// 로그인 유저 아이디
-		HttpSession session = request.getSession();
 		AccountsVO loginVO = (AccountsVO) session.getAttribute("login");
 
 		// followerAccountId에 로그인 아이디 세팅

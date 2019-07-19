@@ -17,14 +17,20 @@ public class FollowServicImpl implements FollowService {
 
 	// 팔로잉 (로그인유저가 팔로우하는 사람 리스트)
 	@Override
-	public List<FollowListVO> followingList(int followAccountId) throws Exception {
-		return followDAO.followingList(followAccountId);
+	public List<FollowListVO> followingList(int accountId) throws Exception {
+		return followDAO.followingList(accountId);
 	}
 
 	// 팔로워(로그인유저를 팔로우하는 사람 리스트)
 	@Override
-	public List<FollowListVO> followerList(int followAccountId) throws Exception {
-		return followDAO.followerList(followAccountId);
+	public List<FollowListVO> followerList(int accountId) throws Exception {
+		return followDAO.followerList(accountId);
+	}
+	
+	// 맛팔 체크
+	@Override
+	public boolean followEachOtherCheck(FollowListVO vo) throws Exception {
+		return followDAO.followEachOtherCheck(vo);
 	}
 
 	// 팔로우 추가

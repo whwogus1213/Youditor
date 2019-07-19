@@ -79,6 +79,9 @@ public class AccountsController {
 			// 기존에 login이란 세션 값이 존재한다면
 			session.removeAttribute("login"); // 기존값을 제거해 준다.
 		}
+
+		// 로그인 날자 처리
+		service.loginDate(accountsVo);
 		
 		// 로그인이 성공하면 UserVO 객체를 반환함.
 		AccountsVO vo = service.login(accountsVo);
@@ -354,13 +357,4 @@ public class AccountsController {
 		}
 		return mav;
 	}
-	
-	@RequestMapping(value = "/signUp.do")
-	public ModelAndView signUp() throws Exception {
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("accounts/signUp");
-		System.out.println("String signUp open");
-		return mav;
-	}
-	
 }
