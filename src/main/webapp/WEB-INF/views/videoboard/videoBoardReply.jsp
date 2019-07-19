@@ -11,7 +11,7 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="/resources/vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Song+Myung|Jua|Cute+Font|Noto+Sans+KR|Black+Han+Sans|Gothic+A1|Hi+Melody|Nanum+Brush+Script|Do+Hyeon|Nanum+Gothic&display=swap" rel="stylesheet">
+<!-- <link href="https://fonts.googleapis.com/css?family=Song+Myung|Jua|Cute+Font|Noto+Sans+KR|Black+Han+Sans|Gothic+A1|Hi+Melody|Nanum+Brush+Script|Do+Hyeon|Nanum+Gothic&display=swap" rel="stylesheet"> -->
 <link href="/resources/css/default.css" rel="stylesheet" type="text/css"/>
 <link href="/resources/css/reply.css" rel="stylesheet">
 </head>
@@ -65,23 +65,38 @@
 
 
 <div class="container" style="font-family: 'Nanum Gothic', sans-serif;">
-		<!-- 댓글 리스트 템플릿 -->
+	<!-- 댓글 리스트 출력하는 곳 -->	
+	<div id="commentList">
+		<div class="text-center">
+			<div class="spinner-border" role="status">
+				<span class="sr-only">Loading...</span>
+			</div>
+		</div>
+	</div>
+</div>
+	
+<script src="/resources/js/reply.js" type="text/javascript"></script>  
+
+</body>
+</html>
+
+
+<!-- 댓글 리스트 템플릿 -->
+<div style='display:none;'>
 		<div class="list_template">
-			<table class="table table-borderless listTable" style="margin-bottom: 0px; margin-top: 10px;">
+			<table class="table table-borderless listTable" style="margin-bottom: 0px; margin-top: 30px;">
 				<tr>
-					<td rowspan="3" width="7%" style="padding-bottom: 0">
+					<td rowspan="3" width="7%" style="padding-bottom: 0; padding-right: 3px; text-align: right;">
 						<img src="/image/nothing.jpg" class="rounded-circle listIamge" width="40px" height="40px">
 					</td>
 					<td style="padding-bottom: 0">
-						<span class="listNickname" style="font-size: 0.9em; font-weight: 800;">
-							암살포차이다
+						<span class="listNickname" style="font-size: 0.9em; font-weight: 900;">
 						</span>
 						<span class="listDate" style="font-size: 0.8em; color: #999;">
-							10 일전
 						</span>
 					</td>
 					
-					<td rowspan="3" width="4%" style="padding-bottom: 0">
+					<td rowspan="3" width="4%" style="padding-bottom: 0; padding-top: 7px;">
 						<div class="dropdown listER">
           					<a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="cursor:pointer">
 								<i class="fas fa-ellipsis-v" style="font-size: 1.3em; color: #999;"></i>
@@ -101,9 +116,8 @@
 				</tr>
 				
 				<tr>
-					<td style="padding-bottom: 0">
+					<td style="padding-bottom: 0; padding-top: 7px;">
 						<span class="listObject" style="font-family: 'Noto Sans KR'; text-overflow:ellipsis; overflow:hidden">
-							내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용
 						</span>
 					</td>
 				</tr>
@@ -116,19 +130,5 @@
 				</tr>
 			</table>
 		</div>
+<div>
 	<!-- 리스트 템플릿 끝 -->	
-		
-	<!-- 댓글 리스트 출력하는 곳 -->	
-	<div id="commentList">
-		<div class="text-center">
-			<div class="spinner-border" role="status">
-				<span class="sr-only">Loading...</span>
-			</div>
-		</div>
-	</div>
-</div>
-	
-<script src="/resources/js/reply.js" type="text/javascript"></script>  
-
-</body>
-</html>

@@ -188,11 +188,17 @@ function getCommentList(){
         	               }
     	               
     	               html += list_template.html();
-    	               html += "<div class='col-12' id=rereplyDiv"+data[i].commentId+">";
+    	               console.log("$$$"+html);
+    	               html += "<div class='col-11 offset-1' id=rereplyDiv"+data[i].commentId+">";
                        html += "</div>";
                        
                    } else {
-                	   html += "<br>";
+                	   
+                	   list_template.find('.listRereply').parent().parent().html('');
+	            	   list_template.find('.listER').html('');
+
+                	   
+                	   html += list_template.html();
                    }
                        
 
@@ -210,11 +216,11 @@ function getCommentList(){
            	        	async : false,
            	        	success : function(check){
                	        	console.log("대댓글 체크 : "+check);
-           	            if(check == 1) {
+           	            if(check >= 1) {
            	            	/* 대댓글 있는 경우 펼치기 */
-           	               html += "<div class='row'>";
+           	               html += "<div class='row' style='margin-bottom: -30px;'>";
      	                   html += "<div class='offset-1 col-11' align='left'>";
-     	                   html += "<button id='reCommentListBtn"+data[i].commentId+"' class='btn btn-xs btn-link' onclick = 'reGetCommentList("+data[i].commentId+"); return false;' style='color:#444; font-size:smaller; padding-left: 0px; border-left: 0px;' value='1'>답글 보기 ▼</button>";
+     	                   html += "<button id='reCommentListBtn"+data[i].commentId+"' class='btn btn-xs' onclick = 'reGetCommentList("+data[i].commentId+"); return false;' style='color:#222; font-size:smaller; padding-left: 0px; border-left: 0px; margin-left: -3px;' value='"+check+"'>답글 "+check+"개 보기 <i class='fas fa-angle-down'></i></button>";
      	                   html += "</div>";
      	                   html += "</div>";
      	                   html += "<div id='reCommentList"+data[i].commentId+"' class='offset-1 col-11'>";
@@ -254,15 +260,17 @@ function reGetCommentList(commentId){
 			"replyCommentId" : commentId,
 			"boardClass" : boardClass
 			};
-	if($("#reCommentListBtn"+commentId).val() == 1) {
+	var tempVal = $("#reCommentListBtn"+commentId).val();
+	if($("#reCommentListBtn"+commentId).val() > 0) {
 	$.ajax({
         type:"POST",
         url : "/reply/reList",
         data : json,
 		async : false,
         success : function(data){
-            $("#reCommentListBtn"+commentId).html('답글 숨기기 ▲');
-            $("#reCommentListBtn"+commentId).val(0);
+            $("#reCommentListBtn"+commentId).html("답글 숨기기 <i class='fas fa-angle-up'></i>");
+            tempVal= -tempVal;
+            $("#reCommentListBtn"+commentId).val(tempVal);
             console.log("버튼 벨류값 : " + $("#reCommentListBtn"+commentId).val());
             var html="";
             var cCnt = data.length;
@@ -276,6 +284,7 @@ function reGetCommentList(commentId){
                 	list_template = $($('.list_template').clone());
              	   
                 	list_template.find('.listTable').attr('id',data[i].commentId);
+                	list_template.find('.listTable').attr('style',"margin-bottom: -20px; margin-top: 30px; margin-left: -25px;");
                 	list_template.find('.listImage').attr('src',data[i].picture);
                 	list_template.find('.listNickname').html(data[i].nickname);
                 	list_template.find('.listDate').html(formatDate(data[i].reg_date));
@@ -290,7 +299,7 @@ function reGetCommentList(commentId){
  	            	  list_template.find('.listER').html('');
  	 	           }
                     
-                    list_template.find('.listRereply').html('');
+                    list_template.find('.listRereply').parent().parent().html('');
                    html += list_template.html();
                 }
         	}
@@ -299,8 +308,9 @@ function reGetCommentList(commentId){
         }
     });
 	} else {
-		 $("#reCommentListBtn"+commentId).html('답글 보기 ▼');
-         $("#reCommentListBtn"+commentId).val(1);
+ 		 tempVal= -tempVal;
+		 $("#reCommentListBtn"+commentId).html("답글 "+tempVal+"개 보기 <i class='fas fa-angle-down'></i>");
+         $("#reCommentListBtn"+commentId).val(tempVal);
          $("#reCommentList"+commentId).html('');
 
 		}              
@@ -316,7 +326,7 @@ function rereplyForm(commentId, accountId, replyCommentId) {
 //	html += "<a href='#' onClick='fn_recommentCancel("+commentId+"); return false;' class='col-1 offset-10 btn btn-default' style='text-align:center;'>취소</a>";
 //	html += "<a href='#' onClick='fn_recomment("+commentId+", "+accountId+", "+replyCommentId+"); return false;' class='col-1 btn pull-right btn-primary' style='text-align:center;'>등록</a>";
 
-	html += "<div id='inputGroup' class='table input-group'>";
+	html += "<div id='inputGroup' class='table input-group' style='margin-left: -30px;'>";
 	html += "<div class='col-1' style='text-align: center; padding-top: 7px;'>";
 	html += "<img src='/image/"+loginPicture+"'class='mx-auto rounded-circle' width='40px' height='40px'/>";
 	html += "</div>";	
@@ -340,9 +350,25 @@ function replyUpdateForm(commentId, accountId, object){
 	console.log("replyUpdateForm 펑션 진입");
 	var html = "";
 	
-	html += "<textarea class='offset-1 col-11' style='resize:none;' rows='2' cols='30' id='upObject"+commentId+"' name='upObject"+commentId+"'>"+object+"</textarea>";
-	html += "<button onClick='replyUpdateCancel("+commentId+"); return false;' class='offset-10 col-1 btn btn-dafault' style='text-align:center;'>취소</button>";
-	html += "<button onClick='replyUpdate("+commentId+"); return false;' class='col-1 btn pull-right btn-warning' style='text-align:center;'>수정</button>";
+//	html += "<textarea class='offset-1 col-11' style='resize:none;' rows='2' cols='30' id='upObject"+commentId+"' name='upObject"+commentId+"'>"+object+"</textarea>";
+//	html += "<button onClick='replyUpdateCancel("+commentId+"); return false;' class='offset-10 col-1 btn btn-dafault' style='text-align:center;'>취소</button>";
+//	html += "<button onClick='replyUpdate("+commentId+"); return false;' class='col-1 btn pull-right btn-warning' style='text-align:center;'>수정</button>";
+	
+	html += "<div id='inputGroup' class='table input-group'>";
+	html += "<div class='col-1' style='text-align: center; padding-top: 7px;'>";
+	html += "<img src='/image/"+loginPicture+"'class='mx-auto rounded-circle' width='40px' height='40px'/>";
+	html += "</div>";	
+	html += "<div class='col-11' style='margin: 0; padding: 0;'>";
+	html += "<textarea class='col-12 textInput' style='resize:none;' rows='1' cols='20' id='upObject"+commentId+"' name='object' maxlength='100'>"+object+"</textarea>";
+	html += "<span class='focus-border'></span>";
+    html += "</div>";    
+    html += "<div class='offset-10 col-2' style='padding-right: 0; padding-top: 5px; text-align: right;'>";
+    html += "<button onClick='replyUpdateCancel("+commentId+"); return false;' class='btn btn-outline-light' style='text-align:center;'><span style='color: black;'>취소</span></button>";
+    html += "<button onClick='replyUpdate("+commentId+"); return false;' class='btn btn-outline-warning' style='text-align:center;'>수정</button>";
+ 	html += "</div>";
+ 	html += "</div>";
+	
+	
 	$("#commentList #"+commentId).html(html);	
 }
 
@@ -372,9 +398,7 @@ function replyUpdate(commentId){
 
 
 function replyDelete(commentId, object){
-	console.log(commentId);
-	console.log(object);
-	
+
 	var json = {
 			"commentId" : commentId,
 			"object" : object,
@@ -386,6 +410,7 @@ function replyDelete(commentId, object){
 		data:json,
 		success : function(){
 			alert("삭제되었습니다.");
+
 			getCommentList();
 		}
 	        
