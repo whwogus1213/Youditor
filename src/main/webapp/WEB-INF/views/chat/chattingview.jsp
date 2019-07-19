@@ -8,7 +8,7 @@
 <%-- <jsp:include page="../module/header.jsp" flush="false"/> --%>
 <!-- <script src="https://code.jquery.com/jquery-1.9.0.js"></script> -->
 <script src="/resources/js/sockjs.min.js"></script>
-<!-- <link href="/resources/css/chat.css" rel="stylesheet"> -->
+<link href="/resources/css/chat.css" rel="stylesheet">
 
 <meta charset="UTF-8">
 <title>Insert title here</title>

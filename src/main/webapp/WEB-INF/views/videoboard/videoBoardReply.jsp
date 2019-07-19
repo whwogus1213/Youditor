@@ -11,6 +11,7 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="/resources/vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
+<script src="/resources/js/jquery-3.3.1.min.js"></script>
 <link href="https://fonts.googleapis.com/css?family=Song+Myung|Jua|Cute+Font|Noto+Sans+KR|Black+Han+Sans|Gothic+A1|Hi+Melody|Nanum+Brush+Script|Do+Hyeon|Nanum+Gothic&display=swap" rel="stylesheet">
 <link href="/resources/css/default.css" rel="stylesheet" type="text/css"/>
 <link href="/resources/css/reply.css" rel="stylesheet">

@@ -93,20 +93,29 @@
 	color: #66CC99;
 }
 .topMenuLi:hover .submenu {
-	height: 32px;
+	height: 60px;
+}
+.notice {
+	padding-right: 30%;
 }
 .category {
-	
+	padding-right: 5%;
+}
+.tip {
+	padding-left: 10%;
+}
+.recruit {
+	padding-left: 30%;
 }
 .hire {
 	padding-left: 0%;
 }
 
 .messageMain {
-	padding-left: 44%;
+	padding-left: 65%;
 }
 .accounts {
-	padding-left: 50%;
+	padding-left: 75%;
 }
 @media (min-width: 576px){
 .col-sm-3 {
@@ -322,48 +331,52 @@ function DosignUp() {
 	</div>
 </div>
 
-<nav class="navbar fixed-top navbar-expand-lg fixed-top">
-    <div class="container">
+
+<!-- 탑 메뉴  -->
+<nav class="navbar fixed-top navbar-expand-lg fixed-top" style="box-shadow: none; min-height: 80px;">
+    <div class="container" style="margin-left: 0px; margin-right: 0px; max-width: 100%;">
 		<a class="navbar-brand" href="/"><img src="/resources/images/main_logo.png" style="height:30px"></a>
 		<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
-		<div class="collapse navbar-collapse" id="navbarResponsive">
-			<ul class="navbar-nav ml-auto">
+		<div class="collapse navbar-collapse row justify-content-between" id="navbarResponsive" style="padding-left: 15%;">
+			<ul class="navbar-nav row justify-content-between" style="font-size: 1.5em;font-family: 'Jua';font-weight: lighter; min-width: 60%; ">
 				<li class="nav-item">
 					<a class="nav-link" href="/"><strong>홈</strong></a>
 				</li>
 				<li class="nav-item topMenuLi">
 					<a class="nav-link" href="/noticeboard/noticeBoardList"><strong>공지</strong></a>
-					<ul class="submenu category">
-						<li>|</li>
+					<ul class="submenu notice" style="box-shadow: none; margin-top: 10px;">
+<!-- 						<li>|</li> -->
 						<c:forEach items="${nCatList}" var="nCatList">
 							<c:choose>
 								<c:when test="${nCatList.viewAuthority == 3 }">
-									<li><a class="submenuLink" href="/noticeboard/noticeBoardList?category=${nCatList.categoryId }">${nCatList.categoryName }</a></li>
-									<li>|</li>
+									<li><a style="font-size: 1em; margin: 0px 10px;" class="submenuLink" href="/noticeboard/noticeBoardList?category=${nCatList.categoryId }">${nCatList.categoryName }</a></li>
+<!-- 									<li>|</li> -->
 								</c:when>
 								<c:when test="${login.authority >= nCatList.viewAuthority }">
-									<li><a class="submenuLink" href="/noticeboard/noticeBoardList?category=${nCatList.categoryId }">${nCatList.categoryName }</a></li>
-									<li>|</li>
+									<li><a style="font-size: 1em; margin: 0px 10px;" class="submenuLink" href="/noticeboard/noticeBoardList?category=${nCatList.categoryId }">${nCatList.categoryName }</a></li>
+<!-- 									<li>|</li> -->
 								</c:when>
 							</c:choose>
 						</c:forEach>
+						<li><a style="font-size: 1em; margin: 0px 10px;" class="submenuLink" href="">공지</a></li>
+						
 					</ul>
 				</li>
 				<li class="nav-item topMenuLi">
 					<a class="nav-link" href="/videoboard/videoBoardList"><strong>영상공유</strong></a>
-					<ul class="submenu category">
-						<li>|</li>
+					<ul class="submenu category" style="box-shadow: none; margin-top: 10px;;">
+<!-- 						<li>|</li> -->
 						<c:forEach items="${vCatList}" var="vCatList">
 							<c:choose>
 								<c:when test="${vCatList.viewAuthority == 3 }">
-									<li><a class="submenuLink" href="/videoboard/videoBoardList?category=${vCatList.categoryId }">${vCatList.categoryName }</a></li>
-									<li>|</li>
+									<li><a style="font-size: 1em; margin: 0px 10px;" class="submenuLink" href="/videoboard/videoBoardList?category=${vCatList.categoryId }">${vCatList.categoryName }</a></li>
+<!-- 									<li>|</li> -->
 								</c:when>
 								<c:when test="${login.authority >= vCatList.viewAuthority }">
-									<li><a class="submenuLink" href="/videoboard/videoBoardList?category=${vCatList.categoryId }">${vCatList.categoryName }</a></li>
-									<li>|</li>
+									<li><a style="font-size: 1em; margin: 0px 10px;" class="submenuLink" href="/videoboard/videoBoardList?category=${vCatList.categoryId }">${vCatList.categoryName }</a></li>
+<!-- 									<li>|</li> -->
 								</c:when>
 							</c:choose>
 						</c:forEach>
@@ -372,17 +385,17 @@ function DosignUp() {
 				<li class="nav-item topMenuLi">
 					<c:if test="${login eq null }">
 						<a class="nav-link" data-toggle="modal" data-target="#myModal" href="#myModal"><strong>팁</strong></a>
-						<ul class="submenu category">
-							<li>|</li>
+						<ul class="submenu tip" style="box-shadow: none; margin-top: 10px;;">
+<!-- 							<li>|</li> -->
 							<c:forEach items="${tCatList}" var="tCatList">
 								<c:choose>
-									<c:when test="${tCatList.viewAuthority == 3 }">
-										<li><a class="submenuLink" data-toggle="modal" data-target="#myModal" href="#myModal">${tCatList.categoryName }</a></li>
-										<li>|</li>
+									<c:when test="${tCatList.viewAuthority == 3}">
+										<li><a style="font-size: 1em; margin: 0px 10px;" class="submenuLink" data-toggle="modal" data-target="#myModal" href="#myModal">${tCatList.categoryName }</a></li>
+<!-- 										<li>|</li> -->
 									</c:when>
 									<c:when test="${login.authority >= tCatList.viewAuthority }">
-										<li><a class="submenuLink" data-toggle="modal" data-target="#myModal" href="#myModal">${tCatList.categoryName }</a></li>
-										<li>|</li>
+										<li><a style="font-size: 1em; margin: 0px 10px;" class="submenuLink" data-toggle="modal" data-target="#myModal" href="#myModal">${tCatList.categoryName }</a></li>
+<!-- 										<li>|</li> -->
 									</c:when>
 								</c:choose>
 							</c:forEach>
@@ -390,17 +403,17 @@ function DosignUp() {
 					</c:if>
 					<c:if test="${login ne null }">
 						<a class="nav-link" href="/tipboard/tipBoardList"><strong>팁</strong></a>
-						<ul class="submenu category">
-							<li>|</li>
+						<ul class="submenu tip" style="box-shadow: none; margin-top: 10px;;">
+<!-- 							<li>|</li> -->
 							<c:forEach items="${tCatList}" var="tCatList">
 								<c:choose>
 									<c:when test="${tCatList.viewAuthority == 3 }">
-										<li><a class="submenuLink" href="/tipboard/tipBoardList?category=${tCatList.categoryId }">${tCatList.categoryName }</a></li>
-										<li>|</li>
+										<li><a style="font-size: 1em; margin: 0px 10px;" class="submenuLink" href="/tipboard/tipBoardList?category=${tCatList.categoryId }">${tCatList.categoryName }</a></li>
+<!-- 										<li>|</li> -->
 									</c:when>
 									<c:when test="${login.authority >= tCatList.viewAuthority }">
-										<li><a class="submenuLink" href="/tipboard/tipBoardList?category=${tCatList.categoryId }">${tCatList.categoryName }</a></li>
-										<li>|</li>
+										<li><a style="font-size: 1em; margin: 0px 10px;" class="submenuLink" href="/tipboard/tipBoardList?category=${tCatList.categoryId }">${tCatList.categoryName }</a></li>
+<!-- 										<li>|</li> -->
 									</c:when>
 								</c:choose>
 							</c:forEach>
@@ -410,17 +423,17 @@ function DosignUp() {
 				<li class="nav-item topMenuLi">
 					<c:if test="${login eq null }">
 						<a class="nav-link" data-toggle="modal" data-target="#myModal" href="#myModal"><strong>구인구직</strong></a>
-						<ul class="submenu category">
-							<li>|</li>
+						<ul class="submenu recruit" style="box-shadow: none; margin-top: 10px;;">
+<!-- 							<li>|</li> -->
 							<c:forEach items="${rCatList}" var="rCatList">
 								<c:choose>
 									<c:when test="${rCatList.viewAuthority == 3 }">
-										<li><a class="submenuLink" data-toggle="modal" data-target="#myModal" href="#myModal">${rCatList.categoryName }</a></li>
-										<li>|</li>
+										<li><a style="font-size: 1em; margin: 0px 10px;" class="submenuLink" data-toggle="modal" data-target="#myModal" href="#myModal">${rCatList.categoryName }</a></li>
+<!-- 										<li>|</li> -->
 									</c:when>
 									<c:when test="${login.authority >= rCatList.viewAuthority }">
-										<li><a class="submenuLink" data-toggle="modal" data-target="#myModal" href="#myModal">${rCatList.categoryName }</a></li>
-										<li>|</li>
+										<li><a style="font-size: 1em; margin: 0px 10px;" class="submenuLink" data-toggle="modal" data-target="#myModal" href="#myModal">${rCatList.categoryName }</a></li>
+<!-- 										<li>|</li> -->
 									</c:when>
 								</c:choose>
 							</c:forEach>
@@ -428,17 +441,17 @@ function DosignUp() {
 					</c:if>
 					<c:if test="${login ne null }">
 						<a class="nav-link" href="/recruitboard/recruitBoardList"><strong>구인구직</strong></a>
-						<ul class="submenu category">
-							<li>|</li>
+						<ul class="submenu recruit" style="box-shadow: none; margin-top: 10px;;">
+<!-- 							<li>|</li> -->
 							<c:forEach items="${rCatList}" var="rCatList">
 								<c:choose>
 									<c:when test="${rCatList.viewAuthority == 3 }">
-										<li><a class="submenuLink" href="/recruitboard/recruitBoardList?category=${rCatList.categoryId }">${rCatList.categoryName }</a></li>
-										<li>|</li>
+										<li><a style="font-size: 1em; margin: 0px 10px;" class="submenuLink" href="/recruitboard/recruitBoardList?category=${rCatList.categoryId }">${rCatList.categoryName }</a></li>
+<!-- 										<li>|</li> -->
 									</c:when>
 									<c:when test="${login.authority >= rCatList.viewAuthority }">
-										<li><a class="submenuLink" href="/recruitboard/recruitBoardList?category=${rCatList.categoryId }">${rCatList.categoryName }</a></li>
-										<li>|</li>
+										<li><a style="font-size: 1em; margin: 0px 10px;" class="submenuLink" href="/recruitboard/recruitBoardList?category=${rCatList.categoryId }">${rCatList.categoryName }</a></li>
+<!-- 										<li>|</li> -->
 									</c:when>
 								</c:choose>
 							</c:forEach>
@@ -446,7 +459,11 @@ function DosignUp() {
 					</c:if>
 				</li>
 			</ul>
-			<ul class="navbar-nav ml-auto">
+			
+			
+			
+			<!-- 두번째 ul -->
+			<ul class="navbar-nav">
 				<c:if test="${login.accountId ne null }">
 					<img src="<spring:url value='/image/${login.picture}'/>" class=" mx-auto rounded-circle" width="40px" height="40px"/>
 					<li class="nav-item topMenuLi">
@@ -461,7 +478,7 @@ function DosignUp() {
 							</c:choose>
 							<strong>메세지</strong>
 						</a>
-						<ul class="submenu messageMain">
+						<ul class="submenu messageMain" style="box-shadow: none; margin-top: 10px;;">
 							<li>|</li>
 							<li><a class="submenuLink" href="/message/messageReceiveList"><i class="fas fa-inbox"></i>받은 메세지</a></li>
 							<li>|</li>
@@ -481,7 +498,7 @@ function DosignUp() {
 							</c:choose>
 							<strong>회원기능</strong>
 						</a>
-						<ul class="submenu accounts">
+						<ul class="submenu accounts" style="box-shadow: none; margin-top: 10px;;">
 							<li>|</li>
 							<li><a class="submenuLink" href="/follow/followingList"><i class="fas fa-user-friends"></i>팔로잉</a></li>
 							<li>|</li>
