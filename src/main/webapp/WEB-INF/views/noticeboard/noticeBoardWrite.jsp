@@ -22,7 +22,7 @@
 	</div>
 	
 	<div class="container">
-	    <form class="form-horizontal" method="post"action=" ${path}/noticeboard/insertNoticeBoardPro">
+	    <form class="form-horizontal" method="post" action=" ${path}/noticeboard/insertNoticeBoardPro">
 	    	<div class="form-inline">
 	        	<label class="control-label col-sm-2">제목</label>
 	        	<div class="col-sm-3">
@@ -55,10 +55,10 @@
 				</div>
 			</div>
 			<br>
-			<div class="col-sm-12" align="center">
-			<button type="submit" id="submit" class="btn btn-success">올리기</button>
-	       <button type="reset" class="btn btn-warning">초기화</button>
-	       <button type="button" class="btn btn-info" onclick="location.href='/noticeboard/noticeBoardList?num=1'">뒤로 가기</button>
+			<div class="col-sm-11" align="right">
+			<button type="submit" id="submit" class="btn btn-sm">올리기</button>
+	       <button type="reset" class="btn btn-sm">초기화</button>
+	       <button type="button" class="btn btn-sm" onclick="location.href='/noticeboard/noticeBoardList?num=1'">뒤로 가기</button>
 	       </div>
 			<br>
 		</form>

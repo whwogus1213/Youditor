@@ -28,13 +28,9 @@
 	<!-- 게시물 조회 -->
 	<select id="view" parameterType="int" resultType="NoticeBoardVO">
 		SELECT
-			boardId, n.accountId, nickname, categoryId, subject, object, n.reg_date, n.mod_date, viewCount 
-		FROM
-			noticeboard as n
-		JOIN
-			accounts as a
-		ON
-			n.accountId = a.accountId
+			boardId, n.accountId, nickname, n.categoryId, subject, object, n.reg_date, n.mod_date, viewCount, categoryName, a.picture
+		FROM noticeboard as n JOIN accounts as a ON n.accountId = a.accountId
+							JOIN noticecategory c on n.categoryId = c.categoryId
 		WHERE
 			boardId = #{boardId}
 	</select>

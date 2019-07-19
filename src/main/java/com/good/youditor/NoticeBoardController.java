@@ -81,7 +81,7 @@ public class NoticeBoardController {
 		System.out.println(vo);
 		noticeBoardService.insertNoticeBoard(vo);
 
-		return "redirect:/";
+		return "redirect:/noticeboard/noticeBoardList";
 
 	}
 	// 글 수정

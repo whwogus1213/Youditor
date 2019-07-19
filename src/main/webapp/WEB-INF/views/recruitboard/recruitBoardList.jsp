@@ -192,9 +192,9 @@ footer{
 
 
 		<!-- 페이징 검색 시작 -->
-		<div class="row">
+		<div class="col-12">
 			<!-- 페이징 -->
-			<div class="p1 pagination col-4">
+			<div class="p1 pagination col-12">
 				<ul>
 					<c:if test="${pagination.prev}">
 						<a href="#" onClick="fn_prev('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}',
@@ -214,7 +214,7 @@ footer{
 			<!-- 페이징 -->
 
 			<!-- 검색 -->
-			<div class="input-group col-8" style="padding-top: 6px;" align="right">
+			<div class="input-group col-12" style="padding-top: 6px;" align="right">
 				<div class="col-3" align="right" style="padding-right: 0px;">
 					<select class="form-control form-control-sm" name="searchType"
 						id="searchType" style="width: 66.6%">
@@ -234,7 +234,7 @@ footer{
 				<div class="col-2" align="right" style="padding-left: 0px; padding-right: 5px;">
 					<c:if test="${login.authority >= 3 }">
 						<button type="button" class="btn btn-sm"
-							onclick="location.href='/noticeboard/write.do' " style="background-color: #2ecc71; color: white;">글쓰기</button>
+							onclick="location.href='/recruitboard/write.do' " style="background-color: #2ecc71; color: white;">글쓰기</button>
 					</c:if>
 				</div>
 			</div>

@@ -336,18 +336,19 @@
 			</c:forEach>
 		</div>
 		<!-- 페이징 검색 시작 -->
-		<div class="row">
+		<div class="col-12">
 			<!-- 페이징 -->
-			<div class="p1 pagination col-4">
+			<div class="p1 pagination col-12">
 				<ul>
 					<c:if test="${pagination.prev}">
 						<a href="#" onClick="fn_prev('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}',
 						'${pagination.searchType}', '${pagination.keyword}')"><li><</li></a>
 					</c:if>
 					<c:forEach begin="${pagination.startPage}" end="${pagination.endPage}" var="idx">
-						<a class="<c:out value="${pagination.page == idx ? 'is-active' : ''}"/>" href="#" onClick="fn_pagination('${idx}', '${pagination.range}', '${pagination.rangeSize}',
-						'${pagination.searchType}', '${pagination.keyword}')">
-							<li>${idx}</li></a>
+						<a class="<c:out value="${pagination.page == idx ? 'is-active' : ''}"/>" href="#"
+						onClick="fn_pagination('${idx}', '${pagination.range}', '${pagination.rangeSize}', '${pagination.categoryId}', 
+						'${pagination.searchType}', '${pagination.keyword}')"><li>${idx}</li></a>
+						
 					</c:forEach>
 					<c:if test="${pagination.next}">
 						<a href="#" onClick="fn_next('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}',
@@ -358,7 +359,7 @@
 			<!-- 페이징 -->
 
 			<!-- 검색 -->
-			<div class="input-group col-8" style="padding-top: 6px;" align="right">
+			<div class="input-group col-12" style="padding-top: 6px;" align="right">
 				<div class="col-3" align="right" style="padding-right: 0px;">
 					<select class="form-control form-control-sm" name="searchType"
 						id="searchType" style="width: 66.6%">
@@ -378,7 +379,7 @@
 				<div class="col-2" align="right" style="padding-left: 0px; padding-right: 5px;">
 					<c:if test="${login.authority >= 3 }">
 						<button type="button" class="btn btn-sm"
-							onclick="location.href='/noticeboard/write.do' " style="background-color: #2ecc71; color: white;">글쓰기</button>
+							onclick="location.href='/videoboard/write.do' " style="background-color: #2ecc71; color: white;">글쓰기</button>
 					</c:if>
 				</div>
 			</div>
