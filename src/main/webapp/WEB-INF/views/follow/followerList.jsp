@@ -27,8 +27,6 @@
 			<thead align="center">
 				<tr>
 					<th>닉네임</th>
-					<th>e-mail</th>
-					<th>날짜</th>
 				</tr>
 			</thead>
 			<tbody align="center">
@@ -36,12 +34,7 @@
 					<tr>
 						<td style="cursor: pointer;"
 							onclick="location.href='/videoboard/videoBoardList?searchType=nickname&keyword=${followerList.nickname }'">
-							${followerList.nickname}</td>
-						<td>
-							${followerList.followerAccountId }
-						</td>
-						<td>
-							<fmt:formatDate value="${followerList.reg_date}" pattern="yyyy-MM-dd" />
+							${followerList.nickname}
 						</td>
 					</tr>
 				</c:forEach>

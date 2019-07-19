@@ -28,4 +28,7 @@ public interface TipBoardDAO {
 	// 조회수
 	public void viewCount(int boardId) throws Exception;
 
+	// 최신 게시물
+	public List<TipBoardVO> newList() throws Exception;
+
 }

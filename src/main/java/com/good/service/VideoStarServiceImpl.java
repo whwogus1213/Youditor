@@ -20,8 +20,6 @@ public class VideoStarServiceImpl implements VideoStarService {
 	// 게시물 목록
 	@Override
 	public List<VideoStarVO> listAll() throws Exception {
-
-		System.out.println("serviceimpl test");
 		return videoStarDAO.listAll();
 	}
 	

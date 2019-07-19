@@ -60,4 +60,9 @@ public class TipBoardServiceImpl implements TipBoardService {
 		tipBoardDAO.viewCount(boardId);
 	}
 
+	@Override
+	public List<TipBoardVO> newList() throws Exception {
+		return tipBoardDAO.newList();
+	}
+
 }

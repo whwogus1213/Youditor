@@ -9,7 +9,23 @@
 <meta charset="UTF-8">
 <title>팁 - YouditoR</title>
 <jsp:include page="../module/header.jsp" flush="false" />
+<link href="/resources/css/pagination.css" rel="stylesheet">
 <script src="https://kit.fontawesome.com/e83fabbb47.js"></script>
+<style>
+ @media (min-width:476px){.container{max-width: 240px;}}
+ @media (min-width:576px){.container{max-width: 300px;}}
+ @media (min-width:768px){.container{max-width: 440px;}}
+ @media (min-width:992px){.container{max-width: 640px;}}
+ @media (min-width:1080px){.container{max-width: 800;}}
+ @media (min-width:1200px){.container{max-width: 925px;}}
+ @media (min-width:1400px){.container{max-width: 1100px;}}
+ .container {
+    float: left;
+}
+footer{
+    margin-top: 250px;
+}
+</style>
 <script>
 	// 이전 버튼
 	function fn_prev(page, range, rangeSize, searchType, keyword) {
@@ -93,17 +109,19 @@
 </head>
 <body>
 	<jsp:include page="../module/top2.jsp" flush="false"/>
+	
+	<!-- 배너 -->
+	<div class="form-group">
+		<div class="col-sm-12" style="background-image:url('/resources/images/tipboard/tipboard.jpg'); background-position:50% 20%; background-size:100%; font-family: 'Noto Serif KR', sans-serif; color:Peru; padding-top:130px; padding-bottom:5%"  >
+			<h1 align="center" style="font-size:50px; letter-spacing:10px"><strong>편집 Tip</strong></h1>
+			<h4 align="center"><br>나만의 편집 팁을 공유하세요.</h4>
+		</div>
+	</div>
+	
 	<div id="deleteOK" class="alert alert-danger hidden" role="alert" style="visibility:hidden">글이 삭제되었습니다.</div>
 	
+	<jsp:include page="../module/aside.jsp" flush="false" />
 	<div class="container">
-		<div class="form-group">
-			<div class="col-sm-12" style="background-image:url('/resources/images/tipboard/tip-board.jpg'); background-position:50% 30%; font-family: 'Song Myung', sans-serif; color:white;"  >
-
-				<h1 align="center"><br><strong>편집 Tip</strong></h1>
-				<h5 align="center"><br>나만의 편집 팁을 공유하세요.</h5>
-				<h1 align="center"><br></h1>
-			</div>
-		</div>
 		<table class="table table-striped nanum table-hover">
 			<!-- <table border="1"> -->
 			<thead align="center">
@@ -158,65 +176,54 @@
 
 		<!-- 페이징 검색 시작 -->
 		<div class="row">
-		
-		<!-- 페이징 -->
-		<div id="paginationBox" class="col-4">
-			<ul class="pagination">
-				<c:if test="${pagination.prev}">
-					<li class="page-item"><a class="page-link" href="#"
-						onClick="fn_prev('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}',
-						'${pagination.searchType}', '${pagination.keyword}')">Pre</a>
-					</li>
-				</c:if>
-				<c:forEach begin="${pagination.startPage}"
-					end="${pagination.endPage}" var="idx">
-					<li
-						class="page-item <c:out value="${pagination.page == idx ? 'active' : ''}"/> ">
-						<a class="page-link" href="#"
-						onClick="fn_pagination('${idx}', '${pagination.range}', '${pagination.rangeSize}',
-						'${pagination.searchType}', '${pagination.keyword}')">${idx}</a>
-					</li>
-				</c:forEach>
-				<c:if test="${pagination.next}">
-					<li class="page-item"><a class="page-link" href="#"
-						onClick="fn_next('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}',
-						'${pagination.searchType}', '${pagination.keyword}')">Next</a>
-					</li>
-				</c:if>
-			</ul>
-		</div>
-		<!-- 페이징 -->
-		
-		<!-- 검색 -->
-		<div class="input-group col-8" style="padding-top: 6px;">
-			<div class="col-sm-3 offset-2" align="right" style="padding-right: 0px;">
-				<select class="form-control form-control-sm" name="searchType"
-					id="searchType" style="width: 66.6%">
-					<option value="subject">제목</option>
-					<option value="object">본문</option>
-					<option value="nickname">닉네임</option>
-				</select>
+			<!-- 페이징 -->
+			<div class="p1 pagination col-4">
+				<ul>
+					<c:if test="${pagination.prev}">
+						<a href="#" onClick="fn_prev('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}',
+						'${pagination.searchType}', '${pagination.keyword}')"><li><</li></a>
+					</c:if>
+					<c:forEach begin="${pagination.startPage}" end="${pagination.endPage}" var="idx">
+						<a class="<c:out value="${pagination.page == idx ? 'is-active' : ''}"/>" href="#" onClick="fn_pagination('${idx}', '${pagination.range}', '${pagination.rangeSize}',
+						'${pagination.searchType}', '${pagination.keyword}')">
+							<li>${idx}</li></a>
+					</c:forEach>
+					<c:if test="${pagination.next}">
+						<a href="#" onClick="fn_next('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}',
+						'${pagination.searchType}', '${pagination.keyword}')"><li>></li></a>
+					</c:if>
+				</ul>
 			</div>
-			<div class="col-sm-4" align="right" style="padding-right: 0px; padding-left: 5px;">
-				<input type="text" class="form-control form-control-sm"
-					name="keyword" id="keyword" style="float: left;">
-			</div>
+			<!-- 페이징 -->
 
-			<div class="col-1" style="padding-left: 5px; text-align: center; padding-top: 2px;">
-				<i class="fas fa-search" name="btnSearch" id="btnSearch"></i>
+			<!-- 검색 -->
+			<div class="input-group col-8" style="padding-top: 6px;" align="right">
+				<div class="col-3" align="right" style="padding-right: 0px;">
+					<select class="form-control form-control-sm" name="searchType"
+						id="searchType" style="width: 66.6%">
+						<option value="subject">제목</option>
+						<option value="object">본문</option>
+						<option value="nickname">닉네임</option>
+					</select>
+				</div>
+				<div class="col-6" align="right" style="padding-right: 0px; padding-left: 5px;">
+					<input type="text" class="form-control form-control-sm" name="keyword" id="keyword" style="float: left;">
+				</div>
+
+				<div class="col-1" style="padding-left: 0px;text-align: center;padding-right: 0px;padding-top: 5px;">
+					<i class="fas fa-search" name="btnSearch" id="btnSearch" style="cursor:"></i>
+				</div>
+
+				<div class="col-2" align="right" style="padding-left: 0px; padding-right: 5px;">
+					<c:if test="${login.authority >= 3 }">
+						<button type="button" class="btn btn-sm"
+							onclick="location.href='/noticeboard/write.do' " style="background-color: #2ecc71; color: white;">글쓰기</button>
+					</c:if>
+				</div>
 			</div>
-			
-			<div class="col-sm-2" align="right">
-			
-				<c:if test="${login.email != null}">
-					<button type="button" class="btn btn-sm btn-primary"
-						onclick="location.href='/tipboard/write.do' ">글쓰기</button>
-				</c:if>
-			</div>
+			<!-- 검색 -->
 		</div>
-		<!-- 검색 -->
-	</div>
-	<!-- 페이징, 검색 끝 -->
+		<!-- 페이징, 검색 끝 -->
 
 	</div>
 	<br>

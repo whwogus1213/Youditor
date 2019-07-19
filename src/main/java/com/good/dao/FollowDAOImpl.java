@@ -19,16 +19,29 @@ public class FollowDAOImpl implements FollowDAO {
 
 	// 팔로잉 (로그인유저가 팔로우하는 사람 리스트)
 	@Override
-	public List<FollowListVO> followingList(int followAccountId) throws Exception {
-		return sqlSession.selectList(NAMESPACE + ".followingList", followAccountId);
+	public List<FollowListVO> followingList(int accountId) throws Exception {
+		return sqlSession.selectList(NAMESPACE + ".followingList", accountId);
 	}
 	
 	// 팔로워(로그인유저를 팔로우하는 사람 리스트)
 	@Override
-	public List<FollowListVO> followerList(int followAccountId) throws Exception {
-		return sqlSession.selectList(NAMESPACE + ".followerList", followAccountId);
+	public List<FollowListVO> followerList(int accountId) throws Exception {
+		return sqlSession.selectList(NAMESPACE + ".followerList", accountId);
 	}
 
+	// 맛팔 체크
+	@Override
+	public boolean followEachOtherCheck(FollowListVO vo) throws Exception {
+		boolean check = false;
+		int result = sqlSession.selectOne(NAMESPACE + ".followEachOtherCheck", vo);
+		
+		if(result != 0) {
+			check = true;
+		}
+		
+		return check;
+	}
+	
 	// 팔로우 추가
 	@Override
 	public void insert(FollowListVO vo) throws Exception {

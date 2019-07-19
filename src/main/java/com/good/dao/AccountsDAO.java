@@ -24,4 +24,6 @@ public interface AccountsDAO {
 	public void updatePassword(int accountId, String pwd) throws Exception;
 	
 	public int insertAccount(AccountsVO vo) throws Exception;
+
+	public void loginDate(AccountsVO vo) throws Exception;
 }

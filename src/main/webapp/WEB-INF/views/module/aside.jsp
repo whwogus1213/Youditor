@@ -43,7 +43,7 @@ li {
 	height: 325px;
 	float: left;    
 	border: 1px solid #EAEAEA;
-    background: #FFF;
+    background: #f9fdfd;
 	}
 .tab_item1 {
 	display: none;
@@ -82,19 +82,16 @@ li {
 #best3:checked ~ .tab_item3 { display: block; }
 #best4:checked ~ .tab_item4 { display: block; }
 
-		.table .thead-dark th {
-		    color: rgb(255, 255, 255);
-		    background-color: rgb(52, 61, 70);
-		}
 		label {
 	    	text-align: center;
 		}
 		
 .table .thead-dark th {
+		    color: rgb(255, 255, 255);
     vertical-align: bottom;
-    background-color: #FFF;
+    background-color: #f9fdfd;
     border-bottom: 0 solid #dee2e6;
-    border-color: #FFF;
+    border-color: #f9fdfd;
 }
 		.table {
 	    margin-bottom: 0rem;

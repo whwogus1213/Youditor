@@ -14,6 +14,7 @@ public class NoticeBoardVO {
 
 	private String nickname;
 	private String categoryName;
+	private String picture;
 	
 	public int getBoardId() {
 		return boardId;
@@ -95,6 +96,15 @@ public class NoticeBoardVO {
 
 	public final void setCategoryName(String categoryName) {
 		this.categoryName = categoryName;
+	}
+
+	
+	public final String getPicture() {
+		return picture;
+	}
+
+	public final void setPicture(String picture) {
+		this.picture = picture;
 	}
 
 	@Override

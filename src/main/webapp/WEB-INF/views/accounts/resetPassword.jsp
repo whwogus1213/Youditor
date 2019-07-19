@@ -43,7 +43,7 @@
 	}
 	</script>
 </head>
-<body>
+<body style="background-color: #FFF;">
 	<jsp:include page="../module/top2.jsp" flush="false"/>
 	<form class="form-horizontal" id="frm" method="post" action="/accounts/resetPasswordPro">
 		<div class="form-inline">

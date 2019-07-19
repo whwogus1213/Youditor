@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ page session="true"%>
@@ -10,10 +9,28 @@
 <title>공지사항 - YouditoR</title>
 <jsp:include page="../module/header.jsp" flush="false" />
 <script src="https://kit.fontawesome.com/e83fabbb47.js"></script>
+<link href="/resources/css/pagination.css" rel="stylesheet">
+
 <style type="text/css">
 .fa-search:before {
-    content: "\f002";
-    cursor: pointer;
+	content: "\f002";
+	cursor: pointer;
+}
+
+.card-body {
+	display: -webkit-box;
+	line-height: 20px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
+}
+
+.card-footer {
+	font-size: 13px;
+	height: 30px;
+	padding-top: 5px;
+	padding-bottom: 5px;
 }
 </style>
 <script>
@@ -97,130 +114,127 @@
 </head>
 <body>
 	<jsp:include page="../module/top2.jsp" flush="false"/>
-	<br><br>
+	
+	<!-- 배너 -->
 	<div class="form-group">
-		<div class="col-sm-12">
-			<h2 align="center">&nbsp;</h2>
-			<h1 align="center"><strong>공지사항</strong></h1>
+		<div class="col-sm-12"  style="background-image:url('/resources/images/notice/notice.jpg'); background-position:50% 60%; font-family: 'Jua', sans-serif; color:white; padding-top:130px; padding-bottom:5%">
+			<h1 align="center" style="font-size:50px; letter-spacing:10px"><strong>공지사항</strong></h1>
+			<h5 align="center"><br>YouditoR의 최신 소식과 이벤트를 알려드립니다.</h5>
 		</div>
 	</div>
-	<h5 align="center">YouditoR의 최신 소식과 이벤트를 알려드립니다.</h5>
 	<div id="deleteOK" class="alert alert-danger hidden" role="alert" style="visibility: hidden">글이 삭제되었습니다.</div>
-		
+
+	<jsp:include page="../module/aside.jsp" flush="false" />
 	<div class="container">
-		<table class="table table-striped nanum table-hover">
-			<!-- <table border="1"> -->
-			<thead align="center">
-				<tr>
-					<th style="width: 80px;">번호</th>
-					<th style="width: 80px;">분류</th>
-					<th>제목</th>
-					<th style="width: 100px;">작성자</th>
-					<th style="width: 130px;">작성일</th>
-					<th style="width: 80px;">조회수</th>
-				</tr>
-			</thead>
-			<tbody align="center">
-				<c:forEach items="${NoticeBoardList}" var="NoticeBoardList">
-					<tr>
-						<td>${NoticeBoardList.boardId}</td>
-						<td>${NoticeBoardList.categoryName}</td>
-						<td align="left" style="padding-left: 30px; cursor: pointer;"
-						onclick="location.href='/noticeboard/noticeBoardView?boardId=${NoticeBoardList.boardId}'">
-								${NoticeBoardList.subject}
-						</td>
-						<td>
-							<div class="dropright">
-								<a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="cursor:pointer">
-									${NoticeBoardList.nickname}
-								</a>
-								<div class="dropdown-menu">
-									<a class="dropdown-item" href="#" onclick="messagePopup();">
-										<i class="far fa-envelope"></i>&nbsp;&nbsp;쪽지 보내기
-									</a>
-									<script type="text/javascript">
-									function messagePopup() {
-										var nickname = "${NoticeBoardList.nickname }";
-										var win = window.open("/message/writePopup.do?nickname=" + nickname, "_blank", 
-												"width=650, height=470, left=200, top=200, location=no, menubar=no, resizble=no, scrollbars=no, status=no, titlebar=no, toolbar=no");
-									}
-									</script>
+		<div class="row">
+			<c:forEach items="${NoticeBoardList}" var="NoticeBoardList">
+				<div class="col-lg-6 mb-4">
+					<div class="card h-100" style="display: block;">
+						<div align="left">
+							<div class="card-header" onclick="location.href='/noticeboard/noticeBoardView?boardId=${NoticeBoardList.boardId}'"
+								style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; width: 100%; height: 50px; cursor: pointer;">
+								<c:if test="${NoticeBoardList.categoryName == '공지'}">
+									<i class="fas fa-exclamation"></i>&nbsp;[${NoticeBoardList.categoryName}]
+								</c:if>
+								<c:if test="${NoticeBoardList.categoryName == '이벤트'}">
+									<i class="fas fa-gift"></i>&nbsp;[${NoticeBoardList.categoryName}]
+								</c:if>
+								No.${NoticeBoardList.boardId}&nbsp;${NoticeBoardList.subject}
+							</div>
+						</div>
+						<div class="card-body" align="left" style="margin: 0; border: 0; padding: 10px; height: 70px; cursor: pointer;"
+							onclick="location.href='/noticeboard/noticeBoardView?boardId=${NoticeBoardList.boardId}'">
+							${NoticeBoardList.object}
+						</div>
+						<div class="card-footer">
+							<div class="row" style="margin: 0">
+								<div class="col-sm-3" align="left" style="padding: 0px;">
+									<i class="far fa-clock"></i>
+									<fmt:formatDate value="${NoticeBoardList.reg_date}" pattern="yy. MM. dd." />
+								</div>
+								<div class="col-sm-2" align="left" style="padding: 0px;">
+									<i class="far fa-eye" aria-hidden="true"></i>&nbsp;&nbsp;${NoticeBoardList.viewCount}<br>
+								</div>
+								<div class="col-sm-7" align="right" style="padding: 0px;">
+									<div class="dropright">
+										<a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="cursor: pointer">
+										<img src="<spring:url value='/image/${NoticeBoardList.picture}'/>" class=" mx-auto rounded-circle" width="20px" height="20px"/>&nbsp;${NoticeBoardList.nickname}<br>
+										</a>
+										<div class="dropdown-menu">
+											<a class="dropdown-item" href="/noticeboard/noticeBoardList?searchType=nickname&keyword=${NoticeBoardList.nickname}">
+												<i class="fab fa-file-alt"></i>&nbsp;&nbsp;게시물 더보기
+											</a>
+											<a class="dropdown-item" href="#">
+												<i class="far fa-envelope"></i>&nbsp;&nbsp;쪽지 보내기
+											</a>
+											<a class="dropdown-item" href="#">
+												<i class="far fa-heart"></i>&nbsp;&nbsp;팔로우하기
+											</a>
+										</div>
+									</div>
 								</div>
 							</div>
-						</td>
-						<td><fmt:formatDate value="${NoticeBoardList.reg_date}"
-								pattern="yyyy-MM-dd" /></td>
-						<td>${NoticeBoardList.viewCount}</td>
-					</tr>
-				</c:forEach>
-			</tbody>
-		</table>
+						</div>
+					</div>
+				</div>
+			</c:forEach>
+		</div>
 
 		<!-- 페이징 검색 시작 -->
 		<div class="row">
-		
-		<!-- 페이징 -->
-		<div id="paginationBox" class="col-4">
-			<ul class="pagination">
-				<c:if test="${pagination.prev}">
-					<li class="page-item"><a class="page-link" href="#"
-						onClick="fn_prev('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}',
-						'${pagination.searchType}', '${pagination.keyword}')">Pre</a>
-					</li>
-				</c:if>
-				<c:forEach begin="${pagination.startPage}"
-					end="${pagination.endPage}" var="idx">
-					<li
-						class="page-item <c:out value="${pagination.page == idx ? 'active' : ''}"/> ">
-						<a class="page-link" href="#"
-						onClick="fn_pagination('${idx}', '${pagination.range}', '${pagination.rangeSize}',
-						'${pagination.searchType}', '${pagination.keyword}')">${idx}</a>
-					</li>
-				</c:forEach>
-				<c:if test="${pagination.next}">
-					<li class="page-item"><a class="page-link" href="#"
-						onClick="fn_next('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}',
-						'${pagination.searchType}', '${pagination.keyword}')">Next</a>
-					</li>
-				</c:if>
-			</ul>
-		</div>
-		<!-- 페이징 -->
-		
-		<!-- 검색 -->
-		<div class="input-group col-8" style="padding-top: 6px;">
-			<div class="col-sm-3 offset-2" align="right" style="padding-right: 0px;">
-				<select class="form-control form-control-sm" name="searchType"
-					id="searchType" style="width: 66.6%">
-					<option value="subject">제목</option>
-					<option value="object">본문</option>
-					<option value="nickname">닉네임</option>
-				</select>
+			<!-- 페이징 -->
+			<div class="p1 pagination col-4">
+				<ul>
+					<c:if test="${pagination.prev}">
+						<a href="#" onClick="fn_prev('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}',
+						'${pagination.searchType}', '${pagination.keyword}')"><li><</li></a>
+					</c:if>
+					<c:forEach begin="${pagination.startPage}" end="${pagination.endPage}" var="idx">
+						<a class="<c:out value="${pagination.page == idx ? 'is-active' : ''}"/>" href="#" onClick="fn_pagination('${idx}', '${pagination.range}', '${pagination.rangeSize}',
+						'${pagination.searchType}', '${pagination.keyword}')">
+							<li>${idx}</li></a>
+					</c:forEach>
+					<c:if test="${pagination.next}">
+						<a href="#" onClick="fn_next('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}',
+						'${pagination.searchType}', '${pagination.keyword}')"><li>></li></a>
+					</c:if>
+				</ul>
 			</div>
-			<div class="col-sm-4" align="right" style="padding-right: 0px; padding-left: 5px;">
-				<input type="text" class="form-control form-control-sm"
-					name="keyword" id="keyword" style="float: left;">
-			</div>
+			<!-- 페이징 -->
 
-			<div class="col-1" style="padding-left: 5px; text-align: center; padding-top: 2px;">
-				<i class="fas fa-search" name="btnSearch" id="btnSearch" style="cursor: "></i>
+			<!-- 검색 -->
+			<div class="input-group col-8" style="padding-top: 6px;" align="right">
+				<div class="col-3" align="right" style="padding-right: 0px;">
+					<select class="form-control form-control-sm" name="searchType"
+						id="searchType" style="width: 66.6%">
+						<option value="subject">제목</option>
+						<option value="object">본문</option>
+						<option value="nickname">닉네임</option>
+					</select>
+				</div>
+				<div class="col-6" align="right" style="padding-right: 0px; padding-left: 5px;">
+					<input type="text" class="form-control form-control-sm" name="keyword" id="keyword" style="float: left;">
+				</div>
+
+				<div class="col-1" style="padding-left: 0px;text-align: center;padding-right: 0px;padding-top: 5px;">
+					<i class="fas fa-search" name="btnSearch" id="btnSearch" style="cursor:"></i>
+				</div>
+
+				<div class="col-2" align="right" style="padding-left: 0px; padding-right: 5px;">
+					<c:if test="${login ne null }">
+						<c:if test="${login.authority >= 4 }">
+							<button type="button" class="btn btn-sm"
+								onclick="location.href='/noticeboard/write.do' " style="background-color: #2ecc71; color: white;">글쓰기</button>
+						</c:if>
+					</c:if>
+				</div>
 			</div>
-			
-			<div class="col-sm-2" align="right">
-			
-				<c:if test="${login.authority >= 3 }">
-					<button type="button" class="btn btn-sm btn-primary"
-						onclick="location.href='/noticeboard/write.do' ">글쓰기</button>
-						권한3↑
-				</c:if>
-			</div>
+			<!-- 검색 -->
 		</div>
-		<!-- 검색 -->
-	</div>
-	<!-- 페이징, 검색 끝 -->
+		<!-- 페이징, 검색 끝 -->
 
 	</div>
 	<br>
-	<jsp:include page="./../module/bottom.jsp" flush="false" />
+		<jsp:include page="./../module/bottom.jsp" flush="false" />
 </body>
 </html>

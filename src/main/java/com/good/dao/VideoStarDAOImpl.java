@@ -22,7 +22,6 @@ public class VideoStarDAOImpl implements VideoStarDAO {
 	
 	@Override
 	public List<VideoStarVO> listAll() throws Exception {
-		System.out.println("daoimpl test");
 		return sqlSession.selectList(NAMESPACE + ".listAll");
 	}
 	
