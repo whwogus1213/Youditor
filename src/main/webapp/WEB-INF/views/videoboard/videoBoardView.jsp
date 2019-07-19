@@ -17,6 +17,7 @@
 <link href="/resources/vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
 <link href="/resources/vendor/bootstrap/css/bootstrap-grid.min.css" rel="stylesheet">
 <script src="/resources/js/jquery-3.3.1.min.js"></script>
+<script src="/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="https://kit.fontawesome.com/e83fabbb47.js"></script>
 <style>
 i {
@@ -282,34 +283,29 @@ i {
 		</script>
 	</div>
 	<!-- <h1>${row.boardId }</h1> -->
-	<div class="container" style="font-family: 'Nanum Gothic', sans-serif;">
+	<div class="container" style="font-family: 'Nanum Gothic', sans-serif; width: 65%;">
 		<br>
+		<input type="hidden" id="boardId" name="boardId" value="${row.boardId }" />
+		
 		<div class="row">
-			<h2 class="col-sm-9">${row.subject }</h2>
-			<div class="col-sm-3" align="right">
-				게시일 :&nbsp;
-				<fmt:formatDate value="${row.reg_date}" pattern="yyyy. MM. dd." />
+			<h2 class="col-9">${row.subject }</h2>
+			<div class="col-3" align="right">
+				게시일 : <fmt:formatDate value="${row.reg_date}" pattern="yyyy. MM. dd." />
 			</div>
 		</div>
-		<div>${row.object }</div>
-
+		
 		<div class="row">
-			<div class="col-sm-6" align="left"
-				style="color: gray; font-size: 14px;">조회수&nbsp;${row.viewCount }회</div>
+			<div class="col-12">${row.object }</div>
 		</div>
-		<input type="hidden" id="boardId" name="boardId"
-			value="${row.boardId }" />
-
-		<!-- 별점 주는 화면 -->
-		<div class="row">
-			<div class="input-group col-sm-6">
+		
+		<div class="row" style="height: 36px;">
+			<div class="input-group col-4">
+				<font style="padding-top: 6px; padding-right: 15px;">평점 ${row.starCount}</font>
 				<c:if test="${login.email ne null}">
 					<c:if test="${login.accountId ne row.accountId}">
 						<p class="star_rating">
-							<a class="starqq" href="#">★</a>
-							<a class="starqq" href="#">★</a>
-							<a class="starqq" href="#">★</a>
-							<a class="starqq" href="#">★</a>
+							<a class="starqq" href="#">★</a> <a class="starqq" href="#">★</a>
+							<a class="starqq" href="#">★</a> <a class="starqq" href="#">★</a>
 							<a class="starqq" href="#">★</a>
 						</p>
 						<div id='ratingBtnDiv'></div>
@@ -318,32 +314,26 @@ i {
 				<c:if test="${login.email eq null}">
 					로그인 후 평가 가능
 				</c:if>
+				
 			</div>
-		</div>
-		
-		<div class="row">
-			<div class="col-sm-2" align="left">
-				평점 ${row.starCount}
-			</div>
-			<div class="col-sm-2 offset-8" align="right">
+			<div class="col-4 offset-4" align="right">
 				<c:if test="${login.accountId eq row.accountId}">
-					<i class="far fa-edit"
-						onclick="location.href='/videoboard/updateVideoBoard.do?boardId=${row.boardId}'"
-						style="cursor: pointer;">수정</i>&nbsp; <i class="far fa-trash-alt"
-						id="deletebtn" style="cursor: pointer;">삭제</i>
+					<i class="far fa-edit" onclick="location.href='/videoboard/updateVideoBoard.do?boardId=${row.boardId}'"
+						style="cursor: pointer;">수정</i>&nbsp;
+					<i class="far fa-trash-alt" id="deletebtn" style="cursor: pointer;">삭제&nbsp;&nbsp;</i>
 				</c:if>
+				<font style="color: gray; font-size: 14px;">조회수&nbsp;${row.viewCount }회</font>
 			</div>
 		</div>
 		
-		<hr>
+		<hr style="margin-top: 0px;">
 
 		<!-- 작성자 정보 -->
 		<div class="row">
 			<div class="dropright" style="padding-left: 18px">
-				<a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-					style="cursor: pointer"> <img
-					src="<spring:url value='/image/${row.picture}'/>"
-					class=" mx-auto rounded-circle" width="30px" height="30px" /> <strong>&nbsp;${row.nickname}</strong>
+				<a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="cursor: pointer">
+					<img src="<spring:url value='/image/${row.picture}'/>" class=" mx-auto rounded-circle" width="30px" height="30px" />
+						<strong>&nbsp;${row.nickname}</strong>
 				</a>
 				<div class="dropdown-menu">
 					<a class="dropdown-item"
@@ -366,11 +356,10 @@ i {
 		</div>
 		<br>
 		<h6>${row.footer }</h6>
-		<hr>
 	</div>
 	
 	<!-- 댓글 -->
-	<div class="container">
+	<div class="container-fluid">
 		<div id="listReply">
 			<jsp:include page="../videoboard/videoBoardReply.jsp" flush="false" />
 		</div>
