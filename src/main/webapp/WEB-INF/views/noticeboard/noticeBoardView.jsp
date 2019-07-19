@@ -77,14 +77,14 @@
 		</div>
 		<hr>
 		<br>
-		<h2>${row.object }</h2>
+		<h2><c:out value="${row.object }" /></h2>
 		<br>
 		<hr>
 		<div align="center">
 			<button type="button" class="btn btn-primary" onclick="location.href='/noticeboard/noticeBoardList' ">목록으로</button>
-			<c:if test="${login.accountId eq row.accountId}">
-			<button type="button" class="btn btn-success" onclick="location.href='/noticeboard/updateNoticeBoard.do?boardId=${row.boardId}' ">수정</button>
-			<button class="btn btn-danger" id="deletebtn">삭제</button>
+			<c:if test="${login.authority >= 4 }">
+				<button type="button" class="btn btn-success" onclick="location.href='/noticeboard/updateNoticeBoard.do?boardId=${row.boardId}' ">수정</button>
+				<button class="btn btn-danger" id="deletebtn">삭제</button>
 			</c:if>
 		</div>
 		<br>

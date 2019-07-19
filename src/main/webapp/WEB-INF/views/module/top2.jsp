@@ -394,7 +394,7 @@ function DosignUp() {
 							<li>|</li>
 							<c:forEach items="${tCatList}" var="tCatList">
 								<c:choose>
-									<c:when test="${vCatList.viewAuthority == 3 }">
+									<c:when test="${tCatList.viewAuthority == 3 }">
 										<li><a class="submenuLink" href="/tipboard/tipBoardList?category=${tCatList.categoryId }">${tCatList.categoryName }</a></li>
 										<li>|</li>
 									</c:when>
@@ -436,7 +436,7 @@ function DosignUp() {
 										<li><a class="submenuLink" href="/recruitboard/recruitBoardList?category=${rCatList.categoryId }">${rCatList.categoryName }</a></li>
 										<li>|</li>
 									</c:when>
-									<c:when test="${login.authority >= tCatList.viewAuthority }">
+									<c:when test="${login.authority >= rCatList.viewAuthority }">
 										<li><a class="submenuLink" href="/recruitboard/recruitBoardList?category=${rCatList.categoryId }">${rCatList.categoryName }</a></li>
 										<li>|</li>
 									</c:when>
