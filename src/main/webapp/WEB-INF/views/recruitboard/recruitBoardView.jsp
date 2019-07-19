@@ -63,8 +63,8 @@
 							${row.nickname }
 						</a>
 						<div class="dropdown-menu">
-							<a class="dropdown-item" href="/videoboard/videoBoardList?searchType=nickname&keyword=${RecruitBoardList.nickname}">
-								<i class="far fa-file-alt" style="width: 20; height: 20"></i>&nbsp;&nbsp;글 더보기
+							<a class="dropdown-item" href="/videoboard/videoBoardList?category=0&searchType=nickname&keyword=${row.nickname}">
+								<i class="fab fa-youtube" style="width: 20; height: 20"></i>&nbsp;&nbsp;편집 영상 보기
 							</a>
 							<a class="dropdown-item" href="#" onclick="messagePopup();">
 								<i class="far fa-envelope"></i>&nbsp;&nbsp;쪽지 보내기
