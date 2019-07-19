@@ -10,9 +10,8 @@
 		SELECT boardId, b.accountId, categoryId, subject, object,
 		CONVERT_TZ(b.reg_date,'+09:00','+00:00') as reg_date,
 		CONVERT_TZ(b.mod_date,'+09:00','+00:00') as mod_date, viewCount,
-		nickname
-		FROM recruitboard b join accounts ac on b.accountId =
-		ac.accountId
+		nickname, picture 
+		FROM recruitboard b join accounts ac on b.accountId = ac.accountId
 		<trim prefix="WHERE" prefixOverrides="AND|OR">
 			<if
 				test="searchType=='subject' and keyword != null and keyword != '' ">
@@ -43,7 +42,7 @@
 		CONVERT_TZ(b.reg_date,'+09:00','+00:00') as reg_date,
 		CONVERT_TZ(b.mod_date,'+09:00','+00:00') as mod_date,
 		viewCount, (select count(*) from videocomment where b.boardId = boardId) as
-		replyCount, ac.nickname
+		replyCount, ac.nickname, picture 
 		from recruitBoard b, accounts ac
 		where boardId = #{boardId} and b.accountId = ac.accountId
 

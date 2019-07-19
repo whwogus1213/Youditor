@@ -18,6 +18,7 @@ public class RecruitBoardVO {
 	
 	private String nickname;
 	private String footer;
+	private String picture;
 
 	public int getBoardId() {
 		return boardId;
@@ -129,6 +130,14 @@ public class RecruitBoardVO {
 
 	public void setFooter(String footer) {
 		this.footer = footer;
+	}
+
+	public String getPicture() {
+		return picture;
+	}
+
+	public void setPicture(String picture) {
+		this.picture = picture;
 	}
 
 	@Override

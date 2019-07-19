@@ -15,8 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.good.dto.NoticeBoardVO;
-import com.good.dto.Search;
-import com.good.dto.VideoStarVO;
+import com.good.dto.SearchBoard;
 import com.good.service.NoticeBoardService;
 
 @Controller
@@ -28,11 +27,13 @@ public class NoticeBoardController {
 
 	// 게시물 목록 + 페이징 + 검색
 	@RequestMapping(value = "/noticeBoardList", method = RequestMethod.GET)
-	public String list(Model model, @RequestParam(required = false, defaultValue = "1") int page,
-									@RequestParam(required = false, defaultValue = "1") int range,
-									@RequestParam(required = false, defaultValue = "object") String searchType,
-									@RequestParam(required = false) String keyword) throws Exception {
-		Search search = new Search();
+	public String list(Model model,
+						@RequestParam(required = false, defaultValue = "0", value = "categoryId") int categoryId,
+						@RequestParam(required = false, defaultValue = "1") int page,
+						@RequestParam(required = false, defaultValue = "1") int range,
+						@RequestParam(required = false, defaultValue = "object") String searchType,
+						@RequestParam(required = false) String keyword) throws Exception {
+		SearchBoard search = new SearchBoard();
 		search.setSearchType(searchType);
 		search.setKeyword(keyword);
 		
@@ -42,7 +43,8 @@ public class NoticeBoardController {
 		System.out.println(" listCnt : " + listCnt);
 		
 		search.pageInfo(page, range, listCnt);
-
+		search.setCategoryId(categoryId);
+		
 		model.addAttribute("pagination", search);
 		model.addAttribute("NoticeBoardList", noticeBoardService.listAll(search));
 		System.out.println("NoticeBoardController NoticeBoardList open");
@@ -76,32 +78,48 @@ public class NoticeBoardController {
 
 	// 글작성 완료
 	@RequestMapping(value = "/insertNoticeBoardPro", method = RequestMethod.POST)
-	public String insertNoticeBoardPro(NoticeBoardVO vo) throws Exception {
+	public String insertNoticeBoardPro(@RequestParam("boardId") int boardId,
+										@RequestParam("categoryId") int categoryId,
+										@RequestParam("subject") String subject,
+										@RequestParam("object") String object) throws Exception {
 		System.out.println("============insertNoticeBoardPro 성공==============");
-		System.out.println(vo);
+		NoticeBoardVO vo = new NoticeBoardVO();
+		vo.setBoardId(boardId);
+		vo.setCategoryId(categoryId);
+		vo.setSubject(subject);
+		vo.setObject(object);
+		
 		noticeBoardService.insertNoticeBoard(vo);
 
-		return "redirect:/";
+		return "redirect:/noticeboard/noticeBoardList";
 
 	}
 	// 글 수정
-	@RequestMapping(value = "/updateNoticeBoardPro")
-	public String updateNoticeBoardPro(NoticeBoardVO vo) throws Exception {
+	@RequestMapping(value = "/updateNoticeBoardPro", method = RequestMethod.POST)
+	public String updateNoticeBoardPro(@RequestParam("boardId") int boardId,
+										@RequestParam("categoryId") int categoryId,
+										@RequestParam("subject") String subject,
+										@RequestParam("object") String object) throws Exception {
+		NoticeBoardVO vo = new NoticeBoardVO();
+		vo.setBoardId(boardId);
+		vo.setCategoryId(categoryId);
+		vo.setSubject(subject);
+		vo.setObject(object);
+		
 		noticeBoardService.updateNoticeBoard(vo);
 		System.out.println("============ updateNoticeBoard 성공==============");
 		return "redirect:/noticeboard/noticeBoardList";
 	}
+	
 	// 파일 이동
 	// 게시글 수정
-	// 'noticeBoardUpdate.jsp' 로 이동 <-- 이동하고자 하는 파일로 명 바꾸면됨
-	@RequestMapping(value = "/updateNoticeBoard.do", method = RequestMethod.GET)
-	public ModelAndView joinUpdate(Locale locale, Model model,@RequestParam("boardId") int boardId) throws Exception {
-		NoticeBoardVO update = noticeBoardService.view(boardId);
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("noticeboard/noticeBoardUpdate");
-		mav.addObject("noticeBoardUpdate", update);
+	@RequestMapping(value = "/update.do", method = RequestMethod.GET)
+	public String joinUpdate(Locale locale, Model model,@RequestParam("boardId") int boardId) throws Exception {
+		NoticeBoardVO row = noticeBoardService.view(boardId);
+		
+		model.addAttribute("row", row);
 		System.out.println("String noticeBoardUpdate open");
-		return mav;
+		return "noticeboard/noticeBoardWrite";
 	}
 
 	// 글 수정

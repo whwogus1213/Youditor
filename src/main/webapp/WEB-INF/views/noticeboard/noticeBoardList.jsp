@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ page session="true"%>
 <!DOCTYPE html>
 <html>
@@ -134,10 +135,10 @@
 							<div class="card-header" onclick="location.href='/noticeboard/noticeBoardView?boardId=${NoticeBoardList.boardId}'"
 								style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; width: 100%; height: 50px; cursor: pointer;">
 								<c:if test="${NoticeBoardList.categoryName == '공지'}">
-									<i class="fas fa-exclamation"></i>&nbsp;[${NoticeBoardList.categoryName}]
+									<strong><i class="fas fa-exclamation"></i>&nbsp;[${NoticeBoardList.categoryName}]</strong>
 								</c:if>
 								<c:if test="${NoticeBoardList.categoryName == '이벤트'}">
-									<i class="fas fa-gift"></i>&nbsp;[${NoticeBoardList.categoryName}]
+									<strong><i class="fas fa-gift"></i>&nbsp;[${NoticeBoardList.categoryName}]</strong>
 								</c:if>
 								No.${NoticeBoardList.boardId}&nbsp;${NoticeBoardList.subject}
 							</div>
@@ -158,11 +159,11 @@
 								<div class="col-sm-7" align="right" style="padding: 0px;">
 									<div class="dropright">
 										<a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="cursor: pointer">
-										<img src="<spring:url value='/image/${NoticeBoardList.picture}'/>" class=" mx-auto rounded-circle" width="20px" height="20px"/>&nbsp;${NoticeBoardList.nickname}<br>
+											<img src="<spring:url value='/image/${NoticeBoardList.picture}'/>" class=" mx-auto rounded-circle" width="20px" height="20px"/>&nbsp;${NoticeBoardList.nickname}<br>
 										</a>
 										<div class="dropdown-menu">
 											<a class="dropdown-item" href="/noticeboard/noticeBoardList?searchType=nickname&keyword=${NoticeBoardList.nickname}">
-												<i class="fab fa-file-alt"></i>&nbsp;&nbsp;게시물 더보기
+												<i class="far fa-file-alt" style="width: 20; height: 20"></i>&nbsp;&nbsp;게시물 더보기
 											</a>
 											<a class="dropdown-item" href="#">
 												<i class="far fa-envelope"></i>&nbsp;&nbsp;쪽지 보내기
@@ -178,12 +179,11 @@
 					</div>
 				</div>
 			</c:forEach>
-		</div>
-
+					
 		<!-- 페이징 검색 시작 -->
-		<div class="row">
+		<div class="col-12">
 			<!-- 페이징 -->
-			<div class="p1 pagination col-4">
+			<div class="p1 pagination col-12">
 				<ul>
 					<c:if test="${pagination.prev}">
 						<a href="#" onClick="fn_prev('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}',
@@ -203,7 +203,7 @@
 			<!-- 페이징 -->
 
 			<!-- 검색 -->
-			<div class="input-group col-8" style="padding-top: 6px;" align="right">
+			<div class="input-group col-12" style="padding-top: 6px;" align="right">
 				<div class="col-3" align="right" style="padding-right: 0px;">
 					<select class="form-control form-control-sm" name="searchType"
 						id="searchType" style="width: 66.6%">
@@ -232,7 +232,7 @@
 			<!-- 검색 -->
 		</div>
 		<!-- 페이징, 검색 끝 -->
-
+		</div>
 	</div>
 	<br>
 		<jsp:include page="./../module/bottom.jsp" flush="false" />

@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.good.dao.NoticeBoardDAO;
 import com.good.dto.NoticeBoardVO;
-import com.good.dto.Pagination;
 import com.good.dto.Search;
+import com.good.dto.SearchBoard;
 
 @Service
 public class NoticeBoardServiceImpl implements NoticeBoardService {
@@ -20,7 +20,7 @@ public class NoticeBoardServiceImpl implements NoticeBoardService {
 
 	// 게시물 목록 + 페이징 + 검색
 	@Override
-	public List<NoticeBoardVO> listAll(Search search) throws Exception {
+	public List<NoticeBoardVO> listAll(SearchBoard search) throws Exception {
 		return noticeBoardDAO.listAll(search);
 	}
 

@@ -516,6 +516,9 @@ function DosignUp() {
 							<li>|</li>
 							<li><a class="submenuLink" href="/accounts/modAccount.do"><i class="fas fa-user-edit"></i>정보수정</a></li>
 							<li>|</li>
+							<c:if test="${login.authority >= 5 }">
+								<li><a href="/admin"><i class="fas fa-toolbox"></i></a>
+							</c:if>
 						</ul>
 					</li>
 					<li class="nav-item">

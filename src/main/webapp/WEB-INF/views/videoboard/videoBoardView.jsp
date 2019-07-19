@@ -58,10 +58,6 @@ i {
 }
 </style>
 <script type="text/javascript">
-	$('.dropdown').on('mouseenter mouseleave click tap', function() {
-	  $(this).toggleClass("open");
-	});
-
 	/* 평가 점수(1~5) 전역변수  */
 	var star=-1;
 	var star_db;

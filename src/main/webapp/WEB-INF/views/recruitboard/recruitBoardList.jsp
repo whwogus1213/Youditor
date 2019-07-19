@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ page session="true"%>
 <!DOCTYPE html>
 <html>
@@ -136,7 +137,7 @@ footer{
 			<thead align="center">
 				<tr>
 					<th style="width: 80px;">번호</th>
-					<th style="width: 80px;">분류</th>
+					<th style="width: 100px;">분류</th>
 					<th>제목</th>
 					<th style="width: 100px;">작성자</th>
 					<th style="width: 130px;">작성일</th>
@@ -148,10 +149,10 @@ footer{
 					<tr>
 						<td>${RecruitBoardList.boardId}</td>
 						<c:if test="${RecruitBoardList.categoryId eq 1}">
-							<td>구인</td>
+							<td><button type="button" class="btn btn-info btn-sm" disabled>구인</button></td>
 						</c:if>
 						<c:if test="${RecruitBoardList.categoryId eq 2}">
-							<td>구직</td>
+							<td><button type="button" class="btn btn-secondary btn-sm" disabled>구직</button></td>
 						</c:if>
 						
 						<td align="left" style="padding-left: 30px; cursor: pointer;"
@@ -160,6 +161,7 @@ footer{
 						</td>
 						<td class="dropright">						
 							<a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="cursor:pointer">
+								<img src="<spring:url value='/image/${RecruitBoardList.picture}'/>" class=" mx-auto rounded-circle" width="20px" height="20px"/>
 								${RecruitBoardList.nickname}
 							</a>
 							<div class="dropdown-menu">
@@ -190,9 +192,9 @@ footer{
 
 
 		<!-- 페이징 검색 시작 -->
-		<div class="row">
+		<div class="col-12">
 			<!-- 페이징 -->
-			<div class="p1 pagination col-4">
+			<div class="p1 pagination col-12">
 				<ul>
 					<c:if test="${pagination.prev}">
 						<a href="#" onClick="fn_prev('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}',
@@ -212,7 +214,7 @@ footer{
 			<!-- 페이징 -->
 
 			<!-- 검색 -->
-			<div class="input-group col-8" style="padding-top: 6px;" align="right">
+			<div class="input-group col-12" style="padding-top: 6px;" align="right">
 				<div class="col-3" align="right" style="padding-right: 0px;">
 					<select class="form-control form-control-sm" name="searchType"
 						id="searchType" style="width: 66.6%">
@@ -232,7 +234,7 @@ footer{
 				<div class="col-2" align="right" style="padding-left: 0px; padding-right: 5px;">
 					<c:if test="${login.authority >= 3 }">
 						<button type="button" class="btn btn-sm"
-							onclick="location.href='/noticeboard/write.do' " style="background-color: #2ecc71; color: white;">글쓰기</button>
+							onclick="location.href='/recruitboard/write.do' " style="background-color: #2ecc71; color: white;">글쓰기</button>
 					</c:if>
 				</div>
 			</div>
