@@ -335,16 +335,16 @@ function DosignUp() {
 				</li>
 				<li class="nav-item topMenuLi">
 					<a class="nav-link" href="/noticeboard/noticeBoardList"><strong>공지</strong></a>
-					<ul class="submenu category">
+					<ul class="submenu">
 						<li>|</li>
 						<c:forEach items="${nCatList}" var="nCatList">
 							<c:choose>
 								<c:when test="${nCatList.viewAuthority == 3 }">
-									<li><a class="submenuLink" href="/noticeboard/noticeBoardList?category=${nCatList.categoryId }">${nCatList.categoryName }</a></li>
+									<li><a class="submenuLink" href="/noticeboard/noticeBoardList?categoryId=${nCatList.categoryId }">${nCatList.categoryName }</a></li>
 									<li>|</li>
 								</c:when>
 								<c:when test="${login.authority >= nCatList.viewAuthority }">
-									<li><a class="submenuLink" href="/noticeboard/noticeBoardList?category=${nCatList.categoryId }">${nCatList.categoryName }</a></li>
+									<li><a class="submenuLink" href="/noticeboard/noticeBoardList?categoryId=${nCatList.categoryId }">${nCatList.categoryName }</a></li>
 									<li>|</li>
 								</c:when>
 							</c:choose>
@@ -358,11 +358,11 @@ function DosignUp() {
 						<c:forEach items="${vCatList}" var="vCatList">
 							<c:choose>
 								<c:when test="${vCatList.viewAuthority == 3 }">
-									<li><a class="submenuLink" href="/videoboard/videoBoardList?category=${vCatList.categoryId }">${vCatList.categoryName }</a></li>
+									<li><a class="submenuLink" href="/videoboard/videoBoardList?categoryId=${vCatList.categoryId }">${vCatList.categoryName }</a></li>
 									<li>|</li>
 								</c:when>
 								<c:when test="${login.authority >= vCatList.viewAuthority }">
-									<li><a class="submenuLink" href="/videoboard/videoBoardList?category=${vCatList.categoryId }">${vCatList.categoryName }</a></li>
+									<li><a class="submenuLink" href="/videoboard/videoBoardList?categoryId=${vCatList.categoryId }">${vCatList.categoryName }</a></li>
 									<li>|</li>
 								</c:when>
 							</c:choose>
@@ -372,7 +372,7 @@ function DosignUp() {
 				<li class="nav-item topMenuLi">
 					<c:if test="${login eq null }">
 						<a class="nav-link" data-toggle="modal" data-target="#myModal" href="#myModal"><strong>팁</strong></a>
-						<ul class="submenu category">
+						<ul class="submenu">
 							<li>|</li>
 							<c:forEach items="${tCatList}" var="tCatList">
 								<c:choose>
@@ -390,16 +390,16 @@ function DosignUp() {
 					</c:if>
 					<c:if test="${login ne null }">
 						<a class="nav-link" href="/tipboard/tipBoardList"><strong>팁</strong></a>
-						<ul class="submenu category">
+						<ul class="submenu">
 							<li>|</li>
 							<c:forEach items="${tCatList}" var="tCatList">
 								<c:choose>
 									<c:when test="${tCatList.viewAuthority == 3 }">
-										<li><a class="submenuLink" href="/tipboard/tipBoardList?category=${tCatList.categoryId }">${tCatList.categoryName }</a></li>
+										<li><a class="submenuLink" href="/tipboard/tipBoardList?categoryId=${tCatList.categoryId }">${tCatList.categoryName }</a></li>
 										<li>|</li>
 									</c:when>
 									<c:when test="${login.authority >= tCatList.viewAuthority }">
-										<li><a class="submenuLink" href="/tipboard/tipBoardList?category=${tCatList.categoryId }">${tCatList.categoryName }</a></li>
+										<li><a class="submenuLink" href="/tipboard/tipBoardList?categoryId=${tCatList.categoryId }">${tCatList.categoryName }</a></li>
 										<li>|</li>
 									</c:when>
 								</c:choose>
@@ -410,7 +410,7 @@ function DosignUp() {
 				<li class="nav-item topMenuLi">
 					<c:if test="${login eq null }">
 						<a class="nav-link" data-toggle="modal" data-target="#myModal" href="#myModal"><strong>구인구직</strong></a>
-						<ul class="submenu category">
+						<ul class="submenu">
 							<li>|</li>
 							<c:forEach items="${rCatList}" var="rCatList">
 								<c:choose>
@@ -428,16 +428,16 @@ function DosignUp() {
 					</c:if>
 					<c:if test="${login ne null }">
 						<a class="nav-link" href="/recruitboard/recruitBoardList"><strong>구인구직</strong></a>
-						<ul class="submenu category">
+						<ul class="submenu">
 							<li>|</li>
 							<c:forEach items="${rCatList}" var="rCatList">
 								<c:choose>
 									<c:when test="${rCatList.viewAuthority == 3 }">
-										<li><a class="submenuLink" href="/recruitboard/recruitBoardList?category=${rCatList.categoryId }">${rCatList.categoryName }</a></li>
+										<li><a class="submenuLink" href="/recruitboard/recruitBoardList?categoryId=${rCatList.categoryId }">${rCatList.categoryName }</a></li>
 										<li>|</li>
 									</c:when>
 									<c:when test="${login.authority >= rCatList.viewAuthority }">
-										<li><a class="submenuLink" href="/recruitboard/recruitBoardList?category=${rCatList.categoryId }">${rCatList.categoryName }</a></li>
+										<li><a class="submenuLink" href="/recruitboard/recruitBoardList?categoryId=${rCatList.categoryId }">${rCatList.categoryName }</a></li>
 										<li>|</li>
 									</c:when>
 								</c:choose>
@@ -499,6 +499,9 @@ function DosignUp() {
 							<li>|</li>
 							<li><a class="submenuLink" href="/accounts/modAccount.do"><i class="fas fa-user-edit"></i>정보수정</a></li>
 							<li>|</li>
+							<c:if test="${login.authority >= 5 }">
+								<li><a href="/admin"><i class="fas fa-toolbox"></i></a>
+							</c:if>
 						</ul>
 					</li>
 					<li class="nav-item">

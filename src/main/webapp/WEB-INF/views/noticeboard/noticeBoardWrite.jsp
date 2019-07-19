@@ -11,8 +11,9 @@
 <jsp:include page="./../module/header.jsp" flush="false"/>
 </head>
 <body>
-	<jsp:include page="../module/top2.jsp" flush="false"/>
-	
+<jsp:include page="../module/top2.jsp" flush="false"/>
+<c:choose>
+<c:when test="${login.authority >= 4 }">
 	<!-- 배너 -->
 	<div class="form-group">
 		<div class="col-sm-12"  style="background-image:url('/resources/images/notice/notice.jpg'); background-position:50% 60%; font-family: 'Jua', sans-serif; color:white; padding-top:130px; padding-bottom:5%">
@@ -22,47 +23,117 @@
 	</div>
 	
 	<div class="container">
-	    <form class="form-horizontal" method="post" action=" ${path}/noticeboard/insertNoticeBoardPro">
+	    <form class="form-horizontal" method="post" name="noticeWriteForm">
 	    	<div class="form-inline">
 	        	<label class="control-label col-sm-2">제목</label>
 	        	<div class="col-sm-3">
-	        		<input type="text" class="form-control" name="subject" maxlength="50" placeholder="Enter Title">
+	        		<c:choose>
+	        			<c:when test="${row ne null }">
+	        				<input type="text" class="form-control" name="subject" id="subject" maxlength="50" value="${row.subject }" placeholder="Enter Title">
+	        			</c:when>
+	        			<c:otherwise>
+	        				<input type="text" class="form-control" name="subject" id="subject" maxlength="50" placeholder="Enter Title">
+	        			</c:otherwise>
+	        		</c:choose>
+	        		<input type="hidden" class="form-control" name="accountId" id="accountId" value="${login.accountId}" readonly>
 	        	</div>
 			</div>
 			<br>
 			<div class="form-inline">
 				<label class="control-label col-sm-2">카테고리</label>
 				<div class="col-sm-3">
-	        		<select class="browser-default custom-select" name="categoryId" style="width:190px">
-		           		<option value="1">공지</option>
-		           		<option value="2">이벤트</option>
+	        		<select class="browser-default custom-select" name="categoryId" id="categoryId" style="width:190px">
+		           		<c:forEach items="${nCatList}" var="nCatList">
+		           			<c:choose>
+		           				<c:when test="${nCatList.categoryId == 99 }">
+		           					<c:if test="${login.authority >= nCatList.editAuthority }">
+		           						<c:choose>
+						        			<c:when test="${row.categoryId == nCatList.categoryId }">
+						        				<option value="${nCatList.categoryId }" selected>${nCatList.categoryName }</option>
+						        			</c:when>
+						        			<c:otherwise>
+						        				<option value="${nCatList.categoryId }">${nCatList.categoryName }</option>
+						        			</c:otherwise>
+						        		</c:choose>
+		           					</c:if>
+		           				</c:when>
+		           				<c:otherwise>
+		           						<c:choose>
+						        			<c:when test="${row.categoryId == nCatList.categoryId }">
+						        				<option value="${nCatList.categoryId }" selected>${nCatList.categoryName }</option>
+						        			</c:when>
+						        			<c:otherwise>
+						        				<option value="${nCatList.categoryId }">${nCatList.categoryName }</option>
+						        			</c:otherwise>
+						        		</c:choose>
+		           				</c:otherwise>
+		           			</c:choose>
+		           		</c:forEach>
 		           </select>
 				</div>
 			</div>
 			<br>
 			<div class="form-inline">
-		        <label class="control-label col-sm-2">작성자</label>
-		        <div class="col-sm-3">
-		        	<input type="text" class="form-control" maxlength="50" value="${login.nickname}" readonly>
-					<input type="text" class="form-control" name="accountId" maxlength="50" value="${login.accountId}" style="display:none" readonly>
-		        </div>
-			</div>
-			<br>
-			<div class="form-inline">
 				<label class="control-label col-sm-2">내용</label>
 				<div class="col-sm-3">
-					<textarea rows="10" cols="100" name="object"></textarea>
+	        		<c:choose>
+	        			<c:when test="${row ne null }">
+	        				<textarea rows="10" cols="100" name="object" id="object"><c:out value="${row.object }"/></textarea>
+	        			</c:when>
+	        			<c:otherwise>
+	        				<textarea rows="10" cols="100" name="object" id="object"></textarea>
+	        			</c:otherwise>
+	        		</c:choose>
 				</div>
 			</div>
 			<br>
 			<div class="col-sm-11" align="right">
-			<button type="submit" id="submit" class="btn btn-sm">올리기</button>
-	       <button type="reset" class="btn btn-sm">초기화</button>
-	       <button type="button" class="btn btn-sm" onclick="location.href='/noticeboard/noticeBoardList?num=1'">뒤로 가기</button>
-	       </div>
+        		<c:choose>
+        			<c:when test="${row ne null }">
+        				<button type="button" class="btn btn-sm" onclick="updateBtn();">수정</button>
+        			</c:when>
+        			<c:otherwise>
+        				<button type="button" class="btn btn-sm" onclick="insertBtn();">올리기</button>
+        			</c:otherwise>
+        		</c:choose>
+				<script type="text/javascript">
+				function insertBtn() {
+					var accountId = $("#accountId").val();
+					var categoryId = $("#categoryId").val();
+		  			var subject = $("#subject").val();
+		  			var object = $("#object").val();
+		  			if(subject.length == 0) { alert("제목을 입력해 주세요."); $("#subject").focus(); return; }
+		  			if(object.length == 0) { alert("내용을 입력해 주세요."); $("#object").focus(); return; }
+
+		  			document.noticeWriteForm.action = "/noticeboard/insertNoticeBoardPro";
+		  			document.noticeWriteForm.method = "POST";
+		  			document.noticeWriteForm.submit();
+				}
+				
+				function updateBtn() {
+					var accountId = $("#accountId").val();
+					var categoryId = $("#categoryId").val();
+		  			var subject = $("#subject").val();
+		  			var object = $("#object").val();
+		  			if(subject.length == 0) { alert("제목을 입력해 주세요."); $("#subject").focus(); return; }
+		  			if(object.length == 0) { alert("내용을 입력해 주세요."); $("#object").focus(); return; }
+
+		  			document.noticeWriteForm.action = "/noticeboard/updateNoticeBoardPro";
+		  			document.noticeWriteForm.method = "POST";
+		  			document.noticeWriteForm.submit();
+				}
+				</script>
+				<button type="reset" class="btn btn-sm">초기화</button>
+				<button type="button" class="btn btn-sm" onclick="location.href='/noticeboard/noticeBoardList?num=1'">뒤로 가기</button>
+			</div>
 			<br>
 		</form>
 	</div>
-	<jsp:include page="../module/bottom.jsp" flush="false" />
+</c:when>
+<c:otherwise>
+	<c:redirect url="/"/>
+</c:otherwise>
+</c:choose>
+<jsp:include page="../module/bottom.jsp" flush="false" />
 </body>
 </html>

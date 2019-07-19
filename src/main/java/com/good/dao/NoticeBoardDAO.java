@@ -4,11 +4,12 @@ import java.util.List;
 
 import com.good.dto.NoticeBoardVO;
 import com.good.dto.Search;
+import com.good.dto.SearchBoard;
 
 public interface NoticeBoardDAO {
 
 	// 게시물 목록 + 페이징 + 검색
-	public List<NoticeBoardVO> listAll(Search search) throws Exception;
+	public List<NoticeBoardVO> listAll(SearchBoard search) throws Exception;
 
 	// 게시물 상세보기
 	public NoticeBoardVO view(int boardId) throws Exception;

@@ -59,7 +59,7 @@
 			<thead align="center">
 				<tr>
 					<th>닉네임</th>
-					<th>맛팔</th>
+					<th>맞팔</th>
 					<th>언팔로우</th>
 				</tr>
 			</thead>
