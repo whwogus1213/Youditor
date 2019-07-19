@@ -29,14 +29,6 @@
 /* 		opacity: 0.3; */
 /* 		filter: alpha(opacity=30); */
 	}
-
-	.container {
-    width: 100%;
-    padding-right: 15px;
-    padding-left: 15px;
-    margin-right: auto;
-    margin-left: 230px;
-	}
 	
 	.vbrow:hover {
 	border: 1px solid black;
@@ -141,94 +133,87 @@
 	<!-- 배너 목록 -->
 	<c:choose>
 		<c:when test="${ categoryName eq '전체'}">
-			<div style="background-image:url('/resources/images/videoList/all.jpg'); background-position:43% 70%;background-size:100%; color:white; text-shadow: -1px 0 #0099CC, 0 1px #0099CC, 1px 0 #0099CC, 0 -1px #0099CC; padding-top:130px; padding-bottom:1%;">
-				<div class="col-sm-10">
+			<div style="background-image:url('/resources/images/videoList/all.jpg'); background-position:43% 70%;background-size:100%; color:white; text-shadow: -1px 0 #0099CC, 0 1px #0099CC, 1px 0 #0099CC, 0 -1px #0099CC; padding-top:130px; padding-bottom:5%;">
+				<div class="col-sm-12">
 					<h1 align="center" style="font-size:60px; letter-spacing:60px">
 						<strong>&nbsp;전체보기</strong>
 					</h1>
 					<h4 align="center"><%=request.getAttribute("categoryName")%> 유투버들의 편집 영상입니다.</h4>
-					<div id="deleteOK" class="alert alert-danger hidden" role="alert" style="visibility: hidden">글이 삭제되었습니다.</div>
 				</div>
 			</div>
 		</c:when>
 		<c:when test="${ categoryName eq '게임'}">
-			<div style="background-image:url('/resources/images/videoList/game.png'); background-position:50% 50%; font-family: 'Do Hyeon', sans-serif; color:#3366FF; padding-top:130px; padding-bottom:1%;">
-				<div class="col-sm-10">
+			<div style="background-image:url('/resources/images/videoList/game.png'); background-position:58% 50%; font-family: 'Do Hyeon', sans-serif; color:#3366FF; padding-top:130px; padding-bottom:5%;">
+				<div class="col-sm-12">
 					<h1 align="center" style="font-size:60px; letter-spacing:60px">
 						<strong>&nbsp;<%=request.getAttribute("categoryName")%></strong>
 					</h1>
 					<h4 align="center"><br><%=request.getAttribute("categoryName")%> 유투버들의 편집 영상입니다.</h4>
-					<div id="deleteOK" class="alert alert-danger hidden" role="alert" style="visibility: hidden">글이 삭제되었습니다.</div>
 				</div>
 			</div>
 		</c:when>
 		<c:when test="${ categoryName eq '먹방'}">
-			<div style="background-image:url('/resources/images/videoList/social_dining.jpg'); background-position:65% 25%;background-size:100%; font-family: 'Nanum Brush Script', sans-serif; color:white; padding-top:130px; padding-bottom:1%;">
-				<div class="col-sm-10">
+			<div style="background-image:url('/resources/images/videoList/social_dining.jpg'); background-position:65% 25%;background-size:100%; font-family: 'Nanum Brush Script', sans-serif; color:white; padding-top:130px; padding-bottom:5%;">
+				<div class="col-sm-12">
 					<h1 align="center" style="font-size:60px; letter-spacing:60px">
 						<strong>&nbsp;<%=request.getAttribute("categoryName")%></strong>
 					</h1>
 					<h4 align="center"><%=request.getAttribute("categoryName")%> 유투버들의 편집 영상입니다.</h4>
-					<div id="deleteOK" class="alert alert-danger hidden" role="alert" style="visibility: hidden">글이 삭제되었습니다.</div>
 				</div>
 			</div>
 		</c:when>
 		<c:when test="${ categoryName eq '일상'}">
-			<div style="background-image:url('/resources/images/videoList/daily_life.jpg'); background-position:70% 60%;background-size:100%; font-family: 'Hi Melody', sans-serif; color:#FFCC00; text-shadow: -1px 0 #996600, 0 1px #996600, 1px 0 #996600, 0 -1px #996600; padding-top:130px; padding-bottom:1%;">
-				<div class="col-sm-10">
+			<div style="background-image:url('/resources/images/videoList/daily_life.jpg'); background-position:70% 60%;background-size:100%; font-family: 'Hi Melody', sans-serif; color:#FFCC00; text-shadow: -1px 0 #996600, 0 1px #996600, 1px 0 #996600, 0 -1px #996600; padding-top:130px; padding-bottom:5%;">
+				<div class="col-sm-12">
 					<h1 align="center" style="font-size:60px; letter-spacing:60px">
 						<strong>&nbsp;<%=request.getAttribute("categoryName")%></strong>
 					</h1>
 					<h4 align="center"><%=request.getAttribute("categoryName")%> 유투버들의 편집 영상입니다.</h4>
-					<div id="deleteOK" class="alert alert-danger hidden" role="alert" style="visibility: hidden">글이 삭제되었습니다.</div>
 				</div>
 			</div>
 		</c:when>
 		<c:when test="${ categoryName eq '모터'}">
-			<div style="background-image:url('/resources/images/videoList/motor.jpg'); background-position:70% 50%; font-family: 'Do Hyeon', sans-serif; color:white; text-shadow: -1px 0 #990033, 0 1px #990033, 1px 0 #990033, 0 -1px #990033; padding-top:130px; padding-bottom:1%;">
-				<div class="col-sm-10">
+			<div style="background-image:url('/resources/images/videoList/motor.jpg'); background-position:70% 50%; font-family: 'Do Hyeon', sans-serif; color:white; text-shadow: -1px 0 #990033, 0 1px #990033, 1px 0 #990033, 0 -1px #990033; padding-top:130px; padding-bottom:5%;">
+				<div class="col-sm-12">
 					<h1 align="center" style="font-size:60px; letter-spacing:60px">
 						<strong>&nbsp;<%=request.getAttribute("categoryName")%></strong>
 					</h1>
 					<h4 align="center"><%=request.getAttribute("categoryName")%> 유투버들의 편집 영상입니다.</h4>
-					<div id="deleteOK" class="alert alert-danger hidden" role="alert" style="visibility: hidden">글이 삭제되었습니다.</div>
 				</div>
 			</div>
 		</c:when>
 		<c:when test="${ categoryName eq '스포츠'}">
-			<div style="background-image:url('/resources/images/videoList/sports.jpg'); background-position:50% 75%; font-family: 'Black Han Sans', sans-serif; color:white; text-shadow: -2px 0 #51A149, 0 2px #51A149, 2px 0 #51A149, 0 -2px #51A149; padding-top:130px; padding-bottom:1%;">
-				<div class="col-sm-10">
+			<div style="background-image:url('/resources/images/videoList/sports.jpg'); background-position:50% 75%; font-family: 'Black Han Sans', sans-serif; color:white; text-shadow: -2px 0 #51A149, 0 2px #51A149, 2px 0 #51A149, 0 -2px #51A149; padding-top:130px; padding-bottom:5%;">
+				<div class="col-sm-12">
 					<h1 align="center" style="font-size:60px; letter-spacing:60px">
 						<strong>&nbsp;<%=request.getAttribute("categoryName")%></strong>
 					</h1>
 					<h4 align="center"><%=request.getAttribute("categoryName")%> 유투버들의 편집 영상입니다.</h4>
-					<div id="deleteOK" class="alert alert-danger hidden" role="alert" style="visibility: hidden">글이 삭제되었습니다.</div>
 				</div>
 			</div>
 		</c:when>
 		<c:when test="${ categoryName eq '예능'}">
-			<div style="background-image:url('/resources/images/videoList/entertainment.jpg'); background-position:50% 50%; background-size:100%; font-family: 'Cute Font', sans-serif; color:white;  text-shadow: -1px 0 #339966, 0 1px #339966, 1px 0 #339966, 0 -1px #339966; padding-top:130px; padding-bottom:1%;">
-				<div class="col-sm-10">
+			<div style="background-image:url('/resources/images/videoList/entertainment.jpg'); background-position:50% 50%; background-size:100%; font-family: 'Cute Font', sans-serif; color:white;  text-shadow: -1px 0 #339966, 0 1px #339966, 1px 0 #339966, 0 -1px #339966; padding-top:130px; padding-bottom:5%;">
+				<div class="col-sm-12">
 					<h1 align="center" style="font-size:60px; letter-spacing:60px">
 						<strong>&nbsp;<%=request.getAttribute("categoryName")%></strong>
 					</h1>
 					<h3 align="center"><%=request.getAttribute("categoryName")%> 유투버들의 편집 영상입니다.</h3>
-					<div id="deleteOK" class="alert alert-danger hidden" role="alert" style="visibility: hidden">글이 삭제되었습니다.</div>
 				</div>
 			</div>
 		</c:when>
 		<c:otherwise>
-			<div style="background-color: #C8C8C8; font-family: 'Do Hyeon', sans-serif; padding-top:130px; padding-bottom:1%;">
-				<div class="col-sm-10">
+			<div style="background-color: #C8C8C8; font-family: 'Do Hyeon', sans-serif; padding-top:130px; padding-bottom:5%;">
+				<div class="col-sm-12">
 					<h1 align="center" style="font-size:60px; letter-spacing:60px">
 						<strong>&nbsp;<%=request.getAttribute("categoryName")%></strong>
 					</h1>
 					<h5 align="center"><%=request.getAttribute("categoryName")%> 유투버들의 편집 영상입니다.</h5>
-					<div id="deleteOK" class="alert alert-danger hidden" role="alert" style="visibility: hidden">글이 삭제되었습니다.</div>
 				</div>
 			</div>
 		</c:otherwise>
 	</c:choose>
+	<div id="deleteOK" class="alert alert-danger hidden" role="alert" style="visibility: hidden">글이 삭제되었습니다.</div>
 
 	<jsp:include page="../module/ListAside.jsp" flush="false" />
 	<div class="container" style="background-color: #E8E8E8 ;">

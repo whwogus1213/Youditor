@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ page session="true"%>
 <!DOCTYPE html>
 <html>
@@ -158,7 +159,7 @@
 								<div class="col-sm-7" align="right" style="padding: 0px;">
 									<div class="dropright">
 										<a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="cursor: pointer">
-										<img src="<spring:url value='/image/${NoticeBoardList.picture}'/>" class=" mx-auto rounded-circle" width="20px" height="20px"/>&nbsp;${NoticeBoardList.nickname}<br>
+											<img src="<spring:url value='/image/${NoticeBoardList.picture}'/>" class=" mx-auto rounded-circle" width="20px" height="20px"/>&nbsp;${NoticeBoardList.nickname}<br>
 										</a>
 										<div class="dropdown-menu">
 											<a class="dropdown-item" href="/noticeboard/noticeBoardList?searchType=nickname&keyword=${NoticeBoardList.nickname}">
