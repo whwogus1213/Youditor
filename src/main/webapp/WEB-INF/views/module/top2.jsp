@@ -244,6 +244,7 @@ function DosignUp() {
 }
 </script>
 
+<script src="https://kit.fontawesome.com/e83fabbb47.js"></script>
 
 <!-- Trigger the modal with a button -->
 <!-- Modal -->
@@ -332,56 +333,117 @@ function DosignUp() {
 				<li class="nav-item">
 					<a class="nav-link" href="/"><strong>홈</strong></a>
 				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="/noticeboard/noticeBoardList"><strong>공지</strong></a>
-				</li>
 				<li class="nav-item topMenuLi">
-					<a class="nav-link" href="#"><strong>카테고리</strong></a>
+					<a class="nav-link" href="/noticeboard/noticeBoardList"><strong>공지</strong></a>
 					<ul class="submenu category">
 						<li>|</li>
-						<li><a class="submenuLink" href="/videoboard/videoBoardList?category=0">전체</a></li>
-						<li>|</li>
-						<li><a class="submenuLink" href="/videoboard/videoBoardList?category=1">게임</a></li>
-						<li>|</li>
-						<li><a class="submenuLink" href="/videoboard/videoBoardList?category=2">먹방</a></li>
-						<li>|</li>
-						<li><a class="submenuLink" href="/videoboard/videoBoardList?category=3">일상</a></li>
-						<li>|</li>
-						<li><a class="submenuLink" href="/videoboard/videoBoardList?category=4">모터</a></li>
-						<li>|</li>
-						<li><a class="submenuLink" href="/videoboard/videoBoardList?category=5">스포츠</a></li>
-						<li>|</li>
-						<li><a class="submenuLink" href="/videoboard/videoBoardList?category=6">예능</a></li>
-						<li>|</li>
+						<c:forEach items="${nCatList}" var="nCatList">
+							<c:choose>
+								<c:when test="${nCatList.viewAuthority == 3 }">
+									<li><a class="submenuLink" href="/noticeboard/noticeBoardList?category=${nCatList.categoryId }">${nCatList.categoryName }</a></li>
+									<li>|</li>
+								</c:when>
+								<c:when test="${login.authority >= nCatList.viewAuthority }">
+									<li><a class="submenuLink" href="/noticeboard/noticeBoardList?category=${nCatList.categoryId }">${nCatList.categoryName }</a></li>
+									<li>|</li>
+								</c:when>
+							</c:choose>
+						</c:forEach>
 					</ul>
 				</li>
-				<li class="nav-item">
-					<c:if test="${login.accountId eq null }">
+				<li class="nav-item topMenuLi">
+					<a class="nav-link" href="/videoboard/videoBoardList"><strong>영상공유</strong></a>
+					<ul class="submenu category">
+						<li>|</li>
+						<c:forEach items="${vCatList}" var="vCatList">
+							<c:choose>
+								<c:when test="${vCatList.viewAuthority == 3 }">
+									<li><a class="submenuLink" href="/videoboard/videoBoardList?category=${vCatList.categoryId }">${vCatList.categoryName }</a></li>
+									<li>|</li>
+								</c:when>
+								<c:when test="${login.authority >= vCatList.viewAuthority }">
+									<li><a class="submenuLink" href="/videoboard/videoBoardList?category=${vCatList.categoryId }">${vCatList.categoryName }</a></li>
+									<li>|</li>
+								</c:when>
+							</c:choose>
+						</c:forEach>
+					</ul>
+				</li>
+				<li class="nav-item topMenuLi">
+					<c:if test="${login eq null }">
 						<a class="nav-link" data-toggle="modal" data-target="#myModal" href="#myModal"><strong>팁</strong></a>
+						<ul class="submenu category">
+							<li>|</li>
+							<c:forEach items="${tCatList}" var="tCatList">
+								<c:choose>
+									<c:when test="${tCatList.viewAuthority == 3 }">
+										<li><a class="submenuLink" data-toggle="modal" data-target="#myModal" href="#myModal">${tCatList.categoryName }</a></li>
+										<li>|</li>
+									</c:when>
+									<c:when test="${login.authority >= tCatList.viewAuthority }">
+										<li><a class="submenuLink" data-toggle="modal" data-target="#myModal" href="#myModal">${tCatList.categoryName }</a></li>
+										<li>|</li>
+									</c:when>
+								</c:choose>
+							</c:forEach>
+						</ul>
 					</c:if>
-					<c:if test="${login.accountId ne null }">
+					<c:if test="${login ne null }">
 						<a class="nav-link" href="/tipboard/tipBoardList"><strong>팁</strong></a>
+						<ul class="submenu category">
+							<li>|</li>
+							<c:forEach items="${tCatList}" var="tCatList">
+								<c:choose>
+									<c:when test="${vCatList.viewAuthority == 3 }">
+										<li><a class="submenuLink" href="/tipboard/tipBoardList?category=${tCatList.categoryId }">${tCatList.categoryName }</a></li>
+										<li>|</li>
+									</c:when>
+									<c:when test="${login.authority >= tCatList.viewAuthority }">
+										<li><a class="submenuLink" href="/tipboard/tipBoardList?category=${tCatList.categoryId }">${tCatList.categoryName }</a></li>
+										<li>|</li>
+									</c:when>
+								</c:choose>
+							</c:forEach>
+						</ul>
 					</c:if>
 				</li>
 				<li class="nav-item topMenuLi">
-					<a class="nav-link" href="#"><strong>구인구직</strong></a>
-					<ul class="submenu hire">
-						<li>|</li>
-						<c:if test="${login.accountId ne null }">
-						<li><a class="submenuLink" href="/recruitboard/recruitBoardList?categoryId=1">구인</a></li>
-						</c:if>
-						<c:if test="${login.accountId eq null }">
-							<li><a class="submenuLink" data-toggle="modal" data-target="#myModal" href="#myModal"><strong>구인</strong></a></li>
-						</c:if>
-						<li>|</li>
-						<c:if test="${login.accountId ne null }">
-						<li><a class="submenuLink" href="/recruitboard/recruitBoardList?categoryId=2">구직</a></li>
-						</c:if>
-						<c:if test="${login.accountId eq null }">
-							<li><a class="submenuLink" data-toggle="modal" data-target="#myModal" href="#myModal"><strong>구직</strong></a></li>
-						</c:if>
-						<li>|</li>
-					</ul>
+					<c:if test="${login eq null }">
+						<a class="nav-link" data-toggle="modal" data-target="#myModal" href="#myModal"><strong>구인구직</strong></a>
+						<ul class="submenu category">
+							<li>|</li>
+							<c:forEach items="${rCatList}" var="rCatList">
+								<c:choose>
+									<c:when test="${rCatList.viewAuthority == 3 }">
+										<li><a class="submenuLink" data-toggle="modal" data-target="#myModal" href="#myModal">${rCatList.categoryName }</a></li>
+										<li>|</li>
+									</c:when>
+									<c:when test="${login.authority >= rCatList.viewAuthority }">
+										<li><a class="submenuLink" data-toggle="modal" data-target="#myModal" href="#myModal">${rCatList.categoryName }</a></li>
+										<li>|</li>
+									</c:when>
+								</c:choose>
+							</c:forEach>
+						</ul>
+					</c:if>
+					<c:if test="${login ne null }">
+						<a class="nav-link" href="/recruitboard/recruitBoardList"><strong>구인구직</strong></a>
+						<ul class="submenu category">
+							<li>|</li>
+							<c:forEach items="${rCatList}" var="rCatList">
+								<c:choose>
+									<c:when test="${rCatList.viewAuthority == 3 }">
+										<li><a class="submenuLink" href="/recruitboard/recruitBoardList?category=${rCatList.categoryId }">${rCatList.categoryName }</a></li>
+										<li>|</li>
+									</c:when>
+									<c:when test="${login.authority >= tCatList.viewAuthority }">
+										<li><a class="submenuLink" href="/recruitboard/recruitBoardList?category=${rCatList.categoryId }">${rCatList.categoryName }</a></li>
+										<li>|</li>
+									</c:when>
+								</c:choose>
+							</c:forEach>
+						</ul>
+					</c:if>
 				</li>
 			</ul>
 			<ul class="navbar-nav ml-auto">

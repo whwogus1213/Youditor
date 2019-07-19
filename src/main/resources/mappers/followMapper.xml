@@ -7,20 +7,46 @@
 
 	<!-- 팔로잉 -->
 	<select id="followingList" resultType="FollowListVO" parameterType="int">
-		select *
-		from accounts acc, followlist fol
-		where acc.accountId = fol.followAccountId
-		and fol.followerAccountId = #{followerAccountId}
-		order by fol.reg_date desc
+	SELECT
+		fo.followAccountId, fo.followerAccountId, ac.nickname
+	FROM
+		followlist as fo
+	JOIN
+		accounts as ac
+	ON
+		fo.followAccountId = ac.accountId
+	WHERE
+		fo.followerAccountId = #{accountId}
+	ORDER BY
+		fo.reg_date DESC
     </select>
 
 	<!-- 팔로워 -->
 	<select id="followerList" resultType="FollowListVO" parameterType="int">
-		select *
-		from accounts acc, followlist fol
-		where acc.accountId = fol.followerAccountId
-		and fol.followAccountId = #{followAccountId}
-		order by fol.reg_date desc
+	SELECT
+		fo.followAccountId, fo.followerAccountId, ac.nickname
+	FROM
+		followlist as fo
+	JOIN
+		accounts as ac
+	ON
+		fo.followAccountId = ac.accountId
+	WHERE
+		fo.followAccountId = #{accountId}
+	ORDER BY
+		fo.reg_date DESC
+    </select>
+    
+    <!-- 맛팔 체크 -->
+    <select id="followEachOtherCheck" parameterType="FollowListVO" resultType="int">
+    SELECT
+    	count(*)
+    FROM
+    	followlist
+    WHERE
+    	followAccountId = #{followAccountId}
+    	AND
+    	followerAccountId = #{followerAccountId}
     </select>
 
 	<!-- 팔로잉 추가 -->

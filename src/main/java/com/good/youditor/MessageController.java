@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.good.dto.MessageVO;
 import com.good.dto.AccountsVO;
+import com.good.dto.FollowListVO;
 import com.good.dto.MessageList;
 import com.good.dto.MessageSearch;
+import com.good.service.HomeService;
 import com.good.service.MessageService;
 
 @Controller
@@ -24,6 +26,9 @@ public class MessageController {
 	
 	@Inject
 	MessageService service;
+	
+	@Inject
+	HomeService homeService;
 	
 	// 받은 메세지 목록 + 페이징 + 검색
 	@RequestMapping(value = "/messageReceiveList", method = RequestMethod.GET)
@@ -38,6 +43,16 @@ public class MessageController {
 		AccountsVO vo = (AccountsVO) session.getAttribute("login");
 		search.setAccountId(vo.getAccountId());
 		List<MessageList> messageReceiveList = service.receiveListAll(search);
+		
+		int mCount = 0;
+		if(vo != null) {
+			int accountId = vo.getAccountId();
+			
+			mCount = homeService.newMessageCnt(accountId);
+			
+			session.setAttribute("mCount", mCount);
+		}
+		
 		
 		// 전체 게시글 개수
 		int listCnt = service.getReceiveListCnt(search);
