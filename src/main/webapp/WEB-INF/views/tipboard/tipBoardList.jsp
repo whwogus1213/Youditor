@@ -217,7 +217,7 @@ footer{
 				<div class="col-2" align="right" style="padding-left: 0px; padding-right: 5px;">
 					<c:if test="${login.authority >= 3 }">
 						<button type="button" class="btn btn-sm"
-							onclick="location.href='/noticeboard/write.do' " style="background-color: #2ecc71; color: white;">글쓰기</button>
+							onclick="location.href='/tipboard/write.do' " style="background-color: #2ecc71; color: white;">글쓰기</button>
 					</c:if>
 				</div>
 			</div>
