@@ -134,10 +134,10 @@
 							<div class="card-header" onclick="location.href='/noticeboard/noticeBoardView?boardId=${NoticeBoardList.boardId}'"
 								style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; width: 100%; height: 50px; cursor: pointer;">
 								<c:if test="${NoticeBoardList.categoryName == '공지'}">
-									<i class="fas fa-exclamation"></i>&nbsp;[${NoticeBoardList.categoryName}]
+									<strong><i class="fas fa-exclamation"></i>&nbsp;[${NoticeBoardList.categoryName}]</strong>
 								</c:if>
 								<c:if test="${NoticeBoardList.categoryName == '이벤트'}">
-									<i class="fas fa-gift"></i>&nbsp;[${NoticeBoardList.categoryName}]
+									<strong><i class="fas fa-gift"></i>&nbsp;[${NoticeBoardList.categoryName}]</strong>
 								</c:if>
 								No.${NoticeBoardList.boardId}&nbsp;${NoticeBoardList.subject}
 							</div>
@@ -162,7 +162,7 @@
 										</a>
 										<div class="dropdown-menu">
 											<a class="dropdown-item" href="/noticeboard/noticeBoardList?searchType=nickname&keyword=${NoticeBoardList.nickname}">
-												<i class="fab fa-file-alt"></i>&nbsp;&nbsp;게시물 더보기
+												<i class="far fa-file-alt" style="width: 20; height: 20"></i>&nbsp;&nbsp;게시물 더보기
 											</a>
 											<a class="dropdown-item" href="#">
 												<i class="far fa-envelope"></i>&nbsp;&nbsp;쪽지 보내기
