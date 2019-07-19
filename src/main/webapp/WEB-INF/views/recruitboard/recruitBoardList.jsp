@@ -160,6 +160,7 @@ footer{
 						</td>
 						<td class="dropright">						
 							<a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="cursor:pointer">
+								<img src="<spring:url value='/image/${RecruitBoardList.picture}'/>" class=" mx-auto rounded-circle" width="20px" height="20px"/>
 								${RecruitBoardList.nickname}
 							</a>
 							<div class="dropdown-menu">
