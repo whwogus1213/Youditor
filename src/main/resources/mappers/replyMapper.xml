@@ -14,7 +14,8 @@
 
 	<!-- 선택한 댓글에 대댓글이 있는지 없는지 체크 -->
 	<select id="isReReply" resultType="int" parameterType="ReplyVO">
-        SELECT EXISTS (select * from ${boardClass} where boardId = #{boardId} and replyCommentId = #{commentId} ) as rec
+<!--         SELECT EXISTS (select * from ${boardClass} where boardId = #{boardId} and replyCommentId = #{commentId} ) as rec -->
+        select count(*) from ${boardClass} where boardId = #{boardId} and replyCommentId = #{commentId}
         
     </select>
     

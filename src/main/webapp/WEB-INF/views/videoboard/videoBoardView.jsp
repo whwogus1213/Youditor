@@ -17,6 +17,7 @@
 <link href="/resources/vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
 <link href="/resources/vendor/bootstrap/css/bootstrap-grid.min.css" rel="stylesheet">
 <script src="/resources/js/jquery-3.3.1.min.js"></script>
+<script src="/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="https://kit.fontawesome.com/e83fabbb47.js"></script>
 <style>
 i {
@@ -57,10 +58,6 @@ i {
 }
 </style>
 <script type="text/javascript">
-	$('.dropdown').on('mouseenter mouseleave click tap', function() {
-	  $(this).toggleClass("open");
-	});
-
 	/* 평가 점수(1~5) 전역변수  */
 	var star=-1;
 	var star_db;
@@ -369,7 +366,7 @@ i {
 			<div id="followDiv" style="padding-top: 1px;"></div>
 		</div>
 		<br>
-		<h6>${row.footer }</h6>
+		<h6>${row.footer}</h6>
 		<hr>
 	</div>
 	

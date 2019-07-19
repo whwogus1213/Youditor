@@ -178,9 +178,9 @@ footer{
 
 
 		<!-- 페이징 검색 시작 -->
-		<div class="row">
+		<div class="col-12">
 			<!-- 페이징 -->
-			<div class="p1 pagination col-4">
+			<div class="p1 pagination col-12">
 				<ul>
 					<c:if test="${pagination.prev}">
 						<a href="#" onClick="fn_prev('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}',
@@ -200,7 +200,7 @@ footer{
 			<!-- 페이징 -->
 
 			<!-- 검색 -->
-			<div class="input-group col-8" style="padding-top: 6px;" align="right">
+			<div class="input-group col-12" style="padding-top: 6px;" align="right">
 				<div class="col-3" align="right" style="padding-right: 0px;">
 					<select class="form-control form-control-sm" name="searchType"
 						id="searchType" style="width: 66.6%">

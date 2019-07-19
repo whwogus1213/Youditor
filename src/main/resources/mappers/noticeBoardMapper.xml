@@ -7,7 +7,7 @@
 	<!-- 게시물 목록 + 페이징 + 검색 -->
 	<select id="listAll" resultType="NoticeBoardVO">
 		SELECT boardId, b.accountId, subject, object,
-			CONVERT_TZ(b.reg_date,'+09:00','+00:00') as reg_date, CONVERT_TZ(b.mod_date,'+09:00','+00:00') as mod_date, viewCount, nickname, categoryName 
+			CONVERT_TZ(b.reg_date,'+09:00','+00:00') as reg_date, CONVERT_TZ(b.reg_date,'+09:00','+00:00') as reg_date, CONVERT_TZ(b.mod_date,'+09:00','+00:00') as mod_date, viewCount, nickname, categoryName, picture  
 			FROM noticeboard b join accounts a on b.accountId = a.accountId
 							   join noticecategory c on b.categoryId=c.categoryId
 		<trim prefix="WHERE" prefixOverrides="AND|OR">
@@ -20,6 +20,9 @@
 			<if test="searchType=='nickname' and keyword != null and keyword != '' ">
 				AND nickname like CONCAT('%', #{keyword}, '%')
 			</if>
+			<if test="categoryId > 0">
+				AND b.categoryId = #{categoryId}
+			</if>
 		</trim>
 		order by boardId desc
 		LIMIT #{startList}, #{listSize}
@@ -28,16 +31,13 @@
 	<!-- 게시물 조회 -->
 	<select id="view" parameterType="int" resultType="NoticeBoardVO">
 		SELECT
-			boardId, n.accountId, nickname, categoryId, subject, object, n.reg_date, n.mod_date, viewCount 
+			boardId, n.accountId, nickname, n.categoryId, subject, object, n.reg_date, n.mod_date, viewCount, categoryName, a.picture
 		FROM
-			noticeboard as n
-		JOIN
-			accounts as a
-		ON
-			n.accountId = a.accountId
+			noticeboard as n JOIN accounts as a ON n.accountId = a.accountId
+							JOIN noticecategory c on n.categoryId = c.categoryId
 		WHERE
 			boardId = #{boardId}
-	</select>
+	</select>	
 
 	<!-- 게시물 총 갯수 구하기 -->
 	<select id="getBoardListCnt" resultType="int">
@@ -73,10 +73,16 @@
     </insert>
 
     <!-- 글 수정 -->
-	 <update id="updateNoticeBoard">
-		update noticeBoard
-		set subject = #{subject}, object = #{object}
-		where boardId = #{boardId}
+	 <update id="updateNoticeBoard" parameterType="NoticeBoardVO">
+		UPDATE
+			noticeboard
+		SET
+			categoryId= #{categoryId},
+			subject = #{subject},
+			object = #{object},
+			mod_date = now()
+		WHERE
+			boardId = #{boardId}
 	 </update>
 
  	<!-- 글 삭제 -->
