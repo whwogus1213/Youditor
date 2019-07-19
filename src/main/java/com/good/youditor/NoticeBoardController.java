@@ -78,17 +78,34 @@ public class NoticeBoardController {
 
 	// 글작성 완료
 	@RequestMapping(value = "/insertNoticeBoardPro", method = RequestMethod.POST)
-	public String insertNoticeBoardPro(NoticeBoardVO vo) throws Exception {
+	public String insertNoticeBoardPro(@RequestParam("boardId") int boardId,
+										@RequestParam("categoryId") int categoryId,
+										@RequestParam("subject") String subject,
+										@RequestParam("object") String object) throws Exception {
 		System.out.println("============insertNoticeBoardPro 성공==============");
-		System.out.println(vo);
+		NoticeBoardVO vo = new NoticeBoardVO();
+		vo.setBoardId(boardId);
+		vo.setCategoryId(categoryId);
+		vo.setSubject(subject);
+		vo.setObject(object);
+		
 		noticeBoardService.insertNoticeBoard(vo);
 
 		return "redirect:/noticeboard/noticeBoardList";
 
 	}
 	// 글 수정
-	@RequestMapping(value = "/updateNoticeBoardPro")
-	public String updateNoticeBoardPro(NoticeBoardVO vo) throws Exception {
+	@RequestMapping(value = "/updateNoticeBoardPro", method = RequestMethod.POST)
+	public String updateNoticeBoardPro(@RequestParam("boardId") int boardId,
+										@RequestParam("categoryId") int categoryId,
+										@RequestParam("subject") String subject,
+										@RequestParam("object") String object) throws Exception {
+		NoticeBoardVO vo = new NoticeBoardVO();
+		vo.setBoardId(boardId);
+		vo.setCategoryId(categoryId);
+		vo.setSubject(subject);
+		vo.setObject(object);
+		
 		noticeBoardService.updateNoticeBoard(vo);
 		System.out.println("============ updateNoticeBoard 성공==============");
 		return "redirect:/noticeboard/noticeBoardList";

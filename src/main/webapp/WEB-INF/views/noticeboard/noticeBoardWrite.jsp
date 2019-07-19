@@ -30,6 +30,7 @@
 	        		<c:choose>
 	        			<c:when test="${row ne null }">
 	        				<input type="text" class="form-control" name="subject" id="subject" maxlength="50" value="${row.subject }" placeholder="Enter Title">
+	        				<input type="hidden" name="boardId" id="boardId" value="${row.boardId }">
 	        			</c:when>
 	        			<c:otherwise>
 	        				<input type="text" class="form-control" name="subject" id="subject" maxlength="50" placeholder="Enter Title">

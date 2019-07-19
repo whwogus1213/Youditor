@@ -188,7 +188,6 @@ function getCommentList(){
         	               }
     	               
     	               html += list_template.html();
-    	               console.log("$$$"+html);
     	               html += "<div class='col-11 offset-1' id=rereplyDiv"+data[i].commentId+">";
                        html += "</div>";
                        
