@@ -360,9 +360,10 @@
 						'${pagination.searchType}', '${pagination.keyword}')"><li><</li></a>
 					</c:if>
 					<c:forEach begin="${pagination.startPage}" end="${pagination.endPage}" var="idx">
-						<a class="<c:out value="${pagination.page == idx ? 'is-active' : ''}"/>" href="#" onClick="fn_pagination('${idx}', '${pagination.range}', '${pagination.rangeSize}',
-						'${pagination.searchType}', '${pagination.keyword}')">
-							<li>${idx}</li></a>
+						<a class="<c:out value="${pagination.page == idx ? 'is-active' : ''}"/>" href="#"
+						onClick="fn_pagination('${idx}', '${pagination.range}', '${pagination.rangeSize}', '${pagination.categoryId}', 
+						'${pagination.searchType}', '${pagination.keyword}')"><li>${idx}</li></a>
+						
 					</c:forEach>
 					<c:if test="${pagination.next}">
 						<a href="#" onClick="fn_next('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}',
@@ -393,7 +394,7 @@
 				<div class="col-2" align="right" style="padding-left: 0px; padding-right: 5px;">
 					<c:if test="${login.authority >= 3 }">
 						<button type="button" class="btn btn-sm"
-							onclick="location.href='/noticeboard/write.do' " style="background-color: #2ecc71; color: white;">글쓰기</button>
+							onclick="location.href='/videoboard/write.do' " style="background-color: #2ecc71; color: white;">글쓰기</button>
 					</c:if>
 				</div>
 			</div>
