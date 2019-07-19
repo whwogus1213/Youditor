@@ -1,5 +1,6 @@
 package com.good.youditor;
 
+import java.util.List;
 import java.util.Locale;
 
 import javax.inject.Inject;
@@ -9,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -117,5 +119,15 @@ public class TipBoardController {
 		System.out.println("============ deleteVideoBoard 성공==============");
 
 		return "redirect:/tipboard/tipBoardList";
+	}
+	
+	// 최신 게시물 목록
+	@ResponseBody
+	@RequestMapping(value = "/newTip", method = {RequestMethod.GET,RequestMethod.POST})
+	public List<TipBoardVO> newList() throws Exception {
+		System.out.println("Start tipBoard List");
+		List<TipBoardVO> newList = tipBoardService.newList();
+		System.out.println("newList : " + newList);
+		return newList;
 	}
 }

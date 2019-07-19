@@ -1,6 +1,5 @@
 package com.good.dao;
 
-import java.sql.ResultSet;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -71,6 +70,11 @@ public class AccountsDAOImpl implements AccountsDAO {
 	@Override
 	public int insertAccount(AccountsVO vo) throws Exception {
 		return sqlSession.insert(NAMESPACE + ".insertAccount", vo);
+	}
+	
+	@Override
+	public void loginDate(AccountsVO vo) throws Exception {
+		sqlSession.update(NAMESPACE + ".loginDate", vo);
 	}
 
 }

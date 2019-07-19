@@ -38,12 +38,12 @@ li {
     border-color: rgb(147, 97, 197, 0.5);
 	}
 .aside {
-	margin: 20px 20px 20px 10px;
+	margin: 60px 20px 20px 0;
 	width: 200px;
 	height: 325px;
 	float: left;    
 	border: 1px solid #EAEAEA;
-    background: #FFF;
+    background: #f9fdfd;
 	}
 .tab_item1 {
 	display: none;
@@ -82,19 +82,16 @@ li {
 #best3:checked ~ .tab_item3 { display: block; }
 #best4:checked ~ .tab_item4 { display: block; }
 
-		.table .thead-dark th {
-		    color: rgb(255, 255, 255);
-		    background-color: rgb(52, 61, 70);
-		}
 		label {
 	    	text-align: center;
 		}
 		
 .table .thead-dark th {
+		    color: rgb(255, 255, 255);
     vertical-align: bottom;
-    background-color: #FFF;
+    background-color: #f9fdfd;
     border-bottom: 0 solid #dee2e6;
-    border-color: #FFF;
+    border-color: #f9fdfd;
 }
 		.table {
 	    margin-bottom: 0rem;
@@ -271,7 +268,7 @@ li {
 
 		//스크롤 이벤트가 발생하면
 		$(window).scroll(function() {
-			yPosition = $win.scrollTop() + 100; //이부분을 조정해서 화면에 보이도록 맞추세요
+			yPosition = $win.scrollTop() - 180; //이부분을 조정해서 화면에 보이도록 맞추세요
 			if (yPosition < 0) {
 				yPosition = 0;
 			}

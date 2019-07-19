@@ -26,6 +26,8 @@
 				</tbody>
 			</table>
 		</form>
+		<button type="button" class="nav-link button-style1" data-toggle="modal" 
+					data-target="#myModal">로그인</button>
 	</div>
 	<jsp:include page="../module/bottom.jsp" flush="false"/>
 </body>

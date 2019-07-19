@@ -13,13 +13,15 @@
 </head>
 <body>
 	<jsp:include page="../module/top2.jsp" flush="false"/>
+	
+	<!-- 배너 -->
 	<div class="form-group">
-		<div class="col-sm-12">
-			<h2 align="center">&nbsp;</h2>
-			<h2 align="center">구인 구직 올리기</h2>
-			<h2 align="center">&nbsp;</h2>
+		<div class="col-sm-12" style="background-image:url('/resources/images/recruit/recruit.jpg'); background-position:50% 60%; background-size:100%; font-family: 'Song Myung', sans-serif; color:white; text-shadow: -1px 0 LightPink, 0 1px LightPink, 1px 0 LightPink, 0 -1px LightPink; padding-top:130px; padding-bottom:5%">
+			<h1 align="center" style="font-size:50px; letter-spacing:10px"><strong>구인/구직</strong></h1>
+			<h4 align="center"><br>당신의 파트너가 될 YouditoR가 있습니다.</h4>
 		</div>
 	</div>
+	
 	<div class="container">
 	    <form class="form-horizontal" method="post" action=" ${path}/recruitboard/insertRecruitBoardPro">
 	    	<div class="form-inline">
