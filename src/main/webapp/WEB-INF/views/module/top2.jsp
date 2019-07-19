@@ -351,17 +351,15 @@ function DosignUp() {
 						<c:forEach items="${nCatList}" var="nCatList">
 							<c:choose>
 								<c:when test="${nCatList.viewAuthority == 3 }">
-									<li><a style="font-size: 1em; margin: 0px 10px;" class="submenuLink" href="/noticeboard/noticeBoardList?category=${nCatList.categoryId }">${nCatList.categoryName }</a></li>
+									<li><a style="font-size: 1em; margin: 0px 10px;" class="submenuLink" href="/noticeboard/noticeBoardList?categoryId=${nCatList.categoryId }">${nCatList.categoryName }</a></li>
 <!-- 									<li>|</li> -->
 								</c:when>
 								<c:when test="${login.authority >= nCatList.viewAuthority }">
-									<li><a style="font-size: 1em; margin: 0px 10px;" class="submenuLink" href="/noticeboard/noticeBoardList?category=${nCatList.categoryId }">${nCatList.categoryName }</a></li>
+									<li><a style="font-size: 1em; margin: 0px 10px;" class="submenuLink" href="/noticeboard/noticeBoardList?categoryId=${nCatList.categoryId }">${nCatList.categoryName }</a></li>
 <!-- 									<li>|</li> -->
 								</c:when>
 							</c:choose>
 						</c:forEach>
-						<li><a style="font-size: 1em; margin: 0px 10px;" class="submenuLink" href="">공지</a></li>
-						
 					</ul>
 				</li>
 				<li class="nav-item topMenuLi">
@@ -371,11 +369,11 @@ function DosignUp() {
 						<c:forEach items="${vCatList}" var="vCatList">
 							<c:choose>
 								<c:when test="${vCatList.viewAuthority == 3 }">
-									<li><a style="font-size: 1em; margin: 0px 10px;" class="submenuLink" href="/videoboard/videoBoardList?category=${vCatList.categoryId }">${vCatList.categoryName }</a></li>
+									<li><a style="font-size: 1em; margin: 0px 10px;" class="submenuLink" href="/videoboard/videoBoardList?categoryId=${vCatList.categoryId }">${vCatList.categoryName }</a></li>
 <!-- 									<li>|</li> -->
 								</c:when>
 								<c:when test="${login.authority >= vCatList.viewAuthority }">
-									<li><a style="font-size: 1em; margin: 0px 10px;" class="submenuLink" href="/videoboard/videoBoardList?category=${vCatList.categoryId }">${vCatList.categoryName }</a></li>
+									<li><a style="font-size: 1em; margin: 0px 10px;" class="submenuLink" href="/videoboard/videoBoardList?categoryId=${vCatList.categoryId }">${vCatList.categoryName }</a></li>
 <!-- 									<li>|</li> -->
 								</c:when>
 							</c:choose>
@@ -408,11 +406,11 @@ function DosignUp() {
 							<c:forEach items="${tCatList}" var="tCatList">
 								<c:choose>
 									<c:when test="${tCatList.viewAuthority == 3 }">
-										<li><a style="font-size: 1em; margin: 0px 10px;" class="submenuLink" href="/tipboard/tipBoardList?category=${tCatList.categoryId }">${tCatList.categoryName }</a></li>
+										<li><a style="font-size: 1em; margin: 0px 10px;" class="submenuLink" href="/tipboard/tipBoardList?categoryId=${tCatList.categoryId }">${tCatList.categoryName }</a></li>
 <!-- 										<li>|</li> -->
 									</c:when>
 									<c:when test="${login.authority >= tCatList.viewAuthority }">
-										<li><a style="font-size: 1em; margin: 0px 10px;" class="submenuLink" href="/tipboard/tipBoardList?category=${tCatList.categoryId }">${tCatList.categoryName }</a></li>
+										<li><a style="font-size: 1em; margin: 0px 10px;" class="submenuLink" href="/tipboard/tipBoardList?categoryId=${tCatList.categoryId }">${tCatList.categoryName }</a></li>
 <!-- 										<li>|</li> -->
 									</c:when>
 								</c:choose>
@@ -446,11 +444,11 @@ function DosignUp() {
 							<c:forEach items="${rCatList}" var="rCatList">
 								<c:choose>
 									<c:when test="${rCatList.viewAuthority == 3 }">
-										<li><a style="font-size: 1em; margin: 0px 10px;" class="submenuLink" href="/recruitboard/recruitBoardList?category=${rCatList.categoryId }">${rCatList.categoryName }</a></li>
+										<li><a style="font-size: 1em; margin: 0px 10px;" class="submenuLink" href="/recruitboard/recruitBoardList?categoryId=${rCatList.categoryId }">${rCatList.categoryName }</a></li>
 <!-- 										<li>|</li> -->
 									</c:when>
 									<c:when test="${login.authority >= rCatList.viewAuthority }">
-										<li><a style="font-size: 1em; margin: 0px 10px;" class="submenuLink" href="/recruitboard/recruitBoardList?category=${rCatList.categoryId }">${rCatList.categoryName }</a></li>
+										<li><a style="font-size: 1em; margin: 0px 10px;" class="submenuLink" href="/recruitboard/recruitBoardList?categoryId=${rCatList.categoryId }">${rCatList.categoryName }</a></li>
 <!-- 										<li>|</li> -->
 									</c:when>
 								</c:choose>
