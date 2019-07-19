@@ -17,6 +17,7 @@
 <link href="/resources/vendor/bootstrap/css/bootstrap-grid.min.css" rel="stylesheet">
 <script src="/resources/js/jquery-3.3.1.min.js"></script>
 <script src="https://kit.fontawesome.com/e83fabbb47.js"></script>
+<jsp:include page="../module/header.jsp" flush="false" />
 </head>
 <body>
 	<jsp:include page="../module/top2.jsp" flush="false"/>
@@ -42,15 +43,18 @@
 			});
 		});
 	</script>
-		<br>
-		<h1>[${row.categoryName}] ${row.subject }</h1>
-		
+		<div class="col-12" style="margin-left:3%; margin-right:3%; margin-top:3%; margin-bottom:1%">
+			<h3><strong>[${row.categoryName}]</strong>&nbsp;&nbsp;${row.subject }</h3>
+		</div>
 		<div class="row">
-			<div class="col-6" align="left">
-				<div class="dropright">
-					작성자 <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="cursor: pointer">
+			<div class="col-6 row" align="left" style="margin-top:2%">
+				<div style="margin-left:12%">
+					<strong>작성자</strong>
+				</div>
+				<div class="dropright" style="margin-left:12%">
+					<a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="cursor: pointer">
 						<img src="<spring:url value='/image/${row.picture}'/>" class=" mx-auto rounded-circle" width="30px" height="30px" />
-						<strong>&nbsp;${row.nickname}</strong>
+						&nbsp;${row.nickname}
 					</a>
 					<div class="dropdown-menu">
 						<a class="dropdown-item" href="#" onclick="messagePopup();">
@@ -67,14 +71,18 @@
 				</div>
 			</div>
 
-			<div class="col-6" align="right">
-				조회수 : ${row.viewCount }&nbsp;&nbsp;
-				게시일 : <fmt:formatDate value="${row.reg_date}" pattern="yyyy. MM. dd." />
+			<div class="col-4" align="right" style="margin-top:2%">
+				<strong>조회수</strong>&nbsp;&nbsp;&nbsp;${row.viewCount }&nbsp;&nbsp;
+			</div>
+			<div class="col-2" align="right" style="margin-top:2%">
+				<strong>게시일</strong>&nbsp;&nbsp;&nbsp;<fmt:formatDate value="${row.reg_date}" pattern="yyyy. MM. dd." />
 			</div>
 				
 		</div>
 		<hr>
-		<pre>${row.object}</pre>
+		<div class="col-12" style="margin-left:3%; margin-right:3%; margin-top:3%; margin-bottom:3%">
+			<pre>${row.object}</pre>
+		</div>
 		<hr>
 		<div align="right">
 			<button type="button" class="btn btn-sm" onclick="location.href='/noticeboard/noticeBoardList'">목록으로</button>
