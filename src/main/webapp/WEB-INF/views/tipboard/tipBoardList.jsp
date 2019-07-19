@@ -12,6 +12,7 @@
 <link href="/resources/css/pagination.css" rel="stylesheet">
 <script src="https://kit.fontawesome.com/e83fabbb47.js"></script>
 <style>
+/*
  @media (min-width:476px){.container{max-width: 240px;}}
  @media (min-width:576px){.container{max-width: 300px;}}
  @media (min-width:768px){.container{max-width: 440px;}}
@@ -23,8 +24,9 @@
     float: left;
 }
 footer{
-    margin-top: 250px;
+    margin-top: 550px;
 }
+*/
 </style>
 <script>
 	// 이전 버튼
@@ -122,6 +124,7 @@ footer{
 	
 	<jsp:include page="../module/aside.jsp" flush="false" />
 	<div class="container">
+	<div  class="row">
 		<table class="table table-striped nanum table-hover">
 			<!-- <table border="1"> -->
 			<thead align="center">
@@ -217,14 +220,14 @@ footer{
 				<div class="col-2" align="right" style="padding-left: 0px; padding-right: 5px;">
 					<c:if test="${login.authority >= 3 }">
 						<button type="button" class="btn btn-sm"
-							onclick="location.href='/noticeboard/write.do' " style="background-color: #2ecc71; color: white;">글쓰기</button>
+							onclick="location.href='/tipboard/write.do' " style="background-color: #2ecc71; color: white;">글쓰기</button>
 					</c:if>
 				</div>
 			</div>
 			<!-- 검색 -->
 		</div>
 		<!-- 페이징, 검색 끝 -->
-
+</div>
 	</div>
 	<br>
 	<jsp:include page="./../module/bottom.jsp" flush="false" />

@@ -9,7 +9,7 @@ public class NoticeBoardVO {
 	private String subject;
 	private String object;
 	private Date reg_date;
-	private Date mod_date;
+	private String mod_date;
 	private int viewCount;
 
 	private String nickname;
@@ -64,11 +64,11 @@ public class NoticeBoardVO {
 		this.reg_date = reg_date;
 	}
 
-	public Date getMod_date() {
+	public String getMod_date() {
 		return mod_date;
 	}
 
-	public void setMod_date(Date mod_date) {
+	public void setMod_date(String mod_date) {
 		this.mod_date = mod_date;
 	}
 
