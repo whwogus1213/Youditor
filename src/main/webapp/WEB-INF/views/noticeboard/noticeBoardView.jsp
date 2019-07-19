@@ -87,7 +87,7 @@
 		<div align="right">
 			<button type="button" class="btn btn-sm" onclick="location.href='/noticeboard/noticeBoardList'">목록으로</button>
 			<c:if test="${login.authority >= 4 }">
-				<button type="button" class="btn btn-sm" onclick="location.href='/noticeboard/updateNoticeBoard.do?boardId=${row.boardId}' ">수정</button>
+				<button type="button" class="btn btn-sm" onclick="location.href='/noticeboard/update.do?boardId=${row.boardId}' ">수정</button>
 				<button class="btn btn-sm" id="deletebtn">삭제</button>
 			</c:if>
 		</div>
