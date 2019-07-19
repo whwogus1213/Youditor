@@ -135,7 +135,7 @@ li {
     line-height: 1;
 }
 .str2{
-	width: 75px;
+    width: 75px;
 }
 		
 </style>
@@ -158,7 +158,11 @@ li {
 						else if(3 <= i < 5){
 							html += "<th scope='row'>"+(i+1)+"</th>";
 							}
-						html += "<td class='str2'>"+data[i].subject+"</td>";
+						if(data[i].subject.length < 5){
+							html += "<td class='str2'>"+data[i].subject+"</td>";
+							}else{
+								html += "<td class='str2'>"+data[i].subject.substr(0, 4)+'..'+"</td>";	
+							}
 						if(data[i].starCount == 5 ){
 							html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
 							html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
@@ -328,7 +332,11 @@ function getTipStar(){
 						else if(3 <= i < 5){
 								html += "<th scope='row'>"+(i+1)+"</th>";
 								}
+						if(data[i].subject.length < 5){
 						html += "<td class='str2'>"+data[i].subject+"</td>";
+						}else{
+							html += "<td class='str2'>"+data[i].subject.substr(0, 4)+'..'+"</td>";	
+						}
 						if(data[i].starCount == 5 ){
 							html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
 							html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
@@ -428,7 +436,11 @@ function getNoticeList(){
 					if(i < 3){
 						html += "<tr onclick=\"location.href='/noticeboard/noticeBoardView?boardId="+data[i].boardId+"'\" style='cursor:pointer;'>";
 						html += "<th class='str'scope='row'>"+(i+1)+"</th>";
-						html += "<td>"+data[i].subject+"</td>";
+						if(data[i].subject.length < 5){
+							html += "<td>"+data[i].subject+"</td>";
+							}else{
+								html += "<td>"+data[i].subject.substr(0, 4)+'..'+"</td>";	
+							}
 						html += "<td>"+data[i].nickname+"</td>";
 						html += "</tr>";
 					}else{

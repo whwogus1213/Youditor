@@ -40,6 +40,35 @@
  .container {
     float: left;
 }
+#title-st, #title-st:hover{
+	font-size: 25px;
+    font-weight: bold;
+    color: #000;
+    text-decoration: none;
+}
+.best {
+    font-size: 17px;
+    font-weight: bold;
+    color: #ef5350;
+}
+.card-header{
+	font-size: 17px;
+    font-weight: bold;
+}
+.span-st{
+    font-size: 12px;
+}
+#sub-st, #sub-st:hover{
+	font-size: 17px;
+    font-weight: bold;
+    color: #000;
+    text-decoration: none;
+}
+#top-st{
+	font-size: 25px;
+    font-weight: bold;
+    color: #000;
+}
   </style>
   <script>
   $(function() {
@@ -60,6 +89,12 @@
 							html += "<img width='100%' height='20%' src='"+data[i].youtubeLink+"'></img>";
 							html += "</div>";
 							html += "<div class='card-footer'>";
+							html += "<i class='far fa-clock'></i>";
+							html += "<span class='span-st'>"+data[i].reg_date+"</span>";
+							html += "<span style='float: right;'>"
+							html += "<i class='far fa-eye' aria-hidden='true'></i>";
+							html += "<span class='span-st'>"+data[i].viewCount+"</span>";
+							html += "</span>"
 							html += "<table>"
 							html += "<tr>"
 							///////////////////////////
@@ -100,11 +135,26 @@ function getAccountsRankList(){
 						html += "<a href='#'><img class='card-img-top' src='/image/"+data[i].picture+"' alt='' width='80' height='200'></a>";
 						html += "<div class='card-body'>";
 						html += "<h4 class='card-title'>";
-						html += "<a href='#'>"+data[i].nickname+"</a>";
+						html += "<div class='dropright'>";
+						html += "<a data-toggle='dropdown' aria-haspopup='true' aria-expanded='false' style='cursor: pointer'>"+data[i].nickname+"</a>";
+						html += "<div class='dropdown-menu'>";
+						html += "<a class='dropdown-item' href='/noticeboard/noticeBoardList?searchType=nickname&keyword="+data[i].nickname+"'></a>";
+						html += "<i class='fab fa-file-alt'></i>&nbsp;&nbsp;게시물 더보기";
+						html += "</a>";
+						html += "<a class='dropdown-item' href='#'>";
+						html += "<i class='far fa-envelope'></i>&nbsp;&nbsp;쪽지 보내기";
+						html += "</a>";
+						html += "<a class='dropdown-item' href='#'>";
+						html += "<i class='far fa-heart'></i>&nbsp;&nbsp;팔로우하기";
+						html += "</a>";
 						html += "</h4>";
 						html += "</div>";
 						html += "</div>";
 						html += "</div>";
+						html += "</div>";
+						html += "</div>";
+						
+									
 						
 					}else{
 						html += "<div class='col-lg-4 col-sm-6 portfolio-item'>";
@@ -138,6 +188,8 @@ function getNoticeNew(){
 		success : function(data) {
 
 			var html = "";
+			
+			
 
 			if(data.length > 0) {
 				for(var i = 0; i < data.length; i++){
@@ -145,9 +197,15 @@ function getNoticeNew(){
 						html += "<tr>";
 						html += "<td>"+(i+1)+"</td>";
 						html += "<td>"+data[i].categoryId+"</td>";
-						html += "<td align='left' style='padding-left: 30px; cursor: pointer;' onclick='location.href='/noticeboard/noticeBoardView?boardId="+data[i].boardId+"''>"+data[i].subject+"</td>";
+						if(data[i].subject.length < 10){
+							html += "<td align='left' style='padding-left: 30px; cursor: pointer;'><a href='/noticeboard/noticeBoardView?boardId="+data[i].boardId+"'>"+data[i].subject+"</a></td>";
+							}else{
+								html += "<td align='left' style='padding-left: 30px; cursor: pointer;'><a href='/noticeboard/noticeBoardView?boardId="+data[i].boardId+"'>"+data[i].subject.substr(0, 9)+'..'+"</a></td>";
+								
+							}
+						
 						html += "<td>"+data[i].nickname+"</td>";
-						html += "<td><fmt:formatDate value="+data[i].mod_date+"pattern='yyyy-MM-dd' /></td>";
+						html += "<td>"+data[i].mod_date+"</td>";
 						html += "<td>"+data[i].viewCount+"</td>";
 						html += "</tr>";
 					}else{
@@ -188,9 +246,14 @@ function getTipNew(){
 						html += "<tr>";
 						html += "<td>"+(i+1)+"</td>";
 						html += "<td>"+data[i].categoryId+"</td>";
-						html += "<td align='left' style='padding-left: 30px; cursor: pointer;' onclick='location.href='/noticeboard/noticeBoardView?boardId="+data[i].boardId+"''>"+data[i].subject+"</td>";
+						if(data[i].subject.length < 10){
+							html += "<td align='left' style='padding-left: 30px; cursor: pointer;'><a href='/tipboard/tipBoardView?boardId="+data[i].boardId+"'>"+data[i].subject+"</a></td>";
+							}else{
+								html += "<td align='left' style='padding-left: 30px; cursor: pointer;'><a href='/tipboard/tipBoardView?boardId="+data[i].boardId+"'>"+data[i].subject.substr(0, 9)+'..'+"</a></td>";
+							}
+						
 						html += "<td>"+data[i].nickname+"</td>";
-						html += "<td><fmt:formatDate value="+data[i].mod_date+"pattern='yyyy-MM-dd' /></td>";
+						html += "<td>"+data[i].mod_date+"<fmt:formatDate value="+data[i].mod_date+"pattern='yyyy-MM-dd' /></td>";
 						html += "<td>"+data[i].viewCount+"</td>";
 						html += "</tr>";
 					}else{
@@ -269,8 +332,9 @@ function getTipNew(){
 	  
   <jsp:include page="./module/aside.jsp" flush="false"/>
   <div class="container">
-
-    <h1 class="my-4">핫한 편집 영상</h1><hr/>
+  <br/>
+	<a href="/videoboard/videoBoardList" id="title-st">편집영상</a>
+	<span class="best">BEST</span><hr/>
 
     <!-- Marketing Icons Section -->
     <div class="row" id="top3-1">
@@ -279,7 +343,8 @@ function getTipNew(){
     <!-- /.row -->
 
     <!-- 편집자 프로필 -->
-    <h2>이번주 편집자 탑3</h2><hr/>
+    <span id="title-st">편집자</span>
+	<span class="best">BEST</span><hr/>
 
     <div class="row" id="top3-2">
       
@@ -288,7 +353,7 @@ function getTipNew(){
     <!-- /.row -->
   	</div><hr/>
   	<div class="jy">
-  		<h2>최신 공지사항</h2><hr/>
+  		<span class="best">NEW  </span><span id="top-st" >공지사항</span><hr/>
   		<div id="notice">
   			<table class="table table-striped nanum table-hover">
 			<!-- <table border="1"> -->
@@ -298,8 +363,8 @@ function getTipNew(){
 					<th style="width: 10%;">분류</th>
 					<th style="width: 40%;">제목</th>
 					<th style="width: 10%;">작성자</th>
-					<th style="width: 20%;">작성일</th>
-					<th style="width: 10%;">조회수</th>
+					<th style="width: 20%;"><i class="far fa-clock"></i></th>
+					<th style="width: 10%;"><i class="far fa-eye" aria-hidden="true"></i></th>
 				</tr>
 			</thead>
 			<tbody align="center" id="newNotice">
@@ -308,7 +373,7 @@ function getTipNew(){
   		</div>
   	</div>
   	<div class="jy">
-  		<h2>최신 TIP 게시판</h2><hr/>
+  		<span class="best">NEW  </span><span id="top-st">TIP 게시판</span><hr/>
   		<div id="tip">
   			<table class="table table-striped nanum table-hover">
 				<!-- <table border="1"> -->
@@ -318,8 +383,8 @@ function getTipNew(){
 						<th style="width: 10%;">분류</th>
 						<th style="width: 40%;">제목</th>
 						<th style="width: 10%;">작성자</th>
-						<th style="width: 20%;">작성일</th>
-						<th style="width: 10%;">조회수</th>
+						<th style="width: 20%;"><i class="far fa-clock"></i></th>
+						<th style="width: 10%;"><i class="far fa-eye" aria-hidden="true"></i></th>
 					</tr>
 				</thead>
 				<tbody align="center" id="newTip">
