@@ -1,6 +1,5 @@
 package com.good.dao;
 
-import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -9,8 +8,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.good.dto.NoticeBoardVO;
-import com.good.dto.Pagination;
 import com.good.dto.Search;
+import com.good.dto.SearchBoard;
 
 @Repository
 public class NoticeBoardDAOImpl implements NoticeBoardDAO {
@@ -23,7 +22,7 @@ public class NoticeBoardDAOImpl implements NoticeBoardDAO {
 
 	// 게시물 목록 + 페이징 + 검색
 	@Override
-	public List<NoticeBoardVO> listAll(Search search) throws Exception {
+	public List<NoticeBoardVO> listAll(SearchBoard search) throws Exception {
 		return sqlSession.selectList(NAMESPACE + ".listAll", search);
 	}
 

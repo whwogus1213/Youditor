@@ -71,16 +71,19 @@
 </head>
 <body>
 <jsp:include page="../module/top2.jsp" flush="false"/>
-<div align="center">
-	<div class="col-sm-12">
-		<h2 align="center">&nbsp;</h2>
-		<h1 align="center">받은 메세지</h1>
-		<h2 align="center">&nbsp;</h2>
+
+<!-- 배너 -->
+<div class="form-group">
+	<div class="col-sm-12" style="background-image:url('/resources/images/message/message.jpg'); background-position:50% 50%; background-size:100%; font-family: 'Poor Story', sans-serif; color:black; padding-top: 5%; padding-bottom:4%">
+		<h1 align="center" style="font-size:50px; letter-spacing:10px"><strong>메세지 보관함</strong></h1>
+		<h4 align="center"><br>다른 YouditoR와 메세지를 주고 받을 수 있습니다.</h4>
 	</div>
+</div>
+
+<div align="center">
 	<div>
-		<button type="button" class="btn btn-sm btn-success" onclick="location.href='/message/messageReceiveList' ">받은 메세지 보기</button>
-		&nbsp;|&nbsp;
-		<button type="button" class="btn btn-sm btn-primary" onclick="location.href='/message/messageSendList' ">보낸 메세지 보기</button>
+		<h3>받은 메세지 목록</h3>
+		<button type="button" class="btn btn-sm btn-link" onclick="location.href='/message/messageSendList' ">보낸 메세지 보기</button>
 	</div>
 </div>
 <hr>
