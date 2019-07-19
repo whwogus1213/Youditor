@@ -12,6 +12,7 @@
 <link href="/resources/css/pagination.css" rel="stylesheet">
 <script src="https://kit.fontawesome.com/e83fabbb47.js"></script>
 <style>
+/*
  @media (min-width:476px){.container{max-width: 240px;}}
  @media (min-width:576px){.container{max-width: 300px;}}
  @media (min-width:768px){.container{max-width: 440px;}}
@@ -19,12 +20,15 @@
  @media (min-width:1080px){.container{max-width: 800;}}
  @media (min-width:1200px){.container{max-width: 925px;}}
  @media (min-width:1400px){.container{max-width: 1100px;}}
+ 
  .container {
     float: left;
 }
+
 footer{
     margin-top: 250px;
 }
+*/
 </style>
 <script>
 	// 이전 버튼
@@ -121,8 +125,10 @@ footer{
 	<div id="deleteOK" class="alert alert-danger hidden" role="alert" style="visibility:hidden">글이 삭제되었습니다.</div>
 	
 	<jsp:include page="../module/aside.jsp" flush="false" />
+	
 	<div class="container">
-		<table class="table table-striped nanum table-hover">
+		<div class="row">
+		<table class="table table-hover">
 			<!-- <table border="1"> -->
 			<thead align="center">
 				<tr>
@@ -172,7 +178,6 @@ footer{
 				</c:forEach>
 			</tbody>
 		</table>
-
 
 		<!-- 페이징 검색 시작 -->
 		<div class="col-12">
@@ -224,6 +229,7 @@ footer{
 			<!-- 검색 -->
 		</div>
 		<!-- 페이징, 검색 끝 -->
+		</div>
 
 	</div>
 	<br>
