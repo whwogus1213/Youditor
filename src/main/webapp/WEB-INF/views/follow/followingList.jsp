@@ -59,8 +59,7 @@
 			<thead align="center">
 				<tr>
 					<th>닉네임</th>
-					<th>e-mail</th>
-					<th>날짜</th>
+					<th>맛팔</th>
 					<th>언팔로우</th>
 				</tr>
 			</thead>
@@ -69,12 +68,10 @@
 					<tr>
 						<td style="cursor: pointer;"
 							onclick="location.href='/videoboard/videoBoardList?searchType=nickname&keyword=${followingList.nickname}'">
-							${followingList.nickname}</td>
-						<td>
-							${followingList.followAccountId }
+							${followingList.nickname}
 						</td>
 						<td>
-							<fmt:formatDate value="${followingList.reg_date}" pattern="yyyy-MM-dd" />
+							${followingList.check }
 						</td>
 						<td>
 							<button class="btn btn-danger btn-sm" id="followbtn${followingList.followAccountId}"

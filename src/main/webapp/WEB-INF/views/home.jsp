@@ -17,7 +17,6 @@
   <title>YouditoR</title>
   <!-- Custom styles -->
   <link href="/resources/css/modern-business.css" rel="stylesheet">
-<script src="https://kit.fontawesome.com/e83fabbb47.js"></script>
   <style>
   footer{
   clear: both;

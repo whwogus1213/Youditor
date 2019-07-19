@@ -8,6 +8,7 @@ public class FollowListVO {
 	private Date reg_date;
 
 	private String nickname;
+	private boolean check;
 
 	public int getFollowAccountId() {
 		return followAccountId;
@@ -40,6 +41,14 @@ public class FollowListVO {
 
 	public final void setNickname(String nickname) {
 		this.nickname = nickname;
+	}
+
+	public boolean getCheck() {
+		return check;
+	}
+
+	public void setCheck(boolean check) {
+		this.check = check;
 	}
 
 	@Override
