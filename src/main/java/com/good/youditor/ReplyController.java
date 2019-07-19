@@ -67,7 +67,7 @@ public class ReplyController {
 	@RequestMapping(value = "/isReReply", method=RequestMethod.POST)
 	public int isReReply(ReplyVO vo) throws Exception{
 		
-		/* 대댓글이 있으면 1 없으면 0 */
+		/* 대댓글이 있으면 개수 없으면 0 */
 		return service.isReReply(vo);
 	}
 	
