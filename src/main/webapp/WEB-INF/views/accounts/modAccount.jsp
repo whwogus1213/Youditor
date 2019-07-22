@@ -87,38 +87,37 @@ th {
 	}
 	
 	function btnRePwd() {
-		var ppwdCfm = $("#ppwdCfm").val();
-		var ppwd = $("#ppwd").val();
-  		if(ppwd == ppwdCfm) {
+		var pwdCfm = $("#pwdCfm").val();
+		var pwd = $("#pwd").val();
+  		if(pwd == pwdCfm) {
   			document.modForm.action = "${path}/accounts/updatePassword.do";
 			document.modForm.submit();
   	  	} else {
 	  	  	alert("비밀번호가 틀렸습니다.");
-  			$("#ppwdCfm").focus();
+  			$("#pwdCfm").focus();
   			return;
 		}
   	}
 	
 	function btnUpdate() {
-		var ppwdCfm = $("#ppwdCfm").val();
-		var ppwd = $("#ppwd").val();
-		alert(ppwdCfm+"!!@!@!@!@!@!@");
-		alert(ppwd+"@@@@@@@@@@@@@@");
-		if(ppwd == ppwdCfm) {
-			alert("시발");
-			document.modForm.action = "accounts/updateAccount.do";
+		var pwdCfm = $("#pwdCfm").val();
+		var pwd = $("#pwd").val();
+		alert(pwd+"@@@@@@@@@@@@@@");
+		if(pwd == pwdCfm) {
+			alert("ds;aklfjdsklfjds");
+			document.modForm.action = "${path}/accounts/updateAccount.do";
 			document.modForm.submit();
   	  	} else {
   	  		alert("비밀번호가 틀렸습니다.");
-			$("#ppwdCfm").focus();
+			$("#pwdCfm").focus();
 			return;
 		}
   	}
 	
 	function btnDelete() {
-		var ppwdCfm = $("#ppwdCfm").val();
-		var ppwd = $("#ppwd").val();
-		if(ppwd == ppwdCfm) {
+		var pwdCfm = $("#pwdCfm").val();
+		var pwd = $("#pwd").val();
+		if(pwd == pwdCfm) {
 			msg = "정말로 계정을 삭제하시겠습니까?";
             if (confirm(msg)!=0) {
 				// Yes click
@@ -130,7 +129,7 @@ th {
 			}
   		} else {
   			alert("비밀번호가 틀렸습니다.");
-  			$("#ppwdCfm").focus();
+  			$("#pwdCfm").focus();
   			return;
   	  	}
   	}
@@ -158,8 +157,8 @@ th {
 						<th class="thcell">비밀번호 확인</th>
 						<td>
 						<p>
-							<input type="password" name="ppwdCfm" id="ppwdCfm" value="">
-							<input type="hidden" name="ppwd" id="ppwd" value="${login.pwd }">
+							<input type="password" name="pwdCfm" id="pwdCfm">
+							<input type="hidden" name="pwd" id="pwd" value="${login.pwd }">
 						</p>
 						<p id="pass-st">
 							<input id="bt-st1" type="button" value="비밀번호변경" onclick="btnRePwd();">

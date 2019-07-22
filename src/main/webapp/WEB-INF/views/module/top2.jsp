@@ -255,6 +255,7 @@ function DosignUp() {
 
 <script src="https://kit.fontawesome.com/e83fabbb47.js"></script>
 
+<c:if test="${login eq null }">
 <!-- Trigger the modal with a button -->
 <!-- Modal -->
 <div id="myModal" class="modal fade" role="dialog">
@@ -307,7 +308,7 @@ function DosignUp() {
 
   </div>
 </div>
-
+</c:if>
 
 
 <!-- Side navigation 채팅 chat chatting -->

@@ -255,7 +255,7 @@ public class AccountsController {
 	
 	// 회원정보수정처리
 	@RequestMapping(value = "/updateAccount.do", method = RequestMethod.POST)
-	public ModelAndView updateAccount(HttpSession session, @RequestParam("accountId") int accountId, @RequestParam("email")String email, @RequestParam("ppwdCfm")String pwdCfm, @RequestParam("nickname")String nickname, @RequestParam("picture")MultipartFile picture, @RequestParam("footer")String footer) throws Exception {
+	public ModelAndView updateAccount(HttpSession session, @RequestParam("accountId") int accountId, @RequestParam("email")String email, @RequestParam("pwdCfm")String pwdCfm, @RequestParam("nickname")String nickname, @RequestParam("picture")MultipartFile picture, @RequestParam("footer")String footer) throws Exception {
 		AccountsVO vo = new AccountsVO();
 		
 		vo.setAccountId(accountId);
