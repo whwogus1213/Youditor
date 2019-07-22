@@ -13,7 +13,6 @@
 	<meta name="author" content="">
 	<title>회원정보수정 - YouDitor</title>
 	<jsp:include page="../module/header.jsp" flush="false"/>
-	<link href="/resources/css/modern-business.css" rel="stylesheet">
 	<style>
 	
 	table {
@@ -103,8 +102,11 @@ th {
 	function btnUpdate() {
 		var ppwdCfm = $("#ppwdCfm").val();
 		var ppwd = $("#ppwd").val();
-		if(pwd == pwdCfm) {
-			document.modForm.action = "${path}/accounts/updateAccount.do";
+		alert(ppwdCfm+"!!@!@!@!@!@!@");
+		alert(ppwd+"@@@@@@@@@@@@@@");
+		if(ppwd == ppwdCfm) {
+			alert("시발");
+			document.modForm.action = "accounts/updateAccount.do";
 			document.modForm.submit();
   	  	} else {
   	  		alert("비밀번호가 틀렸습니다.");
@@ -138,7 +140,7 @@ th {
 	<jsp:include page="../module/top2.jsp" flush="false"/>
 	<div align="center">
 		<c:if test="${login.accountId ne null }">
-			<form:form name="modForm" method="POST" enctype="multipart/form-data">
+			<form name="modForm" method="POST" enctype="multipart/form-data">
 				<table>
 					<tr>
 						<th class="thcell">가입날자</th>
@@ -206,7 +208,7 @@ th {
 					<input id="bt-st" type="button" value="수정하기" onclick="btnUpdate();">
 					<input id="bt-st" type="button" value="삭제하기" onclick="btnDelete();">	
 				</div>
-			</form:form>
+			</form>
 		</c:if>
 		<c:if test="${login.accountId eq null }">
 			로그인상태가 아닙니다.<br>

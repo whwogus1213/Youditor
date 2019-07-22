@@ -41,8 +41,14 @@
 
 	<!-- 게시물 총 갯수 구하기 -->
 	<select id="getBoardListCnt" resultType="int">
-		select count(boardId)
-		from noticeboard b join accounts a on b.accountId=a.accountId  
+		SELECT
+			count(boardId)
+		FROM
+			noticeboard b
+		JOIN
+			accounts a
+		ON
+			b.accountId = a.accountId  
 		 <trim prefix="WHERE" prefixOverrides="AND|OR">
 			<if test="searchType=='subject' and keyword != null and keyword != '' ">
 				AND subject like CONCAT('%', #{keyword}, '%')
@@ -98,9 +104,21 @@
 	
 	<!-- 최신 공지 사항 -->
 	<select id="rankList" resultType="NoticeBoardVO">
-		SELECT boardId, b.accountId, subject, a.nickname, viewCount, b.reg_date, b.categoryId, DATE_FORMAT(b.mod_date, '%Y %m %d') mod_date
-		FROM noticeboard b join accounts a on b.accountId = a.accountId
-		join noticecategory c on b.categoryId=c.categoryId
-        order by b.mod_date DESC limit 5;
+		SELECT
+			boardId, b.accountId, subject, a.nickname, viewCount, b.reg_date, b.categoryId, DATE_FORMAT(b.mod_date, '%Y %m %d') mod_date
+		FROM
+			noticeboard b
+		JOIN
+			accounts a
+		ON
+			b.accountId = a.accountId
+		JOIN
+			noticecategory c
+		ON
+			b.categoryId=c.categoryId
+        ORDER BY
+        	b.mod_date DESC 
+		LIMIT
+			5
 	</select>
 </mapper>

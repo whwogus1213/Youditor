@@ -27,7 +27,7 @@
 	</select>
 
 	<!-- 회원 가입 -->
-	<insert id="insertAccounts" parameterType="com.good.dto.AccountsVO">
+	<insert id="insertAccounts" parameterType="AccountsVO">
 		INSERT INTO
 				accounts(
 						email,
@@ -37,7 +37,7 @@
 						footer,
 						reg_date,
 						mod_date,
-						lastLogin_date,
+						lastFollowerCheck,
 						newLogin_date)
 				VALUES(
 					#{email},

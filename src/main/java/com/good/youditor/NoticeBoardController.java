@@ -78,13 +78,13 @@ public class NoticeBoardController {
 
 	// 글작성 완료
 	@RequestMapping(value = "/insertNoticeBoardPro", method = RequestMethod.POST)
-	public String insertNoticeBoardPro(@RequestParam("boardId") int boardId,
+	public String insertNoticeBoardPro(@RequestParam("accountId") int accountId,
 										@RequestParam("categoryId") int categoryId,
 										@RequestParam("subject") String subject,
 										@RequestParam("object") String object) throws Exception {
 		System.out.println("============insertNoticeBoardPro 성공==============");
 		NoticeBoardVO vo = new NoticeBoardVO();
-		vo.setBoardId(boardId);
+		vo.setAccountId(accountId);
 		vo.setCategoryId(categoryId);
 		vo.setSubject(subject);
 		vo.setObject(object);

@@ -18,6 +18,7 @@ import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -127,27 +128,32 @@ public class AccountsController {
 	@RequestMapping(value = "/insertAccountsPro", method = RequestMethod.POST)
 	public String insertAccountsPro(HttpSession session, AccountsVO vo) throws Exception {
 
-		System.out.println(vo.getPicture());
-		System.out.println(vo.getUploadFile());
+		
+		System.out.println("가입할때 정보1 : "+vo);
 		String savedName = "nothing.jpg";
-		if(!vo.getUploadFile().isEmpty()) {
-			MultipartFile uploadfile = vo.getUploadFile();
-			savedName = uploadfile.getOriginalFilename();
-			UUID uid = UUID.randomUUID();
-			
-			//파일 이름 수정 후 저장
-			StringTokenizer pst = new StringTokenizer(savedName,".");
-			pst.nextToken();
-			String file_ext = pst.nextToken();
-			savedName = uid.toString().substring(0, 10) + "." + file_ext;	// 저장 이름
-			
-			// new File (디렉토리, 파일이름)
-			File target = new File(uploadPath, savedName);
-			
-			FileCopyUtils.copy(uploadfile.getBytes(), target);
-		}
+//		if(!vo.getUploadFile().isEmpty()) {
+//			System.out.println("업로드 파일 있으면~~~~~~~~");
+//			MultipartFile uploadfile = vo.getUploadFile();
+//			savedName = uploadfile.getOriginalFilename();
+//			UUID uid = UUID.randomUUID();
+//			
+//			//파일 이름 수정 후 저장
+//			StringTokenizer pst = new StringTokenizer(savedName,".");
+//			pst.nextToken();
+//			String file_ext = pst.nextToken();
+//			savedName = uid.toString().substring(0, 10) + "." + file_ext;	// 저장 이름
+//			
+//			// new File (디렉토리, 파일이름)
+//			File target = new File(uploadPath, savedName);
+//			
+//			FileCopyUtils.copy(uploadfile.getBytes(), target);
+//		}
 		vo.setPicture(savedName);
 
+		
+		System.out.println("가입할때 정보2 : "+vo);
+		System.out.println(vo.getPicture());
+		System.out.println(vo.getUploadFile());
 		service.insertAccounts(vo);
 		System.out.println("============insertAccountsPro 성공==============");
 
@@ -248,15 +254,15 @@ public class AccountsController {
 	}
 	
 	// 회원정보수정처리
-	@RequestMapping(value = "/updateAccount.do")
-	public ModelAndView updateAccount(HttpSession session, int accountId, String email, String pwdCfm, String nickname, MultipartFile picture, String footer) throws Exception {
+	@RequestMapping(value = "/updateAccount.do", method = RequestMethod.POST)
+	public ModelAndView updateAccount(HttpSession session, @RequestParam("accountId") int accountId, @RequestParam("email")String email, @RequestParam("ppwdCfm")String pwdCfm, @RequestParam("nickname")String nickname, @RequestParam("picture")MultipartFile picture, @RequestParam("footer")String footer) throws Exception {
 		AccountsVO vo = new AccountsVO();
 		
 		vo.setAccountId(accountId);
 		vo.setEmail(email);
 		vo.setPwd(pwdCfm);
 		vo.setNickname(nickname);
-		
+		System.out.println("!!!!!!!!!!!!!!!!!############@@@@@@@@@"+vo);
 		AccountsVO login = (AccountsVO)session.getAttribute("login");
 		//기본 사진이 아닌 경우사진 파일 삭제
 		String savedName = "";
