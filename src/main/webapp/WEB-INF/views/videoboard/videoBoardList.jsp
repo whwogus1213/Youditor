@@ -41,7 +41,7 @@
 <body>
 	<script>
 	// 이전 버튼
-	function fn_prev(page, range, rangeSize) {
+	/*function fn_prev(page, range, rangeSize) {
 		var page = ((range - 2) * rangeSize) + 1;
 		var range = range - 1;
 
@@ -50,10 +50,25 @@
 		url = url + "?page=" + page;
 		url = url + "&range=" + range;
 		location.href = url;
+	}*/
+	// 이전 버튼
+	function fn_prev(categoryId, page, rangeSize, searchType, keyword) {
+		var page = parseInt((page - 1) / rangeSize) * rangeSize;
+		var url = "${pageContext.request.contextPath}/videoboard/videoBoardList?";
+
+		if(categoryId != 0) {
+			url = url + "categoryId=" + categoryId + "&";
+		}
+		url = url + "page=" + page;
+		if(keyword != null && keyword != "") {
+			url = url + "&searchType=" + searchType;
+			url = url + "&keyword=" + keyword;
+		}
+		location.href = url;
 	}
 
 	//페이지 번호 클릭
-	function fn_pagination(page, range, rangeSize, categoryId, searchType, keyword) {
+	/*function fn_pagination(page, range, rangeSize, categoryId, searchType, keyword) {
 		var url = "${pageContext.request.contextPath}/videoboard/videoBoardList";
 
 		url = url + "?category=" + categoryId;
@@ -63,10 +78,24 @@
 		url = url + "&keyword=" + keyword;
 		location.href = url;
 		
+	}*/
+	//페이지 번호 클릭
+	function fn_pagination(categoryId, page, searchType, keyword) {
+		var url = "${pageContext.request.contextPath}/videoboard/videoBoardList?";
+		alert("searchType : " + searchType + ", keyword : " + keyword);
+		if(categoryId != 0) {
+			url = url + "categoryId=" + categoryId + "&";
+		}
+		url = url + "page=" + page;
+		if(keyword != null && keyword != "") {
+			url = url + "&searchType=" + searchType;
+			url = url + "&keyword=" + keyword;
+		}
+		location.href = url;
 	}
 
 	//다음 버튼 이벤트
-	function fn_next(page, range, rangeSize) {
+	/*function fn_next(page, range, rangeSize) {
 		var page = parseInt((range * rangeSize)) + 1;
 		var range = parseInt(range) + 1;
 		var url = "${pageContext.request.contextPath}/videoboard/videoBoardList";
@@ -74,11 +103,25 @@
 		url = url + "?page=" + page;
 		url = url + "&range=" + range;
 		location.href = url;
+	}*/
+	//다음 버튼 이벤트
+	function fn_next(categoryId, page, range, rangeSize, searchType, keyword) {
+		var page = ((parseInt(page / rangeSize) + 1) * rangeSize) + 1;
+		var url = "${pageContext.request.contextPath}/videoboard/videoBoardList?";
+
+		if(categoryId != 0) {
+			url = url + "categoryId=" + categoryId + "&";
+		}
+		url = url + "page=" + page;
+		if(keyword != null && keyword != "") {
+			url = url + "&searchType=" + searchType;
+			url = url + "&keyword=" + keyword;
+		}
+		location.href = url;
 	}
 	
 	// 검색버튼 이벤트
-	
-	$(function(){
+	/*$(function(){
 		$('#keyword').keypress(function(e) {
 
 			var keycode = event.keyCode;
@@ -94,13 +137,33 @@
 
 				location.href = url;
 			}
-
 			e.stopPropagation();
 		});
+	});*/
+	// 검색버튼 이벤트
+	$(function(){
+		$('#keyword').keypress(function(e) {
 
+			var keycode = event.keyCode;
+			// enter를 쳤을 때 keycode가 13이다
+			if (keycode == '13') {
+				e.preventDefault();
+				var url = "${pageContext.request.contextPath}/videoboard/videoBoardList?";
+				var categoryId = "${categoryInfo.categoryId}";
+				if(categoryId != 0) {
+					url = url + "categoryId=" + categoryId + "&";
+				}
+				url = url + "searchType=" + $('#searchType').val();
+				url = url + "&keyword=" + $('#keyword').val();
+
+				location.href = url;
+				console.log(url);
+			}
+			e.stopPropagation();
+		});
 	});
 	
-	$(document).on('click', '#btnSearch', function(e) {
+	/*$(document).on('click', '#btnSearch', function(e) {
 		e.preventDefault();
 		var url = "${pageContext.request.contextPath}/videoboard/videoBoardList";
 		url = url + "?category=" + ${pagination.categoryId};
@@ -112,7 +175,20 @@
 		location.href = url;
 		console.log(url);
 	});
-	var result = '${result}';
+	var result = '${result}';*/
+	// 검색
+	function searchBtn(categoryId, searchType, keyword) {
+		var url = "${pageContext.request.contextPath}/videoboard/videoBoardList?";
+		var categoryId = "${categoryInfo.categoryId}";
+		if(categoryId != 0) {
+			url = url + "categoryId=" + categoryId + "&";
+		}
+		url = url + "searchType=" + $('#searchType').val();
+		url = url + "&keyword=" + $('#keyword').val();
+		
+		location.href = url;
+	}
+	
 	$(function(){
 		//수정이나 글쓰기 하면 추가할수 있음
 		/*
@@ -267,18 +343,17 @@
 			<div class="p1 pagination col-12">
 				<ul>
 					<c:if test="${pagination.prev}">
-						<a href="#" onClick="fn_prev('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}',
-						'${pagination.searchType}', '${pagination.keyword}')"><li><</li></a>
+						<a href="#" onclick="fn_prev('${categoryInfo.categoryId }', '${pagination.page}', 
+						'${pagination.searchType}', '${pagination.keyword}'); return false;"><li>◀</li></a>
 					</c:if>
 					<c:forEach begin="${pagination.startPage}" end="${pagination.endPage}" var="idx">
 						<a class="<c:out value="${pagination.page == idx ? 'is-active' : ''}"/>" href="#"
-						onClick="fn_pagination('${idx}', '${pagination.range}', '${pagination.rangeSize}', '${pagination.categoryId}', 
-						'${pagination.searchType}', '${pagination.keyword}')"><li>${idx}</li></a>
-						
+						onclick="fn_pagination('${categoryInfo.categoryId }', '${idx}', '${pagination.searchType}', '${pagination.keyword}'); return false;">
+							<li>${idx}</li></a>
 					</c:forEach>
 					<c:if test="${pagination.next}">
-						<a href="#" onClick="fn_next('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}',
-						'${pagination.searchType}', '${pagination.keyword}')"><li>></li></a>
+						<a href="#" onclick="fn_next('${categoryInfo.categoryId }', '${pagination.page}', 
+						'${pagination.searchType}', '${pagination.keyword}'); return false;"><li>▶</li></a>
 					</c:if>
 				</ul>
 			</div>
@@ -299,13 +374,16 @@
 				</div>
 
 				<div class="col-1" style="padding-left: 0px;text-align: center;padding-right: 0px;padding-top: 5px;">
-					<i class="fas fa-search" name="btnSearch" id="btnSearch" style="cursor:"></i>
+					<i class="fas fa-search" id="btnSearch" style="cursor:" onclick="searchBtn('${categoryInfo.categoryId }',
+					'${pagination.searchType}', '${pagination.keyword}'); return false;"></i>
 				</div>
 
 				<div class="col-2" align="right" style="padding-left: 0px; padding-right: 5px;">
-					<c:if test="${login.authority >= 3 }">
-						<button type="button" class="btn btn-sm"
-							onclick="location.href='/videoboard/write.do' " style="background-color: #2ecc71; color: white;">글쓰기</button>
+					<c:if test="${login ne null }">
+						<c:if test="${login.authority >= categoryInfo.viewAuthority }">
+							<button type="button" class="btn btn-sm"
+								onclick="location.href='/videoboard/write.do' " style="background-color: #2ecc71; color: white;">글쓰기</button>
+						</c:if>
 					</c:if>
 				</div>
 			</div>
