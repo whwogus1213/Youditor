@@ -42,23 +42,15 @@ public class HomeController {
 	public String home(Locale locale, Model model, HttpSession session) throws Exception {
 		logger.info("Welcome home! The client locale is {}.", locale);
 		
-		List<NoticeCategoryVO> nCatList = (List<NoticeCategoryVO>) session.getAttribute("nCatList");
-		List<VideoCategoryVO> vCatList = (List<VideoCategoryVO>) session.getAttribute("vCatList");
-		List<TipCategoryVO> tCatList = (List<TipCategoryVO>) session.getAttribute("tCatList");
-		List<RecruitCategoryVO> rCatList = (List<RecruitCategoryVO>) session.getAttribute("rCatList");
-		
-		if(nCatList.equals(null) | vCatList.equals(null) | tCatList.equals(null) | rCatList.equals(null)) {
-			nCatList = service.bringNoticeCategory();
-			vCatList = service.bringVideoCategory();
-			tCatList = service.bringTipCategory();
-			rCatList = service.bringRecruitCategory();
+		List<NoticeCategoryVO> nCatList = service.bringNoticeCategory();
+		List<VideoCategoryVO> vCatList = service.bringVideoCategory();
+		List<TipCategoryVO> tCatList = service.bringTipCategory();
+		List<RecruitCategoryVO> rCatList = service.bringRecruitCategory();
 
-			session.setAttribute("nCatList", nCatList);
-			session.setAttribute("vCatList", vCatList);
-			session.setAttribute("tCatList", tCatList);
-			session.setAttribute("rCatList", rCatList);
-
-		}
+		session.setAttribute("nCatList", nCatList);
+		session.setAttribute("vCatList", vCatList);
+		session.setAttribute("tCatList", tCatList);
+		session.setAttribute("rCatList", rCatList);
 		
 		AccountsVO login = (AccountsVO) session.getAttribute("login");
 		int mCount = 0;

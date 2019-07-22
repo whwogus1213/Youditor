@@ -82,7 +82,6 @@
 	//페이지 번호 클릭
 	function fn_pagination(categoryId, page, searchType, keyword) {
 		var url = "${pageContext.request.contextPath}/videoboard/videoBoardList?";
-		alert("searchType : " + searchType + ", keyword : " + keyword);
 		if(categoryId != 0) {
 			url = url + "categoryId=" + categoryId + "&";
 		}
