@@ -320,7 +320,7 @@ public class AccountsController {
 		session.setAttribute("login", vo);
 		
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("accounts/updateAccount");
+		mav.setViewName("accounts/modAccount");
 		System.out.println("String updateAccount open");
 		return mav;
 	}
