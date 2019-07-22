@@ -12,14 +12,14 @@
 		(select round(AVG(star), 2) from videostar  where b.boardId = boardId) as starCount
 	FROM
 		videoboard b
-	JOIN
-		accounts ac
-	ON
-		b.accountId = ac.accountId
-	JOIN
-		videocategory vc
-	ON
-		b.categoryId = vc.categoryId
+		JOIN
+			accounts ac
+			ON
+			b.accountId = ac.accountId
+		JOIN
+			videocategory vc
+			ON
+			b.categoryId = vc.categoryId
 	<trim prefix="WHERE" prefixOverrides="AND|OR">
 		<if test="searchType=='subject' and keyword != null and keyword != '' ">
 			AND subject like CONCAT('%', #{keyword}, '%')
