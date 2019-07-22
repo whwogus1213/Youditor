@@ -48,6 +48,8 @@ public class VideoBoardController {
 		
 		search.pageInfo(page, range, listCnt);
 		search.setCategoryId(categoryId);
+		search.setListSize(6);
+		
 		
 		VideoCategoryVO vCatVO = new VideoCategoryVO();
 		if(categoryId != 0) {
