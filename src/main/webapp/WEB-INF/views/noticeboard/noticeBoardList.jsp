@@ -135,7 +135,7 @@
 							<div class="card-header" onclick="location.href='/noticeboard/noticeBoardView?boardId=${NoticeBoardList.boardId}'"
 								style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; width: 100%; height: 50px; cursor: pointer;">
 								<c:if test="${NoticeBoardList.categoryName == '공지'}">
-									<strong><i class="fas fa-exclamation"></i>&nbsp;[${NoticeBoardList.categoryName}]</strong>
+									<strong><i class="fas fa-bullhorn"></i>&nbsp;[${NoticeBoardList.categoryName}]</strong>
 								</c:if>
 								<c:if test="${NoticeBoardList.categoryName == '이벤트'}">
 									<strong><i class="fas fa-gift"></i>&nbsp;[${NoticeBoardList.categoryName}]</strong>
