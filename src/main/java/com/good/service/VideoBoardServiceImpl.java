@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.good.dao.VideoBoardDAO;
+import com.good.dto.SearchBoard;
 import com.good.dto.VideoBoardVO;
 import com.good.dto.VideoCategoryVO;
 
@@ -19,8 +20,19 @@ public class VideoBoardServiceImpl implements VideoBoardService {
 
 	// 게시물 목록
 	@Override
-	public List<VideoBoardVO> listAll(VideoCategoryVO videoCategory) throws Exception {
-		return videoBoardDAO.listAll(videoCategory);
+	public List<VideoBoardVO> listAll(SearchBoard search) throws Exception {
+		return videoBoardDAO.listAll(search);
+	}
+	
+	// 게시물 갯수
+	@Override
+	public int getBoardListCnt(SearchBoard search) throws Exception {
+		return videoBoardDAO.getBoardListCnt(search);
+	}
+	
+	// 게시물 카테고리 정보
+	public VideoCategoryVO getCatInfo(int categoryId) throws Exception {
+		return videoBoardDAO.getCatInfo(categoryId);
 	}
 
 	// 게시물 읽기
@@ -66,10 +78,5 @@ public class VideoBoardServiceImpl implements VideoBoardService {
 //		return videoBoardDAO.followBoardList(followAccountId);
 //	}
 
-	// 게시물 갯수
-	@Override
-	public int getBoardListCnt(VideoCategoryVO videoCategoryVO) throws Exception {
-		return videoBoardDAO.getBoardListCnt(videoCategoryVO);
-	}
 	
 }
