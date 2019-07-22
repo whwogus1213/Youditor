@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.good.dto.NoticeBoardVO;
+import com.good.dto.NoticeCategoryVO;
 import com.good.dto.Search;
 import com.good.dto.SearchBoard;
 
@@ -24,6 +25,12 @@ public class NoticeBoardDAOImpl implements NoticeBoardDAO {
 	@Override
 	public List<NoticeBoardVO> listAll(SearchBoard search) throws Exception {
 		return sqlSession.selectList(NAMESPACE + ".listAll", search);
+	}
+	
+	// 카테고리 정보 취득
+	@Override
+	public NoticeCategoryVO getCatInfo(int categoryId) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + ".getCatInfo", categoryId);
 	}
 
 	// 게시물 상세보기
