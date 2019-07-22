@@ -26,7 +26,7 @@
 }
 
 footer{
-    margin-top: 250px;
+    margin-top: 550px;
 }
 */
 </style>
@@ -129,7 +129,6 @@ footer{
 	<div class="container">
 		<div class="row">
 		<table class="table table-hover">
-			<!-- <table border="1"> -->
 			<thead align="center">
 				<tr>
 					<th style="width: 80px;">번호</th>
@@ -230,7 +229,6 @@ footer{
 		</div>
 		<!-- 페이징, 검색 끝 -->
 		</div>
-
 	</div>
 	<br>
 	<jsp:include page="./../module/bottom.jsp" flush="false" />

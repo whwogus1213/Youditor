@@ -7,9 +7,11 @@ public class VideoStarVO {
 	private int boardId;
 	private int accountId;
 	private int star;
-	private Date reg_date;
+	private String reg_date;
 	private String subject;
 	private float starCount;
+	
+	private int viewCount;
 	
 	public int getStarId() {
 		return starId;
@@ -43,11 +45,11 @@ public class VideoStarVO {
 		this.star = star;
 	}
 
-	public Date getReg_date() {
+	public String getReg_date() {
 		return reg_date;
 	}
 
-	public void setReg_date(Date reg_date) {
+	public void setReg_date(String reg_date) {
 		this.reg_date = reg_date;
 	}
 	
@@ -67,12 +69,25 @@ public class VideoStarVO {
 	public void setStarCount(float starCount) {
 		this.starCount = starCount;
 	}
+	
+	
+
+	public int getViewCount() {
+		return viewCount;
+	}
+
+	public void setViewCount(int viewCount) {
+		this.viewCount = viewCount;
+	}
 
 	@Override
 	public String toString() {
 		return "VideoStarVO [starId=" + starId + ", boardId=" + boardId + ", accountId=" + accountId + ", star=" + star
-				+ ", reg_date=" + reg_date + ", subject=" + subject + ", starCount=" + starCount + "]";
+				+ ", reg_date=" + reg_date + ", subject=" + subject + ", starCount=" + starCount + ", viewCount="
+				+ viewCount + "]";
 	}
+
+	
 
 	
 	

@@ -33,7 +33,7 @@ button[type="button"] {
     float: left;
 }
 footer{
-    margin-top: 250px;
+    margin-top: 550px;
 }
 </style>
 <script>

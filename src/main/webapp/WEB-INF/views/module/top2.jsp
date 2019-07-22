@@ -6,10 +6,10 @@
 
 /* The sidebar menu */
 .sidenav {
-  height: 100%; /* Full-height: remove this if you want "auto" height */
+  height: 97%; /* Full-height: remove this if you want "auto" height */
   width: 0px; /* Set the width of the sidebar */
   position: fixed; /* Fixed Sidebar (stay in place on scroll) */
-  z-index: 20; /* Stay on top */
+  z-index: 2000; /* Stay on top */
   top: 55px; /* Stay at the top */
   right: 0;
   background-color: #ddd; /* Black */
@@ -308,7 +308,7 @@ function DosignUp() {
   </div>
 </div>
 <!-- Side navigation -->
-<div class="sidenav" id="mySidebar"  style="padding: 0; margin-top: 7px; border-radius: 10px;">
+<div class="sidenav" id="mySidebar"  style="padding: 0; margin-top: 1.6%; border-radius: 10px;">
 	<div align="center">
 		<c:if test="${login.accountId ne null }">
 			<jsp:include page="../chat/chattingview.jsp" flush="false"/>
@@ -335,12 +335,12 @@ function DosignUp() {
 <!-- 탑 메뉴  -->
 <nav class="navbar fixed-top navbar-expand-lg fixed-top" style="box-shadow: none; min-height: 80px;">
     <div class="container" style="margin-left: 0px; margin-right: 0px; max-width: 100%;">
-		<a class="navbar-brand" href="/"><img src="/resources/images/main_logo.png" style="height:30px"></a>
+		<a class="navbar-brand" href="/"><img src="/resources/images/main_logo.png" style="height:40px"></a>
 		<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
 		<div class="collapse navbar-collapse row justify-content-between" id="navbarResponsive" style="padding-left: 15%;">
-			<ul class="navbar-nav row justify-content-between" style="font-size: 1.5em;font-family: 'Jua';font-weight: lighter; min-width: 60%; ">
+			<ul class="navbar-nav row justify-content-between" style="font-size: 1.3em;font-family: 'Jua';font-weight: lighter; min-width: 60%; ">
 				<li class="nav-item">
 					<a class="nav-link" href="/"><strong>홈</strong></a>
 				</li>
@@ -351,17 +351,15 @@ function DosignUp() {
 						<c:forEach items="${nCatList}" var="nCatList">
 							<c:choose>
 								<c:when test="${nCatList.viewAuthority == 3 }">
-									<li><a style="font-size: 1em; margin: 0px 10px;" class="submenuLink" href="/noticeboard/noticeBoardList?category=${nCatList.categoryId }">${nCatList.categoryName }</a></li>
+									<li><a style="font-size: 1em; margin: 0px 10px;" class="submenuLink" href="/noticeboard/noticeBoardList?categoryId=${nCatList.categoryId }">${nCatList.categoryName }</a></li>
 <!-- 									<li>|</li> -->
 								</c:when>
 								<c:when test="${login.authority >= nCatList.viewAuthority }">
-									<li><a style="font-size: 1em; margin: 0px 10px;" class="submenuLink" href="/noticeboard/noticeBoardList?category=${nCatList.categoryId }">${nCatList.categoryName }</a></li>
+									<li><a style="font-size: 1em; margin: 0px 10px;" class="submenuLink" href="/noticeboard/noticeBoardList?categoryId=${nCatList.categoryId }">${nCatList.categoryName }</a></li>
 <!-- 									<li>|</li> -->
 								</c:when>
 							</c:choose>
 						</c:forEach>
-						<li><a style="font-size: 1em; margin: 0px 10px;" class="submenuLink" href="">공지</a></li>
-						
 					</ul>
 				</li>
 				<li class="nav-item topMenuLi">
@@ -371,11 +369,11 @@ function DosignUp() {
 						<c:forEach items="${vCatList}" var="vCatList">
 							<c:choose>
 								<c:when test="${vCatList.viewAuthority == 3 }">
-									<li><a style="font-size: 1em; margin: 0px 10px;" class="submenuLink" href="/videoboard/videoBoardList?category=${vCatList.categoryId }">${vCatList.categoryName }</a></li>
+									<li><a style="font-size: 1em; margin: 0px 10px;" class="submenuLink" href="/videoboard/videoBoardList?categoryId=${vCatList.categoryId }">${vCatList.categoryName }</a></li>
 <!-- 									<li>|</li> -->
 								</c:when>
 								<c:when test="${login.authority >= vCatList.viewAuthority }">
-									<li><a style="font-size: 1em; margin: 0px 10px;" class="submenuLink" href="/videoboard/videoBoardList?category=${vCatList.categoryId }">${vCatList.categoryName }</a></li>
+									<li><a style="font-size: 1em; margin: 0px 10px;" class="submenuLink" href="/videoboard/videoBoardList?categoryId=${vCatList.categoryId }">${vCatList.categoryName }</a></li>
 <!-- 									<li>|</li> -->
 								</c:when>
 							</c:choose>
@@ -408,11 +406,11 @@ function DosignUp() {
 							<c:forEach items="${tCatList}" var="tCatList">
 								<c:choose>
 									<c:when test="${tCatList.viewAuthority == 3 }">
-										<li><a style="font-size: 1em; margin: 0px 10px;" class="submenuLink" href="/tipboard/tipBoardList?category=${tCatList.categoryId }">${tCatList.categoryName }</a></li>
+										<li><a style="font-size: 1em; margin: 0px 10px;" class="submenuLink" href="/tipboard/tipBoardList?categoryId=${tCatList.categoryId }">${tCatList.categoryName }</a></li>
 <!-- 										<li>|</li> -->
 									</c:when>
 									<c:when test="${login.authority >= tCatList.viewAuthority }">
-										<li><a style="font-size: 1em; margin: 0px 10px;" class="submenuLink" href="/tipboard/tipBoardList?category=${tCatList.categoryId }">${tCatList.categoryName }</a></li>
+										<li><a style="font-size: 1em; margin: 0px 10px;" class="submenuLink" href="/tipboard/tipBoardList?categoryId=${tCatList.categoryId }">${tCatList.categoryName }</a></li>
 <!-- 										<li>|</li> -->
 									</c:when>
 								</c:choose>
@@ -446,11 +444,11 @@ function DosignUp() {
 							<c:forEach items="${rCatList}" var="rCatList">
 								<c:choose>
 									<c:when test="${rCatList.viewAuthority == 3 }">
-										<li><a style="font-size: 1em; margin: 0px 10px;" class="submenuLink" href="/recruitboard/recruitBoardList?category=${rCatList.categoryId }">${rCatList.categoryName }</a></li>
+										<li><a style="font-size: 1em; margin: 0px 10px;" class="submenuLink" href="/recruitboard/recruitBoardList?categoryId=${rCatList.categoryId }">${rCatList.categoryName }</a></li>
 <!-- 										<li>|</li> -->
 									</c:when>
 									<c:when test="${login.authority >= rCatList.viewAuthority }">
-										<li><a style="font-size: 1em; margin: 0px 10px;" class="submenuLink" href="/recruitboard/recruitBoardList?category=${rCatList.categoryId }">${rCatList.categoryName }</a></li>
+										<li><a style="font-size: 1em; margin: 0px 10px;" class="submenuLink" href="/recruitboard/recruitBoardList?categoryId=${rCatList.categoryId }">${rCatList.categoryName }</a></li>
 <!-- 										<li>|</li> -->
 									</c:when>
 								</c:choose>
