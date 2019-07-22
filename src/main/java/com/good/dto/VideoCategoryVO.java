@@ -3,6 +3,7 @@ package com.good.dto;
 public class VideoCategoryVO extends Search {
 	private int categoryId;
 	private String categoryName;
+	private String categoryPicture;
 	private int editAuthority;
 	private int viewAuthority;
 	
@@ -18,6 +19,12 @@ public class VideoCategoryVO extends Search {
 	public void setCategoryName(String categoryName) {
 		this.categoryName = categoryName;
 	}
+	public String getCategoryPicture() {
+		return categoryPicture;
+	}
+	public void setCategoryPicture(String categoryPicture) {
+		this.categoryPicture = categoryPicture;
+	}
 	public int getEditAuthority() {
 		return editAuthority;
 	}
@@ -29,6 +36,12 @@ public class VideoCategoryVO extends Search {
 	}
 	public void setViewAuthority(int viewAuthority) {
 		this.viewAuthority = viewAuthority;
+	}
+	
+	@Override
+	public String toString() {
+		return "VideoCategoryVO [categoryId=" + categoryId + ", categoryName=" + categoryName + ", categoryPicture="
+				+ categoryPicture + ", editAuthority=" + editAuthority + ", viewAuthority=" + viewAuthority + "]";
 	}
 	
 } // End - VideoCategoryVO

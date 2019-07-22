@@ -16,7 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.good.dto.AccountsVO;
-import com.good.dto.Search;
+import com.good.dto.SearchBoard;
 import com.good.dto.VideoBoardVO;
 import com.good.dto.VideoCategoryVO;
 import com.good.service.VideoBoardService;
@@ -30,70 +30,54 @@ public class VideoBoardController {
 
 	// 게시물 목록
 	@RequestMapping(value = "/videoBoardList", method = RequestMethod.GET)
-	public ModelAndView list(@RequestParam(required = false, defaultValue = "0") int category,
-							 @RequestParam(required = false, defaultValue = "1") int page,
-							 @RequestParam(required = false, defaultValue = "1") int range,
-							 @RequestParam(required = false, defaultValue = "object") String searchType,
-							 @RequestParam(required = false) String keyword, HttpServletRequest request) throws Exception {		
-		VideoCategoryVO videoCategoryVO = new VideoCategoryVO();
-		ModelAndView mav = new ModelAndView();
+	public String list(Model model,
+							@RequestParam(required = false, defaultValue = "0") int categoryId,
+							@RequestParam(required = false, defaultValue = "1") int page,
+							@RequestParam(required = false, defaultValue = "1") int range,
+							@RequestParam(required = false, defaultValue = "object") String searchType,
+							@RequestParam(required = false) String keyword) throws Exception {		
+		SearchBoard search = new SearchBoard();
+		search.setSearchType(searchType);
+		search.setKeyword(keyword);
 		
-		// 검색
-		videoCategoryVO.setSearchType(searchType);
-		videoCategoryVO.setKeyword(keyword);
-		videoCategoryVO.setCategoryId(category);
+		// 전체 게시글 개수
+		int listCnt = videoBoardService.getBoardListCnt(search);
+
+		System.out.println(" listCnt : " + listCnt);
+		System.out.println(" categoryId : " + categoryId);
 		
+		search.pageInfo(page, range, listCnt);
+		search.setCategoryId(categoryId);
 		
-		// 게시물 갯수
-		int listCnt = videoBoardService.getBoardListCnt(videoCategoryVO);
-		System.out.println(" videoboard 게시물 갯수 : " + listCnt);
-		
-		videoCategoryVO.setListSize(6);
-		videoCategoryVO.pageInfo(page, range, listCnt);
-		
-		mav.addObject("pagination", videoCategoryVO);
-		
-		List<VideoBoardVO> list = videoBoardService.listAll(videoCategoryVO);
-		
-		mav.setViewName("videoboard/videoBoardList");
-		mav.addObject("VideoBoardList", list);
-		
-		String categoryName = "";
-		if (category == 0) {
-			categoryName = "전체";
-		} else if (category == 1) {
-			categoryName = "게임";
-		} else if (category == 2) {
-			categoryName = "먹방";
-		} else if (category == 3) {
-			categoryName = "일상";
-		} else if (category == 4) {
-			categoryName = "모터";
-		} else if (category == 5) {
-			categoryName = "스포츠";
-		} else if (category == 6) {
-			categoryName = "예능";
+		VideoCategoryVO vCatVO = new VideoCategoryVO();
+		if(categoryId != 0) {
+			System.out.println(" 카테고리 정보 취득 ");
+			vCatVO = videoBoardService.getCatInfo(categoryId);
+			System.out.println(" VideoCategoryVO : " + vCatVO);
+		} else {
+			vCatVO.setCategoryName("전체보기");
+			vCatVO.setCategoryPicture("all.jpg");
+			vCatVO.setEditAuthority(4);
+			vCatVO.setViewAuthority(3);
 		}
-		request.setAttribute("categoryId", category);
-		request.setAttribute("categoryName", categoryName);
-		return mav;
+		
+		List<VideoBoardVO> VideoBoardList = videoBoardService.listAll(search);
+		
+		model.addAttribute("pagination", search);
+		model.addAttribute("categoryInfo", vCatVO);
+		model.addAttribute("VideoBoardList", VideoBoardList);
+		System.out.println("VideoBoardController VideoBoardList open");
+		return "videoboard/videoBoardList";
 	}
 
 	// 게시물 상세정보
 	@RequestMapping(value = "/videoBoardView", method = RequestMethod.GET)
-	public ModelAndView view(@RequestParam("boardId") int boardId, HttpServletRequest request) throws Exception {
-
-		// 로그인 세션->followerAccountId
-		HttpSession session = request.getSession();
-		AccountsVO loginVO = (AccountsVO) session.getAttribute("login");
+	public String view(@RequestParam("boardId") int boardId, HttpSession session, Model model) throws Exception {
 
 		VideoBoardVO row = videoBoardService.view(boardId);
 		
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("videoboard/videoBoardView");
-		mav.addObject("row", row);
-
-		return mav;
+		model.addAttribute("row", row);
+		return "videoboard/videoBoardView";
 	}
 
 	

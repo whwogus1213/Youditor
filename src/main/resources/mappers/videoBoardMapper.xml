@@ -4,13 +4,53 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.good.mapper.videoBoardMapper">
-	<select id="listAll" resultType="VideoBoardVO" parameterType="map">
-       select boardId, b.accountId, b.categoryId, subject, object, youtubeLink, 
-				CONVERT_TZ(b.reg_date,'+09:00','+00:00') as reg_date, CONVERT_TZ(b.mod_date,'+09:00','+00:00') as mod_date, viewCount,
-				(select count(*) from videocomment where b.boardId = boardId) as replyCount	, ac.nickname, ac.picture,
-				(select round(AVG(star), 2) from videostar  where b.boardId = boardId) as starCount
-		 from videoBoard b join accounts ac on b.accountId = ac.accountId
-		 <trim prefix="WHERE" prefixOverrides="AND|OR">
+	<select id="listAll" resultType="VideoBoardVO" parameterType="SearchBoard">
+	SELECT
+		boardId, b.accountId, b.categoryId, categoryName, subject, object, youtubeLink,
+		CONVERT_TZ(b.reg_date,'+09:00','+00:00') as reg_date, CONVERT_TZ(b.mod_date,'+09:00','+00:00') as mod_date, viewCount,
+		(select count(*) from videocomment where b.boardId = boardId) as replyCount	, ac.nickname, ac.picture,
+		(select round(AVG(star), 2) from videostar  where b.boardId = boardId) as starCount
+	FROM
+		videoboard b
+	JOIN
+		accounts ac
+	ON
+		b.accountId = ac.accountId
+	JOIN
+		videocategory vc
+	ON
+		b.categoryId = vc.categoryId
+	<trim prefix="WHERE" prefixOverrides="AND|OR">
+		<if test="searchType=='subject' and keyword != null and keyword != '' ">
+			AND subject like CONCAT('%', #{keyword}, '%')
+		</if>
+		<if test="searchType=='object' and keyword != null and keyword != '' ">
+			AND object like CONCAT('%', #{keyword}, '%')
+		</if>
+		<if test="searchType=='nickname' and keyword != null and keyword != '' ">
+			AND nickname like CONCAT('%', #{keyword}, '%')
+		</if>
+		<if test="categoryId > 0">
+			AND b.categoryId = #{categoryId}
+		</if>
+	</trim>
+	ORDER BY
+		boardId desc
+	LIMIT
+		#{startList}, #{listSize} 
+    </select>
+	 
+	<!-- 게시물 총 갯수 구하기 -->
+	<select id="getBoardListCnt" parameterType="SearchBoard" resultType="int">
+		SELECT
+			count(boardId)
+		FROM
+			videoboard b
+		JOIN
+			accounts a
+		ON
+			b.accountId = a.accountId  
+		<trim prefix="WHERE" prefixOverrides="AND|OR">
 			<if test="searchType=='subject' and keyword != null and keyword != '' ">
 				AND subject like CONCAT('%', #{keyword}, '%')
 			</if>
@@ -20,13 +60,18 @@
 			<if test="searchType=='nickname' and keyword != null and keyword != '' ">
 				AND nickname like CONCAT('%', #{keyword}, '%')
 			</if>
-			<if test='categoryId!=0'>
-				AND categoryId = #{categoryId}
-			</if>
 		</trim>
-		 order by boardId desc
-		 LIMIT #{startList}, #{listSize} 
-    </select>
+	</select>
+	
+	<!-- 게시판 카테고리 정보 -->
+	<select id="getCatInfo" parameterType="int" resultType="VideoCategoryVO">
+	SELECT
+		*
+	FROM
+		videocategory
+	WHERE
+		categoryId = #{categoryId}
+	</select>
 
     <!-- 게시물 조회 -->
 	<select id="view" parameterType="int" resultType="VideoBoardVO">
@@ -103,24 +148,4 @@
 		 order by boardId desc 
 	</select>
 	 -->
-	 
-	<!-- 게시물 총 갯수 구하기 -->
-	<select id="getBoardListCnt" resultType="int">
-		select count(boardId)
-		from videoboard b join accounts a on b.accountId=a.accountId  
-		 <trim prefix="WHERE" prefixOverrides="AND|OR">
-			<if test='categoryId!=0'>
-				AND categoryId = #{categoryId}
-			</if>
-			<if test="searchType=='subject' and keyword != null and keyword != '' ">
-				AND subject like CONCAT('%', #{keyword}, '%')
-			</if>
-			<if test="searchType=='object' and keyword != null and keyword != '' ">
-				AND object like CONCAT('%', #{keyword}, '%')
-			</if>
-			<if test="searchType=='nickname' and keyword != null and keyword != '' ">
-				AND nickname like CONCAT('%', #{keyword}, '%')
-			</if>
-		</trim>
-	</select>
 </mapper>
