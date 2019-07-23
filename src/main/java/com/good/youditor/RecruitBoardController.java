@@ -1,23 +1,22 @@
 package com.good.youditor;
 
 import java.util.List;
-import java.util.Locale;
 
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.good.dto.AccountsVO;
+import com.good.dto.NoticeCategoryVO;
 import com.good.dto.RecruitBoardVO;
 import com.good.dto.RecruitCategoryVO;
-import com.good.dto.TipBoardVO;
+import com.good.dto.TipCategoryVO;
+import com.good.dto.VideoCategoryVO;
+import com.good.service.HomeService;
 import com.good.service.RecruitBoardService;
 
 @Controller
@@ -26,6 +25,9 @@ public class RecruitBoardController {
 
 	@Inject
 	RecruitBoardService recruitBoardService;
+	
+	@Inject
+	HomeService homeService;
 
 	// 게시물 목록
 	@RequestMapping(value = "/recruitBoardList", method = RequestMethod.GET)
@@ -33,7 +35,7 @@ public class RecruitBoardController {
 			 @RequestParam(required = false, defaultValue = "1") int page,
 			 @RequestParam(required = false, defaultValue = "1") int range,
 			 @RequestParam(required = false, defaultValue = "object") String searchType,
-			 @RequestParam(required = false) String keyword, HttpServletRequest request) throws Exception {
+			 @RequestParam(required = false) String keyword, HttpSession session) throws Exception {
 		
 		ModelAndView mav = new ModelAndView();
 		RecruitCategoryVO recruitCategoryVO = new RecruitCategoryVO();
@@ -51,6 +53,16 @@ public class RecruitBoardController {
 
 		mav.addObject("pagination", recruitCategoryVO);
 		List<RecruitBoardVO> list = recruitBoardService.listAll(recruitCategoryVO);
+		
+		List<NoticeCategoryVO> nCatList = homeService.bringNoticeCategory();
+		List<VideoCategoryVO> vCatList = homeService.bringVideoCategory();
+		List<TipCategoryVO> tCatList = homeService.bringTipCategory();
+		List<RecruitCategoryVO> rCatList = homeService.bringRecruitCategory();
+		
+		session.setAttribute("nCatList", nCatList);
+		session.setAttribute("vCatList", vCatList);
+		session.setAttribute("tCatList", tCatList);
+		session.setAttribute("rCatList", rCatList);
 
 		
 		mav.setViewName("recruitboard/recruitBoardList");
@@ -61,9 +73,19 @@ public class RecruitBoardController {
 
 	// 게시물 상세정보
 	@RequestMapping(value = "/recruitBoardView", method = RequestMethod.GET)
-	public ModelAndView view(@RequestParam("boardId") int boardId) throws Exception {
+	public ModelAndView view(HttpSession session, @RequestParam("boardId") int boardId) throws Exception {
 
 		RecruitBoardVO row = recruitBoardService.view(boardId);
+		
+		List<NoticeCategoryVO> nCatList = homeService.bringNoticeCategory();
+		List<VideoCategoryVO> vCatList = homeService.bringVideoCategory();
+		List<TipCategoryVO> tCatList = homeService.bringTipCategory();
+		List<RecruitCategoryVO> rCatList = homeService.bringRecruitCategory();
+		
+		session.setAttribute("nCatList", nCatList);
+		session.setAttribute("vCatList", vCatList);
+		session.setAttribute("tCatList", tCatList);
+		session.setAttribute("rCatList", rCatList);
 
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("recruitboard/recruitBoardView");
