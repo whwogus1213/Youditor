@@ -113,16 +113,17 @@
 	</insert>
 
 	<!-- 글 수정 -->
-	<update id="updateRecruitBoard">
-		update
-		recruitboard
-		set
-		subject = #{subject},
-		object =
-		#{object},
-		fee = #{fee}
-		where
-		boardId = #{boardId}
+	<update id="updateRecruitBoard" parameterType="RecruitBoardVO">
+		update 
+		recruitBoard 
+		set 
+		subject = #{subject}, 
+		object = 
+		#{object}, 
+		fee = #{fee},
+		mod_date = now()  
+		where 
+		boardId = #{boardId} 
 	</update>
 
 	<!-- 글 삭제 -->

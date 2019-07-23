@@ -51,8 +51,8 @@
 						<c:if test="${row.categoryId eq 2}"><button type="button" class="btn btn-secondary btn-md" disabled>구직</button></c:if></h4>
 					</div>
 					<div class="col-sm-10" >
-						<h1>${row.subject }</h1>
-						<h4 style="color:brown">| 급여 : ${row.fee}\ |</h4>
+						<h2>${row.subject }</h2>
+						<h4 style="color:brown">| 급여 : ${row.fee} \ |</h4>
 					</div>
 				</div>
 				<div class="col-sm-12 row">
@@ -98,10 +98,10 @@
 		</div>
 		<hr>
 		<div align="center">
-			<button type="button" class="btn btn-primary" onclick="location.href='/recruitboard/recruitBoardList' ">목록으로</button>
-			<c:if test="${login.accountId eq row.accountId}">
-				<button type="button" class="btn btn-success" onclick="location.href='/recruitboard/updateRecruitBoard?boardId=${row.boardId}' ">수정</button>
-			<button class="btn btn-danger" id="deletebtn">삭제</button>
+			<button type="button" class="btn btn-link" onclick="location.href='/recruitboard/recruitBoardList'" style="color:black"><i class="fas fa-clipboard-list"></i>&nbsp;&nbsp;목록으로</button>
+			<c:if test="${login.accountId eq row.accountId}">|
+			<button type="button" class="btn btn-link" onclick="location.href='/recruitboard/updateRecruitBoard?boardId=${row.boardId}'"  style="color:black"><i class="fas fa-cut"></i>&nbsp;&nbsp;수정</button>|
+			<button class="btn btn-link" id="deletebtn" style="color:black"><i class="fas fa-trash-alt"></i>&nbsp;&nbsp;삭제</button>
 			</c:if>
 		</div>
 	</div>

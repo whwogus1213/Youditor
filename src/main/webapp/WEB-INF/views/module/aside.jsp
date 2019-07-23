@@ -49,7 +49,7 @@ li {
 .aside {
 	margin: 20px;
 	width: 200px;
-	height: 270px;
+	height: 256px;
 	float: left;    
 /* 	border: 1px solid #EAEAEA; */
 	border: none;
@@ -95,6 +95,7 @@ li {
 
 label {
 	text-align: center;
+/*  	height: 25px; */
 }
 		
 .table .thead-dark th {
@@ -110,13 +111,15 @@ label {
 .table {
 	border: none;
 	margin-bottom: 0rem;
-	height: 190px;
+	height: 210px;
 }
 
 .table td, .table th {
 	border: none;
     padding: 13px 0 10px 4px;
     font-size: 13px;
+/*     width: 71px; */
+/*     height: 19px; */
 }
 		
 		
