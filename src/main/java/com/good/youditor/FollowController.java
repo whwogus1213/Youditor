@@ -14,7 +14,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.good.dto.AccountsVO;
 import com.good.dto.FollowListVO;
+import com.good.dto.NoticeCategoryVO;
+import com.good.dto.RecruitCategoryVO;
+import com.good.dto.TipCategoryVO;
+import com.good.dto.VideoCategoryVO;
 import com.good.service.FollowService;
+import com.good.service.HomeService;
 import com.good.service.VideoBoardService;
 
 @Controller
@@ -23,6 +28,9 @@ public class FollowController {
 
 	@Inject
 	FollowService followService;
+	
+	@Inject
+	HomeService homeService;
 
 	// 팔로잉 (로그인유저가 팔로우하는 사람 리스트)
 	@RequestMapping(value = "/followingList")
@@ -48,6 +56,16 @@ public class FollowController {
 			checkListVO.setCheck(result);
 			followingList.set(i, checkListVO);
 		}
+		
+		List<NoticeCategoryVO> nCatList = homeService.bringNoticeCategory();
+		List<VideoCategoryVO> vCatList = homeService.bringVideoCategory();
+		List<TipCategoryVO> tCatList = homeService.bringTipCategory();
+		List<RecruitCategoryVO> rCatList = homeService.bringRecruitCategory();
+		
+		session.setAttribute("nCatList", nCatList);
+		session.setAttribute("vCatList", vCatList);
+		session.setAttribute("tCatList", tCatList);
+		session.setAttribute("rCatList", rCatList);
 		
 		model.addAttribute("followingList", followingList);
 		System.out.println(accountId);
