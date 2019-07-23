@@ -137,7 +137,7 @@ th {
 </head>
 <body style="background-color: #FFF;">
 	<jsp:include page="../module/top2.jsp" flush="false"/>
-	<div align="center">
+	<div align="center" style="padding-top:5%">
 		<c:if test="${login.accountId ne null }">
 			<form name="modForm" method="POST" enctype="multipart/form-data">
 				<table>

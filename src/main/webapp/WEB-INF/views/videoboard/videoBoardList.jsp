@@ -206,13 +206,25 @@
 	
 	
 	<!-- 배너 목록 -->
-	<div style="background-image:url('/resources/images/videoList/${categoryInfo.categoryPicture}'); background-position:43% 70%;background-size:100%; color:white; text-shadow: -1px 0 #0099CC, 0 1px #0099CC, 1px 0 #0099CC, 0 -1px #0099CC; padding-top:130px; padding-bottom:5%;">
-		<div class="col-sm-12">
-			<h1 align="center" style="font-size:60px; letter-spacing:60px">
-				<strong>&nbsp;${categoryInfo.categoryName }</strong>
-			</h1>
-			<h4 align="center">${categoryInfo.categoryName } 유투버들의 편집 영상입니다.</h4>
-		</div>
+	<div class="col-sm-12" style="background-image:url('/resources/images/videoList/${categoryInfo.categoryPicture}'); height: 300px; background-size:100%; color:white; padding-top:130px; padding-bottom:5%; background-position: center;">
+	</div>
+	<div class="bg-text" style="background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0, 0.4); /* Black w/opacity/see-through */
+  color: white;
+  font-weight: bold;
+  border: 3px solid #f1f1f1;
+  position: absolute;
+  top: 24%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  width: 60%;
+  padding: 30px;
+  text-align: center;">
+		<h1 align="center" style="font-size:60px; letter-spacing:60px">
+			<strong>&nbsp;${categoryInfo.categoryName }</strong>
+		</h1>
+		<h4 align="center">${categoryInfo.categoryName } 유투버들의 편집 영상입니다.</h4>
 	</div>
 	<div id="deleteOK" class="alert alert-danger hidden" role="alert" style="visibility: hidden">글이 삭제되었습니다.</div>
 
