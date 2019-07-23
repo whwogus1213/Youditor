@@ -94,7 +94,11 @@ a:hover {
 							html += "<a href='/videoboard/videoBoardView?boardId="+data[i].boardId+"'>"+data[i].subject+"</a></h4>";
 							html += "<div class='card-body'>";
 							html += "<a href='/videoboard/videoBoardView?boardId="+data[i].boardId+"'>";
-							html += "<img width='100%' height='20%' src='https://img.youtube.com/vi/" + data[i].youtubeLink.substring(32) + "/mqdefault.jpg'></img></a>";
+							if(data[i].youtubeLink.length > 31){
+								html += "<img width='100%' height='20%' src='https://img.youtube.com/vi/" + data[i].youtubeLink.substring(32) + "/mqdefault.jpg'></img></a>";
+							}else{
+								html += "<img width='100%' height='20%' src='https://img.youtube.com/vi/" + data[i].youtubeLink.substring(17) + "/mqdefault.jpg'></img></a>";
+							}
 							html += "</div>";
 							html += "<div class='card-footer'>";
 							html += "<i class='far fa-clock'></i>";
@@ -140,7 +144,7 @@ function getAccountsRankList(){
 					if(i < 3){
 						html += "<div class='col-lg-4 col-sm-6 portfolio-item'>";
 						html += "<div class='card h-100'>";
-						html += "<a href='#'><img class='card-img-top' src='/image/"+data[i].picture+"' alt='' width='80' height='200'></a>";
+						html += "<img class='card-img-top' src='/image/"+data[i].picture+"' alt='' width='80' height='200'/>";
 						html += "<div class='card-body'>";
 						html += "<h4 class='card-title'>";
 						html += "<div class='dropright'>";
