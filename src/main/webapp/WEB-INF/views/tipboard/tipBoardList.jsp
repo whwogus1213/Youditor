@@ -96,8 +96,8 @@ footer{
 		location.href = url;
 	}*/
 	//다음 버튼 이벤트
-	function fn_next(categoryId, page, range, rangeSize, searchType, keyword) {
-		var page = (parseInt((page - 1) / rangeSize) * rangeSize) + 1;
+	function fn_next(categoryId, page, rangeSize, searchType, keyword) {
+		var page = ((parseInt((page - 1) / rangeSize) + 1) * rangeSize) + 1;
 		var url = "${pageContext.request.contextPath}/tipboard/tipBoardList?";
 
 		if(categoryId != 0) {
