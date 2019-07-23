@@ -41,7 +41,7 @@ public class HomeController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model, HttpSession session) throws Exception {
 		logger.info("Welcome home! The client locale is {}.", locale);
-
+		
 		List<NoticeCategoryVO> nCatList = service.bringNoticeCategory();
 		List<VideoCategoryVO> vCatList = service.bringVideoCategory();
 		List<TipCategoryVO> tCatList = service.bringTipCategory();

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.good.dao.NoticeBoardDAO;
 import com.good.dto.NoticeBoardVO;
+import com.good.dto.NoticeCategoryVO;
 import com.good.dto.Search;
 import com.good.dto.SearchBoard;
 
@@ -22,6 +23,12 @@ public class NoticeBoardServiceImpl implements NoticeBoardService {
 	@Override
 	public List<NoticeBoardVO> listAll(SearchBoard search) throws Exception {
 		return noticeBoardDAO.listAll(search);
+	}
+	
+	// 카테고리 정보 취득
+	@Override
+	public NoticeCategoryVO getCatInfo(int categoryId) throws Exception {
+		return noticeBoardDAO.getCatInfo(categoryId);
 	}
 
 	// 게시물 상세보기

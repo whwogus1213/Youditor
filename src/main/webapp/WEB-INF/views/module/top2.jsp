@@ -255,6 +255,7 @@ function DosignUp() {
 
 <script src="https://kit.fontawesome.com/e83fabbb47.js"></script>
 
+<c:if test="${login eq null }">
 <!-- Trigger the modal with a button -->
 <!-- Modal -->
 <div id="myModal" class="modal fade" role="dialog">
@@ -307,27 +308,13 @@ function DosignUp() {
 
   </div>
 </div>
-<!-- Side navigation -->
+</c:if>
+
+
+<!-- Side navigation 채팅 chat chatting -->
 <div class="sidenav" id="mySidebar"  style="padding: 0; margin-top: 1.6%; border-radius: 10px;">
 	<div align="center">
-		<c:if test="${login.accountId ne null }">
 			<jsp:include page="../chat/chattingview.jsp" flush="false"/>
-		</c:if>
-		<c:if test="${login.accountId eq null }">
-			<div class="chat_window">
-    			<div class="top_menu">
-        			<div class="title">유디터(<span id='sessionCnt'></span>)</div>
-    			</div>
-    			<ul class="messages"></ul>
-    			<div class="bottom_wrapper clearfix">
-					<p style="font-size: 10px;margin-bottom: 3px;text-align: left;font-weight: 300;">${login.nickname}</p>
-	       			<div class="message_input_wrapper">
-			            <input class="message_input" disabled="disabled" placeholder="로그인후 사용가능.."/>
-        			</div>
-    			</div>
-			</div>
-			
-		</c:if>
 	</div>
 </div>
 

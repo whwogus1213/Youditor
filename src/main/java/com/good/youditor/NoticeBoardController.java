@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.good.dto.NoticeBoardVO;
+import com.good.dto.NoticeCategoryVO;
 import com.good.dto.SearchBoard;
 import com.good.service.NoticeBoardService;
 
@@ -28,24 +29,40 @@ public class NoticeBoardController {
 	// 게시물 목록 + 페이징 + 검색
 	@RequestMapping(value = "/noticeBoardList", method = RequestMethod.GET)
 	public String list(Model model,
-						@RequestParam(required = false, defaultValue = "0", value = "categoryId") int categoryId,
+						@RequestParam(required = false, defaultValue = "0") int categoryId,
 						@RequestParam(required = false, defaultValue = "1") int page,
-						@RequestParam(required = false, defaultValue = "1") int range,
 						@RequestParam(required = false, defaultValue = "object") String searchType,
 						@RequestParam(required = false) String keyword) throws Exception {
 		SearchBoard search = new SearchBoard();
 		search.setSearchType(searchType);
 		search.setKeyword(keyword);
+		search.setCategoryId(categoryId);
 		
 		// 전체 게시글 개수
 		int listCnt = noticeBoardService.getBoardListCnt(search);
 		
 		System.out.println(" listCnt : " + listCnt);
+		System.out.println(" categoryId : " + categoryId);
+		
+		int rangeSize = search.getRangeSize();
+		int range = ((page - 1) / rangeSize) + 1;
 		
 		search.pageInfo(page, range, listCnt);
-		search.setCategoryId(categoryId);
+		
+		NoticeCategoryVO nCatVO = new NoticeCategoryVO();
+		if(categoryId != 0) {
+			System.out.println(" 카테고리 정보 취득 ");
+			nCatVO = noticeBoardService.getCatInfo(categoryId);
+			System.out.println(" VideoCategoryVO : " + nCatVO);
+		} else {
+			nCatVO.setCategoryName("전체공지");
+			nCatVO.setCategoryPicture("all.jpg");
+			nCatVO.setEditAuthority(4);
+			nCatVO.setViewAuthority(3);
+		}
 		
 		model.addAttribute("pagination", search);
+		model.addAttribute("categoryInfo", nCatVO);
 		model.addAttribute("NoticeBoardList", noticeBoardService.listAll(search));
 		System.out.println("NoticeBoardController NoticeBoardList open");
 		return "noticeboard/noticeBoardList";

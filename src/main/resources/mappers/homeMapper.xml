@@ -45,6 +45,8 @@
 		*
 	FROM
 		noticecategory
+	ORDER BY
+		categoryId
 	</select>
 	
 	<!-- 비디오 카테고리 가져오기 -->
@@ -53,6 +55,8 @@
 		*
 	FROM
 		videocategory
+	ORDER BY
+		categoryId
 	</select>
 	
 	<!-- 팁 카테고리 가져오기 -->
@@ -61,6 +65,8 @@
 		*
 	FROM
 		tipcategory
+	ORDER BY
+		categoryId
 	</select>
 	
 	<!-- 구인구직 카테고리 가져오기 -->
@@ -69,6 +75,8 @@
 		*
 	FROM
 		recruitcategory
+	ORDER BY
+		categoryId
 	</select>
 	
 	
