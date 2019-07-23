@@ -5,11 +5,20 @@
 
 <mapper namespace="com.good.mapper.tipBoardMapper">
 	<!-- 게시물 목록 + 페이징 + 검색 -->
-	<select id="listAll" resultType="TipBoardVO">
-		SELECT boardId, b.accountId, subject, object,
-			CONVERT_TZ(b.reg_date,'+09:00','+00:00') as reg_date, CONVERT_TZ(b.mod_date,'+09:00','+00:00') as mod_date, viewCount, nickname, categoryName 
-			FROM tipboard b join accounts a on b.accountId = a.accountId
-							   join tipcategory c on b.categoryId=c.categoryId
+	<select id="listAll" parameterType="SearchBoard" resultType="TipBoardVO">
+		SELECT
+			boardId, b.accountId, subject, object, CONVERT_TZ(b.reg_date,'+09:00','+00:00') as reg_date,
+			CONVERT_TZ(b.mod_date,'+09:00','+00:00') as mod_date, viewCount, nickname, categoryName 
+		FROM
+			tipboard b
+			JOIN
+				accounts a
+				ON
+				b.accountId = a.accountId
+			JOIN
+				tipcategory c
+				ON
+				b.categoryId=c.categoryId
 		<trim prefix="WHERE" prefixOverrides="AND|OR">
 			<if test="searchType=='subject' and keyword != null and keyword != '' ">
 				AND subject like CONCAT('%', #{keyword}, '%')
@@ -20,9 +29,26 @@
 			<if test="searchType=='nickname' and keyword != null and keyword != '' ">
 				AND nickname like CONCAT('%', #{keyword}, '%')
 			</if>
+			<if test="categoryId > 0">
+				AND b.categoryId = #{categoryId}
+			</if>
 		</trim>
-		order by boardId desc
-		LIMIT #{startList}, #{listSize}	</select>
+		ORDER BY
+			boardId desc
+		LIMIT
+			#{startList}, #{listSize}
+	</select>
+	
+	<!-- 카테고리 정보 취득 -->
+	<select id="getCatInfo" parameterType="int" resultType="TipCategoryVO">
+	SELECT
+		*
+	FROM
+		tipcategory
+	WHERE
+		categoryId = #{categoryId}
+	</select>
+	
 	<!-- 게시물 조회 -->
 	<select id="view" parameterType="int" resultType="TipBoardVO">
 		<!-- 
@@ -41,9 +67,15 @@
 	</select>
 
 	<!-- 게시물 총 갯수 구하기 -->
-	<select id="getBoardListCnt" resultType="int">
-		select count(boardId)
-		from tipboard b join accounts a on b.accountId=a.accountId  
+	<select id="getBoardListCnt" parameterType="SearchBoard" resultType="int">
+		SELECT
+			count(boardId)
+		FROM
+			tipboard b
+			JOIN
+				accounts a
+				ON
+				b.accountId=a.accountId  
 		 <trim prefix="WHERE" prefixOverrides="AND|OR">
 			<if test="searchType=='subject' and keyword != null and keyword != '' ">
 				AND subject like CONCAT('%', #{keyword}, '%')
@@ -53,6 +85,9 @@
 			</if>
 			<if test="searchType=='nickname' and keyword != null and keyword != '' ">
 				AND nickname like CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="categoryId > 0">
+				AND b.categoryId = #{categoryId}
 			</if>
 		</trim>
 	</select>

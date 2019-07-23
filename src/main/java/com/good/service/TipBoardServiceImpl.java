@@ -7,8 +7,9 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.good.dao.TipBoardDAO;
-import com.good.dto.Search;
+import com.good.dto.SearchBoard;
 import com.good.dto.TipBoardVO;
+import com.good.dto.TipCategoryVO;
 
 @Service
 public class TipBoardServiceImpl implements TipBoardService {
@@ -19,8 +20,14 @@ public class TipBoardServiceImpl implements TipBoardService {
 
 	// 게시물 목록 + 페이징 + 검색
 	@Override
-	public List<TipBoardVO> listAll(Search search) throws Exception {
+	public List<TipBoardVO> listAll(SearchBoard search) throws Exception {
 		return tipBoardDAO.listAll(search);
+	}
+	
+	// 카테고리 정보 취득
+	@Override
+	public TipCategoryVO getCatInfo(int categoryId) throws Exception {
+		return tipBoardDAO.getCatInfo(categoryId);
 	}
 
 	// 게시물 상세보기
@@ -32,7 +39,7 @@ public class TipBoardServiceImpl implements TipBoardService {
 
 	// 게시물 총 개수
 	@Override
-	public int getBoardListCnt(Search search) throws Exception {
+	public int getBoardListCnt(SearchBoard search) throws Exception {
 		return tipBoardDAO.getBoardListCnt(search);
 	}
 
