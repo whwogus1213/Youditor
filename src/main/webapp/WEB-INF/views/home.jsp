@@ -78,6 +78,19 @@ a:hover {
   </style>
   <script>
   $(function() {
+	  var result = '${result}';
+		  if(result == 'loginOK'){
+				alert('로그인 되었습니다.');
+			}
+		  if(result == 'loginNO'){
+				alert('아이디나 비밀번호를 다시 확인하여 주세요.');
+			}
+		  if(result == 'authorityNO'){
+				alert('해당 권한이 부족합니다.');
+			}
+		  if(result == 'updateOK'){
+				alert('회원정보가 수정되었습니다.');
+			}
   $.ajax({
 			type : "POST",
 			url : "/videostar/StarList",

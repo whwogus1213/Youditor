@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%> 
 <%@ page session="true" %>
@@ -18,6 +19,7 @@
 	table {
     	margin: 40px;
     	width: 800px;
+    	margin-top: 100px;
 	}
 	textarea, input {
     padding-left: 5px;
@@ -143,11 +145,11 @@ th {
 				<table>
 					<tr>
 						<th class="thcell">가입날자</th>
-						<td>${login.reg_date }</td>
+						<td><fmt:formatDate value="${login.reg_date }" pattern="yyyy-MM-dd" /></td>
 					</tr>
 					<tr>
 						<th class="thcell">마지막수정날자</th>
-						<td>${login.mod_date }</td>
+						<td><fmt:formatDate value="${login.mod_date }" pattern="yyyy-MM-dd" /></td>
 					</tr>
 					<tr>
 						<th class="thcell">이메일</th>
