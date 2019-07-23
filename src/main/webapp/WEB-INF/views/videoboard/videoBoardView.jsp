@@ -317,6 +317,7 @@ i {
 				
 			</div>
 			<div class="col-4 offset-4" align="right">
+				<i class="far fa-list-alt" onclick="location.href='/videoboard/videoBoardList?categoryId='+${row.categoryId}" style="cursor: pointer;">목록으로</i>&nbsp;&nbsp;
 				<c:if test="${login.accountId eq row.accountId}">
 					<i class="far fa-edit" onclick="location.href='/videoboard/updateVideoBoard.do?boardId=${row.boardId}'"
 						style="cursor: pointer;">수정</i>&nbsp;
