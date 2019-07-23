@@ -10,6 +10,7 @@ public class VideoStarVO {
 	private String reg_date;
 	private String subject;
 	private float starCount;
+	private String youtubeLink;
 	
 	private int viewCount;
 	
@@ -79,13 +80,24 @@ public class VideoStarVO {
 	public void setViewCount(int viewCount) {
 		this.viewCount = viewCount;
 	}
+	
+
+	public String getYoutubeLink() {
+		return youtubeLink;
+	}
+
+	public void setYoutubeLink(String youtubeLink) {
+		this.youtubeLink = youtubeLink;
+	}
 
 	@Override
 	public String toString() {
 		return "VideoStarVO [starId=" + starId + ", boardId=" + boardId + ", accountId=" + accountId + ", star=" + star
-				+ ", reg_date=" + reg_date + ", subject=" + subject + ", starCount=" + starCount + ", viewCount="
-				+ viewCount + "]";
+				+ ", reg_date=" + reg_date + ", subject=" + subject + ", starCount=" + starCount + ", youtubeLink="
+				+ youtubeLink + ", viewCount=" + viewCount + "]";
 	}
+
+	
 
 	
 
