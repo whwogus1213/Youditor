@@ -67,8 +67,8 @@
 	}
 
 	//다음 버튼 이벤트
-	function fn_next(categoryId, page, range, rangeSize, searchType, keyword) {
-		var page = ((parseInt(page / rangeSize) + 1) * rangeSize) + 1;
+	function fn_next(categoryId, page, rangeSize, searchType, keyword) {
+		var page = ((parseInt((page - 1) / rangeSize) + 1) * rangeSize) + 1;
 		var url = "${pageContext.request.contextPath}/noticeboard/noticeBoardList?";
 
 		if(categoryId != 0) {
@@ -140,7 +140,7 @@
 		</div>
 	</div>
 	<div id="deleteOK" class="alert alert-danger hidden" role="alert" style="visibility: hidden">글이 삭제되었습니다.</div>
-
+	
 	<jsp:include page="../module/aside.jsp" flush="false" />
 	<div class="container">
 		<div class="row">

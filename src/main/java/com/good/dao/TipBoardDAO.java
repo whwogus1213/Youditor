@@ -2,19 +2,23 @@ package com.good.dao;
 
 import java.util.List;
 
-import com.good.dto.Search;
+import com.good.dto.SearchBoard;
 import com.good.dto.TipBoardVO;
+import com.good.dto.TipCategoryVO;
 
 public interface TipBoardDAO {
 
 	// 게시물 목록 + 페이징 + 검색
-	public List<TipBoardVO> listAll(Search search) throws Exception;
+	public List<TipBoardVO> listAll(SearchBoard search) throws Exception;
+	
+	// 카테고리 정보 취득
+	public TipCategoryVO getCatInfo(int categoryId) throws Exception;
 
 	// 게시물 상세보기
 	public TipBoardVO view(int boardId) throws Exception;
 
 	// 게시물 총 갯수
-	public int getBoardListCnt(Search search) throws Exception;
+	public int getBoardListCnt(SearchBoard search) throws Exception;
 
 	// 글 쓰기
 	public void insertTipBoard(TipBoardVO vo) throws Exception;

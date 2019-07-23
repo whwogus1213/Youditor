@@ -13,9 +13,9 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <title>${row.subject } - 공지사항 - YouDitor</title>
-<link href="/resources/vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
-<link href="/resources/vendor/bootstrap/css/bootstrap-grid.min.css" rel="stylesheet">
-<script src="/resources/js/jquery-3.3.1.min.js"></script>
+<!-- <link href="/resources/vendor/bootstrap/css/bootstrap.css" rel="stylesheet"> -->
+<!-- <link href="/resources/vendor/bootstrap/css/bootstrap-grid.min.css" rel="stylesheet"> -->
+<!-- <script src="/resources/js/jquery-3.3.1.min.js"></script> -->
 <script src="https://kit.fontawesome.com/e83fabbb47.js"></script>
 <jsp:include page="../module/header.jsp" flush="false" />
 </head>

@@ -59,24 +59,7 @@ var questions = [
 	  {question:"자신을 소개해주세요"},
 	]
 
-	/**********
-
-	  !!!!!
-	  New Version: https://codepen.io/arcs/pen/rYXrNQ
-	  !!!!!
-	  
-	  Credits for the design go to XavierCoulombeM
-	  https://dribbble.com/shots/2510592-Simple-register-form
-	  
-	  This Pen uses no libraries except fonts and should 
-	  work on all modern browsers
-	  
-	  The answers are stored in the `questions` array
-	  with the key `value`. 
-
-	 **********/
-
-	;(function(){
+	$(function(){
 
 	  var tTime = 100  // transition transform time from #register in ms
 	  var wTime = 200  // transition width time from #register in ms
@@ -91,7 +74,70 @@ var questions = [
 	  progressButton.addEventListener('click', validate)
 	  inputField.addEventListener('keyup', function(e){
 	    transform(0, 0) // ie hack to redraw
-	    if(e.keyCode == 13) validate()
+	    if(e.keyCode == 13) {
+		    if(position == 0) { // email 중복 체크
+		    	$.ajax({
+	  				async: true,
+	  				type: "POST",
+	  				data: inputField.value,
+	  				url: "checkEmail.do",
+	  				dataType : "json",
+	  				contentType: "application/json; charset=UTF-8",
+	  				success: function (data) {
+	  			        if(data.cnt > 0) {
+							var tempLabel = $($("#inputLabel").clone());
+							
+							inputLabel.innerHTML = "이미 존재하는 이메일"
+							$("#inputLabel").css("color","red");
+							setTimeout(function() {
+								inputLabel.innerHTML = tempLabel.html();
+								$("#inputLabel").css("color",tempLabel.css("color"));
+							}, 1000)
+								
+							wrong();
+							
+	  			        } else {
+	  			        	validate()
+		  			    }
+	  			        
+	  				},
+	  				error : function(error) {
+	  					alert("error : " + error);
+	  				}
+	  			});
+	  			
+			} else if(position == 2){
+				$.ajax({
+	  				async: true,
+	  				type: "POST",
+	  				data: inputField.value,
+	  				url: "checkNickname.do",
+	  				dataType : "json",
+	  				contentType: "application/json; charset=UTF-8",
+	  				success: function (data) {
+	  			        if(data.cnt > 0) {
+							var tempLabel = $($("#inputLabel").clone());
+							
+							inputLabel.innerHTML = "이미 존재하는 닉네임"
+							$("#inputLabel").css("color","red");
+							setTimeout(function() {
+								inputLabel.innerHTML = tempLabel.html();
+								$("#inputLabel").css("color",tempLabel.css("color"));
+							}, 1000)
+							wrong();
+	  						
+	  			        } else {
+	  						validate()
+	  			        }
+	  				},
+	  				error : function(error) {
+	  					alert("error : " + error);
+	  				}
+	  			});
+			} else {
+				validate()
+			}
+	    }
 	  })
 
 	  // functions

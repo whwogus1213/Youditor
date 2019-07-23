@@ -171,7 +171,7 @@
 </c:if>
 
 <c:if test="${login.accountId eq null }">
-	<div class="chat_window">
+	<div class="chat_window" style="opacity: 0.8;">
 		<div class="top_menu">
 		<div class="title">유디터(<span id='sessionCnt'></span>)</div>
 		</div>
@@ -179,7 +179,7 @@
 		<div class="bottom_wrapper clearfix">
 			<p style="font-size: 10px;margin-bottom: 3px;text-align: left;font-weight: 300;">${login.nickname}</p>
 		<div class="message_input_wrapper">
-	            <input class="message_input" disabled="disabled" placeholder="로그인후 사용가능.."/>
+	            <input class="message_input" disabled="disabled" placeholder="로그인후 사용가능.." style="font-family: 'Jua';"/>
 		</div>
 		</div>
 	</div>

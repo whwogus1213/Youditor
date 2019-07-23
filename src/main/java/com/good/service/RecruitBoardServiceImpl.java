@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.good.dao.RecruitBoardDAO;
 import com.good.dto.RecruitBoardVO;
 import com.good.dto.RecruitCategoryVO;
+import com.good.dto.SearchBoard;
 import com.good.dto.VideoCategoryVO;
 
 @Service
@@ -20,8 +21,20 @@ public class RecruitBoardServiceImpl implements RecruitBoardService {
 
 	// 게시물 목록
 	@Override
-	public List<RecruitBoardVO> listAll(RecruitCategoryVO rcvo) throws Exception {
-		return recruitBoardDAO.listAll(rcvo);
+	public List<RecruitBoardVO> listAll(SearchBoard search) throws Exception {
+		return recruitBoardDAO.listAll(search);
+	}
+	
+	// 카테고리 정보 취득
+	@Override
+	public RecruitCategoryVO getCatInfo(int categoryId) throws Exception {
+		return recruitBoardDAO.getCatInfo(categoryId);
+	}
+	
+	// 게시물 갯수
+	@Override
+	public int getBoardListCnt(SearchBoard search) throws Exception {
+		return recruitBoardDAO.getBoardListCnt(search);
 	}
 
 	// 게시물 읽기
@@ -49,10 +62,4 @@ public class RecruitBoardServiceImpl implements RecruitBoardService {
 		recruitBoardDAO.deleteRecruitBoard(boardId);
 	}
 	
-	// 게시물 갯수
-	@Override
-	public int getBoardListCnt(RecruitCategoryVO rcvo) throws Exception {
-		return recruitBoardDAO.getBoardListCnt(rcvo);
-	}
-
 }

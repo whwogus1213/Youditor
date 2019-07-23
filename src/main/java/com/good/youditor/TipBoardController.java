@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Locale;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,8 +15,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.good.dto.Search;
+import com.good.dto.NoticeCategoryVO;
+import com.good.dto.RecruitCategoryVO;
+import com.good.dto.SearchBoard;
 import com.good.dto.TipBoardVO;
+import com.good.dto.TipCategoryVO;
+import com.good.dto.VideoCategoryVO;
+import com.good.service.HomeService;
 import com.good.service.TipBoardService;
 
 @Controller
@@ -24,24 +30,56 @@ public class TipBoardController {
 
 	@Inject
 	TipBoardService tipBoardService;
+	
+	@Inject
+	HomeService homeService;
 
 	// 게시물 목록 + 페이징 + 검색
 	@RequestMapping(value = "/tipBoardList", method = RequestMethod.GET)
-	public String list(Model model, @RequestParam(required = false, defaultValue = "1") int page,
-						@RequestParam(required = false, defaultValue = "1") int range,
+	public String list(Model model, HttpSession session,
+						@RequestParam(required = false, defaultValue = "0") int categoryId,
+						@RequestParam(required = false, defaultValue = "1") int page,
 						@RequestParam(required = false, defaultValue = "object") String searchType,
 						@RequestParam(required = false) String keyword) throws Exception {
-		
-		Search search = new Search();
+		SearchBoard search = new SearchBoard();
 		search.setSearchType(searchType);
 		search.setKeyword(keyword);
-
+		search.setCategoryId(categoryId);
+		
 		// 전체 게시글 개수
 		int listCnt = tipBoardService.getBoardListCnt(search);
 
+		System.out.println(" listCnt : " + listCnt);
+		System.out.println(" categoryId : " + categoryId);
+		
+		int rangeSize = search.getRangeSize();
+		int range = ((page - 1) / rangeSize) + 1;
+		
 		search.pageInfo(page, range, listCnt);
+		
+		TipCategoryVO tCatVO = new TipCategoryVO();
+		if(categoryId != 0) {
+			System.out.println(" 카테고리 정보 취득 ");
+			tCatVO = tipBoardService.getCatInfo(categoryId);
+			System.out.println(" TipCategoryVO : " + tCatVO);
+		} else {
+			tCatVO.setCategoryName("전체공지");
+			tCatVO.setEditAuthority(4);
+			tCatVO.setViewAuthority(3);
+		}
+		
+		List<NoticeCategoryVO> nCatList = homeService.bringNoticeCategory();
+		List<VideoCategoryVO> vCatList = homeService.bringVideoCategory();
+		List<TipCategoryVO> tCatList = homeService.bringTipCategory();
+		List<RecruitCategoryVO> rCatList = homeService.bringRecruitCategory();
+		
+		session.setAttribute("nCatList", nCatList);
+		session.setAttribute("vCatList", vCatList);
+		session.setAttribute("tCatList", tCatList);
+		session.setAttribute("rCatList", rCatList);
 
 		model.addAttribute("pagination", search);
+		model.addAttribute("categoryInfo", tCatVO);
 		model.addAttribute("TipBoardList", tipBoardService.listAll(search));
 		System.out.println("TipBoardController TipBoardList open");
 		return "tipboard/tipBoardList";
@@ -49,9 +87,19 @@ public class TipBoardController {
 
 	// 게시물 상세정보
 	@RequestMapping(value = "/tipBoardView", method = RequestMethod.GET)
-	public ModelAndView view(@RequestParam("boardId") int boardId) throws Exception {
+	public ModelAndView view(HttpSession session, @RequestParam("boardId") int boardId) throws Exception {
 		System.out.println("*************************************************");
 		TipBoardVO row = tipBoardService.view(boardId);
+		
+		List<NoticeCategoryVO> nCatList = homeService.bringNoticeCategory();
+		List<VideoCategoryVO> vCatList = homeService.bringVideoCategory();
+		List<TipCategoryVO> tCatList = homeService.bringTipCategory();
+		List<RecruitCategoryVO> rCatList = homeService.bringRecruitCategory();
+		
+		session.setAttribute("nCatList", nCatList);
+		session.setAttribute("vCatList", vCatList);
+		session.setAttribute("tCatList", tCatList);
+		session.setAttribute("rCatList", rCatList);
 
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("tipboard/tipBoardView");

@@ -11,39 +11,50 @@ li {
 }
 .style {
     display: block;
-    color: #BBB;
-    font-size: 14px;
-    font-weight: 500;
-    border-bottom: 1px solid #FFF;
+    color: #ddd;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+/*     border-bottom: 1px solid #FFF; */
 }
 .style1 {
     display: block;
     color: #BBB;
     font-size: 14px;
     font-weight: 500;
-    border-bottom: 1px solid #FFF;
+/*     border-bottom: 1px solid #FFF; */
 }
 .style:hover {
-    color: #993399;
+/*     color: #993399; */
+    color: #333;
 }
 .activebnt {
-    color: #993399;
-    padding-bottom: 3px;
-    border-bottom: 2px solid #FFF;
-    
-	border-color: rgb(102, 51, 153, 0.5);
+/*     color: #993399; */
+/*     padding-bottom: 3px; */
+/*     border-bottom: 2px solid #FFF; */
+/* 	border-color: rgb(102, 51, 153, 0.5); */
+
+    color: #000;
+    font-weight: 600;
+    padding-bottom: 1px;
+    font-size: 16px;
+    border: none;
 	}
 	.activebnt:hover {
-    color: #e472e4;
-    border-color: rgb(147, 97, 197, 0.5);
+/*     color: #e472e4; */
+/*     border-color: rgb(147, 97, 197, 0.5); */
+	border: none;
+    color: #000;
 	}
 .aside {
 	margin: 20px;
 	width: 200px;
-	height: 325px;
+	height: 270px;
 	float: left;    
-	border: 1px solid #EAEAEA;
+/* 	border: 1px solid #EAEAEA; */
+	border: none;
     background: #f9fdfd;
+    box-shadow: 3px 3px 20px 3px #ccc;
 	}
 .tab_item1 {
 	display: none;
@@ -72,73 +83,134 @@ li {
 #best3 { display: none; }
 #best4 { display: none; }
 
-#best1 ~ .tab_item1 { display: none; }
-#best2 ~ .tab_item2 { display: none; }
-#best3 ~ .tab_item3 { display: none; }
-#best4 ~ .tab_item4 { display: none; }
+#best1 ~ .tab_item1 { display: none; border: none; }
+#best2 ~ .tab_item2 { display: none; border: none; }
+#best3 ~ .tab_item3 { display: none; border: none; }
+#best4 ~ .tab_item4 { display: none; border: none; }
  
-#best1:checked ~ .tab_item1 { display: block; }
-#best2:checked ~ .tab_item2 { display: block; }
-#best3:checked ~ .tab_item3 { display: block; }
-#best4:checked ~ .tab_item4 { display: block; }
+#best1:checked ~ .tab_item1 { display: block; border: none; }
+#best2:checked ~ .tab_item2 { display: block; border: none; }
+#best3:checked ~ .tab_item3 { display: block; border: none; }
+#best4:checked ~ .tab_item4 { display: block; border: none; }
 
-		label {
-	    	text-align: center;
-		}
+label {
+	text-align: center;
+}
 		
 .table .thead-dark th {
-		    color: rgb(255, 255, 255);
+	color: rgb(255, 255, 255);
     vertical-align: bottom;
     background-color: #f9fdfd;
-    border-bottom: 0 solid #dee2e6;
-    border-color: #f9fdfd;
+    border: none;
 }
-		.table {
-	    margin-bottom: 0rem;
-		}
-		.table td, .table th {
-    padding: 13px 0 13px 4px;
+
+.table tr {
+	border: none;
+}
+.table {
+	border: none;
+	margin-bottom: 0rem;
+	height: 190px;
+}
+
+.table td, .table th {
+	border: none;
+    padding: 13px 0 10px 4px;
     font-size: 13px;
 }
 		
-		_col .most_popular .cell a span {
-		    overflow: hidden;
-		    display: inline-block;
-		    text-overflow: ellipsis;
-		    white-space: nowrap;
-		    max-width: 220px;
-		    vertical-align: top;
-		    line-height: 28px;
-		}
-		.str{
-		width: 20px;
-		color: #FF4949;
-		}
-				.fa-star:before {
-    content: "\f005";
+		
+/* _col .most_popular .cell a span { */
+/* 	    overflow: hidden; */
+/* 	    display: inline-block; */
+/* 	    text-overflow: ellipsis; */
+/* 	    white-space: nowrap; */
+/* 	    max-width: 220px; */
+/* 	    vertical-align: top; */
+/* 	    line-height: 28px; */
+/* } */
+		
+.str{
+	width: 20px;
+	color: #FF4949;
 }
+/* .fa-star:before { */
+/*     content: "\f005"; */
+/* } */
 
 
-.fa, .fas {
-    font-weight: 900;
-}
-.fa, .far, .fas {
-    font-family: "Font Awesome 5 Pro";
-}
-.fa, .fab, .fal, .far, .fas {
-    -moz-osx-font-smoothing: grayscale;
-    -webkit-font-smoothing: antialiased;
-    display: inline-block;
-    font-style: normal;
-    font-variant: normal;
-    text-rendering: auto;
-    line-height: 1;
-}
+/* .fa, .fas { */
+/*     font-weight: 900; */
+/* } */
+/* .fa, .far, .fas { */
+/*     font-family: "Font Awesome 5 Pro"; */
+/* } */
+/* .fa, .fab, .fal, .far, .fas { */
+/*     -moz-osx-font-smoothing: grayscale; */
+/*     -webkit-font-smoothing: antialiased; */
+/*     display: inline-block; */
+/*     font-style: normal; */
+/*     font-variant: normal; */
+/*     text-rendering: auto; */
+/*     line-height: 1; */
+/* } */
 .str2{
     width: 75px;
 }
 		
 </style>
+
+
+<!-- <div class="container-fluid"> -->
+
+	<div class="float_sidebar">
+		<div class="aside">
+		<input id="best1" type="radio" name="tab" checked="checked" />
+    	<input id="best2" type="radio" name="tab"  />
+   		<input id="best3" type="radio" name="tab"  />
+    	<input id="best4" type="radio" name="tab"  />
+   
+			<table class="table">
+				<thead class="thead-dark">
+					<tr>
+						<th style="background-color: #e16b5a; padding: 8px 0px 5px 4px;"><label class="style activebnt" id="bestbtn1" for="best1">전체</label></th>
+						<th style="background-color: #e16b5a; padding: 8px 0px 5px 4px;"><label class="style" id="bestbtn2" for="best2">팁  </label></th>
+						<th style="background-color: #e16b5a; padding: 8px 0px 5px 4px;"><label class="style" id="bestbtn3" for="best3">공지</label></th>
+						<th style="background-color: #e16b5a; padding: 8px 0px 5px 4px;"><label class="style" id="bestbtn4" for="best4">유저</label></th>
+					</tr>
+				</table>
+			<div class="tab_item1">
+			<table class="table table-hover">
+				<tbody id="boardRank">
+					
+				</tbody>
+			</table>
+			</div>
+			
+			<div class="tab_item2">
+			<table class="table table-hover">
+				<tbody id="tipBoardRank">
+					
+				</tbody>
+			</table>
+			</div>
+			<div class="tab_item3">
+			<table class="table table-hover">
+				<tbody id="noticeBoardRank">
+				</tbody>
+			</table>
+			</div>
+			<div class="tab_item4">
+			<table class="table table-hover">
+				<tbody id="accountsRank">
+				</tbody>
+			</table>
+			</div>
+
+		</div>
+	</div>
+<!-- </div> -->
+
 <script type="text/javascript">
 	$(function() {
 		$.ajax({
@@ -170,7 +242,7 @@ li {
 							html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
 							html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
 							}
-							else if(4 < data[i].starCount < 5){
+							else if(4 <= data[i].starCount < 5){
 								html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
 								html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
 								html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
@@ -182,7 +254,7 @@ li {
 									html += "<td class='far fa-star' style='color: #ffd400;'></td>";
 								}
 								}
-							else if(3 < data[i].starCount < 4){
+							else if(3 <= data[i].starCount < 4){
 								html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
 								html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
 								html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
@@ -193,7 +265,7 @@ li {
 								}
 								html += "<td class='far fa-star' style='color: #ffd400;'></td>";
 								}
-							else if(2 < data[i].starCount < 3){
+							else if(2 <= data[i].starCount < 3){
 								html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
 								html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
 								if(data[i].starCount+0.99 > 5){
@@ -205,7 +277,7 @@ li {
 								html += "<td class='far fa-star' style='color: #ffd400;'></td>";
 								html += "<td class='far fa-star' style='color: #ffd400;'></td>";
 								}
-							else if(1 < data[i].starCount < 2){
+							else if(1 <= data[i].starCount < 2){
 								html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
 								if(data[i].starCount+0.99 > 5){
 
@@ -217,7 +289,7 @@ li {
 								html += "<td class='far fa-star' style='color: #ffd400;'></td>";
 								html += "<td class='far fa-star' style='color: #ffd400;'></td>";
 								}
-							else if(0 < data[i].starCount < 1){
+							else if(0 <= data[i].starCount < 1){
 								if(data[i].starCount+0.99 > 5){
 
 									html += "<td class='fas fa-star-half-alt' style='color: #ffd400;'></td>";
@@ -252,7 +324,8 @@ li {
 		});
 		
 		
-			
+		var whatboard = $("#whatboard").val();
+		console.log("whatboard : " + whatboard);	
 		var $win = $(window);
 		var top = $(window).scrollTop();
 
@@ -272,7 +345,11 @@ li {
 
 		//스크롤 이벤트가 발생하면
 		$(window).scroll(function() {
-			yPosition = $win.scrollTop() - 400; //이부분을 조정해서 화면에 보이도록 맞추세요
+			if(whatboard=="home") {
+				yPosition = $win.scrollTop() - 400; //이부분을 조정해서 화면에 보이도록 맞추세요
+			} else {
+				yPosition = $win.scrollTop() - 200; //이부분을 조정해서 화면에 보이도록 맞추세요
+			}
 			if (yPosition < 0) {
 				yPosition = 0;
 			}
@@ -495,53 +572,3 @@ function getAccountsList(){
 	});
 }
 </script>
-
-<div class="container-fluid">
-
-	<div class="float_sidebar">
-		<div class="aside">
-		<input id="best1" type="radio" name="tab" checked="checked" />
-    	<input id="best2" type="radio" name="tab"  />
-   		<input id="best3" type="radio" name="tab"  />
-    	<input id="best4" type="radio" name="tab"  />
-   
-			<table class="table">
-				<thead class="thead-dark">
-					<tr>
-						<th colspan="1"><label class="style" id="bestbtn1" for="best1">전체</label></th>
-						<th colspan="1"><label class="style" id="bestbtn2" for="best2">팁  </label></th>
-						<th colspan="1"><label class="style" id="bestbtn3" for="best3">공지</label></th>
-						<th colspan="1"><label class="style" id="bestbtn4" for="best4">유저</label></th>
-					</tr>
-				</table>
-			<div class="tab_item1">
-			<table class="table table-hover">
-				<tbody id="boardRank">
-					
-				</tbody>
-			</table>
-			</div>
-			
-			<div class="tab_item2">
-			<table class="table table-hover">
-				<tbody id="tipBoardRank">
-					
-				</tbody>
-			</table>
-			</div>
-			<div class="tab_item3">
-			<table class="table table-hover">
-				<tbody id="noticeBoardRank">
-				</tbody>
-			</table>
-			</div>
-			<div class="tab_item4">
-			<table class="table table-hover">
-				<tbody id="accountsRank">
-				</tbody>
-			</table>
-			</div>
-
-		</div>
-	</div>
-</div>

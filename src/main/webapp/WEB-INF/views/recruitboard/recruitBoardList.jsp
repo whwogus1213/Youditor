@@ -38,7 +38,7 @@ footer{
 </style>
 <script>
 	// 이전 버튼
-	function fn_prev(page, range, rangeSize, searchType, keyword) {
+	/*function fn_prev(page, range, rangeSize, searchType, keyword) {
 		var page = ((range - 2) * rangeSize) + 1;
 		var range = range - 1;
 		var url = "${pageContext.request.contextPath}/recruitboard/recruitBoardList";
@@ -48,10 +48,25 @@ footer{
 		url = url + "&searchType=" + searchType;
 		url = url + "&keyword=" + keyword;
 		location.href = url;
+	}*/
+	// 이전 버튼
+	function fn_prev(categoryId, page, rangeSize, searchType, keyword) {
+		var page = parseInt((page - 1) / rangeSize) * rangeSize;
+		var url = "${pageContext.request.contextPath}/recruitboard/recruitBoardList?";
+
+		if(categoryId != 0) {
+			url = url + "categoryId=" + categoryId + "&";
+		}
+		url = url + "page=" + page;
+		if(keyword != null && keyword != "") {
+			url = url + "&searchType=" + searchType;
+			url = url + "&keyword=" + keyword;
+		}
+		location.href = url;
 	}
 
 	//페이지 번호 클릭
-	function fn_pagination(page, range, rangeSize, searchType, keyword) {
+	/*function fn_pagination(page, range, rangeSize, searchType, keyword) {
 		var url = "${pageContext.request.contextPath}/recruitboard/recruitBoardList";
 
 		url = url + "?page=" + page;
@@ -60,10 +75,24 @@ footer{
 		url = url + "&keyword=" + keyword;
 		
 		location.href = url;
+	}*/
+	//페이지 번호 클릭
+	function fn_pagination(categoryId, page, searchType, keyword) {
+		var url = "${pageContext.request.contextPath}/recruitboard/recruitBoardList?";
+
+		if(categoryId != 0) {
+			url = url + "categoryId=" + categoryId + "&";
+		}
+		url = url + "page=" + page;
+		if(keyword != null && keyword != "") {
+			url = url + "&searchType=" + searchType;
+			url = url + "&keyword=" + keyword;
+		}
+		location.href = url;
 	}
 
 	//다음 버튼 이벤트
-	function fn_next(page, range, rangeSize, searchType, keyword) {
+	/*function fn_next(page, range, rangeSize, searchType, keyword) {
 		var page = parseInt((range * rangeSize)) + 1;
 		var range = parseInt(range) + 1;
 		var url = "${pageContext.request.contextPath}/recruitboard/recruitBoardList";
@@ -73,30 +102,47 @@ footer{
 		url = url + "&searchType=" + searchType;
 		url = url + "&keyword=" + keyword;
 		location.href = url;
+	}*/
+	//다음 버튼 이벤트
+	function fn_next(categoryId, page, rangeSize, searchType, keyword) {
+		var page = ((parseInt((page - 1) / rangeSize) + 1) * rangeSize) + 1;
+		var url = "${pageContext.request.contextPath}/recruitboard/recruitBoardList?";
+
+		if(categoryId != 0) {
+			url = url + "categoryId=" + categoryId + "&";
+		}
+		url = url + "page=" + page;
+		if(keyword != null && keyword != "") {
+			url = url + "&searchType=" + searchType;
+			url = url + "&keyword=" + keyword;
+		}
+		location.href = url;
 	}
 
 	// 검색버튼 이벤트
-	
 	$(function(){
 		$('#keyword').keypress(function(e) {
 
 			var keycode = event.keyCode;
 			// enter를 쳤을 때 keycode가 13이다
 			if (keycode == '13') {
-				e.preventDefault();
-				var url = "${pageContext.request.contextPath}/recruitboard/recruitBoardList";
-				url = url + "?searchType=" + $('#searchType').val();
+				var url = "${pageContext.request.contextPath}/recruitboard/recruitBoardList?";
+				var categoryId = "${categoryInfo.categoryId}";
+				if(categoryId != 0) {
+					url = url + "categoryId=" + categoryId + "&";
+				}
+				url = url + "searchType=" + $('#searchType').val();
 				url = url + "&keyword=" + $('#keyword').val();
 
 				location.href = url;
+				console.log(url);
 			}
-
 			e.stopPropagation();
 		});
-
 	});
-	
-	$(document).on('click', '#btnSearch', function(e) {
+
+	// 검색
+	/*$(document).on('click', '#btnSearch', function(e) {
 		e.preventDefault();
 		var url = "${pageContext.request.contextPath}/recruitboard/recruitBoardList";
 		url = url + "?searchType=" + $('#searchType').val();
@@ -104,7 +150,19 @@ footer{
 
 		location.href = url;
 		console.log(url);
-	});
+	});*/
+	// 검색
+	function searchBtn(categoryId, searchType, keyword) {
+		var url = "${pageContext.request.contextPath}/recruitboard/recruitBoardList?";
+		var categoryId = "${categoryInfo.categoryId}";
+		if(categoryId != 0) {
+			url = url + "categoryId=" + categoryId + "&";
+		}
+		url = url + "searchType=" + $('#searchType').val();
+		url = url + "&keyword=" + $('#keyword').val();
+		
+		location.href = url;
+	}
 	
 	//게시글을 삭제 했을시 삭제했다고 경고창이 떳다가 사라지는 기능
 	var result = '${result}';
@@ -148,13 +206,14 @@ footer{
 				<c:forEach items="${RecruitBoardList}" var="RecruitBoardList">
 					<tr>
 						<td>${RecruitBoardList.boardId}</td>
-						<c:if test="${RecruitBoardList.categoryId eq 1}">
-							<td><button type="button" class="btn btn-info btn-sm" disabled>구인</button></td>
-						</c:if>
-						<c:if test="${RecruitBoardList.categoryId eq 2}">
-							<td><button type="button" class="btn btn-secondary btn-sm" disabled>구직</button></td>
-						</c:if>
-						
+						<td>
+							<c:if test="${RecruitBoardList.categoryId eq 1}">
+								<button type="button" class="btn btn-info btn-sm" onclick="location.href='/recruitboard/recruitBoardList?categoryId=1'">구인</button>
+							</c:if>
+							<c:if test="${RecruitBoardList.categoryId eq 2}">
+								<button type="button" class="btn btn-secondary btn-sm" onclick="location.href='/recruitboard/recruitBoardList?categoryId=2'">구직</button>
+							</c:if>
+						</td>
 						<td align="left" style="padding-left: 30px; cursor: pointer;"
 						onclick="location.href='/recruitboard/recruitBoardView?boardId=${RecruitBoardList.boardId}'">
 								${RecruitBoardList.subject}
@@ -197,17 +256,18 @@ footer{
 			<div class="p1 pagination col-12">
 				<ul>
 					<c:if test="${pagination.prev}">
-						<a href="#" onClick="fn_prev('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}',
-						'${pagination.searchType}', '${pagination.keyword}')"><li><</li></a>
+						<a href="#" onclick="fn_prev('${categoryInfo.categoryId }', '${pagination.page}', '${pagination.rangeSize}',
+						'${pagination.searchType}', '${pagination.keyword}'); return false;"><li>◀</li></a>
 					</c:if>
 					<c:forEach begin="${pagination.startPage}" end="${pagination.endPage}" var="idx">
-						<a class="<c:out value="${pagination.page == idx ? 'is-active' : ''}"/>" href="#" onClick="fn_pagination('${idx}', '${pagination.range}', '${pagination.rangeSize}',
-						'${pagination.searchType}', '${pagination.keyword}')">
+						<a class="<c:out value="${pagination.page == idx ? 'is-active' : ''}"/>" href="#"
+						onclick="fn_pagination('${categoryInfo.categoryId }', '${idx}', '${pagination.searchType}', 
+						'${pagination.keyword}'); return false;">
 							<li>${idx}</li></a>
 					</c:forEach>
 					<c:if test="${pagination.next}">
-						<a href="#" onClick="fn_next('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}',
-						'${pagination.searchType}', '${pagination.keyword}')"><li>></li></a>
+						<a href="#" onclick="fn_next('${categoryInfo.categoryId }', '${pagination.page}', '${pagination.rangeSize}',
+						'${pagination.searchType}', '${pagination.keyword}'); return false;"><li>▶</li></a>
 					</c:if>
 				</ul>
 			</div>
@@ -228,13 +288,16 @@ footer{
 				</div>
 
 				<div class="col-1" style="padding-left: 0px;text-align: center;padding-right: 0px;padding-top: 5px;">
-					<i class="fas fa-search" name="btnSearch" id="btnSearch" style="cursor:"></i>
+					<i class="fas fa-search" id="btnSearch" style="cursor:" onclick="searchBtn('${categoryInfo.categoryId }',
+					'${pagination.searchType}', '${pagination.keyword}'); return false;"></i>
 				</div>
 
 				<div class="col-2" align="right" style="padding-left: 0px; padding-right: 5px;">
-					<c:if test="${login.authority >= 3 }">
-						<button type="button" class="btn btn-sm"
-							onclick="location.href='/recruitboard/write.do' " style="background-color: #2ecc71; color: white;">글쓰기</button>
+					<c:if test="${login ne null }">
+						<c:if test="${login.authority >= categoryInfo.viewAuthority }">
+							<button type="button" class="btn btn-sm"
+								onclick="location.href='/recruitboard/write.do' " style="background-color: #2ecc71; color: white;">글쓰기</button>
+						</c:if>
 					</c:if>
 				</div>
 			</div>
