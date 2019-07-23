@@ -16,9 +16,13 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.good.dto.AccountsVO;
+import com.good.dto.NoticeCategoryVO;
+import com.good.dto.RecruitCategoryVO;
 import com.good.dto.SearchBoard;
+import com.good.dto.TipCategoryVO;
 import com.good.dto.VideoBoardVO;
 import com.good.dto.VideoCategoryVO;
+import com.good.service.HomeService;
 import com.good.service.VideoBoardService;
 
 @Controller
@@ -27,18 +31,21 @@ public class VideoBoardController {
 
 	@Inject
 	VideoBoardService videoBoardService;
+	
+	@Inject
+	HomeService homeService;
 
 	// 게시물 목록
 	@RequestMapping(value = "/videoBoardList", method = RequestMethod.GET)
-	public String list(Model model,
-							@RequestParam(required = false, defaultValue = "0") int categoryId,
-							@RequestParam(required = false, defaultValue = "1") int page,
-							@RequestParam(required = false, defaultValue = "1") int range,
-							@RequestParam(required = false, defaultValue = "object") String searchType,
-							@RequestParam(required = false) String keyword) throws Exception {		
+	public String list(Model model, HttpSession session,
+						@RequestParam(required = false, defaultValue = "0") int categoryId,
+						@RequestParam(required = false, defaultValue = "1") int page,
+						@RequestParam(required = false, defaultValue = "object") String searchType,
+						@RequestParam(required = false) String keyword) throws Exception {		
 		SearchBoard search = new SearchBoard();
 		search.setSearchType(searchType);
 		search.setKeyword(keyword);
+		search.setCategoryId(categoryId);
 		
 		// 전체 게시글 개수
 		int listCnt = videoBoardService.getBoardListCnt(search);
@@ -46,10 +53,10 @@ public class VideoBoardController {
 		System.out.println(" listCnt : " + listCnt);
 		System.out.println(" categoryId : " + categoryId);
 		
-		search.pageInfo(page, range, listCnt);
-		search.setCategoryId(categoryId);
+		int rangeSize = search.getRangeSize();
+		int range = ((page - 1) / rangeSize) + 1;
 		search.setListSize(6);
-		
+		search.pageInfo(page, range, listCnt);
 		
 		VideoCategoryVO vCatVO = new VideoCategoryVO();
 		if(categoryId != 0) {
@@ -63,11 +70,19 @@ public class VideoBoardController {
 			vCatVO.setViewAuthority(3);
 		}
 		
-		List<VideoBoardVO> VideoBoardList = videoBoardService.listAll(search);
+		List<NoticeCategoryVO> nCatList = homeService.bringNoticeCategory();
+		List<VideoCategoryVO> vCatList = homeService.bringVideoCategory();
+		List<TipCategoryVO> tCatList = homeService.bringTipCategory();
+		List<RecruitCategoryVO> rCatList = homeService.bringRecruitCategory();
+		
+		session.setAttribute("nCatList", nCatList);
+		session.setAttribute("vCatList", vCatList);
+		session.setAttribute("tCatList", tCatList);
+		session.setAttribute("rCatList", rCatList);
 		
 		model.addAttribute("pagination", search);
 		model.addAttribute("categoryInfo", vCatVO);
-		model.addAttribute("VideoBoardList", VideoBoardList);
+		model.addAttribute("VideoBoardList", videoBoardService.listAll(search));
 		System.out.println("VideoBoardController VideoBoardList open");
 		return "videoboard/videoBoardList";
 	}
@@ -77,6 +92,16 @@ public class VideoBoardController {
 	public String view(@RequestParam("boardId") int boardId, HttpSession session, Model model) throws Exception {
 
 		VideoBoardVO row = videoBoardService.view(boardId);
+		
+		List<NoticeCategoryVO> nCatList = homeService.bringNoticeCategory();
+		List<VideoCategoryVO> vCatList = homeService.bringVideoCategory();
+		List<TipCategoryVO> tCatList = homeService.bringTipCategory();
+		List<RecruitCategoryVO> rCatList = homeService.bringRecruitCategory();
+		
+		session.setAttribute("nCatList", nCatList);
+		session.setAttribute("vCatList", vCatList);
+		session.setAttribute("tCatList", tCatList);
+		session.setAttribute("rCatList", rCatList);
 		
 		model.addAttribute("row", row);
 		return "videoboard/videoBoardView";
@@ -89,7 +114,7 @@ public class VideoBoardController {
 		System.out.println("*************************************************");
 
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("videoboard/boardWrite");
+		mav.setViewName("videoboard/videoBoardWrite");
 		System.out.println("VideoBoardController boardWrite open");
 		return mav;
 	}
