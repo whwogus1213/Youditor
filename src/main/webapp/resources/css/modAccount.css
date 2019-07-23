@@ -3,6 +3,7 @@
 }
 
 body {
+	font-family: 'Nanum Gothic', monospace, sans-serif;
 	color: #000000;
 }
 
@@ -14,76 +15,49 @@ h2 {
 	position: relative;
 	text-align: center;
 	font-size: 2.5em;
+	font-weight: 600;
 }
 
-fieldset {
-	border: none;
-	max-width: 700px;
-	background-color: #EBEEEC;
-	margin: 0 auto 70px;
-	border-radius: 10px;
-}
-
-legend {
-	font-size: 1.5em;
-	visibility: hidden;
-}
-
-span {
-	font-size: 2.5rem;
-	color: #FFF;
-	background-color: #4BA0FF;
-	height: 55px;
-	width: 55px;
-	border-radius: 50%;
-	text-align: center;
-	margin-right: 10px;
-	display: inline-block;
-	visibility: visible;
-}
-
-label {
-	display: block;
-	margin-bottom: 8px;
-	font-size: 1.5em;
-	letter-spacing: .5px;
-}
-
-input[type="text"], input[type="email"], input[type="date"], input[type="password"]
-	{
-	background: #E8E8ED;
+input[type="email"] {
 	border: none;
 	margin: 0;
 	outline: 0;
-	padding: 15px;
+	padding: 5px;
+	color: #000000;
+	letter-spacing: 1.1px;
+}
+
+input[type="text"], input[type="password"] {
+	border: inherit;
+	margin: 0;
+	outline: 0;
+	padding: 5px;
 	width: 60%;
 	background-color: #fff;
 	color: #4BA0FF;
 	box-shadow: 0 2px 0 rgba(0, 0, 0, 0.03) inset;
 	letter-spacing: 1.1px;
-	/*text-align: center;*/
 }
 
-input[type="text"]:focus, input[type="email"]:focus, input[type="date"]:focus,
-	input[type="password"]:focus {
+input[type="text"]:focus, input[type="password"]:focus, textarea:focus {
 	background-color: #E8FFD0;
+	border-color: #fff;
 }
-
+/*
 #bt-st {
 	border: 2px solid #4BA0FF;
 	border-radius: 5px;
-	padding: 10px 40px;
-	background-color: #ffffff;
+	padding: 10px;
+	background-color: #E8FFD0;
 	border-bottom: 3px solid #2F7DC5;
 	color: #000000;
 	cursor: pointer;
 	transition: all .5s ease;
 	margin: 0 auto;
-	/*text-align: center;*/
 }
 
 #bt-st:hover, #bt-st:focus {
-	background-color: #3FD517;
+	background-color: #e8f4ff;
 	border-color: #3FD517;
 	border-bottom-color: #32AC13;
 }
@@ -91,23 +65,90 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="date"]:focus,
 #bt-st:active {
 	color: #4BA0FF;
 }
+*/
 
-.navigation {
-	margin-top: 2em;
-	list-style: none;
-	text-align: center;
-	padding-left: 0;
+/*
+*/
+.btn {
+	border: none;
+	font-weight: 200;
+	font-size: 15px;
+	position: relative;
+	border-radius: 23px/23px;
+	cursor: pointer;
+	z-index: 5;
+	border: 2px solid;
+	overflow: hidden;
 }
 
-.navigation a {
+.btn:after {
+	z-index: -2
+}
+
+.btn:after, .btn:before {
+	content: "";
 	display: inline-block;
-	padding: 20px 180px;
-	text-decoration: none;
-	font-family: sans-serif;
-	color: #000;
+	position: absolute;
 }
 
-.navigation a:hover, .navigation a:focus {
-	background: linear-gradient(to bottom right, rgba(139, 125, 239, 0.65),
-		rgba(59, 153, 239, .65));
+.btn-modify {
+	background-color: #e74c3c;
+	color: #fff;
+	border: 2px solid;
+	transition: all .3s ease-in-out;
+}
+
+.btn-modify:after {
+	background-color: #eee;
+	width: 200px;
+	height: 200px;
+	transition: all 1s ease-in-out;
+	margin-left: 300px;
+	z-index: -3
+}
+
+.btn-modify:before {
+	background-color: white;
+	width: 200px;
+	height: 200px;
+	transition: all .5s ease-in-out;
+	margin-left: 500px;
+	transition: all.9s ease-in-out;
+	z-index: -1
+}
+
+.btn-modify:hover:after {
+	transform: scale(20, 2)
+}
+
+.btn-modify:hover:before {
+	transform: scale(7, 2)
+}
+
+.btn-modify:hover {
+	background-color: transparent;
+	border: 2px solid #f33;
+	color: #f33
+}
+
+.btn-delete {
+	background-color: #19957c;
+	color: #fff;
+	transition: all .7s ease-in-out
+}
+
+.btn-delete:after {
+	border: 2px solid #16a085;
+	border-radius: 50%;
+	transition: all .7s ease-in-out;
+	margin-left: -201px;
+	margin-top: -60px
+}
+
+.btn-delete:hover {
+	background-color: transparent
+}
+
+.btn-delete:hover:after {
+	padding: 100px 160px
 }

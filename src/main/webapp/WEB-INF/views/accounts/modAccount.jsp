@@ -33,33 +33,23 @@ td, th {
     letter-spacing: -1px;
     border: 0;
     border: 1px solid #e5e5e5;
-    padding: 20px;
+    padding: 15px;
     
 }
 th {
-    color: #333;
+    color: #fff;
     border-right: 1px solid #e5e5e5;
-    background: #f9f9f9;
+    background: #81bbc5;
 }
 .thcell {
     width: 200px;
     text-align: center;
     vertical-align: middle;
 }
-#pass-st{
-	margin-top: 30px;
-}
 .ud-st{
 	margin-bottom: 40px;
 }
-#bt-st {
-    border: none;
-}
-#bt-st1 {
-    background-color: #fff;
-    padding: 15px;
-    border: none;
-}
+
 </style>
 <script type="text/javascript">
 
@@ -105,13 +95,12 @@ function btnRePwd() {
 function btnUpdate() {
 	var pwdCfm = $("#pwdCfm").val();
 	var pwd = $("#pwd").val();
-	alert(pwd+"@@@@@@@@@@@@@@");
 	if(pwd == pwdCfm) {
 		alert("ds;aklfjdsklfjds");
 		document.modForm.action = "${path}/accounts/updateAccount.do";
 		document.modForm.submit();
  	  	} else {
- 	  		alert("비밀번호가 틀렸습니다.");
+ 	  		alert("비밀번호를 확인해주세요.");
 		$("#pwdCfm").focus();
 		return;
 	}
@@ -155,14 +144,14 @@ function btnDelete() {
 					</tr>
 					<tr>
 						<th class="thcell">이메일</th>
-                        <td><input type="text" name="email" id="email" value="${login.email }" readonly="readonly" style="color: #000000"></td>						
+                        <td><input type="email" name="email" id="email" value="${login.email }" readonly="readonly"></td>						
 					</tr>
 					<tr>
 						<th class="thcell">비밀번호 확인</th>
 						<td>
 							<input type="password" name="pwdCfm" id="pwdCfm">
 							<input type="hidden" name="pwd" id="pwd" value="${login.pwd }">
-							<input id="bt-st1" type="button" value="비밀번호변경" onclick="btnRePwd();">
+							<input class="btn btn-modify" type="button" value="비밀번호변경" onclick="btnRePwd();">
 						</td>
 					</tr>
 					<tr>
@@ -170,7 +159,7 @@ function btnDelete() {
 					</tr>
 					<tr>
 						<th class="thcell">닉네임</th>
-						<td><input type="text" name="nickname" id="nickname" value="${login.nickname }"></td>
+						<td><input type="text" name="nickname" id="nickname" value="${login.nickname }" style="font-weight: 600;"></td>
 					</tr>
 					<tr>
 						<th class="thcell">프로필 사진</th>
@@ -200,8 +189,8 @@ function btnDelete() {
 				</table>
 				<div class="ud-st">
 					<input  type="hidden" name="accountId" id="accountId" value="${login.accountId }">
-					<input id="bt-st" type="button" value="수정하기" onclick="btnUpdate();">
-                    <input id="bt-st" type="button" value="삭제하기" onclick="btnDelete();">
+					<input class="btn btn-modify" type="button" value="수정하기" onclick="btnUpdate();">
+                    <input class="btn btn-delete" type="button" value="삭제하기" onclick="btnDelete();">
                     <!--     
 					<button id="bt-st" value="수정하기" onclick="btnUpdate();"><i class="fas fa-user-edit"></i>수정하기</button>
 					<button id="bt-st" value="삭제하기" onclick="btnDelete();"><i class="fas fa-user-slash"></i>삭제하기</button>
