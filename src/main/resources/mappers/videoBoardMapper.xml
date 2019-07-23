@@ -60,6 +60,9 @@
 			<if test="searchType=='nickname' and keyword != null and keyword != '' ">
 				AND nickname like CONCAT('%', #{keyword}, '%')
 			</if>
+			<if test="categoryId > 0">
+				AND b.categoryId = #{categoryId}
+			</if>
 		</trim>
 	</select>
 	

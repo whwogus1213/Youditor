@@ -83,7 +83,6 @@
 	}
 
 	// 검색버튼 이벤트
-	
 	$(function(){
 		$('#keyword').keypress(function(e) {
 
@@ -102,17 +101,14 @@
 				location.href = url;
 				console.log(url);
 			}
-
 			e.stopPropagation();
 		});
-
 	});
 
 	// 검색
 	function searchBtn(categoryId, searchType, keyword) {
 		var url = "${pageContext.request.contextPath}/noticeboard/noticeBoardList?";
 		var categoryId = "${categoryInfo.categoryId}";
-		alert(categoryId);
 		if(categoryId != 0) {
 			url = url + "categoryId=" + categoryId + "&";
 		}
@@ -211,12 +207,12 @@
 					</c:if>
 					<c:forEach begin="${pagination.startPage}" end="${pagination.endPage}" var="idx">
 						<a class="<c:out value="${pagination.page == idx ? 'is-active' : ''}"/>" href="#"
-						onclick="fn_pagination('${categoryInfo.categoryId }', '${idx}', '${pagination.range}',
-						'${pagination.rangeSize}', '${pagination.searchType}', '${pagination.keyword}'); return false;">
+						onclick="fn_pagination('${categoryInfo.categoryId }', '${idx}', '${pagination.searchType}', 
+						'${pagination.keyword}'); return false;">
 							<li>${idx}</li></a>
 					</c:forEach>
 					<c:if test="${pagination.next}">
-						<a href="#" onclick="fn_next('${categoryInfo.categoryId }', '${pagination.page}', '${pagination.range}', '${pagination.rangeSize}',
+						<a href="#" onclick="fn_next('${categoryInfo.categoryId }', '${pagination.page}', '${pagination.rangeSize}',
 						'${pagination.searchType}', '${pagination.keyword}'); return false;"><li>▶</li></a>
 					</c:if>
 				</ul>

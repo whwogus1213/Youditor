@@ -29,7 +29,7 @@ public class NoticeBoardController {
 	// 게시물 목록 + 페이징 + 검색
 	@RequestMapping(value = "/noticeBoardList", method = RequestMethod.GET)
 	public String list(Model model,
-						@RequestParam(required = false, defaultValue = "0", value = "categoryId") int categoryId,
+						@RequestParam(required = false, defaultValue = "0") int categoryId,
 						@RequestParam(required = false, defaultValue = "1") int page,
 						@RequestParam(required = false, defaultValue = "object") String searchType,
 						@RequestParam(required = false) String keyword) throws Exception {
@@ -42,8 +42,11 @@ public class NoticeBoardController {
 		int listCnt = noticeBoardService.getBoardListCnt(search);
 		
 		System.out.println(" listCnt : " + listCnt);
+		System.out.println(" categoryId : " + categoryId);
+		
 		int rangeSize = search.getRangeSize();
 		int range = ((page - 1) / rangeSize) + 1;
+		
 		search.pageInfo(page, range, listCnt);
 		
 		NoticeCategoryVO nCatVO = new NoticeCategoryVO();
