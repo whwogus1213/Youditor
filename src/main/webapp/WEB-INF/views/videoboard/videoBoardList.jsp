@@ -216,7 +216,7 @@
 	</div>
 	<div id="deleteOK" class="alert alert-danger hidden" role="alert" style="visibility: hidden">글이 삭제되었습니다.</div>
 
-	<jsp:include page="../module/ListAside.jsp" flush="false" />
+	<jsp:include page="../module/aside.jsp" flush="false" />
 	<div class="container" style="background-color: #E8E8E8 ;">
 	
 		<!-- Marketing Icons Section -->
