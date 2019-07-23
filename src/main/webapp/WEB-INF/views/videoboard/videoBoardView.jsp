@@ -239,7 +239,7 @@ i {
 <body>
 	<jsp:include page="../module/top2.jsp" flush="false" />
 	<!-- 게시글 상세정보 -->
-	<div align="center" style="background-color: black; padding-top: 60px">
+	<div align="center" style="background-color: black; padding-top: 5.5%">
 		<script>
 			var e = '${row.youtubeLink}';
 			var eArray  = e.split('/');

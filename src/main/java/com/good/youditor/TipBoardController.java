@@ -63,7 +63,7 @@ public class TipBoardController {
 			tCatVO = tipBoardService.getCatInfo(categoryId);
 			System.out.println(" TipCategoryVO : " + tCatVO);
 		} else {
-			tCatVO.setCategoryName("전체공지");
+			tCatVO.setCategoryName("전체 팁");
 			tCatVO.setEditAuthority(4);
 			tCatVO.setViewAuthority(3);
 		}
