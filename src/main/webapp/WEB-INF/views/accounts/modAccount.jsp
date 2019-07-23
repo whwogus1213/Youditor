@@ -15,7 +15,6 @@
 <title>회원정보수정 - YouDitor</title>
 <jsp:include page="../module/header.jsp" flush="false"/>
 <link href="/resources/css/modAccount.css" rel="stylesheet">
-<script src="/resources/js/modAccount.js" type="text/javascript"></script>
 <style>
 table {
    	margin: 20px;
@@ -201,8 +200,12 @@ function btnDelete() {
 				</table>
 				<div class="ud-st">
 					<input  type="hidden" name="accountId" id="accountId" value="${login.accountId }">
-					<button id="bt-st" onclick="btnUpdate();"><i class="fas fa-user-edit"></i>수정하기</button>
-					<button id="bt-st" onclick="btnDelete();"><i class="fas fa-user-slash"></i>삭제하기</button>	
+					<input id="bt-st" type="button" value="수정하기" onclick="btnUpdate();">
+                    <input id="bt-st" type="button" value="삭제하기" onclick="btnDelete();">
+                    <!--     
+					<button id="bt-st" value="수정하기" onclick="btnUpdate();"><i class="fas fa-user-edit"></i>수정하기</button>
+					<button id="bt-st" value="삭제하기" onclick="btnDelete();"><i class="fas fa-user-slash"></i>삭제하기</button>
+					 -->	
 				</div>
 			</form>
 		</c:if>
