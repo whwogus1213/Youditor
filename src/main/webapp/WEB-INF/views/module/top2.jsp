@@ -528,6 +528,8 @@ function DosignUp() {
 	<!-- Chat 채팅 아이콘 -->
 	<i id="chatBtn" class="far fa-comments" style="font-size: 1.8em; color:orange; cursor: pointer;" onclick="openNav();"></i>
 	  
+	  
+	  
 	<script>
 		function openNav() {
 				 

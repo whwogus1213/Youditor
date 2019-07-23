@@ -67,7 +67,6 @@ public class TipBoardController {
 			tCatVO.setEditAuthority(4);
 			tCatVO.setViewAuthority(3);
 		}
-
 		
 		List<NoticeCategoryVO> nCatList = homeService.bringNoticeCategory();
 		List<VideoCategoryVO> vCatList = homeService.bringVideoCategory();
@@ -81,7 +80,7 @@ public class TipBoardController {
 
 		model.addAttribute("pagination", search);
 		model.addAttribute("categoryInfo", tCatVO);
-		model.addAttribute("tipBoardList", tipBoardService.listAll(search));
+		model.addAttribute("TipBoardList", tipBoardService.listAll(search));
 		System.out.println("TipBoardController TipBoardList open");
 		return "tipboard/tipBoardList";
 	}

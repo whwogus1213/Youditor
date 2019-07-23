@@ -1,7 +1,6 @@
 package com.good.dao;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -10,7 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.good.dto.RecruitBoardVO;
 import com.good.dto.RecruitCategoryVO;
-import com.good.dto.VideoCategoryVO;
+import com.good.dto.SearchBoard;
 
 @Repository
 public class RecruitBoardDAOImpl implements RecruitBoardDAO {
@@ -23,8 +22,20 @@ public class RecruitBoardDAOImpl implements RecruitBoardDAO {
 
 	// 게시물 목록
 	@Override
-	public List<RecruitBoardVO> listAll(RecruitCategoryVO rcvo) throws Exception {
-		return sqlSession.selectList(NAMESPACE + ".listAll", rcvo);
+	public List<RecruitBoardVO> listAll(SearchBoard search) throws Exception {
+		return sqlSession.selectList(NAMESPACE + ".listAll", search);
+	}
+	
+	// 카테고리 정보 취득
+	@Override
+	public RecruitCategoryVO getCatInfo(int categoryId) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + ".getCatInfo", categoryId);
+	}
+
+	// 게시물 갯수
+	@Override
+	public int getBoardListCnt(SearchBoard search) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + ".getBoardListCnt", search);
 	}
 
 	// 게시물 보기
@@ -55,12 +66,6 @@ public class RecruitBoardDAOImpl implements RecruitBoardDAO {
 	@Override
 	public void viewCount(int boardId) throws Exception {
 		sqlSession.update(NAMESPACE + ".viewCount", boardId);
-	}
-
-	// 게시물 갯수
-	@Override
-	public int getBoardListCnt(RecruitCategoryVO rcvo) throws Exception {
-		return sqlSession.selectOne(NAMESPACE + ".getBoardListCnt", rcvo);
 	}
 
 }

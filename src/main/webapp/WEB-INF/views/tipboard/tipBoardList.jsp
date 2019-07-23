@@ -198,19 +198,19 @@ footer{
 				</tr>
 			</thead>
 			<tbody align="center">
-				<c:forEach items="${tipBoardList}" var="tipBoardList">
+				<c:forEach items="${TipBoardList}" var="TipBoardList">
 					<tr>
-						<td>${tipBoardList.boardId}</td>
-						<td>${tipBoardList.categoryName}</td>
+						<td>${TipBoardList.boardId}</td>
+						<td>${TipBoardList.categoryName}</td>
 						<td align="left" style="padding-left: 30px; cursor: pointer;"
-							onclick="location.href='/tipboard/tipBoardView?boardId=${tipBoardList.boardId}'">${tipBoardList.subject}
+							onclick="location.href='/tipboard/tipBoardView?boardId=${TipBoardList.boardId}'">${TipBoardList.subject}
 						</td>
 						<td class="dropright">						
 							<a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="cursor:pointer">
-								${tipBoardList.nickname}
+								${TipBoardList.nickname}
 							</a>
 							<div class="dropdown-menu">
-								<a class="dropdown-item" href="/tipboard/tipBoardList?searchType=nickname&keyword=${tipBoardList.nickname}">
+								<a class="dropdown-item" href="/tipboard/tipBoardList?searchType=nickname&keyword=${TipBoardList.nickname}">
 									<i class="far fa-file-alt" style="width: 20; height: 20"></i>&nbsp;&nbsp;팁 더보기
 								</a>
 								<a class="dropdown-item" href="#" onclick="messagePopup();">
@@ -218,7 +218,7 @@ footer{
 								</a>
 								<script type="text/javascript">
 								function messagePopup() {
-									var nickname = "${tipBoardList.nickname }";
+									var nickname = "${TipBoardList.nickname }";
 									var win = window.open("/message/writePopup.do?nickname=" + nickname, "_blank", 
 											"width=650, height=470, left=200, top=200, location=no, menubar=no, resizble=no, scrollbars=no, status=no, titlebar=no, toolbar=no");
 								}
@@ -228,9 +228,9 @@ footer{
 								</a>
 							</div>
 						</td>
-						<td><fmt:formatDate value="${tipBoardList.reg_date}"
+						<td><fmt:formatDate value="${TipBoardList.reg_date}"
 								pattern="yyyy-MM-dd" /></td>
-						<td>${tipBoardList.viewCount}</td>
+						<td>${TipBoardList.viewCount}</td>
 					</tr>
 				</c:forEach>
 			</tbody>

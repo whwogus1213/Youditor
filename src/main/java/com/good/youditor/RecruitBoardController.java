@@ -6,6 +6,7 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.good.dto.NoticeCategoryVO;
 import com.good.dto.RecruitBoardVO;
 import com.good.dto.RecruitCategoryVO;
+import com.good.dto.SearchBoard;
 import com.good.dto.TipCategoryVO;
 import com.good.dto.VideoCategoryVO;
 import com.good.service.HomeService;
@@ -31,28 +33,37 @@ public class RecruitBoardController {
 
 	// 게시물 목록
 	@RequestMapping(value = "/recruitBoardList", method = RequestMethod.GET)
-	public ModelAndView list(@RequestParam(required = false, defaultValue = "1") int categoryId,
-			 @RequestParam(required = false, defaultValue = "1") int page,
-			 @RequestParam(required = false, defaultValue = "1") int range,
-			 @RequestParam(required = false, defaultValue = "object") String searchType,
-			 @RequestParam(required = false) String keyword, HttpSession session) throws Exception {
+	public String list(Model model, HttpSession session,
+							@RequestParam(required = false, defaultValue = "0") int categoryId,
+							@RequestParam(required = false, defaultValue = "1") int page,
+							@RequestParam(required = false, defaultValue = "object") String searchType,
+							@RequestParam(required = false) String keyword) throws Exception {
+		SearchBoard search = new SearchBoard();
+		search.setSearchType(searchType);
+		search.setKeyword(keyword);
+		search.setCategoryId(categoryId);
+
+		// 전체 게시글 개수
+		int listCnt = recruitBoardService.getBoardListCnt(search);
+
+		System.out.println(" listCnt : " + listCnt);
+		System.out.println(" categoryId : " + categoryId);
+
+		int rangeSize = search.getRangeSize();
+		int range = ((page - 1) / rangeSize) + 1;
 		
-		ModelAndView mav = new ModelAndView();
-		RecruitCategoryVO recruitCategoryVO = new RecruitCategoryVO();
-		// 검색
-		recruitCategoryVO.setSearchType(searchType);
-		recruitCategoryVO.setKeyword(keyword);
-		recruitCategoryVO.setCategoryId(categoryId);
-
-		// 게시물 갯수
-		int listCnt = recruitBoardService.getBoardListCnt(recruitCategoryVO);
-		System.out.println(" recruitboard 게시물 갯수 : " + listCnt);
-
-		recruitCategoryVO.setListSize(6);
-		recruitCategoryVO.pageInfo(page, range, listCnt);
-
-		mav.addObject("pagination", recruitCategoryVO);
-		List<RecruitBoardVO> list = recruitBoardService.listAll(recruitCategoryVO);
+		search.pageInfo(page, range, listCnt);
+		
+		RecruitCategoryVO rCatVO = new RecruitCategoryVO();
+		if(categoryId != 0) {
+			System.out.println(" 카테고리 정보 취득 ");
+			rCatVO = recruitBoardService.getCatInfo(categoryId);
+			System.out.println(" TipCategoryVO : " + rCatVO);
+		} else {
+			rCatVO.setCategoryName("전체공지");
+			rCatVO.setEditAuthority(4);
+			rCatVO.setViewAuthority(3);
+		}
 		
 		List<NoticeCategoryVO> nCatList = homeService.bringNoticeCategory();
 		List<VideoCategoryVO> vCatList = homeService.bringVideoCategory();
@@ -64,11 +75,11 @@ public class RecruitBoardController {
 		session.setAttribute("tCatList", tCatList);
 		session.setAttribute("rCatList", rCatList);
 
-		
-		mav.setViewName("recruitboard/recruitBoardList");
+		model.addAttribute("pagination", search);
+		model.addAttribute("categoryInfo", rCatVO);
+		model.addAttribute("RecruitBoardList", recruitBoardService.listAll(search));
 		System.out.println("RecruitBoardController RecruitBoardList open");
-		mav.addObject("RecruitBoardList", list);
-		return mav;
+		return "recruitboard/recruitBoardList";
 	}
 
 	// 게시물 상세정보

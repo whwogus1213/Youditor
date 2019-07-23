@@ -37,9 +37,9 @@
  @media (min-width:1080px){.container{max-width: 800;}}
  @media (min-width:1200px){.container{max-width: 925px;}}
  @media (min-width:1400px){.container{max-width: 1100px;}}
- .container {
-    float: left;
-}
+/*  .container { */
+/*     float: left; */
+/* } */
 #title-st, #title-st:hover{
 	font-size: 25px;
     font-weight: bold;
@@ -341,7 +341,8 @@ function getTipNew(){
 	    </div>
 	  </header>
 <div id="dologinform"></div>
-	  
+
+<input type="hidden" id="whatboard" value="home">	  
   <jsp:include page="./module/aside.jsp" flush="false"/>
   <div class="container">
   <br/>
