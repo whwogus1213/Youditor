@@ -242,7 +242,7 @@ label {
 							html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
 							html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
 							}
-							else if(4 < data[i].starCount < 5){
+							else if(4 <= data[i].starCount < 5){
 								html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
 								html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
 								html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
@@ -254,7 +254,7 @@ label {
 									html += "<td class='far fa-star' style='color: #ffd400;'></td>";
 								}
 								}
-							else if(3 < data[i].starCount < 4){
+							else if(3 <= data[i].starCount < 4){
 								html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
 								html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
 								html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
@@ -265,7 +265,7 @@ label {
 								}
 								html += "<td class='far fa-star' style='color: #ffd400;'></td>";
 								}
-							else if(2 < data[i].starCount < 3){
+							else if(2 <= data[i].starCount < 3){
 								html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
 								html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
 								if(data[i].starCount+0.99 > 5){
@@ -277,7 +277,7 @@ label {
 								html += "<td class='far fa-star' style='color: #ffd400;'></td>";
 								html += "<td class='far fa-star' style='color: #ffd400;'></td>";
 								}
-							else if(1 < data[i].starCount < 2){
+							else if(1 <= data[i].starCount < 2){
 								html += "<td class='fas fa-star' style='color: #ffd400; margin: 0;'></td>";
 								if(data[i].starCount+0.99 > 5){
 
@@ -289,7 +289,7 @@ label {
 								html += "<td class='far fa-star' style='color: #ffd400;'></td>";
 								html += "<td class='far fa-star' style='color: #ffd400;'></td>";
 								}
-							else if(0 < data[i].starCount < 1){
+							else if(0 <= data[i].starCount < 1){
 								if(data[i].starCount+0.99 > 5){
 
 									html += "<td class='fas fa-star-half-alt' style='color: #ffd400;'></td>";

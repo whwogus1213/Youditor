@@ -69,6 +69,12 @@
     font-weight: bold;
     color: #000;
 }
+a {
+    color: #000;
+}
+a:hover {
+	color: #000;
+}
   </style>
   <script>
   $(function() {
@@ -78,15 +84,21 @@
 			success : function(data) {
 
 				var html = "";
-
+				
 				if(data.length > 0) {
 					for(var i = 0; i < data.length; i++){
 						if(i < 3){
 							html += "<div class='col-lg-4 mb-4'>";
 							html += "<div class='card h-100'>";
-							html += "<h4 class='card-header'>"+data[i].subject+"</h4>";
+							html += "<h4 class='card-header'>"
+							html += "<a href='/videoboard/videoBoardView?boardId="+data[i].boardId+"'>"+data[i].subject+"</a></h4>";
 							html += "<div class='card-body'>";
-							html += "<img width='100%' height='20%' src='"+data[i].youtubeLink+"'></img>";
+							html += "<a href='/videoboard/videoBoardView?boardId="+data[i].boardId+"'>";
+							if(data[i].youtubeLink.length > 31){
+								html += "<img width='100%' height='20%' src='https://img.youtube.com/vi/" + data[i].youtubeLink.substring(32) + "/mqdefault.jpg'></img></a>";
+							}else{
+								html += "<img width='100%' height='20%' src='https://img.youtube.com/vi/" + data[i].youtubeLink.substring(17) + "/mqdefault.jpg'></img></a>";
+							}
 							html += "</div>";
 							html += "<div class='card-footer'>";
 							html += "<i class='far fa-clock'></i>";
@@ -132,14 +144,14 @@ function getAccountsRankList(){
 					if(i < 3){
 						html += "<div class='col-lg-4 col-sm-6 portfolio-item'>";
 						html += "<div class='card h-100'>";
-						html += "<a href='#'><img class='card-img-top' src='/image/"+data[i].picture+"' alt='' width='80' height='200'></a>";
+						html += "<img class='card-img-top' src='/image/"+data[i].picture+"' alt='' width='80' height='200'/>";
 						html += "<div class='card-body'>";
 						html += "<h4 class='card-title'>";
 						html += "<div class='dropright'>";
 						html += "<a data-toggle='dropdown' aria-haspopup='true' aria-expanded='false' style='cursor: pointer'>"+data[i].nickname+"</a>";
 						html += "<div class='dropdown-menu'>";
-						html += "<a class='dropdown-item' href='/noticeboard/noticeBoardList?searchType=nickname&keyword="+data[i].nickname+"'></a>";
-						html += "<i class='fab fa-file-alt'></i>&nbsp;&nbsp;게시물 더보기";
+						html += "<a class='dropdown-item' href='/videoboard/videoBoardList?searchType=nickname&keyword="+data[i].nickname+"'>";
+						html += "<i class='fab fa-youtube'></i>&nbsp;&nbsp;영상 더보기";
 						html += "</a>";
 						html += "<a class='dropdown-item' href='#'>";
 						html += "<i class='far fa-envelope'></i>&nbsp;&nbsp;쪽지 보내기";
