@@ -94,7 +94,11 @@ a:hover {
 							html += "<a href='/videoboard/videoBoardView?boardId="+data[i].boardId+"'>"+data[i].subject+"</a></h4>";
 							html += "<div class='card-body'>";
 							html += "<a href='/videoboard/videoBoardView?boardId="+data[i].boardId+"'>";
-							html += "<img width='100%' height='20%' src='https://img.youtube.com/vi/" + data[i].youtubeLink.substring(32) + "/mqdefault.jpg'></img></a>";
+							if(data[i].youtubeLink.length > 31){
+								html += "<img width='100%' height='20%' src='https://img.youtube.com/vi/" + data[i].youtubeLink.substring(32) + "/mqdefault.jpg'></img></a>";
+							}else{
+								html += "<img width='100%' height='20%' src='https://img.youtube.com/vi/" + data[i].youtubeLink.substring(17) + "/mqdefault.jpg'></img></a>";
+							}
 							html += "</div>";
 							html += "<div class='card-footer'>";
 							html += "<i class='far fa-clock'></i>";
