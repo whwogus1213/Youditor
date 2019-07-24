@@ -64,7 +64,7 @@
 		<br>
 		<div align="center">
 			<button type="submit" class="btn btn-link" id="submit" style="color:black"><i class="fas fa-cut"></i>&nbsp;&nbsp;수정</button>
-			<button type="button" class="btn btn-link" onclick="location.href='/recruitboard/recruitBoardList'" style="color:black"><i class="fas fa-undo"></i>&nbsp;&nbsp;취소</button>
+			<button type="button" class="btn btn-link" onclick="location.href='/recruitboard/recruitBoardView?boardId=${row.boardId}'" style="color:black"><i class="fas fa-undo"></i>&nbsp;&nbsp;취소</button>
 		</div>
 		<br>
 	</div>

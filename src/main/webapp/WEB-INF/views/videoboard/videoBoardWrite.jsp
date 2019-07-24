@@ -14,27 +14,27 @@
 </head>
 <body>
 	<jsp:include page="../module/top2.jsp" flush="false" />
-	<div  style="font-family: 'Nanum Gothic', sans-serif;">
-		
-	<div class="container">
-		<div class="form-group">
-			<div class="col-sm-12">
-				<h2 align="center">&nbsp;</h2>
-				<h1 align="center"><strong>유투브 올리기</strong></h1>
-				<h2 align="center">&nbsp;</h2>
-			</div>
+	
+	<!-- 배너 -->
+	<div class="form-group">
+		<div class="col-sm-12" style="background-image:url('/resources/images/videoList/upload.jpg'); background-position:50% 50%; background-size:100%; color:white; padding-top: 5%; padding-bottom:4%">
+			<h1 align="center" style="font-size:50px; letter-spacing:10px"><strong><a style="color:Crimson"><i class="fab fa-youtube"></i>유투브</a> 올리기</strong></h1>
+			<h4 align="center"><br>여러분이 직접 편집한 유투브를 올려주세요!</h4>
 		</div>
+	</div>
+	
+	<div class="container" style="padding-top:2%">
 	    <form class="form-horizontal" method="post" action="${path}/videoboard/insertVideoBoardPro">
 	    	<div class="form-inline">
-	        	<label class="control-label col-sm-2">제목</label>
-	        	<div class="col-sm-3">
+	        	<label class="control-label col-sm-3"><strong>제목</strong></label>
+	        	<div class="col-sm-4">
 	        		<input type="text" class="form-control" name="subject" maxlength="50" placeholder="Enter Title">
 	        	</div>
 			</div>
 			<br>
 			<div class="form-inline">
-				<label class="control-label col-sm-2">카테고리</label>
-				<div class="col-sm-3">
+				<label class="control-label col-sm-3"><strong>카테고리</strong></label>
+				<div class="col-sm-4">
 	        		<select class="browser-default custom-select" name="categoryId" style="width:190px">
 		           		<option value="1">게임</option>
 		           		<option value="2">먹방</option>
@@ -47,22 +47,22 @@
 			</div>
 			<br>
 			<div class="form-inline">
-		        <label class="control-label col-sm-2">작성자</label>
-		        <div class="col-sm-3">
+		        <label class="control-label col-sm-3"><strong>작성자</strong></label>
+		        <div class="col-sm-4">
 					<input type="text" class="form-control" maxlength="50" value="${login.nickname}" readonly>
 					<input type="text" class="form-control" name="accountId" maxlength="50" value="${login.accountId}" style="display:none" readonly>
 		        </div>
 			</div>
 			<br>
 			<div class="form-inline">
-		        <label class="control-label col-sm-2">유투브 링크</label>
+		        <label class="control-label col-sm-3"><strong>유투브 링크</strong></label>
 		        <div class="col-sm-8" style="display:inline-block">
 					<input type="text" class="form-control" name="youtubeLink" maxlength="300" placeholder="Enter Youtube Link" style="width:400px">
 					<input type="button" id="test" class="btn btn-danger"  value="썸네일 보기"></input>
 		        </div>
 			</div>
 			<div class="form-inline">
-				<label class="col-sm-2">썸네일 미리보기</label>
+				<label class="col-sm-3"><strong>썸네일 미리보기</strong></label>
 				<div id="thumb1">
 					<img id ="profileImg" src = "/resources/images/ThumbnailDefault.jpg" style = "border-radius:0%; padding-left : 15px; padding-top:10px; height:200px; width:300px;">
 					<script type="text/javascript">
@@ -91,20 +91,28 @@
 			</div>
 			<br>
 			<div class="form-inline">
-				<label class="control-label col-sm-2">내용</label>
-				<div class="col-sm-3">
-					<textarea rows="10" cols="100" name="object"></textarea>
+				<label class="control-label col-sm-3"><strong>내용</strong></label>
+				<div class="col-sm-4">
+					<textarea rows="10" cols="80" name="object"></textarea>
 				</div>
 			</div>
 			<br>
-			<div class="col-sm-12" align="center">
-			<button type="submit" id="submit" class="btn btn-success">동영상 올리기</button>
-	       <button type="reset" class="btn btn-warning">초기화</button>
-	       <button type="button" class="btn btn-info" onclick="location.href='/videoboard/videoBoardList'">목록으로</button>
-			</div>
+			<hr>
 			<br>
+			<div class="row" align="center">
+			<div class="col-sm-5">
+			</div>
+			<div class="col-sm-2">
+				<button type="submit" id="submit" class="btn btn-outline-danger"><i class="fab fa-youtube"></i>&nbsp;&nbsp;동영상 올리기</button>
+			</div>
+			<div class="col-sm-1">
+			</div>
+			<div class="col-sm-4" align="left">
+	       		<button type="reset" class="btn btn-outline-info">초기화</button>
+	       		<button type="button" class="btn btn-outline-dark" onclick="location.href='/videoboard/videoBoardList'">목록으로</button>
+			</div>
+			</div>
 		</form>
-	</div>
 	</div>
 	<jsp:include page="../module/bottom.jsp" flush="false" />
 </body>

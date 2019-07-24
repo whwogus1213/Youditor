@@ -78,7 +78,9 @@
 			${rMessage.subject }
 		</div>
 	</div>
-	<hr>
+	<div class="col-sm-8">
+		<hr>
+	</div>
 	<div class="form-inline">
 		<div class="col-sm-2"></div>
 		<div class="col-sm-2">
@@ -88,17 +90,19 @@
 			<pre style="white-space:pre-wrap"><c:out value="${rMessage.object }" /></pre>
 		</div>
 	</div>
-	<hr>
+	<div class="col-sm-8">
+		<hr>
+	</div>
 	<div class="form-inline">
 		<div class="col-sm-2"></div>
 		<div class="col-sm-2">
-			<button type="button" class="btn btn-sm btn-primary" onclick="location.href='/message/messageReceiveList' ">목록</button>
+			<button type="button" class="btn btn-sm btn-link" onclick="location.href='/message/messageReceiveList' " style="color:gray"><i class="fas fa-mail-bulk"></i>&nbsp;&nbsp;목록</button>
 		</div>
-		<div class="col-sm-4"></div>
-		<div class="col-sm-2">
-			<button type="button" class="btn btn-sm btn-primary" onclick="location.href='/message/reply.do?messageId=${param.messageId}' ">답장</button>
+		<div class="col-sm-3"></div>
+		<div class="col-sm-3">
+			<button type="button" class="btn btn-sm btn-link" onclick="location.href='/message/reply.do?messageId=${param.messageId}' "><i class="fas fa-paper-plane"></i>&nbsp;&nbsp;답장</button>
 			&nbsp;|&nbsp;
-			<button type="button" class="btn btn-sm btn-danger" name="hideBtn" id="hideBtn">지우기</button>
+			<button type="button" class="btn btn-sm btn-link" name="hideBtn" id="hideBtn" style="color:Crimson"><i class="fas fa-eraser"></i>&nbsp;&nbsp;지우기</button>
 			<script>
 			$("#hideBtn").click(function(){
 				var chArr = new Array();

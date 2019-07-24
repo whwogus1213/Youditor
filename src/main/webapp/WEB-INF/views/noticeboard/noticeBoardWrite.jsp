@@ -125,7 +125,13 @@
 				}
 				</script>
 				<button type="reset" class="btn btn-sm">초기화</button>
-				<button type="button" class="btn btn-sm" onclick="location.href='/noticeboard/noticeBoardList?num=1'">뒤로 가기</button>
+				<button type="button" class="btn btn-sm hBack">뒤로 가기</button>
+					<script>
+						$(".hBack").on("click", function(e){
+						    e.preventDefault();
+						    window.history.back();
+						});
+					</script>
 			</div>
 			<br>
 		</form>
