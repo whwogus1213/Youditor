@@ -9,7 +9,7 @@ public class RecruitBoardVO {
 	private String subject;
 	private String object;
 	private int fee;
-	private Date reg_date;
+	private String reg_date;
 	private Date mod_date;
 	private int viewCount;
 	private int replyCount;
@@ -68,11 +68,11 @@ public class RecruitBoardVO {
 		this.fee = fee;
 	}
 
-	public Date getReg_date() {
+	public String getReg_date() {
 		return reg_date;
 	}
 
-	public void setReg_date(Date reg_date) {
+	public void setReg_date(String reg_date) {
 		this.reg_date = reg_date;
 	}
 
