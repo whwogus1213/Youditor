@@ -89,9 +89,15 @@
 			</div>
 			<hr>
 			<input type="text" class="form-control" name="boardId" id="boardId" maxlength="50" value="${videoBoardUpdate.boardId}" style="visibility:hidden">
-			<div align="center">
-				<button type="submit" class="btn btn-warning" id="submit">수정</button>
-				<button type="button" class="btn btn-danger" onclick="location.href='/videoboard/videoBoardView?boardId=${videoBoardUpdate.boardId}' ">취소</button>
+			<div class="row">
+				<div class="col-sm-4">
+				</div>
+				<div class="col-sm-2" align="right">
+					<button type="submit" class="btn btn-outline-success" id="submit">수정</button>
+				</div>
+				<div class="col-sm-2" align="left">
+					<button type="button" class="btn btn-outline-danger" onclick="location.href='/videoboard/videoBoardView?boardId=${videoBoardUpdate.boardId}' ">취소</button>
+				</div>
 			</div>
 		</form>
 	</div>
