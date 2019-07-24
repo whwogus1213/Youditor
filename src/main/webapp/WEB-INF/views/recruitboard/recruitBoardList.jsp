@@ -190,7 +190,7 @@ footer{
 	
 	<jsp:include page="../module/aside.jsp" flush="false" />
 	<div class="container">
-		<table class="table table-striped nanum table-hover">
+		<table class="table table-striped nanum table-hover" style="height:auto">
 			<!-- <table border="1"> -->
 			<thead align="center">
 				<tr>
@@ -251,7 +251,7 @@ footer{
 
 
 		<!-- 페이징 검색 시작 -->
-		<div class="col-12">
+		<div class="col-12" style="padding-top:1%">
 			<!-- 페이징 -->
 			<div class="p1 pagination col-12">
 				<ul>

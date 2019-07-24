@@ -111,7 +111,6 @@ label {
 .table {
 	border: none;
 	margin-bottom: 0rem;
-	height: 210px;
 }
 
 .table td, .table th {

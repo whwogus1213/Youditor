@@ -221,7 +221,7 @@ function getNoticeNew(){
 					if(i < 5){
 						html += "<tr>";
 						html += "<td>"+(i+1)+"</td>";
-						html += "<td>"+data[i].categoryId+"</td>";
+						html += "<td>"+data[i].categoryName+"</td>";
 						if(data[i].subject.length < 10){
 							html += "<td align='left' style='padding-left: 30px; cursor: pointer;'><a href='/noticeboard/noticeBoardView?boardId="+data[i].boardId+"'>"+data[i].subject+"</a></td>";
 							}else{
@@ -236,7 +236,7 @@ function getNoticeNew(){
 					}else{
 						html += "<div class='col-lg-4 col-sm-6 portfolio-item'>";
 						html += "<div class='card h-100'>";
-						html += "<a href='#'><img class='card-img-top' src='/resources/images/member1.jpg' alt='' width='80' height='200'></a>";
+						html += "<a href='#'><img class='card-img-top' src='/resources/images/nothing.jpg' alt='' width='80' height='200'></a>";
 						html += "<div class='card-body'>";
 						html += "<h4 class='card-title'>";
 						html += "<a href='#'>편집자 아이디</a>";
@@ -270,7 +270,7 @@ function getTipNew(){
 					if(i < 5){
 						html += "<tr>";
 						html += "<td>"+(i+1)+"</td>";
-						html += "<td>"+data[i].categoryId+"</td>";
+						html += "<td>"+data[i].categoryName+"</td>";
 						if(data[i].subject.length < 10){
 							html += "<td align='left' style='padding-left: 30px; cursor: pointer;'><a href='/tipboard/tipBoardView?boardId="+data[i].boardId+"'>"+data[i].subject+"</a></td>";
 							}else{

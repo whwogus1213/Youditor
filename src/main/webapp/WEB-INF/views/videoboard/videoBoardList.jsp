@@ -18,7 +18,7 @@
     cursor: pointer;
 }
 .card-body:hover
-	{
+{
 		/* 그림자 이펙트 */
  		-moz-box-shadow: 0 0 20px #999; 
  		-webkit-box-shadow: 0 0 20px #999; 
@@ -28,9 +28,9 @@
  		/* 흐려짐 이펙트 */ 
 /* 		opacity: 0.3; */
 /* 		filter: alpha(opacity=30); */
-	}
+}
 	
-	.vbrow:hover {
+.vbrow:hover {
 	border: 1px solid black;
 	box-shadow: 0px 0px 20px #000;
 }	
@@ -224,12 +224,19 @@
 		<h1 align="center" style="font-size:60px; letter-spacing:60px">
 			<strong>&nbsp;${categoryInfo.categoryName }</strong>
 		</h1>
-		<h4 align="center">${categoryInfo.categoryName } 유투버들의 편집 영상입니다.</h4>
+		<c:choose>
+			<c:when test="${categoryInfo.categoryName ne '전체보기'}">
+				<h4 align="center">${categoryInfo.categoryName } 유투버들의 편집 영상입니다.</h4>
+			</c:when>
+			<c:otherwise>
+				<h4 align="center">모든 유투버들의 편집 영상입니다.</h4>
+			</c:otherwise>
+		</c:choose>
 	</div>
 	<div id="deleteOK" class="alert alert-danger hidden" role="alert" style="visibility: hidden">글이 삭제되었습니다.</div>
 
 	<jsp:include page="../module/aside.jsp" flush="false" />
-	<div class="container" style="background-color: #E8E8E8 ;">
+	<div class="container" style="background-color: #E8E8E8; padding-bottom:2%">
 	
 		<!-- Marketing Icons Section -->
 		<br>

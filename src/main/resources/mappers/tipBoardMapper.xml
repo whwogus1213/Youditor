@@ -127,7 +127,7 @@
 	
 	<!-- 최신 게시물 -->
 	<select id="newList" resultType="TipBoardVO">
-		SELECT boardId, b.accountId, subject, a.nickname, viewCount, b.reg_date, b.categoryId, DATE_FORMAT(b.mod_date, '%Y %m %d') mod_date
+		SELECT boardId, b.accountId, subject, a.nickname, viewCount, b.reg_date, b.categoryId, c.categoryName, DATE_FORMAT(b.mod_date, '%Y %m %d') mod_date
 		FROM tipboard b join accounts a on b.accountId = a.accountId
 		join tipcategory c on b.categoryId=c.categoryId
         order by b.reg_date DESC limit 5

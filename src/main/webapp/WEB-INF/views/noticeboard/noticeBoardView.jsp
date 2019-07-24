@@ -86,8 +86,8 @@
 				
 		</div>
 		<hr>
-		<div class="col-12" style="margin-left:3%; margin-right:3%; margin-top:3%; margin-bottom:3%">
-			<pre>${row.object}</pre>
+		<div class="col-11" style="margin-left:4%; margin-top:4%; margin-bottom:4%">
+			<pre style="white-space:pre-wrap">${row.object}</pre>
 		</div>
 		<hr>
 		<div align="right">
