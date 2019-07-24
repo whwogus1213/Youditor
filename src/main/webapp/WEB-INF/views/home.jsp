@@ -161,7 +161,7 @@ function getAccountsRankList(){
 						html += "<div class='card-body'>";
 						html += "<h4 class='card-title'>";
 						html += "<div class='dropright'>";
-						html += "<a data-toggle='dropdown' aria-haspopup='true' aria-expanded='false' style='cursor: pointer'>"+data[i].nickname+"</a>";
+						html += "<a data-toggle='dropdown' aria-haspopup='true' aria-expanded='false' style='cursor: pointer;'>"+data[i].nickname+"</a>";
 						html += "<div class='dropdown-menu'>";
 						html += "<a class='dropdown-item' href='/videoboard/videoBoardList?searchType=nickname&keyword="+data[i].nickname+"'>";
 						html += "<i class='fab fa-youtube'></i>&nbsp;&nbsp;영상 더보기";
@@ -229,7 +229,7 @@ function getNoticeNew(){
 								
 							}
 						
-						html += "<td>"+data[i].nickname+"</td>";
+						html += "<td style='overflow: hidden; text-overflow: ellipsis; white-space: nowrap;'>"+data[i].nickname+"</td>";
 						html += "<td>"+data[i].mod_date+"</td>";
 						html += "<td>"+data[i].viewCount+"</td>";
 						html += "</tr>";
@@ -277,7 +277,7 @@ function getTipNew(){
 								html += "<td align='left' style='padding-left: 30px; cursor: pointer;'><a href='/tipboard/tipBoardView?boardId="+data[i].boardId+"'>"+data[i].subject.substr(0, 9)+'..'+"</a></td>";
 							}
 						
-						html += "<td>"+data[i].nickname+"</td>";
+						html += "<td style='overflow: hidden; text-overflow: ellipsis; white-space: nowrap;'>"+data[i].nickname+"</td>";
 						html += "<td>"+data[i].mod_date+"<fmt:formatDate value="+data[i].mod_date+"pattern='yyyy-MM-dd' /></td>";
 						html += "<td>"+data[i].viewCount+"</td>";
 						html += "</tr>";
