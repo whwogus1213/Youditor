@@ -79,7 +79,13 @@
 
 	.card .banner{
 		/* ⬇ Photo, geordannatheartist.com */
-		background-image: url("https://images.unsplash.com/photo-1533158326339-7f3cf2404354?ixlib=rb-1.2.1&auto=format&fit=crop&w=1004&q=80");
+ 		background-image: url("https://images.unsplash.com/photo-1533158326339-7f3cf2404354?ixlib=rb-1.2.1&auto=format&fit=crop&w=1004&q=80");
+ 		
+/* 		background-image: url("/resources/images/main_logo.png"); */
+/* 		background-size: contain; */
+/* 		background-repeat: no-repeat; */
+/* 		background-position: top; */
+		
 	}
 	
 
@@ -126,6 +132,11 @@
 			text-decoration: none;
 		}
 		
+.unfollowbtn:hover:before{
+	color: #333;
+
+}
+
 
 .ul{
 	margin-top: 10px;
@@ -166,9 +177,9 @@
 <c:forEach items="${followingList}" var="followingList">
 <!-- card start -->
 <div class="col-3">
-<div class="card" style="margin-bottom: 35px;" onclick="location.href='/videoboard/videoBoardList?searchType=nickname&keyword=${followingList.nickname}'">
+<div class="card" style="margin-bottom: 35px; cursor: pointer;" onclick="location.href='/videoboard/videoBoardList?searchType=nickname&keyword=${followingList.nickname}'">
    <div class="banner">
-   	  <a id = "unfollowbtn${followingList.followAccountId}" onclick="fn_unfollow('${followingList.followAccountId}'); return false;"><i class="fas fa-user-times" style="position: absolute; top: 2%; left: 85%; color: snow; font-size: 1.2em;"></i></a>
+   	  <a class="unfollowbtn" id = "unfollowbtn${followingList.followAccountId}" onclick="fn_unfollow('${followingList.followAccountId}'); return false;"><i class="fas fa-user-times unfollowbtn" style="position: absolute; top: 2%; left: 85%; color: snow; font-size: 1.2em; cursor: pointer;"></i></a>
    	  <spring:url value='/image/${followingList.picture}' var="pictureURL"/>
       <div class="avatar" style="background-image: url(${pictureURL})"> </div>
    </div>
