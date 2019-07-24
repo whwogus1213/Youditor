@@ -221,7 +221,7 @@ function getNoticeNew(){
 					if(i < 5){
 						html += "<tr>";
 						html += "<td>"+(i+1)+"</td>";
-						html += "<td>"+data[i].categoryId+"</td>";
+						html += "<td>"+data[i].categoryName+"</td>";
 						if(data[i].subject.length < 10){
 							html += "<td align='left' style='padding-left: 30px; cursor: pointer;'><a href='/noticeboard/noticeBoardView?boardId="+data[i].boardId+"'>"+data[i].subject+"</a></td>";
 							}else{
@@ -270,7 +270,7 @@ function getTipNew(){
 					if(i < 5){
 						html += "<tr>";
 						html += "<td>"+(i+1)+"</td>";
-						html += "<td>"+data[i].categoryId+"</td>";
+						html += "<td>"+data[i].categoryName+"</td>";
 						if(data[i].subject.length < 10){
 							html += "<td align='left' style='padding-left: 30px; cursor: pointer;'><a href='/tipboard/tipBoardView?boardId="+data[i].boardId+"'>"+data[i].subject+"</a></td>";
 							}else{

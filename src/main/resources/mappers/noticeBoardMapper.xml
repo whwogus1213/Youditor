@@ -6,8 +6,8 @@
 <mapper namespace="com.good.mapper.noticeBoardMapper">
 	<!-- 게시물 목록 + 페이징 + 검색 -->
 	<select id="listAll" resultType="NoticeBoardVO" parameterType="SearchBoard">
-		SELECT boardId, b.accountId, subject, object,
-			CONVERT_TZ(b.reg_date,'+09:00','+00:00') as reg_date, CONVERT_TZ(b.reg_date,'+09:00','+00:00') as reg_date, CONVERT_TZ(b.mod_date,'+09:00','+00:00') as mod_date, viewCount, nickname, categoryName, picture  
+		SELECT boardId, b.accountId, subject, object, viewCount, nickname, categoryName, picture,
+			CONVERT_TZ(b.reg_date,'+09:00','+00:00') as reg_date, CONVERT_TZ(b.mod_date,'+09:00','+00:00') as mod_date   
 		FROM
 			noticeboard b
 			JOIN
@@ -128,7 +128,8 @@
 	<!-- 최신 공지 사항 -->
 	<select id="rankList" resultType="NoticeBoardVO">
 		SELECT
-			boardId, b.accountId, subject, a.nickname, viewCount, b.reg_date, b.categoryId, DATE_FORMAT(b.mod_date, '%Y %m %d') mod_date
+			boardId, b.accountId, subject, a.nickname, viewCount, b.reg_date, b.categoryId, categoryName,
+			DATE_FORMAT(b.mod_date, '%Y %m %d') mod_date
 		FROM
 			noticeboard b
 		JOIN
