@@ -232,14 +232,18 @@ public class AccountsController {
 	}
 	
 	@RequestMapping(value="/updatePasswordPro")
-	public ModelAndView updatePasswordPro(HttpSession session, int accountId, String email, String pwd) throws Exception {
-		service.updatePassword(accountId, pwd);
+	public ModelAndView updatePasswordPro(HttpSession session, int accountId, String email, String newpwd) throws Exception {
+		System.out.println("ffff" + accountId);
+		System.out.println("gggg" + email);
+		System.out.println("hhhh" + newpwd);
+		
+		service.updatePassword(accountId, newpwd);
 		System.out.println("============resetPasswordPro 성공==============");
 		
 		AccountsVO vo = new AccountsVO();
 		
 		vo.setEmail(email);
-		vo.setPwd(pwd);
+		vo.setPwd(newpwd);
 
 		if (session.getAttribute("login") != null) {
 			// 기존에 login이란 세션 값이 존재한다면
