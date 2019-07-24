@@ -1,6 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@ page session="true" %>
+<%@ page session="false" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -17,8 +17,6 @@
 </head>
 <body>
 	<jsp:include page="../module/top2.jsp" flush="false"/>
-	<form class="form-horizontal" method="post" action="${path}/recruitboard/update">
-	
 	<!-- 배너 -->
 	<div class="form-group">
 		<div class="col-sm-12" style="background-image:url('/resources/images/recruit/recruit.jpg'); background-position:50% 60%; background-size:100%; font-family: 'Song Myung', sans-serif; color:white; text-shadow: -1px 0 LightPink, 0 1px LightPink, 1px 0 LightPink, 0 -1px LightPink; padding-top:130px; padding-bottom:5%">
@@ -27,34 +25,46 @@
 		</div>
 	</div>
 	
+	<form class="form-horizontal" method="post" action="${path}/recruitboard/update">
+	
+	
 	<!-- 게시글 상세정보 -->
 	<div class="container">
-		<hr>
-		<br>
-		<label class="control-label col-sm-2">제목</label>
-		<input type="text" class="form-control" name="subject" id="subject" maxlength="50" value="${row.subject }">
-		<br>
-		<label class="control-label col-sm-2">내용</label>
-		
-		<textarea rows="10" cols="100" name="object" id="object">${row.object }</textarea>
-		<br>
-		<input type="text" class="form-control" name="boardId" id="boardId" maxlength="50" value="${row.boardId}" style="visibility:hidden">
-		<br>
-		<label class="control-label col-sm-2">급여</label>
-		<input type="text" class="form-control" name="boardId" id="boardId" maxlength="50" value="${row.fee}">
-		
-		<div align="right">
-		<h4>작성 일시 <fmt:formatDate value="${row.reg_date}" pattern="yyyy-MM-dd" />
-		</h4>
+		<div align="center" style="padding-top:1%; padding-bottom:1%;">
+			<h2>구인/구직 게시글 수정</h2>
 		</div>
 		<hr>
 		<br>
-		
+		<div class="row">
+			<label class="control-label col-sm-2"><strong>제목</strong></label>
+			<input class="col-sm-9" type="text" class="form-control" name="subject" id="subject" maxlength="50" value="${row.subject }">
+		</div>
 		<br>
+		<div class="row">
+			<label class="control-label col-sm-2"><strong>작성일</strong></label>
+			<label class="control-label col-sm-4"><fmt:formatDate value="${row.reg_date}" pattern="yyyy-MM-dd" /></label>
+
+			<label class="control-label col-sm-2"><strong>마지막 수정일</strong></label>
+			<label class="control-label col-sm-4"><fmt:formatDate value="${row.reg_date}" pattern="yyyy-MM-dd" /></label>
+		</div>
+		<br>
+		<div class="row">
+			<label class="control-label col-sm-2"><strong>내용</strong></label>
+			<textarea rows="10" cols="104" name="object" id="object">${row.object }</textarea>
+		</div>
+		<br>
+		<div class="row">
+			<label class="control-label col-sm-2"><strong>급여</strong></label>
+			<input class="col-sm-9" type="text" class="form-control" name="fee" id="fee" maxlength="50" value="${row.fee}">
+		</div>
+		<input type="text" class="form-control" name="boardId" id="boardId" maxlength="50" value="${row.boardId}" style="visibility:hidden">
+		<br>
+		</div>
 		<hr>
+		<br>
 		<div align="center">
-			<button type="submit" id="submit">수정</button>
-			<button type="button" class="btn btn-danger" onclick="location.href='/recruitboard/recruitBoardList' ">취소</button>
+			<button type="submit" class="btn btn-link" id="submit" style="color:black"><i class="fas fa-cut"></i>&nbsp;&nbsp;수정</button>
+			<button type="button" class="btn btn-link" onclick="location.href='/recruitboard/recruitBoardView?boardId=${row.boardId}'" style="color:black"><i class="fas fa-undo"></i>&nbsp;&nbsp;취소</button>
 		</div>
 		<br>
 	</div>

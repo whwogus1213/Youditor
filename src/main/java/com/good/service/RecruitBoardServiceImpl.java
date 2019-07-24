@@ -61,5 +61,13 @@ public class RecruitBoardServiceImpl implements RecruitBoardService {
 	public void deleteRecruitBoard(int boardId) throws Exception {
 		recruitBoardDAO.deleteRecruitBoard(boardId);
 	}
+	@Override
+	public List<RecruitBoardVO> rankList1() throws Exception {
+		return recruitBoardDAO.rankList1();
+	}
+	@Override
+	public List<RecruitBoardVO> rankList2() throws Exception {
+		return recruitBoardDAO.rankList2();
+	}
 	
 }

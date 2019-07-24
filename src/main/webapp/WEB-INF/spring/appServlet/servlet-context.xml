@@ -53,6 +53,8 @@
             <exclude-mapping path="/tipstar/**"/>
             <exclude-mapping path="/tipboard"/>
             <exclude-mapping path="/tipboard/**"/>
+            <exclude-mapping path="/recruitboard"/>
+            <exclude-mapping path="/recruitboard/**"/>
             <beans:ref bean="authenticationInterceptor"/>
         </interceptor>
     </interceptors>

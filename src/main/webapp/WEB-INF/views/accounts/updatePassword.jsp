@@ -91,15 +91,14 @@ td {
 							<input type="hidden" name="accountId" id="accountId" value="${login.accountId }">
 							<input type="hidden" name="email" id="email" value="${login.email }">
 							<p class="pbnt-st">
-							<input type="button" value="비밀번호 변경" onclick="changePwd();">
+								<input type="button" value="비밀번호 변경" onclick="changePwd();">
 						 	</p>
 						</div>
 			</form:form>
 		</c:if>
 		<c:if test="${login.accountId eq null }">
 			로그인상태가 아닙니다.<br><br><br>
-			<button type="button" class="nav-link button-style1" data-toggle="modal" 
-					data-target="#myModal">로그인</button>
+			<button type="button" class="nav-link button-style1" data-toggle="modal" data-target="#myModal">로그인</button>
 		</c:if>
 	</div>
 	<jsp:include page="../module/bottom.jsp" flush="false"/>

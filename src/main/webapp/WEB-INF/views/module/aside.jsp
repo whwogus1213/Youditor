@@ -108,10 +108,10 @@ label {
 .table tr {
 	border: none;
 }
-.table {
+.tableside {
 	border: none;
 	margin-bottom: 0rem;
-	height: 210px;
+/*	height: 210px; */
 }
 
 .table td, .table th {
@@ -173,7 +173,7 @@ label {
    		<input id="best3" type="radio" name="tab"  />
     	<input id="best4" type="radio" name="tab"  />
    
-			<table class="table">
+			<table class="table tableside">
 				<thead class="thead-dark">
 					<tr>
 						<th style="background-color: #e16b5a; padding: 8px 0px 5px 4px;"><label class="style activebnt" id="bestbtn1" for="best1">전체</label></th>

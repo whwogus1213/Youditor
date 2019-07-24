@@ -27,6 +27,12 @@
  	 margin-right: 2%;
  	 text-overflow: ellipsis;
   }
+  .jy2 {
+ 	 width: 48%;
+ 	 float: left;
+ 	 margin-right: 2%;
+ 	 margin-top: 40px;
+  }
   .table th, .table td {
     border-top: 0 solid #dee2e6; 
 }
@@ -75,9 +81,26 @@ a {
 a:hover {
 	color: #000;
 }
+.rcbtn{
+	height: 40px;
+	padding-bottom: auto;
+}
   </style>
   <script>
   $(function() {
+	  var result = '${result}';
+		  if(result == 'loginOK'){
+				alert('로그인 되었습니다.');
+			}
+		  if(result == 'loginNO'){
+				alert('아이디나 비밀번호를 다시 확인하여 주세요.');
+			}
+		  if(result == 'authorityNO'){
+				alert('해당 권한이 부족합니다.');
+			}
+		  if(result == 'updateOK'){
+				alert('회원정보가 수정되었습니다.');
+			}
   $.ajax({
 			type : "POST",
 			url : "/videostar/StarList",
@@ -123,6 +146,8 @@ a:hover {
 				getAccountsRankList();
 				getNoticeNew();
 				getTipNew();
+				getRecruit1();
+				getRecruit2();
 			},
 			error : function(data) {
 				alert('불러오기 실패');
@@ -292,7 +317,106 @@ function getTipNew(){
 		}
 	});
 }
+function getRecruit1(){
+	$.ajax({
+		type : "POST",
+		url : "/recruitboard/newRecruit1",
+		success : function(data) {
 
+			var html = "";
+			
+			
+
+			if(data.length > 0) {
+				for(var i = 0; i < data.length; i++){
+					if(i < 5){
+						html += "<tr class='rcbtn'>";
+						html += "<td>"+(i+1)+"</td>";
+						html += "<td class='rcbtn'><button type='button' class='btn btn-info btn-sm' disabled>구인</button></td>";
+						if(data[i].subject.length < 10){
+							html += "<td align='left' style='padding-left: 30px; cursor: pointer;'><a href='/recruitboard/recruitBoardView?boardId="+data[i].boardId+"'>"+data[i].subject+"</a></td>";
+							}else{
+								html += "<td align='left' style='padding-left: 30px; cursor: pointer;'><a href='/recruitboard/recruitBoardView?boardId="+data[i].boardId+"'>"+data[i].subject.substr(0, 9)+'..'+"</a></td>";
+							}
+						
+						html += "<td>"+data[i].nickname+"</td>";
+						html += "<td>"+data[i].reg_date+"</td>";
+						html += "<td>"+data[i].viewCount+"</td>";
+						html += "</tr>";
+					}else{
+						html += "<div class='col-lg-4 col-sm-6 portfolio-item'>";
+						html += "<div class='card h-100'>";
+						html += "<a href='#'><img class='card-img-top' src='/resources/images/member1.jpg' alt='' width='80' height='200'></a>";
+						html += "<div class='card-body'>";
+						html += "<h4 class='card-title'>";
+						html += "<a href='#'>편집자 아이디</a>";
+						html += "</h4>";
+						html += "<p class='card-text'>편집자 설명</p>";
+						html += "</div>";
+						html += "</div>";
+						html += "</div>";
+					}
+				}
+			}
+
+			$("#newRecruit1").html(html);
+
+		},
+		error : function(data) {
+			alert('불러오기 실패');
+		}
+	});
+}
+function getRecruit2(){
+	$.ajax({
+		type : "POST",
+		url : "/recruitboard/newRecruit2",
+		success : function(data) {
+
+			var html = "";
+			
+			
+
+			if(data.length > 0) {
+				for(var i = 0; i < data.length; i++){
+					if(i < 5){
+						html += "<tr  class='rcbtn'>";
+						html += "<td>"+(i+1)+"</td>";
+						html += "<td><button type='button' class='btn btn-secondary btn-sm' disabled>구직</button></td>";
+						if(data[i].subject.length < 10){
+							html += "<td align='left' style='padding-left: 30px; cursor: pointer;'><a href='/recruitboard/recruitBoardView?boardId="+data[i].boardId+"'>"+data[i].subject+"</a></td>";
+							}else{
+								html += "<td align='left' style='padding-left: 30px; cursor: pointer;'><a href='/recruitboard/recruitBoardView?boardId="+data[i].boardId+"'>"+data[i].subject.substr(0, 9)+'..'+"</a></td>";
+							}
+						
+						html += "<td>"+data[i].nickname+"</td>";
+						html += "<td>"+data[i].reg_date+"</td>";
+						html += "<td>"+data[i].viewCount+"</td>";
+						html += "</tr>";
+					}else{
+						html += "<div class='col-lg-4 col-sm-6 portfolio-item'>";
+						html += "<div class='card h-100'>";
+						html += "<a href='#'><img class='card-img-top' src='/resources/images/member1.jpg' alt='' width='80' height='200'></a>";
+						html += "<div class='card-body'>";
+						html += "<h4 class='card-title'>";
+						html += "<a href='#'>편집자 아이디</a>";
+						html += "</h4>";
+						html += "<p class='card-text'>편집자 설명</p>";
+						html += "</div>";
+						html += "</div>";
+						html += "</div>";
+					}
+				}
+			}
+
+			$("#newRecruit2").html(html);
+
+		},
+		error : function(data) {
+			alert('불러오기 실패');
+		}
+	});
+}
   </script>
 </head>
 
@@ -401,6 +525,46 @@ function getTipNew(){
 					</tr>
 				</thead>
 				<tbody align="center" id="newTip">
+				</tbody>
+			</table>
+  		</div>
+  	</div>
+  	<div class="jy2">
+  		<span class="best">NEW  </span><span id="top-st">구인 게시판</span><hr/>
+  		<div id="recruit1">
+  			<table class="table table-striped nanum table-hover">
+				<!-- <table border="1"> -->
+				<thead align="center">
+					<tr>
+						<th style="width: 10%;">번호</th>
+						<th style="width: 15%;">분류</th>
+						<th style="width: 35%;">제목</th>
+						<th style="width: 10%;">작성자</th>
+						<th style="width: 20%;"><i class="far fa-clock"></i></th>
+						<th style="width: 10%;"><i class="far fa-eye" aria-hidden="true"></i></th>
+					</tr>
+				</thead>
+				<tbody align="center" id="newRecruit1">
+				</tbody>
+			</table>
+  		</div>
+  	</div>
+  	<div class="jy2">
+  		<span class="best">NEW  </span><span id="top-st">구직 게시판</span><hr/>
+  		<div id="recruit2">
+  			<table class="table table-striped nanum table-hover">
+				<!-- <table border="1"> -->
+				<thead align="center">
+					<tr>
+						<th style="width: 10%;">번호</th>
+						<th style="width: 15%;">분류</th>
+						<th style="width: 35%;">제목</th>
+						<th style="width: 10%;">작성자</th>
+						<th style="width: 20%;"><i class="far fa-clock"></i></th>
+						<th style="width: 10%;"><i class="far fa-eye" aria-hidden="true"></i></th>
+					</tr>
+				</thead>
+				<tbody align="center" id="newRecruit2">
 				</tbody>
 			</table>
   		</div>

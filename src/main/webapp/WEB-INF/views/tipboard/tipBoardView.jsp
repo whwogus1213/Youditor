@@ -1,5 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ page session="true" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -288,74 +289,46 @@
 			});
 		});
 	</script>
-		<div align="center">
-			<br><br>
-			<h1>편집 팁</h1>
-			<br><br>
+		<div class="col-12" style="margin-left:3%; margin-right:3%; margin-top:3%; margin-bottom:1%">
+			<h3><strong>[${row.categoryName}]</strong>&nbsp;&nbsp;${row.subject }</h3>
 		</div>
-		<hr>
-		<br>
-		<h1>${row.subject }</h1>
-		<br>
-		<input type="hidden" id="boardId" name="boardId" value="${row.boardId }" />
-			<c:if test="${login.email ne null}">
-	        	<c:if test="${login.accountId ne row.accountId}">
-						<p class="star_rating">
-						    <a class = "starqq" href="#">★</a>
-						    <a class = "starqq" href="#">★</a>
-						    <a class = "starqq" href="#">★</a>
-						    <a class = "starqq" href="#">★</a>
-						    <a class = "starqq" href="#">★</a>
-						</p>
-						<div id='ratingBtnDiv'>
-						</div>
-				</c:if>
-			</c:if>
-		<div align="right">
-			<div class="form-inline">
-				<div class="col-sm-10" align="right">
-					<div class="dropright">
-						<h4>작성자 <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="cursor:pointer">
-							${row.nickname }
-						</a></h4>
-						<div class="dropdown-menu">
-							<a class="dropdown-item" href="#" onclick="messagePopup();">
-								<i class="far fa-envelope"></i>&nbsp;&nbsp;쪽지 보내기
-							</a>
-							<script type="text/javascript">
-							function messagePopup() {
-								var nickname = "${row.nickname }";
-								var win = window.open("/message/writePopup.do?nickname=" + nickname, "_blank", 
-										"width=650, height=470, left=200, top=200, location=no, menubar=no, resizble=no, scrollbars=no, status=no, titlebar=no, toolbar=no");
-							}
-							</script>
-						</div>
+		<div class="row">
+			<div class="col-6 row" align="left" style="margin-top:2%">
+				<div style="margin-left:12%">
+					<strong>작성자</strong>
+				</div>
+				<div class="dropright" style="margin-left:12%">
+					<a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="cursor: pointer">
+						<img src="<spring:url value='/image/${row.picture}'/>" class=" mx-auto rounded-circle" width="30px" height="30px" />
+						&nbsp;${row.nickname}
+					</a>
+					<div class="dropdown-menu">
+						<a class="dropdown-item" href="#" onclick="messagePopup();">
+							<i class="far fa-envelope"></i>&nbsp;&nbsp;쪽지 보내기
+						</a>
+						<script type="text/javascript">
+						function messagePopup() {
+							var nickname = "${row.nickname }";
+							var win = window.open("/message/writePopup.do?nickname=" + nickname, "_blank", 
+									"width=650, height=470, left=200, top=200, location=no, menubar=no, resizble=no, scrollbars=no, status=no, titlebar=no, toolbar=no");
+						}
+						</script>
 					</div>
 				</div>
-				<div class="col-sm-2" align="right">
-					<h4>카테고리 ${row.categoryId}</h4>
-				</div>
 			</div>
-			<div class="form-inline">
-				<div class="col-sm-10" align="right">
-					<h4>작성 일시 <fmt:formatDate value="${row.reg_date}" pattern="yyyy-MM-dd" /></h4>
-				</div>
-				<div class="col-sm-2" align="right">
-					<h4>조회수 ${row.viewCount }</h4>
-				</div>
+
+			<div class="col-4" align="right" style="margin-top:2%">
+				<strong>조회수</strong>&nbsp;&nbsp;&nbsp;${row.viewCount }&nbsp;&nbsp;
 			</div>
-			<c:if test="${login.accountId ne row.accountId}">
-			<div align="right">
-				<label>내가 평가한 점수</label>
-				<span id="star"></span><span> 점</span>
+			<div class="col-2" align="right" style="margin-top:2%">
+				<strong>게시일</strong>&nbsp;&nbsp;&nbsp;<fmt:formatDate value="${row.reg_date}" pattern="yyyy. MM. dd." />
 			</div>
-		</c:if>
-		<div align="right">총 점수 ${row.starCount}</div>
+				
 		</div>
 		<hr>
-		<br>
-		<h2>${row.object }</h2>
-		<br>
+		<div class="col-12" style="margin-left:3%; margin-right:3%; margin-top:3%; margin-bottom:3%">
+			<pre>${row.object}</pre>
+		</div>
 		<hr>
 		<div align="center">
 			<button type="button" class="btn btn-primary" onclick="location.href='/tipboard/tipBoardList' ">목록으로</button>

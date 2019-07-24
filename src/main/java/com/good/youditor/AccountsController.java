@@ -88,6 +88,7 @@ public class AccountsController {
 		AccountsVO vo = service.login(accountsVo);
 		
 		if (vo != null) { // 로그인 성공
+			rttr.addFlashAttribute("result", "loginOK");
 			int authority = vo.getAuthority();
 			
 			if(authority < 3) {		// 권한에 문제가 있는 경우
@@ -95,9 +96,11 @@ public class AccountsController {
 				map.put("error", false);
 				map.put("msg", authority);
 				rttr.addFlashAttribute("error", map);
+				//rttr.addFlashAttribute("result", "authorityNO");
 				returnURL = "redirect:/accounts/login.do";
 			} else {
 				session.setAttribute("login", vo);
+				//rttr.addFlashAttribute("result", "authorityNO");
 				returnURL = "redirect:/";
 			}
 		} else { // 로그인에 실패한 경우
@@ -106,6 +109,7 @@ public class AccountsController {
 			map.put("error", false);
 			map.put("msg", errorCase);
 			rttr.addFlashAttribute("error", map);
+			rttr.addFlashAttribute("result", "loginNO");
 			returnURL = "redirect:/"; // 로그인 폼으로// 홈으로 다시 가도록 함
 		}
 
@@ -228,14 +232,18 @@ public class AccountsController {
 	}
 	
 	@RequestMapping(value="/updatePasswordPro")
-	public ModelAndView updatePasswordPro(HttpSession session, int accountId, String email, String pwd) throws Exception {
-		service.updatePassword(accountId, pwd);
+	public ModelAndView updatePasswordPro(HttpSession session, int accountId, String email, String newpwd) throws Exception {
+		System.out.println("ffff" + accountId);
+		System.out.println("gggg" + email);
+		System.out.println("hhhh" + newpwd);
+		
+		service.updatePassword(accountId, newpwd);
 		System.out.println("============resetPasswordPro 성공==============");
 		
 		AccountsVO vo = new AccountsVO();
 		
 		vo.setEmail(email);
-		vo.setPwd(pwd);
+		vo.setPwd(newpwd);
 
 		if (session.getAttribute("login") != null) {
 			// 기존에 login이란 세션 값이 존재한다면
@@ -255,7 +263,7 @@ public class AccountsController {
 	
 	// 회원정보수정처리
 	@RequestMapping(value = "/updateAccount.do", method = RequestMethod.POST)
-	public ModelAndView updateAccount(HttpSession session, @RequestParam("accountId") int accountId, @RequestParam("email")String email, @RequestParam("pwdCfm")String pwdCfm, @RequestParam("nickname")String nickname, @RequestParam("picture")MultipartFile picture, @RequestParam("footer")String footer) throws Exception {
+	public String updateAccount(RedirectAttributes rttr, HttpSession session, @RequestParam("accountId") int accountId, @RequestParam("email")String email, @RequestParam("pwdCfm")String pwdCfm, @RequestParam("nickname")String nickname, @RequestParam("picture")MultipartFile picture, @RequestParam("footer")String footer) throws Exception {
 		AccountsVO vo = new AccountsVO();
 		
 		vo.setAccountId(accountId);
@@ -319,10 +327,9 @@ public class AccountsController {
 		
 		session.setAttribute("login", vo);
 		
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("accounts/modAccount");
+		rttr.addFlashAttribute("result", "updateOK");
 		System.out.println("String updateAccount open");
-		return mav;
+		return "redirect:/";
 	}
 	
 	@RequestMapping(value = "/deleteAccount.do")

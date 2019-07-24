@@ -154,7 +154,7 @@ public class VideoBoardController {
 	public String updateVideoBoardPro(VideoBoardVO vo) throws Exception {
 		videoBoardService.updateVideoBoard(vo);
 		System.out.println("============ updateVideoBoard 성공==============");
-		return "redirect:/videoboard/videoBoardList";
+		return "redirect:/videoboard/videoBoardView?boardId=" + vo.getBoardId();
 
 	}
 

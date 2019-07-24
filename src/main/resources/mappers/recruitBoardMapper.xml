@@ -113,16 +113,17 @@
 	</insert>
 
 	<!-- 글 수정 -->
-	<update id="updateRecruitBoard">
-		update
-		recruitboard
-		set
-		subject = #{subject},
-		object =
-		#{object},
-		fee = #{fee}
-		where
-		boardId = #{boardId}
+	<update id="updateRecruitBoard" parameterType="RecruitBoardVO">
+		update 
+		recruitBoard 
+		set 
+		subject = #{subject}, 
+		object = 
+		#{object}, 
+		fee = #{fee},
+		mod_date = now()  
+		where 
+		boardId = #{boardId} 
 	</update>
 
 	<!-- 글 삭제 -->
@@ -139,5 +140,44 @@
 		UPDATE recruitBoard SET viewCount = viewCount+1 WHERE
 		boardId=#{boardId}
 	</update>
-
+<!-- 최신 게시물 -->
+	<select id="rankList1" resultType="RecruitBoardVO">
+		SELECT
+			boardId, b.accountId, subject, a.nickname, viewCount, b.mod_date, b.categoryId, DATE_FORMAT(b.reg_date, '%Y %m %d') reg_date
+		FROM
+			recruitboard b
+		JOIN
+			accounts a
+		ON
+			b.accountId = a.accountId
+		JOIN
+			recruitcategory c
+		ON
+			b.categoryId=c.categoryId
+		where c.categoryId = 1
+        ORDER BY
+        	b.reg_date DESC 
+		LIMIT
+			5
+	</select>
+	<!-- 최신 게시물 -->
+	<select id="rankList2" resultType="RecruitBoardVO">
+		SELECT
+			boardId, b.accountId, subject, a.nickname, viewCount, b.mod_date, b.categoryId, DATE_FORMAT(b.reg_date, '%Y %m %d') reg_date
+		FROM
+			recruitboard b
+		JOIN
+			accounts a
+		ON
+			b.accountId = a.accountId
+		JOIN
+			recruitcategory c
+		ON
+			b.categoryId=c.categoryId
+		where c.categoryId = 2
+        ORDER BY
+        	b.reg_date DESC 
+		LIMIT
+			5
+	</select>
 </mapper>

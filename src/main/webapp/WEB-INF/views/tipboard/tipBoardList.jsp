@@ -20,9 +20,11 @@
  @media (min-width:1080px){.container{max-width: 800;}}
  @media (min-width:1200px){.container{max-width: 925px;}}
  @media (min-width:1400px){.container{max-width: 1100px;}}
+ 
  .container {
     float: left;
 }
+
 footer{
     margin-top: 550px;
 }
@@ -183,10 +185,10 @@ footer{
 	<div id="deleteOK" class="alert alert-danger hidden" role="alert" style="visibility:hidden">글이 삭제되었습니다.</div>
 	
 	<jsp:include page="../module/aside.jsp" flush="false" />
+	
 	<div class="container">
-	<div  class="row">
-		<table class="table table-striped nanum table-hover">
-			<!-- <table border="1"> -->
+		<div class="row">
+		<table class="table table-hover">
 			<thead align="center">
 				<tr>
 					<th style="width: 80px;">번호</th>
@@ -235,7 +237,6 @@ footer{
 				</c:forEach>
 			</tbody>
 		</table>
-
 
 		<!-- 페이징 검색 시작 -->
 		<div class="col-12">
@@ -291,7 +292,7 @@ footer{
 			<!-- 검색 -->
 		</div>
 		<!-- 페이징, 검색 끝 -->
-</div>
+		</div>
 	</div>
 	<br>
 	<jsp:include page="./../module/bottom.jsp" flush="false" />

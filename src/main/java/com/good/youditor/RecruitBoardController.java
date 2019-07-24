@@ -10,8 +10,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.good.dto.NoticeBoardVO;
 import com.good.dto.NoticeCategoryVO;
 import com.good.dto.RecruitBoardVO;
 import com.good.dto.RecruitCategoryVO;
@@ -158,5 +160,21 @@ public class RecruitBoardController {
 		System.out.println("============ updateRecruitBoard 성공==============");
 		return "redirect:/recruitboard/recruitBoardList";		
 	}
-
+	
+	@ResponseBody
+	@RequestMapping(value = "/newRecruit2", method = {RequestMethod.GET,RequestMethod.POST})
+	public List<RecruitBoardVO> rankList2() throws Exception {
+		System.out.println("Start RecruitBoard List");
+		List<RecruitBoardVO> rankList = recruitBoardService.rankList2();
+		System.out.println("List : " + rankList);
+		return rankList;
+	}
+	@ResponseBody
+	@RequestMapping(value = "/newRecruit1", method = {RequestMethod.GET,RequestMethod.POST})
+	public List<RecruitBoardVO> rankList1() throws Exception {
+		System.out.println("Start RecruitBoard List");
+		List<RecruitBoardVO> rankList = recruitBoardService.rankList1();
+		System.out.println("List : " + rankList);
+		return rankList;
+	}
 }

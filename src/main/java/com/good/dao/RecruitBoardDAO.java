@@ -31,5 +31,8 @@ public interface RecruitBoardDAO {
 	
 	//조회수 증가
 	public void viewCount(int boardId) throws Exception;
-	
+	//최신 게시물
+		public List<RecruitBoardVO> rankList1() throws Exception;
+		//최신 게시물
+		public List<RecruitBoardVO> rankList2() throws Exception;
 }

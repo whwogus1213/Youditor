@@ -28,7 +28,7 @@
 
 <div align="center">
 	<div class="col-sm-12">
-		<h1 align="center">메세지 보내기</h1>
+		<h3 align="center">메세지 보내기</h3>
 	</div>
 	<div>
 		<button type="button" class="btn btn-sm btn-link" onclick="location.href='/message/messageReceiveList' ">받은 메세지 보기</button>
@@ -94,13 +94,22 @@
 			</c:choose>
 		</div>
 	</div>
-	<hr>
+	<div class="col-sm-8">
+		<hr>
+	</div>
 	<div class="form-inline">
 		<div class="col-sm-2"></div>
 		<div class="col-sm-2"></div>
-		<div class="col-sm-4"></div>
-		<div class="col-sm-2">
-			<button type="button" class="btn btn-sm btn-primary" onClick="sendMessageBtn();">보내기</button>
+		<div class="col-sm-3"></div>
+		<div class="col-sm-3 row">
+			<button type="button" class="btn btn-sm btn-link" onClick="sendMessageBtn();"><i class="fas fa-paper-plane"></i>&nbsp;&nbsp;보내기</button>|
+			<button class="btn btn-sm btn-link hBack" type="button" style="color:Crimson"><i class="fas fa-arrow-left"></i>&nbsp;&nbsp;이전으로</button>
+			<script>
+			$(".hBack").on("click", function(e){
+			    e.preventDefault();
+			    window.history.back();
+			});
+			</script>
 			<script type="text/javascript">
 			function sendMessageBtn() {
 				var senderAccountId = $("#senderAccountId").val();

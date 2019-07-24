@@ -15,7 +15,8 @@ public class TipBoardVO {
 	
 	private String nickname;
 	private String categoryName;
-
+	private String picture;
+	
 	public int getBoardId() {
 		return boardId;
 	}
@@ -104,6 +105,15 @@ public class TipBoardVO {
 
 	public void setStarCount(float starCount) {
 		this.starCount = starCount;
+	}
+
+	
+	public final String getPicture() {
+		return picture;
+	}
+
+	public final void setPicture(String picture) {
+		this.picture = picture;
 	}
 
 	@Override
