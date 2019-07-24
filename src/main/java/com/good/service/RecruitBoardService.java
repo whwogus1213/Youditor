@@ -30,5 +30,8 @@ public interface RecruitBoardService {
 
 	// 삭제
 	public void deleteRecruitBoard(int boardId) throws Exception;
-	
+	//최신 게시물
+		public List<RecruitBoardVO> rankList1() throws Exception;
+		//최신 게시물
+		public List<RecruitBoardVO> rankList2() throws Exception;
 }
