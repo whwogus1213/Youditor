@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.good.dao.FollowDAO;
 import com.good.dto.FollowListVO;
+import com.good.dto.FollowingListVO;
 
 @Service
 public class FollowServicImpl implements FollowService {
@@ -17,7 +18,7 @@ public class FollowServicImpl implements FollowService {
 
 	// 팔로잉 (로그인유저가 팔로우하는 사람 리스트)
 	@Override
-	public List<FollowListVO> followingList(int accountId) throws Exception {
+	public List<FollowingListVO> followingList(int accountId) throws Exception {
 		return followDAO.followingList(accountId);
 	}
 

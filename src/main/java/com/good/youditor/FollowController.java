@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.good.dto.AccountsVO;
 import com.good.dto.FollowListVO;
+import com.good.dto.FollowingListVO;
 import com.good.dto.NoticeCategoryVO;
 import com.good.dto.RecruitCategoryVO;
 import com.good.dto.TipCategoryVO;
@@ -40,22 +41,23 @@ public class FollowController {
 		AccountsVO login = (AccountsVO) session.getAttribute("login");
 		int accountId = login.getAccountId();
 		
-		List<FollowListVO> followingList = followService.followingList(accountId);
-		for(int i = 0; i < followingList.size(); i++) {
-			FollowListVO fListVO = followingList.get(i);
-			int followAccountId = fListVO.getFollowAccountId();
-			fListVO.setFollowerAccountId(followAccountId);
-			fListVO.setFollowAccountId(accountId);
-			boolean result = followService.followEachOtherCheck(fListVO);
-			
-			FollowListVO checkListVO = new FollowListVO();
-			checkListVO.setFollowAccountId(followAccountId);
-			checkListVO.setFollowerAccountId(accountId);
-			checkListVO.setReg_date(fListVO.getReg_date());
-			checkListVO.setNickname(fListVO.getNickname());
-			checkListVO.setCheck(result);
-			followingList.set(i, checkListVO);
-		}
+		List<FollowingListVO> followingList = followService.followingList(accountId);
+		System.out.println(followingList);
+//		for(int i = 0; i < followingList.size(); i++) {
+//			FollowListVO fListVO = followingList.get(i);
+//			int followAccountId = fListVO.getFollowAccountId();
+//			fListVO.setFollowerAccountId(followAccountId);
+//			fListVO.setFollowAccountId(accountId);
+//			boolean result = followService.followEachOtherCheck(fListVO);
+//			
+//			FollowListVO checkListVO = new FollowListVO();
+//			checkListVO.setFollowAccountId(followAccountId);
+//			checkListVO.setFollowerAccountId(accountId);
+//			checkListVO.setReg_date(fListVO.getReg_date());
+//			checkListVO.setNickname(fListVO.getNickname());
+//			checkListVO.setCheck(result);
+//			followingList.set(i, checkListVO);
+//		}
 		
 		List<NoticeCategoryVO> nCatList = homeService.bringNoticeCategory();
 		List<VideoCategoryVO> vCatList = homeService.bringVideoCategory();
@@ -68,8 +70,6 @@ public class FollowController {
 		session.setAttribute("rCatList", rCatList);
 		
 		model.addAttribute("followingList", followingList);
-		System.out.println(accountId);
-		System.out.println(followingList);
 		return "follow/followingList";
 	}
 

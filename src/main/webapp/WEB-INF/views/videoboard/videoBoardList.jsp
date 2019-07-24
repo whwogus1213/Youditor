@@ -351,7 +351,7 @@
 		<!-- 페이징 검색 시작 -->
 		<div class="col-12">
 			<!-- 페이징 -->
-			<div class="p1 pagination col-12">
+			<div class="p1 pagination col-12" style="display: block; text-align: center; margin-bottom: 10px;">
 				<ul>
 					<c:if test="${pagination.prev}">
 						<a href="#" onclick="fn_prev('${categoryInfo.categoryId }', '${pagination.page}', '${pagination.rangeSize}',
@@ -371,17 +371,17 @@
 			<!-- 페이징 -->
 
 			<!-- 검색 -->
-			<div class="input-group col-12" style="padding-top: 6px;" align="right">
-				<div class="col-3" align="right" style="padding-right: 0px;">
+			<div class="input-group col-12" style="padding-top: 6px; padding-bottom: 30px;" align="right">
+				<div class="col-6" align="right" style="padding-right: 0px; float: right; ">
 					<select class="form-control form-control-sm" name="searchType"
-						id="searchType" style="width: 66.6%">
+						id="searchType" style="width: 30%">
 						<option value="subject">제목</option>
 						<option value="object">본문</option>
 						<option value="nickname">닉네임</option>
 					</select>
 				</div>
-				<div class="col-6" align="right" style="padding-right: 0px; padding-left: 5px;">
-					<input type="text" class="form-control form-control-sm" name="keyword" id="keyword" style="float: left;">
+				<div class="col-3" align="right" style="padding-right: 0px; padding-left: 5px;">
+					<input type="text" class="form-control form-control-sm" name="keyword" id="keyword" style="float: right; text-align: right;"> 
 				</div>
 
 				<div class="col-1" style="padding-left: 0px;text-align: center;padding-right: 0px;padding-top: 5px;">
