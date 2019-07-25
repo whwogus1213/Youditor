@@ -39,19 +39,35 @@ order by d.reg_date desc;
     </select>
 
 	<!-- 팔로워 -->
-	<select id="followerList" resultType="FollowListVO" parameterType="int">
-	SELECT
-		fo.followAccountId, fo.followerAccountId, ac.nickname
-	FROM
-		followlist as fo
-	JOIN
-		accounts as ac
-	ON
-		fo.followAccountId = ac.accountId
-	WHERE
-		fo.followAccountId = #{accountId}
-	ORDER BY
-		fo.reg_date DESC
+	<select id="followerList" resultType="FollowingListVO" parameterType="int">
+<!-- 	SELECT -->
+<!-- 		fo.followAccountId, fo.followerAccountId, ac.nickname -->
+<!-- 	FROM -->
+<!-- 		followlist as fo -->
+<!-- 	JOIN -->
+<!-- 		accounts as ac -->
+<!-- 	ON -->
+<!-- 		fo.followAccountId = ac.accountId -->
+<!-- 	WHERE -->
+<!-- 		fo.followAccountId = #{accountId} -->
+<!-- 	ORDER BY -->
+<!-- 		fo.reg_date DESC -->
+select d.followAccountId, d.followerAccountId, d.nickname, d.reg_date, IFNULL(dd.check,'false') as 'check', d.picture, d.footer, d.lastFollowerCheck, d.newLogin_date
+from
+(SELECT fo.followAccountId, fo.followerAccountId, ac.nickname, fo.reg_date, ac.picture, ac.footer, ac.lastFollowerCheck, ac.newLogin_date
+FROM followlist as fo JOIN accounts as ac ON fo.followerAccountId = ac.accountId
+WHERE fo.followAccountId = #{accountId}
+ORDER BY fo.reg_date DESC) as d LEFT OUTER JOIN 
+(select * , 'true' as 'check'
+from (SELECT fo.followAccountId as baseF , fo.followerAccountId as baseFF , ac.nickname as nick, fo.reg_date as foDate
+FROM followlist as fo JOIN accounts as ac ON fo.followerAccountId = ac.accountId
+WHERE fo.followAccountId = #{accountId}
+ORDER BY fo.reg_date DESC)as base, followlist as base2
+where base.baseF = base2.followerAccountId and base.baseFF = base2.followAccountId)as dd
+ON dd.baseF = d.followAccountId and dd.baseFF = d.followerAccountId
+order by IFNULL(dd.check,'false'), d.reg_date desc;
+
+
     </select>
     
     <!-- 맛팔 체크 -->

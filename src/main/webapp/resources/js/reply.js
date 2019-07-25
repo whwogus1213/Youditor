@@ -168,7 +168,9 @@ function getCommentList(){
             	   list_template = $($('.list_template').clone());
             	   
             	   list_template.find('.listTable').attr('id',data[i].commentId);
-            	   list_template.find('.listImage').attr('src',data[i].picture);
+            	   list_template.find('.listImage').attr('src','/image/'+data[i].picture);
+//            	   list_template.find('.listImage').attr('src',"< src='/image/"+data[i].picture+"'/>");
+            	   
             	   list_template.find('.listNickname').html(data[i].nickname);
 
             	   list_template.find('.listDate').html(formatDate(data[i].reg_date));
@@ -284,7 +286,8 @@ function reGetCommentList(commentId){
              	   
                 	list_template.find('.listTable').attr('id',data[i].commentId);
                 	list_template.find('.listTable').attr('style',"margin-bottom: -20px; margin-top: 30px; margin-left: -25px;");
-                	list_template.find('.listImage').attr('src',data[i].picture);
+                	list_template.find('.listImage').attr('src','/image/'+data[i].picture);
+//                	list_template.find('.listImage').attr('src',"<spring:url value='/image/"+data[i].picture+"'/>");
                 	list_template.find('.listNickname').html(data[i].nickname);
                 	list_template.find('.listDate').html(formatDate(data[i].reg_date));
                 	list_template.find('.listObject').html(data[i].object);
