@@ -40,8 +40,23 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public List<VideoCategoryVO> getCatInfo(String category) throws Exception {
-		return dao.getCatInfo(category);
+	public List<VideoCategoryVO> getNoticeCatInfo() throws Exception {
+		return dao.getNoticeCatInfo();
+	}
+
+	@Override
+	public List<VideoCategoryVO> getVideoCatInfo() throws Exception {
+		return dao.getVideoCatInfo();
+	}
+
+	@Override
+	public List<VideoCategoryVO> getTipCatInfo() throws Exception {
+		return dao.getTipCatInfo();
+	}
+
+	@Override
+	public List<VideoCategoryVO> getRecruitCatInfo() throws Exception {
+		return dao.getRecruitCatInfo();
 	}
 	
 	// 이메일 중복체크

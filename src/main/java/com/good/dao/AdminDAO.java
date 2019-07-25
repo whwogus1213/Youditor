@@ -16,7 +16,13 @@ public interface AdminDAO {
 
 	public AccountsVO getAccountInfo(int accountId) throws Exception;
 
-	public List<VideoCategoryVO> getCatInfo(String category) throws Exception;
+	public List<VideoCategoryVO> getNoticeCatInfo() throws Exception;
+
+	public List<VideoCategoryVO> getVideoCatInfo() throws Exception;
+
+	public List<VideoCategoryVO> getTipCatInfo() throws Exception;
+
+	public List<VideoCategoryVO> getRecruitCatInfo() throws Exception;
 	
 	// 이메일 중복체크
 	public int checkEmail(String email) throws Exception;

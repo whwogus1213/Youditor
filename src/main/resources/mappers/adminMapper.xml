@@ -59,9 +59,9 @@
     	SELECT
     		*
     	FROM
-    		#{category}
-    	ORDER BY
-    		categoryId DESC
+	    	<if test = "category != null">
+	    		${category}
+	    	</if>
     </select>
 	
 	<!-- 이메일 체크 -->

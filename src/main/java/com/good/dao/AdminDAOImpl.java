@@ -41,8 +41,23 @@ public class AdminDAOImpl implements AdminDAO {
 	}
 	
 	@Override
-	public List<VideoCategoryVO> getCatInfo(String category) throws Exception {
-		return sqlSession.selectList(NAMESPACE + ".getCatInfo", category);
+	public List<VideoCategoryVO> getNoticeCatInfo() throws Exception {
+		return sqlSession.selectList(NAMESPACE + ".getNoticeCatInfo");
+	}
+	
+	@Override
+	public List<VideoCategoryVO> getVideoCatInfo() throws Exception {
+		return sqlSession.selectList(NAMESPACE + ".getVideoCatInfo");
+	}
+	
+	@Override
+	public List<VideoCategoryVO> getTipCatInfo() throws Exception {
+		return sqlSession.selectList(NAMESPACE + ".getTipCatInfo");
+	}
+	
+	@Override
+	public List<VideoCategoryVO> getRecruitCatInfo() throws Exception {
+		return sqlSession.selectList(NAMESPACE + ".getRecruitCatInfo");
 	}
 	
 	// 이메일 중복체크

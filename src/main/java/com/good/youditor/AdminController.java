@@ -1,6 +1,7 @@
 package com.good.youditor;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,6 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.good.dto.AccountsVO;
 import com.good.dto.AdminVO;
 import com.good.dto.Search;
+import com.good.dto.VideoCategoryVO;
 import com.good.service.AdminService;
 
 /**
@@ -95,9 +97,18 @@ public class AdminController {
 
 	@RequestMapping(value = "/adminCategory", method = RequestMethod.GET)
 	public String adminCategory(@RequestParam("category") String category, Model model) throws Exception {
-		category += "category";
-		System.out.println(category);
-		model.addAttribute("CatInfo", service.getCatInfo(category));
+		List<VideoCategoryVO> CatInfo = new ArrayList<VideoCategoryVO>();
+		if(category == "notice") {
+			CatInfo = service.getNoticeCatInfo();
+		} else if(category == "video") {
+			CatInfo = service.getVideoCatInfo();
+		} else if(category == "tip") {
+			CatInfo = service.getTipCatInfo();
+		} else if(category == "recruit") {
+			CatInfo = service.getRecruitCatInfo();
+		}
+		System.out.println("CatInfo : " + CatInfo);
+		model.addAttribute("CategoryInfo", CatInfo);
 		return "admin/adminCategory";
 	}
 
@@ -189,5 +200,5 @@ public class AdminController {
 		
 		return "redirect:/adminAccount?accountId=" + accountId;
 	}
-
+	
 }

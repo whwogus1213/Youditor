@@ -177,7 +177,7 @@
 <body>
 <jsp:include page="./adminTop.jsp" flush="false"/>
 <div class="container">
-	<h1>adminView</h1>
+	<h1>회원정보관리</h1>
 	<table class="table table-borderd table-striped nanum table-hover">
 		<thead>
 			<tr>
