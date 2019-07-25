@@ -79,7 +79,8 @@
 
 	.card .banner{
 		/* ⬇ Photo, geordannatheartist.com */
- 		background-image: url("https://images.unsplash.com/photo-1533158326339-7f3cf2404354?ixlib=rb-1.2.1&auto=format&fit=crop&w=1004&q=80");
+/*  		background-image: url("https://images.unsplash.com/photo-1533158326339-7f3cf2404354?ixlib=rb-1.2.1&auto=format&fit=crop&w=1004&q=80"); */
+ 		background-image: url("/resources/images/follow_namecard.jpg");
  		
 /* 		background-image: url("/resources/images/main_logo.png"); */
 /* 		background-size: contain; */
@@ -133,7 +134,7 @@
 		}
 		
 .unfollowbtn:hover:before{
-	color: #333;
+	color: #ff2e94;
 
 }
 

@@ -109,7 +109,9 @@ public class ReplyVO {
 	public String toString() {
 		return "ReplyVO [commentId=" + commentId + ", accountId=" + accountId + ", boardId=" + boardId + ", object="
 				+ object + ", replyCommentId=" + replyCommentId + ", reg_date=" + reg_date + ", mod_date=" + mod_date
-				+ ", boardClass=" + boardClass + ", countReply=" + countReply + ", nickname=" + nickname + "]";
+				+ ", boardClass=" + boardClass + ", countReply=" + countReply + ", nickname=" + nickname + ", picture="
+				+ picture + "]";
 	}
 
+	
 }
