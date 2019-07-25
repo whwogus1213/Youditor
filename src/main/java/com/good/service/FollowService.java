@@ -3,11 +3,12 @@ package com.good.service;
 import java.util.List;
 
 import com.good.dto.FollowListVO;
+import com.good.dto.FollowingListVO;
 
 public interface FollowService {
 
 	// 팔로잉 (로그인유저가 팔로우하는 사람 리스트)
-	public List<FollowListVO> followingList(int accountId) throws Exception;
+	public List<FollowingListVO> followingList(int accountId) throws Exception;
 
 	// 팔로워(로그인유저를 팔로우하는 사람 리스트)
 	public List<FollowListVO> followerList(int accountId) throws Exception;

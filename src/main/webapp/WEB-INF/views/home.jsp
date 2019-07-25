@@ -570,6 +570,7 @@ function getRecruit2(){
   		</div>
   	</div>
   </div>
+
   <jsp:include page="./module/bottom.jsp" flush="false"/>
 
 

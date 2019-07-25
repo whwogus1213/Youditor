@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.good.dto.FollowListVO;
+import com.good.dto.FollowingListVO;
 
 @Repository
 public class FollowDAOImpl implements FollowDAO {
@@ -19,7 +20,7 @@ public class FollowDAOImpl implements FollowDAO {
 
 	// 팔로잉 (로그인유저가 팔로우하는 사람 리스트)
 	@Override
-	public List<FollowListVO> followingList(int accountId) throws Exception {
+	public List<FollowingListVO> followingList(int accountId) throws Exception {
 		return sqlSession.selectList(NAMESPACE + ".followingList", accountId);
 	}
 	
