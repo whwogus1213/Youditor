@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ page session="true"%>
 <!DOCTYPE html>
 <html>
@@ -209,6 +210,7 @@ footer{
 						</td>
 						<td class="dropright">						
 							<a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="cursor:pointer">
+								<img src="<spring:url value='/image/${TipBoardList.picture}'/>" class=" mx-auto rounded-circle" width="20px" height="20px"/>
 								${TipBoardList.nickname}
 							</a>
 							<div class="dropdown-menu">

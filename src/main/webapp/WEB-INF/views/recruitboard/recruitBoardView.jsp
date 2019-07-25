@@ -87,7 +87,7 @@
 				<div class="col-sm-10" align="right">
 					<h6>
 						작성 일시&nbsp;&nbsp;
-						<fmt:parseDate value='${RecruitBoardList.reg_date}' var='reg_date' pattern='yyyymmdd'/>
+						<fmt:parseDate value='${row.reg_date}' var='reg_date' pattern='yyyymmdd'/>
 						<fmt:formatDate value="${reg_date}" pattern="yyyy-MM-dd" />
 					</h6>
 				</div>

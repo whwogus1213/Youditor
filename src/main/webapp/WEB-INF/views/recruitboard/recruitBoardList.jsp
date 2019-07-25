@@ -22,6 +22,7 @@ button[type="button"] {
     content: "\f002";
     cursor: pointer;
 }
+
  @media (min-width:476px){.container{max-width: 240px;}}
  @media (min-width:576px){.container{max-width: 300px;}}
  @media (min-width:768px){.container{max-width: 440px;}}
@@ -190,7 +191,7 @@ footer{
 	
 	<jsp:include page="../module/aside.jsp" flush="false" />
 	<div class="container">
-		<table class="table table-striped nanum table-hover" style="height:auto">
+		<table class="table nanum table-hover" style="height:auto">
 			<!-- <table border="1"> -->
 			<thead align="center">
 				<tr>
@@ -205,7 +206,7 @@ footer{
 			<tbody align="center">
 				<c:forEach items="${RecruitBoardList}" var="RecruitBoardList">
 					<tr>
-						<td>${RecruitBoardList.boardId}</td>
+						<td style="vertical-align: middle;">${RecruitBoardList.boardId}</td>
 						<td>
 							<c:if test="${RecruitBoardList.categoryId eq 1}">
 								<button type="button" class="btn btn-info btn-sm" onclick="location.href='/recruitboard/recruitBoardList?categoryId=1'">구인</button>
@@ -214,11 +215,11 @@ footer{
 								<button type="button" class="btn btn-secondary btn-sm" onclick="location.href='/recruitboard/recruitBoardList?categoryId=2'">구직</button>
 							</c:if>
 						</td>
-						<td align="left" style="padding-left: 30px; cursor: pointer;"
+						<td align="left" style="padding-left: 30px; cursor: pointer; vertical-align: middle;"
 						onclick="location.href='/recruitboard/recruitBoardView?boardId=${RecruitBoardList.boardId}'">
 								${RecruitBoardList.subject}
 						</td>
-						<td class="dropright">						
+						<td class="dropright" style="vertical-align: middle;">						
 							<a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="cursor:pointer">
 								<img src="<spring:url value='/image/${RecruitBoardList.picture}'/>" class=" mx-auto rounded-circle" width="20px" height="20px"/>
 								${RecruitBoardList.nickname}
@@ -242,10 +243,10 @@ footer{
 								</a>
 							</div>
 						</td>
-						<td>
+						<td style="vertical-align: middle;">
 							<fmt:parseDate value='${RecruitBoardList.reg_date}' var='reg_date' pattern='yyyymmdd'/>
 							<fmt:formatDate value="${reg_date}" pattern="yyyy-MM-dd" /></td>
-						<td>${RecruitBoardList.viewCount}</td>
+						<td style="vertical-align: middle;">${RecruitBoardList.viewCount}</td>
 					</tr>
 				</c:forEach>
 			</tbody>

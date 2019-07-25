@@ -8,7 +8,7 @@
 	<select id="listAll" parameterType="SearchBoard" resultType="TipBoardVO">
 		SELECT
 			boardId, b.accountId, subject, object, CONVERT_TZ(b.reg_date,'+09:00','+00:00') as reg_date,
-			CONVERT_TZ(b.mod_date,'+09:00','+00:00') as mod_date, viewCount, nickname, categoryName 
+			CONVERT_TZ(b.mod_date,'+09:00','+00:00') as mod_date, viewCount, nickname, categoryName, picture 
 		FROM
 			tipboard b
 			JOIN

@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/module/header.jsp" %>
 
@@ -115,7 +116,7 @@ a:hover {
 							html += "<div class='card h-100'>";
 							html += "<h4 class='card-header'>"
 							html += "<a href='/videoboard/videoBoardView?boardId="+data[i].boardId+"'>"+data[i].subject+"</a></h4>";
-							html += "<div class='card-body'>";
+							html += "<div class='card-body' style='padding: 10px;'>";
 							html += "<a href='/videoboard/videoBoardView?boardId="+data[i].boardId+"'>";
 							if(data[i].youtubeLink.length > 31){
 								html += "<img width='100%' height='20%' src='https://img.youtube.com/vi/" + data[i].youtubeLink.substring(32) + "/mqdefault.jpg'></img></a>";
@@ -170,8 +171,8 @@ function getAccountsRankList(){
 						html += "<div class='col-lg-4 col-sm-6 portfolio-item'>";
 						html += "<div class='card h-100'>";
 						html += "<img class='card-img-top' src='/image/"+data[i].picture+"' alt='' width='80' height='200'/>";
-						html += "<div class='card-body'>";
-						html += "<h4 class='card-title'>";
+						html += "<div class='card-body' style='padding: 10px;'>";
+						html += "<h6 class='card-title' style='margin: 0px;'>";
 						html += "<div class='dropright'>";
 						html += "<a data-toggle='dropdown' aria-haspopup='true' aria-expanded='false' style='cursor: pointer;'>"+data[i].nickname+"</a>";
 						html += "<div class='dropdown-menu'>";
@@ -184,7 +185,7 @@ function getAccountsRankList(){
 						html += "<a class='dropdown-item' href='#'>";
 						html += "<i class='far fa-heart'></i>&nbsp;&nbsp;팔로우하기";
 						html += "</a>";
-						html += "</h4>";
+						html += "</h6>";
 						html += "</div>";
 						html += "</div>";
 						html += "</div>";
@@ -331,17 +332,17 @@ function getRecruit1(){
 				for(var i = 0; i < data.length; i++){
 					if(i < 5){
 						html += "<tr class='rcbtn'>";
-						html += "<td>"+(i+1)+"</td>";
+						html += "<td style='vertical-align: middle;'>"+(i+1)+"</td>";
 						html += "<td class='rcbtn'><button type='button' class='btn btn-info btn-sm' disabled>구인</button></td>";
 						if(data[i].subject.length < 10){
-							html += "<td align='left' style='padding-left: 30px; cursor: pointer;'><a href='/recruitboard/recruitBoardView?boardId="+data[i].boardId+"'>"+data[i].subject+"</a></td>";
+							html += "<td align='left' style='padding-left: 30px; cursor: pointer; vertical-align: middle;'><a href='/recruitboard/recruitBoardView?boardId="+data[i].boardId+"'>"+data[i].subject+"</a></td>";
 							}else{
-								html += "<td align='left' style='padding-left: 30px; cursor: pointer;'><a href='/recruitboard/recruitBoardView?boardId="+data[i].boardId+"'>"+data[i].subject.substr(0, 9)+'..'+"</a></td>";
+								html += "<td align='left' style='padding-left: 30px; cursor: pointer; vertical-align: middle;'><a href='/recruitboard/recruitBoardView?boardId="+data[i].boardId+"'>"+data[i].subject.substr(0, 9)+'..'+"</a></td>";
 							}
 						
-						html += "<td>"+data[i].nickname+"</td>";
-						html += "<td>"+data[i].reg_date+"</td>";
-						html += "<td>"+data[i].viewCount+"</td>";
+						html += "<td style='overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: middle;'>"+data[i].nickname+"</td>";
+						html += "<td style='vertical-align: middle;'>"+data[i].reg_date+"</td>";
+						html += "<td style='vertical-align: middle;'>"+data[i].viewCount+"</td>";
 						html += "</tr>";
 					}else{
 						html += "<div class='col-lg-4 col-sm-6 portfolio-item'>";
@@ -381,17 +382,17 @@ function getRecruit2(){
 				for(var i = 0; i < data.length; i++){
 					if(i < 5){
 						html += "<tr  class='rcbtn'>";
-						html += "<td>"+(i+1)+"</td>";
+						html += "<td style='vertical-align: middle;'>"+(i+1)+"</td>";
 						html += "<td><button type='button' class='btn btn-secondary btn-sm' disabled>구직</button></td>";
 						if(data[i].subject.length < 10){
-							html += "<td align='left' style='padding-left: 30px; cursor: pointer;'><a href='/recruitboard/recruitBoardView?boardId="+data[i].boardId+"'>"+data[i].subject+"</a></td>";
+							html += "<td align='left' style='padding-left: 30px; cursor: pointer; vertical-align: middle;'><a href='/recruitboard/recruitBoardView?boardId="+data[i].boardId+"'>"+data[i].subject+"</a></td>";
 							}else{
-								html += "<td align='left' style='padding-left: 30px; cursor: pointer;'><a href='/recruitboard/recruitBoardView?boardId="+data[i].boardId+"'>"+data[i].subject.substr(0, 9)+'..'+"</a></td>";
+								html += "<td align='left' style='padding-left: 30px; cursor: pointer; vertical-align: middle;'><a href='/recruitboard/recruitBoardView?boardId="+data[i].boardId+"'>"+data[i].subject.substr(0, 9)+'..'+"</a></td>";
 							}
 						
-						html += "<td>"+data[i].nickname+"</td>";
-						html += "<td>"+data[i].reg_date+"</td>";
-						html += "<td>"+data[i].viewCount+"</td>";
+						html += "<td style='overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: middle;'>"+data[i].nickname+"</td>";
+						html += "<td style='vertical-align: middle;'>"+data[i].reg_date+"</td>";
+						html += "<td style='vertical-align: middle;'>"+data[i].viewCount+"</td>";
 						html += "</tr>";
 					}else{
 						html += "<div class='col-lg-4 col-sm-6 portfolio-item'>";
