@@ -76,16 +76,26 @@ public class FollowController {
 	// 팔로워(로그인유저를 팔로우하는 사람 리스트)
 	@RequestMapping(value = "/followerList")
 	public String followerList(Model model, FollowListVO vo, HttpSession session) throws Exception {
+//		System.out.println("Start follower List");
+//		
+//		AccountsVO login = (AccountsVO) session.getAttribute("login");
+//		int accountId = login.getAccountId();
+//		
+//		List<FollowListVO> followerList = followService.followerList(accountId);
+//		
+//		model.addAttribute("followerList", followerList);
+//		System.out.println(accountId);
+//		System.out.println(followerList);
+//		return "follow/followerList";
 		System.out.println("Start follower List");
-		
+
 		AccountsVO login = (AccountsVO) session.getAttribute("login");
 		int accountId = login.getAccountId();
 		
-		List<FollowListVO> followerList = followService.followerList(accountId);
+		List<FollowingListVO> followerList = followService.followerList(accountId);
+		System.out.println(followerList);
 		
 		model.addAttribute("followerList", followerList);
-		System.out.println(accountId);
-		System.out.println(followerList);
 		return "follow/followerList";
 	}
 
@@ -129,8 +139,12 @@ public class FollowController {
 		// 로그인 유저 아이디
 		AccountsVO loginVO = (AccountsVO) session.getAttribute("login");
 
-		// followerAccountId에 로그인 아이디 세팅
-		vo.setFollowerAccountId(loginVO.getAccountId());
+		if(vo.getFollowerAccountId() == 0) {
+			// followerAccountId에 로그인 아이디 세팅
+			vo.setFollowerAccountId(loginVO.getAccountId());
+		} else {
+			vo.setFollowAccountId(loginVO.getAccountId());
+		}
 
 		System.out.println("로그인 유저 아이디 -> followerAccountId : " + vo.getFollowerAccountId());
 //		System.out.println("accountId" + accountId);
