@@ -15,6 +15,7 @@
 	<jsp:include page="../module/header.jsp" flush="false"/>
 	<!-- Custom styles -->
 	<link href="/resources/css/modern-business.css" rel="stylesheet">
+<script src="https://kit.fontawesome.com/e83fabbb47.js"></script>
 	<script>
 		// 이전 버튼
 		function fn_prev(page, range, rangeSize) {
@@ -171,7 +172,7 @@
 	<!-- 검색 -->
 	<div class="row input-group">
 		<div class="col-sm-2" align="center">
-			<button type="button" class="btn btn-sm btn-primary" onclick="location.href='/message/write.do' ">메세지 쓰기</button>
+			<button type="button" class="btn btn-sm" onclick="location.href='/message/write.do'" style="background-color: #2ecc71; color: white;"><i class="fas fa-edit"></i>&nbsp;&nbsp;메세지 쓰기</button>
 		</div>
 		<div class="col-sm-2" align="right">
 			<select class="form-control form-control-sm" name="searchType" id="searchType" style="width:66.6%">
@@ -184,10 +185,10 @@
 			<input type="text" class="form-control form-control-sm" name="keyword" id="keyword" >
 		</div>
 		<div class="col-sm-1">
-			<button class="btn btn-sm btn-primary" name="btnSearch" id="btnSearch">검색</button>
+			<button class="btn btn-sm" name="btnSearch" id="btnSearch" style="background-color: #2ecc71; color: white;">검색</button>
 		</div>
 		<div class="col-sm-3 delBtn" align="center">
-			<button class="btn btn-sm btn-primary selectHideBtn" name="selectHideBtn" id="selectHideBtn">지우기</button>
+			<button class="btn btn-sm selectHideBtn" name="selectHideBtn" id="selectHideBtn" style="background-color: #2ecc71; color: white;"><i class="fas fa-times"></i>&nbsp;&nbsp;지우기</button>
 			<script>
 			$("#selectHideBtn").click(function(){
 				var chArr = new Array();

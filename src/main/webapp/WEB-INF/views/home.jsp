@@ -248,7 +248,7 @@ function getNoticeNew(){
 					}else{
 						html += "<div class='col-lg-4 col-sm-6 portfolio-item'>";
 						html += "<div class='card h-100'>";
-						html += "<a href='#'><img class='card-img-top' src='/resources/images/member1.jpg' alt='' width='80' height='200'></a>";
+						html += "<a href='#'><img class='card-img-top' src='/resources/images/nothing.jpg' alt='' width='80' height='200'></a>";
 						html += "<div class='card-body'>";
 						html += "<h4 class='card-title'>";
 						html += "<a href='#'>편집자 아이디</a>";
