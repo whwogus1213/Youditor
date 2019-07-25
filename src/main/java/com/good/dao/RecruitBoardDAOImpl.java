@@ -68,4 +68,12 @@ public class RecruitBoardDAOImpl implements RecruitBoardDAO {
 		sqlSession.update(NAMESPACE + ".viewCount", boardId);
 	}
 
+	@Override
+	public List<RecruitBoardVO> rankList1() throws Exception {
+		return sqlSession.selectList(NAMESPACE + ".rankList1");
+	}
+	@Override
+	public List<RecruitBoardVO> rankList2() throws Exception {
+		return sqlSession.selectList(NAMESPACE + ".rankList2");
+	}
 }

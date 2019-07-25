@@ -11,6 +11,7 @@ import com.good.dao.AdminDAO;
 import com.good.dto.AccountsVO;
 import com.good.dto.AdminVO;
 import com.good.dto.Search;
+import com.good.dto.VideoCategoryVO;
 
 @Service
 public class AdminServiceImpl implements AdminService {
@@ -19,8 +20,12 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public List<AccountsVO> selectAccounts(Search search) throws Exception {
-		// TODO Auto-generated method stub
 		return dao.selectAccounts(search);
+	}
+
+	@Override
+	public int getAccountListCnt(Search search) throws Exception {
+		return dao.getAccountListCnt(search);
 	}
 
 	@Override
@@ -28,28 +33,39 @@ public class AdminServiceImpl implements AdminService {
 		// TODO Auto-generated method stub
 		return dao.login(vo);
 	}
-
+	
 	@Override
-	public void authorUp(AccountsVO vo) throws Exception {
-		System.out.println(vo.toString());
-		if (vo.getAuthority() <= 4) {
-			vo.setAuthority(vo.getAuthority() + 1);
-			dao.authorUp(vo);
-		}
-
+	public AccountsVO getAccountInfo(int accountId) throws Exception {
+		return dao.getAccountInfo(accountId);
 	}
 
 	@Override
-	public void authorDown(AccountsVO vo) throws Exception {
-		if (vo.getAuthority() >= 2) {
-			vo.setAuthority(vo.getAuthority() - 1);
-			dao.authorDown(vo);
-		}
+	public List<VideoCategoryVO> getCatInfo(String category) throws Exception {
+		return dao.getCatInfo(category);
+	}
+	
+	// 이메일 중복체크
+	@Override
+	public int checkEmail(String email) throws Exception {
+		return dao.checkEmail(email);
 	}
 
+	// 닉네임 중복체크
 	@Override
-	public int getAccountListCnt(Search search) throws Exception {
-		return dao.getAccountListCnt(search);
+	public int checkNickname(String nickname) throws Exception {
+		return dao.checkNickname(nickname);
+	}
+	
+	// 기존 포트레이트 파일 이름 취득
+	@Override
+	public String getOriPic(int accountId) throws Exception {
+		return dao.getOriPic(accountId);
+	}
+	
+	// 유저 정보 업데이트
+	@Override
+	public void accountUpdate(AccountsVO updateUser) throws Exception {
+		dao.accountUpdate(updateUser);
 	}
 
 }

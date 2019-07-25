@@ -25,11 +25,11 @@
 /* 	display: flex; */
 /* 	justify-content: center; */
 /* 	align-items: center; */
-	background: #FAFAFA;
+	background: #fff;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	text-align: center;
-}
+} 
 
 /*- - - - - - C O N T A C T - C A R D S - - - - - */
 
@@ -79,7 +79,13 @@
 
 	.card .banner{
 		/* ⬇ Photo, geordannatheartist.com */
-		background-image: url("https://images.unsplash.com/photo-1533158326339-7f3cf2404354?ixlib=rb-1.2.1&auto=format&fit=crop&w=1004&q=80");
+ 		background-image: url("https://images.unsplash.com/photo-1533158326339-7f3cf2404354?ixlib=rb-1.2.1&auto=format&fit=crop&w=1004&q=80");
+ 		
+/* 		background-image: url("/resources/images/main_logo.png"); */
+/* 		background-size: contain; */
+/* 		background-repeat: no-repeat; */
+/* 		background-position: top; */
+		
 	}
 	
 
@@ -126,6 +132,11 @@
 			text-decoration: none;
 		}
 		
+.unfollowbtn:hover:before{
+	color: #333;
+
+}
+
 
 .ul{
 	margin-top: 10px;
@@ -151,24 +162,32 @@
 <body>
 	<jsp:include page="../module/top2.jsp" flush="false" />
 
+	
 
-<div class="container cardbody" style="padding-top: 200px;">
+<div class="container cardbody" style="padding-top: 100px;">
+<div class="form-group" style="margin-bottom: 60px;">
+		<div class="col-sm-12">
+			<h4 align="center">&nbsp;</h4>
+			<h1 align="center">Following List</h1>
+			<h4 align="center">${login.nickname}의 팔로잉</h4>
+		</div>
+	</div>
 <div class="row">
 
 <c:forEach items="${followingList}" var="followingList">
 <!-- card start -->
 <div class="col-3">
-<div class="card" onclick="location.href='/videoboard/videoBoardList?searchType=nickname&keyword=${followingList.nickname}'">
+<div class="card" style="margin-bottom: 35px; cursor: pointer;" onclick="location.href='/videoboard/videoBoardList?searchType=nickname&keyword=${followingList.nickname}'">
    <div class="banner">
-   	  <a id = "unfollowbtn${followingList.followAccountId}" onclick="fn_unfollow('${followingList.followAccountId}'); return false;"><i class="fas fa-user-times" style="position: absolute; top: 2%; left: 85%; color: snow; font-size: 1.2em;"></i></a>
+   	  <a class="unfollowbtn" id = "unfollowbtn${followingList.followAccountId}" onclick="fn_unfollow('${followingList.followAccountId}'); return false;"><i class="fas fa-user-times unfollowbtn" style="position: absolute; top: 2%; left: 85%; color: snow; font-size: 1.2em; cursor: pointer;"></i></a>
    	  <spring:url value='/image/${followingList.picture}' var="pictureURL"/>
       <div class="avatar" style="background-image: url(${pictureURL})"> </div>
    </div>
-	<h3 class="h3" style="font-family: 'Jua'; font-size: 1.3em;">${followingList.nickname }</h3>
+	<h3 class="h3" style="font-family: 'Jua'; font-size: 1.3em;  text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">${followingList.nickname }</h3>
    
-   <span class="a" data-trigger="hover" data-container="body" data-toggle="popover" data-placement="bottom" data-content="최근 로그인"style="text-align: left; padding-left: 13px; cursor: pointer;"><i class="fas fa-rss"></i>&nbsp;<fmt:timeZone value="GMT"><fmt:formatDate value="${followingList.newLogin_date}" pattern="yyyy-MM-dd kk:mm:ss" /></fmt:timeZone></span>
+   <span class="a" data-trigger="hover" data-container="body" data-toggle="popover" data-placement="bottom" data-content="최근 로그인" style="text-align: left; padding-left: 13px; cursor: pointer; text-overflow: ellipsis; overflow: hidden; white-space: nowrap;"><i class="fas fa-rss"></i>&nbsp;<fmt:timeZone value="GMT"><fmt:formatDate value="${followingList.newLogin_date}" pattern="yyyy-MM-dd kk:mm:ss" /></fmt:timeZone></span>
    
-   <span class="a" data-trigger="hover" data-container="body" data-toggle="popover" data-placement="bottom" data-content="${followingList.footer}" style="text-align: left; padding-left: 13px; cursor: pointer;"><i class="fas fa-portrait"></i>&nbsp;${followingList.footer} </span>
+   <span class="a" data-trigger="hover" data-container="body" data-toggle="popover" data-placement="bottom" data-content="${followingList.footer}" style="text-align: left; padding-left: 13px; cursor: pointer;  text-overflow: ellipsis; overflow: hidden; white-space: nowrap;"><i class="fas fa-portrait"></i>&nbsp;${followingList.footer} </span>
    
    	<c:if test="${followingList.check}">
    		<span  class="a" style="text-align: left; padding-left: 13px; cursor: pointer;" data-trigger="hover" data-container="body" data-toggle="popover" data-placement="bottom" data-content="서로 팔로우하고 있습니다."><i class="far fa-handshake"></i>&nbsp;

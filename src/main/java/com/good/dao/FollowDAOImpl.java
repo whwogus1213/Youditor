@@ -26,7 +26,7 @@ public class FollowDAOImpl implements FollowDAO {
 	
 	// 팔로워(로그인유저를 팔로우하는 사람 리스트)
 	@Override
-	public List<FollowListVO> followerList(int accountId) throws Exception {
+	public List<FollowingListVO> followerList(int accountId) throws Exception {
 		return sqlSession.selectList(NAMESPACE + ".followerList", accountId);
 	}
 
