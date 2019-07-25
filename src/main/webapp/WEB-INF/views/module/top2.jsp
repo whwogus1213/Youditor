@@ -451,7 +451,9 @@ function DosignUp() {
 			<!-- 두번째 ul -->
 			<ul class="navbar-nav">
 				<c:if test="${login.accountId ne null }">
-					<img src="<spring:url value='/image/${login.picture}'/>" class=" mx-auto rounded-circle" width="40px" height="40px"/>
+					<a onclick="location.href='/videoboard/videoBoardList?searchType=nickname&keyword=${login.nickname}'" style="cursor: pointer;">
+						<img src="<spring:url value='/image/${login.picture}'/>" class=" mx-auto rounded-circle" width="40px" height="40px"/>
+					</a>
 					<li class="nav-item topMenuLi">
 						<a class="nav-link" href="#">
 							<c:choose>		
