@@ -54,15 +54,117 @@
     		accountId = #{accountId}
     </select>
     
-    <!-- 카테고리 정보 취득 -->
-    <select id="getCatInfo" parameterType="String" resultType="VideoCategoryVO">
+    <!-- 공지 카테고리 정보 취득 -->
+    <select id="getNoticeCatInfo" parameterType="String" resultType="NoticeCategoryVO">
     	SELECT
     		*
     	FROM
-	    	<if test = "category != null">
-	    		${category}
-	    	</if>
+	    	noticecategory
     </select>
+    
+    <!-- 영상공유 카테고리 정보 취득 -->
+    <select id="getVideoCatInfo" parameterType="String" resultType="VideoCategoryVO">
+    	SELECT
+    		*
+    	FROM
+	    	videocategory
+    </select>
+    
+    <!-- 팁 카테고리 정보 취득 -->
+    <select id="getTipCatInfo" parameterType="String" resultType="TipCategoryVO">
+    	SELECT
+    		*
+    	FROM
+	    	tipcategory
+    </select>
+    
+    <!-- 구인구직 카테고리 정보 취득 -->
+    <select id="getRecruitCatInfo" parameterType="String" resultType="RecruitCategoryVO">
+    	SELECT
+    		*
+    	FROM
+	    	recruitcategory
+    </select>
+    
+    <!-- 공지 게시판 각 카테고리별 게시물 수 -->
+    <select id="getNoticeCatCount" resultType="map">
+    	SELECT
+			categoryId, count(*) as count
+		FROM
+			noticeboard
+		GROUP BY
+			categoryId;
+    </select>
+    
+    <!-- 영상 게시판 각 카테고리별 게시물 수 -->
+    <select id="getVideoCatCount" resultType="map">
+    	SELECT
+			categoryId, count(*) as count
+		FROM
+			videoboard
+		GROUP BY
+			categoryId;
+    </select>
+    
+    <!-- 팁 게시판 각 카테고리별 게시물 수 -->
+    <select id="getTipCatCount" resultType="map">
+    	SELECT
+			categoryId, count(*) as count
+		FROM
+			tipboard
+		GROUP BY
+			categoryId;
+    </select>
+    
+    <!-- 구인구직 게시판 각 카테고리별 게시물 수 -->
+    <select id="getRecruitCatCount" resultType="map">
+    	SELECT
+			categoryId, count(*) as count
+		FROM
+			recruitboard
+		GROUP BY
+			categoryId;
+    </select>
+    
+    <!-- 공지 게시판 categoryId의 게시물을 moveTo 카테고리로 전부 옮기기 -->
+    <update id="moveNoticeCat">
+    	UPDATE
+    		noticeboard
+    	SET
+    		categoryId = #{moveTo}
+    	WHERE
+    		categoryId = #{categoryId}
+    </update>
+    
+    <!-- 영상 게시판 categoryId의 게시물을 moveTo 카테고리로 전부 옮기기 -->
+    <update id="moveVideoCat">
+    	UPDATE
+    		videoboard
+    	SET
+    		categoryId = #{moveTo}
+    	WHERE
+    		categoryId = #{categoryId}
+    </update>
+    
+    <!-- 팁 게시판 categoryId의 게시물을 moveTo 카테고리로 전부 옮기기 -->
+    <update id="moveTipCat">
+    	UPDATE
+    		tipboard
+    	SET
+    		categoryId = #{moveTo}
+    	WHERE
+    		categoryId = #{categoryId}
+    </update>
+    
+    <!-- 구인구직 게시판 categoryId의 게시물을 moveTo 카테고리로 전부 옮기기 -->
+    <update id="moveRecruitCat">
+    	UPDATE
+    		recruitboard
+    	SET
+    		categoryId = #{moveTo}
+    	WHERE
+    		categoryId = #{categoryId}
+    </update>
 	
 	<!-- 이메일 체크 -->
 	<select id="checkEmail" parameterType="String" resultType="Integer">

@@ -11,7 +11,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<meta name="description" content="">
 	<meta name="author" content="">
-	<title>회원정보수정 - YouDitor</title>
+	<title>유저 정보 수정 - YouDitorAdmin</title>
 	<jsp:include page="../module/header.jsp" flush="false"/>
 	<style>
 	
@@ -172,8 +172,12 @@
        		$("#nickname").focus();
   			return false;
 		} else {
-			document.modForm.action = "${path}/adminAccountUpdate";
-			document.modForm.submit();
+			if(confirm("정말로 수정하시겠습니까?")) {
+				document.modForm.action = "${path}/adminAccountUpdate";
+				document.modForm.submit();
+			} else {
+				return false;
+			}
 		}
 	}
 	</script>

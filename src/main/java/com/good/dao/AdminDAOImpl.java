@@ -1,6 +1,7 @@
 package com.good.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -9,7 +10,10 @@ import org.springframework.stereotype.Repository;
 
 import com.good.dto.AccountsVO;
 import com.good.dto.AdminVO;
+import com.good.dto.NoticeCategoryVO;
+import com.good.dto.RecruitCategoryVO;
 import com.good.dto.Search;
+import com.good.dto.TipCategoryVO;
 import com.good.dto.VideoCategoryVO;
 
 @Repository
@@ -41,7 +45,7 @@ public class AdminDAOImpl implements AdminDAO {
 	}
 	
 	@Override
-	public List<VideoCategoryVO> getNoticeCatInfo() throws Exception {
+	public List<NoticeCategoryVO> getNoticeCatInfo() throws Exception {
 		return sqlSession.selectList(NAMESPACE + ".getNoticeCatInfo");
 	}
 	
@@ -51,13 +55,57 @@ public class AdminDAOImpl implements AdminDAO {
 	}
 	
 	@Override
-	public List<VideoCategoryVO> getTipCatInfo() throws Exception {
+	public List<TipCategoryVO> getTipCatInfo() throws Exception {
 		return sqlSession.selectList(NAMESPACE + ".getTipCatInfo");
 	}
 	
 	@Override
-	public List<VideoCategoryVO> getRecruitCatInfo() throws Exception {
+	public List<RecruitCategoryVO> getRecruitCatInfo() throws Exception {
 		return sqlSession.selectList(NAMESPACE + ".getRecruitCatInfo");
+	}
+	
+	// 공지 게시판 각 카테고리별 게시물 갯수
+	@Override
+	public Map<Integer, Integer> getNoticeCatCount() throws Exception {
+		return sqlSession.selectMap(NAMESPACE + ".getNoticeCatCount", "accountId");
+	}
+
+	// 영상 게시판 각 카테고리별 게시물 갯수
+	@Override
+	public Map<Integer, Integer> getVideoCatCount() throws Exception {
+		return sqlSession.selectMap(NAMESPACE + ".getVideoCatCount", "accountId");
+	}
+
+	// 팁 게시판 각 카테고리별 게시물 갯수
+	@Override
+	public Map<Integer, Integer> getTipCatCount() throws Exception {
+		return sqlSession.selectMap(NAMESPACE + ".getTipCatCount", "accountId");
+	}
+
+	// 구인구직 게시판 각 카테고리별 게시물 갯수
+	@Override
+	public Map<Integer, Integer> getRecruitCatCount() throws Exception {
+		return sqlSession.selectMap(NAMESPACE + ".getRecruitCatCount", "accountId");
+	}
+
+	@Override
+	public void moveNoticeCat(Map<String, Integer> fromTo) throws Exception {
+		sqlSession.update(NAMESPACE + ".moveNoticeCat", fromTo);
+	}
+
+	@Override
+	public void moveVideoCat(Map<String, Integer> fromTo) throws Exception {
+		sqlSession.update(NAMESPACE + ".moveVideoCat", fromTo);
+	}
+
+	@Override
+	public void moveTipCat(Map<String, Integer> fromTo) throws Exception {
+		sqlSession.update(NAMESPACE + ".moveTipCat", fromTo);
+	}
+
+	@Override
+	public void moveRecruitCat(Map<String, Integer> fromTo) throws Exception {
+		sqlSession.update(NAMESPACE + ".moveRecruitCat", fromTo);
 	}
 	
 	// 이메일 중복체크

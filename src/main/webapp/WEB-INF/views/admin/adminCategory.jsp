@@ -4,35 +4,78 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<script>
-function getParameterByName(name) {
-    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-        results = regex.exec(location.search);
-    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
-}
+	<meta charset="UTF-8">
+	<title>${CatName } 카테고리 관리 - YouDitorAdmin</title>
+	<jsp:include page="../module/header.jsp" flush="false"/>
+	<link href="/resources/css/modern-business.css" rel="stylesheet">
+	<script>
+	function getParameterByName(name) {
+	    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+	    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+	        results = regex.exec(location.search);
+	    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+	}
 
-function delCatBtn(categoryId) {
-	var category = getParameterByName("category");
-	var moveTo = $("#moveTo").val();
-	var url = "${pageContext.request.contextPath}/adminDelCat?category=" + category + "&categoryId=" + categoryId + "&moveTo=" + moveTo;
+	// 카테고리 소속 게시물들의 카테고리 옮기기 버튼
+	function moveCatBtn(categoryId) {
+		var category = getParameterByName("category");
+		var moveTo = $("#moveTo").val();
+		var moveData = {"category": category, "categoryId": categoryId, "moveTo": moveTo};
 
-	location.href = url;
-}
-</script>
+		if(confirm("정말로 게시물들을 옮기시겠습니까?")) {
+			$.ajax({
+				url : "/adminMoveCatPro",
+				type : "POST",
+				data : moveData,
+				success : function(result){
+					if(result == 1) {
+						location.href='/adminCategory?category=' + category;
+					} else {
+						alert("옮기기 실패");
+					}
+				}
+			});
+		} else {
+			return false;
+		}
+	}
+	
+	// 카테고리 소속 게시물들의 카테고리를 옮기고서 카테고리를 지우는 버튼
+	function delCatBtn(categoryId) {
+		var category = getParameterByName("category");
+		var moveTo = $("#moveTo").val();
+		var deleteData = {"category": category, "categoryId": categoryId, "moveTo": moveTo};
+
+		if(confirm("정말로 게시물들을 옮기시고 카테고리를 삭제하시겠습니까?")) {
+			$.ajax({
+				url : "/adminDelCatPro",
+				type : "POST",
+				data : deleteData,
+				success : function(result){
+					if(result == 1) {
+						location.href='/adminCategory?category=' + category;
+					} else {
+						alert("옮기기 실패");
+					}
+				}
+			});
+		} else {
+			return false;
+		}
+	}
+	</script>
 </head>
 <body>
 <jsp:include page="./adminTop.jsp" flush="false"/>
 <div class="container">
-	<h1>회원정보관리</h1>
+	<h1>${CatName } 카테고리 관리</h1>
+	<h5>관리권한은 열람권한보다 낮을 수 없습니다.<br>관리권한을 열람권한보다 낮은 값을 주면 자동으로 열람권한과 같은 값을 가집니다.</h5>
 	<table class="table table-borderd table-striped nanum table-hover">
 		<thead>
 			<tr>
 				<th>번호</th>
 				<th>이름</th>
-				<c:if test="${CategoryInfo.categoryPicture ne null }">
+				<c:if test="${CatName eq 'video' }">
 					<th>헤더이미지</th>
 				</c:if>
 				<th>관리권한</th>
@@ -43,60 +86,174 @@ function delCatBtn(categoryId) {
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach items="${CategoryInfo}" var="CategoryInfo">
-				<tr>
-					<th>${CategoryInfo.categoryId }</th>
-					<td>${CategoryInfo.categoryName }</td>
-					<c:if test="${CatInfo.categoryPicture ne null }">
-						<td>${CatInfo.categoryPicture }</td>
-					</c:if>
-					<td>${CategoryInfo.editAuthority }</td>
-					<td>${CategoryInfo.viewAuthority }</td>
-					<td><button class="btn btn-xs btn-warning" onclick="editCatBtn('${CategoryInfo.categoryId}');">수정</button></td>
+			<c:forEach items="${CategoryInfo }" var="CatInfo">
+				<form name="editFormCatNum${CatInfo.categoryId }" method="POST"><tr>
+					<th>
+						<c:choose>
+							<c:when test="${CatInfo.categoryId == 99 }">
+								<input type="text" name="CatId" id="CatId" value="${CatInfo.categoryId }" style="width: 100px;" readonly>
+							</c:when>
+							<c:otherwise>
+								<input type="text" name="CatId" id="CatId" value="${CatInfo.categoryId }" style="width: 100px;">
+							</c:otherwise>
+						</c:choose>
+					</th>
 					<td>
-						<select name="moveTo">
-							<c:forEach items="${CategoryInfo }" varStatus="where">
-								<c:if test="${where.categoryId != CatInfo.categoryId }">
+						<c:choose>
+							<c:when test="${CatInfo.categoryId == 99 }">
+								<input type="text" name="CatName" id="CatName" value="${CatInfo.categoryName }" style="width: 100px;" readonly>
+							</c:when>
+							<c:otherwise>
+								<input type="text" name="CatName" id="CatName" value="${CatInfo.categoryName }" style="width: 100px;">
+							</c:otherwise>
+						</c:choose>
+					</td>
+					<c:if test="${CatName eq 'video' }">
+						<td width="210">
+							<c:choose>
+								<c:when test="${CatInfo.categoryId == 99 }">
+									<a href="#" onclick="window.open('/resources/images/videoList/${CatInfo.categoryPicture }', 'popUpWindow','height=500, width=700, left=100, top=100, resizable=yes, scrollbars=yes, toolbar=yes, menubar=no, location=no, directories=no, status=yes'); return false;">
+										${CatInfo.categoryPicture }
+									</a>
+								</c:when>
+								<c:otherwise>
+									<input type="file" name="CatPic" id="CatPic" style="width: 200px;"><br>
+									<a href="#" onclick="window.open('/resources/images/videoList/${CatInfo.categoryPicture }', 'popUpWindow','height=500, width=700, left=100, top=100, resizable=yes, scrollbars=yes, toolbar=yes, menubar=no, location=no, directories=no, status=yes'); return false;">
+										${CatInfo.categoryPicture }
+									</a>
+								</c:otherwise>
+							</c:choose>
+						</td>
+					</c:if>
+					<td>
+						<c:choose>
+							<c:when test="${CatInfo.categoryId == 99 }">
+								<select name="CatEditAuth" id="CatEditAuth" disabled>
+									<c:choose>
+										<c:when test="${CatInfo.editAuthority eq 4 }">
+											<option value="4" selected>커뮤니티매니저</option>
+											<option value="5">사이트관리자</option>
+										</c:when>
+										<c:when test="${CatInfo.editAuthority eq 5 }">
+											<option value="4">커뮤니티매니저</option>
+											<option value="5" selected>사이트관리자</option>
+										</c:when>
+									</c:choose>
+								</select>
+							</c:when>
+							<c:otherwise>
+								<select name="CatEditAuth" id="CatEditAuth">
+									<c:choose>
+										<c:when test="${CatInfo.editAuthority eq 4 }">
+											<option value="4" selected>커뮤니티매니저</option>
+											<option value="5">사이트관리자</option>
+										</c:when>
+										<c:when test="${CatInfo.editAuthority eq 5 }">
+											<option value="4">커뮤니티매니저</option>
+											<option value="5" selected>사이트관리자</option>
+										</c:when>
+									</c:choose>
+								</select>
+							</c:otherwise>
+						</c:choose>
+					</td>
+					<td>
+						<c:choose>
+							<c:when test="${CatInfo.categoryId == 99 }">
+								<select name="CatViewAuth" id="CatViewAuth" disabled>
+									<c:choose>
+										<c:when test="${CatInfo.viewAuthority eq 3 }">
+											<option value="3" selected>일반회원</option>
+											<option value="4">커뮤니티매니저</option>
+											<option value="5">사이트관리자</option>
+										</c:when>
+										<c:when test="${CatInfo.viewAuthority eq 4 }">
+											<option value="3">일반회원</option>
+											<option value="4" selected>커뮤니티매니저</option>
+											<option value="5">사이트관리자</option>
+										</c:when>
+										<c:when test="${CatInfo.viewAuthority eq 5 }">
+											<option value="3">일반회원</option>
+											<option value="4">커뮤니티매니저</option>
+											<option value="5" selected>사이트관리자</option>
+										</c:when>
+									</c:choose>
+								</select>
+							</c:when>
+							<c:otherwise>
+								<select name="CatViewAuth" id="CatViewAuth">
+									<c:choose>
+										<c:when test="${CatInfo.viewAuthority eq 3 }">
+											<option value="3" selected>일반회원</option>
+											<option value="4">커뮤니티매니저</option>
+											<option value="5">사이트관리자</option>
+										</c:when>
+										<c:when test="${CatInfo.viewAuthority eq 4 }">
+											<option value="3">일반회원</option>
+											<option value="4" selected>커뮤니티매니저</option>
+											<option value="5">사이트관리자</option>
+										</c:when>
+										<c:when test="${CatInfo.viewAuthority eq 5 }">
+											<option value="3">일반회원</option>
+											<option value="4">커뮤니티매니저</option>
+											<option value="5" selected>사이트관리자</option>
+										</c:when>
+									</c:choose>
+								</select>
+							</c:otherwise>
+						</c:choose>
+					</td>
+					<td width="100">
+						<c:choose>
+							<c:when test="${CatInfo.categoryId == 99 }">
+								<button class="btn btn-xs btn-warning" onclick="editCatBtn('${CatName }', '${CatInfo.categoryId}');" disabled>수정</button>
+							</c:when>
+							<c:otherwise>
+								<button class="btn btn-xs btn-warning" onclick="editCatBtn('${CatName }', '${CatInfo.categoryId}');">수정</button>
+							</c:otherwise>
+						</c:choose>
+					</td>
+					<td width="80">
+						<select name="moveTo" id="moveTo" style="width: 75px;">
+							<c:forEach items="${CategoryInfo }" var="where">
+								<c:if test="${where.categoryId ne CatInfo.categoryId }">
 									<option value="${where.categoryId }">${where.categoryName }</option>
 								</c:if>
 							</c:forEach>
 						</select>
 					</td>
-					<td>
-						<button class="btn btn-xs btn-warning" onclick="moveCatBtn('${CategoryInfo.categoryId}');">옮기기</button>
-						<button class="btn btn-xs btn-danger" onclick="delCatBtn('${CategoryInfo.categoryId}');">옮기고 삭제</button>
+					<td width="150">
+						<button class="btn btn-xs btn-warning" onclick="moveCatBtn('${CatInfo.categoryId}');">옮기기</button>
+						<c:if test="${CatInfo.categoryId ne 99 }">
+							<button class="btn btn-xs btn-danger" onclick="delCatBtn('${CatInfo.categoryId}');">옮기고 삭제</button>
+						</c:if>
 					</td>
-				</tr>
+				</tr></form>
 			</c:forEach>
 		</tbody>
 		<tfoot>
-			<tr>
+			<form name="newCatForm" method="POST"><tr>
 				<th>
-					<select name="newCatId">
-						<c:forEach var="i" begin="1" end="98">
-							<c:forEach items="${CategoryInfo }" varStatus="used">
-								<c:if test="${i != used.categoryId }">
-									<option value="${i }">${i }</option>
-								</c:if>
-							</c:forEach>
-						</c:forEach>
-					</select>
+					<input type="text" name="newCatId" id="newCatId" placeholder="categoryId" style="width: 100px;"><br>
+					중복된 값은<br>
+					가질 수<br>
+					없습니다.
 				</th>
-				<td><input type="text" name="newCatName" id="newCatName" placeholder="Enter Category Name"></td>
-				<c:if test="${CatInfo.categoryPicture ne null }">
-					<td>
-						<input type="file" name="newCatPic" id="newCatPic"><br>
+				<td><input type="text" name="newCatName" id="newCatName" placeholder="Enter Name" style="width: 100px;"></td>
+				<c:if test="${CatName eq 'video' }">
+					<td width="210px">
+						<input type="file" name="newCatPic" id="newCatPic" style="width: 200px;"><br>
 						<a href="#">미리보기</a>
 					</td>
 				</c:if>
 				<td>
-					<select name="editAuth">
+					<select name="newEditAuth">
 						<option value="4" selected>커뮤니티매니저</option>
 						<option value="5">사이트관리자</option>
 					</select>
 				</td>
 				<td>
-					<select name="viewAuth">
+					<select name="newViewAuth">
 						<option value="3" selected>일반회원</option>
 						<option value="4">커뮤니티매니저</option>
 						<option value="5">사이트관리자</option>
@@ -104,10 +261,10 @@ function delCatBtn(categoryId) {
 				</td>
 				<td></td>
 				<td></td>
-				<td>
+				<td width="150">
 					<button type="button" class="btn btn-xs btn-success" onclick="newCatBtn();">추가</button>
 				</td>
-			</tr>
+			</tr></form>
 		</tfoot>
 	</table>
 </div>
