@@ -17,6 +17,9 @@
 <jsp:include page="../module/header.jsp" flush="false" />
 <link href="/resources/css/modAccount.css" rel="stylesheet">
 <style>
+input {
+	border-radius: 10px;
+}
 table {
 	margin: 20px;
 	width: 800px;
@@ -108,6 +111,7 @@ th {
 		}
 		else if(pwd == pwdCfm && nickCheck == '사용불가') {
 			alert("사용 중인 닉네임입니다.");
+			$("#nickname").focus();
 		}
 		else {
 			alert("비밀번호를 확인해주세요.");
@@ -189,8 +193,12 @@ th {
 		       	if(nickname != loginnickname) { 
 					if(data.cnt == 0) {
 						$('#chkMsg').html("사용가능");
+						$('#nickname').css("background-color", "#E8FFD0");
+						$('#nickname').css("color", "#000000");
 					} else {
 						$('#chkMsg').html("사용불가");
+						$('#nickname').css("background-color", "#ffd1d1");
+						$('#nickname').css("color", "#000000");
 					}
 				} else {
 					$('#chkMsg').html("사용가능");	
