@@ -12,7 +12,7 @@
 		content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<meta name="description" content="">
 	<meta name="author" content="">
-	<title>YouditoR</title>
+	<title>유저 일람 - YouDitorAdmin</title>
 	<jsp:include page="../module/header.jsp" flush="false" />
 	<script type="text/javascript">
 	/*function authorUp(accountId, authority){
@@ -177,7 +177,7 @@
 <body>
 <jsp:include page="./adminTop.jsp" flush="false"/>
 <div class="container">
-	<h1>adminView</h1>
+	<h1>회원정보관리</h1>
 	<table class="table table-borderd table-striped nanum table-hover">
 		<thead>
 			<tr>
