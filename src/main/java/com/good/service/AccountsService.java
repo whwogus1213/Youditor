@@ -2,6 +2,7 @@ package com.good.service;
 
 import java.util.List;
 
+import com.good.dto.AccountCheckVO;
 import com.good.dto.AccountsVO;
 
 public interface AccountsService {
@@ -21,7 +22,7 @@ public interface AccountsService {
 		
 	public void deleteAccount(AccountsVO vo) throws Exception;
 	
-	public void updateAuthority(AccountsVO vo) throws Exception;
+	public void updateAuthority(AccountCheckVO Cvo) throws Exception;
 	
 	public void updateAccount(AccountsVO vo) throws Exception;
 	

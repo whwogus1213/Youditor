@@ -25,6 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.good.dto.AccountCheckVO;
 import com.good.dto.AccountsVO;
 import com.good.service.AccountsService;
 
@@ -168,12 +169,12 @@ public class AccountsController {
 	
 	//회원가입 이메일 인증 확인
 	@RequestMapping(value="/joinConfirm", method=RequestMethod.GET)
-	public String emailConfirm(@ModelAttribute("vo") AccountsVO vo, Model model) throws Exception {
+	public String emailConfirm(@ModelAttribute("Cvo") AccountCheckVO Cvo, Model model) throws Exception {
 //		logger.info(uVO.getEmail() + ": auth confirmed");
-		System.out.println(vo.getEmail() + ": 권한 확인");
-		vo.setAuthority(3);
-		System.out.println(vo);
-		service.updateAuthority(vo);
+		System.out.println(Cvo.getAccountId() + ": 권한 확인");
+		
+		System.out.println(Cvo);
+		service.updateAuthority(Cvo);
 		System.out.println("updateAuthority 완료");
 //		model.addAttribute("auth_check", 1);
 		

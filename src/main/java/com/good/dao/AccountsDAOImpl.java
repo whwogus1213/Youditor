@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.good.dto.AccountCheckVO;
 import com.good.dto.AccountsVO;
 
 @Repository
@@ -25,8 +26,14 @@ public class AccountsDAOImpl implements AccountsDAO {
 	}
 
 	@Override
-	public void insertAccounts(AccountsVO vo) throws Exception {
+	public int insertAccounts(AccountsVO vo) throws Exception {
 		sqlSession.insert(NAMESPACE + ".insertAccounts", vo);
+		return sqlSession.selectOne(NAMESPACE + ".returnAccountId", vo);
+	}
+	
+	@Override
+	public void insertAccountCheck(AccountCheckVO Cvo) throws Exception {
+		sqlSession.insert(NAMESPACE + ".insertAccountCheck", Cvo);
 	}
 
 	@Override
@@ -36,9 +43,9 @@ public class AccountsDAOImpl implements AccountsDAO {
 	
 	
 	@Override
-	public void updateAuthority(AccountsVO vo) throws Exception {
-		sqlSession.update(NAMESPACE + ".updateAuthority", vo);
-		sqlSession.delete(NAMESPACE + ".deleteAuthkey", vo);
+	public void updateAuthority(AccountCheckVO Cvo) throws Exception {
+		sqlSession.update(NAMESPACE + ".updateAuthority", Cvo);
+		sqlSession.delete(NAMESPACE + ".deleteAuthkey", Cvo);
 	}
 
 	@Override
@@ -83,5 +90,7 @@ public class AccountsDAOImpl implements AccountsDAO {
 	public void loginDate(AccountsVO vo) throws Exception {
 		sqlSession.update(NAMESPACE + ".loginDate", vo);
 	}
+
+	
 
 }
