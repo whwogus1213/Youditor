@@ -87,84 +87,116 @@
     </select>
     
     <!-- 공지 게시판 각 카테고리별 게시물 수 -->
-    <select id="getNoticeCatCount" resultType="map">
+    <select id="getNoticeCatCount" resultType="java.util.HashMap">
     	SELECT
 			categoryId, count(*) as count
 		FROM
 			noticeboard
 		GROUP BY
-			categoryId;
+			categoryId
     </select>
     
     <!-- 영상 게시판 각 카테고리별 게시물 수 -->
-    <select id="getVideoCatCount" resultType="map">
+    <select id="getVideoCatCount" resultType="java.util.HashMap">
     	SELECT
 			categoryId, count(*) as count
 		FROM
 			videoboard
 		GROUP BY
-			categoryId;
+			categoryId
     </select>
     
     <!-- 팁 게시판 각 카테고리별 게시물 수 -->
-    <select id="getTipCatCount" resultType="map">
+    <select id="getTipCatCount" resultType="java.util.HashMap">
     	SELECT
 			categoryId, count(*) as count
 		FROM
 			tipboard
 		GROUP BY
-			categoryId;
+			categoryId
     </select>
     
     <!-- 구인구직 게시판 각 카테고리별 게시물 수 -->
-    <select id="getRecruitCatCount" resultType="map">
+    <select id="getRecruitCatCount" resultType="java.util.HashMap">
     	SELECT
 			categoryId, count(*) as count
 		FROM
 			recruitboard
 		GROUP BY
-			categoryId;
+			categoryId
     </select>
     
     <!-- 공지 게시판 categoryId의 게시물을 moveTo 카테고리로 전부 옮기기 -->
-    <update id="moveNoticeCat">
+    <update id="moveNoticeCat" parameterType="map">
     	UPDATE
     		noticeboard
     	SET
-    		categoryId = #{moveTo}
+    		categoryId = ${to}
     	WHERE
-    		categoryId = #{categoryId}
+    		categoryId = ${from}
     </update>
     
     <!-- 영상 게시판 categoryId의 게시물을 moveTo 카테고리로 전부 옮기기 -->
-    <update id="moveVideoCat">
+    <update id="moveVideoCat" parameterType="map">
     	UPDATE
     		videoboard
     	SET
-    		categoryId = #{moveTo}
+    		categoryId = ${to}
     	WHERE
-    		categoryId = #{categoryId}
+    		categoryId = ${from}
     </update>
     
     <!-- 팁 게시판 categoryId의 게시물을 moveTo 카테고리로 전부 옮기기 -->
-    <update id="moveTipCat">
+    <update id="moveTipCat" parameterType="map">
     	UPDATE
     		tipboard
     	SET
-    		categoryId = #{moveTo}
+    		categoryId = ${to}
     	WHERE
-    		categoryId = #{categoryId}
+    		categoryId = ${from}
     </update>
     
     <!-- 구인구직 게시판 categoryId의 게시물을 moveTo 카테고리로 전부 옮기기 -->
-    <update id="moveRecruitCat">
+    <update id="moveRecruitCat" parameterType="map">
     	UPDATE
     		recruitboard
     	SET
-    		categoryId = #{moveTo}
+    		categoryId = ${to}
+    	WHERE
+    		categoryId = ${from}
+    </update>
+    
+    <!-- 공지 게시판 categoryId 카테고리 지우기 -->
+    <delete id="delNoticeCat" parameterType="int">
+    	DELETE FROM
+    		noticecategory
     	WHERE
     		categoryId = #{categoryId}
-    </update>
+    </delete>
+    
+    <!-- 영상 게시판 categoryId 카테고리 지우기 -->
+    <delete id="delVideoCat" parameterType="int">
+    	DELETE FROM
+    		videocategory
+    	WHERE
+    		categoryId = #{categoryId}
+    </delete>
+    
+    <!-- 팁 게시판 categoryId 카테고리 지우기 -->
+    <delete id="delTipCat" parameterType="int">
+    	DELETE FROM
+    		tipcategory
+    	WHERE
+    		categoryId = #{categoryId}
+    </delete>
+    
+    <!-- 구인구직 게시판 categoryId 카테고리 지우기 -->
+    <delete id="delRecruitCat" parameterType="int">
+    	DELETE FROM
+    		recruitcategory
+    	WHERE
+    		categoryId = #{categoryId}
+    </delete>
 	
 	<!-- 이메일 체크 -->
 	<select id="checkEmail" parameterType="String" resultType="Integer">
@@ -210,5 +242,68 @@
 			mod_date = now()
 		WHERE
 			accountId = #{accountId}
+	</update>
+	
+	<!-- 공지 게시판 카테고리 업데이트 -->
+	<update id="editNoticeCat" parameterType="EditCategoryVO">
+	UPDATE
+		noticecategory
+	SET
+		categoryId = #{catNewId},
+		categoryName = #{catName},
+		editAuthority = #{editAuth},
+		viewAuthority = #{viewAuth}
+	WHERE
+		categoryId = #{catOldId}
+	</update>
+	
+	<!-- 영상 카테고리 헤더 이미지 파일명 취득 -->
+	<select id="getCatPic" parameterType="int">
+	SELECT
+		categoryPicture
+	FROM
+		videocategory
+	WHERE
+		categoryId = #{categoryId}
+	</select>
+	
+	<!-- 영상 게시판 카테고리 업데이트 -->
+	<update id="editVideoCat" parameterType="EditCategoryVO">
+	UPDATE
+		videocategory
+	SET
+		categoryId = #{catNewId},
+		categoryName = #{catName},
+		categoryPicture = #{catPic},
+		editAuthority = #{editAuth},
+		viewAuthority = #{viewAuth}
+	WHERE
+		categoryId = #{catOldId}
+	</update>
+	
+	<!-- 팁 게시판 카테고리 업데이트 -->
+	<update id="editTipCat" parameterType="EditCategoryVO">
+	UPDATE
+		tipcategory
+	SET
+		categoryId = #{catNewId},
+		categoryName = #{catName},
+		editAuthority = #{editAuth},
+		viewAuthority = #{viewAuth}
+	WHERE
+		categoryId = #{catOldId}
+	</update>
+	
+	<!-- 구인구직 게시판 카테고리 업데이트 -->
+	<update id="editRecruitCat" parameterType="EditCategoryVO">
+	UPDATE
+		recruitcategory
+	SET
+		categoryId = #{catNewId},
+		categoryName = #{catName},
+		editAuthority = #{editAuth},
+		viewAuthority = #{viewAuth}
+	WHERE
+		categoryId = #{catOldId}
 	</update>
 </mapper>

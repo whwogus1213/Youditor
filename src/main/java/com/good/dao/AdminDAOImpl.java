@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.good.dto.AccountsVO;
 import com.good.dto.AdminVO;
+import com.good.dto.EditCategoryVO;
 import com.good.dto.NoticeCategoryVO;
 import com.good.dto.RecruitCategoryVO;
 import com.good.dto.Search;
@@ -106,6 +107,61 @@ public class AdminDAOImpl implements AdminDAO {
 	@Override
 	public void moveRecruitCat(Map<String, Integer> fromTo) throws Exception {
 		sqlSession.update(NAMESPACE + ".moveRecruitCat", fromTo);
+	}
+	
+	// 공지 게시판 categoryId 카테고리 지우기
+	@Override
+	public void delNoticeCat(int categoryId) throws Exception {
+		sqlSession.delete(NAMESPACE + ".delNoticeCat", categoryId);
+	}
+	
+	// 영상 게시판 categoryId 카테고리 지우기
+	@Override
+	public void delVideoCat(int categoryId) throws Exception {
+		sqlSession.delete(NAMESPACE + ".delVideoCat", categoryId);
+	}
+	
+	// 팁 게시판 categoryId 카테고리 지우기
+	@Override
+	public void delTipCat(int categoryId) throws Exception {
+		sqlSession.delete(NAMESPACE + ".delTipCat", categoryId);
+	}
+	
+	// 구인구직 게시판 categoryId 카테고리 지우기
+	@Override
+	public void delRecruitCat(int categoryId) throws Exception {
+		sqlSession.delete(NAMESPACE + ".delRecruitCat", categoryId);
+
+	}
+	
+	// 공지 게시판 카테고리 업데이트
+	@Override
+	public void editNoticeCat(EditCategoryVO nCatVO) throws Exception {
+		sqlSession.update(NAMESPACE + ".editNoticeCat", nCatVO);
+	}
+	
+	// 영상 게시판 헤더 이미지 파일명 취득 
+	@Override
+	public String getCatPic(int categoryId) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + ".getCatPic", categoryId);
+	}
+	
+	// 영상 게시판 카테고리 업데이트
+	@Override
+	public void editVideoCat(EditCategoryVO vCatVO) throws Exception {
+		sqlSession.update(NAMESPACE + ".editVideoCat", vCatVO);
+	}
+	
+	// 팁 게시판 카테고리 업데이트
+	@Override
+	public void editTipCat(EditCategoryVO tCatVO) throws Exception {
+		sqlSession.update(NAMESPACE + ".editTipCat", tCatVO);
+	}
+	
+	// 구인구직 게시판 카테고리 업데이트
+	@Override
+	public void editRecruitCat(EditCategoryVO rCatVO) throws Exception {
+		sqlSession.update(NAMESPACE + ".editRecruitCat", rCatVO);
 	}
 	
 	// 이메일 중복체크

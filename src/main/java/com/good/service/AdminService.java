@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.good.dto.AccountsVO;
 import com.good.dto.AdminVO;
+import com.good.dto.EditCategoryVO;
 import com.good.dto.NoticeCategoryVO;
 import com.good.dto.RecruitCategoryVO;
 import com.good.dto.Search;
@@ -55,6 +56,33 @@ public interface AdminService {
 
 	// 구인구직 게시판 categoryId 소속 게시물을 moveTo 카테고리로 옮기기
 	public void moveRecruitCat(Map<String, Integer> fromTo) throws Exception;
+	
+	// 공지 게시판 categoryId 카테고리 지우기
+	public void delNoticeCat(int categoryId) throws Exception;
+	
+	// 영상 게시판 categoryId 카테고리 지우기
+	public void delVideoCat(int categoryId) throws Exception;
+	
+	// 팁 게시판 categoryId 카테고리 지우기
+	public void delTipCat(int categoryId) throws Exception;
+	
+	// 구인구직 게시판 categoryId 카테고리 지우기
+	public void delRecruitCat(int categoryId) throws Exception;
+	
+	// 공지 게시판 카테고리 업데이트
+	public void editNoticeCat(EditCategoryVO nCatVO) throws Exception;
+	
+	// 영상 게시판 헤더 이미지 파일명 취득 
+	public String getCatPic(int categoryId) throws Exception;
+	
+	// 영상 게시판 카테고리 업데이트
+	public void editVideoCat(EditCategoryVO vCatVO) throws Exception;
+	
+	// 팁 게시판 카테고리 업데이트
+	public void editTipCat(EditCategoryVO tCatVO) throws Exception;
+	
+	// 구인구직 게시판 카테고리 업데이트
+	public void editRecruitCat(EditCategoryVO rCatVO) throws Exception;
 	
 	// 이메일 중복체크
 	public int checkEmail(String email) throws Exception;

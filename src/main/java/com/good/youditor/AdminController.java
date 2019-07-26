@@ -24,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.good.dto.AccountsVO;
 import com.good.dto.AdminVO;
+import com.good.dto.EditCategoryVO;
 import com.good.dto.NoticeCategoryVO;
 import com.good.dto.RecruitCategoryVO;
 import com.good.dto.Search;
@@ -98,7 +99,9 @@ public class AdminController {
 		return "admin/adminAccount";
 	}
 
-	@RequestMapping(value = "/adminCategory", method = RequestMethod.GET)
+	@RequestMapping(value = "/adminCategory")
+	//@RequestMapping(value = "/adminCategory", method = RequestMethod.GET)
+	//@ResponseBody
 	public String adminCategory(@RequestParam("category") String category, Model model) throws Exception {
 		if(category.equals("notice")) {
 			System.out.println("공지");
@@ -234,24 +237,164 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value = "/adminMoveCatPro", method = RequestMethod.POST)
+	@ResponseBody
 	public int adminMoveCatPro(@RequestParam("category") String category,
 							@RequestParam("categoryId") int categoryId,
 							@RequestParam("moveTo") int moveTo) throws Exception {
+		System.out.println("category : " + category);
+		System.out.println("categoryId : " + categoryId);
+		System.out.println("moveTo : " + moveTo);
 		int result = 0;
 		Map<String, Integer> fromTo = new HashMap<String, Integer>();
 		fromTo.put("from", categoryId);
 		fromTo.put("to", moveTo);
-		if(category == "notice") {
+		if(category.equals("notice")) {
 			service.moveNoticeCat(fromTo);
 			result = 1;
-		} else if(category == "video") {
+		} else if(category.equals("video")) {
 			service.moveVideoCat(fromTo);
 			result = 1;
-		} else if(category == "tip") {
+		} else if(category.equals("tip")) {
 			service.moveTipCat(fromTo);
 			result = 1;
-		} else if(category == "recruit") {
+		} else if(category.equals("recruit")) {
 			service.moveRecruitCat(fromTo);
+			result = 1;
+		} else {
+			result = 0;
+		}
+		
+		return result;
+	}
+	
+	@RequestMapping(value = "/adminDelCatPro", method = RequestMethod.POST)
+	@ResponseBody
+	public int adminDelCatPro(@RequestParam("category") String category,
+							@RequestParam("categoryId") int categoryId,
+							@RequestParam("moveTo") int moveTo) throws Exception {
+		System.out.println("category : " + category);
+		System.out.println("categoryId : " + categoryId);
+		System.out.println("moveTo : " + moveTo);
+		int result = 0;
+		Map<String, Integer> fromTo = new HashMap<String, Integer>();
+		fromTo.put("from", categoryId);
+		fromTo.put("to", moveTo);
+		if(category.equals("notice")) {
+			service.moveNoticeCat(fromTo);
+			service.delNoticeCat(categoryId);
+			result = 1;
+		} else if(category.equals("video")) {
+			service.moveVideoCat(fromTo);
+			service.delVideoCat(categoryId);
+			result = 1;
+		} else if(category.equals("tip")) {
+			service.moveTipCat(fromTo);
+			service.delTipCat(categoryId);
+			result = 1;
+		} else if(category.equals("recruit")) {
+			service.moveRecruitCat(fromTo);
+			service.delRecruitCat(categoryId);
+			result = 1;
+		} else {
+			result = 0;
+		}
+		
+		return result;
+	}
+	
+	@RequestMapping(value = "/adminEditCatPro")
+	@ResponseBody
+	public int adminEditCatPro(@RequestParam("category") String category,
+								@RequestParam("categoryId") int categoryId,
+								@RequestParam("catId") int catId,
+								@RequestParam("catName") String catName,
+								@RequestParam(required = false, value="CatPic") MultipartFile CatPic,
+								@RequestParam("catEditAuth") int catEditAuth,
+								@RequestParam("catViewAuth") int catViewAuth) throws Exception {
+		int result = 0;
+		
+		if(category.equals("notice")) {
+			EditCategoryVO nCatVO = new EditCategoryVO();
+			nCatVO.setCatOldId(categoryId);
+			nCatVO.setCatNewId(catId);
+			nCatVO.setCatName(catName);
+			nCatVO.setEditAuth(catEditAuth);
+			nCatVO.setViewAuth(catViewAuth);
+
+			System.out.println("nCatVO : " + nCatVO);
+			service.editNoticeCat(nCatVO);
+			result = 1;
+		} else if(category.equals("video")) {
+			//기본 사진이 아닌 경우사진 파일 삭제
+			String savedName = "";
+			String oriPic = service.getCatPic(categoryId);
+			try {
+				oriPic.isEmpty();
+			} catch(Exception e) {
+				oriPic = "nothing.jpg";
+			} finally {
+				savedName = oriPic;
+				if(!oriPic.equals("nothing.jpg") && !CatPic.isEmpty()) {
+					String filePath = uploadPath + "/videoboard/" + oriPic;
+					File picture_old = new File(filePath);
+					if(picture_old.exists()) {
+						if(picture_old.delete()) {
+							System.out.println("기존 사진 삭제 성공");
+						} else {
+							System.out.println("기존 사진 삭제 실패");
+						}
+					} else {
+						System.out.println("기존에 사진이 없었습니다.");
+					}
+				}
+			}
+
+			//새로운 사진 등록
+			if(!CatPic.isEmpty()) {
+				savedName = CatPic.getOriginalFilename();
+				StringTokenizer pst = new StringTokenizer(savedName,".");
+				pst.nextToken();
+				String file_ext = pst.nextToken();
+				UUID uid = UUID.randomUUID();
+				savedName = uid.toString().substring(0, 16) + "." + file_ext;	// 저장 이름
+				// new File (디렉토리, 파일이름)
+				File target = new File(uploadPath, savedName);
+				
+				FileCopyUtils.copy(CatPic.getBytes(), target);
+			}
+			
+			EditCategoryVO vCatVO = new EditCategoryVO();
+			vCatVO.setCatOldId(categoryId);
+			vCatVO.setCatNewId(catId);
+			vCatVO.setCatName(catName);
+			vCatVO.setEditAuth(catEditAuth);
+			vCatVO.setViewAuth(catViewAuth);
+			vCatVO.setCatPic(savedName);
+
+			System.out.println("vCatVO : " + vCatVO);
+			service.editVideoCat(vCatVO);
+			result = 1;
+		} else if(category.equals("tip")) {
+			EditCategoryVO tCatVO = new EditCategoryVO();
+			tCatVO.setCatOldId(categoryId);
+			tCatVO.setCatNewId(catId);
+			tCatVO.setCatName(catName);
+			tCatVO.setEditAuth(catEditAuth);
+			tCatVO.setViewAuth(catViewAuth);
+
+			System.out.println("tCatVO : " + tCatVO);
+			service.editTipCat(tCatVO);
+			result = 1;
+		} else if(category.equals("recruit")) {
+			EditCategoryVO rCatVO = new EditCategoryVO();
+			rCatVO.setCatOldId(categoryId);
+			rCatVO.setCatNewId(catId);
+			rCatVO.setCatName(catName);
+			rCatVO.setEditAuth(catEditAuth);
+			rCatVO.setViewAuth(catViewAuth);
+
+			System.out.println("rCatVO : " + rCatVO);
+			service.editRecruitCat(rCatVO);
 			result = 1;
 		} else {
 			result = 0;

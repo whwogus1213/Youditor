@@ -18,6 +18,7 @@
 			
     		<typeAlias type="com.good.dto.ReplyVO" alias="ReplyVO"/>
     		<typeAlias type="com.good.dto.SearchBoard" alias="SearchBoard"/>
+    		<typeAlias type="com.good.dto.EditCategoryVO" alias="EditCategoryVO"/>
 
     		<typeAlias type="com.good.dto.NoticeBoardVO" alias="NoticeBoardVO"/>
     		<typeAlias type="com.good.dto.NoticeCategoryVO" alias="NoticeCategoryVO"/>
