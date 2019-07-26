@@ -164,7 +164,7 @@ var questions = [
 						"nickname" : questions[2].value, 
 						"footer" : questions[3].value, 
 			        },
-		        success : function(data){
+		        success : function(){
 
 			        setTimeout(function() {
 						window.location.href = "/";
@@ -177,6 +177,7 @@ var questions = [
 		        
 		    });
 
+		  
 		
 	    // remove the box if there is no next question
 	    register.className = 'close'
@@ -184,6 +185,8 @@ var questions = [
 	    // add the h1 at the end with the welcome text
 	    var h1 = document.createElement('h1')
 	    h1.appendChild(document.createTextNode('Welcome ' + questions[2].value + '!'))
+	    h1.appendChild(document.createElement('br'));
+	    h1.appendChild(document.createTextNode('이메일 인증후 가입이 완료됩니다.'))
 	    setTimeout(function() {
 	      register.parentElement.appendChild(h1)     
 	      setTimeout(function() {h1.style.opacity = 1}, 50)
