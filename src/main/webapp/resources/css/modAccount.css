@@ -34,7 +34,7 @@ input[type="text"], input[type="password"] {
 	padding: 5px;
 	width: 60%;
 	background-color: #fff;
-	color: #4BA0FF;
+	color: #000000;
 	box-shadow: 0 2px 0 rgba(0, 0, 0, 0.03) inset;
 	letter-spacing: 1.1px;
 }

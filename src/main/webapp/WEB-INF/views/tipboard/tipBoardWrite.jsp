@@ -22,18 +22,18 @@
 	</div>
 	
 	<div class="container">
-	    <form class="form-horizontal" method="post" action=" ${path}/tipboard/insertTipBoardPro">
+	    <form class="form-horizontal" method="post" name="tipWriteForm">
 	    	<div class="form-inline">
 	        	<label class="control-label col-sm-2">제목</label>
 	        	<div class="col-sm-3">
-	        		<input type="text" class="form-control" name="subject" maxlength="50" placeholder="Enter Title">
+	        		<input type="text" class="form-control" name="subject" id="subject" maxlength="50" placeholder="Enter Title">
 	        	</div>
 			</div>
 			<br>
 			<div class="form-inline">
 				<label class="control-label col-sm-2">카테고리</label>
 				<div class="col-sm-3">
-	        		<select class="browser-default custom-select" name="categoryId" style="width:190px">
+	        		<select class="browser-default custom-select" name="categoryId" style="width:190px" id="categoryId">
 		           		<option value="1">팁</option>
 		           </select>
 				</div>
@@ -43,19 +43,64 @@
 		        <label class="control-label col-sm-2">작성자</label>
 		        <div class="col-sm-3">
 					<input type="text" class="form-control" maxlength="50" value="${login.nickname}" readonly>
-					<input type="text" class="form-control" name="accountId" maxlength="50" value="${login.accountId}" style="display:none" readonly>
+					<input type="text" class="form-control" name="accountId" id="accountId" maxlength="50" value="${login.accountId}" style="display:none" readonly>
 		        </div>
 			</div>
 			<br>
 			<div class="form-inline">
 				<label class="control-label col-sm-2">내용</label>
 				<div class="col-sm-3">
-					<textarea rows="10" cols="100" name="object"></textarea>
+					<textarea rows="10" cols="100" name="object" id="object"></textarea>
 				</div>
 			</div>
 			<br>
 			<div class="col-sm-12" align="center">
-			<button type="submit" id="submit" class="btn btn-success">올리기</button>
+			<button type="submit" id="submit" class="btn btn-success" onclick="insertBtn();">올리기</button>
+				<script type="text/javascript">
+				function insertBtn() {
+					var accountId = $("#accountId").val();
+					var categoryId = $("#categoryId").val();
+		  			var subject = $("#subject").val();
+		  			var object = $("#object").val();
+
+		  			if (subject.length == 0) {
+						alert("제목을 입력해 주세요.");
+						$("#subject").focus();
+						return;
+					}
+					if (object.length == 0) {
+						alert("내용을 입력해 주세요.");
+						$("#object").focus();
+						return;
+					}
+			  		
+					document.tipWriteForm.action = "/tipboard/insertTipBoardPro";
+					document.tipWriteForm.method = "POST";
+					document.tipWriteForm.submit();
+				}
+
+				function updateBtn() {
+					var accountId = $("#accountId").val();
+					var categoryId = $("#categoryId").val();
+					var subject = $("#subject").val();
+					var object = $("#object").val();
+					if (subject.length == 0) {
+						alert("제목을 입력해 주세요.");
+						$("#subject").focus();
+						return;
+					}
+					if (object.length == 0) {
+						alert("내용을 입력해 주세요.");
+						$("#object").focus();
+						return;
+					}
+
+					document.tipWriteForm.action = "/tipboard/updateTipBoardPro";
+					document.tipWriteForm.method = "POST";
+					document.tipWriteForm.submit();
+				}
+				</script>
+			
 	       <button type="reset" class="btn btn-warning">초기화</button>
 	       <button type="button" class="btn btn-info" onclick="location.href='/tipboard/tipBoardList?num=1'">뒤로 가기</button>
 	       </div>
