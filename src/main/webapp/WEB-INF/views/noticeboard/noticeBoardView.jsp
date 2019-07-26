@@ -46,10 +46,10 @@
 		<div class="col-12" style="margin-left:3%; margin-right:3%; margin-top:3%; margin-bottom:1%">
 			<h3>
 				<c:if test="${row.categoryName == '공지'}">
-					<strong><i class="fas fa-bullhorn"></i>&nbsp;[${row.categoryName}]</strong>
+					<strong style="color:SeaGreen "><i class="fas fa-bullhorn"></i>&nbsp;[${row.categoryName}]</strong>
 				</c:if>
 				<c:if test="${row.categoryName == '이벤트'}">
-					<strong><i class="fas fa-gift"></i>&nbsp;[${row.categoryName}]</strong>
+					<strong style="color:SeaGreen "><i class="fas fa-gift"></i>&nbsp;[${row.categoryName}]</strong>
 				</c:if>
 				${row.subject }
 			</h3>
@@ -57,7 +57,7 @@
 		<div class="row">
 			<div class="row col-6" align="left" style="margin-top:2%">
 				<div style="margin-left:12%">
-					<strong>작성자</strong>
+					<strong style="color:SeaGreen ">작성자</strong>
 				</div>
 				<div class="dropright" style="margin-left:10px">
 					<a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="cursor: pointer">
@@ -80,8 +80,8 @@
 			</div>
 
 			<div class="col-6" align="right" style="margin-top:2%; padding: 0px;">
-				<i class="far fa-eye"></i>&nbsp;<strong>조회수</strong>&nbsp;&nbsp;${row.viewCount }&nbsp;&nbsp;&nbsp;
-				<i class="far fa-clock"></i>&nbsp;<strong>게시일</strong>&nbsp;&nbsp;<fmt:formatDate value="${row.reg_date}" pattern="yyyy. MM. dd." />
+				<i class="far fa-eye" style="color:SeaGreen "></i>&nbsp;<strong style="color:SeaGreen ">조회수</strong>&nbsp;&nbsp;${row.viewCount }&nbsp;&nbsp;&nbsp;
+				<i class="far fa-clock" style="color:SeaGreen "></i>&nbsp;<strong style="color:SeaGreen ">게시일</strong>&nbsp;&nbsp;<fmt:formatDate value="${row.reg_date}" pattern="yyyy. MM. dd." />
 			</div>
 				
 		</div>
@@ -90,10 +90,10 @@
 			<pre style="white-space:pre-wrap">${row.object}</pre>
 		</div>
 		<hr>
-		<div align="right">
-			<i class="far fa-list-alt" onclick="location.href='/noticeboard/noticeBoardList'" style="cursor: pointer;">목록으로</i>&nbsp;&nbsp;
+		<div align="right" style="color:SeaGreen ">
+			<i class="far fa-list-alt" onclick="location.href='/noticeboard/noticeBoardList'" style="cursor: pointer;">목록으로</i>&nbsp;|&nbsp;
 			<c:if test="${login.authority >= 4 }">
-				<i class="far fa-edit" onclick="location.href='/noticeboard/update.do?boardId=${row.boardId}'" style="cursor: pointer;">수정</i>&nbsp;&nbsp;
+				<i class="far fa-edit" onclick="location.href='/noticeboard/update.do?boardId=${row.boardId}'" style="cursor: pointer;">수정</i>&nbsp;|&nbsp;
 				<i class="far fa-trash-alt" id="deletebtn" style="cursor: pointer;">삭제</i>
 			</c:if>
 		</div>
