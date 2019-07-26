@@ -55,7 +55,8 @@
 			</div>
 			<br>
 			<div class="col-sm-12" align="center">
-			<button type="submit" id="submit" class="btn btn-success" onclick="insertBtn();">올리기</button>
+				<button type="button" class="btn btn-success" onclick="insertBtn();">올리기</button>
+			
 				<script type="text/javascript">
 				function insertBtn() {
 					var accountId = $("#accountId").val();
@@ -78,7 +79,8 @@
 					document.tipWriteForm.method = "POST";
 					document.tipWriteForm.submit();
 				}
-
+				
+				/*
 				function updateBtn() {
 					var accountId = $("#accountId").val();
 					var categoryId = $("#categoryId").val();
@@ -99,6 +101,7 @@
 					document.tipWriteForm.method = "POST";
 					document.tipWriteForm.submit();
 				}
+				*/
 				</script>
 			
 	       <button type="reset" class="btn btn-warning">초기화</button>
