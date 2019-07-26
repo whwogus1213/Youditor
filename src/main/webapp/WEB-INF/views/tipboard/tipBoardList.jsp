@@ -189,7 +189,7 @@ footer{
 	<div class="container">
 		<div class="row">
 		<table class="table table-hover">
-			<thead align="center">
+			<thead align="center" style="color:Brown ">
 				<tr>
 					<th style="width: 80px;">번호</th>
 					<th style="width: 80px;">분류</th>
@@ -250,7 +250,7 @@ footer{
 					<c:forEach begin="${pagination.startPage}" end="${pagination.endPage}" var="idx">
 						<a class="<c:out value="${pagination.page == idx ? 'is-active' : ''}"/>" href="#"
 						onclick="fn_pagination('${categoryInfo.categoryId }', '${idx}', '${pagination.searchType}', 
-						'${pagination.keyword}'); return false;">
+						'${pagination.keyword}'); return false;"  style="background-color: IndianRed">
 							<li>${idx}</li></a>
 					</c:forEach>
 					<c:if test="${pagination.next}">
@@ -275,7 +275,7 @@ footer{
 					<input type="text" class="form-control form-control-sm" name="keyword" id="keyword" style="float: left;">
 				</div>
 
-				<div class="col-1" style="padding-left: 0px;text-align: center;padding-right: 0px;padding-top: 5px;">
+				<div class="col-1" style="padding-left: 0px;text-align: center;padding-right: 0px;padding-top: 5px; color:IndianRed">
 					<i class="fas fa-search" id="btnSearch" style="cursor:" onclick="searchBtn('${categoryInfo.categoryId }',
 					'${pagination.searchType}', '${pagination.keyword}'); return false;"></i>
 				</div>
@@ -284,7 +284,7 @@ footer{
 					<c:if test="${login ne null }">
 						<c:if test="${login.authority >= categoryInfo.viewAuthority }">
 							<button type="button" class="btn btn-sm"
-								onclick="location.href='/tipboard/write.do' " style="background-color: #2ecc71; color: white;">글쓰기</button>
+								onclick="location.href='/tipboard/write.do' " style="background-color: IndianRed; color: white;">글쓰기</button>
 						</c:if>
 					</c:if>
 				</div>
