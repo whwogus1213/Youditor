@@ -79,7 +79,8 @@
 
 	.card .banner{
 		/* ⬇ Photo, geordannatheartist.com */
- 		background-image: url("https://images.unsplash.com/photo-1533158326339-7f3cf2404354?ixlib=rb-1.2.1&auto=format&fit=crop&w=1004&q=80");
+/*  		background-image: url("https://images.unsplash.com/photo-1533158326339-7f3cf2404354?ixlib=rb-1.2.1&auto=format&fit=crop&w=1004&q=80"); */
+ 		background-image: url("/resources/images/follow_namecard.jpg");
  		
 /* 		background-image: url("/resources/images/main_logo.png"); */
 /* 		background-size: contain; */
@@ -133,7 +134,7 @@
 		}
 		
 .unfollowbtn:hover:before{
-	color: #333;
+	color: #ff2e94;
 
 }
 
@@ -161,17 +162,17 @@
 	
 <body>
 	<jsp:include page="../module/top2.jsp" flush="false" />
-
 	
-
-<div class="container cardbody" style="padding-top: 100px;">
-<div class="form-group" style="margin-bottom: 60px;">
-		<div class="col-sm-12">
-			<h4 align="center">&nbsp;</h4>
-			<h1 align="center">Following List</h1>
-			<h4 align="center">${login.nickname}의 팔로잉</h4>
+	<!-- 배너 -->
+	<div class="form-group" style="margin-top:5%">
+		<div class="col-sm-12" style="background-image:url('/resources/images/follow/follow.jpg'); background-position:100% 40%; background-size:160%; color:white; padding-top: 5%; padding-bottom:4%">
+			<h1 align="center" style="font-family: 'Lobster', 'Poor story', sans-serif; font-size:50px; letter-spacing:10px; text-shadow: 3px 3px LightCoral;"><strong>Following List</strong></h1>
+			<h3 align="center" style="font-family:'Gamja Flower';text-shadow: 2px 2px LightCoral;"><br><strong>${login.nickname}님이 팔로우하는 편집자들</strong></h3>
 		</div>
 	</div>
+	
+<div class="container cardbody" style="padding-top: 100px;">
+
 <div class="row">
 
 <c:forEach items="${followingList}" var="followingList">

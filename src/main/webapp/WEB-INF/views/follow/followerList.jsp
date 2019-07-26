@@ -79,7 +79,7 @@
 
 	.card .banner{
 		/* ⬇ Photo, geordannatheartist.com */
- 		background-image: url("/resources/images/follower_namecard.jpg");
+ 		background-image: url("/resources/images/follow/follower_namecard.jpg");
  		
 /* 		background-image: url("/resources/images/main_logo.png"); */
 /* 		background-size: contain; */
@@ -166,17 +166,16 @@
 	
 <body>
 	<jsp:include page="../module/top2.jsp" flush="false" />
-
 	
-
-<div class="container cardbody" style="padding-top: 100px;">
-<div class="form-group" style="margin-bottom: 60px;">
-		<div class="col-sm-12">
-			<h4 align="center">&nbsp;</h4>
-			<h1 align="center">Follower List</h1>
-			<h4 align="center">${login.nickname}님을 팔로우한 편집자들</h4>
+	<!-- 배너 -->
+	<div class="form-group" style="margin-top:5%">
+		<div class="col-sm-12" style="background-image:url('/resources/images/follow/follower.jpg'); background-position:100% 45%; background-size:150%; color:Plum; padding-top: 5%; padding-bottom:4%">
+			<h1 align="center" style="font-family: 'Lobster', 'Poor story', sans-serif; font-size:50px; letter-spacing:10px;"><strong>Follower List</strong></h1>
+			<h3 align="center" style="font-family:'Gamja Flower';"><br><strong>${login.nickname}님을 팔로우하는 YouditoR들</strong></h3>
 		</div>
 	</div>
+
+<div class="container cardbody" style="padding-top: 100px;">
 <div class="row">
 
 <c:forEach items="${followerList}" var="followerList">
