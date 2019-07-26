@@ -63,6 +63,10 @@
 					)
 	</insert>
 	
+	<select id="duplicateCheck" parameterType="Integer" resultType="Integer">
+		SELECT EXISTS(SELECT * FROM accountcheck a where a.check=#{check})	
+	</select>
+	
 	
 	
 	<!-- 회원가입시 AccountId 리턴 -->
@@ -177,6 +181,8 @@
 		AND		
 		pwd = #{pwd}		
 	</update>
+	
+	
 </mapper>
 
 

@@ -30,7 +30,13 @@ public class AccountsServiceImpl implements AccountsService {
 	public void insertAccounts(AccountsVO vo) throws Exception {
 		
 		int accountId = dao.insertAccounts(vo);	//회원정보 등록
-		int check = 1234;
+		int check=0;
+		
+		do {
+			check = (int)(Math.random() * 99999) + 10000;
+			System.out.println(check + "--------------------check");
+		} while(dao.duplicateCheck(check)!=0);
+			
 		
 		AccountCheckVO Cvo = new AccountCheckVO();
 		Cvo.setAccountId(accountId);

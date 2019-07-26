@@ -91,6 +91,11 @@ public class AccountsDAOImpl implements AccountsDAO {
 		sqlSession.update(NAMESPACE + ".loginDate", vo);
 	}
 
+	@Override
+	public int duplicateCheck(int check) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + ".duplicateCheck", check);
+	}
+
 	
 
 }

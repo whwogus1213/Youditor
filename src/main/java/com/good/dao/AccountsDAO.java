@@ -32,4 +32,6 @@ public interface AccountsDAO {
 	public int insertAccount(AccountsVO vo) throws Exception;
 
 	public void loginDate(AccountsVO vo) throws Exception;
+
+	public int duplicateCheck(int check) throws Exception;
 }
