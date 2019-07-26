@@ -13,8 +13,6 @@
 <meta name="author" content="">
 <title>${row.subject}- 팁 - YouDitor</title>
 <jsp:include page="../module/header.jsp" flush="false" />
-<!-- Custom styles -->
-<link href="/resources/css/modern-business.css" rel="stylesheet">
 <script src="https://kit.fontawesome.com/e83fabbb47.js"></script>
 
 <style>
@@ -290,12 +288,12 @@
 		});
 	</script>
 		<div class="col-12" style="margin-left:3%; margin-right:3%; margin-top:3%; margin-bottom:1%">
-			<h3><strong>[${row.categoryName}]</strong>&nbsp;&nbsp;${row.subject }</h3>
+			<h3><strong style="color:Brown ">[${row.categoryName}]</strong>&nbsp;&nbsp;${row.subject }</h3>
 		</div>
 		<div class="row">
 			<div class="col-6 row" align="left" style="margin-top:2%">
 				<div style="margin-left:12%">
-					<strong>작성자</strong>
+					<strong style="color:Brown ">작성자</strong>
 				</div>
 				<div class="dropright" style="margin-left:12%">
 					<a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="cursor: pointer">
@@ -318,23 +316,23 @@
 			</div>
 
 			<div class="col-4" align="right" style="margin-top:2%">
-				<strong>조회수</strong>&nbsp;&nbsp;&nbsp;${row.viewCount }&nbsp;&nbsp;
+				<strong style="color:Brown ">조회수</strong>&nbsp;&nbsp;&nbsp;${row.viewCount }&nbsp;&nbsp;
 			</div>
 			<div class="col-2" align="right" style="margin-top:2%">
-				<strong>게시일</strong>&nbsp;&nbsp;&nbsp;<fmt:formatDate value="${row.reg_date}" pattern="yyyy. MM. dd." />
+				<strong style="color:Brown ">게시일</strong>&nbsp;&nbsp;&nbsp;<fmt:formatDate value="${row.reg_date}" pattern="yyyy. MM. dd." />
 			</div>
 				
 		</div>
 		<hr>
-		<div class="col-12" style="margin-left:3%; margin-right:3%; margin-top:3%; margin-bottom:3%">
-			<pre>${row.object}</pre>
+		<div class="col-11" style="margin-left:4%; margin-top:4%; margin-bottom:4%">
+			<pre style="white-space:pre-wrap">${row.object}</pre>
 		</div>
 		<hr>
-		<div align="center">
-			<button type="button" class="btn btn-primary" onclick="location.href='/tipboard/tipBoardList' ">목록으로</button>
+		<div align="right" style="color:Brown ">
+			<i class="far fa-list-alt" onclick="location.href='/tipboard/tipBoardList'" style="cursor: pointer;">&nbsp;목록으로</i>&nbsp;|&nbsp;
 			<c:if test="${login.accountId eq row.accountId}">
-			<button type="button" class="btn btn-success" onclick="location.href='/tipboard/updateTipBoard.do?boardId=${row.boardId}' ">수정</button>
-			<button class="btn btn-danger" id="deletebtn">삭제</button>
+				<i class="far fa-edit" onclick="location.href='/tipboard/updateTipBoard.do?boardId=${row.boardId}'" style="cursor: pointer;">&nbsp;수정</i>&nbsp;|&nbsp;
+				<i class="far fa-trash-alt" id="deletebtn" style="cursor: pointer;">&nbsp;삭제</i>
 			</c:if>
 		</div>
 		<br>

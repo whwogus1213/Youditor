@@ -35,12 +35,13 @@
 				<div class="col-sm-3">
 	        		<select class="browser-default custom-select" name="categoryId" style="width:190px" id="categoryId">
 		           		<option value="1">팁</option>
+		           		<option value="2">질문</option>
 		           </select>
 				</div>
 			</div>
 			<br>
 			<div class="form-inline">
-		        <label class="control-label col-sm-2">작성자</label>
+		        <label class="control-label">작성자</label>
 		        <div class="col-sm-3">
 					<input type="text" class="form-control" maxlength="50" value="${login.nickname}" readonly>
 					<input type="text" class="form-control" name="accountId" id="accountId" maxlength="50" value="${login.accountId}" style="display:none" readonly>

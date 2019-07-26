@@ -26,10 +26,10 @@
 	    <form class="form-horizontal" method="post" name="noticeWriteForm">
 	    	<div class="form-inline">
 	        	<label class="control-label col-sm-2">제목</label>
-	        	<div class="col-sm-3">
+	        	<div class="col-sm-8">
 	        		<c:choose>
 	        			<c:when test="${row ne null }">
-	        				<input type="text" class="form-control" name="subject" id="subject" maxlength="50" value="${row.subject }" placeholder="Enter Title">
+	        				<input type="text" class="form-control" name="subject" id="subject" maxlength="50" style="width:100%" value="${row.subject }" placeholder="Enter Title">
 	        				<input type="hidden" name="boardId" id="boardId" value="${row.boardId }">
 	        			</c:when>
 	        			<c:otherwise>
@@ -123,8 +123,8 @@
 		  			document.noticeWriteForm.method = "POST";
 		  			document.noticeWriteForm.submit();
 				}
-				</script>
-				<button type="reset" class="btn btn-sm">초기화</button>
+				</script>|
+				<button type="reset" class="btn btn-sm">초기화&nbsp;</button>|
 				<button type="button" class="btn btn-sm hBack">뒤로 가기</button>
 					<script>
 						$(".hBack").on("click", function(e){
