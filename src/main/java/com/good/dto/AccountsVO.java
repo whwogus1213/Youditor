@@ -17,6 +17,7 @@ public class AccountsVO {
 	private Date newLogin_date;
 	private int authority;
 	private MultipartFile uploadFile;
+	private String authkey;
 	
 	
 	
@@ -163,13 +164,30 @@ public class AccountsVO {
 	}
 
 
+	
+
+	public String getAuthkey() {
+		return authkey;
+	}
+
+
+
+	public void setAuthkey(String authkey) {
+		this.authkey = authkey;
+	}
+
+
 
 	@Override
 	public String toString() {
 		return "AccountsVO [accountId=" + accountId + ", email=" + email + ", pwd=" + pwd + ", nickname=" + nickname
 				+ ", picture=" + picture + ", footer=" + footer + ", reg_date=" + reg_date + ", mod_date=" + mod_date
 				+ ", lastFollowerCheck=" + lastFollowerCheck + ", newLogin_date=" + newLogin_date + ", authority="
-				+ authority + ", uploadFile=" + uploadFile + "]";
+				+ authority + ", uploadFile=" + uploadFile + ", authkey=" + authkey + "]";
 	}
+
+
+
+
 	
 }

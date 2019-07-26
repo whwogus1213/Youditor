@@ -91,6 +91,11 @@
 
 	<c:if test="${error.error == false }">
 		<c:choose>
+			<c:when test="${error.msg eq -1 }">
+				<script>
+					alert( '이메일을 인증해주세요' );
+		   		</script>
+			</c:when>
 			<c:when test="${error.msg eq 0 }">
 				<script>
 					alert( '탈퇴된 계정입니다.' );

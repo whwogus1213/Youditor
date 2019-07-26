@@ -1,6 +1,7 @@
 package com.good.youditor;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,7 +24,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.good.dto.AccountsVO;
 import com.good.dto.AdminVO;
+import com.good.dto.NoticeCategoryVO;
+import com.good.dto.RecruitCategoryVO;
 import com.good.dto.Search;
+import com.good.dto.TipCategoryVO;
+import com.good.dto.VideoCategoryVO;
 import com.good.service.AdminService;
 
 /**
@@ -95,9 +100,47 @@ public class AdminController {
 
 	@RequestMapping(value = "/adminCategory", method = RequestMethod.GET)
 	public String adminCategory(@RequestParam("category") String category, Model model) throws Exception {
-		category += "category";
-		System.out.println(category);
-		model.addAttribute("CatInfo", service.getCatInfo(category));
+		if(category.equals("notice")) {
+			System.out.println("공지");
+			List<NoticeCategoryVO> CatInfo = new ArrayList<NoticeCategoryVO>();
+			CatInfo = service.getNoticeCatInfo();
+			Map<Integer, Integer> catCount = service.getNoticeCatCount();
+			System.out.println("CatInfo : " + CatInfo);
+			System.out.println("CatCount : " + catCount);
+			model.addAttribute("CatName", category);
+			model.addAttribute("CategoryInfo", CatInfo);
+			model.addAttribute("CatCount", catCount);
+		} else if(category.equals("video")) {
+			System.out.println("영상공유");
+			List<VideoCategoryVO> CatInfo = new ArrayList<VideoCategoryVO>();
+			CatInfo = service.getVideoCatInfo();
+			Map<Integer, Integer> catCount = service.getVideoCatCount();
+			System.out.println("CatInfo : " + CatInfo);
+			System.out.println("CatCount : " + catCount);
+			model.addAttribute("CatName", category);
+			model.addAttribute("CategoryInfo", CatInfo);
+			model.addAttribute("CatCount", catCount);
+		} else if(category.equals("tip")) {
+			System.out.println("팁");
+			List<TipCategoryVO> CatInfo = new ArrayList<TipCategoryVO>();
+			CatInfo = service.getTipCatInfo();
+			Map<Integer, Integer> catCount = service.getTipCatCount();
+			System.out.println("CatInfo : " + CatInfo);
+			System.out.println("CatCount : " + catCount);
+			model.addAttribute("CatName", category);
+			model.addAttribute("CategoryInfo", CatInfo);
+			model.addAttribute("CatCount", catCount);
+		} else if(category.equals("recruit")) {
+			System.out.println("구인구직");
+			List<RecruitCategoryVO> CatInfo = new ArrayList<RecruitCategoryVO>();
+			CatInfo = service.getRecruitCatInfo();
+			Map<Integer, Integer> catCount = service.getRecruitCatCount();
+			System.out.println("CatInfo : " + CatInfo);
+			System.out.println("CatCount : " + catCount);
+			model.addAttribute("CatName", category);
+			model.addAttribute("CategoryInfo", CatInfo);
+			model.addAttribute("CatCount", catCount);
+		}
 		return "admin/adminCategory";
 	}
 
@@ -189,5 +232,32 @@ public class AdminController {
 		
 		return "redirect:/adminAccount?accountId=" + accountId;
 	}
-
+	
+	@RequestMapping(value = "/adminMoveCatPro", method = RequestMethod.POST)
+	public int adminMoveCatPro(@RequestParam("category") String category,
+							@RequestParam("categoryId") int categoryId,
+							@RequestParam("moveTo") int moveTo) throws Exception {
+		int result = 0;
+		Map<String, Integer> fromTo = new HashMap<String, Integer>();
+		fromTo.put("from", categoryId);
+		fromTo.put("to", moveTo);
+		if(category == "notice") {
+			service.moveNoticeCat(fromTo);
+			result = 1;
+		} else if(category == "video") {
+			service.moveVideoCat(fromTo);
+			result = 1;
+		} else if(category == "tip") {
+			service.moveTipCat(fromTo);
+			result = 1;
+		} else if(category == "recruit") {
+			service.moveRecruitCat(fromTo);
+			result = 1;
+		} else {
+			result = 0;
+		}
+		
+		return result;
+	}
+	
 }

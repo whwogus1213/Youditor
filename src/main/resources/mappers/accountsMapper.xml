@@ -38,7 +38,8 @@
 						reg_date,
 						mod_date,
 						lastFollowerCheck,
-						newLogin_date)
+						newLogin_date
+						)
 				VALUES(
 					#{email},
 					#{pwd},
@@ -48,8 +49,36 @@
 					now(),
 					now(),
 					now(),
-					now())
+					now()
+					)
 	</insert>
+	
+	<!-- 회원 가입 이메일 인증 check항목 추가 -->
+	<insert id="insertAccountCheck" parameterType="AccountCheckVO">
+		INSERT INTO
+				accountcheck
+				VALUES(
+					#{accountId},
+					#{check}
+					)
+	</insert>
+	
+	<select id="duplicateCheck" parameterType="Integer" resultType="Integer">
+		SELECT EXISTS(SELECT * FROM accountcheck a where a.check=#{check})	
+	</select>
+	
+	
+	
+	<!-- 회원가입시 AccountId 리턴 -->
+	<select id="returnAccountId" parameterType="AccountsVO" resultType="Integer">
+	    SELECT
+	      accountId
+	    FROM
+	      accounts
+	    WHERE
+	      email = #{email}
+	</select>
+	
 	
 	<!-- 이메일 체크 -->
 	<select id="checkEmail" parameterType="String" resultType="Integer">
@@ -97,6 +126,25 @@
 			pwd = #{pwd}
 	</delete>
 	
+	<!-- 이메일 인증 확인후 권한 3으로 부여 -->
+	<update id="updateAuthority" parameterType="AccountCheckVO">
+		UPDATE
+			accounts
+		SET
+			authority = 3
+		WHERE
+			accountId = #{accountId}
+			AND
+			(SELECT a.check FROM accountcheck a WHERE a.accountId = #{accountId}) = #{check}
+			
+	</update>
+	
+	<!-- 인증 완료후 삭제 -->
+	<delete id="deleteAuthkey" parameterType="AccountCheckVO">
+		DELETE FROM accountcheck WHERE accountId = #{accountId}
+	</delete>
+	
+	
 	<update id="updateAccount" parameterType="AccountsVO">
 		UPDATE
 			accounts
@@ -133,6 +181,8 @@
 		AND		
 		pwd = #{pwd}		
 	</update>
+	
+	
 </mapper>
 
 
