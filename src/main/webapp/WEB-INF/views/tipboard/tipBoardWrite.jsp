@@ -22,18 +22,24 @@
 	</div>
 	
 	<div class="container">
+		<div align="right" >
+			<br>
+			<h1 style="color:Brown; font-family: 'Noto Serif KR'">편집 Tip 작성</h1>
+		</div>
+		<hr>
+		<br>
 	    <form class="form-horizontal" method="post" action=" ${path}/tipboard/insertTipBoardPro">
 	    	<div class="form-inline">
-	        	<label class="control-label col-sm-2">제목</label>
-	        	<div class="col-sm-3">
-	        		<input type="text" class="form-control" name="subject" maxlength="50" placeholder="Enter Title">
+	        	<label class="control-label col-sm-2"><strong style="color:brown">제목</strong></label>
+	        	<div class="col-sm-8">
+	        		<input type="text" class="form-control" name="subject" maxlength="50" placeholder="Enter Title" style="width:100%">
 	        	</div>
 			</div>
 			<br>
 			<div class="form-inline">
-				<label class="control-label col-sm-2">카테고리</label>
+				<label class="control-label col-sm-2"><strong style="color:brown">카테고리</strong></label>
 				<div class="col-sm-3">
-	        		<select class="browser-default custom-select" name="categoryId" style="width:190px">
+	        		<select class="browser-default custom-select" name="categoryId" style="width:100%">
 		           		<option value="1">팁</option>
 		           		<option value="2">질문</option>
 		           </select>
@@ -41,24 +47,24 @@
 			</div>
 			<br>
 			<div class="form-inline">
-		        <label class="control-label">작성자</label>
+		        <label class="control-label col-sm-2"><strong style="color:brown">작성자</strong></label>
 		        <div class="col-sm-3">
-					<input type="text" class="form-control" maxlength="50" value="${login.nickname}" readonly>
+					<input type="text" class="form-control" maxlength="50" value="${login.nickname}" readonly style="width:100%">
 					<input type="text" class="form-control" name="accountId" maxlength="50" value="${login.accountId}" style="display:none" readonly>
 		        </div>
 			</div>
 			<br>
 			<div class="form-inline">
-				<label class="control-label col-sm-2">내용</label>
+				<label class="control-label col-sm-2"><strong style="color:brown">내용</strong></label>
 				<div class="col-sm-3">
-					<textarea rows="10" cols="100" name="object"></textarea>
+					<textarea rows="10" cols="90" name="object"></textarea>
 				</div>
 			</div>
 			<br>
-			<div class="col-sm-12" align="center">
-			<button type="submit" id="submit" class="btn btn-success">올리기</button>
-	       <button type="reset" class="btn btn-warning">초기화</button>
-	       <button type="button" class="btn btn-info" onclick="location.href='/tipboard/tipBoardList?num=1'">뒤로 가기</button>
+			<div class="col-sm-12" align="center" style="color:brown">
+			<button type="submit" id="submit" class="btn btn-sm"><strong style="color:brown">올리기</strong></button>&nbsp;|
+	       <button type="reset" class="btn btn-sm"><strong style="color:brown">초기화</strong></button>&nbsp;|
+	       <button type="button" class="btn btn-sm" onclick="location.href='/tipboard/tipBoardList?num=1'"><strong style="color:brown">뒤로 가기</strong></button>
 	       </div>
 			<br>
 		</form>

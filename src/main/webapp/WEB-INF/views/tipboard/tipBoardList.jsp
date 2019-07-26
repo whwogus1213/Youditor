@@ -284,7 +284,7 @@ footer{
 					<c:if test="${login ne null }">
 						<c:if test="${login.authority >= categoryInfo.viewAuthority }">
 							<button type="button" class="btn btn-sm"
-								onclick="location.href='/tipboard/write.do' " style="background-color: IndianRed; color: white;">글쓰기</button>
+								onclick="location.href='/tipboard/write.do' " style="background-color: IndianRed; color: white;"><i class="far fa-edit"></i>&nbsp;글쓰기</button>
 						</c:if>
 					</c:if>
 				</div>

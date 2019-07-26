@@ -29,22 +29,21 @@
 	<!-- 게시글 상세정보 -->
 	<div class="container">
 		<form class="form-horizontal" method="post" action="${path}/tipboard/updateTipBoardPro">
-			<div align="center">
-				<br><br>
-				<h1>Tip 수정</h1>
-				<br><br>
-			</div>
-			<hr>
+		<div align="right" >
 			<br>
+			<h1 style="color:Brown; font-family: 'Noto Serif KR'">편집 Tip 수정</h1>
+		</div>
+		<hr>
+		<br>
 			<div class="form-inline">
-				<label class="control-label col-sm-2">제목</label>
+				<label class="control-label col-sm-2"><strong style="color:brown">제목</strong></label>
 				<div class="col-sm-8">
 					<input type="text" class="form-control" name="subject" id="subject" maxlength="50" style="width:100%" value="${tipBoardUpdate.subject }">
 				</div>
 			</div>
 			<br>
 			<div class="form-inline">
-				<label class="control-label col-sm-2">카테고리</label>
+				<label class="control-label col-sm-2"><strong style="color:brown">카테고리</strong></label>
 				<div class="col-sm-3">
 	        		<select class="browser-default custom-select" name="categoryId" style="width:190px">
 		           		<option value="1">팁</option>
@@ -54,14 +53,14 @@
 			</div>
 			<br>
 			<div class="form-inline">
-				<label class="control-label col-sm-2">작성 일</label>
+				<label class="control-label col-sm-2"><strong style="color:brown">작성 일</strong></label>
 				<div class="col-sm-3">
 					<fmt:formatDate value="${tipBoardUpdate.reg_date}" pattern="yyyy-MM-dd" />
 				</div>
 			</div>
 			<br>
 			<div class="form-inline">
-				<label class="control-label col-sm-2">내용</label>
+				<label class="control-label col-sm-2"><strong style="color:brown">내용</strong></label>
 				<div class="col-sm-3">
 				<textarea rows="10" cols="90" name="object">${tipBoardUpdate.object }</textarea>
 				</div>
@@ -72,10 +71,10 @@
 			</div>
 			<hr>
 			<br>
-			<div align="center">
-				<button type="submit" class="btn btn-sm" id="submit">수정</button>|
-				<button type="reset" class="btn btn-sm">초기화&nbsp;</button>|
-				<button type="button" class="btn btn-sm" onclick="location.href='/tipboard/tipBoardList' ">취소</button>
+			<div align="center" style="color:brown">
+				<button type="submit" class="btn btn-sm" id="submit"><strong style="color:brown">수정</strong></button>&nbsp;|
+				<button type="reset" class="btn btn-sm"><strong style="color:brown">초기화</strong></button>&nbsp;|
+				<button type="button" class="btn btn-sm" onclick="location.href='/tipboard/tipBoardList' "><strong style="color:brown">취소</strong></button>
 			</div>
 			<br>
 		</form>
