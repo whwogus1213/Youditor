@@ -203,7 +203,7 @@ var questions = [
 	    console.log(questions[position].value)
 
 	    // check if the pattern matches
-	    if (!inputField.value.match(questions[position].pattern || /.+/)) wrong()
+	    if (!inputField.value.match(questions[position].pattern || /.+/) || inputField.value.trim()=='') wrong()
 	    else ok(function() {
 	      
 	      // set the progress of the background
