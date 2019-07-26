@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -129,8 +130,9 @@ public class AccountsController {
 	}
 
 	// insertAccountsForm-> insertAccountsPro
+	@ResponseBody
 	@RequestMapping(value = "/insertAccountsPro", method = RequestMethod.POST)
-	public String insertAccountsPro(HttpSession session, AccountsVO vo) throws Exception {
+	public void insertAccountsPro(HttpSession session, AccountsVO vo) throws Exception {
 
 		
 		System.out.println("가입할때 정보1 : "+vo);
@@ -161,8 +163,21 @@ public class AccountsController {
 		service.insertAccounts(vo);
 		System.out.println("============insertAccountsPro 성공==============");
 
+		return;
+	}
+	
+	//회원가입 이메일 인증 확인
+	@RequestMapping(value="/joinConfirm", method=RequestMethod.GET)
+	public String emailConfirm(@ModelAttribute("vo") AccountsVO vo, Model model) throws Exception {
+//		logger.info(uVO.getEmail() + ": auth confirmed");
+		System.out.println(vo.getEmail() + ": 권한 확인");
+		vo.setAuthority(3);
+		System.out.println(vo);
+		service.updateAuthority(vo);
+		System.out.println("updateAuthority 완료");
+//		model.addAttribute("auth_check", 1);
+		
 		return "redirect:/";
-
 	}
 
 

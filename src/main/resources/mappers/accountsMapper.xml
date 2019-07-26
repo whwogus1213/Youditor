@@ -38,7 +38,8 @@
 						reg_date,
 						mod_date,
 						lastFollowerCheck,
-						newLogin_date)
+						newLogin_date,
+						authkey)
 				VALUES(
 					#{email},
 					#{pwd},
@@ -48,7 +49,8 @@
 					now(),
 					now(),
 					now(),
-					now())
+					now(),
+					#{authkey})
 	</insert>
 	
 	<!-- 이메일 체크 -->
@@ -96,6 +98,27 @@
 			AND
 			pwd = #{pwd}
 	</delete>
+	
+	<update id="updateAuthority" parameterType="AccountsVO">
+		UPDATE
+			accounts
+		SET
+			authority = #{authority}
+		WHERE
+			email = #{email}
+			AND
+			authkey = #{authkey}
+	</update>
+	
+	<delete id="deleteAuthkey" parameterType="AccountsVO">
+		UPDATE
+			accounts
+		SET
+			authkey = null
+		WHERE
+			email = #{email}
+	</delete>
+	
 	
 	<update id="updateAccount" parameterType="AccountsVO">
 		UPDATE

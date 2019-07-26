@@ -21,6 +21,8 @@ public interface AccountsService {
 		
 	public void deleteAccount(AccountsVO vo) throws Exception;
 	
+	public void updateAuthority(AccountsVO vo) throws Exception;
+	
 	public void updateAccount(AccountsVO vo) throws Exception;
 	
 	public void updatePassword(int accountId, String pwd) throws Exception;

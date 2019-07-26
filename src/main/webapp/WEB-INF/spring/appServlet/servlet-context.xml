@@ -55,6 +55,7 @@
             <exclude-mapping path="/tipboard/**"/>
             <exclude-mapping path="/recruitboard"/>
             <exclude-mapping path="/recruitboard/**"/>
+            <exclude-mapping path="/joinConfirm"/>
             <beans:ref bean="authenticationInterceptor"/>
         </interceptor>
     </interceptors>

@@ -34,6 +34,13 @@ public class AccountsDAOImpl implements AccountsDAO {
 		return sqlSession.selectOne(NAMESPACE + ".login", vo);
 	}
 	
+	
+	@Override
+	public void updateAuthority(AccountsVO vo) throws Exception {
+		sqlSession.update(NAMESPACE + ".updateAuthority", vo);
+		sqlSession.delete(NAMESPACE + ".deleteAuthkey", vo);
+	}
+
 	@Override
 	public int checkEmail(String email) throws Exception {
 		return sqlSession.selectOne(NAMESPACE + ".checkEmail", email);
