@@ -98,6 +98,8 @@ th {
 		}
 	}
 
+
+	var isCheckNickname = 0;
 	// 수정
 	function btnUpdate() {
 		var pwdCfm = $("#pwdCfm").val();
@@ -105,11 +107,11 @@ th {
 
 		var nickCheck = $("#chkMsg").html();
 		
-		if (pwd == pwdCfm && nickCheck == '사용가능') {
+		if (pwd == pwdCfm && isCheckNickname == 0) {
 			document.modForm.action = "${path}/accounts/updateAccount.do";
 			document.modForm.submit();
 		}
-		else if(pwd == pwdCfm && nickCheck == '사용불가') {
+		else if(pwd == pwdCfm && isCheckNickname == 1) {
 			alert("사용 중인 닉네임입니다.");
 			$("#nickname").focus();
 		}
@@ -192,16 +194,22 @@ th {
 	        success : function(data) {
 		       	if(nickname != loginnickname) { 
 					if(data.cnt == 0) {
-						$('#chkMsg').html("사용가능");
+						$('#chkMsg').html("사용가능한 닉네임입니다.");
 						$('#nickname').css("background-color", "#E8FFD0");
 						$('#nickname').css("color", "#000000");
+						isCheckNickname = 0;
+						console.log("사용가능 " + isCheckNickname);
 					} else {
-						$('#chkMsg').html("사용불가");
+						$('#chkMsg').html("<font style='color: red;'>사용 중인 닉네임입니다.</font>");
+
 						$('#nickname').css("background-color", "#ffd1d1");
 						$('#nickname').css("color", "#000000");
+						isCheckNickname = 1;
+						console.log("사용불가 " + isCheckNickname);
 					}
 				} else {
-					$('#chkMsg').html("사용가능");	
+					$('#chkMsg').html("사용가능한 닉네임입니다.");
+					console.log("사용가능111 " + isCheckNickname);
 			    }
 	        }
 	        /*
@@ -252,12 +260,9 @@ th {
 						<th class="thcell">닉네임</th>
 						<td>
 							<input type="text" name="nickname" id="nickname" value="${login.nickname }" style="font-weight: 600;" oninput="checkNickname()">
-							<!-- 
-							<button class="btn btn-modify" type="button" onclick="checkNickname();"><i class="far fa-edit"></i>닉네임체크</button>
-							 -->
-							<span id = "chkMsg">사용가능</span> 
-							
+							<span id = "chkMsg">사용가능한 닉네임입니다.</span>
 						</td>
+						
 					</tr>
 					<tr>
 						<th class="thcell">프로필 사진</th>
