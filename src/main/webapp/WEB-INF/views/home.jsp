@@ -115,7 +115,7 @@ a:hover {
 							html += "<div class='card h-100'>";
 							html += "<h4 class='card-header'>"
 							html += "<a href='/videoboard/videoBoardView?boardId="+data[i].boardId+"'>"+data[i].subject+"</a></h4>";
-							html += "<div class='card-body'>";
+							html += "<div class='card-body' style='padding: 0; height:200px;'>";
 							html += "<a href='/videoboard/videoBoardView?boardId="+data[i].boardId+"'>";
 							if(data[i].youtubeLink.length > 31){
 								html += "<img width='100%' height='100%' src='https://img.youtube.com/vi/" + data[i].youtubeLink.substring(32) + "/mqdefault.jpg'></img></a>";
