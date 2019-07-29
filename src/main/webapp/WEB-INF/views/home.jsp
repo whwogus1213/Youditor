@@ -142,12 +142,8 @@ a:hover {
 					}
 				}
 
-				$("#top3-1").html(html);
 				getAccountsRankList();
-				getNoticeNew();
-				getTipNew();
-				getRecruit1();
-				getRecruit2();
+				$("#top3-1").html(html);
 			},
 			error : function(data) {
 				alert('불러오기 실패');
@@ -163,7 +159,6 @@ function getAccountsRankList(){
 		success : function(data) {
 
 			var html = "";
-
 			if(data.length > 0) {
 				for(var i = 0; i < 3; i++){
 					if(i < 3){
@@ -208,7 +203,8 @@ function getAccountsRankList(){
 					}
 				}
 			}
-
+			alert('finally!!');
+			getNoticeNew();
 			$("#top3-2").html(html);
 
 		},
@@ -261,8 +257,8 @@ function getNoticeNew(){
 				}
 			}
 
+			getTipNew();
 			$("#newNotice").html(html);
-
 		},
 		error : function(data) {
 			alert('불러오기 실패');
@@ -309,6 +305,7 @@ function getTipNew(){
 				}
 			}
 
+			getRecruit1();
 			$("#newTip").html(html);
 
 		},
@@ -359,8 +356,8 @@ function getRecruit1(){
 				}
 			}
 
+			getRecruit2();
 			$("#newRecruit1").html(html);
-
 		},
 		error : function(data) {
 			alert('불러오기 실패');

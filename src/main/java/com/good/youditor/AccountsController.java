@@ -44,7 +44,7 @@ public class AccountsController {
 	String uploadPath;// <== 공통으로 사용하기 위해서
 	
 	@ResponseBody
-	@RequestMapping(value = "/accountsList", method = {RequestMethod.GET,RequestMethod.POST})
+	@RequestMapping(value = "/accountsList", method = {RequestMethod.GET, RequestMethod.POST})
 	public List<AccountsVO> list() throws Exception {
 		System.out.println("Start accounts List");
 		List<AccountsVO> list = service.selectAccounts();

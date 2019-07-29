@@ -89,7 +89,7 @@
 <hr>
 <div class="container" align="center">
 	<table class="table table-striped table-hover">
-		<thead class="thead-dark">
+		<thead style="background-color:Maroon; color:AntiqueWhite">
 			<tr>
 				<th scope="col"><div style="overflow:hidden; text-overflow: ellipsis; white-space:nowrap; width:100px; height: 100%">받는이</div></th>
 				<th scope="col"><div style="overflow:hidden; text-overflow: ellipsis; white-space:nowrap; width:400px; height: 100%">제목</div></th>
@@ -169,7 +169,7 @@
 	<!-- 검색 -->
 	<div class="row input-group">
 		<div class="col-sm-2" align="center">
-			<button type="button" class="btn btn-sm btn-link" onclick="location.href='/message/write.do' " style="background-color: #2ecc71; color: white;"><i class="fas fa-edit"></i>&nbsp;&nbsp;메세지 쓰기</button>
+			<button type="button" class="btn btn-sm btn-link" onclick="location.href='/message/write.do' " style="background-color:AntiqueWhite; color: DarkGoldenRod;"><i class="fas fa-edit"></i>&nbsp;&nbsp;메세지 쓰기</button>
 		</div>
 		<div class="col-sm-2" align="right">
 			<select class="form-control form-control-sm" name="searchType" id="searchType" style="width:66.6%">
@@ -182,10 +182,10 @@
 			<input type="text" class="form-control form-control-sm" name="keyword" id="keyword" >
 		</div>
 		<div class="col-sm-1">
-			<button class="btn btn-sm btn-link" name="btnSearch" id="btnSearch" style="background-color: #2ecc71; color: white;">검색</button>
+			<button class="btn btn-sm btn-link" name="btnSearch" id="btnSearch" style="background-color:AntiqueWhite; color: DarkGoldenRod;">검색</button>
 		</div>
 		<div class="col-sm-3 delBtn" align="center">
-			<button class="btn btn-sm btn-link selectHideBtn" name="selectHideBtn" id="selectHideBtn" style="background-color: #2ecc71; color: white;"><i class="fas fa-times"></i>&nbsp;&nbsp;지우기</button>
+			<button class="btn btn-sm btn-link selectHideBtn" name="selectHideBtn" id="selectHideBtn" style="background-color:AntiqueWhite; color: DarkGoldenRod;"><i class="fas fa-times"></i>&nbsp;&nbsp;지우기</button>
 			<script>
 			$("#selectHideBtn").click(function(){
 				var chArr = new Array();
