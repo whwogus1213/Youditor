@@ -15,6 +15,7 @@
 	<jsp:include page="../module/header.jsp" flush="false"/>
 	<!-- Custom styles -->
 	<link href="/resources/css/modern-business.css" rel="stylesheet">
+	<script src="https://kit.fontawesome.com/e83fabbb47.js"></script>
 	<script>
 		// 이전 버튼
 		function fn_prev(page, range, rangeSize) {
@@ -80,14 +81,16 @@
 	</div>
 </div>
 
-<div align="center">
-	<div>
-		<h3>보낸 메세지 목록</h3>
-		<button type="button" class="btn btn-sm btn-link" onclick="location.href='/message/messageReceiveList' ">받은 메세지 보기</button>
-	</div>
-</div>
-<hr>
 <div class="container" align="center">
+	<div class="row" style="font-family: 'Poor Story', sans-serif;">
+		<div align="left" style="color:DarkGoldenRod; padding-top:1%">
+				<h3 style="margin-bottom:0px; font-weight:600">&nbsp;&nbsp;보낸 메세지 목록</h3>
+		</div>
+		<div align="left" style="padding-top:2%">
+			<button type="button" class="btn btn-sm btn-link" onclick="location.href='/message/messageReceiveList' " style="color:GoldenRod;"><i class="fas fa-arrows-alt-h"></i>&nbsp;&nbsp;받은 메세지 보기</button>
+		</div>
+	</div>
+	<hr style="margin-top:0px">
 	<table class="table table-striped table-hover">
 		<thead style="background-color:Maroon; color:AntiqueWhite">
 			<tr>
