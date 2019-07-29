@@ -33,15 +33,39 @@
 			<div class="form-inline">
 				<label class="control-label col-sm-2">카테고리</label>
 				<div class="col-sm-3">
-	        		<select class="browser-default custom-select" name="categoryId" style="width:190px" id="categoryId">
-		           		<option value="1">팁</option>
-		           		<option value="2">질문</option>
-		           </select>
+					<select class="browser-default custom-select" name="categoryId" id="categoryId" style="width: 190px">
+						<c:forEach items="${tCatList}" var="tCatList">
+							<c:choose>
+								<c:when test="${tCatList.categoryId == 99 }">
+									<c:if test="${login.authority >= tCatList.editAuthority }">
+										<c:choose>
+											<c:when test="${row.categoryId == tCatList.categoryId }">
+												<option value="${tCatList.categoryId }" selected>${tCatList.categoryName }</option>
+											</c:when>
+											<c:otherwise>
+												<option value="${tCatList.categoryId }">${tCatList.categoryName }</option>
+											</c:otherwise>
+										</c:choose>
+									</c:if>
+								</c:when>
+								<c:otherwise>
+									<c:choose>
+										<c:when test="${row.categoryId == tCatList.categoryId }">
+											<option value="${tCatList.categoryId }" selected>${tCatList.categoryName }</option>
+										</c:when>
+										<c:otherwise>
+											<option value="${tCatList.categoryId }">${tCatList.categoryName }</option>
+										</c:otherwise>
+									</c:choose>
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+					</select>
 				</div>
 			</div>
 			<br>
 			<div class="form-inline">
-		        <label class="control-label">작성자</label>
+		        <label class="control-label col-2">작성자</label>
 		        <div class="col-sm-3">
 					<input type="text" class="form-control" maxlength="50" value="${login.nickname}" readonly>
 					<input type="text" class="form-control" name="accountId" id="accountId" maxlength="50" value="${login.accountId}" style="display:none" readonly>
