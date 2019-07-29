@@ -7,7 +7,7 @@
 	<!-- 게시물 목록 + 페이징 + 검색 -->
 	<select id="listAll" parameterType="SearchBoard" resultType="RecruitBoardVO">
 		SELECT
-			boardId, b.accountId, categoryId, subject, object, CONVERT_TZ(b.reg_date,'+09:00','+00:00') as reg_date,
+			boardId, b.accountId, categoryId, subject, object, DATE_FORMAT(b.reg_date, '%Y %m %d') as reg_date,
 			CONVERT_TZ(b.mod_date,'+09:00','+00:00') as mod_date, viewCount, nickname, picture
 		FROM
 			recruitboard b
