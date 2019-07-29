@@ -1,6 +1,8 @@
 package com.good.dto;
 
-public class TipCategoryVO {
+import java.io.Serializable;
+
+public class TipCategoryVO implements Serializable{
 	private int categoryId;
 	private String categoryName;
 	private int editAuthority;

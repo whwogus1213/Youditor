@@ -23,12 +23,14 @@
   }
   .jy {
  	 width: 48%;
+ 	 height: 50%;
  	 float: left;
  	 margin-right: 2%;
  	 text-overflow: ellipsis;
   }
   .jy2 {
  	 width: 48%;
+ 	 height: 50%;
  	 float: left;
  	 margin-right: 2%;
  	 margin-top: 40px;
