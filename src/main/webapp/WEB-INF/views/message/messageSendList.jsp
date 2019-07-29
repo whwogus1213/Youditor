@@ -58,15 +58,6 @@
 			console.log(url);
 		});
 		
-		//게시글을 삭제 했을시 삭제했다고 경고창이 떳다가 사라지는 기능
-		var result = '${result}';
-		$(function(){
-			if(result === 'deleteOK'){
-				$('#deleteOK').removeClass('hidden');
-				$('#deleteOK').removeAttr("style");
-				$('#deleteOK').fadeOut(2000);
-			}
-		})
 	</script>
 </head>
 <body>

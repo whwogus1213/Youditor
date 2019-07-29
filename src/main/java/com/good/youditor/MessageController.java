@@ -56,12 +56,16 @@ public class MessageController {
 		
 		// 전체 게시글 개수
 		int listCnt = service.getReceiveListCnt(search);
-		
-		search.pageInfo(page, range, listCnt);
 
+		search.pageInfo(page, range, listCnt);
+		System.out.println("page : " + page);
+		System.out.println(search.getStartList());
+		
 		model.addAttribute("pagination", search);
 		model.addAttribute("MessageReceiveList", messageReceiveList);
 		System.out.println("MessageController MessageReceiveList open");
+		System.out.println("#####################");
+		System.out.println(service.receiveListAll(search));
 		return "message/messageReceiveList";
 	}
 	
@@ -80,6 +84,7 @@ public class MessageController {
 		List<MessageList> messageSendList = service.sendListAll(search);
 		// 전체 게시글 개수
 		int listCnt = service.getSendListCnt(search);
+		System.out.println("listcnt :  " + listCnt);
 		
 		search.pageInfo(page, range, listCnt);
 

@@ -15,13 +15,15 @@
 	<jsp:include page="../module/header.jsp" flush="false"/>
 	<!-- Custom styles -->
 	<link href="/resources/css/modern-business.css" rel="stylesheet">
+	<link href="/resources/css/pagination.css" rel="stylesheet">
 <script src="https://kit.fontawesome.com/e83fabbb47.js"></script>
 	<script>
 		// 이전 버튼
 		function fn_prev(page, range, rangeSize) {
 			var page = ((range - 2) * rangeSize) + 1;
 			var range = range - 1;
-			var url = "${pageContext.request.contextPath}/noticeboard/noticeBoardList";
+
+			var url = "${pageContext.request.contextPath}/message/messageReceiveList?";
 	
 			url = url + "?page=" + page;
 			url = url + "&range=" + range;
@@ -29,45 +31,46 @@
 		}
 	
 		//페이지 번호 클릭
-		function fn_pagination(page, range, rangeSize, searchType, keyword) {
-			var url = "${pageContext.request.contextPath}/noticeboard/noticeBoardList";
-	
-			url = url + "?page=" + page;
-			url = url + "&range=" + range;
+		function fn_pagination(page, searchType, keyword) {
+			var url = "${pageContext.request.contextPath}/message/messageReceiveList?";
+
+			url = url + "page=" + page;
+			if(keyword != null && keyword != "") {
+				url = url + "&searchType=" + searchType;
+				url = url + "&keyword=" + keyword;
+			}
 			location.href = url;
 		}
+		
 	
 		//다음 버튼 이벤트
 		function fn_next(page, range, rangeSize) {
 			var page = parseInt((range * rangeSize)) + 1;
 			var range = parseInt(range) + 1;
-			var url = "${pageContext.request.contextPath}/noticeboard/noticeBoardList";
+			var url = "${pageContext.request.contextPath}/message/messageReceiveList?";
 	
 			url = url + "?page=" + page;
 			url = url + "&range=" + range;
 			location.href = url;
 		}
 	
-		// 검색버튼 이벤트
-		$(document).on('click', '#btnSearch', function(e) {
-			e.preventDefault();
-			var url = "${pageContext.request.contextPath}/noticeboard/noticeBoardList";
-			url = url + "?searchType=" + $('#searchType').val();
-			url = url + "&keyword=" + $('#keyword').val();
-	
-			location.href = url;
-			console.log(url);
-		});
-		
-		//게시글을 삭제 했을시 삭제했다고 경고창이 떳다가 사라지는 기능
-		var result = '${result}';
 		$(function(){
-			if(result === 'deleteOK'){
-				$('#deleteOK').removeClass('hidden');
-				$('#deleteOK').removeAttr("style");
-				$('#deleteOK').fadeOut(2000);
-			}
-		})
+			$('#keyword').keypress(function(e) {
+
+				var keycode = event.keyCode;
+				// enter를 쳤을 때 keycode가 13이다
+				if (keycode == '13') {
+					e.preventDefault();
+					var url = "${pageContext.request.contextPath}/message/messageReceiveList?";
+					url = url + "searchType=" + $('#searchType').val();
+					url = url + "&keyword=" + $('#keyword').val();
+
+					location.href = url;
+					console.log(url);
+				}
+				e.stopPropagation();
+			});
+		});
 	</script>
 </head>
 <body>
@@ -144,7 +147,7 @@
 		</tbody>
 	</table>
 	<!-- 페이징 -->
-	<div id="paginationBox">
+	<div class="p1 pagination col-12" style="display: block; text-align: center; margin-bottom: 10px;">
 		<ul class="pagination" style="display:table; margin-left:auto; margin-right: auto;">
 			<c:if test="${pagination.prev}">
 				<li class="page-item">
@@ -153,10 +156,9 @@
 				</li>
 			</c:if>
 			<c:forEach begin="${pagination.startPage}" end="${pagination.endPage}" var="idx">
-				<li class="page-item <c:out value="${pagination.page == idx ? 'active' : ''}"/> ">
-					<a class="page-link" href="#"
-					onClick="fn_pagination('${idx}', '${pagination.range}', '${pagination.rangeSize}')">${idx}</a>
-				</li>
+				<a class="<c:out value="${pagination.page == idx ? 'is-active' : ''}"/>" href="#"
+				onclick="fn_pagination('${idx}', '${pagination.searchType}', '${pagination.keyword}'); return false;">
+					<li>${idx}</li></a>
 			</c:forEach>
 			<c:if test="${pagination.next}">
 				<li class="page-item">
