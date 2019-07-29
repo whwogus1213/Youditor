@@ -118,9 +118,9 @@ a:hover {
 							html += "<div class='card-body'>";
 							html += "<a href='/videoboard/videoBoardView?boardId="+data[i].boardId+"'>";
 							if(data[i].youtubeLink.length > 31){
-								html += "<img width='100%' height='20%' src='https://img.youtube.com/vi/" + data[i].youtubeLink.substring(32) + "/mqdefault.jpg'></img></a>";
+								html += "<img width='100%' height='100%' src='https://img.youtube.com/vi/" + data[i].youtubeLink.substring(32) + "/mqdefault.jpg'></img></a>";
 							}else{
-								html += "<img width='100%' height='20%' src='https://img.youtube.com/vi/" + data[i].youtubeLink.substring(17) + "/mqdefault.jpg'></img></a>";
+								html += "<img width='100%' height='100%' src='https://img.youtube.com/vi/" + data[i].youtubeLink.substring(17) + "/mqdefault.jpg'></img></a>";
 							}
 							html += "</div>";
 							html += "<div class='card-footer'>";
