@@ -174,8 +174,17 @@
 								</div>
 								<div class="col-sm-7" align="right" style="padding: 0px;">
 									<div class="dropright">
-										<a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="cursor: pointer">
-											<img src="<spring:url value='/image/${NoticeBoardList.picture}'/>" class=" mx-auto rounded-circle" width="20px" height="20px"/>&nbsp;${NoticeBoardList.nickname}<br>
+									<!-- 내 아이디에 마우스 오버 -->						
+									<c:if test="${NoticeBoardList.accountId eq login.accountId }">
+										<img src="<spring:url value='/image/${NoticeBoardList.picture}'/>" class=" mx-auto rounded-circle" 
+										width="20px" height="20px"/>&nbsp;${NoticeBoardList.nickname}<br>
+									</c:if>
+									<!-- 다른 사람 아이디에 마우스 오버 -->
+									<c:if test="${NoticeBoardList.accountId ne login.accountId }">
+										<a id="dropdownBtn${NoticeBoardList.boardId}" onclick="checkFollow('${NoticeBoardList.accountId}'); return false;" 
+										data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="cursor: pointer">
+											<img src="<spring:url value='/image/${NoticeBoardList.picture}'/>" class=" mx-auto rounded-circle"
+											width="20px" height="20px"/>&nbsp;${NoticeBoardList.nickname}<br>
 										</a>
 										<div class="dropdown-menu">
 											<a class="dropdown-item" href="/noticeboard/noticeBoardList?searchType=nickname&keyword=${NoticeBoardList.nickname}">
@@ -184,11 +193,13 @@
 											<a class="dropdown-item" href="#">
 												<i class="far fa-envelope"></i>&nbsp;&nbsp;쪽지 보내기
 											</a>
-											<a class="dropdown-item" href="#">
+											<a class="dropdown-item dropdownBtnFollow${NoticeBoardList.accountId}"
+											onclick="fn_follow(${NoticeBoardList.accountId}); return false;" style="cursor: pointer;">
 												<i class="far fa-heart"></i>&nbsp;&nbsp;팔로우하기
-											</a>
+   											</a>
 										</div>
-									</div>
+									</c:if>
+								 	</div>
 								</div>
 							</div>
 						</div>
@@ -253,6 +264,70 @@
 		</div>
 	</div>
 	<br>
-		<jsp:include page="./../module/bottom.jsp" flush="false" />
+	<jsp:include page="./../module/bottom.jsp" flush="false" />
+<script type="text/javascript">
+	 //팔로우 추가
+	 function fn_follow(accountId) {
+	 	var tr = $(".dropdownBtnFollow"+accountId);
+	 	var json = {
+	 		"followAccountId" : accountId
+	 	}
+	 				
+	 	event.stopPropagation();
+	 	
+	 	$.ajax({
+	 		type : "POST",
+	 		url : "/follow/insert",
+	 		data : json,
+	 		success : function(data) {
+	 			if (data == "success") {
+	 				tr.attr("style","");
+	 				tr.css("color", "red");
+	 				tr.find("i").css("color","red");
+	 				tr.attr("onclick","");
+	 				tr.css("cursor","default");
+	 				tr.html("<i class='far fa-heart'></i>&nbsp;&nbsp;팔로우중");
+	 			}
+	 			
+	 		},
+	 		error : function(data) {
+	 			alert("에러");
+	 		}
+	 	});
+	 	
+	 }
+
+	 //팔로우 체크
+	 function checkFollow(accountId){
+	 	console.log(accountId+"bbbbbbbbbbbbbbbbbbbbbb");
+	 	var tr = $(".dropdownBtnFollow"+accountId);
+	 	var json = {
+	 			"followAccountId" : accountId,
+	 			"followerAccountId" : ${login.accountId}
+	 			};
+	 	$.ajax({
+	 		type : "POST",
+	 		url : "/follow/check",
+	 		data : json,
+	 		success : function(data) {
+	 			if (data == "1") {
+	 				console.log("팔로우 되어있습니다.");
+	 				tr.attr("style","");
+	 				tr.css("color", "red");
+	 				tr.find("i").css("color","red");
+	 				tr.attr("onclick","");
+	 				tr.css("cursor","default");
+	 				tr.html("<i class='far fa-heart'></i>&nbsp;&nbsp;팔로우중");
+	 				
+	 			} else {
+	 				console.log("팔로우 아님");
+	 			}
+	 		},
+	 		error : function(data) {
+	 			alert("에러");
+	 		}
+	 	});
+	 }
+</script>
 </body>
 </html>

@@ -208,32 +208,43 @@ footer{
 						<td align="left" style="padding-left: 30px; cursor: pointer;"
 							onclick="location.href='/tipboard/tipBoardView?boardId=${TipBoardList.boardId}'">${TipBoardList.subject}
 						</td>
-						<td class="dropright">						
-							<a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="cursor:pointer">
-								<img src="<spring:url value='/image/${TipBoardList.picture}'/>" class=" mx-auto rounded-circle" width="20px" height="20px"/>
-								${TipBoardList.nickname}
-							</a>
-							<div class="dropdown-menu">
-								<a class="dropdown-item" href="/tipboard/tipBoardList?searchType=nickname&keyword=${TipBoardList.nickname}">
-									<i class="far fa-file-alt" style="width: 20; height: 20"></i>&nbsp;&nbsp;팁 더보기
-								</a>
-								<a class="dropdown-item" href="#" onclick="messagePopup();">
-									<i class="far fa-envelope"></i>&nbsp;&nbsp;쪽지 보내기
-								</a>
-								<script type="text/javascript">
-								function messagePopup() {
-									var nickname = "${TipBoardList.nickname }";
-									var win = window.open("/message/writePopup.do?nickname=" + nickname, "_blank", 
-											"width=650, height=470, left=200, top=200, location=no, menubar=no, resizble=no, scrollbars=no, status=no, titlebar=no, toolbar=no");
-								}
-								</script>
-								<a class="dropdown-item" href="#">
-									<i class="far fa-heart"></i>&nbsp;&nbsp;팔로우하기
-								</a>
-							</div>
+	
+	
+						<td class="dropright">
+							<!-- 내 아이디에 마우스 오버 -->						
+							<c:if test="${TipBoardList.accountId eq login.accountId }">
+								<img src="<spring:url value='/image/${TipBoardList.picture}'/>" class=" mx-auto rounded-circle" 
+								width="20px" height="20px"/>&nbsp;${TipBoardList.nickname}<br>
+							</c:if>
+							<!-- 다른 사람 아이디에 마우스 오버 -->
+								<c:if test="${TipBoardList.accountId ne login.accountId }">
+									<a id="dropdownBtn${TipBoardList.boardId}" onclick="checkFollow('${TipBoardList.accountId}'); return false;" 
+									data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="cursor:pointer">
+										<img src="<spring:url value='/image/${TipBoardList.picture}'/>" class=" mx-auto rounded-circle"
+										width="20px" height="20px"/>&nbsp;${TipBoardList.nickname}
+									</a>
+									<div class="dropdown-menu">
+										<a class="dropdown-item" href="/tipboard/tipBoardList?searchType=nickname&keyword=${TipBoardList.nickname}">
+											<i class="far fa-file-alt" style="width: 20; height: 20"></i>&nbsp;&nbsp;팁 더보기
+										</a>
+										<a class="dropdown-item" href="#" onclick="messagePopup();">
+											<i class="far fa-envelope"></i>&nbsp;&nbsp;쪽지 보내기
+										</a>
+											<script type="text/javascript">
+												function messagePopup() {
+												var nickname = "${TipBoardList.nickname }";
+												var win = window.open("/message/writePopup.do?nickname=" + nickname, "_blank", 
+														"width=650, height=470, left=200, top=200, location=no, menubar=no, resizble=no, scrollbars=no, status=no, titlebar=no, toolbar=no");
+												}
+											</script>
+										<a class="dropdown-item dropdownBtnFollow${TipBoardList.accountId}"
+										onclick="fn_follow(${TipBoardList.accountId}); return false;" style="cursor: pointer;">
+											<i class="far fa-heart"></i>&nbsp;&nbsp;팔로우하기
+   										</a>
+									</div>
+								</c:if>
 						</td>
-						<td><fmt:formatDate value="${TipBoardList.reg_date}"
-								pattern="yyyy-MM-dd" /></td>
+						<td><fmt:formatDate value="${TipBoardList.reg_date}" pattern="yyyy-MM-dd" /></td>
 						<td>${TipBoardList.viewCount}</td>
 					</tr>
 				</c:forEach>
@@ -298,5 +309,69 @@ footer{
 	</div>
 	<br>
 	<jsp:include page="./../module/bottom.jsp" flush="false" />
+<script type="text/javascript">
+	 //팔로우 추가
+	 function fn_follow(accountId) {
+	 	var tr = $(".dropdownBtnFollow"+accountId);
+	 	var json = {
+	 		"followAccountId" : accountId
+	 	}
+	 				
+	 	event.stopPropagation();
+	 	
+	 	$.ajax({
+	 		type : "POST",
+	 		url : "/follow/insert",
+	 		data : json,
+	 		success : function(data) {
+	 			if (data == "success") {
+	 				tr.attr("style","");
+	 				tr.css("color", "red");
+	 				tr.find("i").css("color","red");
+	 				tr.attr("onclick","");
+	 				tr.css("cursor","default");
+	 				tr.html("<i class='far fa-heart'></i>&nbsp;&nbsp;팔로우중");
+	 			}
+	 			
+	 		},
+	 		error : function(data) {
+	 			alert("에러");
+	 		}
+	 	});
+	 	
+	 }
+
+	 //팔로우 체크
+	 function checkFollow(accountId){
+	 	console.log(accountId+"bbbbbbbbbbbbbbbbbbbbbb");
+	 	var tr = $(".dropdownBtnFollow"+accountId);
+	 	var json = {
+	 			"followAccountId" : accountId,
+	 			"followerAccountId" : ${login.accountId}
+	 			};
+	 	$.ajax({
+	 		type : "POST",
+	 		url : "/follow/check",
+	 		data : json,
+	 		success : function(data) {
+	 			if (data == "1") {
+	 				console.log("팔로우 되어있습니다.");
+	 				tr.attr("style","");
+	 				tr.css("color", "red");
+	 				tr.find("i").css("color","red");
+	 				tr.attr("onclick","");
+	 				tr.css("cursor","default");
+	 				tr.html("<i class='far fa-heart'></i>&nbsp;&nbsp;팔로우중");
+	 				
+	 			} else {
+	 				console.log("팔로우 아님");
+	 			}
+	 		},
+	 		error : function(data) {
+	 			alert("에러");
+	 		}
+	 	});
+	 }
+</script>
 </body>
 </html>

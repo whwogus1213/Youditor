@@ -219,29 +219,39 @@ footer{
 						onclick="location.href='/recruitboard/recruitBoardView?boardId=${RecruitBoardList.boardId}'">
 								${RecruitBoardList.subject}
 						</td>
-						<td class="dropright" style="vertical-align: middle;">						
-							<a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="cursor:pointer">
-								<img src="<spring:url value='/image/${RecruitBoardList.picture}'/>" class=" mx-auto rounded-circle" width="20px" height="20px"/>
-								${RecruitBoardList.nickname}
-							</a>
-							<div class="dropdown-menu">
-								<a class="dropdown-item" href="/recruitboard/recruitBoardList?searchType=nickname&keyword=${RecruitBoardList.nickname}">
-									<i class="far fa-file-alt" style="width: 20; height: 20"></i>&nbsp;&nbsp;글 더보기
+						<td class="dropright" style="vertical-align: middle;">
+							<!-- 내 아이디에 마우스 오버 -->						
+							<c:if test="${RecruitBoardList.accountId eq login.accountId }">
+								<img src="<spring:url value='/image/${RecruitBoardList.picture}'/>" class=" mx-auto rounded-circle" 
+								width="20px" height="20px"/>&nbsp;${RecruitBoardList.nickname}<br>
+							</c:if>
+							<!-- 다른 사람 아이디에 마우스 오버 -->
+							<c:if test="${RecruitBoardList.accountId ne login.accountId }">
+								<a id="dropdownBtn${RecruitBoardList.boardId}" onclick="checkFollow('${RecruitBoardList.accountId}'); return false;"
+								data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="cursor:pointer">
+									<img src="<spring:url value='/image/${RecruitBoardList.picture}'/>" class=" mx-auto rounded-circle" width="20px" height="20px"/>
+									${RecruitBoardList.nickname}
 								</a>
-								<a class="dropdown-item" href="#" onclick="messagePopup();">
-									<i class="far fa-envelope"></i>&nbsp;&nbsp;쪽지 보내기
-								</a>
-								<script type="text/javascript">
-								function messagePopup() {
-									var nickname = "${RecruitBoardList.nickname }";
-									var win = window.open("/message/writePopup.do?nickname=" + nickname, "_blank", 
-											"width=650, height=470, left=200, top=200, location=no, menubar=no, resizble=no, scrollbars=no, status=no, titlebar=no, toolbar=no");
-								}
-								</script>
-								<a class="dropdown-item" href="#">
-									<i class="far fa-heart"></i>&nbsp;&nbsp;팔로우하기
-								</a>
-							</div>
+								<div class="dropdown-menu">
+									<a class="dropdown-item" href="/recruitboard/recruitBoardList?searchType=nickname&keyword=${RecruitBoardList.nickname}">
+										<i class="far fa-file-alt" style="width: 20; height: 20"></i>&nbsp;&nbsp;글 더보기
+									</a>
+									<a class="dropdown-item" href="#" onclick="messagePopup();">
+										<i class="far fa-envelope"></i>&nbsp;&nbsp;쪽지 보내기
+									</a>
+									<script type="text/javascript">
+									function messagePopup() {
+										var nickname = "${RecruitBoardList.nickname }";
+										var win = window.open("/message/writePopup.do?nickname=" + nickname, "_blank", 
+												"width=650, height=470, left=200, top=200, location=no, menubar=no, resizble=no, scrollbars=no, status=no, titlebar=no, toolbar=no");
+									}
+									</script>
+									<a class="dropdown-item dropdownBtnFollow${RecruitBoardList.accountId}"
+									onclick="fn_follow(${RecruitBoardList.accountId}); return false;" style="cursor: pointer;">
+										<i class="far fa-heart"></i>&nbsp;&nbsp;팔로우하기
+									</a>
+								</div>
+							</c:if>
 						</td>
 						<td style="vertical-align: middle;">
 							<fmt:parseDate value='${RecruitBoardList.reg_date}' var='reg_date' pattern='yyyymmdd'/>
@@ -311,5 +321,69 @@ footer{
 	</div>
 	<br>
 	<jsp:include page="./../module/bottom.jsp" flush="false" />
+<script type="text/javascript">
+	 //팔로우 추가
+	 function fn_follow(accountId) {
+	 	var tr = $(".dropdownBtnFollow"+accountId);
+	 	var json = {
+	 		"followAccountId" : accountId
+	 	}
+	 				
+	 	event.stopPropagation();
+	 	
+	 	$.ajax({
+	 		type : "POST",
+	 		url : "/follow/insert",
+	 		data : json,
+	 		success : function(data) {
+	 			if (data == "success") {
+	 				tr.attr("style","");
+	 				tr.css("color", "red");
+	 				tr.find("i").css("color","red");
+	 				tr.attr("onclick","");
+	 				tr.css("cursor","default");
+	 				tr.html("<i class='far fa-heart'></i>&nbsp;&nbsp;팔로우중");
+	 			}
+	 			
+	 		},
+	 		error : function(data) {
+	 			alert("에러");
+	 		}
+	 	});
+	 	
+	 }
+
+	 //팔로우 체크
+	 function checkFollow(accountId){
+	 	console.log(accountId+"bbbbbbbbbbbbbbbbbbbbbb");
+	 	var tr = $(".dropdownBtnFollow"+accountId);
+	 	var json = {
+	 			"followAccountId" : accountId,
+	 			"followerAccountId" : ${login.accountId}
+	 			};
+	 	$.ajax({
+	 		type : "POST",
+	 		url : "/follow/check",
+	 		data : json,
+	 		success : function(data) {
+	 			if (data == "1") {
+	 				console.log("팔로우 되어있습니다.");
+	 				tr.attr("style","");
+	 				tr.css("color", "red");
+	 				tr.find("i").css("color","red");
+	 				tr.attr("onclick","");
+	 				tr.css("cursor","default");
+	 				tr.html("<i class='far fa-heart'></i>&nbsp;&nbsp;팔로우중");
+	 				
+	 			} else {
+	 				console.log("팔로우 아님");
+	 			}
+	 		},
+	 		error : function(data) {
+	 			alert("에러");
+	 		}
+		});
+	}
+</script>
 </body>
 </html>
