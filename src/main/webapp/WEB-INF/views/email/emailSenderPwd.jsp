@@ -18,6 +18,13 @@
 	<jsp:include page="../module/header.jsp" flush="false"/>
 	<script>
 	</script>
+	<style>
+	.w3-block {
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+	</style>
 </head>
 <body style="background-color: #FFF;">
 	<jsp:include page="../module/top2.jsp" flush="false"/>
@@ -30,11 +37,11 @@
 			</div>
 			<div>
 				<p>
-					<label>NickName</label>
+					<label><strong>닉네임(nickname)</strong></label>
 					<input class="w3-input" type="text" id="nickname" name="nickname" required>
 				</p>
 				<p>
-					<label>Email</label>
+					<label><strong>이메일(e-mail)</strong></label>
 					<input class="w3-input" type="text" id="email" name="email" required>
 				</p>
 				<p class="w3-center">

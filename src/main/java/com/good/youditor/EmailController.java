@@ -81,12 +81,14 @@ public class EmailController {
 	            return mav;
 	        }else {
 	        	System.out.println("실패했습니다.");
-	            mav=new ModelAndView("redirect:/");
+				mo.addAttribute("message","발송에 실패했습니다. \n 잠시후 다시 시도해 주세요.");
+	            mav=new ModelAndView("email/emailSenderPwd");
 	            return mav;
         }
         }else {
         	System.out.println("해당 아이디로 가입된 정보가 없습니다.");
-            mav=new ModelAndView("redirect:/");
+			mo.addAttribute("message","해당 아이디로 가입된 정보가 없습니다.");
+            mav=new ModelAndView("email/emailSenderPwd");
             return mav;
         }
     }
