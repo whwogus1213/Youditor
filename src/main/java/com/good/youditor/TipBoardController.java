@@ -122,11 +122,25 @@ public class TipBoardController {
 
 	// 글작성 완료
 	@RequestMapping(value = "/insertTipBoardPro", method = RequestMethod.POST)
-	public String insertTipBoardPro(TipBoardVO vo) throws Exception {
+	public String insertTipBoardPro(@RequestParam("accountId") int accountId,
+									@RequestParam("categoryId") int categoryId,
+									@RequestParam("subject") String subject,
+									@RequestParam("object") String object) throws Exception {
 		System.out.println("============insertTipBoardPro 성공==============");
-		System.out.println(vo);
-		tipBoardService.insertTipBoard(vo);
+		TipBoardVO vo = new TipBoardVO();
+		
+		vo.setAccountId(accountId);
+		vo.setCategoryId(categoryId);
+		vo.setSubject(subject);
+		vo.setObject(object);
+		
+		System.out.println("acc" + accountId);
+		System.out.println("cate" + categoryId);
+		System.out.println("sub" + subject);
+		System.out.println("obj" + object);
 
+		tipBoardService.insertTipBoard(vo);
+		
 		return "redirect:/tipboard/tipBoardList";
 	}
 	

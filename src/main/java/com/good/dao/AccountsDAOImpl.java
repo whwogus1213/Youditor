@@ -1,6 +1,7 @@
 package com.good.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -94,6 +95,18 @@ public class AccountsDAOImpl implements AccountsDAO {
 	@Override
 	public int duplicateCheck(int check) throws Exception {
 		return sqlSession.selectOne(NAMESPACE + ".duplicateCheck", check);
+	}
+	@Override
+	public String getPwd(Map<String, String> paramMap) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + ".getPwd",paramMap);
+	}
+	@Override
+	public String getEmail(Map<String, String> paramMap) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + ".getEmail",paramMap);
+	}
+	@Override
+	public int getAccountId(Map<String, String> paramMap) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + ".getAccountId",paramMap);
 	}
 
 	

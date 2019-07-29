@@ -181,6 +181,32 @@
 		AND		
 		pwd = #{pwd}		
 	</update>
+	<select id="getPwd" resultType="String" parameterType="map">
+		select
+			pwd
+		from
+			accounts
+		where
+			nickname = #{nickname} 
+		and
+			email = #{email}
+	</select>
+	<select id="getEmail" resultType="String" parameterType="map">
+		select
+			email
+		from
+			accounts
+		where
+			email = #{email}
+	</select>
+	<select id="getAccountId" resultType="int" parameterType="map">
+		select
+			accountId
+		from
+			accounts
+		where
+			email = #{email}
+	</select>
 	
 	
 </mapper>

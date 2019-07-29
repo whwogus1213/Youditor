@@ -1,6 +1,8 @@
 package com.good.dto;
 
-public class VideoCategoryVO extends Search {
+import java.io.Serializable;
+
+public class VideoCategoryVO extends Search implements Serializable{
 	private int categoryId;
 	private String categoryName;
 	private String categoryPicture;

@@ -1,6 +1,7 @@
 package com.good.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -112,5 +113,18 @@ public class AccountsServiceImpl implements AccountsService {
 	@Override
 	public void loginDate(AccountsVO vo) throws Exception {
 		dao.loginDate(vo);
+	}
+	@Override
+	public String getPwd(Map<String, String> paramMap) throws Exception {
+		return dao.getPwd(paramMap);
+	}
+	@Override
+	public String getEmail(Map<String, String> paramMap) throws Exception {
+		return dao.getEmail(paramMap);
+	}
+
+	@Override
+	public int getAccountId(Map<String, String> paramMap) throws Exception {
+		return dao.getAccountId(paramMap);
 	}
 }

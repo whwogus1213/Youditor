@@ -39,32 +39,104 @@
 			<div class="form-inline">
 				<label class="control-label col-sm-2"><strong style="color:brown">카테고리</strong></label>
 				<div class="col-sm-3">
-	        		<select class="browser-default custom-select" name="categoryId" style="width:100%">
-		           		<option value="1">팁</option>
-		           		<option value="2">질문</option>
-		           </select>
+					<select class="browser-default custom-select" name="categoryId" id="categoryId" style="width: 190px">
+						<c:forEach items="${tCatList}" var="tCatList">
+							<c:choose>
+								<c:when test="${tCatList.categoryId == 99 }">
+									<c:if test="${login.authority >= tCatList.editAuthority }">
+										<c:choose>
+											<c:when test="${row.categoryId == tCatList.categoryId }">
+												<option value="${tCatList.categoryId }" selected>${tCatList.categoryName }</option>
+											</c:when>
+											<c:otherwise>
+												<option value="${tCatList.categoryId }">${tCatList.categoryName }</option>
+											</c:otherwise>
+										</c:choose>
+									</c:if>
+								</c:when>
+								<c:otherwise>
+									<c:choose>
+										<c:when test="${row.categoryId == tCatList.categoryId }">
+											<option value="${tCatList.categoryId }" selected>${tCatList.categoryName }</option>
+										</c:when>
+										<c:otherwise>
+											<option value="${tCatList.categoryId }">${tCatList.categoryName }</option>
+										</c:otherwise>
+									</c:choose>
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+					</select>
 				</div>
 			</div>
 			<br>
 			<div class="form-inline">
-		        <label class="control-label col-sm-2"><strong style="color:brown">작성자</strong></label>
+		        <label class="control-label col-2">작성자</label>
 		        <div class="col-sm-3">
-					<input type="text" class="form-control" maxlength="50" value="${login.nickname}" readonly style="width:100%">
-					<input type="text" class="form-control" name="accountId" maxlength="50" value="${login.accountId}" style="display:none" readonly>
+					<input type="text" class="form-control" maxlength="50" value="${login.nickname}" readonly>
+					<input type="text" class="form-control" name="accountId" id="accountId" maxlength="50" value="${login.accountId}" style="display:none" readonly>
 		        </div>
 			</div>
 			<br>
 			<div class="form-inline">
 				<label class="control-label col-sm-2"><strong style="color:brown">내용</strong></label>
 				<div class="col-sm-3">
-					<textarea rows="10" cols="90" name="object"></textarea>
+					<textarea rows="10" cols="100" name="object" id="object"></textarea>
 				</div>
 			</div>
 			<br>
-			<div class="col-sm-12" align="center" style="color:brown">
-			<button type="submit" id="submit" class="btn btn-sm"><strong style="color:brown">올리기</strong></button>&nbsp;|
-	       <button type="reset" class="btn btn-sm"><strong style="color:brown">초기화</strong></button>&nbsp;|
-	       <button type="button" class="btn btn-sm" onclick="location.href='/tipboard/tipBoardList?num=1'"><strong style="color:brown">뒤로 가기</strong></button>
+			<div class="col-sm-12" align="center">
+				<button type="button" class="btn btn-success" onclick="insertBtn();">올리기</button>
+			
+				<script type="text/javascript">
+				function insertBtn() {
+					var accountId = $("#accountId").val();
+					var categoryId = $("#categoryId").val();
+		  			var subject = $("#subject").val();
+		  			var object = $("#object").val();
+
+		  			if (subject.length == 0) {
+						alert("제목을 입력해 주세요.");
+						$("#subject").focus();
+						return;
+					}
+					if (object.length == 0) {
+						alert("내용을 입력해 주세요.");
+						$("#object").focus();
+						return;
+					}
+			  		
+					document.tipWriteForm.action = "/tipboard/insertTipBoardPro";
+					document.tipWriteForm.method = "POST";
+					document.tipWriteForm.submit();
+				}
+				
+				/*
+				function updateBtn() {
+					var accountId = $("#accountId").val();
+					var categoryId = $("#categoryId").val();
+					var subject = $("#subject").val();
+					var object = $("#object").val();
+					if (subject.length == 0) {
+						alert("제목을 입력해 주세요.");
+						$("#subject").focus();
+						return;
+					}
+					if (object.length == 0) {
+						alert("내용을 입력해 주세요.");
+						$("#object").focus();
+						return;
+					}
+
+					document.tipWriteForm.action = "/tipboard/updateTipBoardPro";
+					document.tipWriteForm.method = "POST";
+					document.tipWriteForm.submit();
+				}
+				*/
+				</script>
+			
+	       <button type="reset" class="btn btn-warning">초기화</button>
+	       <button type="button" class="btn btn-info" onclick="location.href='/tipboard/tipBoardList?num=1'">뒤로 가기</button>
 	       </div>
 			<br>
 		</form>

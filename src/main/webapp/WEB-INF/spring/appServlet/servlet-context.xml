@@ -56,6 +56,8 @@
             <exclude-mapping path="/recruitboard"/>
             <exclude-mapping path="/recruitboard/**"/>
             <exclude-mapping path="/joinConfirm"/>
+            <exclude-mapping path="/email"/>
+            <exclude-mapping path="/email/**"/>
             <beans:ref bean="authenticationInterceptor"/>
         </interceptor>
     </interceptors>

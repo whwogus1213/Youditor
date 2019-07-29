@@ -312,7 +312,7 @@ i {
 					</c:if>
 				</c:if>
 				<c:if test="${login.email eq null}">
-					로그인 후 평가 가능
+					<font style="padding-top: 6px; padding-right: 15px;">로그인 후 평가 가능</font>
 				</c:if>
 				
 			</div>

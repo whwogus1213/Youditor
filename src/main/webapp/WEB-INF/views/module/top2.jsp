@@ -285,11 +285,7 @@ function DosignUp() {
 				<input type="password" class="form-control" id="pwd"
 					name="pwd" maxlength="20" placeholder="Enter Password"><br>
 			</div>
-			<div>
-			<button type="button" class="nav-link button-style3" onclick="DoPass();">비밀번호를 잊어버리셨습니까?</button>
-			<div id="doPass1">
-			
-			</div>
+			<button type="button" class="nav-link button-style3" onclick="location.href='${path }/email/senderpwd.do'">비밀번호를 잊어버리셨습니까?</button>
 		</div></div>
 		<h2 align="center">&nbsp;</h2>
 		<div class="form-group">
