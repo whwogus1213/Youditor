@@ -75,6 +75,14 @@
 			</div>
 			<br>
 			<div class="form-inline">
+		        <label class="control-label col-2">작성자</label>
+		        <div class="col-sm-3">
+					<input type="text" class="form-control" maxlength="50" value="${login.nickname}" readonly>
+					<input type="text" class="form-control" name="accountId" id="accountId" maxlength="50" value="${login.accountId}" style="display:none" readonly>
+		        </div>
+			</div>
+			<br>
+			<div class="form-inline">
 				<label class="control-label col-sm-2">내용</label>
 				<div class="col-sm-3">
 	        		<c:choose>

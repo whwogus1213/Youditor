@@ -1,6 +1,7 @@
 package com.good.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.good.dto.AccountCheckVO;
 import com.good.dto.AccountsVO;
@@ -31,4 +32,10 @@ public interface AccountsService {
 	public boolean insertAccount(AccountsVO vo) throws Exception;
 	
 	public void loginDate(AccountsVO vo) throws Exception;
+
+	public String getPwd(Map<String, String> paramMap) throws Exception;
+
+	public String getEmail(Map<String, String> paramMap) throws Exception;
+
+	public int getAccountId(Map<String, String> paramMap) throws Exception;
 }

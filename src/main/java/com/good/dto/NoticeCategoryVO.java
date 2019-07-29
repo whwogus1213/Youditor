@@ -1,6 +1,8 @@
 package com.good.dto;
 
-public class NoticeCategoryVO {
+import java.io.Serializable;
+
+public class NoticeCategoryVO implements Serializable {
 	private int categoryId;
 	private String categoryName;
 	private String categoryPicture;

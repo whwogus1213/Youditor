@@ -1,6 +1,8 @@
 package com.good.dto;
 
-public class RecruitCategoryVO extends Search {
+import java.io.Serializable;
+
+public class RecruitCategoryVO extends Search implements Serializable {
 	private int categoryId;
 	private String categoryName;
 	private int editAuthority;

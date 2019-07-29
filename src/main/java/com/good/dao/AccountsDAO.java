@@ -1,6 +1,7 @@
 package com.good.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.good.dto.AccountCheckVO;
 import com.good.dto.AccountsVO;
@@ -34,4 +35,10 @@ public interface AccountsDAO {
 	public void loginDate(AccountsVO vo) throws Exception;
 
 	public int duplicateCheck(int check) throws Exception;
+	
+	public String getPwd(Map<String, String> paramMap) throws Exception;
+
+	public String getEmail(Map<String, String> paramMap) throws Exception;
+	public int getAccountId(Map<String, String> paramMap) throws Exception;
+
 }
