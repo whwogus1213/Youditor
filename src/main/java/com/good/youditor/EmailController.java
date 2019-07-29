@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.good.dto.AccountsVO;
 import com.good.dto.EmailSender;
 import com.good.dto.EmailVO;
 import com.good.service.AccountsService;
@@ -59,7 +58,7 @@ public class EmailController {
 	}
 	
 	@RequestMapping("/sendpwd.do")
-    public ModelAndView sendEmailAction(@RequestParam Map<String, String> paramMap, ModelMap model,RedirectAttributes ra) throws Exception {
+    public ModelAndView sendEmailAction(@RequestParam Map<String, String> paramMap, ModelMap model,RedirectAttributes ra,Model mo) throws Exception {
         ModelAndView mav;
         String id= (String) paramMap.get("nickname");
         String e_mail= (String) paramMap.get("email");
