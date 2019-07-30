@@ -77,6 +77,11 @@
 		});
 	});
 </script>
+<style type="text/css">
+.p1 a.is-active {
+	background-color:AntiqueWhite; color: DarkGoldenRod;
+}
+</style>
 </head>
 <body>
 <jsp:include page="../module/top2.jsp" flush="false"/>
@@ -158,17 +163,17 @@
 		<ul class="pagination" style="display:table; margin-left:auto; margin-right: auto;">
 			<c:if test="${pagination.prev}">
 				<a href="#" onclick="fn_prev('${pagination.page}', '${pagination.rangeSize}',
-				'${pagination.searchType}', '${pagination.keyword}'); return false;" style="background-color:AntiqueWhite; color: DarkGoldenRod; border-style:none;"><li>◀</li></a>
+				'${pagination.searchType}', '${pagination.keyword}'); return false;"><li>◀</li></a>
 			</c:if>
 			
 			<c:forEach begin="${pagination.startPage}" end="${pagination.endPage}" var="idx">
 				<a class="<c:out value="${pagination.page == idx ? 'is-active' : ''}"/>" href="#"
-				onclick="fn_pagination('${idx}', '${pagination.searchType}', '${pagination.keyword}'); return false;" style="background-color:AntiqueWhite; color: DarkGoldenRod; border-style:none;">
+				onclick="fn_pagination('${idx}', '${pagination.searchType}', '${pagination.keyword}'); return false;">
 					<li>${idx}</li></a>
 			</c:forEach>
 			<c:if test="${pagination.next}">
 				<a href="#" onclick="fn_next('${pagination.page}', '${pagination.rangeSize}',
-				'${pagination.searchType}', '${pagination.keyword}'); return false;" style="background-color:AntiqueWhite; color: DarkGoldenRod; border-style:none;"><li>▶</li></a>
+				'${pagination.searchType}', '${pagination.keyword}'); return false;"><li>▶</li></a>
 			</c:if>
 		</ul>
 	</div>
