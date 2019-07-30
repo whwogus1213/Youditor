@@ -23,6 +23,11 @@ button[type="button"] {
     cursor: pointer;
 }
 
+.p1 a.is-active {
+	background-color: PaleVioletRed;
+	color: white;
+}
+
  @media (min-width:476px){.container{max-width: 240px;}}
  @media (min-width:576px){.container{max-width: 300px;}}
  @media (min-width:768px){.container{max-width: 440px;}}
@@ -271,8 +276,8 @@ footer{
 		<!-- 페이징 검색 시작 -->
 		<div class="col-12" style="padding-top:1%" align="center">
 			<!-- 페이징 -->
-			<div class="p1 pagination col-12">
-				<ul>
+			<div class="p1 pagination col-12" style="display: block; text-align: center; margin-bottom: 10px;">
+			<ul class="pagination" style="display:table; margin-left:auto; margin-right: auto;">
 					<c:if test="${pagination.prev}">
 						<a href="#" onclick="fn_prev('${categoryInfo.categoryId }', '${pagination.page}', '${pagination.rangeSize}',
 						'${pagination.searchType}', '${pagination.keyword}'); return false;"><li>◀</li></a>
@@ -285,7 +290,7 @@ footer{
 					</c:forEach>
 					<c:if test="${pagination.next}">
 						<a href="#" onclick="fn_next('${categoryInfo.categoryId }', '${pagination.page}', '${pagination.rangeSize}',
-						'${pagination.searchType}', '${pagination.keyword}'); return false;" "><li>▶</li></a>
+						'${pagination.searchType}', '${pagination.keyword}'); return false;"><li>▶</li></a>
 					</c:if>
 				</ul>
 			</div>

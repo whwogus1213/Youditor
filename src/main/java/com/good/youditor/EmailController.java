@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.good.dto.AccountsVO;
 import com.good.dto.EmailSender;
 import com.good.dto.EmailVO;
 import com.good.service.AccountsService;
@@ -82,12 +82,14 @@ public class EmailController {
 	            return mav;
 	        }else {
 	        	System.out.println("실패했습니다.");
-	            mav=new ModelAndView("redirect:/");
+	            mav=new ModelAndView("email/emailSenderPwd");
+	            mav.addObject("message","해당 이메일이나 아이디로 가입된 정보가 없습니다.  가입하신 이메일로 정확히 입력해 주세요. 메일이 발송됩니다.");
 	            return mav;
         }
         }else {
         	System.out.println("해당 아이디로 가입된 정보가 없습니다.");
-            mav=new ModelAndView("redirect:/");
+            mav=new ModelAndView("email/emailSenderPwd");
+            mav.addObject("message","해당 이메일이나 아이디로 가입된 정보가 없습니다.  가입하신 이메일로 정확히 입력해 주세요. 메일이 발송됩니다.");
             return mav;
         }
     }
@@ -116,4 +118,12 @@ public class EmailController {
 		System.out.println("success emailpwdupdate");
 		return mav;
 	}
+	
+	/*@ResponseBody
+	@RequestMapping("/emailcheck")
+    public ModelAndView emailcheck(@RequestParam Map<String, String> paramMap, ModelMap model,RedirectAttributes ra) throws Exception {
+        ModelAndView mav;
+        
+        return mav;
+	}*/
 }

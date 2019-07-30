@@ -2,73 +2,80 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ page session="true" %>
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
-	<meta name="description" content="">
-	<meta name="author" content="">
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>보낸 메세지 - YouDitor</title>
-	<jsp:include page="../module/header.jsp" flush="false"/>
-	<!-- Custom styles -->
-	<link href="/resources/css/modern-business.css" rel="stylesheet">
-	<script src="https://kit.fontawesome.com/e83fabbb47.js"></script>
-	<script>
-		// 이전 버튼
-		function fn_prev(page, range, rangeSize) {
-			var page = ((range - 2) * rangeSize) + 1;
-			var range = range - 1;
-			var url = "${pageContext.request.contextPath}/noticeboard/noticeBoardList";
-	
-			url = url + "?page=" + page;
-			url = url + "&range=" + range;
-			location.href = url;
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
+<meta name="description" content="">
+<meta name="author" content="">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>보낸 메세지 - YouDitor</title>
+<jsp:include page="../module/header.jsp" flush="false"/>
+<!-- Custom styles -->
+<link href="/resources/css/modern-business.css" rel="stylesheet">
+<script src="https://kit.fontawesome.com/e83fabbb47.js"></script>
+<script>
+
+	// 이전 버튼
+	function fn_prev(page, rangeSize, searchType, keyword) {
+		var page = parseInt((page - 1) / rangeSize) * rangeSize;
+		var url = "${pageContext.request.contextPath}/message/messageSendList?";
+
+		url = url + "page=" + page;
+		if(keyword != null && keyword != "") {
+			url = url + "&searchType=" + searchType;
+			url = url + "&keyword=" + keyword;
 		}
-	
-		//페이지 번호 클릭
-		function fn_pagination(page, range, rangeSize, searchType, keyword) {
-			var url = "${pageContext.request.contextPath}/noticeboard/noticeBoardList";
-	
-			url = url + "?page=" + page;
-			url = url + "&range=" + range;
-			location.href = url;
+		location.href = url;
+	}
+
+	//페이지 번호 클릭
+	function fn_pagination(page, searchType, keyword) {
+		var url = "${pageContext.request.contextPath}/message/messageSendList?";
+
+		url = url + "page=" + page;
+		if(keyword != null && keyword != "") {
+			url = url + "&searchType=" + searchType;
+			url = url + "&keyword=" + keyword;
 		}
+		location.href = url;
+	}
 	
-		//다음 버튼 이벤트
-		function fn_next(page, range, rangeSize) {
-			var page = parseInt((range * rangeSize)) + 1;
-			var range = parseInt(range) + 1;
-			var url = "${pageContext.request.contextPath}/noticeboard/noticeBoardList";
-	
-			url = url + "?page=" + page;
-			url = url + "&range=" + range;
-			location.href = url;
+
+	//다음 버튼 이벤트
+	function fn_next(page, rangeSize, searchType, keyword) {
+		var page = ((parseInt((page - 1) / rangeSize) + 1) * rangeSize) + 1;
+		var url = "${pageContext.request.contextPath}/message/messageSendList?";
+
+		url = url + "page=" + page;
+		if(keyword != null && keyword != "") {
+			url = url + "&searchType=" + searchType;
+			url = url + "&keyword=" + keyword;
 		}
-	
-		// 검색버튼 이벤트
-		$(document).on('click', '#btnSearch', function(e) {
-			e.preventDefault();
-			var url = "${pageContext.request.contextPath}/noticeboard/noticeBoardList";
-			url = url + "?searchType=" + $('#searchType').val();
-			url = url + "&keyword=" + $('#keyword').val();
-	
-			location.href = url;
-			console.log(url);
-		});
+		location.href = url;
+	}
 		
-		//게시글을 삭제 했을시 삭제했다고 경고창이 떳다가 사라지는 기능
-		var result = '${result}';
-		$(function(){
-			if(result === 'deleteOK'){
-				$('#deleteOK').removeClass('hidden');
-				$('#deleteOK').removeAttr("style");
-				$('#deleteOK').fadeOut(2000);
+	$(function(){
+		$('#keyword').keypress(function(e) {
+
+			var keycode = event.keyCode;
+			// enter를 쳤을 때 keycode가 13이다
+			if (keycode == '13') {
+				e.preventDefault();
+				var url = "${pageContext.request.contextPath}/message/messageSendList?";
+				url = url + "searchType=" + $('#searchType').val();
+				url = url + "&keyword=" + $('#keyword').val();
+
+				location.href = url;
+				console.log(url);
 			}
-		})
-	</script>
+			e.stopPropagation();
+		});
+	});
+</script>
 </head>
 <body>
 <jsp:include page="../module/top2.jsp" flush="false"/>
@@ -84,7 +91,7 @@
 <div class="container" align="center">
 	<div class="row" style="font-family: 'Poor Story', sans-serif;">
 		<div align="left" style="color:DarkGoldenRod; padding-top:1%">
-				<h3 style="margin-bottom:0px; font-weight:600">&nbsp;&nbsp;보낸 메세지 목록</h3>
+				<h3 style="margin-bottom:0px; font-weight:600; cursor: pointer;" onclick="location.href='/message/messageSendList' ">&nbsp;&nbsp;보낸 메세지 목록</h3>
 		</div>
 		<div align="left" style="padding-top:2%">
 			<button type="button" class="btn btn-sm btn-link" onclick="location.href='/message/messageReceiveList' " style="color:GoldenRod;"><i class="fas fa-arrows-alt-h"></i>&nbsp;&nbsp;받은 메세지 보기</button>
@@ -115,7 +122,10 @@
 		<tbody>
 			<c:forEach items="${MessageSendList }" var="MessageSendList">
 				<tr>
-					<td>${MessageSendList.nickname}</td>
+					<td>
+						<img src="<spring:url value='/image/${MessageSendList.picture}'/>" class=" mx-auto rounded-circle" 
+										width="20px" height="20px"/>&nbsp;${MessageSendList.nickname}<br>	
+					</td>
 					<td>
 						<a href="/message/messageSendView?messageId=${MessageSendList.messageId}" style="align:center; color:black">${MessageSendList.subject}</a>
 					</td>
@@ -143,26 +153,21 @@
 		</tbody>
 	</table>
 	<!-- 페이징 -->
-	<div id="paginationBox">
+	<div class="p1 pagination col-12" style="display: block; text-align: center; margin-bottom: 10px;">
 		<ul class="pagination" style="display:table; margin-left:auto; margin-right: auto;">
 			<c:if test="${pagination.prev}">
-				<li class="page-item">
-					<a class="page-link" href="#"
-					onClick="fn_prev('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}')" style="background-color:AntiqueWhite; color: DarkGoldenRod; border-style:none;">Previous</a>
-				</li>
+				<a href="#" onclick="fn_prev('${pagination.page}', '${pagination.rangeSize}',
+				'${pagination.searchType}', '${pagination.keyword}'); return false;" style="background-color:AntiqueWhite; color: DarkGoldenRod; border-style:none;"><li>◀</li></a>
 			</c:if>
+			
 			<c:forEach begin="${pagination.startPage}" end="${pagination.endPage}" var="idx">
-				<li class="page-item <c:out value="${pagination.page == idx ? 'active' : ''}"/>">
-					<a class="page-link" href="#"
-					onClick="fn_pagination('${idx}', '${pagination.range}', '${pagination.rangeSize}')" style="background-color:AntiqueWhite; color: DarkGoldenRod; border-style:none;">${idx}</a>
-				</li>
+				<a class="<c:out value="${pagination.page == idx ? 'is-active' : ''}"/>" href="#"
+				onclick="fn_pagination('${idx}', '${pagination.searchType}', '${pagination.keyword}'); return false;" style="background-color:AntiqueWhite; color: DarkGoldenRod; border-style:none;">
+					<li>${idx}</li></a>
 			</c:forEach>
 			<c:if test="${pagination.next}">
-				<li class="page-item">
-					<a class="page-link" href="#"
-					onClick="fn_next('${pagination.range}', '${pagination.range}',
-					'${pagination.rangeSize}')" style="background-color:AntiqueWhite; color: DarkGoldenRod; border-style:none;">Next</a>
-				</li>
+				<a href="#" onclick="fn_next('${pagination.page}', '${pagination.rangeSize}',
+				'${pagination.searchType}', '${pagination.keyword}'); return false;" style="background-color:AntiqueWhite; color: DarkGoldenRod; border-style:none;"><li>▶</li></a>
 			</c:if>
 		</ul>
 	</div>

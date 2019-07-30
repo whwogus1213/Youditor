@@ -7,7 +7,7 @@
 	<!-- 받은 메시지 목록 + 페이징 + 검색 -->
 	<select id="receiveListAll" resultType="MessageList">
 		SELECT
-			messageId, senderAccountId, nickname, subject, CONVERT_TZ(send_date,'+09:00','+00:00') as send_date, CONVERT_TZ(read_date,'+09:00','+00:00') as read_date, receiverView
+			messageId, senderAccountId, nickname, subject, CONVERT_TZ(send_date,'+09:00','+00:00') as send_date, CONVERT_TZ(read_date,'+09:00','+00:00') as read_date, receiverView, picture
 		FROM
 			message as m
 		JOIN
@@ -59,7 +59,7 @@
 	<!-- 보낸 메시지 목록 + 페이징 + 검색 -->
 	<select id="sendListAll" resultType="MessageList">
 		SELECT
-			messageId, receiverAccountId, nickname, subject, CONVERT_TZ(send_date,'+09:00','+00:00') as send_date, CONVERT_TZ(read_date,'+09:00','+00:00') as read_date, senderView
+			messageId, receiverAccountId, nickname, subject, CONVERT_TZ(send_date,'+09:00','+00:00') as send_date, CONVERT_TZ(read_date,'+09:00','+00:00') as read_date, senderView, a.picture
 		FROM
 			message as m
 		JOIN
