@@ -2,6 +2,7 @@ package com.good.dto;
 
 public class MessageList extends MessageVO {
 	private String nickname;
+	private String picture;
 
 	public String getNickname() {
 		return nickname;
@@ -9,6 +10,15 @@ public class MessageList extends MessageVO {
 
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
+	}
+
+	
+	public final String getPicture() {
+		return picture;
+	}
+
+	public final void setPicture(String picture) {
+		this.picture = picture;
 	}
 
 	@Override

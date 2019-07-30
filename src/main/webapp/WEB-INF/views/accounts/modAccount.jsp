@@ -13,7 +13,7 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="">
 <meta name="author" content="">
-<title>회원정보수정 - YouDitor</title>
+<title>회원정보수정 - YouditoR</title>
 <jsp:include page="../module/header.jsp" flush="false" />
 <link href="/resources/css/modAccount.css" rel="stylesheet">
 <style>
@@ -224,10 +224,14 @@ th {
 </head>
 <body style="background-color: #FFF;">
 	<jsp:include page="../module/top2.jsp" flush="false" />
-	<div align="center" style="padding-top: 7%">
+	<div class="form-group" style="width:100%; display:table; padding-top: 5%;">
+		<div class="col-sm-12" style="background-image: url('../resources/images/profile/mod_profile.jpg'); background-size:100%; background-position:50% 70%; height:200px; display: table-cell; vertical-align: middle; text-shadow: 3px 6px 3px DarkCyan ;">
+			<h1 style="color:white">회원정보수정</h1>
+		</div>
+	</div>
+	<div align="center" style="padding-top:3%;">
 		<c:if test="${login.accountId ne null }">
 			<form name="modForm" method="POST" enctype="multipart/form-data">
-				<h2>회원정보수정</h2>
 				<table>
 					<tr>
 						<th class="thcell">가입일</th>
@@ -293,7 +297,7 @@ th {
 					</tr>
 
 				</table>
-				<div class="ud-st">
+				<div class="ud-st" style="padding-top:1%">
 					<input type="hidden" name="accountId" id="accountId" value="${login.accountId}">
 					<button id="modify" class="btn btn-modify" type="button" onclick="btnUpdate();"><i class="fas fa-user-edit"></i>수정하기</button>
 					<button class="btn btn-delete" type="button" onclick="btnDelete();"><i class="fas fa-user-slash"></i>삭제하기</button>

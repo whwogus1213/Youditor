@@ -69,7 +69,6 @@ public class MessageController {
 	// 보낸 메세지 목록 + 페이징 + 검색
 	@RequestMapping(value = "/messageSendList", method = RequestMethod.GET)
 	public String sendList(Model model, @RequestParam(required = false, defaultValue = "1") int page,
-									@RequestParam(required = false, defaultValue = "1") int range,
 									@RequestParam(required = false, defaultValue = "object") String searchType,
 									@RequestParam(required = false) String keyword,
 									HttpSession session) throws Exception {
@@ -78,9 +77,15 @@ public class MessageController {
 		search.setKeyword(keyword);
 		AccountsVO vo = (AccountsVO) session.getAttribute("login");
 		search.setAccountId(vo.getAccountId());
-		List<MessageList> messageSendList = service.sendListAll(search);
+
 		// 전체 게시글 개수
 		int listCnt = service.getSendListCnt(search);
+		int rangeSize = search.getRangeSize();
+		int range = ((page - 1) / rangeSize) + 1;
+		search.pageInfo(page, range, listCnt);
+		
+		List<MessageList> messageSendList = service.sendListAll(search);
+		
 		System.out.println("listcnt :  " + listCnt);
 		
 		search.pageInfo(page, range, listCnt);

@@ -22,16 +22,22 @@
 	</div>
 	
 	<div class="container">
-	    <form class="form-horizontal" method="post" name="tipWriteForm">
+		<div align="right" >
+			<br>
+			<h1 style="color:Brown; font-family: 'Noto Serif KR'">편집 Tip 작성</h1>
+		</div>
+		<hr>
+		<br>
+	    <form class="form-horizontal" method="post" action=" ${path}/tipboard/insertTipBoardPro">
 	    	<div class="form-inline">
-	        	<label class="control-label col-sm-2">제목</label>
-	        	<div class="col-sm-3">
-	        		<input type="text" class="form-control" name="subject" id="subject" maxlength="50" placeholder="Enter Title">
+	        	<label class="control-label col-sm-2"><strong style="color:brown">제목</strong></label>
+	        	<div class="col-sm-8">
+	        		<input type="text" class="form-control" name="subject" maxlength="50" placeholder="Enter Title" style="width:100%">
 	        	</div>
 			</div>
 			<br>
 			<div class="form-inline">
-				<label class="control-label col-sm-2">카테고리</label>
+				<label class="control-label col-sm-2"><strong style="color:brown">카테고리</strong></label>
 				<div class="col-sm-3">
 					<select class="browser-default custom-select" name="categoryId" id="categoryId" style="width: 190px">
 						<c:forEach items="${tCatList}" var="tCatList">
@@ -65,7 +71,7 @@
 			</div>
 			<br>
 			<div class="form-inline">
-		        <label class="control-label col-2">작성자</label>
+		        <label class="control-label col-2"><strong style="color:brown">작성자</strong></label>
 		        <div class="col-sm-3">
 					<input type="text" class="form-control" maxlength="50" value="${login.nickname}" readonly>
 					<input type="text" class="form-control" name="accountId" id="accountId" maxlength="50" value="${login.accountId}" style="display:none" readonly>
@@ -73,14 +79,14 @@
 			</div>
 			<br>
 			<div class="form-inline">
-				<label class="control-label col-sm-2">내용</label>
+				<label class="control-label col-sm-2"><strong style="color:brown">내용</strong></label>
 				<div class="col-sm-3">
 					<textarea rows="10" cols="100" name="object" id="object"></textarea>
 				</div>
 			</div>
 			<br>
 			<div class="col-sm-12" align="center">
-				<button type="button" class="btn btn-success" onclick="insertBtn();">올리기</button>
+				<button type="submit" id="submit" class="btn btn-success" onclick="insertBtn();">올리기</button>
 			
 				<script type="text/javascript">
 				function insertBtn() {
@@ -135,6 +141,6 @@
 			<br>
 		</form>
 	</div>
-	<jsp:include page="../module/bottom.jsp" flush="false" />
 </body>
+<jsp:include page="../module/bottom.jsp" flush="false" />
 </html>

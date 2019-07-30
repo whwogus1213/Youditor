@@ -21,11 +21,23 @@
 			<h5 align="center"><br>YouditoR의 최신 소식과 이벤트를 알려드립니다.</h5>
 		</div>
 	</div>
-	
 	<div class="container">
+		<div align="right" >
+			<br>
+	        <c:choose>
+	        	<c:when test="${row ne null }">
+					<h1 style="color:DarkGreen; font-family: 'Jua'">공지사항 수정</h1>
+	        	</c:when>
+	        	<c:otherwise>
+					<h1 style="color:DarkGreen; font-family: 'Jua'">공지사항 작성</h1>
+	        	</c:otherwise>
+	        </c:choose>
+		</div>
+		<hr>
+		<br>
 	    <form class="form-horizontal" method="post" name="noticeWriteForm">
 	    	<div class="form-inline">
-	        	<label class="control-label col-sm-2">제목</label>
+	        	<label class="control-label col-sm-2"><strong style="color:DarkGreen">제목</strong></label>
 	        	<div class="col-sm-8">
 	        		<c:choose>
 	        			<c:when test="${row ne null }">
@@ -41,7 +53,7 @@
 			</div>
 			<br>
 			<div class="form-inline">
-				<label class="control-label col-sm-2">카테고리</label>
+				<label class="control-label col-sm-2"><strong style="color:DarkGreen">카테고리</strong></label>
 				<div class="col-sm-3">
 	        		<select class="browser-default custom-select" name="categoryId" id="categoryId" style="width:190px">
 		           		<c:forEach items="${nCatList}" var="nCatList">
