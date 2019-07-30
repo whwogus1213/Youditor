@@ -164,11 +164,11 @@
   		if(nickname.length < 3) { alert("닉네임을 입력해 주세요."); $("#nickname").focus(); return; }
 
 		if(email != emailCfm && isCheckEmail == 0) {
-  			alert(email + '이메일 중복체크를 해주세요' + emailCfm);
+  			alert('이메일 중복체크를 해주세요');
   			$("#email").focus();
   			return false;
 		} else if(nickname != nicknameCfm && isCheckNickname == 0) {
-       		alert(nickname + '닉네임 중복체크를 해주세요' + nicknameCfm);
+       		alert('닉네임 중복체크를 해주세요');
        		$("#nickname").focus();
   			return false;
 		} else {
@@ -185,7 +185,7 @@
 </head>
 <body style="background-color: #FFF;">
 <jsp:include page="./adminTop.jsp" flush="false"/>
-<div align="center">
+<div class="container" align="center" style="max-width: 85%;">
 	<form name="modForm" method="POST" enctype="multipart/form-data">
 		<table>
 			<tr>

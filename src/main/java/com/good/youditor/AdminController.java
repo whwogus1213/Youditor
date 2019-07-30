@@ -24,6 +24,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.good.dto.AccountsVO;
 import com.good.dto.AdminVO;
+import com.good.dto.CategoryCount;
+import com.good.dto.EditCategoryVO;
 import com.good.dto.NoticeCategoryVO;
 import com.good.dto.RecruitCategoryVO;
 import com.good.dto.Search;
@@ -39,7 +41,7 @@ public class AdminController {
 
 	@Inject
 	AdminService service;
-	
+
 	@Resource(name="uploadPath")
 	String uploadPath;
 
@@ -76,16 +78,16 @@ public class AdminController {
 		Search search = new Search();
 		search.setSearchType(searchType);
 		search.setKeyword(keyword);
-		
+
 		int listCnt = service.getAccountListCnt(search);
-		
+
 		System.out.println(" listCnt : " + listCnt);
 
 		int rangeSize = search.getRangeSize();
 		int range = ((page - 1) / rangeSize) + 1;
-		
+
 		search.pageInfo(page, range, listCnt);
-		
+
 		model.addAttribute("pagination", search);
 		model.addAttribute("list", service.selectAccounts(search));
 		return "admin/adminView";
@@ -93,7 +95,7 @@ public class AdminController {
 
 	@RequestMapping(value = "/adminAccount", method = RequestMethod.GET)
 	public String adminAccount(@RequestParam("accountId") int accountId, Model model) throws Exception {
-		
+
 		model.addAttribute("AccountInfo", service.getAccountInfo(accountId));
 		return "admin/adminAccount";
 	}
@@ -104,7 +106,7 @@ public class AdminController {
 			System.out.println("공지");
 			List<NoticeCategoryVO> CatInfo = new ArrayList<NoticeCategoryVO>();
 			CatInfo = service.getNoticeCatInfo();
-			Map<Integer, Integer> catCount = service.getNoticeCatCount();
+			List<CategoryCount> catCount = service.getNoticeCatCount();
 			System.out.println("CatInfo : " + CatInfo);
 			System.out.println("CatCount : " + catCount);
 			model.addAttribute("CatName", category);
@@ -114,7 +116,7 @@ public class AdminController {
 			System.out.println("영상공유");
 			List<VideoCategoryVO> CatInfo = new ArrayList<VideoCategoryVO>();
 			CatInfo = service.getVideoCatInfo();
-			Map<Integer, Integer> catCount = service.getVideoCatCount();
+			List<CategoryCount> catCount = service.getVideoCatCount();
 			System.out.println("CatInfo : " + CatInfo);
 			System.out.println("CatCount : " + catCount);
 			model.addAttribute("CatName", category);
@@ -124,7 +126,7 @@ public class AdminController {
 			System.out.println("팁");
 			List<TipCategoryVO> CatInfo = new ArrayList<TipCategoryVO>();
 			CatInfo = service.getTipCatInfo();
-			Map<Integer, Integer> catCount = service.getTipCatCount();
+			List<CategoryCount> catCount = service.getTipCatCount();
 			System.out.println("CatInfo : " + CatInfo);
 			System.out.println("CatCount : " + catCount);
 			model.addAttribute("CatName", category);
@@ -134,7 +136,7 @@ public class AdminController {
 			System.out.println("구인구직");
 			List<RecruitCategoryVO> CatInfo = new ArrayList<RecruitCategoryVO>();
 			CatInfo = service.getRecruitCatInfo();
-			Map<Integer, Integer> catCount = service.getRecruitCatCount();
+			List<CategoryCount> catCount = service.getRecruitCatCount();
 			System.out.println("CatInfo : " + CatInfo);
 			System.out.println("CatCount : " + catCount);
 			model.addAttribute("CatName", category);
@@ -171,7 +173,7 @@ public class AdminController {
 
 		return map;
 	}
-	
+
 	// 유저 계정 업뎃
 	@RequestMapping(value = "/adminAccountUpdate", method = RequestMethod.POST)
 	public String accountUpdate(@RequestParam("accountId") int accountId,
@@ -223,17 +225,18 @@ public class AdminController {
 			savedName = uid.toString().substring(0, 16) + "." + file_ext;	// 저장 이름
 			// new File (디렉토리, 파일이름)
 			File target = new File(uploadPath, savedName);
-			
+
 			FileCopyUtils.copy(picture.getBytes(), target);
 		}
 		updateUser.setPicture(savedName);
-		
+
 		service.accountUpdate(updateUser);
-		
+
 		return "redirect:/adminAccount?accountId=" + accountId;
 	}
-	
+
 	@RequestMapping(value = "/adminMoveCatPro", method = RequestMethod.POST)
+	@ResponseBody
 	public int adminMoveCatPro(@RequestParam("category") String category,
 							@RequestParam("categoryId") int categoryId,
 							@RequestParam("moveTo") int moveTo) throws Exception {
@@ -241,23 +244,198 @@ public class AdminController {
 		Map<String, Integer> fromTo = new HashMap<String, Integer>();
 		fromTo.put("from", categoryId);
 		fromTo.put("to", moveTo);
-		if(category == "notice") {
+		if(category.equals("notice")) {
 			service.moveNoticeCat(fromTo);
 			result = 1;
-		} else if(category == "video") {
+		} else if(category.equals("video")) {
 			service.moveVideoCat(fromTo);
 			result = 1;
-		} else if(category == "tip") {
+		} else if(category.equals("tip")) {
 			service.moveTipCat(fromTo);
 			result = 1;
-		} else if(category == "recruit") {
+		} else if(category.equals("recruit")) {
 			service.moveRecruitCat(fromTo);
 			result = 1;
 		} else {
 			result = 0;
 		}
+
+		return result;
+	}
+
+	@RequestMapping(value = "/adminDelCatPro", method = RequestMethod.POST)
+	@ResponseBody
+	public int adminDelCatPro(@RequestParam("category") String category,
+							@RequestParam("categoryId") int categoryId,
+							@RequestParam("moveTo") int moveTo) throws Exception {
+		int result = 0;
+		Map<String, Integer> fromTo = new HashMap<String, Integer>();
+		fromTo.put("from", categoryId);
+		fromTo.put("to", moveTo);
+		if(category.equals("notice")) {
+			service.moveNoticeCat(fromTo);
+			service.delNoticeCat(categoryId);
+			result = 1;
+		} else if(category.equals("video")) {
+			service.moveVideoCat(fromTo);
+			service.delVideoCat(categoryId);
+			result = 1;
+		} else if(category.equals("tip")) {
+			service.moveTipCat(fromTo);
+			service.delTipCat(categoryId);
+			result = 1;
+		} else if(category.equals("recruit")) {
+			service.moveRecruitCat(fromTo);
+			service.delRecruitCat(categoryId);
+			result = 1;
+		} else {
+			result = 0;
+		}
+
+		return result;
+	}
+
+	@RequestMapping(value = "/adminEditCatPro")
+	@ResponseBody
+	public int adminEditCatPro(@RequestParam("category") String category,
+								@RequestParam("categoryId") int categoryId,
+								@RequestParam("catId") int catId,
+								@RequestParam("catName") String catName,
+								@RequestParam("catEditAuth") int catEditAuth,
+								@RequestParam("catViewAuth") int catViewAuth) throws Exception {
+		System.out.println("카테고리 수정");
+		int result = 0;
+
+		EditCategoryVO catVO = new EditCategoryVO();
+		catVO.setCatOldId(categoryId);
+		catVO.setCatNewId(catId);
+		catVO.setCatName(catName);
+		catVO.setEditAuth(catEditAuth);
+		catVO.setViewAuth(catViewAuth);
 		
+		if(category.equals("notice")) {
+			System.out.println("nCatVO : " + catVO);
+			service.editNoticeCat(catVO);
+			result = 1;
+		} else if(category.equals("video")) {
+			System.out.println("vCatVO : " + catVO);
+			service.editVideoCat(catVO);
+			result = 1;
+		} else if(category.equals("tip")) {
+			System.out.println("tCatVO : " + catVO);
+			service.editTipCat(catVO);
+			result = 1;
+		} else if(category.equals("recruit")) {
+			System.out.println("rCatVO : " + catVO);
+			service.editRecruitCat(catVO);
+			result = 1;
+		} else {
+			result = 0;
+		}
+
+		return result;
+	}
+
+	@RequestMapping(value = "/adminNewCatPicPro")
+	@ResponseBody
+	public int adminNewCatPicPro(@RequestParam("categoryId") int categoryId,
+									@RequestParam("CatPic") MultipartFile CatPic) throws Exception {
+		System.out.println(categoryId);
+		int result = 0;
+		//기본 사진이 아닌 경우사진 파일 삭제
+		String savedName = "";
+		String oriPic = service.getCatPic(categoryId);
+		System.out.println(oriPic);
+		try {
+			oriPic.isEmpty();
+		} catch(Exception e) {
+			oriPic = "nothing.jpg";
+		} finally {
+			savedName = oriPic;
+			if(!oriPic.equals("nothing.jpg") && !CatPic.isEmpty()) {
+				String filePath = uploadPath + "/videoboard/" + oriPic;
+				File picture_old = new File(filePath);
+				if(picture_old.exists()) {
+					if(picture_old.delete()) {
+						System.out.println("기존 사진 삭제 성공");
+					} else {
+						System.out.println("기존 사진 삭제 실패");
+					}
+				} else {
+					System.out.println("기존에 사진이 없었습니다.");
+				}
+			}
+		}
+
+		//새로운 사진 등록
+		if(!CatPic.isEmpty()) {
+			savedName = CatPic.getOriginalFilename();
+			StringTokenizer pst = new StringTokenizer(savedName,".");
+			pst.nextToken();
+			String file_ext = pst.nextToken();
+			UUID uid = UUID.randomUUID();
+			savedName = uid.toString().substring(0, 16) + "." + file_ext;	// 저장 이름
+			// new File (디렉토리, 파일이름)
+			File target = new File(uploadPath + "/videoboard/", savedName);
+
+			FileCopyUtils.copy(CatPic.getBytes(), target);
+
+			result = 1;
+		}
+		EditCategoryVO editCatVO = new EditCategoryVO();
+		editCatVO.setCatOldId(categoryId);
+		editCatVO.setCatPic(savedName);
+		System.out.println(editCatVO);
+		service.updateCatPic(editCatVO);
+
 		return result;
 	}
 	
+	@RequestMapping(value = "/adminAddCatPro")
+	@ResponseBody
+	public int adminAddCatPro(@RequestParam("board") String board,
+							@RequestParam("newCatId") int newCatId,
+							@RequestParam("newCatName") String newCatName,
+							@RequestParam("newEditAuth") int newEditAuth,
+							@RequestParam("newViewAuth") int newViewAuth) throws Exception {
+		System.out.println("board : " + board + ", newCatId : " + newCatId + ", newCatName : " + newCatName);
+		int result = 0;
+		EditCategoryVO newCat = new EditCategoryVO();
+		newCat.setCatNewId(newCatId);
+		newCat.setCatName(newCatName);
+		newCat.setEditAuth(newEditAuth);
+		newCat.setViewAuth(newViewAuth);
+		System.out.println(newCat);
+		if(board.equals("notice")) {
+			if(service.checkNoticeCatId(newCatId) == 0) {
+				System.out.println("nCatVO : " + newCat);
+				service.insertNewNoticeCat(newCat);
+				result = 1;
+			}
+		} else if(board.equals("video")) {
+			if(service.checkVideoCatId(newCatId) == 0) {
+				System.out.println("vCatVO : " + newCat);
+				service.insertNewVideoCat(newCat);
+				result = 1;
+			}
+		} else if(board.equals("tip")) {
+			if(service.checkTipCatId(newCatId) == 0) {
+				System.out.println("tCatVO : " + newCat);
+				service.insertNewTipCat(newCat);
+				result = 1;
+			}
+		} else if(board.equals("recruit")) {
+			if(service.checkRecruitCatId(newCatId) == 0) {
+				System.out.println("rCatVO : " + newCat);
+				service.insertNewRecruitCat(newCat);
+				result = 1;
+			}
+		} else {
+			result = 0;
+		}
+
+		
+		return result;
+	}
+
 }
