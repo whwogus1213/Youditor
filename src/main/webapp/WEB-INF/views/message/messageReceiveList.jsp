@@ -18,18 +18,31 @@
 	<link href="/resources/css/pagination.css" rel="stylesheet">
 <script src="https://kit.fontawesome.com/e83fabbb47.js"></script>
 	<script>
-		// 이전 버튼
-		function fn_prev(page, range, rangeSize) {
-			var page = ((range - 2) * rangeSize) + 1;
-			var range = range - 1;
+// 		// 이전 버튼
+// 		function fn_prev(page, range, rangeSize) {
+// 			var page = ((range - 2) * rangeSize) + 1;
+// 			var range = range - 1;
 
+// 			var url = "${pageContext.request.contextPath}/message/messageReceiveList?";
+	
+// 			url = url + "?page=" + page;
+// 			url = url + "&range=" + range;
+// 			location.href = url;
+// 		}
+
+		// 이전 버튼
+		function fn_prev(page, rangeSize, searchType, keyword) {
+			var page = parseInt((page - 1) / rangeSize) * rangeSize;
 			var url = "${pageContext.request.contextPath}/message/messageReceiveList?";
 	
-			url = url + "?page=" + page;
-			url = url + "&range=" + range;
+			url = url + "page=" + page;
+			if(keyword != null && keyword != "") {
+				url = url + "&searchType=" + searchType;
+				url = url + "&keyword=" + keyword;
+			}
 			location.href = url;
 		}
-	
+
 		//페이지 번호 클릭
 		function fn_pagination(page, searchType, keyword) {
 			var url = "${pageContext.request.contextPath}/message/messageReceiveList?";
@@ -44,16 +57,18 @@
 		
 	
 		//다음 버튼 이벤트
-		function fn_next(page, range, rangeSize) {
-			var page = parseInt((range * rangeSize)) + 1;
-			var range = parseInt(range) + 1;
+		function fn_next(page, rangeSize, searchType, keyword) {
+			var page = ((parseInt((page - 1) / rangeSize) + 1) * rangeSize) + 1;
 			var url = "${pageContext.request.contextPath}/message/messageReceiveList?";
-	
-			url = url + "?page=" + page;
-			url = url + "&range=" + range;
+
+			url = url + "page=" + page;
+			if(keyword != null && keyword != "") {
+				url = url + "&searchType=" + searchType;
+				url = url + "&keyword=" + keyword;
+			}
 			location.href = url;
 		}
-	
+			
 		$(function(){
 			$('#keyword').keypress(function(e) {
 
@@ -149,23 +164,25 @@
 	<!-- 페이징 -->
 	<div class="p1 pagination col-12" style="display: block; text-align: center; margin-bottom: 10px;">
 		<ul class="pagination" style="display:table; margin-left:auto; margin-right: auto;">
+<%-- 			<c:if test="${pagination.prev}"> --%>
+<!-- 				<li class="page-item"> -->
+<!-- 					<a class="page-link" href="#" -->
+<%-- 					onClick="fn_prev('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}')">Previous</a> --%>
+<!-- 				</li> -->
+<%-- 			</c:if> --%>
 			<c:if test="${pagination.prev}">
-				<li class="page-item">
-					<a class="page-link" href="#"
-					onClick="fn_prev('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}')">Previous</a>
-				</li>
+				<a href="#" onclick="fn_prev('${pagination.page}', '${pagination.rangeSize}',
+				'${pagination.searchType}', '${pagination.keyword}'); return false;"><li>◀</li></a>
 			</c:if>
+			
 			<c:forEach begin="${pagination.startPage}" end="${pagination.endPage}" var="idx">
 				<a class="<c:out value="${pagination.page == idx ? 'is-active' : ''}"/>" href="#"
 				onclick="fn_pagination('${idx}', '${pagination.searchType}', '${pagination.keyword}'); return false;">
 					<li>${idx}</li></a>
 			</c:forEach>
 			<c:if test="${pagination.next}">
-				<li class="page-item">
-					<a class="page-link" href="#"
-					onClick="fn_next('${pagination.range}', '${pagination.range}',
-					'${pagination.rangeSize}')">Next</a>
-				</li>
+				<a href="#" onclick="fn_next('${pagination.page}', '${pagination.rangeSize}',
+				'${pagination.searchType}', '${pagination.keyword}'); return false;"><li>▶</li></a>
 			</c:if>
 		</ul>
 	</div>
