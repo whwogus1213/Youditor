@@ -434,6 +434,7 @@
 	 		type : "POST",
 	 		url : "/follow/insert",
 	 		data : json,
+	 		async: false,
 	 		success : function(data) {
 	 			if (data == "success") {
 	 				tr.attr("style","");
@@ -449,6 +450,15 @@
 	 			alert("에러");
 	 		}
 	 	});
+
+
+
+		/* 웹소켓으로 팔로우 알람 */
+		var sendText = {};
+		sendText.from = "msgAlarm";
+		sendText.text = accountId;
+		sock.send(JSON.stringify(sendText));
+		console.log(tempcheck);
 	 	
 	 }
 

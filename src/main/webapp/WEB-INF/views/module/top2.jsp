@@ -314,7 +314,9 @@ function DosignUp() {
 			<jsp:include page="../chat/chattingview.jsp" flush="false"/>
 	</div>
 </div>
+<script type="text/javascript">
 
+</script>
 
 <!-- 탑 메뉴  -->
 <nav class="navbar fixed-top navbar-expand-lg fixed-top" style="box-shadow: none; min-height: 80px;">
@@ -454,7 +456,7 @@ function DosignUp() {
 						<a class="nav-link" href="#">
 							<c:choose>		
 								<c:when test="${mCount >= 1 }">		
-									<i class="far fa-envelope"></i>		
+									<i id="messageIcon" class="far fa-envelope" style="color: blue;"></i>		
 								</c:when>		
 								<c:otherwise>		
 									<i class="far fa-envelope-open"></i>		

@@ -7,6 +7,9 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
@@ -33,21 +36,35 @@ public class EchoHandler extends TextWebSocketHandler {
 	
 	// 클라이언트가 서버로 메시지를 전송했을때 실행
 	@Override
-	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
+	protected void handleTextMessage(WebSocketSession session, @RequestBody TextMessage message) throws Exception {
 		// TODO Auto-generated method stub
 		System.out.println("handleTextmessage 진입");
 		System.out.println("메세지를 보낸 클라이언트 세션 : "+ session.getId());
 		System.out.println("보낸 메세지 : "+ message.getPayload());
-
-		// http session 사용 방법
-		Map<String, Object> map;
-		map = session.getAttributes();
-		AccountsVO loginVO = (AccountsVO)map.get("login");
-		System.out.println("accountId : " + loginVO.getAccountId());
-
-		
-		for (WebSocketSession sess : sessionList) {
-			sess.sendMessage(new TextMessage(loginVO.getAccountId() + "|" + loginVO.getNickname() + "|" + message.getPayload()));
+		JSONParser jsonParser = new JSONParser();
+		JSONObject jsonObj = (JSONObject)jsonParser.parse(message.getPayload());
+//		String from = (String) jsonObj.get("from");
+//		String text = (String) jsonObj.get("text");
+		System.out.println(jsonObj.get("from"));
+		System.out.println(jsonObj.get("text"));
+//
+//		
+		if(jsonObj.get("from").equals("chat")) {
+			// http session 사용 방법
+			Map<String, Object> map;
+			map = session.getAttributes();
+			AccountsVO loginVO = (AccountsVO)map.get("login");
+			System.out.println("accountId : " + loginVO.getAccountId());
+			
+			
+			for (WebSocketSession sess : sessionList) {
+				sess.sendMessage(new TextMessage(loginVO.getAccountId() + "|" + loginVO.getNickname() + "|" + jsonObj.get("text")));
+			}
+		} else if(jsonObj.get("from").equals("msgAlarm")) {
+			System.out.println("메시지 알람이요~~~메시지 알람이요~~~메시지 알람이요~~~메시지 알람이요~~~메시지 알람이요~~~메시지 알람이요~~~메시지 알람이요~~~");
+			for (WebSocketSession sess : sessionList) {
+				sess.sendMessage(new TextMessage("msgAlarm"));
+			}
 		}
 	}
 

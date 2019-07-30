@@ -302,6 +302,9 @@ $(function(){
 				alert("에러");
 			}
 		});
+
+
+		
 	}
 </script>
 
