@@ -24,13 +24,13 @@
 		LIMIT
 			#{startList}, #{listSize}
 	</select>
-	
+
 	<!-- 계정 수 -->
 	<select id="getAccountListCnt" resultType="int">
 		SELECT
 			count(accountId)
 		FROM
-			accounts  
+			accounts
 		 <trim prefix="WHERE" prefixOverrides="AND|OR">
 			<if test="searchType=='email' and keyword != null and keyword != '' ">
 				AND email like CONCAT('%', #{keyword}, '%')
@@ -40,11 +40,11 @@
 			</if>
 		</trim>
 	</select>
-	
+
 	<select id="login" resultType="AdminVO">
         select * from admin where adminId = #{adminId} and adminPwd = #{adminPwd}
     </select>
-    
+
     <select id="getAccountInfo" parameterType="int" resultType="AccountsVO">
     	SELECT
     		*
@@ -53,7 +53,7 @@
     	WHERE
     		accountId = #{accountId}
     </select>
-    
+
     <!-- 공지 카테고리 정보 취득 -->
     <select id="getNoticeCatInfo" parameterType="String" resultType="NoticeCategoryVO">
     	SELECT
@@ -61,7 +61,7 @@
     	FROM
 	    	noticecategory
     </select>
-    
+
     <!-- 영상공유 카테고리 정보 취득 -->
     <select id="getVideoCatInfo" parameterType="String" resultType="VideoCategoryVO">
     	SELECT
@@ -69,7 +69,7 @@
     	FROM
 	    	videocategory
     </select>
-    
+
     <!-- 팁 카테고리 정보 취득 -->
     <select id="getTipCatInfo" parameterType="String" resultType="TipCategoryVO">
     	SELECT
@@ -77,7 +77,7 @@
     	FROM
 	    	tipcategory
     </select>
-    
+
     <!-- 구인구직 카테고리 정보 취득 -->
     <select id="getRecruitCatInfo" parameterType="String" resultType="RecruitCategoryVO">
     	SELECT
@@ -85,87 +85,119 @@
     	FROM
 	    	recruitcategory
     </select>
-    
+
     <!-- 공지 게시판 각 카테고리별 게시물 수 -->
-    <select id="getNoticeCatCount" resultType="map">
+    <select id="getNoticeCatCount" resultType="CategoryCount">
     	SELECT
-			categoryId, count(*) as count
+			categoryId as catId, count(*) as catCount
 		FROM
 			noticeboard
 		GROUP BY
 			categoryId;
     </select>
-    
+
     <!-- 영상 게시판 각 카테고리별 게시물 수 -->
-    <select id="getVideoCatCount" resultType="map">
+    <select id="getVideoCatCount" resultType="CategoryCount">
     	SELECT
-			categoryId, count(*) as count
+			categoryId as catId, count(*) as catCount
 		FROM
 			videoboard
 		GROUP BY
 			categoryId;
     </select>
-    
+
     <!-- 팁 게시판 각 카테고리별 게시물 수 -->
-    <select id="getTipCatCount" resultType="map">
+    <select id="getTipCatCount" resultType="CategoryCount">
     	SELECT
-			categoryId, count(*) as count
+			categoryId as catId, count(*) as catCount
 		FROM
 			tipboard
 		GROUP BY
 			categoryId;
     </select>
-    
+
     <!-- 구인구직 게시판 각 카테고리별 게시물 수 -->
-    <select id="getRecruitCatCount" resultType="map">
+    <select id="getRecruitCatCount" resultType="CategoryCount">
     	SELECT
-			categoryId, count(*) as count
+			categoryId as catId, count(*) as catCount
 		FROM
 			recruitboard
 		GROUP BY
 			categoryId;
     </select>
-    
+
     <!-- 공지 게시판 categoryId의 게시물을 moveTo 카테고리로 전부 옮기기 -->
     <update id="moveNoticeCat">
     	UPDATE
     		noticeboard
     	SET
-    		categoryId = #{moveTo}
+    		categoryId = #{to}
     	WHERE
-    		categoryId = #{categoryId}
+    		categoryId = #{from}
     </update>
-    
+
     <!-- 영상 게시판 categoryId의 게시물을 moveTo 카테고리로 전부 옮기기 -->
     <update id="moveVideoCat">
     	UPDATE
     		videoboard
     	SET
-    		categoryId = #{moveTo}
+    		categoryId = #{to}
     	WHERE
-    		categoryId = #{categoryId}
+    		categoryId = #{from}
     </update>
-    
+
     <!-- 팁 게시판 categoryId의 게시물을 moveTo 카테고리로 전부 옮기기 -->
     <update id="moveTipCat">
     	UPDATE
     		tipboard
     	SET
-    		categoryId = #{moveTo}
+    		categoryId = #{to}
     	WHERE
-    		categoryId = #{categoryId}
+    		categoryId = #{from}
     </update>
-    
+
     <!-- 구인구직 게시판 categoryId의 게시물을 moveTo 카테고리로 전부 옮기기 -->
     <update id="moveRecruitCat">
     	UPDATE
     		recruitboard
     	SET
-    		categoryId = #{moveTo}
+    		categoryId = #{to}
     	WHERE
-    		categoryId = #{categoryId}
+    		categoryId = #{from}
     </update>
-	
+    
+    <!-- 공지 카테고리 제거 -->
+    <delete id="delNoticeCat" parameterType="int">
+    DELETE FROM
+    	noticecategory
+    WHERE
+    	categoryId = #{categoryId}
+    </delete>
+    
+    <!-- 영상 카테고리 제거 -->
+    <delete id="delVideoCat" parameterType="int">
+    DELETE FROM
+    	videocategory
+    WHERE
+    	categoryId = #{categoryId}
+    </delete>
+    
+    <!-- 팁 카테고리 제거 -->
+    <delete id="delTipCat" parameterType="int">
+    DELETE FROM
+    	tipcategory
+    WHERE
+    	categoryId = #{categoryId}
+    </delete>
+    
+    <!-- 구인구직 카테고리 제거 -->
+    <delete id="delRecruitCat" parameterType="int">
+    DELETE FROM
+    	recruitcategory
+    WHERE
+    	categoryId = #{categoryId}
+    </delete>
+
 	<!-- 이메일 체크 -->
 	<select id="checkEmail" parameterType="String" resultType="Integer">
 	    SELECT
@@ -185,7 +217,7 @@
 	    WHERE
 	      nickname = #{nickname}
 	</select>
-	
+
 	<!-- 유저 포트레이트 파일 이름 취득 -->
 	<select id="getOriPic" parameterType="int" resultType="String">
 		SELECT
@@ -195,7 +227,7 @@
 		WHERE
 			accountId = #{accountId}
 	</select>
-	
+
 	<!-- 유저 정보 업데이트 -->
 	<update id="accountUpdate" parameterType="AccountsVO">
 		UPDATE
@@ -211,4 +243,149 @@
 		WHERE
 			accountId = #{accountId}
 	</update>
+
+	<!-- 공지 게시판 카테고리 업데이트 -->
+	<update id="editNoticeCat" parameterType="EditCategoryVO">
+	UPDATE
+		noticecategory
+	SET
+		categoryId = #{catNewId},
+		categoryName = #{catName},
+		editAuthority = #{editAuth},
+		viewAuthority = #{viewAuth}
+	WHERE
+		categoryId = #{catOldId}
+	</update>
+
+	<!-- 영상 게시판 카테고리 업데이트 -->
+	<update id="editVideoCat" parameterType="EditCategoryVO">
+	UPDATE
+		videocategory
+	SET
+		categoryId = #{catNewId},
+		categoryName = #{catName},
+		editAuthority = #{editAuth},
+		viewAuthority = #{viewAuth}
+	WHERE
+		categoryId = #{catOldId}
+	</update>
+
+	<!-- 팁 게시판 카테고리 업데이트 -->
+	<update id="editTipCat" parameterType="EditCategoryVO">
+	UPDATE
+		tipcategory
+	SET
+		categoryId = #{catNewId},
+		categoryName = #{catName},
+		editAuthority = #{editAuth},
+		viewAuthority = #{viewAuth}
+	WHERE
+		categoryId = #{catOldId}
+	</update>
+
+	<!-- 구인구직 게시판 카테고리 업데이트 -->
+	<update id="editRecruitCat" parameterType="EditCategoryVO">
+	UPDATE
+		recruitcategory
+	SET
+		categoryId = #{catNewId},
+		categoryName = #{catName},
+		editAuthority = #{editAuth},
+		viewAuthority = #{viewAuth}
+	WHERE
+		categoryId = #{catOldId}
+	</update>
+
+	<!-- 영상 카테고리 헤더 이미지 파일명 취득 -->
+	<select id="getCatPic" parameterType="int" resultType="String">
+	SELECT
+		categoryPicture
+	FROM
+		videocategory
+	WHERE
+		categoryId = #{categoryId}
+	</select>
+
+	<!-- 영상 게시판 카테고리 헤더이미지 업데이트 -->
+	<update id="updateCatPic" parameterType="EditCategoryVO">
+	UPDATE
+		videocategory
+	SET
+		categoryPicture = #{catPic}
+	WHERE
+		categoryId = #{catOldId}
+	</update>
+	
+	<!-- 공지 카테고리 번호 체크 -->
+	<select id="checkNoticeCatId" parameterType="int" resultType="int">
+	SELECT
+		count(*)
+	FROM
+		noticecategory
+	WHERE
+		categoryId = #{newCatId}
+	</select>
+	
+	<!-- 영상 카테고리 번호 체크 -->
+	<select id="checkVideoCatId" parameterType="int" resultType="int">
+	SELECT
+		count(*)
+	FROM
+		videocategory
+	WHERE
+		categoryId = #{newCatId}
+	</select>
+	
+	<!-- 팁 카테고리 번호 체크 -->
+	<select id="checkTipCatId" parameterType="int" resultType="int">
+	SELECT
+		count(*)
+	FROM
+		tipcategory
+	WHERE
+		categoryId = #{newCatId}
+	</select>
+	
+	<!-- 구인구직 카테고리 번호 체크 -->
+	<select id="checkRecruitCatId" parameterType="int" resultType="int">
+	SELECT
+		count(*)
+	FROM
+		recruitcategory
+	WHERE
+		categoryId = #{newCatId}
+	</select>
+	
+	<!-- 공지 게시판 새 카테고리 추가 -->
+	<insert id="insertNewNoticeCat" parameterType="EditCategoryVO">
+	INSERT INTO
+		noticecategory (categoryId, categoryName, editAuthority, viewAuthority)
+	VALUES
+		(#{catNewId}, #{catName}, #{editAuth}, #{viewAuth})
+	</insert>
+	
+	<!-- 영상 게시판 새 카테고리 추가 -->
+	<insert id="insertNewVideoCat" parameterType="EditCategoryVO">
+	INSERT INTO
+		videocategory (categoryId, categoryName, editAuthority, viewAuthority)
+	VALUES
+		(#{catNewId}, #{catName}, #{editAuth}, #{viewAuth})
+	</insert>
+	
+	<!-- 팁 게시판 새 카테고리 추가 -->
+	<insert id="insertNewTipCat" parameterType="EditCategoryVO">
+	INSERT INTO
+		tipcategory (categoryId, categoryName, editAuthority, viewAuthority)
+	VALUES
+		(#{catNewId}, #{catName}, #{editAuth}, #{viewAuth})
+	</insert>
+	
+	<!-- 구인구직 게시판 새 카테고리 추가 -->
+	<insert id="insertNewRecruitCat" parameterType="EditCategoryVO">
+	INSERT INTO
+		recruitcategory (categoryId, categoryName, editAuthority, viewAuthority)
+	VALUES
+		(#{catNewId}, #{catName}, #{editAuth}, #{viewAuth})
+	</insert>
+	
 </mapper>
