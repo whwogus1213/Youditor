@@ -222,7 +222,7 @@ footer{
 								<button type="button" class="btn btn-link btn-sm" onclick="location.href='/recruitboard/recruitBoardList?categoryId=1'" style="background-color: Plum; color: white;">구인</button>
 							</c:if>
 							<c:if test="${RecruitBoardList.categoryId eq 2}">
-								<button type="button" class="btn btn-link btn-sm" onclick="location.href='/recruitboard/recruitBoardList?categoryId=2'" style="background-color:LightPink ; color: PaleVioletRed ;">구직</button>
+								<button type="button" class="btn btn-link btn-sm" onclick="location.href='/recruitboard/recruitBoardList?categoryId=2'" style="background-color:LavenderBlush ; color: PaleVioletRed ;">구직</button>
 							</c:if>
 						</td>
 						<td align="left" style="padding-left: 30px; cursor: pointer; vertical-align: middle;"
