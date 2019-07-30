@@ -79,7 +79,8 @@
 </script>
 <style type="text/css">
 .p1 a.is-active {
-	background-color:AntiqueWhite; color: DarkGoldenRod;
+	background-color:AntiqueWhite;
+	color: DarkGoldenRod;
 }
 </style>
 </head>
