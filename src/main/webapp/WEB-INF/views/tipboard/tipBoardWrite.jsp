@@ -71,7 +71,7 @@
 			</div>
 			<br>
 			<div class="form-inline">
-		        <label class="control-label col-2">작성자</label>
+		        <label class="control-label col-2"><strong style="color:brown">작성자</strong></label>
 		        <div class="col-sm-3">
 					<input type="text" class="form-control" maxlength="50" value="${login.nickname}" readonly>
 					<input type="text" class="form-control" name="accountId" id="accountId" maxlength="50" value="${login.accountId}" style="display:none" readonly>
@@ -86,7 +86,7 @@
 			</div>
 			<br>
 			<div class="col-sm-12" align="center">
-				<button type="button" class="btn btn-success" onclick="insertBtn();">올리기</button>
+				<button type="submit" id="submit" class="btn btn-success" onclick="insertBtn();">올리기</button>
 			
 				<script type="text/javascript">
 				function insertBtn() {
@@ -141,6 +141,6 @@
 			<br>
 		</form>
 	</div>
-	<jsp:include page="../module/bottom.jsp" flush="false" />
 </body>
+<jsp:include page="../module/bottom.jsp" flush="false" />
 </html>

@@ -34,7 +34,7 @@ button[type="button"] {
     float: left;
 }
 footer{
-    margin-top: 550px;
+    margin-top: 45%;
 }
 </style>
 <script>
@@ -320,7 +320,6 @@ footer{
 
 	</div>
 	<br>
-	<jsp:include page="./../module/bottom.jsp" flush="false" />
 <script type="text/javascript">
 	 //팔로우 추가
 	 function fn_follow(accountId) {
@@ -386,4 +385,5 @@ footer{
 	}
 </script>
 </body>
+<jsp:include page="./../module/bottom.jsp" flush="false" />
 </html>

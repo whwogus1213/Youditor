@@ -190,7 +190,7 @@ footer{
 	<div class="container">
 		<div class="row">
 		<table class="table table-hover">
-			<thead align="center" style="color:Brown ">
+			<thead align="center" style="color:Brown">
 				<tr>
 					<th style="width: 80px;">번호</th>
 					<th style="width: 80px;">분류</th>
@@ -258,17 +258,17 @@ footer{
 				<ul>
 					<c:if test="${pagination.prev}">
 						<a href="#" onclick="fn_prev('${categoryInfo.categoryId }', '${pagination.page}', '${pagination.rangeSize}',
-						'${pagination.searchType}', '${pagination.keyword}'); return false;"><li>◀</li></a>
+						'${pagination.searchType}', '${pagination.keyword}'); return false;" style="background-color:Brown"><li>◀</li></a>
 					</c:if>
 					<c:forEach begin="${pagination.startPage}" end="${pagination.endPage}" var="idx">
 						<a class="<c:out value="${pagination.page == idx ? 'is-active' : ''}"/>" href="#"
 						onclick="fn_pagination('${categoryInfo.categoryId }', '${idx}', '${pagination.searchType}', 
-						'${pagination.keyword}'); return false;">
+						'${pagination.keyword}'); return false;" style="background-color:Brown">
 							<li>${idx}</li></a>
 					</c:forEach>
 					<c:if test="${pagination.next}">
 						<a href="#" onclick="fn_next('${categoryInfo.categoryId }', '${pagination.page}', '${pagination.rangeSize}',
-						'${pagination.searchType}', '${pagination.keyword}'); return false;"><li>▶</li></a>
+						'${pagination.searchType}', '${pagination.keyword}'); return false;" style="background-color:Brown"><li>▶</li></a>
 					</c:if>
 				</ul>
 			</div>
@@ -297,7 +297,7 @@ footer{
 					<c:if test="${login ne null }">
 						<c:if test="${login.authority >= categoryInfo.viewAuthority }">
 							<button type="button" class="btn btn-sm"
-								onclick="location.href='/tipboard/write.do' " style="background-color: #2ecc71; color: white;">글쓰기</button>
+								onclick="location.href='/tipboard/write.do' " style="background-color:Brown; color: white;">글쓰기</button>
 						</c:if>
 					</c:if>
 				</div>
