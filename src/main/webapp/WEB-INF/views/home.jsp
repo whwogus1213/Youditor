@@ -118,7 +118,7 @@ a:hover {
 							html += "<div class='card h-100'>";
 							html += "<h4 class='card-header'>"
 							html += "<a href='/videoboard/videoBoardView?boardId="+data[i].boardId+"'>"+data[i].subject+"</a></h4>";
-							html += "<div class='card-body' style='padding: 10px;'>";
+							html += "<div class='card-body' style='padding: 0; height:200px;'>";
 							html += "<a href='/videoboard/videoBoardView?boardId="+data[i].boardId+"'>";
 							if(data[i].youtubeLink.length > 31){
 								html += "<img width='100%' height='25%' src='https://img.youtube.com/vi/" + data[i].youtubeLink.substring(32) + "/mqdefault.jpg'></img></a>";
@@ -144,8 +144,8 @@ a:hover {
 						}
 					}
 				}
-
 				$("#top3-1").html(html);
+
 				getAccountsRankList();
 				getNoticeNew();
 				getTipNew();
@@ -166,9 +166,8 @@ function getAccountsRankList(){
 		success : function(data) {
 
 			var html = "";
-
 			if(data.length > 0) {
-				for(var i = 0; i < 3; i++){
+				for(var i = 0; i < data.length; i++){
 					if(i < 3){
 						html += "<div class='col-lg-4 col-sm-6 portfolio-item'>";
 						html += "<div class='card h-100'>";
@@ -211,7 +210,6 @@ function getAccountsRankList(){
 					}
 				}
 			}
-
 			$("#top3-2").html(html);
 
 		},
@@ -265,7 +263,6 @@ function getNoticeNew(){
 			}
 
 			$("#newNotice").html(html);
-
 		},
 		error : function(data) {
 			alert('불러오기 실패');
@@ -361,9 +358,7 @@ function getRecruit1(){
 					}
 				}
 			}
-
 			$("#newRecruit1").html(html);
-
 		},
 		error : function(data) {
 			alert('불러오기 실패');

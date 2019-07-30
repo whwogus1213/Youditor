@@ -21,8 +21,6 @@
 </head>
 <body>
 	<jsp:include page="../module/top2.jsp" flush="false"/>
-	
-	
 	<!-- 배너 -->
 	<div class="form-group">
 		<div class="col-sm-12" style="background-image:url('/resources/images/videoList/upload.jpg'); background-position:50% 50%; background-size:100%; color:white; padding-top: 5%; padding-bottom:4%">

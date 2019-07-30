@@ -15,6 +15,7 @@
 	<jsp:include page="../module/header.jsp" flush="false"/>
 	<!-- Custom styles -->
 	<link href="/resources/css/modern-business.css" rel="stylesheet">
+	<script src="https://kit.fontawesome.com/e83fabbb47.js"></script>
 	<script>
 		// 이전 버튼
 		function fn_prev(page, range, rangeSize) {
@@ -80,21 +81,22 @@
 	</div>
 </div>
 
-<div align="center">
-	<div>
-		<h3>보낸 메세지 목록</h3>
-		<button type="button" class="btn btn-sm btn-link" onclick="location.href='/message/messageReceiveList' ">받은 메세지 보기</button>
-	</div>
-</div>
-<hr>
 <div class="container" align="center">
-	<table class="table table-striped table-hover">
-		<thead class="thead-dark">
+	<div class="row" style="font-family: 'Poor Story', sans-serif;">
+		<div align="left" style="color:DarkGoldenRod; padding-top:1%">
+				<h3 style="margin-bottom:0px; font-weight:600">&nbsp;&nbsp;보낸 메세지 목록</h3>
+		</div>
+		<div align="left" style="padding-top:2%">
+			<button type="button" class="btn btn-sm btn-link" onclick="location.href='/message/messageReceiveList' " style="color:GoldenRod;"><i class="fas fa-arrows-alt-h"></i>&nbsp;&nbsp;받은 메세지 보기</button>
+		</div>
+	</div>
+	<table class="table table-hover">
+		<thead style="color:Peru">
 			<tr>
-				<th scope="col"><div style="overflow:hidden; text-overflow: ellipsis; white-space:nowrap; width:100px; height: 100%">받는이</div></th>
-				<th scope="col"><div style="overflow:hidden; text-overflow: ellipsis; white-space:nowrap; width:400px; height: 100%">제목</div></th>
-				<th scope="col"><div style="overflow:hidden; text-overflow: ellipsis; white-space:nowrap; width:100px; height: 100%">보낸 날짜</div></th>
-				<th scope="col"><div style="overflow:hidden; text-overflow: ellipsis; white-space:nowrap; width:100px; height: 100%">읽은 날짜</div></th>
+				<th scope="col"><div style="overflow:hidden; text-overflow: ellipsis; white-space:nowrap; width:100px; height: 100%;" align="center">받는이</div></th>
+				<th scope="col"><div style="overflow:hidden; text-overflow: ellipsis; white-space:nowrap; width:400px; height: 100%;" align="center">제목</div></th>
+				<th scope="col"><div style="overflow:hidden; text-overflow: ellipsis; white-space:nowrap; width:100px; height: 100%;" align="center">보낸 날짜</div></th>
+				<th scope="col"><div style="overflow:hidden; text-overflow: ellipsis; white-space:nowrap; width:100px; height: 100%;" align="center">읽은 날짜</div></th>
 				<th scope="col">
 					<input type="checkbox" name="allCheck" id="allCheck" />
 					<script>
@@ -115,7 +117,7 @@
 				<tr>
 					<td>${MessageSendList.nickname}</td>
 					<td>
-						<a href="/message/messageSendView?messageId=${MessageSendList.messageId}">${MessageSendList.subject}</a>
+						<a href="/message/messageSendView?messageId=${MessageSendList.messageId}" style="align:center; color:black">${MessageSendList.subject}</a>
 					</td>
 					<td><fmt:formatDate value="${MessageSendList.send_date}" pattern="yyyy-MM-dd" /></td>
 					<td>
@@ -146,20 +148,20 @@
 			<c:if test="${pagination.prev}">
 				<li class="page-item">
 					<a class="page-link" href="#"
-					onClick="fn_prev('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}')">Previous</a>
+					onClick="fn_prev('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}')" style="background-color:AntiqueWhite; color: DarkGoldenRod; border-style:none;">Previous</a>
 				</li>
 			</c:if>
 			<c:forEach begin="${pagination.startPage}" end="${pagination.endPage}" var="idx">
-				<li class="page-item <c:out value="${pagination.page == idx ? 'active' : ''}"/> ">
+				<li class="page-item <c:out value="${pagination.page == idx ? 'active' : ''}"/>">
 					<a class="page-link" href="#"
-					onClick="fn_pagination('${idx}', '${pagination.range}', '${pagination.rangeSize}')">${idx}</a>
+					onClick="fn_pagination('${idx}', '${pagination.range}', '${pagination.rangeSize}')" style="background-color:AntiqueWhite; color: DarkGoldenRod; border-style:none;">${idx}</a>
 				</li>
 			</c:forEach>
 			<c:if test="${pagination.next}">
 				<li class="page-item">
 					<a class="page-link" href="#"
 					onClick="fn_next('${pagination.range}', '${pagination.range}',
-					'${pagination.rangeSize}')">Next</a>
+					'${pagination.rangeSize}')" style="background-color:AntiqueWhite; color: DarkGoldenRod; border-style:none;">Next</a>
 				</li>
 			</c:if>
 		</ul>
@@ -169,7 +171,7 @@
 	<!-- 검색 -->
 	<div class="row input-group">
 		<div class="col-sm-2" align="center">
-			<button type="button" class="btn btn-sm btn-link" onclick="location.href='/message/write.do' " style="background-color: #2ecc71; color: white;"><i class="fas fa-edit"></i>&nbsp;&nbsp;메세지 쓰기</button>
+			<button type="button" class="btn btn-sm btn-link" onclick="location.href='/message/write.do' " style="background-color:AntiqueWhite; color: DarkGoldenRod;"><i class="fas fa-edit"></i>&nbsp;&nbsp;메세지 쓰기</button>
 		</div>
 		<div class="col-sm-2" align="right">
 			<select class="form-control form-control-sm" name="searchType" id="searchType" style="width:66.6%">
@@ -182,10 +184,10 @@
 			<input type="text" class="form-control form-control-sm" name="keyword" id="keyword" >
 		</div>
 		<div class="col-sm-1">
-			<button class="btn btn-sm btn-link" name="btnSearch" id="btnSearch" style="background-color: #2ecc71; color: white;">검색</button>
+			<button class="btn btn-sm btn-link" name="btnSearch" id="btnSearch" style="background-color:AntiqueWhite; color: DarkGoldenRod;">검색</button>
 		</div>
 		<div class="col-sm-3 delBtn" align="center">
-			<button class="btn btn-sm btn-link selectHideBtn" name="selectHideBtn" id="selectHideBtn" style="background-color: #2ecc71; color: white;"><i class="fas fa-times"></i>&nbsp;&nbsp;지우기</button>
+			<button class="btn btn-sm btn-link selectHideBtn" name="selectHideBtn" id="selectHideBtn" style="background-color:AntiqueWhite; color: DarkGoldenRod;"><i class="fas fa-times"></i>&nbsp;&nbsp;지우기</button>
 			<script>
 			$("#selectHideBtn").click(function(){
 				var chArr = new Array();
