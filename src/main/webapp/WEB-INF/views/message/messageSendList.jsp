@@ -90,14 +90,13 @@
 			<button type="button" class="btn btn-sm btn-link" onclick="location.href='/message/messageReceiveList' " style="color:GoldenRod;"><i class="fas fa-arrows-alt-h"></i>&nbsp;&nbsp;받은 메세지 보기</button>
 		</div>
 	</div>
-	<hr style="margin-top:0px">
-	<table class="table table-striped table-hover">
-		<thead style="background-color:Maroon; color:AntiqueWhite">
+	<table class="table table-hover">
+		<thead style="color:Peru">
 			<tr>
-				<th scope="col"><div style="overflow:hidden; text-overflow: ellipsis; white-space:nowrap; width:100px; height: 100%">받는이</div></th>
-				<th scope="col"><div style="overflow:hidden; text-overflow: ellipsis; white-space:nowrap; width:400px; height: 100%">제목</div></th>
-				<th scope="col"><div style="overflow:hidden; text-overflow: ellipsis; white-space:nowrap; width:100px; height: 100%">보낸 날짜</div></th>
-				<th scope="col"><div style="overflow:hidden; text-overflow: ellipsis; white-space:nowrap; width:100px; height: 100%">읽은 날짜</div></th>
+				<th scope="col"><div style="overflow:hidden; text-overflow: ellipsis; white-space:nowrap; width:100px; height: 100%;" align="center">받는이</div></th>
+				<th scope="col"><div style="overflow:hidden; text-overflow: ellipsis; white-space:nowrap; width:400px; height: 100%;" align="center">제목</div></th>
+				<th scope="col"><div style="overflow:hidden; text-overflow: ellipsis; white-space:nowrap; width:100px; height: 100%;" align="center">보낸 날짜</div></th>
+				<th scope="col"><div style="overflow:hidden; text-overflow: ellipsis; white-space:nowrap; width:100px; height: 100%;" align="center">읽은 날짜</div></th>
 				<th scope="col">
 					<input type="checkbox" name="allCheck" id="allCheck" />
 					<script>
@@ -118,7 +117,7 @@
 				<tr>
 					<td>${MessageSendList.nickname}</td>
 					<td>
-						<a href="/message/messageSendView?messageId=${MessageSendList.messageId}">${MessageSendList.subject}</a>
+						<a href="/message/messageSendView?messageId=${MessageSendList.messageId}" style="align:center; color:black">${MessageSendList.subject}</a>
 					</td>
 					<td><fmt:formatDate value="${MessageSendList.send_date}" pattern="yyyy-MM-dd" /></td>
 					<td>
@@ -149,20 +148,20 @@
 			<c:if test="${pagination.prev}">
 				<li class="page-item">
 					<a class="page-link" href="#"
-					onClick="fn_prev('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}')">Previous</a>
+					onClick="fn_prev('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}')" style="background-color:AntiqueWhite; color: DarkGoldenRod; border-style:none;">Previous</a>
 				</li>
 			</c:if>
 			<c:forEach begin="${pagination.startPage}" end="${pagination.endPage}" var="idx">
-				<li class="page-item <c:out value="${pagination.page == idx ? 'active' : ''}"/> ">
+				<li class="page-item <c:out value="${pagination.page == idx ? 'active' : ''}"/>">
 					<a class="page-link" href="#"
-					onClick="fn_pagination('${idx}', '${pagination.range}', '${pagination.rangeSize}')">${idx}</a>
+					onClick="fn_pagination('${idx}', '${pagination.range}', '${pagination.rangeSize}')" style="background-color:AntiqueWhite; color: DarkGoldenRod; border-style:none;">${idx}</a>
 				</li>
 			</c:forEach>
 			<c:if test="${pagination.next}">
 				<li class="page-item">
 					<a class="page-link" href="#"
 					onClick="fn_next('${pagination.range}', '${pagination.range}',
-					'${pagination.rangeSize}')">Next</a>
+					'${pagination.rangeSize}')" style="background-color:AntiqueWhite; color: DarkGoldenRod; border-style:none;">Next</a>
 				</li>
 			</c:if>
 		</ul>

@@ -194,7 +194,7 @@ footer{
 		<table class="table nanum table-hover" style="height:auto">
 			<!-- <table border="1"> -->
 			<thead align="center">
-				<tr>
+				<tr style="color:PaleVioletRed;">
 					<th style="width: 80px;">번호</th>
 					<th style="width: 100px;">분류</th>
 					<th>제목</th>
@@ -264,23 +264,23 @@ footer{
 
 
 		<!-- 페이징 검색 시작 -->
-		<div class="col-12" style="padding-top:1%">
+		<div class="col-12" style="padding-top:1%" align="center">
 			<!-- 페이징 -->
 			<div class="p1 pagination col-12">
 				<ul>
 					<c:if test="${pagination.prev}">
 						<a href="#" onclick="fn_prev('${categoryInfo.categoryId }', '${pagination.page}', '${pagination.rangeSize}',
-						'${pagination.searchType}', '${pagination.keyword}'); return false;"><li>◀</li></a>
+						'${pagination.searchType}', '${pagination.keyword}'); return false;" style="background-color: PaleVioletRed ; color: white;"><li>◀</li></a>
 					</c:if>
 					<c:forEach begin="${pagination.startPage}" end="${pagination.endPage}" var="idx">
 						<a class="<c:out value="${pagination.page == idx ? 'is-active' : ''}"/>" href="#"
 						onclick="fn_pagination('${categoryInfo.categoryId }', '${idx}', '${pagination.searchType}', 
-						'${pagination.keyword}'); return false;">
+						'${pagination.keyword}'); return false;" style="background-color: PaleVioletRed ; color: white;">
 							<li>${idx}</li></a>
 					</c:forEach>
 					<c:if test="${pagination.next}">
 						<a href="#" onclick="fn_next('${categoryInfo.categoryId }', '${pagination.page}', '${pagination.rangeSize}',
-						'${pagination.searchType}', '${pagination.keyword}'); return false;"><li>▶</li></a>
+						'${pagination.searchType}', '${pagination.keyword}'); return false;" style="background-color: PaleVioletRed ; color: white;"><li>▶</li></a>
 					</c:if>
 				</ul>
 			</div>
@@ -309,7 +309,7 @@ footer{
 					<c:if test="${login ne null }">
 						<c:if test="${login.authority >= categoryInfo.viewAuthority }">
 							<button type="button" class="btn btn-sm"
-								onclick="location.href='/recruitboard/write.do' " style="background-color: #2ecc71; color: white;">글쓰기</button>
+								onclick="location.href='/recruitboard/write.do' " style="background-color: PaleVioletRed ; color: white;">글쓰기</button>
 						</c:if>
 					</c:if>
 				</div>
