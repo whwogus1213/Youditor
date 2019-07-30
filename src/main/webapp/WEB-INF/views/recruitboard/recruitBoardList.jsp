@@ -36,6 +36,11 @@ button[type="button"] {
 footer{
     margin-top: 45%;
 }
+.p1 a.is-active {
+	background-color: PaleVioletRed ;
+	border-radius: 100%;
+	color: #fff;
+}
 </style>
 <script>
 	// 이전 버튼
@@ -209,10 +214,10 @@ footer{
 						<td style="vertical-align: middle;">${RecruitBoardList.boardId}</td>
 						<td>
 							<c:if test="${RecruitBoardList.categoryId eq 1}">
-								<button type="button" class="btn btn-info btn-sm" onclick="location.href='/recruitboard/recruitBoardList?categoryId=1'">구인</button>
+								<button type="button" class="btn btn-link btn-sm" onclick="location.href='/recruitboard/recruitBoardList?categoryId=1'" style="background-color: Plum; color: white;">구인</button>
 							</c:if>
 							<c:if test="${RecruitBoardList.categoryId eq 2}">
-								<button type="button" class="btn btn-secondary btn-sm" onclick="location.href='/recruitboard/recruitBoardList?categoryId=2'">구직</button>
+								<button type="button" class="btn btn-link btn-sm" onclick="location.href='/recruitboard/recruitBoardList?categoryId=2'" style="background-color:LightPink ; color: PaleVioletRed ;">구직</button>
 							</c:if>
 						</td>
 						<td align="left" style="padding-left: 30px; cursor: pointer; vertical-align: middle;"
@@ -270,17 +275,17 @@ footer{
 				<ul>
 					<c:if test="${pagination.prev}">
 						<a href="#" onclick="fn_prev('${categoryInfo.categoryId }', '${pagination.page}', '${pagination.rangeSize}',
-						'${pagination.searchType}', '${pagination.keyword}'); return false;" style="background-color: PaleVioletRed ; color: white;"><li>◀</li></a>
+						'${pagination.searchType}', '${pagination.keyword}'); return false;"><li>◀</li></a>
 					</c:if>
 					<c:forEach begin="${pagination.startPage}" end="${pagination.endPage}" var="idx">
 						<a class="<c:out value="${pagination.page == idx ? 'is-active' : ''}"/>" href="#"
 						onclick="fn_pagination('${categoryInfo.categoryId }', '${idx}', '${pagination.searchType}', 
-						'${pagination.keyword}'); return false;" style="background-color: PaleVioletRed ; color: white;">
+						'${pagination.keyword}'); return false;">
 							<li>${idx}</li></a>
 					</c:forEach>
 					<c:if test="${pagination.next}">
 						<a href="#" onclick="fn_next('${categoryInfo.categoryId }', '${pagination.page}', '${pagination.rangeSize}',
-						'${pagination.searchType}', '${pagination.keyword}'); return false;" style="background-color: PaleVioletRed ; color: white;"><li>▶</li></a>
+						'${pagination.searchType}', '${pagination.keyword}'); return false;" "><li>▶</li></a>
 					</c:if>
 				</ul>
 			</div>
@@ -301,7 +306,7 @@ footer{
 				</div>
 
 				<div class="col-1" style="padding-left: 0px;text-align: center;padding-right: 0px;padding-top: 5px;">
-					<i class="fas fa-search" id="btnSearch" style="cursor:" onclick="searchBtn('${categoryInfo.categoryId }',
+					<i class="fas fa-search" id="btnSearch" onclick="searchBtn('${categoryInfo.categoryId }',
 					'${pagination.searchType}', '${pagination.keyword}'); return false;"></i>
 				</div>
 
@@ -320,70 +325,70 @@ footer{
 
 	</div>
 	<br>
-<script type="text/javascript">
-	 //팔로우 추가
-	 function fn_follow(accountId) {
-	 	var tr = $(".dropdownBtnFollow"+accountId);
-	 	var json = {
-	 		"followAccountId" : accountId
-	 	}
-	 				
-	 	event.stopPropagation();
-	 	
-	 	$.ajax({
-	 		type : "POST",
-	 		url : "/follow/insert",
-	 		data : json,
-	 		success : function(data) {
-	 			if (data == "success") {
-	 				tr.attr("style","");
-	 				tr.css("color", "red");
-	 				tr.find("i").css("color","red");
-	 				tr.attr("onclick","");
-	 				tr.css("cursor","default");
-	 				tr.html("<i class='far fa-heart'></i>&nbsp;&nbsp;팔로우중");
-	 			}
-	 			
-	 		},
-	 		error : function(data) {
-	 			alert("에러");
-	 		}
-	 	});
-	 	
-	 }
-
-	 //팔로우 체크
-	 function checkFollow(accountId){
-	 	console.log(accountId+"bbbbbbbbbbbbbbbbbbbbbb");
-	 	var tr = $(".dropdownBtnFollow"+accountId);
-	 	var json = {
-	 			"followAccountId" : accountId,
-	 			"followerAccountId" : ${login.accountId}
-	 			};
-	 	$.ajax({
-	 		type : "POST",
-	 		url : "/follow/check",
-	 		data : json,
-	 		success : function(data) {
-	 			if (data == "1") {
-	 				console.log("팔로우 되어있습니다.");
-	 				tr.attr("style","");
-	 				tr.css("color", "red");
-	 				tr.find("i").css("color","red");
-	 				tr.attr("onclick","");
-	 				tr.css("cursor","default");
-	 				tr.html("<i class='far fa-heart'></i>&nbsp;&nbsp;팔로우중");
-	 				
-	 			} else {
-	 				console.log("팔로우 아님");
-	 			}
-	 		},
-	 		error : function(data) {
-	 			alert("에러");
-	 		}
-		});
-	}
-</script>
+	<script type="text/javascript">
+		 //팔로우 추가
+		 function fn_follow(accountId) {
+		 	var tr = $(".dropdownBtnFollow"+accountId);
+		 	var json = {
+		 		"followAccountId" : accountId
+		 	}
+		 				
+		 	event.stopPropagation();
+		 	
+		 	$.ajax({
+		 		type : "POST",
+		 		url : "/follow/insert",
+		 		data : json,
+		 		success : function(data) {
+		 			if (data == "success") {
+		 				tr.attr("style","");
+		 				tr.css("color", "red");
+		 				tr.find("i").css("color","red");
+		 				tr.attr("onclick","");
+		 				tr.css("cursor","default");
+		 				tr.html("<i class='far fa-heart'></i>&nbsp;&nbsp;팔로우중");
+		 			}
+		 			
+		 		},
+		 		error : function(data) {
+		 			alert("에러");
+		 		}
+		 	});
+		 	
+		 }
+	
+		 //팔로우 체크
+		 function checkFollow(accountId){
+		 	console.log(accountId+"bbbbbbbbbbbbbbbbbbbbbb");
+		 	var tr = $(".dropdownBtnFollow"+accountId);
+		 	var json = {
+		 			"followAccountId" : accountId,
+		 			"followerAccountId" : ${login.accountId}
+		 			};
+		 	$.ajax({
+		 		type : "POST",
+		 		url : "/follow/check",
+		 		data : json,
+		 		success : function(data) {
+		 			if (data == "1") {
+		 				console.log("팔로우 되어있습니다.");
+		 				tr.attr("style","");
+		 				tr.css("color", "red");
+		 				tr.find("i").css("color","red");
+		 				tr.attr("onclick","");
+		 				tr.css("cursor","default");
+		 				tr.html("<i class='far fa-heart'></i>&nbsp;&nbsp;팔로우중");
+		 				
+		 			} else {
+		 				console.log("팔로우 아님");
+		 			}
+		 		},
+		 		error : function(data) {
+		 			alert("에러");
+		 		}
+			});
+		}
+	</script>
 </body>
 <jsp:include page="./../module/bottom.jsp" flush="false" />
 </html>

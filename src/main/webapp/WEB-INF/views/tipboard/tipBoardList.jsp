@@ -30,6 +30,13 @@ footer{
     margin-top: 550px;
 }
 */
+
+.p1 a.is-active {
+	background-color: Brown;
+	border-radius: 100%;
+	color: #fff;
+}
+
 </style>
 <script>
 	// 이전 버튼
@@ -258,17 +265,17 @@ footer{
 				<ul>
 					<c:if test="${pagination.prev}">
 						<a href="#" onclick="fn_prev('${categoryInfo.categoryId }', '${pagination.page}', '${pagination.rangeSize}',
-						'${pagination.searchType}', '${pagination.keyword}'); return false;" style="background-color:Brown"><li>◀</li></a>
+						'${pagination.searchType}', '${pagination.keyword}'); return false;"><li>◀</li></a>
 					</c:if>
 					<c:forEach begin="${pagination.startPage}" end="${pagination.endPage}" var="idx">
 						<a class="<c:out value="${pagination.page == idx ? 'is-active' : ''}"/>" href="#"
 						onclick="fn_pagination('${categoryInfo.categoryId }', '${idx}', '${pagination.searchType}', 
-						'${pagination.keyword}'); return false;" style="background-color:Brown">
+						'${pagination.keyword}'); return false;">
 							<li>${idx}</li></a>
 					</c:forEach>
 					<c:if test="${pagination.next}">
 						<a href="#" onclick="fn_next('${categoryInfo.categoryId }', '${pagination.page}', '${pagination.rangeSize}',
-						'${pagination.searchType}', '${pagination.keyword}'); return false;" style="background-color:Brown"><li>▶</li></a>
+						'${pagination.searchType}', '${pagination.keyword}'); return false;" ><li>▶</li></a>
 					</c:if>
 				</ul>
 			</div>

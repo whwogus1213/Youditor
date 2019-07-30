@@ -30,8 +30,9 @@
 	
 	<!-- 게시글 상세정보 -->
 	<div class="container">
-		<div align="center" style="padding-top:1%; padding-bottom:1%;">
-			<h2>구인/구직 게시글 수정</h2>
+		<div class="col-sm-11" align="right" >
+			<br>
+			<h1 style="color:PaleVioletRed; font-family: 'Song Myung', sans-serif; ">구인/구직 게시글 수정</h1>
 		</div>
 		<hr>
 		<br>
