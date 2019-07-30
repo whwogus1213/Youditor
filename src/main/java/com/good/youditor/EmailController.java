@@ -89,6 +89,7 @@ public class EmailController {
         }else {
         	System.out.println("해당 아이디로 가입된 정보가 없습니다.");
             mav=new ModelAndView("email/emailSenderPwd");
+            mav.addObject("message","해당 이메일이나 아이디로 가입된 정보가 없습니다.  가입하신 이메일로 정확히 입력해 주세요. 메일이 발송됩니다.");
             return mav;
         }
     }
