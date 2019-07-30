@@ -455,8 +455,8 @@
 
 		/* 웹소켓으로 팔로우 알람 */
 		var sendText = {};
-		sendText.from = "msgAlarm";
-		sendText.text = accountId;
+		sendText.from = "followAlarm";
+		sendText.text = String(accountId);
 		sock.send(JSON.stringify(sendText));
 		console.log(tempcheck);
 	 	

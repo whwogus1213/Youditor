@@ -132,10 +132,13 @@
 			return;
 		}
 
-		/* 메세지 알림일때 */
-		if(strArray[0] == 'msgAlarm') {
-			$('#messageIcon').css('color','red');
-			alert("메시지 왔서요");
+		/* 팔로우 알림일때 */
+		if(strArray[0] == 'followAlarm') {
+			$("#alarmPopup p").html(strArray[1]+"님이 팔로우 했어요");
+			$("#alarmPopup").slideDown(1000);
+			setTimeout(function() {
+				$("#alarmPopup").slideUp(1000);
+	        }, 3000);
 			return;
 		}
 

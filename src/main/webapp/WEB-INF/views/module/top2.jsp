@@ -529,7 +529,12 @@ function DosignUp() {
 	<!-- Chat 채팅 아이콘 -->
 	<i id="chatBtn" class="far fa-comments" style="font-size: 1.8em; color:orange; cursor: pointer;" onclick="openNav();"></i>
 	  
-	  
+	<!-- 알람 div -->
+	<div id="alarmPopup" style="display:none; z-index: 9999; position: absolute; padding: 10px; background-color: #323232; color: #f1f1f1; width: 250px; height: 60px; text-align: center;">
+		<p style="vertical-align: middle; line-height: 40px;">
+		</p>
+	</div>
+	
 	  
 	<script>
 		function openNav() {
