@@ -20,7 +20,8 @@
   <link href="/resources/css/modern-business.css" rel="stylesheet">
   <style>
   footer{
-  clear: both;
+	clear: both;
+    margin-top:105%;
   }
   .jy {
  	 width: 48%;
