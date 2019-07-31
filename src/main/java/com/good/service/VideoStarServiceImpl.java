@@ -7,7 +7,6 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.good.dao.VideoStarDAO;
-import com.good.dto.ReplyVO;
 import com.good.dto.VideoStarVO;
 
 @Service

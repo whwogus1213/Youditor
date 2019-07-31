@@ -85,8 +85,8 @@
 				</div>
 			</div>
 			<br>
-			<div class="col-sm-12" align="center">
-				<button type="submit" id="submit" class="btn btn-success" onclick="insertBtn();">올리기</button>
+			<div class="col-sm-11" align="right">
+				<button type="submit" id="submit" class="btn btn-link" onclick="insertBtn();"><strong style="color:Brown;"><i class="fas fa-file-upload"></i>&nbsp;&nbsp;올리기</strong></button>|
 			
 				<script type="text/javascript">
 				function insertBtn() {
@@ -135,8 +135,8 @@
 				*/
 				</script>
 			
-	       <button type="reset" class="btn btn-warning">초기화</button>
-	       <button type="button" class="btn btn-info" onclick="location.href='/tipboard/tipBoardList?num=1'">뒤로 가기</button>
+	       <button type="reset" class="btn btn-link"><strong style="color:Brown;"><i class="fas fa-undo-alt"></i>&nbsp;&nbsp;초기화</strong></button>&nbsp;|
+	       <button type="button" class="btn btn-link" onclick="location.href='/tipboard/tipBoardList?num=1'"><strong style="color:Brown;"><i class="fas fa-backspace"></i>&nbsp;&nbsp;뒤로 가기</strong></button>
 	       </div>
 			<br>
 		</form>

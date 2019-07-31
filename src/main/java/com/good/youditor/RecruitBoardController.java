@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.good.dto.NoticeBoardVO;
 import com.good.dto.NoticeCategoryVO;
 import com.good.dto.RecruitBoardVO;
 import com.good.dto.RecruitCategoryVO;

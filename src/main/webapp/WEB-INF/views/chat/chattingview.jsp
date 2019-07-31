@@ -52,7 +52,7 @@
 </div>
     	
 <script type="text/javascript">
-
+	var tempcheck = "변수값 넘어갑니까???";
 	var sock = new SockJS("/echo");
 
 	sock.onmessage = onMessage;
@@ -94,7 +94,11 @@
             if(text.trim() === '') {
 				return;
 			}
-        	sock.send(text);
+			var sendText = {};
+			sendText.from = "chat";
+			sendText.text = text;
+			sock.send(JSON.stringify(sendText));
+//         	sock.send(text);
             $('.message_input').val('');
             $('.message_input').focusin();    
         }
@@ -125,6 +129,16 @@
 		/* 방참여 인원수 표시 */
 		if(strArray[0]=='sessionCnt') {
 			$('#sessionCnt').html(strArray[1]);
+			return;
+		}
+
+		/* 팔로우 알림일때 */
+		if(strArray[0] == 'followAlarm') {
+			$("#alarmPopup p").html(strArray[1]+"님이 팔로우 했어요");
+			$("#alarmPopup").slideDown(1000);
+			setTimeout(function() {
+				$("#alarmPopup").slideUp(1000);
+	        }, 3000);
 			return;
 		}
 
@@ -163,7 +177,7 @@
     
 	//서버와 연결을 끊을 때 
 	function onClose(evt) {
-		$("#data").append("연결 끊김");
+		console.log("웹소켓 연결 끊김");
 	}
 
 

@@ -30,6 +30,11 @@ footer{
     margin-top: 550px;
 }
 */
+
+.p1 a.is-active {
+	background-color: brown;
+	color: white;
+}
 </style>
 <script>
 	// 이전 버튼
@@ -254,21 +259,21 @@ footer{
 		<!-- 페이징 검색 시작 -->
 		<div class="col-12">
 			<!-- 페이징 -->
-			<div class="p1 pagination col-12">
-				<ul>
+			<div class="p1 pagination col-12" style="display: block; text-align: center; margin-bottom: 10px;">
+					<ul class="pagination" style="display:table; margin-left:auto; margin-right: auto;">
 					<c:if test="${pagination.prev}">
 						<a href="#" onclick="fn_prev('${categoryInfo.categoryId }', '${pagination.page}', '${pagination.rangeSize}',
-						'${pagination.searchType}', '${pagination.keyword}'); return false;" style="background-color:Brown"><li>◀</li></a>
+						'${pagination.searchType}', '${pagination.keyword}'); return false;"><li>◀</li></a>
 					</c:if>
 					<c:forEach begin="${pagination.startPage}" end="${pagination.endPage}" var="idx">
 						<a class="<c:out value="${pagination.page == idx ? 'is-active' : ''}"/>" href="#"
 						onclick="fn_pagination('${categoryInfo.categoryId }', '${idx}', '${pagination.searchType}', 
-						'${pagination.keyword}'); return false;" style="background-color:Brown">
+						'${pagination.keyword}'); return false;">
 							<li>${idx}</li></a>
 					</c:forEach>
 					<c:if test="${pagination.next}">
 						<a href="#" onclick="fn_next('${categoryInfo.categoryId }', '${pagination.page}', '${pagination.rangeSize}',
-						'${pagination.searchType}', '${pagination.keyword}'); return false;" style="background-color:Brown"><li>▶</li></a>
+						'${pagination.searchType}', '${pagination.keyword}'); return false;"><li>▶</li></a>
 					</c:if>
 				</ul>
 			</div>
@@ -331,6 +336,12 @@ footer{
 	 				tr.attr("onclick","");
 	 				tr.css("cursor","default");
 	 				tr.html("<i class='far fa-heart'></i>&nbsp;&nbsp;팔로우중");
+	 				/* 웹소켓으로 팔로우 알람 */
+	 				var sendText = {};
+	 				sendText.from = "followAlarm";
+	 				sendText.text = String(accountId);
+	 				sock.send(JSON.stringify(sendText));
+	 				console.log(tempcheck);
 	 			}
 	 			
 	 		},

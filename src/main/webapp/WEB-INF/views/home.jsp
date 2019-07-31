@@ -569,12 +569,12 @@ function getRecruit2(){
   	</div>
   </div>
 
-  <jsp:include page="./module/bottom.jsp" flush="false"/>
-
 
 <!--   <script src="/resources/vendor/jquery/jquery.min.js"></script> -->
 <!--   <script src="/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script> -->
 
 </body>
+
+<jsp:include page="./module/bottom.jsp" flush="false"/>
 
 </html>

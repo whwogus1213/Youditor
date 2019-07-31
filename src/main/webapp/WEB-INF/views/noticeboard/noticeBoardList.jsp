@@ -33,6 +33,11 @@
 	padding-top: 5px;
 	padding-bottom: 5px;
 }
+
+.p1 a.is-active {
+	background-color: DarkGreen;
+	color: #fff;
+}
 </style>
 <script>
 	// 이전 버튼
@@ -253,7 +258,7 @@
 					<c:if test="${login ne null }">
 						<c:if test="${login.authority >= categoryInfo.editAuthority }">
 							<button type="button" class="btn btn-sm"
-								onclick="location.href='/noticeboard/write.do' " style="background-color: #2ecc71; color: white;">글쓰기</button>
+								onclick="location.href='/noticeboard/write.do' " style="background-color:DarkGreen; color: white;">글쓰기</button>
 						</c:if>
 					</c:if>
 				</div>
@@ -287,6 +292,12 @@
 	 				tr.attr("onclick","");
 	 				tr.css("cursor","default");
 	 				tr.html("<i class='far fa-heart'></i>&nbsp;&nbsp;팔로우중");
+	 				/* 웹소켓으로 팔로우 알람 */
+	 				var sendText = {};
+	 				sendText.from = "followAlarm";
+	 				sendText.text = String(accountId);
+	 				sock.send(JSON.stringify(sendText));
+	 				console.log(tempcheck);
 	 			}
 	 			
 	 		},

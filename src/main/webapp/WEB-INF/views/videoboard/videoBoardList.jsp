@@ -206,7 +206,7 @@
 	
 	
 	<!-- 배너 목록 -->
-	<div class="col-sm-12" style="background-image:url('/resources/images/videoList/${categoryInfo.categoryPicture}'); height: 300px; background-size:100%; color:white; padding-top:130px; padding-bottom:5%; background-position: center;">
+	<div class="col-sm-12" style="background-image:url('/image/videoboard/${categoryInfo.categoryPicture}'); height: 300px; background-size:100%; color:white; padding-top:130px; padding-bottom:5%; background-position: center;">
 	</div>
 	<div class="bg-text" style="background-color: rgb(0,0,0); /* Fallback color */
   background-color: rgba(0,0,0, 0.4); /* Black w/opacity/see-through */
@@ -434,6 +434,7 @@
 	 		type : "POST",
 	 		url : "/follow/insert",
 	 		data : json,
+	 		async: false,
 	 		success : function(data) {
 	 			if (data == "success") {
 	 				tr.attr("style","");
@@ -442,6 +443,12 @@
 	 				tr.attr("onclick","");
 	 				tr.css("cursor","default");
 	 				tr.html("<i class='far fa-heart'></i>&nbsp;&nbsp;팔로우중");
+	 				/* 웹소켓으로 팔로우 알람 */
+	 				var sendText = {};
+	 				sendText.from = "followAlarm";
+	 				sendText.text = String(accountId);
+	 				sock.send(JSON.stringify(sendText));
+	 				console.log(tempcheck);
 	 			}
 	 			
 	 		},
@@ -449,6 +456,15 @@
 	 			alert("에러");
 	 		}
 	 	});
+
+
+
+		/* 웹소켓으로 팔로우 알람 */
+		var sendText = {};
+		sendText.from = "followAlarm";
+		sendText.text = String(accountId);
+		sock.send(JSON.stringify(sendText));
+		console.log(tempcheck);
 	 	
 	 }
 
