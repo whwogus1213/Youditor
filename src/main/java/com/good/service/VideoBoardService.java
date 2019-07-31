@@ -34,6 +34,9 @@ public interface VideoBoardService {
 
 	// 팔로우 체크
 	public int followCheck(int accountId, int accountId2) throws Exception;
+	
+	// 게시물의 editAuthority
+	public int getEditAuth(int boardId) throws Exception;
 
 //	// 팔로우 게시물 목록
 //	public List<VideoBoardVO> followBoardList(int followAccountId) throws Exception;

@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.good.dto.MessageVO;
 import com.good.dto.AccountsVO;
-import com.good.dto.FollowListVO;
 import com.good.dto.MessageList;
 import com.good.dto.MessageSearch;
 import com.good.service.HomeService;

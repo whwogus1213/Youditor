@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.good.dto.AccountsVO;
 import com.good.dto.NoticeBoardVO;
 import com.good.dto.NoticeCategoryVO;
 import com.good.dto.RecruitCategoryVO;
@@ -111,13 +112,21 @@ public class NoticeBoardController {
 
 	// 게시물 쓰기
 	@RequestMapping(value = "/write.do", method = RequestMethod.GET)
-	public ModelAndView writedo() throws Exception {
+	public String writedo(HttpSession session) throws Exception {
 		System.out.println("*************************************************");
 
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("noticeboard/noticeBoardWrite");
-		System.out.println("NoticeBoardController boardWrite open");
-		return mav;
+		String result = "";
+		
+		AccountsVO login = (AccountsVO) session.getAttribute("login");
+		
+		if(4 <= login.getAuthority()) {
+			result = "noticeboard/noticeBoardWrite";
+			System.out.println("NoticeBoardController boardWrite open");
+		} else {
+			result = "noticeboard/noticeBoardList";
+		}
+		
+		return result; 
 	}
 
 
@@ -126,17 +135,28 @@ public class NoticeBoardController {
 	public String insertNoticeBoardPro(@RequestParam("accountId") int accountId,
 										@RequestParam("categoryId") int categoryId,
 										@RequestParam("subject") String subject,
-										@RequestParam("object") String object) throws Exception {
-		System.out.println("============insertNoticeBoardPro 성공==============");
-		NoticeBoardVO vo = new NoticeBoardVO();
-		vo.setAccountId(accountId);
-		vo.setCategoryId(categoryId);
-		vo.setSubject(subject);
-		vo.setObject(object);
+										@RequestParam("object") String object,
+										HttpSession session) throws Exception {
+		String result = "";
 		
-		noticeBoardService.insertNoticeBoard(vo);
-
-		return "redirect:/noticeboard/noticeBoardList";
+		AccountsVO login = (AccountsVO) session.getAttribute("login");
+		
+		if(4 <= login.getAuthority()) {
+			System.out.println("============insertNoticeBoardPro 성공==============");
+			NoticeBoardVO vo = new NoticeBoardVO();
+			vo.setAccountId(accountId);
+			vo.setCategoryId(categoryId);
+			vo.setSubject(subject);
+			vo.setObject(object);
+			
+			noticeBoardService.insertNoticeBoard(vo);
+			
+			result = "redirect:/noticeboard/noticeBoardView?boardId=" + vo.getBoardId();
+		} else {
+			result = "redirect:/noticeboard/noticeBoardList";
+		}
+		
+		return result;
 
 	}
 	// 글 수정
@@ -144,44 +164,65 @@ public class NoticeBoardController {
 	public String updateNoticeBoardPro(@RequestParam("boardId") int boardId,
 										@RequestParam("categoryId") int categoryId,
 										@RequestParam("subject") String subject,
-										@RequestParam("object") String object) throws Exception {
-		NoticeBoardVO vo = new NoticeBoardVO();
-		vo.setBoardId(boardId);
-		vo.setCategoryId(categoryId);
-		vo.setSubject(subject);
-		vo.setObject(object);
+										@RequestParam("object") String object,
+										HttpSession session) throws Exception {
+		String result = "";
 		
-		noticeBoardService.updateNoticeBoard(vo);
-		System.out.println("============ updateNoticeBoard 성공==============");
-		return "redirect:/noticeboard/noticeBoardList";
+		AccountsVO login = (AccountsVO) session.getAttribute("login");
+		
+		if(4 <= login.getAuthority()) {
+			NoticeBoardVO vo = new NoticeBoardVO();
+			vo.setBoardId(boardId);
+			vo.setCategoryId(categoryId);
+			vo.setSubject(subject);
+			vo.setObject(object);
+			
+			noticeBoardService.updateNoticeBoard(vo);
+			result = "redirect:/noticeboard/noticeBoardView?boardId=" + vo.getBoardId();
+			System.out.println("============ updateNoticeBoard 성공 ==============");
+		} else {
+			System.out.println("============ 권한없음 ==============");
+			result = "redirect:/noticeboard/noticeBoardList";
+		}
+		
+		return result;
 	}
 	
 	// 파일 이동
 	// 게시글 수정
 	@RequestMapping(value = "/update.do", method = RequestMethod.GET)
-	public String joinUpdate(Locale locale, Model model,@RequestParam("boardId") int boardId) throws Exception {
-		NoticeBoardVO row = noticeBoardService.view(boardId);
+	public String joinUpdate(Locale locale, Model model, HttpSession session,
+							@RequestParam("boardId") int boardId) throws Exception {
+		String result = "";
 		
-		model.addAttribute("row", row);
-		System.out.println("String noticeBoardUpdate open");
-		return "noticeboard/noticeBoardWrite";
-	}
-
-	// 글 수정
-	@RequestMapping(value = "/update", method = RequestMethod.GET)
-	public void getUpdatey(@RequestParam("boardId") int boardId, Model model) throws Exception {
-		NoticeBoardVO vo = noticeBoardService.view(boardId);
-
-		model.addAttribute("updateNoticeBoard", vo);
-
+		AccountsVO login = (AccountsVO) session.getAttribute("login");
+		
+		if(4 <= login.getAuthority()) {
+			NoticeBoardVO row = noticeBoardService.view(boardId);
+			
+			model.addAttribute("row", row);
+			
+			result = "noticeboard/noticeBoardWrite";
+			System.out.println("String noticeBoardUpdate open");
+		} else {
+			result = "redirect:/noticeboard/noticeBoardList";
+			System.out.println("권한없음 리스트로 돌아감");
+		}
+		return result;
 	}
 
 	// 글 삭제
 	@RequestMapping(value = "/deleteNoticeBoardPro")
-	public String deleteNoticeBoardPro(NoticeBoardVO vo, RedirectAttributes rttr) throws Exception {
-		noticeBoardService.deleteNoticeBoard(vo);
-		rttr.addFlashAttribute("result","deleteOK");
-		System.out.println("============ deleteVideoBoard 성공==============");
+	public String deleteNoticeBoardPro(NoticeBoardVO vo, RedirectAttributes rttr, HttpSession session) throws Exception {
+		AccountsVO login = (AccountsVO) session.getAttribute("login");
+		
+		if(4 <= login.getAuthority()) {
+			noticeBoardService.deleteNoticeBoard(vo);
+			rttr.addFlashAttribute("result","deleteOK");
+			System.out.println("============ deleteVideoBoard 성공==============");
+		} else {
+			System.out.println("권한없음 리스트로 돌아감");
+		}
 
 		return "redirect:/noticeboard/noticeBoardList";
 	}

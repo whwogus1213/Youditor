@@ -29,17 +29,13 @@
 <body style="background-color: #FFF;">
 	<jsp:include page="../module/top2.jsp" flush="false"/>
 	<br/><br/><br/><br/><br/>
-			<form id="search" name="search" action="${path }/email/sendpwd.do" method="post">
+			<form id="search" name="search" action="${path }/email/sendnick.do" method="post">
 				<div class="w3-content w3-container w3-margin-top">
 				<div class="w3-container w3-card-4">
 					<div class="w3-center w3-large w3-margin-top">
-						<h3>비밀번호 찾기</h3>
+						<h3>닉네임 찾기</h3>
 					</div>
 					<div>
-						<p>
-							<label><strong>닉네임(nickname)</strong></label>
-							<input class="w3-input" type="text" id="nickname" name="nickname" required>
-						</p>
 						<p>
 							<label><strong>이메일(e-mail)</strong></label>
 							<input class="w3-input" type="text" id="email" name="email" required>
@@ -51,7 +47,7 @@
 							<button type="submit" class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-round">find</button>
 							<button type="button" onclick="location.href='/'" class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-margin-bottom w3-round">Cancel</button>
 							
-							<button type="button" onclick="location.href='${path }/email/sendernick.do'" class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-margin-bottom w3-round">닉네임 찾기</button>
+							<button type="button" onclick="location.href='${path }/email/senderpwd.do'" class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-margin-bottom w3-round">비밀번호 찾기</button>
 						</p>
 					</div>
 				</div>

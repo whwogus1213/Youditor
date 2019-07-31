@@ -36,6 +36,7 @@ public interface AccountsService {
 	public String getPwd(Map<String, String> paramMap) throws Exception;
 
 	public String getEmail(Map<String, String> paramMap) throws Exception;
+	public String getNickname(Map<String, String> paramMap) throws Exception;
 
 	public int getAccountId(Map<String, String> paramMap) throws Exception;
 }

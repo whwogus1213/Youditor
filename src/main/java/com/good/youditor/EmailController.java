@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -49,24 +48,30 @@ public class EmailController {
 		}
 		return "email/emailSender";
 	}
-
-	@RequestMapping(value = "/sender.do", method = RequestMethod.GET)
-	public ModelAndView sender(Locale locale, Model model) throws Exception {
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("email/emailSender");
-		System.out.println("String emailSender open");
-		return mav;
-	}
 	
 	@RequestMapping("/sendpwd.do")
     public ModelAndView sendEmailAction(@RequestParam Map<String, String> paramMap, ModelMap model,RedirectAttributes ra) throws Exception {
         ModelAndView mav;
         String id= (String) paramMap.get("nickname");
         String e_mail= (String) paramMap.get("email");
+        int check = service.checkEmail(e_mail);
+        if(check == 0) {
+        	System.out.println("실패했습니다.");
+            mav=new ModelAndView("email/emailSenderPwd");
+            mav.addObject("message","해당 이메일로 가입된 정보가 없습니다. 가입하신 이메일로 정확히 입력해 주세요. 메일이 발송됩니다.");
+            return mav;
+        	
+        }
         String pw = service.getPwd(paramMap);
         String name = service.getEmail(paramMap);
         int accountId = service.getAccountId(paramMap);
         System.out.println(accountId);
+        if(accountId == 0) {
+        	System.out.println("실패했습니다.");
+            mav=new ModelAndView("email/emailSenderPwd");
+            mav.addObject("message","해당 이메일이나 닉네임으로 가입된 정보가 없습니다.  가입하신 이메일로 정확히 입력해 주세요. 메일이 발송됩니다.");
+            return mav;
+        }
         if(name != null) {
 	        if(pw!=null) {
 	        	pw = "";
@@ -79,20 +84,53 @@ public class EmailController {
 	            email.setSubject(id+"님 비밀번호 찾기 메일입니다.");
 	            emailSender.SendEmail(email);
 	            mav= new ModelAndView("email/emailSender");
+	    		mav.addObject("message","비밀번호 찾기 완료");
 	            return mav;
 	        }else {
 	        	System.out.println("실패했습니다.");
 	            mav=new ModelAndView("email/emailSenderPwd");
-	            mav.addObject("message","해당 이메일이나 아이디로 가입된 정보가 없습니다.  가입하신 이메일로 정확히 입력해 주세요. 메일이 발송됩니다.");
+	            mav.addObject("message","해당 이메일이나 닉네임으로 가입된 정보가 없습니다.  가입하신 이메일로 정확히 입력해 주세요. 메일이 발송됩니다.");
 	            return mav;
         }
         }else {
         	System.out.println("해당 아이디로 가입된 정보가 없습니다.");
             mav=new ModelAndView("email/emailSenderPwd");
-            mav.addObject("message","해당 이메일이나 아이디로 가입된 정보가 없습니다.  가입하신 이메일로 정확히 입력해 주세요. 메일이 발송됩니다.");
+            mav.addObject("message","해당 이메일이나 닉네임으로 가입된 정보가 없습니다.  가입하신 이메일로 정확히 입력해 주세요. 메일이 발송됩니다.");
             return mav;
         }
     }
+	//아이디 찾기
+	@RequestMapping("/sendnick.do")
+    public ModelAndView sendNickEmailAction(@RequestParam Map<String, String> paramMap, ModelMap model,RedirectAttributes ra) throws Exception {
+        ModelAndView mav;
+        String e_mail= (String) paramMap.get("email");
+        int check = service.checkEmail(e_mail);
+        if(check == 0) {
+        	System.out.println("실패했습니다.");
+            mav=new ModelAndView("email/emailSenderNick");
+            mav.addObject("message","해당 이메일로 가입된 정보가 없습니다. 가입하신 이메일로 정확히 입력해 주세요. 메일이 발송됩니다.");
+            return mav;
+        	
+        }
+        String name = service.getNickname(paramMap);
+        if(name != null) {
+
+	            email.setMessage("회원님의 닉네임은 "+name+" 입니다.");
+	            email.setReceiveMail(e_mail);
+	            email.setSubject("YouditoR 회원님 닉네임 찾기 메일입니다.");
+	            emailSender.SendEmail(email);
+	            mav= new ModelAndView("email/emailSender");
+	    		mav.addObject("message","닉네임 찾기 완료");
+	            return mav;
+	        }else {
+	        	System.out.println("실패했습니다.");
+	            mav=new ModelAndView("email/emailSenderNick");
+	            mav.addObject("message","해당 이메일로 가입된 정보가 없습니다. 가입하신 이메일로 정확히 입력해 주세요. 메일이 발송됩니다.");
+	            return mav;
+        }
+        
+    }
+	// 비밀번호 찾기 화면
 	@RequestMapping(value = "/senderpwd.do", method = RequestMethod.GET)
 	public ModelAndView senderPwd(Locale locale, Model model) throws Exception {
 		ModelAndView mav = new ModelAndView();
@@ -100,12 +138,12 @@ public class EmailController {
 		System.out.println("String emailSenderPwd open");
 		return mav;
 	}
-	// 비밀번호수정화면으로 
-	@RequestMapping(value = "/emailUpdatePassword.do", method = {RequestMethod.GET,RequestMethod.POST})
+	// 아이디 찾기 화면 
+	@RequestMapping(value = "/sendernick.do", method = {RequestMethod.GET,RequestMethod.POST})
 	public ModelAndView updatePassword(Locale locale, Model model) throws Exception {
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("email/emailUpdatePassword");
-		System.out.println("String emailUpdatePassword open");
+		mav.setViewName("email/emailSenderNick");
+		System.out.println("String emailSenderNick open");
 		return mav;
 	}
 	

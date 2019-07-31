@@ -324,11 +324,20 @@ i {
 			</div>
 			<div class="col-4 offset-4" align="right">
 				<i class="far fa-list-alt" onclick="location.href='/videoboard/videoBoardList?categoryId='+${row.categoryId}" style="cursor: pointer;">목록으로</i>&nbsp;&nbsp;
-				<c:if test="${login.accountId eq row.accountId}">
-					<i class="far fa-edit" onclick="location.href='/videoboard/updateVideoBoard.do?boardId=${row.boardId}'"
-						style="cursor: pointer;">수정</i>&nbsp;
-					<i class="far fa-trash-alt" id="deletebtn" style="cursor: pointer;">삭제&nbsp;&nbsp;</i>
-				</c:if>
+				<c:choose>
+					<c:when test="${login.accountId eq row.accountId}">
+						<i class="far fa-edit" onclick="location.href='/videoboard/update.do?boardId=${row.boardId}'" style="cursor: pointer;">
+							수정
+						</i>&nbsp;
+						<i class="far fa-trash-alt" id="deletebtn" style="cursor: pointer;">삭제&nbsp;&nbsp;</i>
+					</c:when>
+					<c:when test="${login.authority >= auth }">
+						<i class="far fa-edit" onclick="location.href='/videoboard/update.do?boardId=${row.boardId}'" style="cursor: pointer;">
+							수정
+						</i>&nbsp;
+						<i class="far fa-trash-alt" id="deletebtn" style="cursor: pointer;">삭제&nbsp;&nbsp;</i>
+					</c:when>
+				</c:choose>
 				<font style="color: gray; font-size: 14px;">조회수&nbsp;${row.viewCount }회</font>
 			</div>
 		</div>
