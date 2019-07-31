@@ -87,7 +87,7 @@ i {
 
 		$(".starqq").hover(function(){
 			$(this).prevAll().addClass("mouseon");
-			$(this).addClaoss("mouseon");
+			$(this).addClass("mouseon");
 		}, function(){
 			$(this).prevAll().removeClass("mouseon");
 			$(this).removeClass("mouseon");	
@@ -178,6 +178,12 @@ i {
 			success : function(data) {
 				if (data == "success") {
 					fn_followbtn();
+					/* 웹소켓으로 팔로우 알람 */
+	 				var sendText = {};
+	 				sendText.from = "followAlarm";
+	 				sendText.text = String(accountId);
+	 				sock.send(JSON.stringify(sendText));
+	 				console.log(tempcheck);
 				}
 			},
 			error : function(data) {

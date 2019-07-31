@@ -73,14 +73,14 @@ public class EchoHandler extends TextWebSocketHandler {
 		System.out.println(jsonObj.get("from"));
 		System.out.println(jsonObj.get("text"));
 
+		// http session 사용 방법
+		Map<String, Object> map;
+		map = session.getAttributes();
+		AccountsVO loginVO = (AccountsVO)map.get("login");
+		System.out.println("accountId : " + loginVO.getAccountId());
+		
 		
 		if(jsonObj.get("from").equals("chat")) {
-			// http session 사용 방법
-			Map<String, Object> map;
-			map = session.getAttributes();
-			AccountsVO loginVO = (AccountsVO)map.get("login");
-			System.out.println("accountId : " + loginVO.getAccountId());
-			
 			
 //			for (WebSocketSession sess : sessionList) {
 //				sess.sendMessage(new TextMessage(loginVO.getAccountId() + "|" + loginVO.getNickname() + "|" + jsonObj.get("text")));
@@ -100,7 +100,7 @@ public class EchoHandler extends TextWebSocketHandler {
 			WebSocketSession sess = sessionList2.get(key);
 			if(sess != null) {
 				
-				AccountsVO vo = dao.getAccount(Integer.parseInt(key));
+				AccountsVO vo = dao.getAccount(loginVO.getAccountId());
 				sess.sendMessage(new TextMessage("followAlarm"+"|"+vo.getNickname()));
 			}
 			
