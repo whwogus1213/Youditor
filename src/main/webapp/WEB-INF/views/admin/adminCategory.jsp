@@ -116,7 +116,7 @@
 			});
 		}
 	}
-	
+
 	// 새로운 카테고리 만들기
 	function newCatBtn(category) {
 		var newCatId = $("#newCatId").val();
