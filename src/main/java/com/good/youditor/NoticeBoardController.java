@@ -151,7 +151,7 @@ public class NoticeBoardController {
 			
 			noticeBoardService.insertNoticeBoard(vo);
 			
-			result = "redirect:/noticeboard/noticeBoardList";
+			result = "redirect:/noticeboard/noticeBoardView?boardId=" + vo.getBoardId();
 		} else {
 			result = "redirect:/noticeboard/noticeBoardList";
 		}
@@ -166,6 +166,8 @@ public class NoticeBoardController {
 										@RequestParam("subject") String subject,
 										@RequestParam("object") String object,
 										HttpSession session) throws Exception {
+		String result = "";
+		
 		AccountsVO login = (AccountsVO) session.getAttribute("login");
 		
 		if(4 <= login.getAuthority()) {
@@ -176,12 +178,14 @@ public class NoticeBoardController {
 			vo.setObject(object);
 			
 			noticeBoardService.updateNoticeBoard(vo);
+			result = "redirect:/noticeboard/noticeBoardView?boardId=" + vo.getBoardId();
 			System.out.println("============ updateNoticeBoard 성공 ==============");
 		} else {
 			System.out.println("============ 권한없음 ==============");
+			result = "redirect:/noticeboard/noticeBoardList";
 		}
 		
-		return "redirect:/noticeboard/noticeBoardList";
+		return result;
 	}
 	
 	// 파일 이동
