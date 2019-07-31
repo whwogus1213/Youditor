@@ -1,12 +1,10 @@
 package com.good.service;
 
 import java.util.List;
-import java.util.Map;
 
 import com.good.dto.RecruitBoardVO;
 import com.good.dto.RecruitCategoryVO;
 import com.good.dto.SearchBoard;
-import com.good.dto.VideoCategoryVO;
 
 public interface RecruitBoardService {
 
