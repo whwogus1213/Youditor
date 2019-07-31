@@ -30,6 +30,11 @@ footer{
     margin-top: 550px;
 }
 */
+
+.p1 a.is-active {
+	background-color: brown;
+	color: white;
+}
 </style>
 <script>
 	// 이전 버튼
@@ -190,7 +195,7 @@ footer{
 	<div class="container">
 		<div class="row">
 		<table class="table table-hover">
-			<thead align="center" style="color:Brown ">
+			<thead align="center" style="color:Brown">
 				<tr>
 					<th style="width: 80px;">번호</th>
 					<th style="width: 80px;">분류</th>
@@ -254,8 +259,8 @@ footer{
 		<!-- 페이징 검색 시작 -->
 		<div class="col-12">
 			<!-- 페이징 -->
-			<div class="p1 pagination col-12">
-				<ul>
+			<div class="p1 pagination col-12" style="display: block; text-align: center; margin-bottom: 10px;">
+					<ul class="pagination" style="display:table; margin-left:auto; margin-right: auto;">
 					<c:if test="${pagination.prev}">
 						<a href="#" onclick="fn_prev('${categoryInfo.categoryId }', '${pagination.page}', '${pagination.rangeSize}',
 						'${pagination.searchType}', '${pagination.keyword}'); return false;"><li>◀</li></a>
@@ -297,7 +302,7 @@ footer{
 					<c:if test="${login ne null }">
 						<c:if test="${login.authority >= categoryInfo.viewAuthority }">
 							<button type="button" class="btn btn-sm"
-								onclick="location.href='/tipboard/write.do' " style="background-color: #2ecc71; color: white;">글쓰기</button>
+								onclick="location.href='/tipboard/write.do' " style="background-color:Brown; color: white;">글쓰기</button>
 						</c:if>
 					</c:if>
 				</div>

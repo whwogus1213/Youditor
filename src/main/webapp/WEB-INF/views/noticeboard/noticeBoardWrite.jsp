@@ -87,7 +87,7 @@
 			</div>
 			<br>
 			<div class="form-inline">
-		        <label class="control-label col-2">작성자</label>
+		        <label class="control-label col-2"><strong style="color:DarkGreen">작성자</strong></label>
 		        <div class="col-sm-3">
 					<input type="text" class="form-control" maxlength="50" value="${login.nickname}" readonly>
 					<input type="text" class="form-control" name="accountId" id="accountId" maxlength="50" value="${login.accountId}" style="display:none" readonly>
@@ -95,7 +95,7 @@
 			</div>
 			<br>
 			<div class="form-inline">
-				<label class="control-label col-sm-2">내용</label>
+				<label class="control-label col-sm-2"><strong style="color:DarkGreen">내용</strong></label>
 				<div class="col-sm-3">
 	        		<c:choose>
 	        			<c:when test="${row ne null }">
@@ -111,10 +111,10 @@
 			<div class="col-sm-11" align="right">
         		<c:choose>
         			<c:when test="${row ne null }">
-        				<button type="button" class="btn btn-sm" onclick="updateBtn();">수정</button>
+        				<button type="button" class="btn btn-md" onclick="updateBtn();"><strong style="color:DarkGreen;"><i class="fas fa-eraser"></i>&nbsp;&nbsp;수정</strong></button>
         			</c:when>
         			<c:otherwise>
-        				<button type="button" class="btn btn-sm" onclick="insertBtn();">올리기</button>
+        				<button type="button" class="btn btn-md" onclick="insertBtn();"><strong style="color:DarkGreen;"><i class="fas fa-file-upload"></i>&nbsp;&nbsp;올리기</strong></button>
         			</c:otherwise>
         		</c:choose>
 				<script type="text/javascript">
@@ -144,8 +144,8 @@
 		  			document.noticeWriteForm.submit();
 				}
 				</script>|
-				<button type="reset" class="btn btn-sm">초기화&nbsp;</button>|
-				<button type="button" class="btn btn-sm hBack">뒤로 가기</button>
+				<button type="reset" class="btn btn-md"><strong style="color:DarkGreen;"><i class="fas fa-undo-alt"></i>&nbsp;&nbsp;초기화&nbsp;</strong></button>|
+				<button type="button" class="btn btn-md hBack"><strong style="color:DarkGreen;"><i class="fas fa-backspace"></i>&nbsp;&nbsp;뒤로 가기</strong></button>
 					<script>
 						$(".hBack").on("click", function(e){
 						    e.preventDefault();

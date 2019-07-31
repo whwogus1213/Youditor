@@ -23,6 +23,11 @@ button[type="button"] {
     cursor: pointer;
 }
 
+.p1 a.is-active {
+	background-color: PaleVioletRed;
+	color: white;
+}
+
  @media (min-width:476px){.container{max-width: 240px;}}
  @media (min-width:576px){.container{max-width: 300px;}}
  @media (min-width:768px){.container{max-width: 440px;}}
@@ -34,7 +39,12 @@ button[type="button"] {
     float: left;
 }
 footer{
-    margin-top: 550px;
+    margin-top: 45%;
+}
+.p1 a.is-active {
+	background-color: PaleVioletRed ;
+	border-radius: 100%;
+	color: #fff;
 }
 </style>
 <script>
@@ -209,10 +219,10 @@ footer{
 						<td style="vertical-align: middle;">${RecruitBoardList.boardId}</td>
 						<td>
 							<c:if test="${RecruitBoardList.categoryId eq 1}">
-								<button type="button" class="btn btn-info btn-sm" onclick="location.href='/recruitboard/recruitBoardList?categoryId=1'">구인</button>
+								<button type="button" class="btn btn-link btn-sm" onclick="location.href='/recruitboard/recruitBoardList?categoryId=1'" style="background-color: Plum; color: white;">구인</button>
 							</c:if>
 							<c:if test="${RecruitBoardList.categoryId eq 2}">
-								<button type="button" class="btn btn-secondary btn-sm" onclick="location.href='/recruitboard/recruitBoardList?categoryId=2'">구직</button>
+								<button type="button" class="btn btn-link btn-sm" onclick="location.href='/recruitboard/recruitBoardList?categoryId=2'" style="background-color:LavenderBlush ; color: PaleVioletRed ;">구직</button>
 							</c:if>
 						</td>
 						<td align="left" style="padding-left: 30px; cursor: pointer; vertical-align: middle;"
@@ -266,21 +276,21 @@ footer{
 		<!-- 페이징 검색 시작 -->
 		<div class="col-12" style="padding-top:1%" align="center">
 			<!-- 페이징 -->
-			<div class="p1 pagination col-12">
-				<ul>
+			<div class="p1 pagination col-12" style="display: block; text-align: center; margin-bottom: 10px;">
+			<ul class="pagination" style="display:table; margin-left:auto; margin-right: auto;">
 					<c:if test="${pagination.prev}">
 						<a href="#" onclick="fn_prev('${categoryInfo.categoryId }', '${pagination.page}', '${pagination.rangeSize}',
-						'${pagination.searchType}', '${pagination.keyword}'); return false;" style="background-color: PaleVioletRed ; color: white;"><li>◀</li></a>
+						'${pagination.searchType}', '${pagination.keyword}'); return false;"><li>◀</li></a>
 					</c:if>
 					<c:forEach begin="${pagination.startPage}" end="${pagination.endPage}" var="idx">
 						<a class="<c:out value="${pagination.page == idx ? 'is-active' : ''}"/>" href="#"
 						onclick="fn_pagination('${categoryInfo.categoryId }', '${idx}', '${pagination.searchType}', 
-						'${pagination.keyword}'); return false;" style="background-color: PaleVioletRed ; color: white;">
+						'${pagination.keyword}'); return false;">
 							<li>${idx}</li></a>
 					</c:forEach>
 					<c:if test="${pagination.next}">
 						<a href="#" onclick="fn_next('${categoryInfo.categoryId }', '${pagination.page}', '${pagination.rangeSize}',
-						'${pagination.searchType}', '${pagination.keyword}'); return false;" style="background-color: PaleVioletRed ; color: white;"><li>▶</li></a>
+						'${pagination.searchType}', '${pagination.keyword}'); return false;"><li>▶</li></a>
 					</c:if>
 				</ul>
 			</div>
@@ -301,7 +311,7 @@ footer{
 				</div>
 
 				<div class="col-1" style="padding-left: 0px;text-align: center;padding-right: 0px;padding-top: 5px;">
-					<i class="fas fa-search" id="btnSearch" style="cursor:" onclick="searchBtn('${categoryInfo.categoryId }',
+					<i class="fas fa-search" id="btnSearch" onclick="searchBtn('${categoryInfo.categoryId }',
 					'${pagination.searchType}', '${pagination.keyword}'); return false;"></i>
 				</div>
 
@@ -320,7 +330,6 @@ footer{
 
 	</div>
 	<br>
-	<jsp:include page="./../module/bottom.jsp" flush="false" />
 <script type="text/javascript">
 	 //팔로우 추가
 	 function fn_follow(accountId) {
@@ -392,4 +401,5 @@ footer{
 	}
 </script>
 </body>
+<jsp:include page="./../module/bottom.jsp" flush="false" />
 </html>

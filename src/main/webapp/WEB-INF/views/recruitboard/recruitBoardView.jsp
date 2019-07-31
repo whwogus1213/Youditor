@@ -47,8 +47,8 @@
 			<div class="form-inline">
 				<div class="col-sm-12 row" align="center" style="margin-bottom:50px">
 					<div class="col-sm-2">
-						<h4><c:if test="${row.categoryId eq 1}"><button type="button" class="btn btn-info btn-md" disabled>구인</button></c:if>
-						<c:if test="${row.categoryId eq 2}"><button type="button" class="btn btn-secondary btn-md" disabled>구직</button></c:if></h4>
+						<h4><c:if test="${row.categoryId eq 1}"><button type="button" class="btn btn-link btn-md" style="background-color: Plum; color: white;" disabled>구인</button></c:if>
+						<c:if test="${row.categoryId eq 2}"><button type="button" class="btn btn-link btn-md" style="background-color:LavenderBlush ; color: MediumOrchid ;" disabled>구직</button></c:if></h4>
 					</div>
 					<div class="col-sm-10" >
 						<h2>${row.subject }</h2>
@@ -57,7 +57,7 @@
 				</div>
 				<div class="col-sm-12 row">
 					<div class="dropdown show">
-						작성자&nbsp;&nbsp;
+						<strong style="color:PaleVioletRed">작성자</strong>&nbsp;&nbsp;
 						<!-- 내 아이디에 마우스 오버 -->						
 						<c:if test="${row.accountId eq login.accountId }">
 							<img src="<spring:url value='/image/${row.picture}'/>" class=" mx-auto rounded-circle" 
@@ -96,13 +96,13 @@
 			<div class="form-inline">
 				<div class="col-sm-10" align="right">
 					<h6>
-						작성 일시&nbsp;&nbsp;
+						<strong style="color:PaleVioletRed">작성 일시</strong>&nbsp;&nbsp;
 						<fmt:parseDate value='${row.reg_date}' var='reg_date' pattern='yyyymmdd'/>
 						<fmt:formatDate value="${reg_date}" pattern="yyyy-MM-dd" />
 					</h6>
 				</div>
 				<div class="col-sm-2" align="right">
-					<h6>조회수&nbsp;&nbsp;${row.viewCount }</h6>
+					<h6><strong style="color:PaleVioletRed">조회수</strong>&nbsp;&nbsp;${row.viewCount }</h6>
 				</div>
 			</div>
 		</div>
@@ -112,10 +112,10 @@
 		</div>
 		<hr>
 		<div align="center">
-			<button type="button" class="btn btn-link" onclick="location.href='/recruitboard/recruitBoardList'" style="color:black"><i class="fas fa-clipboard-list"></i>&nbsp;&nbsp;목록으로</button>
+			<button type="button" class="btn btn-link" onclick="location.href='/recruitboard/recruitBoardList'"><strong style="color:PaleVioletRed"><i class="fas fa-clipboard-list"></i>&nbsp;&nbsp;목록으로</strong></button>
 			<c:if test="${login.accountId eq row.accountId}">|
-			<button type="button" class="btn btn-link" onclick="location.href='/recruitboard/updateRecruitBoard?boardId=${row.boardId}'"  style="color:black"><i class="fas fa-cut"></i>&nbsp;&nbsp;수정</button>|
-			<button class="btn btn-link" id="deletebtn" style="color:black"><i class="fas fa-trash-alt"></i>&nbsp;&nbsp;삭제</button>
+			<button type="button" class="btn btn-link" onclick="location.href='/recruitboard/updateRecruitBoard?boardId=${row.boardId}'" ><strong style="color:PaleVioletRed"><i class="fas fa-cut"></i>&nbsp;&nbsp;수정</strong></button>|
+			<button class="btn btn-link" id="deletebtn"><strong style="color:PaleVioletRed"><i class="fas fa-trash-alt"></i>&nbsp;&nbsp;삭제</strong></button>
 			</c:if>
 		</div>
 	</div>

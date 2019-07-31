@@ -67,5 +67,13 @@ public class MessageVO {
 	public void setReceiverView(boolean receiverView) {
 		this.receiverView = receiverView;
 	}
+	@Override
+	public String toString() {
+		return "MessageVO [messageId=" + messageId + ", senderAccountId=" + senderAccountId + ", receiverAccountId="
+				+ receiverAccountId + ", subject=" + subject + ", object=" + object + ", send_date=" + send_date
+				+ ", read_date=" + read_date + ", senderView=" + senderView + ", receiverView=" + receiverView + "]";
+	}
+	
+	
 
 } // End - MessageVO
