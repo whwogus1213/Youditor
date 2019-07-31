@@ -31,11 +31,10 @@
 <body style="background-color: #FFF;">
 	<jsp:include page="../module/top2.jsp" flush="false"/>
 	<br/><br/><br/><br/><br/>
-			<form action="${path }/email/sendpwd.do" method="post">
 		<div class="w3-content w3-container w3-margin-top">
 		<div class="w3-container w3-card-4">
 			<div class="w3-center w3-large w3-margin-top">
-				<h3>비밀번호 찾기 완료</h3><hr/>
+				<h3>${message}</h3><hr/>
 			</div>
 			<div>
 				<p class="confirm">
@@ -47,7 +46,6 @@
 			</div>
 		</div>
 	</div>
-			</form>
 	<jsp:include page="../module/bottom.jsp" flush="false"/>
 </body>
 </html>

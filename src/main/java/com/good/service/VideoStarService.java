@@ -1,9 +1,7 @@
 package com.good.service;
 
 import java.util.List;
-import java.util.Map;
 
-import com.good.dto.ReplyVO;
 import com.good.dto.VideoStarVO;
 
 public interface VideoStarService {

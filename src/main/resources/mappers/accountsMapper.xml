@@ -207,6 +207,14 @@
 		where
 			email = #{email}
 	</select>
+	<select id="getNickname" resultType="String" parameterType="map">
+		select
+			nickname
+		from
+			accounts
+		where
+			email = #{email}
+	</select>
 	
 	
 </mapper>

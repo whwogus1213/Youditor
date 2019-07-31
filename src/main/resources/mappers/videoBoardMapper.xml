@@ -105,18 +105,19 @@
             now())
     </insert>
 
-    	<!-- 글 수정 -->
-		 <update id="updateVideoBoard">
-		  update
-        videoBoard
-		  set
-        subject = #{subject},
-		    object = #{object},
-        youtubeLink = #{youtubeLink},
-        mod_date = now()
-		  where
-        boardId = #{boardId}
-		 </update>
+ 	<!-- 글 수정 -->
+	<update id="updateVideoBoard">
+	UPDATE
+		videoBoard
+	SET
+		categoryId = #{categoryId},
+		subject = #{subject},
+		object = #{object},
+		youtubeLink = #{youtubeLink},
+		mod_date = now()
+	WHERE
+		boardId = #{boardId}
+	</update>
 
  		<!-- 글 삭제 -->
 		 <delete id="deleteVideoBoard">
@@ -138,6 +139,21 @@
 						where followAccountId = #{accountId2}
 						and followerAccountId = #{accountId} )
 	</select>
+	
+	<!-- 게시물의 editAuthority 확인 -->
+	<select id="getEditAuth" parameterType="int" resultType="int">
+		SELECT
+			editAuthority
+		FROM
+			videoboard as b
+			JOIN
+				videocategory as c
+			ON
+				b.categoryId = c.categoryId
+		WHERE
+			boardId = #{boardId}
+	</select>
+	
 	
 	<!-- 팔로우 게시물 목록 -->
 	<!-- 

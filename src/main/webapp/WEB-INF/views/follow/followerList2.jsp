@@ -181,7 +181,7 @@
 <c:forEach items="${followerList}" var="followerList">
 <!-- card start -->
 <div class="col-3">
-<div class="card" style="margin-bottom: 35px;" >
+<div class="card" style="margin-bottom: 35px; cursor: pointer;" onclick="location.href='/videoboard/videoBoardList?searchType=nickname&keyword=${followerList.nickname}'">
    <div class="banner">
  	<c:if test="${followerList.check}">
 	   	  <a class="unfollowbtn" id = "unfollowbtn${followerList.followerAccountId}" onclick="fn_unfollow('${followerList.followerAccountId}'); return false;"><i class="fas fa-user-times unfollowbtn" style="position: absolute; top: 2%; left: 85%; color: snow; font-size: 1.2em; cursor: pointer;"></i></a>
@@ -190,7 +190,7 @@
 	   	  <a class="followbtn" id = "followbtn${followerList.followerAccountId}" onclick="fn_follow('${followerList.followerAccountId}'); return false;"><i class="fas fa-user-plus followbtn" style="position: absolute; top: 2%; left: 85%; color: #ffeaf4; font-size: 1.2em; cursor: pointer;"></i></a>
    	</c:if>
    	  <spring:url value='/image/${followerList.picture}' var="pictureURL"/>
-      <div class="avatar" style="background-image: url(${pictureURL}); cursor: pointer;" onclick="location.href='/videoboard/videoBoardList?searchType=nickname&keyword=${followerList.nickname}'"> </div>
+      <div class="avatar" style="background-image: url(${pictureURL})"> </div>
    </div>
 	<h3 class="h3" style="font-family: 'Jua'; font-size: 1.3em;  text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">${followerList.nickname }</h3>
    
@@ -204,7 +204,7 @@
    		</span>
    	</c:if>
    	<c:if test="${!followerList.check}">
-   		<span id="fcase" class="a" style="text-align: left; padding-left: 13px; cursor: pointer;" data-trigger="hover" data-container="body" data-toggle="popover" data-placement="bottom" data-content="상대방만 팔로우하고 있습니다."><i class="far fa-handshake"></i>&nbsp;
+   		<span id="fcase" class="a" style="text-align: left; padding-left: 13px; cursor: pointer;" data-trigger="hover" data-container="body" data-toggle="popover" data-placement="bottom" data-content="당신만 팔로우하고 있습니다."><i class="far fa-handshake"></i>&nbsp;
    			당신을 팔로우하는 중
    		</span>
    	</c:if>
@@ -241,7 +241,7 @@ $(function(){
 		var tr = $("#unfollowbtn" + followerAccountId).parent().parent();
 
 		var json = {
-			"followAccountId" : followerAccountId
+			"followerAccountId" : followerAccountId
 		}
 		event.stopPropagation();
 		
@@ -251,14 +251,12 @@ $(function(){
 			data : json,
 			success : function(data) {
 				if (data == "success1") {
-					tr.find(".unfollowbtn").html("");
-					tr.find(".unfollowbtn").html("<i class='fas fa-user-plus followbtn' style='position: absolute; top: 2%; left: 85%; color: #ffeaf4; font-size: 1.2em; cursor: pointer;'></i>");
-					tr.find(".unfollowbtn").attr("id","followbtn"+followerAccountId);
-					tr.find(".unfollowbtn").attr("onclick","fn_follow('"+followerAccountId+"');"+" return false;");
-					tr.find(".unfollowbtn").attr("class","followbtn");
-					tr.find("#fcase").html("당신을 팔로우 하는 중");
-					tr.find("#fcase").attr("data-content","상대방만 팔로우 하고 있습니다.")
-					tr.css("box-shadow","0 5px 10px #ff2e94");
+					tr.attr("style","");
+					tr.attr("style","margin-bottom: 35px;");
+					tr.css("border","1px solid red");
+					tr.attr("onclick","");
+					tr.css("opacity","0.4");
+					tr.attr("class","cardremove");
 				}
 			},
 			error : function(data) {
@@ -293,13 +291,6 @@ $(function(){
 					tr.find("#fcase").html("맞팔중");
 					tr.find("#fcase").attr("data-content","서로 팔로우 하고 있습니다.")
 					tr.css("box-shadow","0 5px 10px #0096d6");
-
-					/* 웹소켓으로 팔로우 알람 */
-					var sendText = {};
-					sendText.from = "followAlarm";
-					sendText.text = String(followerAccountId);
-					sock.send(JSON.stringify(sendText));
-					console.log(tempcheck);
 				}
 				
 			},

@@ -31,6 +31,10 @@ public interface TipBoardService {
 
 	// 조회수
 	public void viewCount(int boardId) throws Exception;
+	
 	// 최신 게시물
 	public List<TipBoardVO> newList() throws Exception;
+	
+	// 게시물의 editAuthority
+	public int getEditAuth(int boardId) throws Exception;
 }

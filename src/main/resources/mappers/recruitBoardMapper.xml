@@ -114,16 +114,16 @@
 
 	<!-- 글 수정 -->
 	<update id="updateRecruitBoard" parameterType="RecruitBoardVO">
-		update 
+	UPDATE 
 		recruitBoard 
-		set 
+	SET
+		categoryId = #{categoryId},
 		subject = #{subject}, 
-		object = 
-		#{object}, 
+		object = #{object}, 
 		fee = #{fee},
 		mod_date = now()  
-		where 
-		boardId = #{boardId} 
+	WHERE
+		boardId = #{boardId}
 	</update>
 
 	<!-- 글 삭제 -->

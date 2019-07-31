@@ -72,5 +72,11 @@ public class TipBoardDAOImpl implements TipBoardDAO {
 	public List<TipBoardVO> newList() throws Exception {
 		return sqlSession.selectList(NAMESPACE + ".newList");
 	}
+	
+	// 게시물의 editAuthority
+	@Override
+	public int getEditAuth(int boardId) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + ".getEditAuth", boardId);
+	}
 
 }

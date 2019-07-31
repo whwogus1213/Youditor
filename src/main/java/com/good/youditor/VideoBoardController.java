@@ -1,10 +1,8 @@
 package com.good.youditor;
 
 import java.util.List;
-import java.util.Locale;
 
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -93,6 +91,8 @@ public class VideoBoardController {
 
 		VideoBoardVO row = videoBoardService.view(boardId);
 		
+		int auth = videoBoardService.getEditAuth(boardId);
+		
 		List<NoticeCategoryVO> nCatList = homeService.bringNoticeCategory();
 		List<VideoCategoryVO> vCatList = homeService.bringVideoCategory();
 		List<TipCategoryVO> tCatList = homeService.bringTipCategory();
@@ -102,8 +102,9 @@ public class VideoBoardController {
 		session.setAttribute("vCatList", vCatList);
 		session.setAttribute("tCatList", tCatList);
 		session.setAttribute("rCatList", rCatList);
-		
+
 		model.addAttribute("row", row);
+		model.addAttribute("auth", auth);
 		return "videoboard/videoBoardView";
 	}
 
@@ -143,15 +144,16 @@ public class VideoBoardController {
 	public String joinUpdate(Model model, HttpSession session, @RequestParam("boardId") int boardId) throws Exception {
 		AccountsVO login = (AccountsVO) session.getAttribute("login");
 		VideoBoardVO update = videoBoardService.view(boardId);
+		int auth = videoBoardService.getEditAuth(boardId);
 		String result = "";
 		if(login.getAccountId() == update.getAccountId()) {
 			model.addAttribute("row", update);
 			result = "videoboard/videoBoardWrite";
-			System.out.println("String videoBoardUpdate open");
-		} else if(4 <= login.getAuthority()) {
+			System.out.println("String videoBoardWrite open");
+		} else if(auth <= login.getAuthority()) {
 			model.addAttribute("row", update);
 			result = "videoboard/videoBoardWrite";
-			System.out.println("String videoBoardUpdate open");
+			System.out.println("String videoBoardWrite open");
 		} else {
 			result = "videoboared/videoBoardView?boardId=" + boardId;
 		}

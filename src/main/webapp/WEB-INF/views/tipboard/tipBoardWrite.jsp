@@ -28,11 +28,19 @@
 		</div>
 		<hr>
 		<br>
-	    <form class="form-horizontal" method="post" action=" ${path}/tipboard/insertTipBoardPro">
+	    <form class="form-horizontal" method="post" name="tipWriteForm">
 	    	<div class="form-inline">
 	        	<label class="control-label col-sm-2"><strong style="color:brown">제목</strong></label>
 	        	<div class="col-sm-8">
-	        		<input type="text" class="form-control" name="subject" maxlength="50" placeholder="Enter Title" style="width:100%">
+	        		<c:choose>
+	        			<c:when test="${row ne null }">
+	        				<input type="text" class="form-control" name="subject" id="subject" maxlength="50" placeholder="Enter Title" style="width:100%" value="${row.subject }">
+	        				<input type="hidden" name="boardId" id="boardId" value="${row.boardId }">
+	        			</c:when>
+	        			<c:otherwise>
+	        				<input type="text" class="form-control" name="subject" id="subject" maxlength="50" placeholder="Enter Title" style="width:100%">
+	        			</c:otherwise>
+	        		</c:choose>
 	        	</div>
 			</div>
 			<br>
@@ -40,27 +48,27 @@
 				<label class="control-label col-sm-2"><strong style="color:brown">카테고리</strong></label>
 				<div class="col-sm-3">
 					<select class="browser-default custom-select" name="categoryId" id="categoryId" style="width: 190px">
-						<c:forEach items="${tCatList}" var="tCatList">
+						<c:forEach items="${tCatList}" var="CatList">
 							<c:choose>
-								<c:when test="${tCatList.categoryId == 99 }">
-									<c:if test="${login.authority >= tCatList.editAuthority }">
+								<c:when test="${CatList.categoryId == 99 }">
+									<c:if test="${login.authority >= CatList.editAuthority }">
 										<c:choose>
-											<c:when test="${row.categoryId == tCatList.categoryId }">
-												<option value="${tCatList.categoryId }" selected>${tCatList.categoryName }</option>
+											<c:when test="${row.categoryId == CatList.categoryId }">
+												<option value="${CatList.categoryId }" selected>${CatList.categoryName }</option>
 											</c:when>
 											<c:otherwise>
-												<option value="${tCatList.categoryId }">${tCatList.categoryName }</option>
+												<option value="${CatList.categoryId }">${CatList.categoryName }</option>
 											</c:otherwise>
 										</c:choose>
 									</c:if>
 								</c:when>
 								<c:otherwise>
 									<c:choose>
-										<c:when test="${row.categoryId == tCatList.categoryId }">
-											<option value="${tCatList.categoryId }" selected>${tCatList.categoryName }</option>
+										<c:when test="${row.categoryId == CatList.categoryId }">
+											<option value="${CatList.categoryId }" selected>${CatList.categoryName }</option>
 										</c:when>
 										<c:otherwise>
-											<option value="${tCatList.categoryId }">${tCatList.categoryName }</option>
+											<option value="${CatList.categoryId }">${CatList.categoryName }</option>
 										</c:otherwise>
 									</c:choose>
 								</c:otherwise>
@@ -73,21 +81,42 @@
 			<div class="form-inline">
 		        <label class="control-label col-2"><strong style="color:brown">작성자</strong></label>
 		        <div class="col-sm-3">
-					<input type="text" class="form-control" maxlength="50" value="${login.nickname}" readonly>
-					<input type="text" class="form-control" name="accountId" id="accountId" maxlength="50" value="${login.accountId}" style="display:none" readonly>
+	        		<c:choose>
+	        			<c:when test="${row ne null }">
+	        				<input type="text" class="form-control" maxlength="50" value="${row.nickname}" readonly>
+							<input type="hidden" class="form-control" name="accountId" id="accountId" maxlength="50" value="${row.accountId}" style="display:none" readonly>
+	        			</c:when>
+	        			<c:otherwise>
+	        				<input type="text" class="form-control" maxlength="50" value="${login.nickname}" readonly>
+							<input type="hidden" class="form-control" name="accountId" id="accountId" maxlength="50" value="${login.accountId}" style="display:none" readonly>
+	        			</c:otherwise>
+	        		</c:choose>
 		        </div>
 			</div>
 			<br>
 			<div class="form-inline">
 				<label class="control-label col-sm-2"><strong style="color:brown">내용</strong></label>
 				<div class="col-sm-3">
-					<textarea rows="10" cols="100" name="object" id="object"></textarea>
+	        		<c:choose>
+	        			<c:when test="${row ne null }">
+	        				<textarea rows="10" cols="100" name="object" id="object"><c:out value="${row.object }"/></textarea>
+	        			</c:when>
+	        			<c:otherwise>
+	        				<textarea rows="10" cols="100" name="object" id="object"></textarea>
+	        			</c:otherwise>
+	        		</c:choose>
 				</div>
 			</div>
 			<br>
 			<div class="col-sm-11" align="right">
-				<button type="submit" id="submit" class="btn btn-link" onclick="insertBtn();"><strong style="color:Brown;"><i class="fas fa-file-upload"></i>&nbsp;&nbsp;올리기</strong></button>|
-			
+        		<c:choose>
+        			<c:when test="${row ne null }">
+        				<button type="button" class="btn btn-link" onclick="updateBtn();"><strong style="color:Brown;"><i class="fas fa-file-upload"></i>&nbsp;&nbsp;수정하기</strong></button>
+        			</c:when>
+        			<c:otherwise>
+        				<button type="button" class="btn btn-link" onclick="insertBtn();"><strong style="color:Brown;"><i class="fas fa-file-upload"></i>&nbsp;&nbsp;올리기</strong></button>|
+        			</c:otherwise>
+        		</c:choose>
 				<script type="text/javascript">
 				function insertBtn() {
 					var accountId = $("#accountId").val();
@@ -111,10 +140,7 @@
 					document.tipWriteForm.submit();
 				}
 				
-				/*
 				function updateBtn() {
-					var accountId = $("#accountId").val();
-					var categoryId = $("#categoryId").val();
 					var subject = $("#subject").val();
 					var object = $("#object").val();
 					if (subject.length == 0) {
@@ -132,7 +158,6 @@
 					document.tipWriteForm.method = "POST";
 					document.tipWriteForm.submit();
 				}
-				*/
 				</script>
 			
 	       <button type="reset" class="btn btn-link"><strong style="color:Brown;"><i class="fas fa-undo-alt"></i>&nbsp;&nbsp;초기화</strong></button>&nbsp;|

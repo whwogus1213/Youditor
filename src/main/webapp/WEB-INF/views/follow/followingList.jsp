@@ -178,13 +178,13 @@
 <c:forEach items="${followingList}" var="followingList">
 <!-- card start -->
 <div class="col-3">
-<div class="card" style="margin-bottom: 35px; cursor: pointer;" onclick="location.href='/videoboard/videoBoardList?searchType=nickname&keyword=${followingList.nickname}'">
+<div class="card" style="margin-bottom: 35px;">
    <div class="banner">
    	  <a class="unfollowbtn" id = "unfollowbtn${followingList.followAccountId}" onclick="fn_unfollow('${followingList.followAccountId}'); return false;"><i class="fas fa-user-times unfollowbtn" style="position: absolute; top: 2%; left: 85%; color: snow; font-size: 1.2em; cursor: pointer;"></i></a>
    	  <spring:url value='/image/${followingList.picture}' var="pictureURL"/>
-      <div class="avatar" style="background-image: url(${pictureURL})"> </div>
+      <div class="avatar" style="background-image: url(${pictureURL}); cursor: pointer;" onclick="location.href='/videoboard/videoBoardList?searchType=nickname&keyword=${followingList.nickname}'"> </div>
    </div>
-	<h3 class="h3" style="font-family: 'Jua'; font-size: 1.3em;  text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">${followingList.nickname }</h3>
+	<h3 class="h3" style="font-family: 'Jua'; font-size: 1.3em;  text-overflow: ellipsis; overflow: hidden; white-space: nowrap;" onclick="location.href='/videoboard/videoBoardList?searchType=nickname&keyword=${followingList.nickname}'">${followingList.nickname }</h3>
    
    <span class="a" data-trigger="hover" data-container="body" data-toggle="popover" data-placement="bottom" data-content="최근 로그인" style="text-align: left; padding-left: 13px; cursor: pointer; text-overflow: ellipsis; overflow: hidden; white-space: nowrap;"><i class="fas fa-rss"></i>&nbsp;<fmt:timeZone value="GMT"><fmt:formatDate value="${followingList.newLogin_date}" pattern="yyyy-MM-dd kk:mm:ss" /></fmt:timeZone></span>
    
@@ -231,14 +231,13 @@ $(function(){
 	//팔로우 삭제
 	function fn_unfollow(followAccountId) {
 		var tr = $("#unfollowbtn" + followAccountId).parent().parent();
-		
-
-		
-		
-
+		var clonetr = JSON.stringify($("#unfollowbtn" + followAccountId).parent().parent().parent().clone().html());
+		console.log(tr);
+		console.log(clonetr);
 		var json = {
 			"followAccountId" : followAccountId
 		}
+		
 		event.stopPropagation();
 		
 		$.ajax({
@@ -252,12 +251,43 @@ $(function(){
 					tr.attr("onclick","");
 					tr.css("opacity","0.4");
 					tr.attr("class","cardremove");
+					$("#unfollowbtn"+followAccountId).attr("onclick","fn_follow('"+followAccountId+"', "+clonetr+"); return false;");
 				}
+				
 			},
 			error : function(data) {
-				alert("에러");
+				alert("삭제에러");
 			}
 		});
+	}
+
+	//팔로우 추가
+	function fn_follow(followerAccountId, clonetr) {
+		console.log(followerAccountId);
+		console.log(clonetr);
+		var tr = $("#unfollowbtn" + followerAccountId).parent().parent().parent();
+
+		var json = {
+			"followAccountId" : followerAccountId
+		};
+					
+		event.stopPropagation();
+		
+		$.ajax({
+			type : "POST",
+			url : "/follow/insert",
+			data : json,
+			success : function(data) {
+				if (data == "success") {
+					tr.html(clonetr);
+				}
+				
+			},
+			error : function(data) {
+				alert("추가에러");
+			}
+		});
+
 	}
 </script>
 
