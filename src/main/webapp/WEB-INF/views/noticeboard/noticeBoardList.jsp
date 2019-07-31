@@ -215,7 +215,7 @@
 		<!-- 페이징 검색 시작 -->
 		<div class="col-12">
 			<!-- 페이징 -->
-			<div class="p1 pagination col-12">
+			<div class="p1 pagination col-12" style="display:block; text-align:center">
 				<ul>
 					<c:if test="${pagination.prev}">
 						<a href="#" onclick="fn_prev('${categoryInfo.categoryId }', '${pagination.page}', '${pagination.rangeSize}',
@@ -250,7 +250,7 @@
 				</div>
 
 				<div class="col-1" style="padding-left: 0px;text-align: center;padding-right: 0px;padding-top: 5px;">
-					<i class="fas fa-search" id="btnSearch" style="cursor:" onclick="searchBtn('${categoryInfo.categoryId }',
+					<i class="fas fa-search" id="btnSearch" style="color: DarkGreen;" onclick="searchBtn('${categoryInfo.categoryId }',
 					'${pagination.searchType}', '${pagination.keyword}'); return false;"></i>
 				</div>
 

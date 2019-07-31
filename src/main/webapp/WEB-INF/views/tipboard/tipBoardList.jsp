@@ -294,7 +294,7 @@ footer{
 				</div>
 
 				<div class="col-1" style="padding-left: 0px;text-align: center;padding-right: 0px;padding-top: 5px;">
-					<i class="fas fa-search" id="btnSearch" style="cursor:" onclick="searchBtn('${categoryInfo.categoryId }',
+					<i class="fas fa-search" id="btnSearch" style="color:Brown" onclick="searchBtn('${categoryInfo.categoryId }',
 					'${pagination.searchType}', '${pagination.keyword}'); return false;"></i>
 				</div>
 

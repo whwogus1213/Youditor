@@ -196,10 +196,10 @@
 			<input type="text" class="form-control form-control-sm" name="keyword" id="keyword" >
 		</div>
 		<div class="col-sm-1">
-			<button class="btn btn-sm" name="btnSearch" id="btnSearch" style="background-color:AntiqueWhite; color: DarkGoldenRod;">검색</button>
+			<i class="fas fa-search" id="btnSearch" style="color: DarkGoldenRod;"></i>
 		</div>
 		<div class="col-sm-3 delBtn" align="center">
-			<button class="btn btn-sm selectHideBtn" name="selectHideBtn" id="selectHideBtn" style="background-color:AntiqueWhite; color: DarkGoldenRod;"><i class="fas fa-times"></i>&nbsp;&nbsp;지우기</button>
+			<button class="btn btn-sm selectHideBtn" name="selectHideBtn" id="selectHideBtn" style="background-color:AntiqueWhite; color: DarkGoldenRod;"><i class="fas fa-trash-alt"></i>&nbsp;&nbsp;지우기</button>
 			<script>
 			$("#selectHideBtn").click(function(){
 				var chArr = new Array();

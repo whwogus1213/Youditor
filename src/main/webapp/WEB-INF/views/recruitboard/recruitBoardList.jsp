@@ -310,7 +310,7 @@ footer{
 					<input type="text" class="form-control form-control-sm" name="keyword" id="keyword" style="float: left;">
 				</div>
 
-				<div class="col-1" style="padding-left: 0px;text-align: center;padding-right: 0px;padding-top: 5px;">
+				<div class="col-1" style="padding-left: 0px;text-align: center;padding-right: 0px;padding-top: 5px; color: PaleVioletRed ;">
 					<i class="fas fa-search" id="btnSearch" onclick="searchBtn('${categoryInfo.categoryId }',
 					'${pagination.searchType}', '${pagination.keyword}'); return false;"></i>
 				</div>

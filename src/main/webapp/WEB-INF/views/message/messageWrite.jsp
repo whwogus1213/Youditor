@@ -27,22 +27,19 @@
 </div>
 
 <div align="center">
-	<div class="col-sm-12">
-		<h3 align="center">메세지 보내기</h3>
-	</div>
-	<div>
-		<button type="button" class="btn btn-sm btn-link" onclick="location.href='/message/messageReceiveList' ">받은 메세지 보기</button>
-		&nbsp;|&nbsp;
-		<button type="button" class="btn btn-sm btn-link" onclick="location.href='/message/messageSendList' ">보낸 메세지 보기</button>
+	<div class="col-sm-6">
+		<h3 align="right" style="color:GoldenRod; font-family: 'Poor Story', sans-serif;'"><strong>메세지 보내기</strong></h3>
+		<hr>
 	</div>
 </div>
-<hr>
 <div class="container" align="center">
 <form name="messageForm">
 	<div class="form-inline">
 		<div class="col-sm-2"></div>
 		<div class="col-sm-2">
+			<strong style="color: DarkGoldenRod;">
 			받는이
+			</strong>
 		</div>
 		<div class="col-sm-6" align="left">
 			<c:choose>
@@ -59,7 +56,9 @@
 	<div class="form-inline">
 		<div class="col-sm-2"></div>
 		<div class="col-sm-2">
-			제목
+			<strong style="color: DarkGoldenRod;">
+				제목
+			</strong>
 		</div>
 		<br>
 		<br>
@@ -78,7 +77,9 @@
 	<div class="form-inline">
 		<div class="col-sm-2"></div>
 		<div class="col-sm-2">
+			<strong style="color: DarkGoldenRod;">
 			내용
+			</strong>
 		</div>
 		<div class="col-sm-6" align="left">
 			<c:choose>
@@ -102,8 +103,8 @@
 		<div class="col-sm-2"></div>
 		<div class="col-sm-3"></div>
 		<div class="col-sm-3 row">
-			<button type="button" class="btn btn-sm btn-link" onClick="sendMessageBtn();"><i class="fas fa-paper-plane"></i>&nbsp;&nbsp;보내기</button>|
-			<button class="btn btn-sm btn-link hBack" type="button" style="color:Crimson"><i class="fas fa-arrow-left"></i>&nbsp;&nbsp;이전으로</button>
+			<button type="button" class="btn btn-md btn-link" onClick="sendMessageBtn();" style="color: DarkGoldenRod;"><strong><i class="fas fa-paper-plane"></i>&nbsp;&nbsp;보내기</strong></button>
+			<button class="btn btn-md btn-link hBack" type="button" style="color: DarkGoldenRod;"><strong><i class="fas fa-arrow-left"></i>&nbsp;&nbsp;이전으로</strong></button>
 			<script>
 			$(".hBack").on("click", function(e){
 			    e.preventDefault();

@@ -385,15 +385,15 @@
 
 			<!-- 검색 -->
 			<div class="input-group col-12" style="padding-top: 6px; padding-bottom: 30px;" align="right">
-				<div class="col-6" align="right" style="padding-right: 0px; float: right; ">
+				<div class="col-3" align="right" style="padding-right: 0px;">
 					<select class="form-control form-control-sm" name="searchType"
-						id="searchType" style="width: 30%">
+						id="searchType" style="width: 66.6%">
 						<option value="subject">제목</option>
 						<option value="object">본문</option>
 						<option value="nickname">닉네임</option>
 					</select>
 				</div>
-				<div class="col-3" align="right" style="padding-right: 0px; padding-left: 5px;">
+				<div class="col-6" align="right" style="padding-right: 0px; padding-left: 5px;">
 					<input type="text" class="form-control form-control-sm" name="keyword" id="keyword" style="float: right; text-align: right;"> 
 				</div>
 
