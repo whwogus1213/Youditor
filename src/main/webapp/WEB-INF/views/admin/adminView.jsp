@@ -176,7 +176,7 @@
 </head>
 <body>
 <jsp:include page="./adminTop.jsp" flush="false"/>
-<div class="container" style="max-width: 85%;"><br/><br/><br/>
+<div class="container" style="max-width: 85%;"><br/>
 	<h1>회원정보관리</h1>
 	<table class="table table-borderd table-striped nanum table-hover">
 		<thead>
