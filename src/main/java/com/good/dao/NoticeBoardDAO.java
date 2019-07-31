@@ -23,6 +23,9 @@ public interface NoticeBoardDAO {
 
 	// 글 쓰기
 	public void insertNoticeBoard(NoticeBoardVO vo) throws Exception;
+	
+	// 권한 확인
+	public int getEditAuth(int boardId) throws Exception;
 
 	// 수정
 	public void updateNoticeBoard(NoticeBoardVO vo) throws Exception;

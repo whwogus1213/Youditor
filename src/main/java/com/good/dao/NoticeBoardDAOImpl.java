@@ -50,6 +50,12 @@ public class NoticeBoardDAOImpl implements NoticeBoardDAO {
 	public void insertNoticeBoard(NoticeBoardVO vo) throws Exception {
 		sqlSession.insert(NAMESPACE + ".insertNoticeBoard", vo);
 	}
+	
+	// 권한 확인
+	@Override
+	public int getEditAuth(int boardId) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + ".getEditAuth", boardId);
+	}
 
 	// 수정
 	@Override

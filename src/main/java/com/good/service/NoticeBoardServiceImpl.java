@@ -49,6 +49,12 @@ public class NoticeBoardServiceImpl implements NoticeBoardService {
 	public void insertNoticeBoard(NoticeBoardVO vo) throws Exception {
 		noticeBoardDAO.insertNoticeBoard(vo);
 	}
+	
+	// 권한 확인
+	@Override
+	public int getEditAuth(int boardId) throws Exception {
+		return noticeBoardDAO.getEditAuth(boardId);
+	}
 
 	// 수정
 	@Override

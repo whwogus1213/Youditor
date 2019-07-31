@@ -100,6 +100,20 @@
 				now(),
 				now())
     </insert>
+    
+    <!-- 권한 확인 -->
+    <select id="getEditAuth" parameterType="int" resultType="int">
+    SELECT
+		editAuthority
+	FROM
+		noticeboard as b
+		JOIN
+			noticecategory as c
+		ON
+			b.categoryId = c.categoryId
+	WHERE
+		boardId = #{boardId}
+    </select>
 
     <!-- 글 수정 -->
 	 <update id="updateNoticeBoard" parameterType="NoticeBoardVO">

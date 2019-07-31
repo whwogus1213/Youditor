@@ -167,12 +167,13 @@ public class VideoBoardController {
 		String result = "";
 		
 		AccountsVO login = (AccountsVO) session.getAttribute("login");
+		int auth = videoBoardService.getEditAuth(vo.getBoardId());
 		
 		if(login.getAccountId() == vo.getAccountId()) {
 			videoBoardService.updateVideoBoard(vo);
 			System.out.println("============ updateVideoBoard 성공==============");
 			result = "redirect:/videoboard/videoBoardView?boardId=" + vo.getBoardId();
-		} else if(4 <= login.getAuthority()) {
+		} else if(auth <= login.getAuthority()) {
 			videoBoardService.updateVideoBoard(vo);
 			System.out.println("============ updateVideoBoard 성공==============");
 			result = "redirect:/videoboard/videoBoardView?boardId=" + vo.getBoardId();
@@ -189,13 +190,14 @@ public class VideoBoardController {
 		String result = "";
 		
 		AccountsVO login = (AccountsVO) session.getAttribute("login");
+		int auth = videoBoardService.getEditAuth(vo.getBoardId());
 		
 		if(login.getAccountId() == vo.getAccountId()) {
 			videoBoardService.deleteVideoBoard(vo);
 			rttr.addFlashAttribute("result", "deleteOK");
 			System.out.println("============ deleteVideoBoard 성공==============");
 			result = "redirect:/videoboard/videoBoardList";
-		} else if(4 <= login.getAuthority()) {
+		} else if(auth <= login.getAuthority()) {
 			videoBoardService.deleteVideoBoard(vo);
 			rttr.addFlashAttribute("result", "deleteOK");
 			System.out.println("============ deleteVideoBoard 성공==============");
