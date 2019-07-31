@@ -105,6 +105,10 @@ public class AccountsDAOImpl implements AccountsDAO {
 		return sqlSession.selectOne(NAMESPACE + ".getEmail",paramMap);
 	}
 	@Override
+	public String getNickname(Map<String, String> paramMap) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + ".getNickname",paramMap);
+	}
+	@Override
 	public int getAccountId(Map<String, String> paramMap) throws Exception {
 		return sqlSession.selectOne(NAMESPACE + ".getAccountId",paramMap);
 	}

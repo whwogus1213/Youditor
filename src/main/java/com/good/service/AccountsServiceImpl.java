@@ -122,6 +122,10 @@ public class AccountsServiceImpl implements AccountsService {
 	public String getEmail(Map<String, String> paramMap) throws Exception {
 		return dao.getEmail(paramMap);
 	}
+	@Override
+	public String getNickname(Map<String, String> paramMap) throws Exception {
+		return dao.getNickname(paramMap);
+	}
 
 	@Override
 	public int getAccountId(Map<String, String> paramMap) throws Exception {
