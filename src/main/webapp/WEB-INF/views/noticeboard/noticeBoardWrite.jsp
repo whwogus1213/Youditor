@@ -111,16 +111,14 @@
 			<div class="col-sm-11" align="right">
         		<c:choose>
         			<c:when test="${row ne null }">
-        				<button type="button" class="btn btn-md" onclick="updateBtn();"><strong style="color:DarkGreen;"><i class="fas fa-eraser"></i>&nbsp;&nbsp;수정</strong></button>
+        				<button type="button" class="btn btn-md" onclick="updateBtn();"><strong style="color:DarkGreen;"><i class="fas fa-eraser"></i>&nbsp;&nbsp;수정</strong></button>|
         			</c:when>
         			<c:otherwise>
-        				<button type="button" class="btn btn-md" onclick="insertBtn();"><strong style="color:DarkGreen;"><i class="fas fa-file-upload"></i>&nbsp;&nbsp;올리기</strong></button>
+        				<button type="button" class="btn btn-md" onclick="insertBtn();"><strong style="color:DarkGreen;"><i class="fas fa-file-upload"></i>&nbsp;&nbsp;올리기</strong></button>|
         			</c:otherwise>
         		</c:choose>
 				<script type="text/javascript">
 				function insertBtn() {
-					var accountId = $("#accountId").val();
-					var categoryId = $("#categoryId").val();
 		  			var subject = $("#subject").val();
 		  			var object = $("#object").val();
 		  			if(subject.length == 0) { alert("제목을 입력해 주세요."); $("#subject").focus(); return; }
@@ -132,8 +130,6 @@
 				}
 				
 				function updateBtn() {
-					var accountId = $("#accountId").val();
-					var categoryId = $("#categoryId").val();
 		  			var subject = $("#subject").val();
 		  			var object = $("#object").val();
 		  			if(subject.length == 0) { alert("제목을 입력해 주세요."); $("#subject").focus(); return; }
@@ -143,7 +139,7 @@
 		  			document.noticeWriteForm.method = "POST";
 		  			document.noticeWriteForm.submit();
 				}
-				</script>|
+				</script>
 				<button type="reset" class="btn btn-md"><strong style="color:DarkGreen;"><i class="fas fa-undo-alt"></i>&nbsp;&nbsp;초기화&nbsp;</strong></button>|
 				<button type="button" class="btn btn-md hBack"><strong style="color:DarkGreen;"><i class="fas fa-backspace"></i>&nbsp;&nbsp;뒤로 가기</strong></button>
 					<script>

@@ -71,5 +71,11 @@ public class TipBoardServiceImpl implements TipBoardService {
 	public List<TipBoardVO> newList() throws Exception {
 		return tipBoardDAO.newList();
 	}
+	
+	// 게시물의 editAuthority
+	@Override
+	public int getEditAuth(int boardId) throws Exception {
+		return tipBoardDAO.getEditAuth(boardId);
+	}
 
 }

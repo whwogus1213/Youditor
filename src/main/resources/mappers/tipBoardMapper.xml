@@ -108,10 +108,16 @@
     </insert>
 
     <!-- 글 수정 -->
-	 <update id="updateTipBoard">
-		update tipBoard
-		set subject = #{subject}, object = #{object}
-		where boardId = #{boardId}
+	<update id="updateTipBoard">
+	UPDATE
+		tipBoard
+	SET
+		categoryId = #{categoryId},
+		subject = #{subject},
+		object = #{object},
+		mod_date = now()
+	WHERE
+		boardId = #{boardId}
 	 </update>
 
  	<!-- 글 삭제 -->
@@ -132,6 +138,20 @@
 		FROM tipboard b join accounts a on b.accountId = a.accountId
 		join tipcategory c on b.categoryId=c.categoryId
         order by b.reg_date DESC limit 5
+	</select>
+	
+	<!-- 게시물의 editAuthority 확인 -->
+	<select id="getEditAuth" parameterType="int" resultType="int">
+		SELECT
+			editAuthority
+		FROM
+			tipboard as b
+			JOIN
+				tipcategory as c
+			ON
+				b.categoryId = c.categoryId
+		WHERE
+			boardId = #{boardId}
 	</select>
 
 </mapper>

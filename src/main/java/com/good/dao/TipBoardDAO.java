@@ -34,5 +34,8 @@ public interface TipBoardDAO {
 
 	// 최신 게시물
 	public List<TipBoardVO> newList() throws Exception;
+	
+	// 게시물의 editAuthority
+	public int getEditAuth(int boardId) throws Exception;
 
 }

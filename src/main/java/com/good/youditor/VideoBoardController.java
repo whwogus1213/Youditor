@@ -144,15 +144,16 @@ public class VideoBoardController {
 	public String joinUpdate(Model model, HttpSession session, @RequestParam("boardId") int boardId) throws Exception {
 		AccountsVO login = (AccountsVO) session.getAttribute("login");
 		VideoBoardVO update = videoBoardService.view(boardId);
+		int auth = videoBoardService.getEditAuth(boardId);
 		String result = "";
 		if(login.getAccountId() == update.getAccountId()) {
 			model.addAttribute("row", update);
 			result = "videoboard/videoBoardWrite";
-			System.out.println("String videoBoardUpdate open");
-		} else if(4 <= login.getAuthority()) {
+			System.out.println("String videoBoardWrite open");
+		} else if(auth <= login.getAuthority()) {
 			model.addAttribute("row", update);
 			result = "videoboard/videoBoardWrite";
-			System.out.println("String videoBoardUpdate open");
+			System.out.println("String videoBoardWrite open");
 		} else {
 			result = "videoboared/videoBoardView?boardId=" + boardId;
 		}

@@ -105,18 +105,19 @@
             now())
     </insert>
 
-    	<!-- 글 수정 -->
-		 <update id="updateVideoBoard">
-		  update
-        videoBoard
-		  set
-        subject = #{subject},
-		    object = #{object},
-        youtubeLink = #{youtubeLink},
-        mod_date = now()
-		  where
-        boardId = #{boardId}
-		 </update>
+ 	<!-- 글 수정 -->
+	<update id="updateVideoBoard">
+	UPDATE
+		videoBoard
+	SET
+		categoryId = #{categoryId},
+		subject = #{subject},
+		object = #{object},
+		youtubeLink = #{youtubeLink},
+		mod_date = now()
+	WHERE
+		boardId = #{boardId}
+	</update>
 
  		<!-- 글 삭제 -->
 		 <delete id="deleteVideoBoard">
