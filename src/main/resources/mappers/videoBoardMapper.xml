@@ -139,6 +139,21 @@
 						and followerAccountId = #{accountId} )
 	</select>
 	
+	<!-- 게시물의 editAuthority 확인 -->
+	<select id="getEditAuth" parameterType="int" resultType="int">
+		SELECT
+			editAuthority
+		FROM
+			videoboard as b
+			JOIN
+				videocategory as c
+			ON
+				b.categoryId = c.categoryId
+		WHERE
+			boardId = #{boardId}
+	</select>
+	
+	
 	<!-- 팔로우 게시물 목록 -->
 	<!-- 
 	<select id="followBoardList" resultType="VideoBoardVO" parameterType="int">

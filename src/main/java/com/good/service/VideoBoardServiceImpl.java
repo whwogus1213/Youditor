@@ -71,6 +71,12 @@ public class VideoBoardServiceImpl implements VideoBoardService {
 	public int followCheck(int accountId, int accountId2) throws Exception {
 		return videoBoardDAO.followCheck(accountId, accountId2);
 	}
+	
+	// 게시물의 editAuthority
+	@Override
+	public int getEditAuth(int boardId) throws Exception {
+		return videoBoardDAO.getEditAuth(boardId);
+	}
 
 //	// 팔로우 게시물 목록
 //	@Override

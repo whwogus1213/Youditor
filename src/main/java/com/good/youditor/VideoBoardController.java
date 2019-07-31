@@ -91,6 +91,8 @@ public class VideoBoardController {
 
 		VideoBoardVO row = videoBoardService.view(boardId);
 		
+		int auth = videoBoardService.getEditAuth(boardId);
+		
 		List<NoticeCategoryVO> nCatList = homeService.bringNoticeCategory();
 		List<VideoCategoryVO> vCatList = homeService.bringVideoCategory();
 		List<TipCategoryVO> tCatList = homeService.bringTipCategory();
@@ -100,8 +102,9 @@ public class VideoBoardController {
 		session.setAttribute("vCatList", vCatList);
 		session.setAttribute("tCatList", tCatList);
 		session.setAttribute("rCatList", rCatList);
-		
+
 		model.addAttribute("row", row);
+		model.addAttribute("auth", auth);
 		return "videoboard/videoBoardView";
 	}
 

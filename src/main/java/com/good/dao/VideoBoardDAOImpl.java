@@ -78,6 +78,12 @@ public class VideoBoardDAOImpl implements VideoBoardDAO {
 		
 		return sqlSession.selectOne(NAMESPACE + ".followCheck", map);
 	}
+	
+	// 게시물의 editAuthority
+	@Override
+	public int getEditAuth(int boardId) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + ".getEditAuth", boardId);
+	}
 
 //	// 팔로우 게시물 목록
 //	@Override

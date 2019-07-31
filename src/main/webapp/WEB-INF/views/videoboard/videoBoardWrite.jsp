@@ -76,8 +76,16 @@
 			<div class="form-inline">
 		        <label class="control-label col-sm-3"><strong>작성자</strong></label>
 		        <div class="col-sm-4">
-					<input type="text" class="form-control" maxlength="50" value="${login.nickname}" readonly>
-					<input type="text" class="form-control" name="accountId" maxlength="50" value="${login.accountId}" style="display:none" readonly>
+	        		<c:choose>
+	        			<c:when test="${row ne null }">
+	        				<input type="text" class="form-control" maxlength="50" value="${row.nickname}" readonly>
+							<input type="text" class="form-control" name="accountId" maxlength="50" value="${row.accountId}" style="display:none" readonly>
+	        			</c:when>
+	        			<c:otherwise>
+	        				<input type="text" class="form-control" maxlength="50" value="${login.nickname}" readonly>
+							<input type="text" class="form-control" name="accountId" maxlength="50" value="${login.accountId}" style="display:none" readonly>
+	        			</c:otherwise>
+	        		</c:choose>
 		        </div>
 			</div>
 			<br>

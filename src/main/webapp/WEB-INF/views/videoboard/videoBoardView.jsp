@@ -331,7 +331,7 @@ i {
 						</i>&nbsp;
 						<i class="far fa-trash-alt" id="deletebtn" style="cursor: pointer;">삭제&nbsp;&nbsp;</i>
 					</c:when>
-					<c:when test="${login.authority >= 4 }">
+					<c:when test="${login.authority >= auth }">
 						<i class="far fa-edit" onclick="location.href='/videoboard/update.do?boardId=${row.boardId}'" style="cursor: pointer;">
 							수정
 						</i>&nbsp;
