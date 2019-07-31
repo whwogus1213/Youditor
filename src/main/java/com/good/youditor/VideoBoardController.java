@@ -139,33 +139,72 @@ public class VideoBoardController {
 	// 파일 이동
 	// 게시글 수정
 	// 'videoBoardUpdate.jsp' 로 이동 <-- 이동하고자 하는 파일로 명 바꾸면됨
-	@RequestMapping(value = "/updateVideoBoard.do", method = RequestMethod.GET)
-	public ModelAndView joinUpdate(Locale locale, Model model, @RequestParam("boardId") int boardId) throws Exception {
+	@RequestMapping(value = "/update.do", method = RequestMethod.GET)
+	public String joinUpdate(Model model, HttpSession session, @RequestParam("boardId") int boardId) throws Exception {
+		AccountsVO login = (AccountsVO) session.getAttribute("login");
 		VideoBoardVO update = videoBoardService.view(boardId);
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("videoboard/videoBoardUpdate");
-		mav.addObject("videoBoardUpdate", update);
-		System.out.println("String videoBoardUpdate open");
-		return mav;
+		String result = "";
+		if(login.getAccountId() == update.getAccountId()) {
+			model.addAttribute("row", update);
+			result = "videoboard/videoBoardWrite";
+			System.out.println("String videoBoardUpdate open");
+		} else if(4 <= login.getAuthority()) {
+			model.addAttribute("row", update);
+			result = "videoboard/videoBoardWrite";
+			System.out.println("String videoBoardUpdate open");
+		} else {
+			result = "videoboared/videoBoardView?boardId=" + boardId;
+		}
+		
+		return result;
 	}
 
 	// 글 수정
 	@RequestMapping(value = "/updateVideoBoardPro")
-	public String updateVideoBoardPro(VideoBoardVO vo) throws Exception {
-		videoBoardService.updateVideoBoard(vo);
-		System.out.println("============ updateVideoBoard 성공==============");
-		return "redirect:/videoboard/videoBoardView?boardId=" + vo.getBoardId();
-
+	public String updateVideoBoardPro(VideoBoardVO vo, HttpSession session) throws Exception {
+		String result = "";
+		
+		AccountsVO login = (AccountsVO) session.getAttribute("login");
+		
+		if(login.getAccountId() == vo.getAccountId()) {
+			videoBoardService.updateVideoBoard(vo);
+			System.out.println("============ updateVideoBoard 성공==============");
+			result = "redirect:/videoboard/videoBoardView?boardId=" + vo.getBoardId();
+		} else if(4 <= login.getAuthority()) {
+			videoBoardService.updateVideoBoard(vo);
+			System.out.println("============ updateVideoBoard 성공==============");
+			result = "redirect:/videoboard/videoBoardView?boardId=" + vo.getBoardId();
+		} else {
+			result = "redirect:/videoboard/videoBoardList"; 
+		}
+		
+		return result;
 	}
 
 	// 글 삭제
 	@RequestMapping(value = "/deleteVideoBoardPro")
-	public String deleteVideoBoardPro(VideoBoardVO vo, RedirectAttributes rttr) throws Exception {
-		videoBoardService.deleteVideoBoard(vo);
-		rttr.addFlashAttribute("result", "deleteOK");
-		System.out.println("============ deleteVideoBoard 성공==============");
+	public String deleteVideoBoardPro(VideoBoardVO vo, RedirectAttributes rttr, HttpSession session) throws Exception {
+		String result = "";
+		
+		AccountsVO login = (AccountsVO) session.getAttribute("login");
+		
+		if(login.getAccountId() == vo.getAccountId()) {
+			videoBoardService.deleteVideoBoard(vo);
+			rttr.addFlashAttribute("result", "deleteOK");
+			System.out.println("============ deleteVideoBoard 성공==============");
+			result = "redirect:/videoboard/videoBoardList";
+		} else if(4 <= login.getAuthority()) {
+			videoBoardService.deleteVideoBoard(vo);
+			rttr.addFlashAttribute("result", "deleteOK");
+			System.out.println("============ deleteVideoBoard 성공==============");
+			result = "redirect:/videoboard/videoBoardList";
+		} else {
+			rttr.addFlashAttribute("result", "deleteFail");
+			System.out.println("============ deleteVideoBoard 실패==============");
+			result = "redirect:/videoboard/videoBoardView?boardId" + vo.getBoardId();
+		}
 
-		return "redirect:/videoboard/videoBoardList";
+		return result;
 	}
 
 }

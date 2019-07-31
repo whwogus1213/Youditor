@@ -434,6 +434,7 @@
 	 		type : "POST",
 	 		url : "/follow/insert",
 	 		data : json,
+	 		async: false,
 	 		success : function(data) {
 	 			if (data == "success") {
 	 				tr.attr("style","");
@@ -442,6 +443,12 @@
 	 				tr.attr("onclick","");
 	 				tr.css("cursor","default");
 	 				tr.html("<i class='far fa-heart'></i>&nbsp;&nbsp;팔로우중");
+	 				/* 웹소켓으로 팔로우 알람 */
+	 				var sendText = {};
+	 				sendText.from = "followAlarm";
+	 				sendText.text = String(accountId);
+	 				sock.send(JSON.stringify(sendText));
+	 				console.log(tempcheck);
 	 			}
 	 			
 	 		},
@@ -449,6 +456,15 @@
 	 			alert("에러");
 	 		}
 	 	});
+
+
+
+		/* 웹소켓으로 팔로우 알람 */
+		var sendText = {};
+		sendText.from = "followAlarm";
+		sendText.text = String(accountId);
+		sock.send(JSON.stringify(sendText));
+		console.log(tempcheck);
 	 	
 	 }
 

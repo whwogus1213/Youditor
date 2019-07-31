@@ -330,70 +330,76 @@ footer{
 
 	</div>
 	<br>
-	<script type="text/javascript">
-		 //팔로우 추가
-		 function fn_follow(accountId) {
-		 	var tr = $(".dropdownBtnFollow"+accountId);
-		 	var json = {
-		 		"followAccountId" : accountId
-		 	}
-		 				
-		 	event.stopPropagation();
-		 	
-		 	$.ajax({
-		 		type : "POST",
-		 		url : "/follow/insert",
-		 		data : json,
-		 		success : function(data) {
-		 			if (data == "success") {
-		 				tr.attr("style","");
-		 				tr.css("color", "red");
-		 				tr.find("i").css("color","red");
-		 				tr.attr("onclick","");
-		 				tr.css("cursor","default");
-		 				tr.html("<i class='far fa-heart'></i>&nbsp;&nbsp;팔로우중");
-		 			}
-		 			
-		 		},
-		 		error : function(data) {
-		 			alert("에러");
-		 		}
-		 	});
-		 	
-		 }
-	
-		 //팔로우 체크
-		 function checkFollow(accountId){
-		 	console.log(accountId+"bbbbbbbbbbbbbbbbbbbbbb");
-		 	var tr = $(".dropdownBtnFollow"+accountId);
-		 	var json = {
-		 			"followAccountId" : accountId,
-		 			"followerAccountId" : ${login.accountId}
-		 			};
-		 	$.ajax({
-		 		type : "POST",
-		 		url : "/follow/check",
-		 		data : json,
-		 		success : function(data) {
-		 			if (data == "1") {
-		 				console.log("팔로우 되어있습니다.");
-		 				tr.attr("style","");
-		 				tr.css("color", "red");
-		 				tr.find("i").css("color","red");
-		 				tr.attr("onclick","");
-		 				tr.css("cursor","default");
-		 				tr.html("<i class='far fa-heart'></i>&nbsp;&nbsp;팔로우중");
-		 				
-		 			} else {
-		 				console.log("팔로우 아님");
-		 			}
-		 		},
-		 		error : function(data) {
-		 			alert("에러");
-		 		}
-			});
-		}
-	</script>
+<script type="text/javascript">
+	 //팔로우 추가
+	 function fn_follow(accountId) {
+	 	var tr = $(".dropdownBtnFollow"+accountId);
+	 	var json = {
+	 		"followAccountId" : accountId
+	 	}
+	 				
+	 	event.stopPropagation();
+	 	
+	 	$.ajax({
+	 		type : "POST",
+	 		url : "/follow/insert",
+	 		data : json,
+	 		success : function(data) {
+	 			if (data == "success") {
+	 				tr.attr("style","");
+	 				tr.css("color", "red");
+	 				tr.find("i").css("color","red");
+	 				tr.attr("onclick","");
+	 				tr.css("cursor","default");
+	 				tr.html("<i class='far fa-heart'></i>&nbsp;&nbsp;팔로우중");
+	 				/* 웹소켓으로 팔로우 알람 */
+	 				var sendText = {};
+	 				sendText.from = "followAlarm";
+	 				sendText.text = String(accountId);
+	 				sock.send(JSON.stringify(sendText));
+	 				console.log(tempcheck);
+	 			}
+	 			
+	 		},
+	 		error : function(data) {
+	 			alert("에러");
+	 		}
+	 	});
+	 	
+	 }
+
+	 //팔로우 체크
+	 function checkFollow(accountId){
+	 	console.log(accountId+"bbbbbbbbbbbbbbbbbbbbbb");
+	 	var tr = $(".dropdownBtnFollow"+accountId);
+	 	var json = {
+	 			"followAccountId" : accountId,
+	 			"followerAccountId" : ${login.accountId}
+	 			};
+	 	$.ajax({
+	 		type : "POST",
+	 		url : "/follow/check",
+	 		data : json,
+	 		success : function(data) {
+	 			if (data == "1") {
+	 				console.log("팔로우 되어있습니다.");
+	 				tr.attr("style","");
+	 				tr.css("color", "red");
+	 				tr.find("i").css("color","red");
+	 				tr.attr("onclick","");
+	 				tr.css("cursor","default");
+	 				tr.html("<i class='far fa-heart'></i>&nbsp;&nbsp;팔로우중");
+	 				
+	 			} else {
+	 				console.log("팔로우 아님");
+	 			}
+	 		},
+	 		error : function(data) {
+	 			alert("에러");
+	 		}
+		});
+	}
+</script>
 </body>
 <jsp:include page="./../module/bottom.jsp" flush="false" />
 </html>
