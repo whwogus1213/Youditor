@@ -178,12 +178,13 @@ public class TipBoardController {
 		String result = "";
 		
 		AccountsVO login = (AccountsVO) session.getAttribute("login");
+		int auth = tipBoardService.getEditAuth(vo.getBoardId());
 		
 		if(login.getAccountId() == vo.getAccountId()) {
 			tipBoardService.updateTipBoard(vo);
 			System.out.println("============ updateTipBoard 성공==============");
 			result = "redirect:/tipboard/tipBoardView?boardId=" + vo.getBoardId();
-		} else if(4 <= login.getAuthority()) {
+		} else if(auth <= login.getAuthority()) {
 			tipBoardService.updateTipBoard(vo);
 			System.out.println("============ updateTipBoard 성공==============");
 			result = "redirect:/tipboard/tipBoardView?boardId=" + vo.getBoardId();
@@ -200,13 +201,14 @@ public class TipBoardController {
 		String result = "";
 		
 		AccountsVO login = (AccountsVO) session.getAttribute("login");
+		int auth = tipBoardService.getEditAuth(vo.getBoardId());
 		
 		if(login.getAccountId() == vo.getAccountId()) {
 			tipBoardService.deleteTipBoard(vo);
 			rttr.addFlashAttribute("result","deleteOK");
 			System.out.println("============ deleteVideoBoard 성공==============");
 			result = "redirect:/tipboard/tipBoardList";
-		} else if(4 <= login.getAuthority()) {
+		} else if(auth <= login.getAuthority()) {
 			tipBoardService.deleteTipBoard(vo);
 			rttr.addFlashAttribute("result","deleteOK");
 			System.out.println("============ deleteVideoBoard 성공==============");

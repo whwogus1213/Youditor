@@ -66,7 +66,7 @@
 <nav class="navbar fixed-top navbar-expand-lg" style="box-shadow: none; min-height: 50px;">
 	<div class="container" style="margin-left: 0px; margin-right: 0px; max-width: 100%;">
 		<div class="collapse navbar-collapse row center justify-content-between" id="navbarResponsive">
-			<ul class="navbar-nav row justify-content-between center navitem	">
+			<ul class="navbar-nav row justify-content-between center navitem">
 				<li class="nav-item">
 					<a class="nav-link" href="/adminView"><strong>계정관리</strong></a>
 				</li>
@@ -86,6 +86,11 @@
 							<a class="submenuLink" href="/adminCategory?category=recruit">구인구직 카테고리</a>
 						</li>
 					</ul>
+				</li>
+			</ul>
+			<ul>
+				<li>
+					<a class="nav-link" href="/"><strong>메인페이지로 돌아가기</strong></a>
 				</li>
 			</ul>
 		</div>

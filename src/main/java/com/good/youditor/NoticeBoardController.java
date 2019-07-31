@@ -169,8 +169,9 @@ public class NoticeBoardController {
 		String result = "";
 		
 		AccountsVO login = (AccountsVO) session.getAttribute("login");
+		int auth = noticeBoardService.getEditAuth(boardId);
 		
-		if(4 <= login.getAuthority()) {
+		if(auth <= login.getAuthority()) {
 			NoticeBoardVO vo = new NoticeBoardVO();
 			vo.setBoardId(boardId);
 			vo.setCategoryId(categoryId);
@@ -196,8 +197,9 @@ public class NoticeBoardController {
 		String result = "";
 		
 		AccountsVO login = (AccountsVO) session.getAttribute("login");
+		int auth = noticeBoardService.getEditAuth(boardId);
 		
-		if(4 <= login.getAuthority()) {
+		if(auth <= login.getAuthority()) {
 			NoticeBoardVO row = noticeBoardService.view(boardId);
 			
 			model.addAttribute("row", row);
@@ -215,6 +217,7 @@ public class NoticeBoardController {
 	@RequestMapping(value = "/deleteNoticeBoardPro")
 	public String deleteNoticeBoardPro(NoticeBoardVO vo, RedirectAttributes rttr, HttpSession session) throws Exception {
 		AccountsVO login = (AccountsVO) session.getAttribute("login");
+		int auth = noticeBoardService.getEditAuth(vo.getBoardId());
 		
 		if(4 <= login.getAuthority()) {
 			noticeBoardService.deleteNoticeBoard(vo);
