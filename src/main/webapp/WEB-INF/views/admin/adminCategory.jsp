@@ -116,7 +116,7 @@
 			});
 		}
 	}
-	
+
 	// 새로운 카테고리 만들기
 	function newCatBtn(category) {
 		var newCatId = $("#newCatId").val();
@@ -149,7 +149,7 @@
 </head>
 <body>
 <jsp:include page="./adminTop.jsp" flush="false"/>
-<div class="container" style="max-width: 85%;"><br/><br/><br/>
+<div class="container" style="max-width: 85%;"><br/>
 	<h1>${CatName } 카테고리 관리</h1>
 	<h5>관리권한은 열람권한보다 낮을 수 없습니다.<br>관리권한을 열람권한보다 낮은 값을 주면 자동으로 열람권한과 같은 값을 가집니다.</h5>
 	<table class="table table-borderd table-striped nanum table-hover">
