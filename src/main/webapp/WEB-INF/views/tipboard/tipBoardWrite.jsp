@@ -24,7 +24,14 @@
 	<div class="container">
 		<div align="right" >
 			<br>
-			<h1 style="color:Brown; font-family: 'Noto Serif KR'">편집 Tip 작성</h1>
+        	<c:choose>
+        		<c:when test="${row ne null }">
+					<h1 style="color:Brown; font-family: 'Noto Serif KR'">편집 Tip 수정</h1>
+        		</c:when>
+        		<c:otherwise>
+					<h1 style="color:Brown; font-family: 'Noto Serif KR'">편집 Tip 작성</h1>
+        		</c:otherwise>
+        	</c:choose>
 		</div>
 		<hr>
 		<br>

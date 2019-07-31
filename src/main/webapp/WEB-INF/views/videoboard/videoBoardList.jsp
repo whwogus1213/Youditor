@@ -206,7 +206,7 @@
 	
 	
 	<!-- 배너 목록 -->
-	<div class="col-sm-12" style="background-image:url('/image/videoboard/${categoryInfo.categoryPicture}'); height: 300px; background-size:100%; color:white; padding-top:130px; padding-bottom:5%; background-position: center;">
+	<div class="col-sm-12" style="background-image:url('/resources/images/videoList/${categoryInfo.categoryPicture}'); height: 300px; background-size:100%; color:white; padding-top:130px; padding-bottom:5%; background-position: center;">
 	</div>
 	<div class="bg-text" style="background-color: rgb(0,0,0); /* Fallback color */
   background-color: rgba(0,0,0, 0.4); /* Black w/opacity/see-through */
