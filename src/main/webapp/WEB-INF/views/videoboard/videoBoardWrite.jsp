@@ -24,11 +24,18 @@
 	</div>
 	
 	<div class="container" style="padding-top:2%">
-	    <form class="form-horizontal" method="post" action="${path}/videoboard/insertVideoBoardPro">
+	    <form class="form-horizontal" name="videoForm" method="post">
 	    	<div class="form-inline">
 	        	<label class="control-label col-sm-3"><strong>제목</strong></label>
 	        	<div class="col-sm-4">
-	        		<input type="text" class="form-control" name="subject" maxlength="50" placeholder="Enter Title">
+	        		<c:choose>
+	        			<c:when test="${row ne null }">
+	        				<input type="text" class="form-control" name="subject" maxlength="50" placeholder="Enter Title" value="${row.subject }">
+	        			</c:when>
+	        			<c:otherwise>
+	        				<input type="text" class="form-control" name="subject" maxlength="50" placeholder="Enter Title">
+	        			</c:otherwise>
+	        		</c:choose>
 	        	</div>
 			</div>
 			<br>
@@ -36,12 +43,32 @@
 				<label class="control-label col-sm-3"><strong>카테고리</strong></label>
 				<div class="col-sm-4">
 	        		<select class="browser-default custom-select" name="categoryId" style="width:190px">
-		           		<option value="1">게임</option>
-		           		<option value="2">먹방</option>
-		           		<option value="3">일상</option>
-		           		<option value="4">모터</option>
-		           		<option value="5">스포츠</option>
-		           		<option value="6">예능</option>
+	        			<c:forEach items="${vCatList}" var="CatList">
+		           			<c:choose>
+		           				<c:when test="${CatList.categoryId == 99 }">
+		           					<c:if test="${login.authority >= CatList.editAuthority }">
+		           						<c:choose>
+						        			<c:when test="${row.categoryId == CatList.categoryId }">
+						        				<option value="${CatList.categoryId }" selected>${CatList.categoryName }</option>
+						        			</c:when>
+						        			<c:otherwise>
+						        				<option value="${CatList.categoryId }">${CatList.categoryName }</option>
+						        			</c:otherwise>
+						        		</c:choose>
+		           					</c:if>
+		           				</c:when>
+		           				<c:otherwise>
+		           						<c:choose>
+						        			<c:when test="${row.categoryId == CatList.categoryId }">
+						        				<option value="${CatList.categoryId }" selected>${CatList.categoryName }</option>
+						        			</c:when>
+						        			<c:otherwise>
+						        				<option value="${CatList.categoryId }">${CatList.categoryName }</option>
+						        			</c:otherwise>
+						        		</c:choose>
+		           				</c:otherwise>
+		           			</c:choose>
+		           		</c:forEach>
 		           </select>
 				</div>
 			</div>
@@ -57,7 +84,14 @@
 			<div class="form-inline">
 		        <label class="control-label col-sm-3"><strong>유투브 링크</strong></label>
 		        <div class="col-sm-8" style="display:inline-block">
-					<input type="text" class="form-control" name="youtubeLink" maxlength="300" placeholder="Enter Youtube Link" style="width:400px">
+	        		<c:choose>
+	        			<c:when test="${row ne null }">
+	        				<input type="text" class="form-control" name="youtubeLink" maxlength="300" placeholder="Enter Youtube Link" style="width:400px" value="${row.youtubeLink }">
+	        			</c:when>
+	        			<c:otherwise>
+	        				<input type="text" class="form-control" name="youtubeLink" maxlength="300" placeholder="Enter Youtube Link" style="width:400px">
+	        			</c:otherwise>
+	        		</c:choose>
 					<input type="button" id="test" class="btn btn-danger"  value="썸네일 보기"></input>
 		        </div>
 			</div>
@@ -93,7 +127,14 @@
 			<div class="form-inline">
 				<label class="control-label col-sm-3"><strong>내용</strong></label>
 				<div class="col-sm-4">
-					<textarea rows="10" cols="80" name="object"></textarea>
+	        		<c:choose>
+	        			<c:when test="${row ne null }">
+	        				<textarea rows="10" cols="80" name="object"><c:out value="${row.object }"/></textarea>
+	        			</c:when>
+	        			<c:otherwise>
+	        				<textarea rows="10" cols="80" name="object"></textarea>
+	        			</c:otherwise>
+	        		</c:choose>
 				</div>
 			</div>
 			<br>
@@ -103,7 +144,26 @@
 			<div class="col-sm-5">
 			</div>
 			<div class="col-sm-2">
-				<button type="submit" id="submit" class="btn btn-outline-danger"><i class="fab fa-youtube"></i>&nbsp;&nbsp;동영상 올리기</button>
+        		<c:choose>
+        			<c:when test="${row ne null }">
+        				<button type="button" id="updateBtn" onclick="updateBtn(); return false;" class="btn btn-outline-danger"><i class="fab fa-youtube"></i>&nbsp;&nbsp;수정하기</button>
+        			</c:when>
+        			<c:otherwise>
+        				<button type="button" id="insertBtn" onclick="insertBtn(); return false;" class="btn btn-outline-danger"><i class="fab fa-youtube"></i>&nbsp;&nbsp;동영상 올리기</button>
+        			</c:otherwise>
+        		</c:choose>
+        		<script type="text/javascript">
+				function insertBtn() {
+					var form = document.videoForm;
+					form.action="${path}/videoboard/insertVideoBoardPro";
+					form.submit();
+				}
+				function updateBtn {
+					var form = document.videoForm;
+					form.action="${path}/videoboard/updateVideoBoardPro";
+					form.submit();
+				}
+   				</script>
 			</div>
 			<div class="col-sm-1">
 			</div>
