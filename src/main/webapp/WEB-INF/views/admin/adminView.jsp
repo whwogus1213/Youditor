@@ -211,7 +211,7 @@
 	<!-- 페이징 검색 시작 -->
 	<div class="col-12">
 		<!-- 페이징 -->
-		<div class="p1 pagination col-12">
+		<div class="p1 pagination col-12" style="display: block; text-align: center; margin-bottom: 10px;">
 			<ul>
 				<c:if test="${pagination.prev}">
 					<a href="#" onclick="fn_prev('${pagination.page}', '${pagination.rangeSize}',
