@@ -19,6 +19,7 @@
 .navitem {
     margin-left: auto;
     margin-right: auto;
+    padding-left: 227px;
 }
 .navbar a{
 	text-decoration:none;
@@ -59,6 +60,9 @@
 }
 .topMenuLi:hover .submenu {
 	height: 30px;
+}
+ul{
+list-style: none;
 }
 </style>
 

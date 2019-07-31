@@ -176,7 +176,7 @@
 </head>
 <body>
 <jsp:include page="./adminTop.jsp" flush="false"/>
-<div class="container" style="max-width: 85%;">
+<div class="container" style="max-width: 85%;"><br/>
 	<h1>회원정보관리</h1>
 	<table class="table table-borderd table-striped nanum table-hover">
 		<thead>
@@ -211,7 +211,7 @@
 	<!-- 페이징 검색 시작 -->
 	<div class="col-12">
 		<!-- 페이징 -->
-		<div class="p1 pagination col-12">
+		<div class="p1 pagination col-12" style="display: block; text-align: center; margin-bottom: 10px;">
 			<ul>
 				<c:if test="${pagination.prev}">
 					<a href="#" onclick="fn_prev('${pagination.page}', '${pagination.rangeSize}',
