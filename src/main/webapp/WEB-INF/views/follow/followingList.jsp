@@ -178,11 +178,11 @@
 <c:forEach items="${followingList}" var="followingList">
 <!-- card start -->
 <div class="col-3">
-<div class="card" style="margin-bottom: 35px; cursor: pointer;">
+<div class="card" style="margin-bottom: 35px;">
    <div class="banner">
    	  <a class="unfollowbtn" id = "unfollowbtn${followingList.followAccountId}" onclick="fn_unfollow('${followingList.followAccountId}'); return false;"><i class="fas fa-user-times unfollowbtn" style="position: absolute; top: 2%; left: 85%; color: snow; font-size: 1.2em; cursor: pointer;"></i></a>
    	  <spring:url value='/image/${followingList.picture}' var="pictureURL"/>
-      <div class="avatar" style="background-image: url(${pictureURL})" onclick="location.href='/videoboard/videoBoardList?searchType=nickname&keyword=${followingList.nickname}'"> </div>
+      <div class="avatar" style="background-image: url(${pictureURL}); cursor: pointer;" onclick="location.href='/videoboard/videoBoardList?searchType=nickname&keyword=${followingList.nickname}'"> </div>
    </div>
 	<h3 class="h3" style="font-family: 'Jua'; font-size: 1.3em;  text-overflow: ellipsis; overflow: hidden; white-space: nowrap;" onclick="location.href='/videoboard/videoBoardList?searchType=nickname&keyword=${followingList.nickname}'">${followingList.nickname }</h3>
    
@@ -251,8 +251,6 @@ $(function(){
 					tr.attr("onclick","");
 					tr.css("opacity","0.4");
 					tr.attr("class","cardremove");
-					console.log(followAccountId);
-					console.log("--------------------");
 					$("#unfollowbtn"+followAccountId).attr("onclick","fn_follow('"+followAccountId+"', "+clonetr+"); return false;");
 				}
 				

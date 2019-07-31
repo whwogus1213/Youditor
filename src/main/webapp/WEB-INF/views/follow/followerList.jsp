@@ -181,7 +181,7 @@
 <c:forEach items="${followerList}" var="followerList">
 <!-- card start -->
 <div class="col-3">
-<div class="card" style="margin-bottom: 35px; cursor: pointer;" >
+<div class="card" style="margin-bottom: 35px;" >
    <div class="banner">
  	<c:if test="${followerList.check}">
 	   	  <a class="unfollowbtn" id = "unfollowbtn${followerList.followerAccountId}" onclick="fn_unfollow('${followerList.followerAccountId}'); return false;"><i class="fas fa-user-times unfollowbtn" style="position: absolute; top: 2%; left: 85%; color: snow; font-size: 1.2em; cursor: pointer;"></i></a>
@@ -190,7 +190,7 @@
 	   	  <a class="followbtn" id = "followbtn${followerList.followerAccountId}" onclick="fn_follow('${followerList.followerAccountId}'); return false;"><i class="fas fa-user-plus followbtn" style="position: absolute; top: 2%; left: 85%; color: #ffeaf4; font-size: 1.2em; cursor: pointer;"></i></a>
    	</c:if>
    	  <spring:url value='/image/${followerList.picture}' var="pictureURL"/>
-      <div class="avatar" style="background-image: url(${pictureURL})" onclick="location.href='/videoboard/videoBoardList?searchType=nickname&keyword=${followerList.nickname}'"> </div>
+      <div class="avatar" style="background-image: url(${pictureURL}); cursor: pointer;" onclick="location.href='/videoboard/videoBoardList?searchType=nickname&keyword=${followerList.nickname}'"> </div>
    </div>
 	<h3 class="h3" style="font-family: 'Jua'; font-size: 1.3em;  text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">${followerList.nickname }</h3>
    
