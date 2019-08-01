@@ -394,7 +394,7 @@
 					</select>
 				</div>
 				<div class="col-6" align="right" style="padding-right: 0px; padding-left: 5px;">
-					<input type="text" class="form-control form-control-sm" name="keyword" id="keyword" style="float: right; text-align: right;"> 
+					<input type="text" class="form-control form-control-sm" name="keyword" id="keyword"> 
 				</div>
 
 				<div class="col-1" style="padding-left: 0px;text-align: center;padding-right: 0px;padding-top: 5px;">
