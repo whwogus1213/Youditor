@@ -104,24 +104,24 @@ th {
 	function btnUpdate() {
 		var pwdCfm = $("#pwdCfm").val();
 		var pwd = $("#pwd").val();
+		var nickname = $('#nickname').val();
 
-		var nickCheck = $("#chkMsg").html();
-		
-		if (pwd == pwdCfm && isCheckNickname == 0) {
-			document.modForm.action = "${path}/accounts/updateAccount.do";
-			document.modForm.submit();
+		if(pwd != pwdCfm) {
+			alert("비밀번호를 확인해주세요.1");
+			$("#pwdCfm").focus();
 		}
-		else if(pwd == pwdCfm && isCheckNickname == 1) {
+		else if(nickname.length <= 0 || nickname.length > 16) {
+			alert("닉네임을 확인해주세요.");
+			$("#nickname").focus();
+		}
+		else if(isCheckNickname == 1) {
 			alert("사용 중인 닉네임입니다.");
 			$("#nickname").focus();
 		}
 		else {
-			alert("비밀번호를 확인해주세요.");
-			$("#pwdCfm").focus();
-			return;
+			document.modForm.action = "/accounts/updateAccount.do";
+			document.modForm.submit();
 		}
-
-
 	}
 
 	// 삭제
@@ -132,7 +132,7 @@ th {
 			msg = "정말로 계정을 삭제하시겠습니까?";
 			if (confirm(msg) != 0) {
 				// Yes click
-				document.modForm.action = "${path}/accounts/deleteAccount.do";
+				document.modForm.action = "/accounts/deleteAccount.do";
 				document.modForm.submit();
 			} else {
 				// no click
@@ -176,12 +176,26 @@ th {
 	// 닉네임 체크
 	function checkNickname() {
 		var nickname = $('#nickname').val();
+// 		var loginnickname = 1;
 		var loginnickname = ${login.nickname};
-	    
+
+		console.log("loginnickname : " + loginnickname);
+		console.log("nickname : " + nickname);
+		console.log("nickname length : " + nickname.length);
+		
 		var json = {
 			"nickname" : nickname,
 			"loginnickname" : loginnickname
 		}
+	    if (nickname.length > 16) {
+			$('#chkMsg').html("<font style='color: red;'>16자 이내로 입력해주세요.</font>");
+			$('#nickname').css("background-color", "#ffd1d1");
+			return;
+	    }
+        if(nickname.length == 0) {
+			$('#chkMsg').html("<font style='color: red;'>닉네임을 입력하세요.</font>");
+			$('#nickname').css("background-color", "#ffd1d1");
+	    }
 		
 	    $.ajax({
 	    	async: true,
@@ -192,26 +206,26 @@ th {
 			contentType: "application/json; charset=UTF-8",
 			
 	        success : function(data) {
-		       	if(nickname != loginnickname) { 
+		        if(nickname != loginnickname) { 
 					if(data.cnt == 0) {
 						$('#chkMsg').html("사용가능한 닉네임입니다.");
 						$('#nickname').css("background-color", "#E8FFD0");
-						$('#nickname').css("color", "#000000");
 						isCheckNickname = 0;
 						console.log("사용가능 " + isCheckNickname);
-					} else {
+					} else if(data.cnt == 1) {
 						$('#chkMsg').html("<font style='color: red;'>사용 중인 닉네임입니다.</font>");
 
 						$('#nickname').css("background-color", "#ffd1d1");
-						$('#nickname').css("color", "#000000");
 						isCheckNickname = 1;
 						console.log("사용불가 " + isCheckNickname);
 					}
 				} else {
 					$('#chkMsg').html("사용가능한 닉네임입니다.");
+					$('#nickname').css("background-color", "#E8FFD0");
+					isCheckNickname = 0;
 					console.log("사용가능111 " + isCheckNickname);
-			    }
-	        }
+				}
+			}
 	        /*
 	        error : function() {
 	                alert("에러입니다");
@@ -221,6 +235,7 @@ th {
 	}
 	
 </script>
+
 </head>
 <body style="background-color: #FFF;">
 	<jsp:include page="../module/top2.jsp" flush="false" />
