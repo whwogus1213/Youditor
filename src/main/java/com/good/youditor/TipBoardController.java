@@ -95,7 +95,6 @@ public class TipBoardController {
 		
 		String result = "";
 		
-		
 		List<NoticeCategoryVO> nCatList = homeService.bringNoticeCategory();
 		List<VideoCategoryVO> vCatList = homeService.bringVideoCategory();
 		List<TipCategoryVO> tCatList = homeService.bringTipCategory();
@@ -110,7 +109,6 @@ public class TipBoardController {
 		model.addAttribute("row", row);
 		model.addAttribute("auth", auth);
 		System.out.println("TipBoardController boardView open");
-		System.out.println(row);
 		return result;
 	}
 
@@ -139,11 +137,6 @@ public class TipBoardController {
 		vo.setSubject(subject);
 		vo.setObject(object);
 		
-		System.out.println("acc" + accountId);
-		System.out.println("cate" + categoryId);
-		System.out.println("sub" + subject);
-		System.out.println("obj" + object);
-
 		tipBoardService.insertTipBoard(vo);
 		
 		return "redirect:/tipboard/tipBoardList";
@@ -217,7 +210,7 @@ public class TipBoardController {
 			result = "redirect:/tipboard/tipBoardView?boardId=" + vo.getBoardId();
 		}
 
-		return "redirect:/tipboard/tipBoardList";
+		return result;
 	}
 	
 	// 최신 게시물 목록
