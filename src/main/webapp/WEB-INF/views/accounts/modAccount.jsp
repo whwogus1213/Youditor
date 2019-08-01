@@ -244,7 +244,7 @@ th {
 			<h1 style="color:white">회원정보수정</h1>
 		</div>
 	</div>
-	<div align="center" style="padding-top:3%;">
+	<div align="center">
 		<c:if test="${login.accountId ne null }">
 			<form name="modForm" method="POST" enctype="multipart/form-data">
 				<table>
