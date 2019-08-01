@@ -68,9 +68,8 @@
 			<button type="button" class="btn btn-link" onclick="location.href='/recruitboard/recruitBoardView?boardId=${row.boardId}'" style="color:black"><i class="fas fa-undo"></i>&nbsp;&nbsp;취소</button>
 		</div>
 		<br>
-	</div>
 	</form>
-	<jsp:include page="../module/bottom.jsp" flush="false"/>
 
 </body>
+<jsp:include page="../module/bottom.jsp" flush="false"/>
 </html>

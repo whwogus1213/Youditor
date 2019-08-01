@@ -145,18 +145,18 @@
 	background-color: #FAFAFA;
 }
 
-	.ul .a{
-		display: inline;
-		margin-right: 10px;
-	}
+.ul .a{
+	display: inline;
+	margin-right: 10px;
+}
 
-		.ul .a:last-of-type{
-			margin-right: 0px;
-		}
+.ul .a:last-of-type{
+	margin-right: 0px;
+}
 
-			.ul .a .i:hover{
-				transform: scale(1.5);
-			}
+.ul .a .i:hover{
+	transform: scale(1.5);
+}
 </style>
 </head>
 	
@@ -292,4 +292,5 @@ $(function(){
 </script>
 
 </body>
+<jsp:include page="../module/bottom.jsp" flush="false"/>
 </html>
