@@ -46,4 +46,10 @@ public class FollowServicImpl implements FollowService {
 		followDAO.delete(vo);
 	}
 	
+	// 마지막 팔로워 체크 시간 갱신
+	@Override
+	public void updateLastFollowerCheck(int accountId) throws Exception {
+		followDAO.updateLastFollowerCheck(accountId);
+	}
+	
 }

@@ -3,7 +3,6 @@ package com.good.youditor;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -35,7 +34,7 @@ public class FollowController {
 
 	// 팔로잉 (로그인유저가 팔로우하는 사람 리스트)
 	@RequestMapping(value = "/followingList")
-	public String followingList(Model model, FollowListVO vo, HttpSession session) throws Exception {
+	public String followingList(Model model, HttpSession session) throws Exception {
 		System.out.println("Start following List");
 
 		AccountsVO login = (AccountsVO) session.getAttribute("login");
@@ -69,13 +68,18 @@ public class FollowController {
 		session.setAttribute("tCatList", tCatList);
 		session.setAttribute("rCatList", rCatList);
 		
+		if(login != null) {
+			session.setAttribute("mCount", homeService.newMessageCnt(accountId));
+			session.setAttribute("fCount", homeService.newFollowerCnt(accountId));
+		}
+		
 		model.addAttribute("followingList", followingList);
 		return "follow/followingList";
 	}
 
 	// 팔로워(로그인유저를 팔로우하는 사람 리스트)
 	@RequestMapping(value = "/followerList")
-	public String followerList(Model model, FollowListVO vo, HttpSession session) throws Exception {
+	public String followerList(Model model, HttpSession session) throws Exception {
 //		System.out.println("Start follower List");
 //		
 //		AccountsVO login = (AccountsVO) session.getAttribute("login");
@@ -96,6 +100,14 @@ public class FollowController {
 		System.out.println(followerList);
 		
 		model.addAttribute("followerList", followerList);
+		
+		if(login != null) {
+			
+			session.setAttribute("mCount", homeService.newMessageCnt(accountId));
+			session.setAttribute("fCount", homeService.newFollowerCnt(accountId));
+			followService.updateLastFollowerCheck(accountId);
+		}
+		
 		return "follow/followerList";
 	}
 

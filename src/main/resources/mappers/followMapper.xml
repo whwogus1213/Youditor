@@ -94,6 +94,15 @@ order by IFNULL(dd.check,'false'), d.reg_date desc;
         where followAccountId = #{followAccountId} and followerAccountId = #{followerAccountId}
     </delete>
 	
+	<!-- 마지막 팔로워 체크 시간 갱신 -->
+	<update id="updateLastFollowerCheck" parameterType="int">
+		UPDATE
+			accounts
+		SET
+			lastFollowerCheck = now()
+		WHERE
+			accountId = #{accountId}
+	</update>
 	
 	<!-- 페이징 -->
 <!-- 

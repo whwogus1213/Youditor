@@ -54,4 +54,11 @@ public class FollowDAOImpl implements FollowDAO {
 	public void delete(FollowListVO vo) throws Exception {
 		sqlSession.delete(NAMESPACE + ".delete", vo);
 	}
+	
+	// 마지막 팔로워 체크 시간 갱신
+	@Override
+	public void updateLastFollowerCheck(int accountId) throws Exception {
+		sqlSession.update(NAMESPACE + ".updateLastFollowerCheck", accountId);
+	}
+	
 }

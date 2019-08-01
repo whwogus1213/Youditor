@@ -29,8 +29,8 @@ public class HomeDAOImpl implements HomeDAO {
 	
 	// 새로운 팔로워 수 감지
 	@Override
-	public int newFollowerCnt(FollowListVO vo) throws Exception {
-		return session.selectOne(NAMESPACE + ".newFollowerCnt", vo);
+	public int newFollowerCnt(int accountId) throws Exception {
+		return session.selectOne(NAMESPACE + ".newFollowerCnt", accountId);
 	}
 
 	// 공지 카테고리 가져오기

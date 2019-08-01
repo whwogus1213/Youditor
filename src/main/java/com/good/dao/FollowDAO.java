@@ -21,5 +21,8 @@ public interface FollowDAO {
 
 	// 팔로우 삭제
 	public void delete(FollowListVO vo) throws Exception;
+	
+	// 마지막 팔로워 체크 시간 갱신
+	public void updateLastFollowerCheck(int accountId) throws Exception;
 
 }
