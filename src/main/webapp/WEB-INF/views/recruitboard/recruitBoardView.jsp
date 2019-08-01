@@ -37,7 +37,7 @@
 			$(function(){
 				$('#deletebtn').click(function(){
 					if(confirm("정말 삭제하시겠습니까?")){
-						self.location.href = "${path}/recruitboard/delete?boardId=${row.boardId}";
+						self.location.href = "${path}/recruitboard/deleteRecruitBoardPro?boardId=${row.boardId}";
 					}
 				});
 			});
@@ -115,11 +115,11 @@
 			<button type="button" class="btn btn-link" onclick="location.href='/recruitboard/recruitBoardList'"><strong style="color:PaleVioletRed"><i class="fas fa-clipboard-list"></i>&nbsp;&nbsp;목록으로</strong></button>|
 			<c:choose>
 				<c:when test="${login.accountId eq row.accountId}">
-					<button type="button" class="btn btn-link" onclick="location.href='/recruitboard/updateRecruitBoard?boardId=${row.boardId}'" ><strong style="color:PaleVioletRed"><i class="fas fa-cut"></i>&nbsp;&nbsp;수정</strong></button>|
+					<button type="button" class="btn btn-link" onclick="location.href='/recruitboard/update.do?boardId=${row.boardId}'" ><strong style="color:PaleVioletRed"><i class="fas fa-cut"></i>&nbsp;&nbsp;수정</strong></button>|
 					<button class="btn btn-link" id="deletebtn"><strong style="color:PaleVioletRed"><i class="fas fa-trash-alt"></i>&nbsp;&nbsp;삭제</strong></button>
 				</c:when>
 				<c:when test="${login.authority >= auth }">
-					<button type="button" class="btn btn-link" onclick="location.href='/recruitboard/updateRecruitBoard?boardId=${row.boardId}'" ><strong style="color:PaleVioletRed"><i class="fas fa-cut"></i>&nbsp;&nbsp;수정</strong></button>|
+					<button type="button" class="btn btn-link" onclick="location.href='/recruitboard/update.do?boardId=${row.boardId}'" ><strong style="color:PaleVioletRed"><i class="fas fa-cut"></i>&nbsp;&nbsp;수정</strong></button>|
 					<button class="btn btn-link" id="deletebtn"><strong style="color:PaleVioletRed"><i class="fas fa-trash-alt"></i>&nbsp;&nbsp;삭제</strong></button>
 				</c:when>
 			</c:choose>

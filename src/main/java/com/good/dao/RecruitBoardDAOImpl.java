@@ -72,8 +72,21 @@ public class RecruitBoardDAOImpl implements RecruitBoardDAO {
 	public List<RecruitBoardVO> rankList1() throws Exception {
 		return sqlSession.selectList(NAMESPACE + ".rankList1");
 	}
+	
 	@Override
 	public List<RecruitBoardVO> rankList2() throws Exception {
 		return sqlSession.selectList(NAMESPACE + ".rankList2");
+	}
+	
+	// 게시물의 editAuthority
+	@Override
+	public int getEditAuth(int boardId) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + ".getEditAuth", boardId);
+	}
+	
+	// 게시물의 작성자 회원번호 취득
+	@Override
+	public int getAccountId(int boardId) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + ".getAccountId", boardId);
 	}
 }
