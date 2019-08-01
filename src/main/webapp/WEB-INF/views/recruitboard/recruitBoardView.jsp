@@ -97,8 +97,7 @@
 				<div class="col-sm-10" align="right">
 					<h6>
 						<strong style="color:PaleVioletRed">작성 일시</strong>&nbsp;&nbsp;
-						<fmt:parseDate value='${row.reg_date}' var='reg_date' pattern='yyyymmdd'/>
-						<fmt:formatDate value="${reg_date}" pattern="yyyy-MM-dd" />
+						${row.reg_date}
 					</h6>
 				</div>
 				<div class="col-sm-2" align="right">

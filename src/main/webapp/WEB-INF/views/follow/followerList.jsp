@@ -315,4 +315,5 @@ $(function(){
 </script>
 
 </body>
+<jsp:include page="../module/bottom.jsp" flush="false"/>
 </html>
