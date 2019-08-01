@@ -78,6 +78,15 @@ public class TipBoardController {
 		session.setAttribute("tCatList", tCatList);
 		session.setAttribute("rCatList", rCatList);
 
+		AccountsVO login = (AccountsVO) session.getAttribute("login");
+		
+		if(login != null) {
+			int accountId = login.getAccountId();
+			
+			session.setAttribute("mCount", homeService.newMessageCnt(accountId));
+			session.setAttribute("fCount", homeService.newFollowerCnt(accountId));
+		}
+		
 		model.addAttribute("pagination", search);
 		model.addAttribute("categoryInfo", tCatVO);
 		model.addAttribute("TipBoardList", tipBoardService.listAll(search));
@@ -104,6 +113,15 @@ public class TipBoardController {
 		session.setAttribute("tCatList", tCatList);
 		session.setAttribute("rCatList", rCatList);
 
+		AccountsVO login = (AccountsVO) session.getAttribute("login");
+		
+		if(login != null) {
+			int accountId = login.getAccountId();
+			
+			session.setAttribute("mCount", homeService.newMessageCnt(accountId));
+			session.setAttribute("fCount", homeService.newFollowerCnt(accountId));
+		}
+		
 		result = "tipboard/tipBoardView";
 		model.addAttribute("row", row);
 		model.addAttribute("auth", auth);

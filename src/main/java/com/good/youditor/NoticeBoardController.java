@@ -79,6 +79,15 @@ public class NoticeBoardController {
 		session.setAttribute("vCatList", vCatList);
 		session.setAttribute("tCatList", tCatList);
 		session.setAttribute("rCatList", rCatList);
+
+		AccountsVO login = (AccountsVO) session.getAttribute("login");
+		
+		if(login != null) {
+			int accountId = login.getAccountId();
+			
+			session.setAttribute("mCount", homeService.newMessageCnt(accountId));
+			session.setAttribute("fCount", homeService.newFollowerCnt(accountId));
+		}
 		
 		model.addAttribute("pagination", search);
 		model.addAttribute("categoryInfo", nCatVO);
@@ -103,6 +112,15 @@ public class NoticeBoardController {
 		session.setAttribute("tCatList", tCatList);
 		session.setAttribute("rCatList", rCatList);
 
+		AccountsVO login = (AccountsVO) session.getAttribute("login");
+		
+		if(login != null) {
+			int accountId = login.getAccountId();
+			
+			session.setAttribute("mCount", homeService.newMessageCnt(accountId));
+			session.setAttribute("fCount", homeService.newFollowerCnt(accountId));
+		}
+		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("noticeboard/noticeBoardView");
 		mav.addObject("row", row);

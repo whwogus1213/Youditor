@@ -112,6 +112,8 @@ public class MessageController {
 			model.addAttribute("rMessage", rMessage);
 			System.out.println("MessageController messageReceiveView open");
 			result = "message/messageReceiveView";
+			session.setAttribute("mCount", homeService.newMessageCnt(login.getAccountId()));
+			session.setAttribute("fCount", homeService.newFollowerCnt(login.getAccountId()));
 		} else {
 			result = "message/messageReceiveList";
 		}
@@ -130,6 +132,8 @@ public class MessageController {
 			model.addAttribute("rMessage", rMessage);
 			System.out.println("MessageController messageSendView open");
 			result = "message/messageSendView";
+			session.setAttribute("mCount", homeService.newMessageCnt(login.getAccountId()));
+			session.setAttribute("fCount", homeService.newFollowerCnt(login.getAccountId()));
 		} else {
 			result = "redirect:/message/messageSendList";
 		}
