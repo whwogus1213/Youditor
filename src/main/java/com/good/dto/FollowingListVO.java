@@ -16,6 +16,34 @@ public class FollowingListVO {
 	private Date lastFollowerCheck;
 	private Date newLogin_date;
 	
+	private int followCnt;
+	private int starCnt;
+	private int starRank;
+	
+
+	public int getFollowCnt() {
+		return followCnt;
+	}
+
+	public void setFollowCnt(int followCnt) {
+		this.followCnt = followCnt;
+	}
+
+	public int getStarCnt() {
+		return starCnt;
+	}
+
+	public void setStarCnt(int starCnt) {
+		this.starCnt = starCnt;
+	}
+
+	public int getStarRank() {
+		return starRank;
+	}
+
+	public void setStarRank(int starRank) {
+		this.starRank = starRank;
+	}
 
 	public int getFollowAccountId() {
 		return followAccountId;
@@ -90,14 +118,14 @@ public class FollowingListVO {
 		this.newLogin_date = newLogin_date;
 	}
 
+	
 	@Override
 	public String toString() {
 		return "FollowingListVO [followAccountId=" + followAccountId + ", followerAccountId=" + followerAccountId
 				+ ", reg_date=" + reg_date + ", check=" + check + ", nickname=" + nickname + ", picture=" + picture
 				+ ", footer=" + footer + ", lastFollowerCheck=" + lastFollowerCheck + ", newLogin_date=" + newLogin_date
-				+ "]";
+				+ ", followCnt=" + followCnt + ", starCnt=" + starCnt + ", starRank=" + starRank + "]";
 	}
-
 
 
 } // End - FollowListVO

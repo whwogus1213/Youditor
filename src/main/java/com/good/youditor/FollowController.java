@@ -42,22 +42,15 @@ public class FollowController {
 		int accountId = login.getAccountId();
 		
 		List<FollowingListVO> followingList = followService.followingList(accountId);
+		
+		for(int i = 0; i < followingList.size(); i++) {
+			followingList.get(i).setFollowCnt(followService.followCnt(followingList.get(i).getFollowAccountId()));
+			followingList.get(i).setStarCnt(followService.starCnt(followingList.get(i).getFollowAccountId()));
+			followingList.get(i).setStarRank(followService.starRank(followingList.get(i).getFollowAccountId()));
+		}
+		
+		
 		System.out.println(followingList);
-//		for(int i = 0; i < followingList.size(); i++) {
-//			FollowListVO fListVO = followingList.get(i);
-//			int followAccountId = fListVO.getFollowAccountId();
-//			fListVO.setFollowerAccountId(followAccountId);
-//			fListVO.setFollowAccountId(accountId);
-//			boolean result = followService.followEachOtherCheck(fListVO);
-//			
-//			FollowListVO checkListVO = new FollowListVO();
-//			checkListVO.setFollowAccountId(followAccountId);
-//			checkListVO.setFollowerAccountId(accountId);
-//			checkListVO.setReg_date(fListVO.getReg_date());
-//			checkListVO.setNickname(fListVO.getNickname());
-//			checkListVO.setCheck(result);
-//			followingList.set(i, checkListVO);
-//		}
 		
 		List<NoticeCategoryVO> nCatList = homeService.bringNoticeCategory();
 		List<VideoCategoryVO> vCatList = homeService.bringVideoCategory();
@@ -76,23 +69,17 @@ public class FollowController {
 	// 팔로워(로그인유저를 팔로우하는 사람 리스트)
 	@RequestMapping(value = "/followerList")
 	public String followerList(Model model, FollowListVO vo, HttpSession session) throws Exception {
-//		System.out.println("Start follower List");
-//		
-//		AccountsVO login = (AccountsVO) session.getAttribute("login");
-//		int accountId = login.getAccountId();
-//		
-//		List<FollowListVO> followerList = followService.followerList(accountId);
-//		
-//		model.addAttribute("followerList", followerList);
-//		System.out.println(accountId);
-//		System.out.println(followerList);
-//		return "follow/followerList";
 		System.out.println("Start follower List");
 
 		AccountsVO login = (AccountsVO) session.getAttribute("login");
 		int accountId = login.getAccountId();
 		
 		List<FollowingListVO> followerList = followService.followerList(accountId);
+		for(int i = 0; i < followerList.size(); i++) {
+			followerList.get(i).setFollowCnt(followService.followCnt(followerList.get(i).getFollowerAccountId()));
+			followerList.get(i).setStarCnt(followService.starCnt(followerList.get(i).getFollowerAccountId()));
+			followerList.get(i).setStarRank(followService.starRank(followerList.get(i).getFollowerAccountId()));
+		}
 		System.out.println(followerList);
 		
 		model.addAttribute("followerList", followerList);

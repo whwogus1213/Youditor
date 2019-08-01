@@ -40,32 +40,20 @@ order by d.reg_date desc;
 
 	<!-- 팔로워 -->
 	<select id="followerList" resultType="FollowingListVO" parameterType="int">
-<!-- 	SELECT -->
-<!-- 		fo.followAccountId, fo.followerAccountId, ac.nickname -->
-<!-- 	FROM -->
-<!-- 		followlist as fo -->
-<!-- 	JOIN -->
-<!-- 		accounts as ac -->
-<!-- 	ON -->
-<!-- 		fo.followAccountId = ac.accountId -->
-<!-- 	WHERE -->
-<!-- 		fo.followAccountId = #{accountId} -->
-<!-- 	ORDER BY -->
-<!-- 		fo.reg_date DESC -->
-select d.followAccountId, d.followerAccountId, d.nickname, d.reg_date, IFNULL(dd.check,'false') as 'check', d.picture, d.footer, d.lastFollowerCheck, d.newLogin_date
-from
-(SELECT fo.followAccountId, fo.followerAccountId, ac.nickname, fo.reg_date, ac.picture, ac.footer, ac.lastFollowerCheck, ac.newLogin_date
-FROM followlist as fo JOIN accounts as ac ON fo.followerAccountId = ac.accountId
-WHERE fo.followAccountId = #{accountId}
-ORDER BY fo.reg_date DESC) as d LEFT OUTER JOIN 
-(select * , 'true' as 'check'
-from (SELECT fo.followAccountId as baseF , fo.followerAccountId as baseFF , ac.nickname as nick, fo.reg_date as foDate
-FROM followlist as fo JOIN accounts as ac ON fo.followerAccountId = ac.accountId
-WHERE fo.followAccountId = #{accountId}
-ORDER BY fo.reg_date DESC)as base, followlist as base2
-where base.baseF = base2.followerAccountId and base.baseFF = base2.followAccountId)as dd
-ON dd.baseF = d.followAccountId and dd.baseFF = d.followerAccountId
-order by IFNULL(dd.check,'false'), d.reg_date desc;
+	select d.followAccountId, d.followerAccountId, d.nickname, d.reg_date, IFNULL(dd.check,'false') as 'check', d.picture, d.footer, d.lastFollowerCheck, d.newLogin_date
+	from
+		(SELECT fo.followAccountId, fo.followerAccountId, ac.nickname, fo.reg_date, ac.picture, ac.footer, ac.lastFollowerCheck, ac.newLogin_date
+		FROM followlist as fo JOIN accounts as ac ON fo.followerAccountId = ac.accountId
+		WHERE fo.followAccountId = #{accountId}
+		ORDER BY fo.reg_date DESC) as d LEFT OUTER JOIN 
+		(select * , 'true' as 'check'
+		from (SELECT fo.followAccountId as baseF , fo.followerAccountId as baseFF , ac.nickname as nick, fo.reg_date as foDate
+			FROM followlist as fo JOIN accounts as ac ON fo.followerAccountId = ac.accountId
+			WHERE fo.followAccountId = #{accountId}
+			ORDER BY fo.reg_date DESC)as base, followlist as base2
+			where base.baseF = base2.followerAccountId and base.baseFF = base2.followAccountId)as dd
+		ON dd.baseF = d.followAccountId and dd.baseFF = d.followerAccountId
+		order by IFNULL(dd.check,'false'), d.reg_date desc;
 
 
     </select>
@@ -93,52 +81,42 @@ order by IFNULL(dd.check,'false'), d.reg_date desc;
         delete from followlist
         where followAccountId = #{followAccountId} and followerAccountId = #{followerAccountId}
     </delete>
-	
-	
-	<!-- 페이징 -->
-<!-- 
-	<select id="paging" parameterType="PagingVo" resultType="FollowListVO">
-        SELECT @rownum:=@rownum+1 as no, notice.*
-		FROM noticeboard notice
-		WHERE (@rownum:=0)=0
-		ORDER BY no desc
-		LIMIT #{start}, #{last}
-	</select>
--->
-    <!-- 카운트 -->
-<!-- 
-	<select id="getListCount" resultType="int">
-		SELECT count(*)
-		FROM followlist
-	</select>    
- -->
- 
-	<!-- 팔로우 리스트 출력 + 페이징 + 검색-->
-<!-- 
-	<select id="listAll" resultType="FollowListVO">
-		SELECT *
-		FROM followlist
-		<trim prefix="WHERE" prefixOverrides="AND|OR">
-			<if test="searchType=='followAccountId' and keyword != null and keyword != '' ">
-				AND followAccountId like CONCAT('%', #{keyword}, '%')
-			</if>
-		</trim>
-		order by reg_date desc
-		LIMIT #{startList}, #{listSize}
-	</select>
- -->
-	<!-- 팔로워 수 -->
-<!-- 
-	<select id="getFollowListCnt" resultType="int">
-		select count(*)
-		from followlist
-		<trim prefix="WHERE" prefixOverrides="AND|OR">
-			<if test="keyword != null and keyword != '' ">
-				<if test="searchType=='followAccountId'">
-					AND followAccountId like CONCAT('%', #{keyword}, '%')
-				</if>
-			</if>
-		</trim>
-	</select>
- -->	
+    
+    <select id="followCnt" parameterType="int" resultType="int">
+		select count(*) from followlist where followAccountId = #{accountId}    
+    </select>
+
+    <select id="starCnt" parameterType="int" resultType="int">
+	select ifnull(sum(star),0) as starCnt
+	from 
+		(select accountId, sum(star) as star
+		from videostar
+		group by accountId
+		having accountId = #{accountId}
+			union
+		select accountId, sum(star) as star
+		from tipstar
+		group by accountId
+		having accountId = #{accountId}) as starfrom;    
+    </select>
+
+    <select id="starRank" parameterType="int" resultType="int">
+	select ifnull(sum(starRank),0) as starRank
+	from(
+		select starRank
+		from(
+			select accountId, star, @rownum:= @rownum+1 as starRank
+			from(
+				select accountId, sum(star) as star
+				from (select * from videostar
+					union
+				select * from tipstar
+				) as unistar
+			group by accountId
+			order by sum(star) desc) as orderstar, (select @rownum:=0) as initrow
+			) as rankb
+		where accountId = #{accountId}
+		) as checknull;
+    </select>
+    
 </mapper>
