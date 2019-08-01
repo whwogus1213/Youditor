@@ -2,7 +2,6 @@ package com.good.service;
 
 import java.util.List;
 
-import com.good.dto.FollowListVO;
 import com.good.dto.NoticeCategoryVO;
 import com.good.dto.RecruitCategoryVO;
 import com.good.dto.TipCategoryVO;

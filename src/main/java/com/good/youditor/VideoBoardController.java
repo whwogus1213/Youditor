@@ -77,6 +77,15 @@ public class VideoBoardController {
 		session.setAttribute("vCatList", vCatList);
 		session.setAttribute("tCatList", tCatList);
 		session.setAttribute("rCatList", rCatList);
+
+		AccountsVO login = (AccountsVO) session.getAttribute("login");
+		
+		if(login != null) {
+			int accountId = login.getAccountId();
+			
+			session.setAttribute("mCount", homeService.newMessageCnt(accountId));
+			session.setAttribute("fCount", homeService.newFollowerCnt(accountId));
+		}
 		
 		model.addAttribute("pagination", search);
 		model.addAttribute("categoryInfo", vCatVO);
@@ -103,6 +112,15 @@ public class VideoBoardController {
 		session.setAttribute("tCatList", tCatList);
 		session.setAttribute("rCatList", rCatList);
 
+		AccountsVO login = (AccountsVO) session.getAttribute("login");
+		
+		if(login != null) {
+			int accountId = login.getAccountId();
+			
+			session.setAttribute("mCount", homeService.newMessageCnt(accountId));
+			session.setAttribute("fCount", homeService.newFollowerCnt(accountId));
+		}
+		
 		model.addAttribute("row", row);
 		model.addAttribute("auth", auth);
 		return "videoboard/videoBoardView";

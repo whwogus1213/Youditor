@@ -48,7 +48,6 @@ public class FollowController {
 			followingList.get(i).setStarRank(followService.starRank(followingList.get(i).getFollowAccountId()));
 		}
 
-
 		System.out.println(followingList);
 
 		List<NoticeCategoryVO> nCatList = homeService.bringNoticeCategory();
@@ -89,7 +88,6 @@ public class FollowController {
 		model.addAttribute("followerList", followerList);
 
 		if(login != null) {
-
 			session.setAttribute("mCount", homeService.newMessageCnt(accountId));
 			session.setAttribute("fCount", homeService.newFollowerCnt(accountId));
 			followService.updateLastFollowerCheck(accountId);
