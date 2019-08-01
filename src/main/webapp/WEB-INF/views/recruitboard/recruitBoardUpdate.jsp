@@ -1,6 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@ page session="false" %>
+<%@ page session="true" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -43,10 +43,10 @@
 		<br>
 		<div class="row">
 			<label class="control-label col-sm-2"><strong>작성일</strong></label>
-			<label class="control-label col-sm-4"><fmt:formatDate value="${row.reg_date}" pattern="yyyy-MM-dd" /></label>
+			<label class="control-label col-sm-4"><span>${row.reg_date}</span></label>
 
 			<label class="control-label col-sm-2"><strong>마지막 수정일</strong></label>
-			<label class="control-label col-sm-4"><fmt:formatDate value="${row.reg_date}" pattern="yyyy-MM-dd" /></label>
+			<label class="control-label col-sm-4"><fmt:formatDate value="${row.mod_date}" pattern="yyyy-MM-dd" /></label>
 		</div>
 		<br>
 		<div class="row">

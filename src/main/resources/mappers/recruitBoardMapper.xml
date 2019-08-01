@@ -7,7 +7,7 @@
 	<!-- 게시물 목록 + 페이징 + 검색 -->
 	<select id="listAll" parameterType="SearchBoard" resultType="RecruitBoardVO">
 		SELECT
-			boardId, b.accountId, categoryId, subject, object, DATE_FORMAT(b.reg_date, '%Y %m %d') as reg_date,
+			boardId, b.accountId, categoryId, subject, object, DATE_FORMAT(b.reg_date, '%Y-%m-%d') as reg_date,
 			CONVERT_TZ(b.mod_date,'+09:00','+00:00') as mod_date, viewCount, nickname, picture
 		FROM
 			recruitboard b
@@ -85,7 +85,7 @@
 		resultType="RecruitBoardVO">
 
 		select boardId, b.accountId, categoryId, subject, object, fee, 
-		CONVERT_TZ(b.reg_date,'+09:00','+00:00') as reg_date,
+		DATE_FORMAT(b.reg_date, '%Y-%m-%d') as reg_date,
 		CONVERT_TZ(b.mod_date,'+09:00','+00:00') as mod_date,
 		viewCount, (select count(*) from videocomment where b.boardId = boardId) as
 		replyCount, ac.nickname, picture 
@@ -143,7 +143,7 @@
 <!-- 최신 게시물 -->
 	<select id="rankList1" resultType="RecruitBoardVO">
 		SELECT
-			boardId, b.accountId, subject, a.nickname, viewCount, b.mod_date, b.categoryId, DATE_FORMAT(b.reg_date, '%Y %m %d') reg_date
+			boardId, b.accountId, subject, a.nickname, viewCount, b.mod_date, b.categoryId, DATE_FORMAT(b.reg_date, '%Y-%m-%d') reg_date
 		FROM
 			recruitboard b
 		JOIN
@@ -163,7 +163,7 @@
 	<!-- 최신 게시물 -->
 	<select id="rankList2" resultType="RecruitBoardVO">
 		SELECT
-			boardId, b.accountId, subject, a.nickname, viewCount, b.mod_date, b.categoryId, DATE_FORMAT(b.reg_date, '%Y %m %d') reg_date
+			boardId, b.accountId, subject, a.nickname, viewCount, b.mod_date, b.categoryId, DATE_FORMAT(b.reg_date, '%Y-%m-%d') reg_date
 		FROM
 			recruitboard b
 		JOIN
