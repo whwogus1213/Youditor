@@ -274,7 +274,7 @@
           					<div class="col-sm-6" align="left">
           						<strong>Made by.</strong>
           					</div>
-          					<div class="col-sm-6" align="right">
+          					<div class="col-sm-6" align="right" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">
           						<c:if test="${VideoBoardList.accountId eq login.accountId }">
 									<img src="<spring:url value='/image/${VideoBoardList.picture}'/>" class=" mx-auto rounded-circle" width="20px" height="20px"/>&nbsp;${VideoBoardList.nickname}<br>
           						</c:if>

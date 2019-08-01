@@ -194,7 +194,7 @@ footer{
 	
 	<div class="container">
 		<div class="row">
-		<table class="table table-hover">
+		<table class="table table-hover" style="table-layout: fixed;">
 			<thead align="center" style="color:Brown">
 				<tr>
 					<th style="width: 80px;">번호</th>
@@ -215,7 +215,7 @@ footer{
 						</td>
 	
 	
-						<td class="dropright">
+						<td class="dropright" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap; padding-left: 0px">
 							<!-- 내 아이디에 마우스 오버 -->						
 							<c:if test="${TipBoardList.accountId eq login.accountId }">
 								<img src="<spring:url value='/image/${TipBoardList.picture}'/>" class=" mx-auto rounded-circle" 

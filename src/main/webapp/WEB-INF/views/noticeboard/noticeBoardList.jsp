@@ -177,7 +177,7 @@
 								<div class="col-sm-2" align="left" style="padding: 0px;">
 									<i class="far fa-eye" aria-hidden="true"></i>&nbsp;&nbsp;${NoticeBoardList.viewCount}<br>
 								</div>
-								<div class="col-sm-7" align="right" style="padding: 0px;">
+								<div class="col-6 offset-1" align="right" style="padding: 0px;">
 									<div class="dropright">
 									<!-- 내 아이디에 마우스 오버 -->						
 									<c:if test="${NoticeBoardList.accountId eq login.accountId }">
