@@ -177,7 +177,7 @@ th {
 	function checkNickname() {
 		var nickname = $('#nickname').val();
 // 		var loginnickname = 1;
-		var loginnickname = ${login.nickname};
+		var loginnickname = "${login.nickname}";
 
 		console.log("loginnickname : " + loginnickname);
 		console.log("nickname : " + nickname);
