@@ -263,9 +263,7 @@ footer{
 								</div>
 							</c:if>
 						</td>
-						<td style="vertical-align: middle;">
-							<fmt:parseDate value='${RecruitBoardList.reg_date}' var='reg_date' pattern='yyyymmdd'/>
-							<fmt:formatDate value="${reg_date}" pattern="yyyy-MM-dd" /></td>
+						<td style="vertical-align: middle;">${RecruitBoardList.reg_date}</td>
 						<td style="vertical-align: middle;">${RecruitBoardList.viewCount}</td>
 					</tr>
 				</c:forEach>

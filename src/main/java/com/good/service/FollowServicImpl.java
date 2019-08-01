@@ -45,5 +45,27 @@ public class FollowServicImpl implements FollowService {
 	public void delete(FollowListVO vo) throws Exception {
 		followDAO.delete(vo);
 	}
+
+	@Override
+	public int followCnt(int accountId) throws Exception {
+		System.out.println("---------------------------------------- : "+accountId);
+		return followDAO.followCnt(accountId);
+	}
+
+	@Override
+	public int starCnt(int accountId) throws Exception {
+		return followDAO.starCnt(accountId);
+	}
+
+	@Override
+	public int starRank(int accountId) throws Exception {
+		return followDAO.starRank(accountId);
+	}
+	
+	// 마지막 팔로워 체크 시간 갱신
+	@Override
+	public void updateLastFollowerCheck(int accountId) throws Exception {
+		followDAO.updateLastFollowerCheck(accountId);
+	}
 	
 }

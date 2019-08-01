@@ -60,13 +60,27 @@ public class RecruitBoardServiceImpl implements RecruitBoardService {
 	public void deleteRecruitBoard(int boardId) throws Exception {
 		recruitBoardDAO.deleteRecruitBoard(boardId);
 	}
+	
 	@Override
 	public List<RecruitBoardVO> rankList1() throws Exception {
 		return recruitBoardDAO.rankList1();
 	}
+	
 	@Override
 	public List<RecruitBoardVO> rankList2() throws Exception {
 		return recruitBoardDAO.rankList2();
+	}
+	
+	// 게시물의 editAuthority
+	@Override
+	public int getEditAuth(int boardId) throws Exception {
+		return recruitBoardDAO.getEditAuth(boardId);
+	}
+	
+	// 게시물의 작성자 회원번호 취득
+	@Override
+	public int getAccountId(int boardId) throws Exception {
+		return recruitBoardDAO.getAccountId(boardId);
 	}
 	
 }

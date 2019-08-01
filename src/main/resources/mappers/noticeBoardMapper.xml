@@ -143,7 +143,7 @@
 	<select id="rankList" resultType="NoticeBoardVO">
 		SELECT
 			boardId, b.accountId, subject, a.nickname, viewCount, b.reg_date, b.categoryId, categoryName,
-			DATE_FORMAT(b.mod_date, '%Y %m %d') mod_date
+			DATE_FORMAT(b.mod_date, '%Y-%m-%d') mod_date
 		FROM
 			noticeboard b
 		JOIN

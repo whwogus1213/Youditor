@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.good.dto.AccountsVO;
-import com.good.dto.FollowListVO;
 import com.good.dto.NoticeCategoryVO;
 import com.good.dto.RecruitCategoryVO;
 import com.good.dto.TipCategoryVO;
@@ -53,19 +52,12 @@ public class HomeController {
 		session.setAttribute("rCatList", rCatList);
 		
 		AccountsVO login = (AccountsVO) session.getAttribute("login");
-		int mCount = 0;
-		int fCount = 0;
+		
 		if(login != null) {
 			int accountId = login.getAccountId();
-			FollowListVO vo = new FollowListVO();
-			vo.setFollowAccountId(accountId);
-			vo.setReg_date(login.getLastFollowerCheck());
 			
-			mCount = service.newMessageCnt(accountId);
-			fCount = service.newFollowerCnt(vo);
-			
-			session.setAttribute("mCount", mCount);
-			session.setAttribute("fCount", fCount);
+			session.setAttribute("mCount", service.newMessageCnt(accountId));
+			session.setAttribute("fCount", service.newFollowerCnt(accountId));
 		}
 		
 		Date date = new Date();

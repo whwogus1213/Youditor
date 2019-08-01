@@ -27,8 +27,8 @@ public class HomeServiceImpl implements HomeService {
 	
 	// 새로운 팔로워 수 감지
 	@Override
-	public int newFollowerCnt(FollowListVO vo) throws Exception {
-		return dao.newFollowerCnt(vo);
+	public int newFollowerCnt(int accountId) throws Exception {
+		return dao.newFollowerCnt(accountId);
 	}
 
 	// 공지 카테고리 가져오기
