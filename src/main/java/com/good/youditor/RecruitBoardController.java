@@ -18,7 +18,6 @@ import com.good.dto.NoticeCategoryVO;
 import com.good.dto.RecruitBoardVO;
 import com.good.dto.RecruitCategoryVO;
 import com.good.dto.SearchBoard;
-import com.good.dto.TipBoardVO;
 import com.good.dto.TipCategoryVO;
 import com.good.dto.VideoCategoryVO;
 import com.good.service.HomeService;

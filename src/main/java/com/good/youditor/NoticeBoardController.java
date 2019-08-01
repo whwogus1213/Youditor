@@ -219,7 +219,7 @@ public class NoticeBoardController {
 		AccountsVO login = (AccountsVO) session.getAttribute("login");
 		int auth = noticeBoardService.getEditAuth(vo.getBoardId());
 		
-		if(4 <= login.getAuthority()) {
+		if(auth <= login.getAuthority()) {
 			noticeBoardService.deleteNoticeBoard(vo);
 			rttr.addFlashAttribute("result","deleteOK");
 			System.out.println("============ deleteVideoBoard 성공==============");
