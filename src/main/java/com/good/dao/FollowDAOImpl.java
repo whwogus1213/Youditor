@@ -54,4 +54,19 @@ public class FollowDAOImpl implements FollowDAO {
 	public void delete(FollowListVO vo) throws Exception {
 		sqlSession.delete(NAMESPACE + ".delete", vo);
 	}
+
+	@Override
+	public int followCnt(int accountId) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + ".followCnt", accountId);
+	}
+
+	@Override
+	public int starCnt(int accountId) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + ".starCnt", accountId);
+	}
+
+	@Override
+	public int starRank(int accountId) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + ".starRank", accountId);
+	}
 }

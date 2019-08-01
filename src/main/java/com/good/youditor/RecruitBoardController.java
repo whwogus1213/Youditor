@@ -13,10 +13,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.good.dto.AccountsVO;
 import com.good.dto.NoticeCategoryVO;
 import com.good.dto.RecruitBoardVO;
 import com.good.dto.RecruitCategoryVO;
 import com.good.dto.SearchBoard;
+import com.good.dto.TipBoardVO;
 import com.good.dto.TipCategoryVO;
 import com.good.dto.VideoCategoryVO;
 import com.good.service.HomeService;
@@ -85,9 +87,12 @@ public class RecruitBoardController {
 
 	// 게시물 상세정보
 	@RequestMapping(value = "/recruitBoardView", method = RequestMethod.GET)
-	public ModelAndView view(HttpSession session, @RequestParam("boardId") int boardId) throws Exception {
-
+	public String view(Model model, HttpSession session, @RequestParam("boardId") int boardId) throws Exception {
+		System.out.println("*************************************************");
 		RecruitBoardVO row = recruitBoardService.view(boardId);
+		int auth = recruitBoardService.getEditAuth(boardId);
+		
+		String result = "";
 		
 		List<NoticeCategoryVO> nCatList = homeService.bringNoticeCategory();
 		List<VideoCategoryVO> vCatList = homeService.bringVideoCategory();
@@ -98,12 +103,12 @@ public class RecruitBoardController {
 		session.setAttribute("vCatList", vCatList);
 		session.setAttribute("tCatList", tCatList);
 		session.setAttribute("rCatList", rCatList);
-
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("recruitboard/recruitBoardView");
-		mav.addObject("row", row);
+		
+		result = "recruitboard/recruitBoardView";
+		model.addAttribute("row", row);
+		model.addAttribute("auth", auth);
 		System.out.println("RecruitBoardController boardView open");
-		return mav;
+		return result;
 	}
 
 	// 게시물 쓰기
@@ -115,12 +120,6 @@ public class RecruitBoardController {
 		mav.setViewName("recruitboard/recruitBoardWrite");
 		System.out.println("RecruitBoardController boardWrite open");
 		return mav;
-	}
-
-	// 글작성
-	@RequestMapping(value = "/insertRecruitBoardForm")
-	public String insertRecruitBoardForm() throws Exception {
-		return "recruitboard/insertRecruitBoard";
 	}
 
 	// 글작성 완료
@@ -135,29 +134,71 @@ public class RecruitBoardController {
 	}
 
 	// 글 수정
-	@RequestMapping(value = "/updateRecruitBoard", method = RequestMethod.GET)
-	public ModelAndView getUpdate(@RequestParam("boardId") int boardId) throws Exception {
+	@RequestMapping(value = "/update.do", method = RequestMethod.GET)
+	public String getUpdate(Model model, HttpSession session, @RequestParam("boardId") int boardId) throws Exception {
+		AccountsVO login = (AccountsVO) session.getAttribute("login");
+		RecruitBoardVO update = recruitBoardService.view(boardId);
+		int auth = recruitBoardService.getEditAuth(boardId);
+		String result = "";
+		if(login.getAccountId() == update.getAccountId()) {
+			model.addAttribute("row", update);
+			result = "recruitboard/recruitBoardWrite";
+			System.out.println("String recruitBoardWrite open");
+		} else if(auth <= login.getAuthority()) {
+			model.addAttribute("row", update);
+			result = "recruitboard/recruitBoardWrite";
+			System.out.println("String recruitBoardWrite open");
+		} else {
+			result = "recruitboared/recruitBoardView?boardId=" + boardId;
+		}
 		
-		ModelAndView mav = new ModelAndView();
-		RecruitBoardVO vo = recruitBoardService.view(boardId);
-		mav.addObject("row",vo);
-		mav.setViewName("recruitboard/recruitBoardUpdate");
-		return mav;
+		return result;
 	}
 
 	// 글 삭제
-	@RequestMapping(value = "/delete", method = RequestMethod.GET)
-	public String getDelete(@RequestParam("boardId") int boardId) throws Exception {
-		recruitBoardService.deleteRecruitBoard(boardId);
-		return "redirect:/recruitboard/recruitBoardList";
+	@RequestMapping(value = "/deleteRecruitBoardPro", method = RequestMethod.GET)
+	public String getDelete(HttpSession session, @RequestParam("boardId") int boardId) throws Exception {
+		String result = "";
+		
+		AccountsVO login = (AccountsVO) session.getAttribute("login");
+		int auth = recruitBoardService.getEditAuth(boardId);
+		int writer = recruitBoardService.getAccountId(boardId);
+		if(login.getAccountId() == writer) {
+			recruitBoardService.deleteRecruitBoard(boardId);
+			System.out.println("============ deleteRecruitBoard 성공==============");
+			result = "redirect:/recruitboard/recruitBoardList";
+		} else if(auth <= login.getAuthority()) {
+			recruitBoardService.deleteRecruitBoard(boardId);
+			System.out.println("============ deleteRecruitBoard 성공==============");
+			result = "redirect:/recruitboard/recruitBoardList";
+		} else {
+			result = "redirect:/recruitboard/recruitBoardView?boardId=" + boardId;
+		}
+		
+		return result;
 	}
 
 	// 글 수정  POST
-	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public String postUpdate(RecruitBoardVO vo) throws Exception {
-		recruitBoardService.updateRecruitBoard(vo);
-		System.out.println("============ updateRecruitBoard 성공==============");
-		return "redirect:/recruitboard/recruitBoardList";		
+	@RequestMapping(value = "/updateRecruitBoardPro", method = RequestMethod.POST)
+	public String postUpdate(HttpSession session, RecruitBoardVO vo) throws Exception {
+		String result = "";
+		
+		AccountsVO login = (AccountsVO) session.getAttribute("login");
+		int auth = recruitBoardService.getEditAuth(vo.getBoardId());
+
+		if(login.getAccountId() == vo.getAccountId()) {
+			recruitBoardService.updateRecruitBoard(vo);
+			System.out.println("============ updateRecruitBoard 성공==============");
+			result = "redirect:/recruitboard/recruitBoardView?boardId=" + vo.getBoardId();
+		} else if(auth <= login.getAuthority()) {
+			recruitBoardService.updateRecruitBoard(vo);
+			System.out.println("============ updateRecruitBoard 성공==============");
+			result = "redirect:/recruitboard/recruitBoardView?boardId=" + vo.getBoardId();
+		} else {
+			result = "redirect:/recruitboard/recruitBoardView?boardId=" + vo.getBoardId();
+		}
+		
+		return result;
 	}
 	
 	@ResponseBody

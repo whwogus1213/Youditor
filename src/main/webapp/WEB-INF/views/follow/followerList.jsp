@@ -210,11 +210,12 @@
    	</c:if>
    	
    	<!-- 나중에 여기다 팔로우사람 평점, 순위 등등 추가하고 싶으면 사용 -->
-	<ul class="ul">
-	<li><a class="a" href=""><i class="fa fa-twitter i" style="font-size:16px"></i></a></li>
-<!-- 	   <a class="a" href=""><i class="fa fa-linkedin i" style="font-size:16px"></i></a> -->
-<!--       <a class="a" href=""><i class="fa fa-codepen i" style="font-size:16px"></i></a> -->
-<!--       <a class="a" href=""><i class="fa fa-dribbble i" style="font-size:16px"></i></a> -->
+	<ul class="ul" style="padding-top: 0px; margin-top: 2px;" data-trigger="hover" data-container="body" data-toggle="popover" data-placement="bottom" data-content="팔로우   받은별수   랭킹" >
+	<li>
+		<i class="fas fa-heart" style="font-size:14px; color: #0096d6;"></i> ${followerList.followCnt}&emsp;
+		<i class="far fa-star" style="font-size:14px; color: #0096d6;"></i> ${followerList.starCnt}&emsp;
+		<i class="fas fa-medal" style="font-size:14px; color: #0096d6;"></i> ${followerList.starRank}
+	</li>
 	</ul>
 </div>
 </div>

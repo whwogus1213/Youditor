@@ -7,7 +7,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>비디오게시판 - 작성 - YouditoR</title>
+<c:choose>
+	<c:when test="${row ne null }">
+		<title>비디오게시판 - 수정 - YouditoR</title>
+	</c:when>
+	<c:otherwise>
+		<title>비디오게시판 - 작성 - YouditoR</title>
+	</c:otherwise>
+</c:choose>
 <jsp:include page="./../module/header.jsp" flush="false"/>
 <!-- Custom styles -->
 <link href="/resources/css/modern-business.css" rel="stylesheet">

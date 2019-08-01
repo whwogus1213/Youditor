@@ -22,4 +22,7 @@ public interface FollowService {
 	// 팔로우 삭제
 	public void delete(FollowListVO vo) throws Exception;
 	
+	public int followCnt(int accountId) throws Exception;
+	public int starCnt(int accountId) throws Exception;
+	public int starRank(int accountId) throws Exception;
 }

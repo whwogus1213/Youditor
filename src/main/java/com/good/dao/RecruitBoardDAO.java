@@ -32,7 +32,15 @@ public interface RecruitBoardDAO {
 	//조회수 증가
 	public void viewCount(int boardId) throws Exception;
 	//최신 게시물
-		public List<RecruitBoardVO> rankList1() throws Exception;
-		//최신 게시물
-		public List<RecruitBoardVO> rankList2() throws Exception;
+	public List<RecruitBoardVO> rankList1() throws Exception;
+	
+	//최신 게시물
+	public List<RecruitBoardVO> rankList2() throws Exception;
+	
+	// 게시물의 editAuthority
+	public int getEditAuth(int boardId) throws Exception;
+	
+	// 게시물의 작성자 회원번호 취득
+	public int getAccountId(int boardId) throws Exception;
+	
 }
