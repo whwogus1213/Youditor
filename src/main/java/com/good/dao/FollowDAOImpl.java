@@ -55,6 +55,12 @@ public class FollowDAOImpl implements FollowDAO {
 		sqlSession.delete(NAMESPACE + ".delete", vo);
 	}
 
+	// 마지막 팔로워 체크 시간 갱신
+	@Override
+	public void updateLastFollowerCheck(int accountId) throws Exception {
+		sqlSession.update(NAMESPACE + ".updateLastFollowerCheck", accountId);
+	}
+
 	@Override
 	public int followCnt(int accountId) throws Exception {
 		return sqlSession.selectOne(NAMESPACE + ".followCnt", accountId);
@@ -68,11 +74,5 @@ public class FollowDAOImpl implements FollowDAO {
 	@Override
 	public int starRank(int accountId) throws Exception {
 		return sqlSession.selectOne(NAMESPACE + ".starRank", accountId);
-	}
-	
-	// 마지막 팔로워 체크 시간 갱신
-	@Override
-	public void updateLastFollowerCheck(int accountId) throws Exception {
-		sqlSession.update(NAMESPACE + ".updateLastFollowerCheck", accountId);
 	}
 }
