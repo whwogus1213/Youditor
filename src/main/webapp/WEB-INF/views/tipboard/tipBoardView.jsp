@@ -328,24 +328,27 @@
 			<pre style="white-space:pre-wrap">${row.object}</pre>
 		</div>
 		<hr>
-		<div align="right" style="color:Brown ">
-			<i class="far fa-list-alt" onclick="location.href='/tipboard/tipBoardList'" style="cursor: pointer;">&nbsp;목록으로</i>&nbsp;|&nbsp;
+		<div align="center" style="color:Brown ">
+			<i class="far fa-list-alt" onclick="location.href='/tipboard/tipBoardList'" style="cursor: pointer;">&nbsp;목록으로</i>
 			<c:choose>
 				<c:when test="${login.accountId eq row.accountId}">
-					<i class="far fa-edit" onclick="location.href='/tipboard/update.do?boardId=${row.boardId}'" style="cursor: pointer;">&nbsp;수정</i>&nbsp;|&nbsp;
+					&nbsp;|&nbsp;&nbsp;<i class="far fa-edit" onclick="location.href='/tipboard/update.do?boardId=${row.boardId}'" style="cursor: pointer;">&nbsp;수정</i>&nbsp;|&nbsp;
 					<i class="far fa-trash-alt" id="deletebtn" style="cursor: pointer;">&nbsp;삭제</i>
 				</c:when>
 				<c:when test="${login.authority >= auth }">
-					<i class="far fa-edit" onclick="location.href='/tipboard/update.do?boardId=${row.boardId}'" style="cursor: pointer;">&nbsp;수정</i>&nbsp;|&nbsp;
+					&nbsp;|&nbsp;&nbsp;<i class="far fa-edit" onclick="location.href='/tipboard/update.do?boardId=${row.boardId}'" style="cursor: pointer;">&nbsp;수정</i>&nbsp;|&nbsp;
 					<i class="far fa-trash-alt" id="deletebtn" style="cursor: pointer;">&nbsp;삭제</i>
 				</c:when>
 			</c:choose>
 		</div>
 		<br>
 	</div>
-	<div id="listReply">
-		<jsp:include page="../tipboard/tipBoardReply.jsp" flush="false"/>
+	<div class="container-fluid">
+		<div id="listReply">
+			<jsp:include page="../tipboard/tipBoardReply.jsp" flush="false"/>
+		</div>
 	</div>
+	<br>
 	<jsp:include page="../module/bottom.jsp" flush="false"/>
 
 </body>

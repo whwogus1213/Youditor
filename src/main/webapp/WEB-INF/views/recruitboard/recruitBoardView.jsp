@@ -109,22 +109,24 @@
 		</div>
 		<hr>
 		<div align="center">
-			<button type="button" class="btn btn-link" onclick="location.href='/recruitboard/recruitBoardList'"><strong style="color:PaleVioletRed"><i class="fas fa-clipboard-list"></i>&nbsp;&nbsp;목록으로</strong></button>|
+			<button type="button" class="btn btn-link" onclick="location.href='/recruitboard/recruitBoardList'"><strong style="color:PaleVioletRed"><i class="fas fa-clipboard-list"></i>&nbsp;&nbsp;목록으로</strong></button>
 			<c:choose>
 				<c:when test="${login.accountId eq row.accountId}">
-					<button type="button" class="btn btn-link" onclick="location.href='/recruitboard/update.do?boardId=${row.boardId}'" ><strong style="color:PaleVioletRed"><i class="fas fa-cut"></i>&nbsp;&nbsp;수정</strong></button>|
+					|&nbsp;<button type="button" class="btn btn-link" onclick="location.href='/recruitboard/update.do?boardId=${row.boardId}'" ><strong style="color:PaleVioletRed"><i class="fas fa-cut"></i>&nbsp;&nbsp;수정</strong></button>|
 					<button class="btn btn-link" id="deletebtn"><strong style="color:PaleVioletRed"><i class="fas fa-trash-alt"></i>&nbsp;&nbsp;삭제</strong></button>
 				</c:when>
 				<c:when test="${login.authority >= auth }">
-					<button type="button" class="btn btn-link" onclick="location.href='/recruitboard/update.do?boardId=${row.boardId}'" ><strong style="color:PaleVioletRed"><i class="fas fa-cut"></i>&nbsp;&nbsp;수정</strong></button>|
+					|&nbsp;<button type="button" class="btn btn-link" onclick="location.href='/recruitboard/update.do?boardId=${row.boardId}'" ><strong style="color:PaleVioletRed"><i class="fas fa-cut"></i>&nbsp;&nbsp;수정</strong></button>|
 					<button class="btn btn-link" id="deletebtn"><strong style="color:PaleVioletRed"><i class="fas fa-trash-alt"></i>&nbsp;&nbsp;삭제</strong></button>
 				</c:when>
 			</c:choose>
 		</div>
 	</div>
 	<br>
+	<div class="container-fluid">
 	<div id="listReply">
 		<jsp:include page="../recruitboard/recruitBoardReply.jsp" flush="true"/>
+	</div>
 	</div>
 	<script type="text/javascript">
 		 //팔로우 추가
@@ -197,5 +199,6 @@
 		}
 	</script>
 </body>
+<br><br>
 <jsp:include page="../module/bottom.jsp" flush="true"/>
 </html>
