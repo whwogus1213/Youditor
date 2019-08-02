@@ -19,6 +19,14 @@
   <!-- Custom styles -->
   <link href="/resources/css/modern-business.css" rel="stylesheet">
   <style>
+  table {
+  	table-layout: fixed;
+  }
+  td {
+  	text-overflow: ellipsis;
+  	overflow: hidden;
+  	white-space: nowrap;
+  }
   footer{
 	clear: both;
     margin-top:105%;
@@ -236,14 +244,9 @@ function getNoticeNew(){
 						html += "<tr>";
 						html += "<td>"+(i+1)+"</td>";
 						html += "<td>"+data[i].categoryName+"</td>";
-						if(data[i].subject.length < 10){
 							html += "<td align='left' style='padding-left: 30px; cursor: pointer;'><a href='/noticeboard/noticeBoardView?boardId="+data[i].boardId+"'>"+data[i].subject+"</a></td>";
-							}else{
-								html += "<td align='left' style='padding-left: 30px; cursor: pointer;'><a href='/noticeboard/noticeBoardView?boardId="+data[i].boardId+"'>"+data[i].subject.substr(0, 9)+'..'+"</a></td>";
-								
-							}
+							html += "<td style='overflow: hidden; text-overflow: ellipsis; white-space: nowrap;'>"+data[i].nickname+"</td>";
 						
-						html += "<td style='overflow: hidden; text-overflow: ellipsis; white-space: nowrap;'>"+data[i].nickname+"</td>";
 						html += "<td>"+data[i].mod_date+"</td>";
 						html += "<td>"+data[i].viewCount+"</td>";
 						html += "</tr>";
@@ -284,13 +287,8 @@ function getTipNew(){
 						html += "<tr>";
 						html += "<td>"+(i+1)+"</td>";
 						html += "<td>"+data[i].categoryName+"</td>";
-						if(data[i].subject.length < 10){
-							html += "<td align='left' style='padding-left: 30px; cursor: pointer;'><a href='/tipboard/tipBoardView?boardId="+data[i].boardId+"'>"+data[i].subject+"</a></td>";
-							}else{
-								html += "<td align='left' style='padding-left: 30px; cursor: pointer;'><a href='/tipboard/tipBoardView?boardId="+data[i].boardId+"'>"+data[i].subject.substr(0, 9)+'..'+"</a></td>";
-							}
-						
-						html += "<td style='overflow: hidden; text-overflow: ellipsis; white-space: nowrap;'>"+data[i].nickname+"</td>";
+						html += "<td align='left' style='padding-left: 30px; cursor: pointer;'><a href='/tipboard/tipBoardView?boardId="+data[i].boardId+"'>"+data[i].subject+"</a></td>";
+						html += "<td>"+data[i].nickname+"</td>";
 						html += "<td>"+data[i].mod_date+"<fmt:formatDate value="+data[i].mod_date+"pattern='yyyy-MM-dd' /></td>";
 						html += "<td>"+data[i].viewCount+"</td>";
 						html += "</tr>";
@@ -340,8 +338,11 @@ function getRecruit1(){
 								html += "<td align='left' style='padding-left: 30px; cursor: pointer; vertical-align: middle;'><a href='/recruitboard/recruitBoardView?boardId="+data[i].boardId+"'>"+data[i].subject.substr(0, 9)+'..'+"</a></td>";
 							}
 						
-						html += "<td style='overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: middle;'>"+data[i].nickname+"</td>";
-						html += "<td style='vertical-align: middle;'>"+data[i].reg_date+"</td>";
+						if(data[i].nickname.length < 4) {
+							html += "<td style='vertical-align: middle;'>"+data[i].nickname+"</td>";
+						} else {
+							html += "<td style='overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: middle;'>"+data[i].nickname.substr(0, 4)+'...'+"</td>";
+						}						html += "<td style='vertical-align: middle;'>"+data[i].reg_date+"</td>";
 						html += "<td style='vertical-align: middle;'>"+data[i].viewCount+"</td>";
 						html += "</tr>";
 					}else{
@@ -388,7 +389,11 @@ function getRecruit2(){
 								html += "<td align='left' style='padding-left: 30px; cursor: pointer; vertical-align: middle;'><a href='/recruitboard/recruitBoardView?boardId="+data[i].boardId+"'>"+data[i].subject.substr(0, 9)+'..'+"</a></td>";
 							}
 						
-						html += "<td style='overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: middle;'>"+data[i].nickname+"</td>";
+						if(data[i].nickname.length < 4) {
+							html += "<td style='vertical-align: middle;'>"+data[i].nickname+"</td>";
+						} else {
+							html += "<td style='overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: middle;'>"+data[i].nickname.substr(0, 4)+'...'+"</td>";
+						}
 						html += "<td style='vertical-align: middle;'>"+data[i].reg_date+"</td>";
 						html += "<td style='vertical-align: middle;'>"+data[i].viewCount+"</td>";
 						html += "</tr>";
@@ -497,8 +502,8 @@ function getRecruit2(){
 				<tr>
 					<th style="width: 10%;">번호</th>
 					<th style="width: 10%;">분류</th>
-					<th style="width: 40%;">제목</th>
-					<th style="width: 10%;">작성자</th>
+					<th style="width: 35%;">제목</th>
+					<th style="width: 15%;">작성자</th>
 					<th style="width: 20%;"><i class="far fa-clock"></i></th>
 					<th style="width: 10%;"><i class="far fa-eye" aria-hidden="true"></i></th>
 				</tr>
@@ -517,8 +522,8 @@ function getRecruit2(){
 					<tr>
 						<th style="width: 10%;">번호</th>
 						<th style="width: 10%;">분류</th>
-						<th style="width: 40%;">제목</th>
-						<th style="width: 10%;">작성자</th>
+						<th style="width: 35%;">제목</th>
+						<th style="width: 15%;">작성자</th>
 						<th style="width: 20%;"><i class="far fa-clock"></i></th>
 						<th style="width: 10%;"><i class="far fa-eye" aria-hidden="true"></i></th>
 					</tr>
@@ -536,9 +541,9 @@ function getRecruit2(){
 				<thead align="center">
 					<tr>
 						<th style="width: 10%;">번호</th>
-						<th style="width: 15%;">분류</th>
+						<th style="width: 10%;">분류</th>
 						<th style="width: 35%;">제목</th>
-						<th style="width: 10%;">작성자</th>
+						<th style="width: 15%;">작성자</th>
 						<th style="width: 20%;"><i class="far fa-clock"></i></th>
 						<th style="width: 10%;"><i class="far fa-eye" aria-hidden="true"></i></th>
 					</tr>
@@ -556,9 +561,9 @@ function getRecruit2(){
 				<thead align="center">
 					<tr>
 						<th style="width: 10%;">번호</th>
-						<th style="width: 15%;">분류</th>
+						<th style="width: 10%;">분류</th>
 						<th style="width: 35%;">제목</th>
-						<th style="width: 10%;">작성자</th>
+						<th style="width: 15%;">작성자</th>
 						<th style="width: 20%;"><i class="far fa-clock"></i></th>
 						<th style="width: 10%;"><i class="far fa-eye" aria-hidden="true"></i></th>
 					</tr>

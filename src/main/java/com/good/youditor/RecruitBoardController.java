@@ -18,7 +18,6 @@ import com.good.dto.NoticeCategoryVO;
 import com.good.dto.RecruitBoardVO;
 import com.good.dto.RecruitCategoryVO;
 import com.good.dto.SearchBoard;
-import com.good.dto.TipBoardVO;
 import com.good.dto.TipCategoryVO;
 import com.good.dto.VideoCategoryVO;
 import com.good.service.HomeService;
@@ -78,6 +77,15 @@ public class RecruitBoardController {
 		session.setAttribute("tCatList", tCatList);
 		session.setAttribute("rCatList", rCatList);
 
+		AccountsVO login = (AccountsVO) session.getAttribute("login");
+		
+		if(login != null) {
+			int accountId = login.getAccountId();
+			
+			session.setAttribute("mCount", homeService.newMessageCnt(accountId));
+			session.setAttribute("fCount", homeService.newFollowerCnt(accountId));
+		}
+		
 		model.addAttribute("pagination", search);
 		model.addAttribute("categoryInfo", rCatVO);
 		model.addAttribute("RecruitBoardList", recruitBoardService.listAll(search));
@@ -92,8 +100,6 @@ public class RecruitBoardController {
 		RecruitBoardVO row = recruitBoardService.view(boardId);
 		int auth = recruitBoardService.getEditAuth(boardId);
 		
-		String result = "";
-		
 		List<NoticeCategoryVO> nCatList = homeService.bringNoticeCategory();
 		List<VideoCategoryVO> vCatList = homeService.bringVideoCategory();
 		List<TipCategoryVO> tCatList = homeService.bringTipCategory();
@@ -103,12 +109,20 @@ public class RecruitBoardController {
 		session.setAttribute("vCatList", vCatList);
 		session.setAttribute("tCatList", tCatList);
 		session.setAttribute("rCatList", rCatList);
+
+		AccountsVO login = (AccountsVO) session.getAttribute("login");
 		
-		result = "recruitboard/recruitBoardView";
+		if(login != null) {
+			int accountId = login.getAccountId();
+			
+			session.setAttribute("mCount", homeService.newMessageCnt(accountId));
+			session.setAttribute("fCount", homeService.newFollowerCnt(accountId));
+		}
+		
 		model.addAttribute("row", row);
 		model.addAttribute("auth", auth);
 		System.out.println("RecruitBoardController boardView open");
-		return result;
+		return "recruitboard/recruitBoardView";
 	}
 
 	// 게시물 쓰기

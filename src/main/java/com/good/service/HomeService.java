@@ -2,7 +2,6 @@ package com.good.service;
 
 import java.util.List;
 
-import com.good.dto.FollowListVO;
 import com.good.dto.NoticeCategoryVO;
 import com.good.dto.RecruitCategoryVO;
 import com.good.dto.TipCategoryVO;
@@ -14,7 +13,7 @@ public interface HomeService {
 	public int newMessageCnt(int accountId) throws Exception;
 	
 	// 새로운 팔로워 수 감지
-	public int newFollowerCnt(FollowListVO vo) throws Exception;
+	public int newFollowerCnt(int accountId) throws Exception;
 
 	// 공지 카테고리 가져오기
 	public List<NoticeCategoryVO> bringNoticeCategory() throws Exception;

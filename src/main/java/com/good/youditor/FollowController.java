@@ -3,7 +3,6 @@ package com.good.youditor;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -29,39 +28,43 @@ public class FollowController {
 
 	@Inject
 	FollowService followService;
-	
+
 	@Inject
 	HomeService homeService;
 
 	// 팔로잉 (로그인유저가 팔로우하는 사람 리스트)
 	@RequestMapping(value = "/followingList")
-	public String followingList(Model model, FollowListVO vo, HttpSession session) throws Exception {
+	public String followingList(Model model, HttpSession session) throws Exception {
 		System.out.println("Start following List");
 
 		AccountsVO login = (AccountsVO) session.getAttribute("login");
 		int accountId = login.getAccountId();
-		
+
 		List<FollowingListVO> followingList = followService.followingList(accountId);
-		
+
 		for(int i = 0; i < followingList.size(); i++) {
 			followingList.get(i).setFollowCnt(followService.followCnt(followingList.get(i).getFollowAccountId()));
 			followingList.get(i).setStarCnt(followService.starCnt(followingList.get(i).getFollowAccountId()));
 			followingList.get(i).setStarRank(followService.starRank(followingList.get(i).getFollowAccountId()));
 		}
-		
-		
+
 		System.out.println(followingList);
-		
+
 		List<NoticeCategoryVO> nCatList = homeService.bringNoticeCategory();
 		List<VideoCategoryVO> vCatList = homeService.bringVideoCategory();
 		List<TipCategoryVO> tCatList = homeService.bringTipCategory();
 		List<RecruitCategoryVO> rCatList = homeService.bringRecruitCategory();
-		
+
 		session.setAttribute("nCatList", nCatList);
 		session.setAttribute("vCatList", vCatList);
 		session.setAttribute("tCatList", tCatList);
 		session.setAttribute("rCatList", rCatList);
-		
+
+		if(login != null) {
+			session.setAttribute("mCount", homeService.newMessageCnt(accountId));
+			session.setAttribute("fCount", homeService.newFollowerCnt(accountId));
+		}
+
 		model.addAttribute("followingList", followingList);
 		return "follow/followingList";
 	}
@@ -73,7 +76,7 @@ public class FollowController {
 
 		AccountsVO login = (AccountsVO) session.getAttribute("login");
 		int accountId = login.getAccountId();
-		
+
 		List<FollowingListVO> followerList = followService.followerList(accountId);
 		for(int i = 0; i < followerList.size(); i++) {
 			followerList.get(i).setFollowCnt(followService.followCnt(followerList.get(i).getFollowerAccountId()));
@@ -81,8 +84,15 @@ public class FollowController {
 			followerList.get(i).setStarRank(followService.starRank(followerList.get(i).getFollowerAccountId()));
 		}
 		System.out.println(followerList);
-		
+
 		model.addAttribute("followerList", followerList);
+
+		if(login != null) {
+			session.setAttribute("mCount", homeService.newMessageCnt(accountId));
+			session.setAttribute("fCount", homeService.newFollowerCnt(accountId));
+			followService.updateLastFollowerCheck(accountId);
+		}
+
 		return "follow/followerList";
 	}
 
@@ -92,7 +102,7 @@ public class FollowController {
 
 		System.out.println("----------Start follow insert");
 		System.out.println("글쓴이 아이디 정보 : " + vo);
-		
+
 		AccountsVO loginVO = (AccountsVO) session.getAttribute("login");
 
 		// 로그인 유저 아이디
@@ -162,25 +172,25 @@ public class FollowController {
 		System.out.println(fc + "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 		return fc;
 	}
-	
+
 //	// 팔로우 게시물 목록
 //	@RequestMapping(value = "followBoardList")
 //	public ModelAndView followBoardList(@RequestParam("followAccountId") int followAccountId, HttpServletRequest request) throws Exception {
 //		System.out.println("팔로우 게시물 목록 시작");
 //		System.out.println("   followAccountId   " + followAccountId);
-//		
-//		
+//
+//
 //		List<VideoBoardVO> VideoBoardList = videoBoardService.followBoardList(followAccountId);
-//		
-//		
-//		
+//
+//
+//
 //		ModelAndView mv = new ModelAndView();
 //		mv.setViewName("videoboard/videoBoardList");
 //		mv.addObject("VideoBoardList", VideoBoardList);
 //		request.setAttribute("nickname", VideoBoardList.get(0).getNickname());
-//		
+//
 //		System.out.println("팔로우 게시물 목록 끝");
 //		return mv;
-//	}	
+//	}
 
 }

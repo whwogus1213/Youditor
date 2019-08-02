@@ -27,7 +27,7 @@ public class FollowServicImpl implements FollowService {
 	public List<FollowingListVO> followerList(int accountId) throws Exception {
 		return followDAO.followerList(accountId);
 	}
-	
+
 	// 맛팔 체크
 	@Override
 	public boolean followEachOtherCheck(FollowListVO vo) throws Exception {
@@ -46,6 +46,12 @@ public class FollowServicImpl implements FollowService {
 		followDAO.delete(vo);
 	}
 
+	// 마지막 팔로워 체크 시간 갱신
+	@Override
+	public void updateLastFollowerCheck(int accountId) throws Exception {
+		followDAO.updateLastFollowerCheck(accountId);
+	}
+
 	@Override
 	public int followCnt(int accountId) throws Exception {
 		System.out.println("---------------------------------------- : "+accountId);
@@ -61,5 +67,5 @@ public class FollowServicImpl implements FollowService {
 	public int starRank(int accountId) throws Exception {
 		return followDAO.starRank(accountId);
 	}
-	
+
 }

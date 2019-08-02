@@ -28,15 +28,19 @@
 	</select>
 	
 	<!-- 새로운 팔로워 수 감지 -->
-	<select id="newFollowerCnt" parameterType="FollowListVO" resultType="int">
+	<select id="newFollowerCnt" parameterType="int" resultType="int">
 	SELECT
-		count(followAccountId) as count
+		count(followerAccountId) as count
 	FROM
-		followlist
+		followlist as f
+	    JOIN
+			accounts as a
+		ON
+			followAccountId = accountId
 	WHERE
-		reg_date > #{reg_date}
+		f.reg_date > a.lastFollowerCheck
 		AND
-		followAccountId = #{followAccountId}
+		followAccountId =  #{accountId}
 	</select>
 	
 	<!-- 공지 카테고리 가져오기 -->

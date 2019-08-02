@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.good.dto.AccountCheckVO;
 import com.good.dto.EmailSender;
 import com.good.dto.EmailVO;
 import com.good.service.AccountsService;
@@ -30,6 +31,9 @@ public class EmailController {
 	
 	@Inject
 	EmailService emailService;
+	
+	@Inject
+	AccountsService accountsService;
 	
 	@Inject
 	private EmailSender emailSender;
@@ -74,12 +78,19 @@ public class EmailController {
         }
         if(name != null) {
 	        if(pw!=null) {
-	        	pw = "";
-				for (int i = 0; i < 12; i++) {
-					pw += (char) ((Math.random() * 26) + 97);
-				}
-				service.updatePassword(accountId ,pw);
-	            email.setMessage("임시 비밀번호는 "+pw+" 입니다. \n 비밀번호를 변경하여 사용해 주세요!!" + new StringBuffer().append("\n 비밀번호를 바꾸려면 아래 링크를 클릭하세요. \n").append("\n http://localhost:8080/email/emailUpdatePassword.do?accountId=").append(service.getAccountId(paramMap)).toString());
+	        	AccountCheckVO chVO = new AccountCheckVO();
+	        	chVO.setAccountId(accountId);
+	        	int checkNum = 0;
+	    		
+	    		do {
+	    			checkNum = (int)(Math.random() * 99999) + 10000;
+	    			System.out.println(checkNum + "--------------------check");
+	    		} while(accountsService.duplicateCheck(checkNum) != 0);
+	        	chVO.setCheckNum(checkNum);
+	        	
+	        	accountsService.insertCheckNum(chVO);
+	        	
+	            email.setMessage("비밀번호를 바꾸려면 아래 링크를 클릭하세요." + new StringBuffer().append("\n http://localhost:8080/accounts/passwordFinder.do?accountId=" + chVO.getAccountId() + "&check=" + chVO.getCheckNum()));
 	            email.setReceiveMail(e_mail);
 	            email.setSubject(id+"님 비밀번호 찾기 메일입니다.");
 	            emailSender.SendEmail(email);

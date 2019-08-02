@@ -49,13 +49,11 @@ public class MessageController {
 		
 		List<MessageList> messageReceiveList = service.receiveListAll(search);
 		
-		int mCount = 0;
 		if(vo != null) {
 			int accountId = vo.getAccountId();
 			
-			mCount = homeService.newMessageCnt(accountId);
-			
-			session.setAttribute("mCount", mCount);
+			session.setAttribute("mCount", homeService.newMessageCnt(accountId));
+			session.setAttribute("fCount", homeService.newFollowerCnt(accountId));
 		}
 		
 		
@@ -84,10 +82,13 @@ public class MessageController {
 		search.pageInfo(page, range, listCnt);
 		
 		List<MessageList> messageSendList = service.sendListAll(search);
-		
-		System.out.println("listcnt :  " + listCnt);
-		
-		search.pageInfo(page, range, listCnt);
+
+		if(vo != null) {
+			int accountId = vo.getAccountId();
+			
+			session.setAttribute("mCount", homeService.newMessageCnt(accountId));
+			session.setAttribute("fCount", homeService.newFollowerCnt(accountId));
+		}
 
 		model.addAttribute("pagination", search);
 		model.addAttribute("MessageSendList", messageSendList);
@@ -97,28 +98,47 @@ public class MessageController {
 
 	// 받은 메시지 읽기
 	@RequestMapping(value = "/messageReceiveView", method = RequestMethod.GET)
-	public String receiveMessageView(Model model, @RequestParam("messageId") int messageId) throws Exception {
+	public String receiveMessageView(Model model, HttpSession session, @RequestParam("messageId") int messageId) throws Exception {
 		System.out.println("*************************************************");
+		String result = "";
 		MessageList rMessage = service.receiveMessageView(messageId);
-		if(rMessage.getRead_date() == null) {
-			service.updateReadDate(messageId);
-			rMessage = service.receiveMessageView(messageId);
-		}
+		AccountsVO login = (AccountsVO) session.getAttribute("login");
+		if(rMessage.getReceiverAccountId() == login.getAccountId()) {
+			if(rMessage.getRead_date() == null) {
+				service.updateReadDate(messageId);
+				rMessage = service.receiveMessageView(messageId);
+			}
 
-		model.addAttribute("rMessage", rMessage);
-		System.out.println("MessageController messageReceiveView open");
-		return "message/messageReceiveView";
+			model.addAttribute("rMessage", rMessage);
+			System.out.println("MessageController messageReceiveView open");
+			result = "message/messageReceiveView";
+			session.setAttribute("mCount", homeService.newMessageCnt(login.getAccountId()));
+			session.setAttribute("fCount", homeService.newFollowerCnt(login.getAccountId()));
+		} else {
+			result = "message/messageReceiveList";
+		}
+		
+		return result;
 	}
 
 	// 보낸 메시지 읽기
 	@RequestMapping(value = "/messageSendView", method = RequestMethod.GET)
-	public String sendMessageView(Model model, @RequestParam("messageId") int messageId) throws Exception {
+	public String sendMessageView(Model model, HttpSession session, @RequestParam("messageId") int messageId) throws Exception {
 		System.out.println("*************************************************");
+		String result = "";
 		MessageList rMessage = service.sendMessageView(messageId);
-
-		model.addAttribute("rMessage", rMessage);
-		System.out.println("MessageController messageSendView open");
-		return "message/messageSendView";
+		AccountsVO login = (AccountsVO) session.getAttribute("login");
+		if(rMessage.getSenderAccountId() == login.getAccountId()) {
+			model.addAttribute("rMessage", rMessage);
+			System.out.println("MessageController messageSendView open");
+			result = "message/messageSendView";
+			session.setAttribute("mCount", homeService.newMessageCnt(login.getAccountId()));
+			session.setAttribute("fCount", homeService.newFollowerCnt(login.getAccountId()));
+		} else {
+			result = "redirect:/message/messageSendList";
+		}
+		
+		return result;
 	}
 	
 	// 메시지 쓰기
@@ -132,14 +152,23 @@ public class MessageController {
 	
 	// 메시지 답장 쓰기
 	@RequestMapping(value = "/reply.do", method = RequestMethod.GET)
-	public String replydo(Model model, @RequestParam("messageId") int messageId) throws Exception {
+	public String replydo(Model model, HttpSession session, @RequestParam("messageId") int messageId) throws Exception {
 		System.out.println("*************************************************");
+		AccountsVO login = (AccountsVO) session.getAttribute("login");
 		// messageId로 nickname 추출, subject & object 추출
 		MessageList replyInfo = service.getReplyInfo(messageId);
 		
-		model.addAttribute("replyInfo", replyInfo);
-		System.out.println("MessageController messageWrite open");
-		return "message/messageWrite";
+		String result = "";
+		
+		if(login.getAccountId() == replyInfo.getReceiverAccountId() || login.getAccountId() == replyInfo.getSenderAccountId()) {
+			model.addAttribute("replyInfo", replyInfo);
+			System.out.println("MessageController messageWrite open");
+			result = "message/messageWrite";
+		} else {
+			result = "redirect:/message/messageSendList";
+		}
+		
+		return result;
 	}
 	
 	// 메시지 보내기

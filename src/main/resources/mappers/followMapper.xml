@@ -26,7 +26,7 @@ from
 (SELECT fo.followAccountId, fo.followerAccountId, ac.nickname, fo.reg_date, ac.picture, ac.footer, ac.lastFollowerCheck, ac.newLogin_date
 FROM followlist as fo JOIN accounts as ac ON fo.followAccountId = ac.accountId
 WHERE fo.followerAccountId = #{accountId}
-ORDER BY fo.reg_date DESC) as d LEFT OUTER JOIN 
+ORDER BY fo.reg_date DESC) as d LEFT OUTER JOIN
 (select * , 'true' as 'check'
 from (SELECT fo.followAccountId as baseF , fo.followerAccountId as baseFF , ac.nickname as nick, fo.reg_date as foDate
 FROM followlist as fo JOIN accounts as ac ON fo.followAccountId = ac.accountId
@@ -35,7 +35,7 @@ ORDER BY fo.reg_date DESC)as base, followlist as base2
 where base.baseF = base2.followerAccountId and base.baseFF = base2.followAccountId)as dd
 ON dd.baseF = d.followAccountId and dd.baseFF = d.followerAccountId
 order by d.reg_date desc;
-	
+
     </select>
 
 	<!-- 팔로워 -->
@@ -45,7 +45,7 @@ order by d.reg_date desc;
 		(SELECT fo.followAccountId, fo.followerAccountId, ac.nickname, fo.reg_date, ac.picture, ac.footer, ac.lastFollowerCheck, ac.newLogin_date
 		FROM followlist as fo JOIN accounts as ac ON fo.followerAccountId = ac.accountId
 		WHERE fo.followAccountId = #{accountId}
-		ORDER BY fo.reg_date DESC) as d LEFT OUTER JOIN 
+		ORDER BY fo.reg_date DESC) as d LEFT OUTER JOIN
 		(select * , 'true' as 'check'
 		from (SELECT fo.followAccountId as baseF , fo.followerAccountId as baseFF , ac.nickname as nick, fo.reg_date as foDate
 			FROM followlist as fo JOIN accounts as ac ON fo.followerAccountId = ac.accountId
@@ -57,7 +57,7 @@ order by d.reg_date desc;
 
 
     </select>
-    
+
     <!-- 맛팔 체크 -->
     <select id="followEachOtherCheck" parameterType="FollowListVO" resultType="int">
     SELECT
@@ -82,13 +82,23 @@ order by d.reg_date desc;
         where followAccountId = #{followAccountId} and followerAccountId = #{followerAccountId}
     </delete>
     
+  	<!-- 마지막 팔로워 체크 시간 갱신 -->
+  	<update id="updateLastFollowerCheck" parameterType="int">
+  		UPDATE
+  			accounts
+  		SET
+  			lastFollowerCheck = now()
+  		WHERE
+  			accountId = #{accountId}
+  	</update>
+
     <select id="followCnt" parameterType="int" resultType="int">
-		select count(*) from followlist where followAccountId = #{accountId}    
+		select count(*) from followlist where followAccountId = #{accountId}
     </select>
 
     <select id="starCnt" parameterType="int" resultType="int">
 	select ifnull(sum(star),0) as starCnt
-	from 
+	from
 		(select accountId, sum(star) as star
 		from videostar
 		group by accountId
@@ -97,7 +107,7 @@ order by d.reg_date desc;
 		select accountId, sum(star) as star
 		from tipstar
 		group by accountId
-		having accountId = #{accountId}) as starfrom;    
+		having accountId = #{accountId}) as starfrom;
     </select>
 
     <select id="starRank" parameterType="int" resultType="int">
@@ -118,5 +128,5 @@ order by d.reg_date desc;
 		where accountId = #{accountId}
 		) as checknull;
     </select>
-    
+
 </mapper>

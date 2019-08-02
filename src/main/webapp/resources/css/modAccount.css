@@ -27,6 +27,7 @@ input[type="email"] {
 	padding: 5px;
 	color: #000000;
 	letter-spacing: 1.1px;
+	width: 400px;
 }
 
 input[type="text"], input[type="password"] {
