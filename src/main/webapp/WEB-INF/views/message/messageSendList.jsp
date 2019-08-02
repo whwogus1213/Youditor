@@ -105,14 +105,14 @@
 			<button type="button" class="btn btn-sm btn-link" onclick="location.href='/message/messageReceiveList' " style="color:GoldenRod;"><i class="fas fa-arrows-alt-h"></i>&nbsp;&nbsp;받은 메세지 보기</button>
 		</div>
 	</div>
-	<table class="table table-hover">
-		<thead style="color:Peru">
+	<table class="table table-hover" style="table-layout: fixed;">
+		<thead style="color:Peru" align="center">
 			<tr>
-				<th scope="col"><div style="overflow:hidden; text-overflow: ellipsis; white-space:nowrap; width:100px; height: 100%;" align="center">받는이</div></th>
-				<th scope="col"><div style="overflow:hidden; text-overflow: ellipsis; white-space:nowrap; width:400px; height: 100%;" align="center">제목</div></th>
-				<th scope="col"><div style="overflow:hidden; text-overflow: ellipsis; white-space:nowrap; width:100px; height: 100%;" align="center">보낸 날짜</div></th>
-				<th scope="col"><div style="overflow:hidden; text-overflow: ellipsis; white-space:nowrap; width:100px; height: 100%;" align="center">읽은 날짜</div></th>
-				<th scope="col">
+				<th scope="col" style="width: 10%;">받는이</th>
+				<th scope="col" style="width: 40%">제목</th>
+				<th scope="col" style="width: 12%">보낸 날짜</th>
+				<th scope="col" style="width: 12%">읽은 날짜</th>
+				<th scope="col" style="width: 5%;">
 					<input type="checkbox" name="allCheck" id="allCheck" />
 					<script>
 					$("#allCheck").click(function(){
@@ -127,14 +127,14 @@
 				</th>
 			</tr>
 		</thead>
-		<tbody>
+		<tbody align="center">
 			<c:forEach items="${MessageSendList }" var="MessageSendList">
 				<tr>
-					<td>
+					<td align="left" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">
 						<img src="<spring:url value='/image/${MessageSendList.picture}'/>" class=" mx-auto rounded-circle" 
 										width="20px" height="20px"/>&nbsp;${MessageSendList.nickname}<br>	
 					</td>
-					<td>
+					<td align="left" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">
 						<a href="/message/messageSendView?messageId=${MessageSendList.messageId}" style="align:center; color:black">${MessageSendList.subject}</a>
 					</td>
 					<td><fmt:formatDate value="${MessageSendList.send_date}" pattern="yyyy-MM-dd" /></td>
