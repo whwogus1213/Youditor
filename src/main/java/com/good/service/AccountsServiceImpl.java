@@ -41,7 +41,7 @@ public class AccountsServiceImpl implements AccountsService {
 		
 		AccountCheckVO Cvo = new AccountCheckVO();
 		Cvo.setAccountId(accountId);
-		Cvo.setCheck(check);
+		Cvo.setCheckNum(check);
 		dao.insertAccountCheck(Cvo);	//회원 메일인증을 위한 accountcheck 등록
 		System.out.println("accountcheck : "+Cvo);
 		
@@ -55,7 +55,7 @@ public class AccountsServiceImpl implements AccountsService {
 				.append("accountId=")
 				.append(Cvo.getAccountId())
 				.append("&check=")
-				.append(Cvo.getCheck())
+				.append(Cvo.getCheckNum())
 				.append("' target='_blenk'>이메일 인증 확인</a>")
 				.toString());
 		sendMail.setFrom("YouditoR", "유디터");
@@ -114,6 +114,12 @@ public class AccountsServiceImpl implements AccountsService {
 	public void loginDate(AccountsVO vo) throws Exception {
 		dao.loginDate(vo);
 	}
+	
+	@Override
+	public int duplicateCheck(int check) throws Exception {
+		return dao.duplicateCheck(check);
+	}
+	
 	@Override
 	public String getPwd(Map<String, String> paramMap) throws Exception {
 		return dao.getPwd(paramMap);
@@ -131,4 +137,27 @@ public class AccountsServiceImpl implements AccountsService {
 	public int getAccountId(Map<String, String> paramMap) throws Exception {
 		return dao.getAccountId(paramMap);
 	}
+	
+	// 비번리셋용 1회용 키 발급
+	@Override
+	public void insertCheckNum(AccountCheckVO chVO) throws Exception {
+		dao.insertCheckNum(chVO);
+	}
+	
+	// 비번리셋페이지로 넘어가기위한 확인
+	@Override
+	public int accountCheckCheck(AccountCheckVO chVO) throws Exception {
+		return dao.accountCheckCheck(chVO);
+	}
+	
+	// 비번 리셋으로 새로운 패스워드 넣기
+	public void newPassword(AccountsVO newPwd) throws Exception {
+		dao.newPassword(newPwd);
+	}
+	
+	// 비번 리셋용 1회용 키 사용불가 처리
+	public void removeAccountCheckKey(AccountCheckVO chVO) throws Exception {
+		dao.removeAccountCheckKey(chVO);
+	}
+	
 }
