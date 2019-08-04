@@ -55,8 +55,8 @@
 						<h4 style="color:brown">| 급여 : ${row.fee} \ |</h4>
 					</div>
 				</div>
-				<div class="col-sm-12 row">
-					<div class="dropdown show">
+				<div class="row col-sm-12">
+					<div class="col-sm-7 dropdown show">
 						<strong style="color:PaleVioletRed">작성자</strong>&nbsp;&nbsp;
 						<!-- 내 아이디에 마우스 오버 -->						
 						<c:if test="${row.accountId eq login.accountId }">
@@ -91,17 +91,15 @@
 							</div>
 						</c:if>
 					</div>
-				</div>
-			</div>
-			<div class="form-inline">
-				<div class="col-sm-10" align="right">
-					<h6>
-						<strong style="color:PaleVioletRed">작성 일시</strong>&nbsp;&nbsp;
-						${row.reg_date}
-					</h6>
-				</div>
-				<div class="col-sm-2" align="right">
-					<h6><strong style="color:PaleVioletRed">조회수</strong>&nbsp;&nbsp;${row.viewCount }</h6>
+					<div class="col-sm-3" align="right">
+						<h6>
+							<strong style="color:PaleVioletRed">작성 일시</strong>&nbsp;&nbsp;
+							${row.reg_date}
+						</h6>
+					</div>
+					<div class="col-sm-2" align="right">
+						<h6><strong style="color:PaleVioletRed">조회수</strong>&nbsp;&nbsp;${row.viewCount }</h6>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -111,93 +109,96 @@
 		</div>
 		<hr>
 		<div align="center">
-			<button type="button" class="btn btn-link" onclick="location.href='/recruitboard/recruitBoardList'"><strong style="color:PaleVioletRed"><i class="fas fa-clipboard-list"></i>&nbsp;&nbsp;목록으로</strong></button>|
+			<button type="button" class="btn btn-link" onclick="location.href='/recruitboard/recruitBoardList'"><strong style="color:PaleVioletRed"><i class="fas fa-clipboard-list"></i>&nbsp;&nbsp;목록으로</strong></button>
 			<c:choose>
 				<c:when test="${login.accountId eq row.accountId}">
-					<button type="button" class="btn btn-link" onclick="location.href='/recruitboard/update.do?boardId=${row.boardId}'" ><strong style="color:PaleVioletRed"><i class="fas fa-cut"></i>&nbsp;&nbsp;수정</strong></button>|
+					|&nbsp;<button type="button" class="btn btn-link" onclick="location.href='/recruitboard/update.do?boardId=${row.boardId}'" ><strong style="color:PaleVioletRed"><i class="fas fa-cut"></i>&nbsp;&nbsp;수정</strong></button>|
 					<button class="btn btn-link" id="deletebtn"><strong style="color:PaleVioletRed"><i class="fas fa-trash-alt"></i>&nbsp;&nbsp;삭제</strong></button>
 				</c:when>
 				<c:when test="${login.authority >= auth }">
-					<button type="button" class="btn btn-link" onclick="location.href='/recruitboard/update.do?boardId=${row.boardId}'" ><strong style="color:PaleVioletRed"><i class="fas fa-cut"></i>&nbsp;&nbsp;수정</strong></button>|
+					|&nbsp;<button type="button" class="btn btn-link" onclick="location.href='/recruitboard/update.do?boardId=${row.boardId}'" ><strong style="color:PaleVioletRed"><i class="fas fa-cut"></i>&nbsp;&nbsp;수정</strong></button>|
 					<button class="btn btn-link" id="deletebtn"><strong style="color:PaleVioletRed"><i class="fas fa-trash-alt"></i>&nbsp;&nbsp;삭제</strong></button>
 				</c:when>
 			</c:choose>
 		</div>
 	</div>
 	<br>
+	<div class="container-fluid">
 	<div id="listReply">
-		<jsp:include page="../recruitboard/recruitBoardReply.jsp" flush="false"/>
+		<jsp:include page="../recruitboard/recruitBoardReply.jsp" flush="true"/>
 	</div>
-	<jsp:include page="../module/bottom.jsp" flush="false"/>
-<script type="text/javascript">
-	 //팔로우 추가
-	 function fn_follow(accountId) {
-	 	var tr = $(".dropdownBtnFollow"+accountId);
-	 	var json = {
-	 		"followAccountId" : accountId
-	 	}
-	 				
-	 	event.stopPropagation();
-	 	
-	 	$.ajax({
-	 		type : "POST",
-	 		url : "/follow/insert",
-	 		data : json,
-	 		success : function(data) {
-	 			if (data == "success") {
-	 				tr.attr("style","");
-	 				tr.css("color", "red");
-	 				tr.find("i").css("color","red");
-	 				tr.attr("onclick","");
-	 				tr.css("cursor","default");
-	 				tr.html("<i class='far fa-heart'></i>&nbsp;&nbsp;팔로우중");
-	 				/* 웹소켓으로 팔로우 알람 */
-	 				var sendText = {};
-	 				sendText.from = "followAlarm";
-	 				sendText.text = String(accountId);
-	 				sock.send(JSON.stringify(sendText));
-	 				console.log(tempcheck);
-	 			}
-	 			
-	 		},
-	 		error : function(data) {
-	 			alert("에러");
-	 		}
-	 	});
-	 	
-	 }
-
-	 //팔로우 체크
-	 function checkFollow(accountId){
-	 	console.log(accountId+"bbbbbbbbbbbbbbbbbbbbbb");
-	 	var tr = $(".dropdownBtnFollow"+accountId);
-	 	var json = {
-	 			"followAccountId" : accountId,
-	 			"followerAccountId" : ${login.accountId}
-	 			};
-	 	$.ajax({
-	 		type : "POST",
-	 		url : "/follow/check",
-	 		data : json,
-	 		success : function(data) {
-	 			if (data == "1") {
-	 				console.log("팔로우 되어있습니다.");
-	 				tr.attr("style","");
-	 				tr.css("color", "red");
-	 				tr.find("i").css("color","red");
-	 				tr.attr("onclick","");
-	 				tr.css("cursor","default");
-	 				tr.html("<i class='far fa-heart'></i>&nbsp;&nbsp;팔로우중");
-	 				
-	 			} else {
-	 				console.log("팔로우 아님");
-	 			}
-	 		},
-	 		error : function(data) {
-	 			alert("에러");
-	 		}
-		});
-	}
-</script>
+	</div>
+	<script type="text/javascript">
+		 //팔로우 추가
+		 function fn_follow(accountId) {
+		 	var tr = $(".dropdownBtnFollow"+accountId);
+		 	var json = {
+		 		"followAccountId" : accountId
+		 	}
+		 				
+		 	event.stopPropagation();
+		 	
+		 	$.ajax({
+		 		type : "POST",
+		 		url : "/follow/insert",
+		 		data : json,
+		 		success : function(data) {
+		 			if (data == "success") {
+		 				tr.attr("style","");
+		 				tr.css("color", "red");
+		 				tr.find("i").css("color","red");
+		 				tr.attr("onclick","");
+		 				tr.css("cursor","default");
+		 				tr.html("<i class='far fa-heart'></i>&nbsp;&nbsp;팔로우중");
+		 				/* 웹소켓으로 팔로우 알람 */
+		 				var sendText = {};
+		 				sendText.from = "followAlarm";
+		 				sendText.text = String(accountId);
+		 				sock.send(JSON.stringify(sendText));
+		 				console.log(tempcheck);
+		 			}
+		 			
+		 		},
+		 		error : function(data) {
+		 			alert("에러");
+		 		}
+		 	});
+		 	
+		 }
+	
+		 //팔로우 체크
+		 function checkFollow(accountId){
+		 	console.log(accountId+"bbbbbbbbbbbbbbbbbbbbbb");
+		 	var tr = $(".dropdownBtnFollow"+accountId);
+		 	var json = {
+		 			"followAccountId" : accountId,
+		 			"followerAccountId" : ${login.accountId}
+		 			};
+		 	$.ajax({
+		 		type : "POST",
+		 		url : "/follow/check",
+		 		data : json,
+		 		success : function(data) {
+		 			if (data == "1") {
+		 				console.log("팔로우 되어있습니다.");
+		 				tr.attr("style","");
+		 				tr.css("color", "red");
+		 				tr.find("i").css("color","red");
+		 				tr.attr("onclick","");
+		 				tr.css("cursor","default");
+		 				tr.html("<i class='far fa-heart'></i>&nbsp;&nbsp;팔로우중");
+		 				
+		 			} else {
+		 				console.log("팔로우 아님");
+		 			}
+		 		},
+		 		error : function(data) {
+		 			alert("에러");
+		 		}
+			});
+		}
+	</script>
 </body>
+<br><br>
+<jsp:include page="../module/bottom.jsp" flush="true"/>
 </html>
