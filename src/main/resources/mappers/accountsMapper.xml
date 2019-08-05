@@ -64,7 +64,7 @@
 	</insert>
 	
 	<select id="duplicateCheck" parameterType="Integer" resultType="Integer">
-		SELECT EXISTS(SELECT * FROM accountcheck a where a.checkNum = #{checkNum})	
+		SELECT EXISTS(SELECT * FROM accountcheck where checkNum = #{checkNum})	
 	</select>
 	
 	
@@ -135,7 +135,7 @@
 		WHERE
 			accountId = #{accountId}
 			AND
-			(SELECT a.check FROM accountcheck a WHERE a.accountId = #{accountId}) = #{checkNum}
+			(SELECT checkNum FROM accountcheck WHERE accountId = #{accountId}) = #{checkNum}
 			
 	</update>
 	

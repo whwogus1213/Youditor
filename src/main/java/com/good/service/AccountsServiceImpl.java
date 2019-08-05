@@ -54,7 +54,7 @@ public class AccountsServiceImpl implements AccountsService {
 				.append("<a href='http://localhost:8180/accounts/joinConfirm?")
 				.append("accountId=")
 				.append(Cvo.getAccountId())
-				.append("&check=")
+				.append("&checkNum=")
 				.append(Cvo.getCheckNum())
 				.append("' target='_blenk'>이메일 인증 확인</a>")
 				.toString());
