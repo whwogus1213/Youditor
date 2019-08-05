@@ -7,6 +7,7 @@ public class EmailVO {
     private String receiveMail;
     private String subject;
     private String message;
+    
 	public String getSenderName() {
 		return senderName;
 	}
@@ -37,12 +38,11 @@ public class EmailVO {
 	public void setMessage(String message) {
 		this.message = message;
 	}
+	
 	@Override
 	public String toString() {
 		return "EmailVO [senderName=" + senderName + ", senderMail=" + senderMail + ", receiveMail=" + receiveMail
 				+ ", subject=" + subject + ", message=" + message + "]";
 	}
-      
-     
     
 }

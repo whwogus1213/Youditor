@@ -96,23 +96,47 @@ public class AccountsDAOImpl implements AccountsDAO {
 	public int duplicateCheck(int check) throws Exception {
 		return sqlSession.selectOne(NAMESPACE + ".duplicateCheck", check);
 	}
+	
 	@Override
 	public String getPwd(Map<String, String> paramMap) throws Exception {
 		return sqlSession.selectOne(NAMESPACE + ".getPwd",paramMap);
 	}
+	
 	@Override
 	public String getEmail(Map<String, String> paramMap) throws Exception {
 		return sqlSession.selectOne(NAMESPACE + ".getEmail",paramMap);
 	}
+	
 	@Override
 	public String getNickname(Map<String, String> paramMap) throws Exception {
 		return sqlSession.selectOne(NAMESPACE + ".getNickname",paramMap);
 	}
+	
 	@Override
 	public int getAccountId(Map<String, String> paramMap) throws Exception {
 		return sqlSession.selectOne(NAMESPACE + ".getAccountId",paramMap);
 	}
-
 	
+	// 비번리셋용 1회용 키 발급
+	@Override
+	public void insertCheckNum(AccountCheckVO chVO) throws Exception {
+		sqlSession.insert(NAMESPACE + ".insertCheckNum", chVO);
+	}
+	
+	// 비번리셋페이지로 넘어가기위한 확인
+	@Override
+	public int accountCheckCheck(AccountCheckVO chVO) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + ".accountCheckCheck", chVO);
+	}
+	
+	// 비번 리셋으로 새로운 패스워드 넣기
+	public void newPassword(AccountsVO newPwd) throws Exception {
+		sqlSession.update(NAMESPACE + ".newPassword", newPwd);
+	}
+	
+	// 비번 리셋용 1회용 키 사용불가 처리
+	public void removeAccountCheckKey(AccountCheckVO chVO) throws Exception {
+		sqlSession.delete(NAMESPACE + ".removeAccountCheckKey", chVO);
+	}
 
 }
