@@ -117,6 +117,18 @@ public class AccountsDAOImpl implements AccountsDAO {
 		return sqlSession.selectOne(NAMESPACE + ".getAccountId",paramMap);
 	}
 	
+	// 비번 리셋용 발급된 키 유무 체크
+	@Override
+	public int findAccountCheckKey(int accountId) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + ".findAccountCheckKey", accountId);
+	}
+	
+	// 비번 리셋용 키 발급된 경우 취득
+	@Override
+	public int getCheckNUm(int accountId) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + ".getCheckNUm", accountId);
+	}
+	
 	// 비번리셋용 1회용 키 발급
 	@Override
 	public void insertCheckNum(AccountCheckVO chVO) throws Exception {

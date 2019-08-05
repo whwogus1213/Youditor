@@ -216,6 +216,26 @@
 			email = #{email}
 	</select>
 	
+	<!-- 비번리셋키 발급 유무 -->
+	<select id="findAccountCheckKey" parameterType="int" resultType="int">
+		SELECT
+			count(*)
+		FROM
+			accountcheck
+		WHERE
+			accountId = #{accountId}
+	</select>
+	
+	<!-- 발급된 비번리셋키 존재시 취득 -->
+	<select id="getCheckNUm" parameterType="int" resultType="int">
+		SELECT
+			checkNum
+		FROM
+			accountcheck
+		WHERE
+			accountId = #{accountId}
+	</select>
+	
 	<!-- 비번리셋용 1회용 키 발급 -->
 	<insert id="insertCheckNum" parameterType="AccountCheckVO">
 		INSERT INTO
@@ -254,7 +274,7 @@
 	WHERE
 		accountId = #{accountId}
 		AND
-		checkNum = '${checkNum}
+		checkNum = ${checkNum}
 	</delete>
 	
 </mapper>
