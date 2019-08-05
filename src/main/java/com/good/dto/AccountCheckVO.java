@@ -2,7 +2,7 @@ package com.good.dto;
 
 public class AccountCheckVO {
 	private int accountId;
-	private int check;
+	private int checkNum;
 	
 	public int getAccountId() {
 		return accountId;
@@ -10,15 +10,15 @@ public class AccountCheckVO {
 	public void setAccountId(int accountId) {
 		this.accountId = accountId;
 	}
-	public int getCheck() {
-		return check;
+	public int getCheckNum() {
+		return checkNum;
 	}
-	public void setCheck(int check) {
-		this.check = check;
+	public void setCheckNum(int checkNum) {
+		this.checkNum = checkNum;
 	}
 	@Override
 	public String toString() {
-		return "AccountCheck [accountId=" + accountId + ", check=" + check + "]";
+		return "AccountCheck [accountId=" + accountId + ", checkNum=" + checkNum + "]";
 	}
 	
 }

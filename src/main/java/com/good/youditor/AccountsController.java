@@ -102,9 +102,14 @@ public class AccountsController {
 				returnURL = "redirect:/accounts/login.do";
 			} else {
 				session.setAttribute("login", vo);
+
+				if(service.findAccountCheckKey(vo.getAccountId()) == 1) {
+					service.removeUnusedCheckKey(vo.getAccountId());
+				}
 				//rttr.addFlashAttribute("result", "authorityNO");
 				returnURL = "redirect:/";
 			}
+			
 		} else { // 로그인에 실패한 경우
 			int errorCase = 3;
 			Map<String, Object> map = new HashMap<String,Object>();
@@ -385,5 +390,47 @@ public class AccountsController {
 			System.out.println("String modAccount open");
 		}
 		return mav;
+	}
+	
+	@RequestMapping(value = "passwordFinder.do", method = RequestMethod.GET)
+	public String passwordFinder(Model model, @RequestParam("accountId") int accountId, @RequestParam("checkNum") int checkNum) throws Exception {
+		String result = "";
+		AccountCheckVO chVO = new AccountCheckVO();
+		chVO.setAccountId(accountId);
+		chVO.setCheckNum(checkNum);
+		if(service.accountCheckCheck(chVO) == 1) {
+			model.addAttribute("accountCheck", chVO);
+			result = "accounts/passwordFinder"; 
+		} else {
+			result = "redirect:/";
+		}
+		return result;
+	}
+	
+	@RequestMapping(value = "passwordResetPro", method = RequestMethod.POST)
+	@ResponseBody
+	public int passwordResetPro(@RequestParam("accountId") int accountId,
+								@RequestParam("checkNum") int checkNum,
+								@RequestParam("pwd") String pwd,
+								@RequestParam("pwdCfm") String pwdCfm) throws Exception {
+		int result = 0;
+		AccountCheckVO chVO = new AccountCheckVO();
+		chVO.setAccountId(accountId);
+		chVO.setCheckNum(checkNum);
+		if(service.accountCheckCheck(chVO) == 1) {
+			if(pwd.equals(pwdCfm)) {
+				System.out.println("aaaaaaaa");
+				AccountsVO newPwd = new AccountsVO();
+				newPwd.setAccountId(accountId);
+				newPwd.setPwd(pwd);
+				
+				service.newPassword(newPwd);
+				
+				result = 1;
+				System.out.println(chVO);
+				service.removeAccountCheckKey(chVO);
+			}
+		}
+		return result;
 	}
 }

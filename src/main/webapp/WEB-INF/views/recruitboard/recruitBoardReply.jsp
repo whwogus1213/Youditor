@@ -11,17 +11,14 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="/resources/vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
+<script src="/resources/js/jquery-3.3.1.min.js"></script>
 <link href="https://fonts.googleapis.com/css?family=Song+Myung|Jua|Cute+Font|Noto+Sans+KR|Black+Han+Sans|Gothic+A1|Hi+Melody|Nanum+Brush+Script|Do+Hyeon|Nanum+Gothic&display=swap" rel="stylesheet">
 <link href="/resources/css/default.css" rel="stylesheet" type="text/css"/>
 <link href="/resources/css/reply.css" rel="stylesheet">
 </head>
 <body>
-
-
 <div class="container" style="font-family: 'Nanum Gothic', sans-serif;">
     <form id="commentForm" name="commentForm" method="post">
-	
-    <br><br>
         <div>
             <hr style="2px dashed;">
             <div style="margin-bottom: 20px;">
@@ -87,7 +84,7 @@
 			<table class="table table-borderless listTable" style="margin-bottom: 0px; margin-top: 30px;">
 				<tr>
 					<td rowspan="3" width="7%" style="padding-bottom: 0; padding-right: 3px; text-align: right;">
-						<img src="/image/nothing.jpg" class="rounded-circle listIamge" width="40px" height="40px">
+						<img src="/image/nothing.jpg" class="rounded-circle listImage" width="40px" height="40px">
 					</td>
 					<td style="padding-bottom: 0">
 						<span class="listNickname" style="font-size: 0.9em; font-weight: 900;">
