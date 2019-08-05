@@ -20,7 +20,7 @@
 			</if>
 		</trim>
 		ORDER BY
-			reg_date DESC
+			${orderBy} ${orderType}
 		LIMIT
 			#{startList}, #{listSize}
 	</select>

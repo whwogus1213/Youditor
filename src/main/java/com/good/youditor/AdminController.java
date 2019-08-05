@@ -28,7 +28,7 @@ import com.good.dto.CategoryCount;
 import com.good.dto.EditCategoryVO;
 import com.good.dto.NoticeCategoryVO;
 import com.good.dto.RecruitCategoryVO;
-import com.good.dto.Search;
+import com.good.dto.SearchAccounts;
 import com.good.dto.TipCategoryVO;
 import com.good.dto.VideoCategoryVO;
 import com.good.service.AdminService;
@@ -73,12 +73,16 @@ public class AdminController {
 
 	@RequestMapping(value = "/adminView", method = RequestMethod.GET)
 	public String adminView(Model model, @RequestParam(required = false, defaultValue = "1") int page,
+										 @RequestParam(required = false, defaultValue = "accountId") String orderBy,
+										 @RequestParam(required = false, defaultValue = "DESC") String orderType,
 										 @RequestParam(required = false, defaultValue = "nickname") String searchType,
 										 @RequestParam(required = false) String keyword) throws Exception {
-		Search search = new Search();
+		SearchAccounts search = new SearchAccounts();
 		search.setSearchType(searchType);
 		search.setKeyword(keyword);
-
+		search.setOrderBy(orderBy);
+		search.setOrderType(orderType);
+		
 		int listCnt = service.getAccountListCnt(search);
 
 		System.out.println(" listCnt : " + listCnt);
