@@ -138,6 +138,18 @@ public class AccountsServiceImpl implements AccountsService {
 		return dao.getAccountId(paramMap);
 	}
 	
+	// 비번 리셋용 발급된 키 유무 체크
+	@Override
+	public int findAccountCheckKey(int accountId) throws Exception {
+		return dao.findAccountCheckKey(accountId);
+	}
+	
+	// 비번 리셋용 키 발급된 경우 취득
+	@Override
+	public int getCheckNUm(int accountId) throws Exception {
+		return dao.getCheckNUm(accountId);
+	}
+	
 	// 비번리셋용 1회용 키 발급
 	@Override
 	public void insertCheckNum(AccountCheckVO chVO) throws Exception {

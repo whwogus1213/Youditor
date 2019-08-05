@@ -80,17 +80,20 @@ public class EmailController {
 	        if(pw!=null) {
 	        	AccountCheckVO chVO = new AccountCheckVO();
 	        	chVO.setAccountId(accountId);
-	        	int checkNum = 0;
-	    		
-	    		do {
-	    			checkNum = (int)(Math.random() * 99999) + 10000;
-	    			System.out.println(checkNum + "--------------------check");
-	    		} while(accountsService.duplicateCheck(checkNum) != 0);
-	        	chVO.setCheckNum(checkNum);
+	        	if(accountsService.findAccountCheckKey(accountId) == 1) {
+	        		chVO.setCheckNum(accountsService.getCheckNUm(accountId));
+	        	} else {
+		        	int checkNum = 0;
+		    		do {
+		    			checkNum = (int)(Math.random() * 99999) + 10000;
+		    			System.out.println(checkNum + "--------------------check");
+		    		} while(accountsService.duplicateCheck(checkNum) != 0);
+		        	chVO.setCheckNum(checkNum);
+		        	
+		        	accountsService.insertCheckNum(chVO);	        		
+	        	}
 	        	
-	        	accountsService.insertCheckNum(chVO);
-	        	
-	            email.setMessage("비밀번호를 바꾸려면 아래 링크를 클릭하세요." + new StringBuffer().append("\n http://localhost:8080/accounts/passwordFinder.do?accountId=" + chVO.getAccountId() + "&check=" + chVO.getCheckNum()));
+	            email.setMessage("비밀번호를 바꾸려면 아래 링크를 클릭하세요." + new StringBuffer().append("\n http://localhost:8080/accounts/passwordFinder.do?accountId=" + chVO.getAccountId() + "&checkNum=" + chVO.getCheckNum()));
 	            email.setReceiveMail(e_mail);
 	            email.setSubject(id+"님 비밀번호 찾기 메일입니다.");
 	            emailSender.SendEmail(email);

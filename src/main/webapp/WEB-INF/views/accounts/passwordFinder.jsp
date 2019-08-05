@@ -16,7 +16,7 @@
 		var pwd = $("#pwd").val();
 		var pwdCfm = $("#pwdCfm").val();
 		var accountId = $("#accountId").val();
-		var check = $("#check").val();
+		var checkNum = $("#checkNum").val();
 		if(pwd.length < 8) {
 			alert("비밀번호가 최소 8자 이상이어야 합니다.");
 			$("#pwd").focus();
@@ -107,7 +107,7 @@ td {
 					<td>
 						<input type="password" name="pwdCfm" id="pwdCfm" maxlength="20" placeholder="Confirm New Password">
 						<input type="hidden" name="accountId" id="accountId" value="${accountCheck.accountId }">
-						<input type="hidden" name="check" id="check" value="${accountCheck.check }">
+						<input type="hidden" name="checkNum" id="checkNum" value="${accountCheck.checkNum }">
 					</td>
 				</tr>
 			</table>
