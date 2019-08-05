@@ -42,6 +42,12 @@ public class AccountsDAOImpl implements AccountsDAO {
 		return sqlSession.selectOne(NAMESPACE + ".login", vo);
 	}
 	
+	// 로그인시 발급된 임시인증키가 존재할 경우 제거
+	@Override
+	public void removeUnusedCheckKey(int accountId) throws Exception {
+		sqlSession.delete(NAMESPACE + ".removeUnusedCheckKey", accountId);
+	}
+	
 	
 	@Override
 	public void updateAuthority(AccountCheckVO Cvo) throws Exception {

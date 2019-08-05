@@ -16,6 +16,9 @@ public interface AccountsDAO {
 
 	public AccountsVO login(AccountsVO vo) throws Exception;
 	
+	// 로그인시 발급된 임시인증키가 존재할 경우 제거
+	public void removeUnusedCheckKey(int accountId) throws Exception;
+	
 	public int checkEmail(String email) throws Exception;
 
 	public int checkNickname(String nickname) throws Exception;

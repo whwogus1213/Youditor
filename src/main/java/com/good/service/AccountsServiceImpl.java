@@ -75,6 +75,12 @@ public class AccountsServiceImpl implements AccountsService {
 		return dao.login(vo);
 
 	}
+	
+	// 로그인시 발급된 임시인증키가 존재할 경우 제거
+	@Override
+	public void removeUnusedCheckKey(int accountId) throws Exception {
+		dao.removeUnusedCheckKey(accountId);
+	}
 
 	@Override
 	public int checkEmail(String email) throws Exception {

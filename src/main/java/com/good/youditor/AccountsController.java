@@ -102,9 +102,14 @@ public class AccountsController {
 				returnURL = "redirect:/accounts/login.do";
 			} else {
 				session.setAttribute("login", vo);
+
+				if(service.findAccountCheckKey(vo.getAccountId()) == 1) {
+					service.removeUnusedCheckKey(vo.getAccountId());
+				}
 				//rttr.addFlashAttribute("result", "authorityNO");
 				returnURL = "redirect:/";
 			}
+			
 		} else { // 로그인에 실패한 경우
 			int errorCase = 3;
 			Map<String, Object> map = new HashMap<String,Object>();

@@ -104,6 +104,13 @@
 		 select * from accounts where email = #{email} and pwd = #{pwd}
 	</select>
 	
+	<delete id="removeUnusedCheckKey" parameterType="int">
+		DELETE FROM
+			accountcheck
+		WHERE
+			accountId = #{accountId}
+	</delete>
+	
 	<update id="resetPassword" parameterType="String">
 		UPDATE
 			accounts

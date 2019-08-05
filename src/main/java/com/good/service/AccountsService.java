@@ -13,6 +13,9 @@ public interface AccountsService {
 
 	public AccountsVO login(AccountsVO vo) throws Exception;
 	
+	// 로그인시 발급된 임시인증키가 존재할 경우 제거
+	public void removeUnusedCheckKey(int accountId) throws Exception;
+	
 	//회원가입시 이메일 중복체크 service
 	public int checkEmail(String email) throws Exception;
 
