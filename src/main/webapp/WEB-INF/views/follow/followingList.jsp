@@ -253,9 +253,8 @@ $(function(){
 // 					tr.css("opacity","0.4");
 // 					tr.attr("class","cardremove");
 
-					tr.css("opacity","0.4");
 					tr.css("box-shadow","0 5px 10px #ff2e94");
-					tr.find(".unfollowbtn i").attr("class","fas fa-undo-alt unfollowbtn");
+					tr.find(".unfollowbtn i").attr("class","fas fa-user-plus unfollowbtn");
 					$("#unfollowbtn"+followAccountId).attr("onclick","fn_follow('"+followAccountId+"', "+clonetr+"); return false;");
 				}
 				
