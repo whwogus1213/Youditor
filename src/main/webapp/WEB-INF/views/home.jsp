@@ -177,7 +177,7 @@ function getAccountsRankList(){
 			var html = "";
 			if(data.length > 0) {
 				for(var i = 0; i < data.length; i++){
-					if(i < 3){
+					if(i<3) {
 						html += "<div class='col-lg-4 col-sm-6 portfolio-item'>";
 						html += "<div class='card h-100'>";
 						html += "<img class='card-img-top' src='/image/"+data[i].picture+"' alt='' width='80' height='200'/>";
@@ -198,21 +198,6 @@ function getAccountsRankList(){
 						html += "</h6>";
 						html += "</div>";
 						html += "</div>";
-						html += "</div>";
-						html += "</div>";
-						html += "</div>";
-						
-									
-						
-					}else{
-						html += "<div class='col-lg-4 col-sm-6 portfolio-item'>";
-						html += "<div class='card h-100'>";
-						html += "<a href='#'><img class='card-img-top' src='/resources/images/member1.jpg' alt='' width='80' height='200'></a>";
-						html += "<div class='card-body'>";
-						html += "<h4 class='card-title'>";
-						html += "<a href='#'>편집자 아이디</a>";
-						html += "</h4>";
-						html += "<p class='card-text'>편집자 설명</p>";
 						html += "</div>";
 						html += "</div>";
 						html += "</div>";

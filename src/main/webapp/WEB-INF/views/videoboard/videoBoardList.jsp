@@ -274,15 +274,20 @@
           					<div class="col-sm-6" align="left">
           						<strong>Made by.</strong>
           					</div>
-          					<div class="col-sm-6" align="right" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">
+          					<div class="col-sm-6" align="right">
+          						
           						<c:if test="${VideoBoardList.accountId eq login.accountId }">
+          							<div style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">
 									<img src="<spring:url value='/image/${VideoBoardList.picture}'/>" class=" mx-auto rounded-circle" width="20px" height="20px"/>&nbsp;${VideoBoardList.nickname}<br>
+									</div>
           						</c:if>
           						<c:if test="${VideoBoardList.accountId ne login.accountId }">
           						<div class="dropright">
-          							<a id="dropdownBtn${VideoBoardList.boardId}" onclick="checkFollow('${VideoBoardList.accountId}'); return false;"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="cursor:pointer">
+          							<a id="dropdownBtn${VideoBoardList.boardId}" onclick="checkFollow('${VideoBoardList.accountId}'); return false;"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap; cursor: pointer; display: block;">
+          							
 										<img src="<spring:url value='/image/${VideoBoardList.picture}'/>" class=" mx-auto rounded-circle" width="20px" height="20px"/>&nbsp;${VideoBoardList.nickname}<br>
           							</a>
+									
           							<div class="dropdown-menu">
           								<a class="dropdown-item" href="/videoboard/videoBoardList?searchType=nickname&keyword=${VideoBoardList.nickname}">
 											<i class="fab fa-youtube"></i>&nbsp;&nbsp;영상 더보기
