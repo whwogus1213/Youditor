@@ -14,7 +14,7 @@ import com.good.dto.CategoryCount;
 import com.good.dto.EditCategoryVO;
 import com.good.dto.NoticeCategoryVO;
 import com.good.dto.RecruitCategoryVO;
-import com.good.dto.Search;
+import com.good.dto.SearchAccounts;
 import com.good.dto.TipCategoryVO;
 import com.good.dto.VideoCategoryVO;
 
@@ -27,12 +27,12 @@ public class AdminDAOImpl implements AdminDAO {
 	private static final String NAMESPACE = "com.good.mapper.adminMapper";
 
 	@Override
-	public List<AccountsVO> selectAccounts(Search search) throws Exception {
+	public List<AccountsVO> selectAccounts(SearchAccounts search) throws Exception {
 		return sqlSession.selectList(NAMESPACE + ".selectAccounts", search);
 	}
 
 	@Override
-	public int getAccountListCnt(Search search) throws Exception {
+	public int getAccountListCnt(SearchAccounts search) throws Exception {
 		return sqlSession.selectOne(NAMESPACE + ".getAccountListCnt", search);
 	}
 

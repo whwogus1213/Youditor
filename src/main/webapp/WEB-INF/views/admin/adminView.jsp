@@ -15,80 +15,26 @@
 	<title>유저 일람 - YouDitorAdmin</title>
 	<jsp:include page="../module/header.jsp" flush="false" />
 	<script type="text/javascript">
-	/*function authorUp(accountId, authority){
-		var json = {
-				"accountId" : accountId,
-				 "authority" : authority
-				};
-		console.log(json);
-		$.ajax({
-			url:"admin/authorUp",
-			type:"post",
-			data:json,
-			success : function(){
-	// 				alert("권한을 증가하였습니다.");
-					location.reload();
-				}
-	
-	
-			});
-	}
-	function authorDown(accountId, authority){
-		var json = {
-				"accountId" : accountId,
-				 "authority" : authority
-				};
-		console.log(json);
-		$.ajax({
-			url:"admin/authorDown",
-			type:"post",
-			data:json,
-			success : function(){
-	// 				alert("권한을 감소하였습니다.");
-					location.reload();
-				}
-	
-	
-			});
-	}*/
-	
 	// 이전 버튼
-	/*function fn_prev(page, range, rangeSize, searchType, keyword) {
-		var page = ((range - 2) * rangeSize) + 1;
-		var range = range - 1;
-		var url = "${pageContext.request.contextPath}/adminView";
-	
-		url = url + "?page=" + page;
-		url = url + "&range=" + range;
-		url = url + "&searchType=" + searchType;
-		url = url + "&keyword=" + keyword;
-		location.href = url;
-	}*/
-	// 이전 버튼
-	function fn_prev(page, rangeSize, searchType, keyword) {
+	function fn_prev(page, rangeSize, searchType, keyword, orderBy, orderType) {
 		var page = parseInt((page - 1) / rangeSize) * rangeSize;
 		var url = "${pageContext.request.contextPath}/adminView?";
-	
+		
 		url = url + "page=" + page;
 		if(keyword != null && keyword != "") {
 			url = url + "&searchType=" + searchType;
 			url = url + "&keyword=" + keyword;
 		}
+
+		if(orderBy != null) {
+			url = url + "&orderBy=" + orderBy + "&orderType=" + orderType;
+		}
+		
 		location.href = url;
 	}
 	
 	//페이지 번호 클릭
-	/*function fn_pagination(page, range, rangeSize, searchType, keyword) {
-		var url = "${pageContext.request.contextPath}/adminView";
-	
-		url = url + "?page=" + page;
-		url = url + "&range=" + range;
-		url = url + "&searchType=" + searchType;
-		url = url + "&keyword=" + keyword;
-		location.href = url;
-	}*/
-	//페이지 번호 클릭
-	function fn_pagination(page, searchType, keyword) {
+	function fn_pagination(page, searchType, keyword, orderBy, orderType) {
 		var url = "${pageContext.request.contextPath}/adminView?";
 	
 		url = url + "page=" + page;
@@ -96,23 +42,16 @@
 			url = url + "&searchType=" + searchType;
 			url = url + "&keyword=" + keyword;
 		}
+
+		if(orderBy != null) {
+			url = url + "&orderBy=" + orderBy + "&orderType=" + orderType;
+		}
+		
 		location.href = url;
 	}
 	
 	//다음 버튼 이벤트
-	/*function fn_next(page, range, rangeSize, searchType, keyword) {
-		var page = parseInt((range * rangeSize)) + 1;
-		var range = parseInt(range) + 1;
-		var url = "${pageContext.request.contextPath}/adminView";
-	
-		url = url + "?page=" + page;
-		url = url + "&range=" + range;
-		url = url + "&searchType=" + searchType;
-		url = url + "&keyword=" + keyword;
-		location.href = url;
-	}*/
-	//다음 버튼 이벤트
-	function fn_next(page, rangeSize, searchType, keyword) {
+	function fn_next(page, rangeSize, searchType, keyword, orderBy, orderType) {
 		var page = ((parseInt((page - 1) / rangeSize) + 1) * rangeSize) + 1;
 		var url = "${pageContext.request.contextPath}/adminView?";
 	
@@ -121,19 +60,13 @@
 			url = url + "&searchType=" + searchType;
 			url = url + "&keyword=" + keyword;
 		}
+		
+		if(orderBy != null) {
+			url = url + "&orderBy=" + orderBy + "&orderType=" + orderType;
+		}
+		
 		location.href = url;
 	}
-	
-	// 검색버튼 이벤트
-	/*$(document).on('click', '#btnSearch', function(e) {
-		e.preventDefault();
-		var url = "${pageContext.request.contextPath}/adminView";
-		url = url + "?searchType=" + $('#searchType').val();
-		url = url + "&keyword=" + $('#keyword').val();
-	
-		location.href = url;
-		console.log(url);
-	});*/
 	
 	// 검색버튼 이벤트
 	$(function(){
@@ -144,27 +77,64 @@
 			if (keycode == '13') {
 				e.preventDefault();
 				var url = "${pageContext.request.contextPath}/adminView?";
+
+				if($('#keyword').val() != null && $('#keyword').val().length != 0) {
+					url = url + "searchType=" + $('#searchType').val();
+					url = url + "&keyword=" + $('#keyword').val();
+					
+					var orderBy = "${pagination.orderBy}";
+					var orderType = "${pagination.orderType}";
+					
+					if(orderBy != null) {
+						url = url + "&orderBy=" + orderBy + "&orderType=" + orderType;
+					}
+		
+					location.href = url;
+					console.log(url);
+				} else {
+					return;
+				}
 				
-				url = url + "searchType=" + $('#searchType').val();
-				url = url + "&keyword=" + $('#keyword').val();
-	
-				location.href = url;
-				console.log(url);
 			}
 			e.stopPropagation();
 		});
 	});
 	
 	// 검색
-	function searchBtn(searchType, keyword) {
+	function searchBtn(orderBy, orderType) {
+		var url = "${pageContext.request.contextPath}/adminView?";
+
+		if($('#keyword').val() != null && $('#keyword').val().length != 0) {
+
+			url = url + "searchType=" + $('#searchType').val();
+			url = url + "&keyword=" + $('#keyword').val();
+			
+			if(orderBy != null) {
+				url = url + "&orderBy=" + orderBy + "&orderType=" + orderType;
+			}
+			
+			location.href = url;
+		} else {
+			return;
+		}
+	}
+
+	// 컬럼별 순서대로 버튼
+	function sortBtn(searchType, keyword, orderBy, orderType) {
 		var url = "${pageContext.request.contextPath}/adminView?";
 		
-		url = url + "searchType=" + $('#searchType').val();
-		url = url + "&keyword=" + $('#keyword').val();
+		if(keyword != null && keyword.length != 0) {
+			url = url + "searchType=" + searchType;
+			url = url + "&keyword=" + keyword;
+			url = url + "&orderBy=" + orderBy + "&orderType=" + orderType;
+		} else {
+			url = url + "orderBy=" + orderBy + "&orderType=" + orderType;
+		}
 		
 		location.href = url;
 	}
 
+	// 계정 수정 버튼
 	function modAccountBtn(accountId) {
 		var url = "${pageContext.request.contextPath}/adminAccount?";
 		url = url + "accountId=" + accountId;
@@ -173,6 +143,7 @@
 	}
 	</script>
 	<link href="/resources/css/modern-business.css" rel="stylesheet">
+	<script src="https://kit.fontawesome.com/e83fabbb47.js"></script>
 </head>
 <body>
 <jsp:include page="./adminTop.jsp" flush="false"/>
@@ -181,13 +152,125 @@
 	<table class="table table-borderd table-striped nanum table-hover">
 		<thead>
 			<tr>
-				<th>계정번호</th>
-				<th>닉네임</th>
-				<th>이메일</th>
-				<th>등록일자</th>
-				<th>마지막 수정일자</th>
-				<th>마지막 로그인일자</th>
-				<th>권한등급</th>
+				<th>
+					<c:choose>
+						<c:when test="${pagination.orderBy eq 'accountId' }">
+							<c:choose>
+								<c:when test="${pagination.orderType eq 'DESC' }">
+									<a href="#" onclick="sortBtn('${pagination.searchType}', '${pagination.keyword }', 'accountId', 'ASC');">계정번호<i class="fas fa-sort-numeric-down-alt"></i></a>
+								</c:when>
+								<c:otherwise>
+									<a href="#" onclick="sortBtn('${pagination.searchType}', '${pagination.keyword }', 'accountId', 'DESC');">계정번호<i class="fas fa-sort-numeric-down"></i></a>
+								</c:otherwise>
+							</c:choose>
+						</c:when>
+						<c:otherwise>
+							<a href="#" onclick="sortBtn('${pagination.searchType}', '${pagination.keyword }', 'accountId', 'DESC');">계정번호</a>
+						</c:otherwise>
+					</c:choose>
+				</th>
+				<th>
+					<c:choose>
+						<c:when test="${pagination.orderBy eq 'nickname' }">
+							<c:choose>
+								<c:when test="${pagination.orderType eq 'DESC' }">
+									<a href="#" onclick="sortBtn('${pagination.searchType}', '${pagination.keyword }', 'nickname', 'ASC');">닉네임<i class="fas fa-sort-alpha-down-alt"></i></a>
+								</c:when>
+								<c:otherwise>
+									<a href="#" onclick="sortBtn('${pagination.searchType}', '${pagination.keyword }', 'nickname', 'DESC');">닉네임<i class="fas fa-sort-alpha-down"></i></a>
+								</c:otherwise>
+							</c:choose>
+						</c:when>
+						<c:otherwise>
+							<a href="#" onclick="sortBtn('${pagination.searchType}', '${pagination.keyword }', 'nickname', 'DESC');">닉네임</a>
+						</c:otherwise>
+					</c:choose>
+				</th>
+				<th>
+					<c:choose>
+						<c:when test="${pagination.orderBy eq 'email' }">
+							<c:choose>
+								<c:when test="${pagination.orderType eq 'DESC' }">
+									<a href="#" onclick="sortBtn('${pagination.searchType}', '${pagination.keyword }', 'email', 'ASC');">이메일<i class="fas fa-sort-alpha-down-alt"></i></a>
+								</c:when>
+								<c:otherwise>
+									<a href="#" onclick="sortBtn('${pagination.searchType}', '${pagination.keyword }', 'email', 'DESC');">이메일<i class="fas fa-sort-alpha-down"></i></a>
+								</c:otherwise>
+							</c:choose>
+						</c:when>
+						<c:otherwise>
+							<a href="#" onclick="sortBtn('${pagination.searchType}', '${pagination.keyword }', 'email', 'DESC');">이메일</a>
+						</c:otherwise>
+					</c:choose>
+				</th>
+				<th>
+					<c:choose>
+						<c:when test="${pagination.orderBy eq 'reg_date' }">
+							<c:choose>
+								<c:when test="${pagination.orderType eq 'DESC' }">
+									<a href="#" onclick="sortBtn('${pagination.searchType}', '${pagination.keyword }', 'reg_date', 'ASC');">등록일자<i class="fas fa-sort-numeric-down-alt"></i></a>
+								</c:when>
+								<c:otherwise>
+									<a href="#" onclick="sortBtn('${pagination.searchType}', '${pagination.keyword }', 'reg_date', 'DESC');">등록일자<i class="fas fa-sort-numeric-down"></i></a>
+								</c:otherwise>
+							</c:choose>
+						</c:when>
+						<c:otherwise>
+							<a href="#" onclick="sortBtn('${pagination.searchType}', '${pagination.keyword }', 'reg_date', 'DESC');">등록일자</a>
+						</c:otherwise>
+					</c:choose>
+				</th>
+				<th>
+					<c:choose>
+						<c:when test="${pagination.orderBy eq 'mod_date' }">
+							<c:choose>
+								<c:when test="${pagination.orderType eq 'DESC' }">
+									<a href="#" onclick="sortBtn('${pagination.searchType}', '${pagination.keyword }', 'mod_date', 'ASC');">마지막 수정일자<i class="fas fa-sort-numeric-down-alt"></i></a>
+								</c:when>
+								<c:otherwise>
+									<a href="#" onclick="sortBtn('${pagination.searchType}', '${pagination.keyword }', 'mod_date', 'DESC');">마지막 수정일자<i class="fas fa-sort-numeric-down"></i></a>
+								</c:otherwise>
+							</c:choose>
+						</c:when>
+						<c:otherwise>
+							<a href="#" onclick="sortBtn('${pagination.searchType}', '${pagination.keyword }', 'mod_date', 'DESC');">마지막 수정일자</a>
+						</c:otherwise>
+					</c:choose>
+				</th>
+				<th>
+					<c:choose>
+						<c:when test="${pagination.orderBy eq 'newLogin_date' }">
+							<c:choose>
+								<c:when test="${pagination.orderType eq 'DESC' }">
+									<a href="#" onclick="sortBtn('${pagination.searchType}', '${pagination.keyword }', 'newLogin_date', 'ASC');">마지막 로그인일자<i class="fas fa-sort-numeric-down-alt"></i></a>
+								</c:when>
+								<c:otherwise>
+									<a href="#" onclick="sortBtn('${pagination.searchType}', '${pagination.keyword }', 'newLogin_date', 'DESC');">마지막 로그인일자<i class="fas fa-sort-numeric-down"></i></a>
+								</c:otherwise>
+							</c:choose>
+						</c:when>
+						<c:otherwise>
+							<a href="#" onclick="sortBtn('${pagination.searchType}', '${pagination.keyword }', 'newLogin_date', 'DESC');">마지막 로그인일자</a>
+						</c:otherwise>
+					</c:choose>
+				</th>
+				<th>
+					<c:choose>
+						<c:when test="${pagination.orderBy eq 'authority' }">
+							<c:choose>
+								<c:when test="${pagination.orderType eq 'DESC' }">
+									<a href="#" onclick="sortBtn('${pagination.searchType}', '${pagination.keyword }', 'authority', 'ASC');">권한등급<i class="fas fa-sort-numeric-down-alt"></i></a>
+								</c:when>
+								<c:otherwise>
+									<a href="#" onclick="sortBtn('${pagination.searchType}', '${pagination.keyword }', 'authority', 'DESC');">권한등급<i class="fas fa-sort-numeric-down"></i></a>
+								</c:otherwise>
+							</c:choose>
+						</c:when>
+						<c:otherwise>
+							<a href="#" onclick="sortBtn('${pagination.searchType}', '${pagination.keyword }', 'authority', 'DESC');">권한등급</a>
+						</c:otherwise>
+					</c:choose>
+				</th>
 				<th>수정</th>
 			</tr>
 		</thead>
@@ -214,18 +297,18 @@
 		<div class="p1 pagination col-12" style="display: block; text-align: center; margin-bottom: 10px;">
 			<ul>
 				<c:if test="${pagination.prev}">
-					<a href="#" onclick="fn_prev('${pagination.page}', '${pagination.rangeSize}',
-					'${pagination.searchType}', '${pagination.keyword}'); return false;"><li>◀</li></a>
+					<a href="#" onclick="fn_prev('${pagination.page}', '${pagination.rangeSize}', '${pagination.searchType}',
+					'${pagination.keyword}', '${pagination.orderBy }', '${pagination.orderType }'); return false;"><li>◀</li></a>
 				</c:if>
 				<c:forEach begin="${pagination.startPage}" end="${pagination.endPage}" var="idx">
 					<a class="<c:out value="${pagination.page == idx ? 'is-active' : ''}"/>" href="#"
-					onclick="fn_pagination('${idx}', '${pagination.searchType}', 
-					'${pagination.keyword}'); return false;">
+					onclick="fn_pagination('${idx}', '${pagination.searchType}', '${pagination.keyword}',
+					'${pagination.orderBy }', '${pagination.orderType }'); return false;">
 						<li>${idx}</li></a>
 				</c:forEach>
 				<c:if test="${pagination.next}">
-					<a href="#" onclick="fn_next('${pagination.page}', '${pagination.rangeSize}',
-					'${pagination.searchType}', '${pagination.keyword}'); return false;"><li>▶</li></a>
+					<a href="#" onclick="fn_next('${pagination.page}', '${pagination.rangeSize}', '${pagination.searchType}',
+					'${pagination.keyword}', '${pagination.orderBy }', '${pagination.orderType }'); return false;"><li>▶</li></a>
 				</c:if>
 			</ul>
 		</div>
@@ -244,8 +327,7 @@
 			</div>
 
 			<div class="col-1" style="padding-left: 0px;text-align: center;padding-right: 0px;padding-top: 5px;">
-				<i class="fas fa-search" id="btnSearch" style="cursor:" onclick="searchBtn('${categoryInfo.categoryId }',
-				'${pagination.searchType}', '${pagination.keyword}'); return false;"></i>
+				<i class="fas fa-search" id="btnSearch" style="cursor:" onclick="searchBtn('${pagination.orderBy }', '${pagination.orderType }',); return false;"></i>
 			</div>
 
 			<div class="col-2" align="right" style="padding-left: 0px; padding-right: 5px;">

@@ -14,7 +14,7 @@ import com.good.dto.CategoryCount;
 import com.good.dto.EditCategoryVO;
 import com.good.dto.NoticeCategoryVO;
 import com.good.dto.RecruitCategoryVO;
-import com.good.dto.Search;
+import com.good.dto.SearchAccounts;
 import com.good.dto.TipCategoryVO;
 import com.good.dto.VideoCategoryVO;
 
@@ -24,12 +24,12 @@ public class AdminServiceImpl implements AdminService {
 	private AdminDAO dao;
 
 	@Override
-	public List<AccountsVO> selectAccounts(Search search) throws Exception {
+	public List<AccountsVO> selectAccounts(SearchAccounts search) throws Exception {
 		return dao.selectAccounts(search);
 	}
 
 	@Override
-	public int getAccountListCnt(Search search) throws Exception {
+	public int getAccountListCnt(SearchAccounts search) throws Exception {
 		return dao.getAccountListCnt(search);
 	}
 
