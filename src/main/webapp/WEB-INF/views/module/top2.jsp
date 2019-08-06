@@ -456,7 +456,7 @@ function DosignUp() {
 						<a class="nav-link" href="#">
 							<c:choose>		
 								<c:when test="${mCount >= 1 }">		
-									<i id="messageIcon" class="far fa-envelope"></i>${mCount }		
+									<i id="messageIcon" class="far fa-envelope">${mCount }</i>
 								</c:when>		
 								<c:otherwise>		
 									<i class="far fa-envelope-open"></i>		
@@ -476,7 +476,7 @@ function DosignUp() {
 						<a class="nav-link" href="#">
 							<c:choose>		
 								<c:when test="${fCount >= 1 }">		
-									<i class="far fa-heart"></i>${fCount }		
+									<i class="far fa-heart">${fCount }</i>
 								</c:when>		
 								<c:otherwise>		
 									<i class="fas fa-user-cog"></i>		
@@ -491,7 +491,7 @@ function DosignUp() {
 							<li><a class="submenuLink" href="/follow/followerList">
 								<c:choose>		
 									<c:when test="${fCount >= 1 }">		
-										<i class="far fa-heart"></i>${fCount }		
+										<i class="far fa-heart">${fCount }</i>		
 									</c:when>		
 									<c:otherwise>		
 										<i class="fas fa-users"></i>		
