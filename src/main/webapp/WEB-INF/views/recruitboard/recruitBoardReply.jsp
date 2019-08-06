@@ -19,8 +19,6 @@
 <body>
 <div class="container" style="font-family: 'Nanum Gothic', sans-serif;">
     <form id="commentForm" name="commentForm" method="post">
-	
-    <br><br>
         <div>
             <hr style="2px dashed;">
             <div style="margin-bottom: 20px;">

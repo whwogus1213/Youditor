@@ -16,6 +16,9 @@ public interface AccountsDAO {
 
 	public AccountsVO login(AccountsVO vo) throws Exception;
 	
+	// 로그인시 발급된 임시인증키가 존재할 경우 제거
+	public void removeUnusedCheckKey(int accountId) throws Exception;
+	
 	public int checkEmail(String email) throws Exception;
 
 	public int checkNickname(String nickname) throws Exception;
@@ -43,6 +46,12 @@ public interface AccountsDAO {
 	public String getNickname(Map<String, String> paramMap) throws Exception;
 	
 	public int getAccountId(Map<String, String> paramMap) throws Exception;
+	
+	// 비번 리셋용 발급된 키 유무 체크
+	public int findAccountCheckKey(int accountId) throws Exception;
+	
+	// 비번 리셋용 키 발급된 경우 취득
+	public int getCheckNUm(int accountId) throws Exception;
 	
 	// 비번리셋용 1회용 키 발급
 	public void insertCheckNum(AccountCheckVO chVO) throws Exception;

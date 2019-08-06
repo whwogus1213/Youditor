@@ -54,7 +54,7 @@ public class AccountsServiceImpl implements AccountsService {
 				.append("<a href='http://localhost:8180/accounts/joinConfirm?")
 				.append("accountId=")
 				.append(Cvo.getAccountId())
-				.append("&check=")
+				.append("&checkNum=")
 				.append(Cvo.getCheckNum())
 				.append("' target='_blenk'>이메일 인증 확인</a>")
 				.toString());
@@ -74,6 +74,12 @@ public class AccountsServiceImpl implements AccountsService {
 	public AccountsVO login(AccountsVO vo) throws Exception {
 		return dao.login(vo);
 
+	}
+	
+	// 로그인시 발급된 임시인증키가 존재할 경우 제거
+	@Override
+	public void removeUnusedCheckKey(int accountId) throws Exception {
+		dao.removeUnusedCheckKey(accountId);
 	}
 
 	@Override
@@ -136,6 +142,18 @@ public class AccountsServiceImpl implements AccountsService {
 	@Override
 	public int getAccountId(Map<String, String> paramMap) throws Exception {
 		return dao.getAccountId(paramMap);
+	}
+	
+	// 비번 리셋용 발급된 키 유무 체크
+	@Override
+	public int findAccountCheckKey(int accountId) throws Exception {
+		return dao.findAccountCheckKey(accountId);
+	}
+	
+	// 비번 리셋용 키 발급된 경우 취득
+	@Override
+	public int getCheckNUm(int accountId) throws Exception {
+		return dao.getCheckNUm(accountId);
 	}
 	
 	// 비번리셋용 1회용 키 발급

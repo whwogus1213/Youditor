@@ -64,7 +64,7 @@
 	</insert>
 	
 	<select id="duplicateCheck" parameterType="Integer" resultType="Integer">
-		SELECT EXISTS(SELECT * FROM accountcheck a where a.checkNum = #{checkNum})	
+		SELECT EXISTS(SELECT * FROM accountcheck where checkNum = #{checkNum})	
 	</select>
 	
 	
@@ -104,6 +104,13 @@
 		 select * from accounts where email = #{email} and pwd = #{pwd}
 	</select>
 	
+	<delete id="removeUnusedCheckKey" parameterType="int">
+		DELETE FROM
+			accountcheck
+		WHERE
+			accountId = #{accountId}
+	</delete>
+	
 	<update id="resetPassword" parameterType="String">
 		UPDATE
 			accounts
@@ -135,7 +142,7 @@
 		WHERE
 			accountId = #{accountId}
 			AND
-			(SELECT a.check FROM accountcheck a WHERE a.accountId = #{accountId}) = #{checkNum}
+			(SELECT checkNum FROM accountcheck WHERE accountId = #{accountId}) = #{checkNum}
 			
 	</update>
 	
@@ -216,6 +223,26 @@
 			email = #{email}
 	</select>
 	
+	<!-- 비번리셋키 발급 유무 -->
+	<select id="findAccountCheckKey" parameterType="int" resultType="int">
+		SELECT
+			count(*)
+		FROM
+			accountcheck
+		WHERE
+			accountId = #{accountId}
+	</select>
+	
+	<!-- 발급된 비번리셋키 존재시 취득 -->
+	<select id="getCheckNUm" parameterType="int" resultType="int">
+		SELECT
+			checkNum
+		FROM
+			accountcheck
+		WHERE
+			accountId = #{accountId}
+	</select>
+	
 	<!-- 비번리셋용 1회용 키 발급 -->
 	<insert id="insertCheckNum" parameterType="AccountCheckVO">
 		INSERT INTO
@@ -254,7 +281,7 @@
 	WHERE
 		accountId = #{accountId}
 		AND
-		checkNum = '${checkNum}
+		checkNum = ${checkNum}
 	</delete>
 	
 </mapper>
