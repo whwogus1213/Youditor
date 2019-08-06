@@ -232,9 +232,10 @@ footer{
 										<a class="dropdown-item" href="/tipboard/tipBoardList?searchType=nickname&keyword=${TipBoardList.nickname}">
 											<i class="far fa-file-alt" style="width: 20; height: 20"></i>&nbsp;&nbsp;팁 더보기
 										</a>
-										<a class="dropdown-item" href="#" onclick="messagePopup();">
-											<i class="far fa-envelope"></i>&nbsp;&nbsp;쪽지 보내기
-										</a>
+										<c:if test="${login.accountId ne null }">
+											<a class="dropdown-item" href="#" onclick="messagePopup(); return false;">
+												<i class="far fa-envelope"></i>&nbsp;&nbsp;쪽지 보내기
+											</a>
 											<script type="text/javascript">
 												function messagePopup() {
 												var nickname = "${TipBoardList.nickname }";
@@ -242,10 +243,11 @@ footer{
 														"width=650, height=470, left=200, top=200, location=no, menubar=no, resizble=no, scrollbars=no, status=no, titlebar=no, toolbar=no");
 												}
 											</script>
-										<a class="dropdown-item dropdownBtnFollow${TipBoardList.accountId}"
-										onclick="fn_follow(${TipBoardList.accountId}); return false;" style="cursor: pointer;">
-											<i class="far fa-heart"></i>&nbsp;&nbsp;팔로우하기
-   										</a>
+											<a class="dropdown-item dropdownBtnFollow${TipBoardList.accountId}"
+											onclick="fn_follow(${TipBoardList.accountId}); return false;" style="cursor: pointer;">
+												<i class="far fa-heart"></i>&nbsp;&nbsp;팔로우하기
+	   										</a>
+   										</c:if>
 									</div>
 								</c:if>
 						</td>
