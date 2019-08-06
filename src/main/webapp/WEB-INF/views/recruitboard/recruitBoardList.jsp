@@ -229,7 +229,7 @@ footer{
 						onclick="location.href='/recruitboard/recruitBoardView?boardId=${RecruitBoardList.boardId}'">
 								${RecruitBoardList.subject}
 						</td>
-						<td class="dropright" style="vertical-align: middle; text-overflow: ellipsis; overflow: hidden; white-space: nowrap; padding-left: 0px;">
+						<td  style="vertical-align: middle; text-overflow: ellipsis; overflow: hidden; white-space: nowrap; padding-left: 0px;">
 							<!-- 내 아이디에 마우스 오버 -->						
 							<c:if test="${RecruitBoardList.accountId eq login.accountId }">
 								<img src="<spring:url value='/image/${RecruitBoardList.picture}'/>" class=" mx-auto rounded-circle" 
