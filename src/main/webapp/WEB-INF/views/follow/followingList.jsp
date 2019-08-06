@@ -247,11 +247,14 @@ $(function(){
 			data : json,
 			success : function(data) {
 				if (data == "success1") {
-					tr.attr("style","");
-					tr.css("border","1px solid red");
-					tr.attr("onclick","");
-					tr.css("opacity","0.4");
-					tr.attr("class","cardremove");
+// 					tr.attr("style","");
+// 					tr.css("border","1px solid red");
+// 					tr.attr("onclick","");
+// 					tr.css("opacity","0.4");
+// 					tr.attr("class","cardremove");
+
+					tr.css("box-shadow","0 5px 10px #ff2e94");
+					tr.find(".unfollowbtn i").attr("class","fas fa-user-plus unfollowbtn");
 					$("#unfollowbtn"+followAccountId).attr("onclick","fn_follow('"+followAccountId+"', "+clonetr+"); return false;");
 				}
 				
