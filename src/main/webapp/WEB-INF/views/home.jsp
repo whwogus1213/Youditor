@@ -102,7 +102,7 @@ a:hover {
   $(function() {
 	  var result = '${result}';
 		  if(result == 'loginOK'){
-				alert('로그인 되었습니다.');
+				return;
 			}
 		  if(result == 'loginNO'){
 				alert('아이디나 비밀번호를 다시 확인하여 주세요.');
