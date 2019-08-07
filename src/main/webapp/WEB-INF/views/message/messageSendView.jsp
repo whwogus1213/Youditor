@@ -98,7 +98,7 @@
 		</div>
 		<div class="col-sm-3"></div>
 		<div class="col-sm-3">
-			<button type="button" class="btn btn-md btn-link" onclick="location.href='/message/reply.do?messageId=${param.messageId}' " style="color:DarkGoldenRod;"><strong><i class="fas fa-paper-plane"></i>&nbsp;&nbsp;답장</strong></button>
+			<button type="button" class="btn btn-md btn-link" onclick="location.href='/message/reply.do?messageId=${param.messageId}' " style="color:DarkGoldenRod;"><strong><i class="fas fa-paper-plane"></i>&nbsp;&nbsp;재전송</strong></button>
 			&nbsp;|&nbsp;
 			<button type="button" class="btn btn-md btn-link" name="hideBtn" id="hideBtn" style="color:DarkGoldenRod;"><strong><i class="fas fa-eraser"></i>&nbsp;&nbsp;지우기</strong></button>
 			<script>
