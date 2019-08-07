@@ -153,7 +153,7 @@
 	<!-- 답장시 답장할 메세지의 정보 취득 -->
 	<select id="getReplyInfo" parameterType="int" resultType="MessageList">
 		SELECT
-			senderAccountId, nickname, subject, object
+			senderAccountId, receiverAccountId, nickname, subject, object
 		FROM
 			message as m
 		JOIN

@@ -160,7 +160,11 @@ public class MessageController {
 		
 		String result = "";
 		
-		if(login.getAccountId() == replyInfo.getReceiverAccountId() || login.getAccountId() == replyInfo.getSenderAccountId()) {
+		if(login.getAccountId() == replyInfo.getReceiverAccountId()) {
+			model.addAttribute("replyInfo", replyInfo);
+			System.out.println("MessageController messageWrite open");
+			result = "message/messageWrite";
+		} else if(login.getAccountId() == replyInfo.getSenderAccountId()) {
 			model.addAttribute("replyInfo", replyInfo);
 			System.out.println("MessageController messageWrite open");
 			result = "message/messageWrite";
