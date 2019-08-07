@@ -29,7 +29,7 @@
 
 <div class="container" align="center">
 	<div class="col-sm-8" style="font-family: 'Poor Story', sans-serif; color:DarkGoldenRod;">
-		<h3 align="right"><strong>받은 메세지</strong></h3>
+		<h3 align="right"><strong>보낸 메세지</strong></h3>
 		<hr>
 	</div>
 	<div class="form-inline">
