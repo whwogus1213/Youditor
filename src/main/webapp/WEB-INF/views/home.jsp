@@ -125,7 +125,7 @@ a:hover {
 						if(i < 3){
 							html += "<div class='col-lg-4 mb-4'>";
 							html += "<div class='card h-100'>";
-							html += "<h4 class='card-header'>"
+							html += "<h4 class='card-header' style='overflow: hidden; text-overflow: ellipsis; white-space: nowrap;'>"
 							html += "<a href='/videoboard/videoBoardView?boardId="+data[i].boardId+"'>"+data[i].subject+"</a></h4>";
 							html += "<div class='card-body' style='padding: 0; height:200px;'>";
 							html += "<a href='/videoboard/videoBoardView?boardId="+data[i].boardId+"'>";
