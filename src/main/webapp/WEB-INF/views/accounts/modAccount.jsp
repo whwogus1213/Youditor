@@ -107,7 +107,7 @@ th {
 		var nickname = $('#nickname').val();
 
 		if(pwd != pwdCfm) {
-			alert("비밀번호를 확인해주세요.1");
+			alert("비밀번호를 확인해주세요.");
 			$("#pwdCfm").focus();
 		}
 		else if(nickname.length <= 0 || nickname.length > 16) {
