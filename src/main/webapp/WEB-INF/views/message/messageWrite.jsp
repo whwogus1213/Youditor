@@ -90,7 +90,7 @@
 					<textarea cols="40" rows="6" name="object" id="object" style="width: 400px" autofocus><c:out value="${replyInfo.object }" />
 =================================
 
-					</textarea>
+</textarea>
 				</c:otherwise>
 			</c:choose>
 		</div>
