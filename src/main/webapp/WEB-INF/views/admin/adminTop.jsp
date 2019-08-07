@@ -94,7 +94,7 @@ list-style: none;
 			</ul>
 			<ul>
 				<li>
-					<a class="nav-link" href="/"><strong>메인페이지로 돌아가기</strong></a>
+					<a class="nav-link" href="/adminLogOut"><strong>로그아웃&메인페이지로</strong></a>
 				</li>
 			</ul>
 		</div>
