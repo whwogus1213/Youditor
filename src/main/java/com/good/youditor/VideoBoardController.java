@@ -154,9 +154,9 @@ public class VideoBoardController {
 	public String insertVideoBoardPro(VideoBoardVO vo) throws Exception {
 		System.out.println("============insertVideoBoardPro 성공==============");
 		System.out.println(vo);
-		String url = "redirect:/videoboard/videoBoardList";
+		String url = "";
 		videoBoardService.insertVideoBoard(vo);
-		url = url + "?categoryId=" + vo.getCategoryId();
+		url = "redirect:/videoboard/videoBoardList?categoryId=" + vo.getCategoryId();
 		
 		return url;
 	}
