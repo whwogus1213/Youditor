@@ -301,7 +301,7 @@ i {
 		</div>
 		
 		<div class="row">
-			<div class="col-12">${row.object }</div>
+			<div class="col-12"><pre>${row.object }</pre></div>
 		</div>
 		
 		<div class="row" style="height: 36px;">

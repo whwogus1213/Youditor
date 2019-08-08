@@ -93,7 +93,7 @@ public class EmailController {
 		        	accountsService.insertCheckNum(chVO);	        		
 	        	}
 	        	
-	            email.setMessage("비밀번호를 바꾸려면 아래 링크를 클릭하세요." + new StringBuffer().append("\n http://localhost:8080/accounts/passwordFinder.do?accountId=" + chVO.getAccountId() + "&checkNum=" + chVO.getCheckNum()));
+	            email.setMessage("비밀번호를 바꾸려면 아래 링크를 클릭하세요." + new StringBuffer().append("\n http://172.16.1.1:8180/accounts/passwordFinder.do?accountId=" + chVO.getAccountId() + "&checkNum=" + chVO.getCheckNum()));
 	            email.setReceiveMail(e_mail);
 	            email.setSubject(id+"님 비밀번호 찾기 메일입니다.");
 	            emailSender.SendEmail(email);

@@ -169,7 +169,8 @@ public class NoticeBoardController {
 			
 			noticeBoardService.insertNoticeBoard(vo);
 			
-			result = "redirect:/noticeboard/noticeBoardView?boardId=" + vo.getBoardId();
+			result = "redirect:/noticeboard/noticeBoardList";
+//			result = "redirect:/noticeboard/noticeBoardView?boardId=" + vo.getBoardId();
 		} else {
 			result = "redirect:/noticeboard/noticeBoardList";
 		}

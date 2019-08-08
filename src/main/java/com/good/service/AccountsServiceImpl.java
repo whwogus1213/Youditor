@@ -51,7 +51,7 @@ public class AccountsServiceImpl implements AccountsService {
 		sendMail.setSubject("[YouditoR] 회원가입 이메일 인증");
 		sendMail.setText(new StringBuffer().append("<h1>[이메일 인증]</h1>")
 				.append("<p>아래 링크를 클릭하시면 이메일 인증이 완료됩니다.</p>")
-				.append("<a href='http://localhost:8180/accounts/joinConfirm?")
+				.append("<a href='http://172.16.1.1:8180/accounts/joinConfirm?")
 				.append("accountId=")
 				.append(Cvo.getAccountId())
 				.append("&checkNum=")
