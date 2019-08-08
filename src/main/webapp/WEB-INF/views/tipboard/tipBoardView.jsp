@@ -130,9 +130,9 @@
 				$(".star_rating a:lt("+data+")").addClass("on");
 				var html = "";
 				if(data == 0) {
-					html += "<button id ='ratingbtn' class='btn btn-info btn-sm' style='visibility:hidden' onclick='fn_rating("+${row.boardId}+"); return false;'>평가하기</button>";
+					html += "<button id ='ratingbtn' class='btn btn-sm' style='visibility:hidden' onclick='fn_rating("+${row.boardId}+"); return false;'>확인</button>";
 				} else {
-					html += "<button id ='ratingbtn' class='btn btn-warning btn-sm' style='visibility:hidden' onclick='fn_ratingupdate("+${row.boardId}+"); return false'>평가바꾸기</button>";
+					html += "<button id ='ratingbtn' class='btn btn-sm' style='visibility:hidden' onclick='fn_ratingupdate("+${row.boardId}+"); return false'>확인</button>";
 				}
 				$("#ratingBtnDiv").html(html);
 			},
@@ -320,6 +320,23 @@
 			</div>
 			<div class="col-2" align="right" style="margin-top:2%">
 				<strong style="color:Brown ">게시일</strong>&nbsp;&nbsp;&nbsp;<fmt:formatDate value="${row.reg_date}" pattern="yyyy. MM. dd." />
+			</div>
+			<div class="input-group col-4" style="padding-left: 65px;">
+				<font style="padding-top: 6px; padding-right: 15px;">평점 ${row.starCount}</font>
+				<c:if test="${login.email ne null}">
+					<c:if test="${login.accountId ne row.accountId}">
+						<p class="star_rating">
+							<a class="starqq" href="#">★</a> <a class="starqq" href="#">★</a>
+							<a class="starqq" href="#">★</a> <a class="starqq" href="#">★</a>
+							<a class="starqq" href="#">★</a>
+						</p>
+						<div id='ratingBtnDiv'></div>
+					</c:if>
+				</c:if>
+				<c:if test="${login.email eq null}">
+					<font style="padding-top: 6px; padding-right: 15px;">로그인 후 평가 가능</font>
+				</c:if>
+				
 			</div>
 				
 		</div>

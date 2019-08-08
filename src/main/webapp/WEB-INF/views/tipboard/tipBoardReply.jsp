@@ -87,7 +87,7 @@
 			<table class="table table-borderless listTable" style="margin-bottom: 0px; margin-top: 30px;">
 				<tr>
 					<td rowspan="3" width="7%" style="padding-bottom: 0; padding-right: 3px; text-align: right;">
-						<img src="/image/nothing.jpg" class="rounded-circle listIamge" width="40px" height="40px">
+						<img src="/image/nothing.jpg" class="rounded-circle listImage" width="40px" height="40px">
 					</td>
 					<td style="padding-bottom: 0">
 						<span class="listNickname" style="font-size: 0.9em; font-weight: 900;">
