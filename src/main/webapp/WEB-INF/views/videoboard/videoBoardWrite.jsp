@@ -60,7 +60,14 @@
 						        				<option value="${CatList.categoryId }" selected>${CatList.categoryName }</option>
 						        			</c:when>
 						        			<c:otherwise>
-						        				<option value="${CatList.categoryId }">${CatList.categoryName }</option>
+						        				<c:choose>
+						        					<c:when test="${catId == CatList.categoryId }">
+								        				<option value="${CatList.categoryId }" selected>${CatList.categoryName }</option>
+								        			</c:when>
+								        			<c:otherwise>
+								        				<option value="${CatList.categoryId }">${CatList.categoryName }</option>
+								        			</c:otherwise>
+						        				</c:choose>
 						        			</c:otherwise>
 						        		</c:choose>
 		           					</c:if>
@@ -71,7 +78,14 @@
 						        				<option value="${CatList.categoryId }" selected>${CatList.categoryName }</option>
 						        			</c:when>
 						        			<c:otherwise>
-						        				<option value="${CatList.categoryId }">${CatList.categoryName }</option>
+						        				<c:choose>
+						        					<c:when test="${catId == CatList.categoryId }">
+								        				<option value="${CatList.categoryId }" selected>${CatList.categoryName }</option>
+								        			</c:when>
+								        			<c:otherwise>
+								        				<option value="${CatList.categoryId }">${CatList.categoryName }</option>
+								        			</c:otherwise>
+						        				</c:choose>
 						        			</c:otherwise>
 						        		</c:choose>
 		           				</c:otherwise>
@@ -178,7 +192,7 @@
 		  			if(object.length == 0) { alert("내용을 입력해 주세요."); $("#object").focus(); return; }
 		  			if(youtubeLink.length == 0) { alert("유튜브링크를 입력해 주세요."); $("#youtubeLink").focus(); return; }
 		  			if(!youtubeLink.match(p)) { alert("유튜브링크를 입력해 주세요."); $("#youtubeLink").focus(); return; }
-
+					
 		  			document.videoForm.action = "/videoboard/insertVideoBoardPro";
 		  			document.videoForm.method = "POST";
 		  			document.videoForm.submit();

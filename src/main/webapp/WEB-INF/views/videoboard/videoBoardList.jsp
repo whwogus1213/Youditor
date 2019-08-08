@@ -412,7 +412,17 @@
 					<c:if test="${login ne null }">
 						<c:if test="${login.authority >= categoryInfo.viewAuthority }">
 							<button type="button" class="btn btn-sm"
-								onclick="location.href='/videoboard/write.do' " style="background-color: #2ecc71; color: white;">글쓰기</button>
+								onclick="writeBtn(${categoryInfo.categoryId }); return false;" style="background-color: #2ecc71; color: white;">글쓰기</button>
+							<script>
+							function writeBtn(catId) {
+								var url = "/videoboard/write.do";
+								if(catId != null) {
+									url = url + "?categoryId=" + catId;
+								}
+								
+								location.href = url;
+							}
+							</script>
 						</c:if>
 					</c:if>
 				</div>

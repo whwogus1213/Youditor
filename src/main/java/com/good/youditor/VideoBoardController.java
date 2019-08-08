@@ -129,11 +129,15 @@ public class VideoBoardController {
 	
 	// 게시물 쓰기
 	@RequestMapping(value = "/write.do", method = RequestMethod.GET)
-	public ModelAndView writedo() throws Exception {
+	public ModelAndView writedo(@RequestParam(value = "categoryId", required = false, defaultValue = "0") int categoryId) throws Exception {
 		System.out.println("*************************************************");
-
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("videoboard/videoBoardWrite");
+		if(categoryId == 0) {
+			mav.setViewName("videoboard/videoBoardWrite");
+		} else {
+			mav.setViewName("videoboard/videoBoardWrite");
+			mav.addObject("catId", categoryId);
+		}
 		System.out.println("VideoBoardController boardWrite open");
 		return mav;
 	}
@@ -150,9 +154,11 @@ public class VideoBoardController {
 	public String insertVideoBoardPro(VideoBoardVO vo) throws Exception {
 		System.out.println("============insertVideoBoardPro 성공==============");
 		System.out.println(vo);
+		String url = "redirect:/videoboard/videoBoardList";
 		videoBoardService.insertVideoBoard(vo);
-
-		return "redirect:/videoboard/videoBoardList";
+		url = url + "?categoryId=" + vo.getCategoryId();
+		
+		return url;
 	}
 
 	// 파일 이동
